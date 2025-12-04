@@ -8,7 +8,19 @@
 % Best practice to not specify the file extension for included images,
 % so when LaTeX is building it will look for the appropriate image type.
 \usepackage{graphicx}
-               
+
+% Package to use SI units
+\usepackage{siunitx}
+
+% Package for referencing labeled positions in thesis
+% Must include cleveref before hyperref so links can work correctly
+\usepackage{cleveref}
+\usepackage{hyperref}
+
+
+% Setup for SI unit package
+\sisetup{range-units = single, range-phrase = \,--\,}
+
 \begin{document}
 \include{dissertation-tap}
                    % This file (dissertation-tap.tex) contains the Title
@@ -36,7 +48,7 @@
 \include{appA}     % This file (appA.tex) contains the text
                    % for Appendix A. 
                    
-\include{appB}     % This file (appB.tex) contains the text
+%\include{appB}     % This file (appB.tex) contains the text
                    % for Appendix B.   
        
 \end{document}
