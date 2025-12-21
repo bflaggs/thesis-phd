@@ -1,0 +1,5 @@
+# Build files (.aux, .log, .toc, etc.)
+build/*
+
+# Output PDF
+*.pdf
