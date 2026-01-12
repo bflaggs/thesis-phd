@@ -19,7 +19,7 @@ This chapter discusses deployment, hardware specifications, and preliminary anal
 \section{An IceCube-Gen2 Prototype Station at the Pierre Auger Observatory}\label{sec:gen2prototype}
 
 IceCube-Gen2 is a future upgrade of the existing IceCube Neutrino Observatory at the South Pole.
-The upgrade plans to increase the volume of the current in-ice optical array from \SI{1}{\kilo\meter^{3}} to approximately \SI{8}{\kilo\meter^{3}}, in addition to deploying an in-ice radio array for neutrino detection and a surface array of scintillator panels and radio antennas for cosmic ray air shower detection.
+The upgrade plans to increase the volume of the current in-ice optical array from \SI{1}{\kilo\meter^{3}} to approximately \SI{8}{\kilo\meter^{3}}, in addition to deploying an in-ice radio array for neutrino detection and a surface array of scintillator panels and radio antennas for cosmic-ray air shower detection.
 The planned surface array will span nearly \SI{6}{\kilo\meter^{2}} to cover the full optical array extension, serving both as a veto to the optical array and to reconstruct cosmic-ray air showers and their properties.
 Each station of the surface array consists of eight scintillator panels, three SKALA radio antennas, and a central fieldhub hosting the local DAQ of the station.
 A schematic of the surface station layout at the South Pole is shown in INSERTFIGURE.
@@ -32,16 +32,21 @@ The Auger prototype station has roughly the same design as the South Pole protot
 Other differences include the need for fencing around each detector position to prevent damage from roaming animals, and the lack of height adjustable stands, unnecessary in Argentina as constant snow accumulation is not an issue like at the South Pole.
 The prototype station is co-located in both the AERA footprint and the densest part of the SD array to serve the main science goal of coincident air-shower measurements with Auger detectors.
 
-\subsection{Station Layout and Design}\label{sec:gen2layout}
+\subsection{Station Design and Deployment}\label{sec:gen2layout}
 
-Each arm of the Auger prototype station spans about \SI{70}{\meter} in length, with a pair of scintillator panels at the ends of each arm.
-Another pair of scintillator panels lies at the station center, along with the station's local DAQ labeled as TAXI in INSERTLAYOUTSCHEMATIC. 
+The layout of the deployed station is shown in INSERTLAYOUTSCHEMATIC.
+Each arm of the Auger prototype station spans about \SI{70}{\meter} in length, with a pair of scintillator panels at the ends of each arm and another pair of scintillator panels at the station center, 
 Halfway between the station center and the end of each arm is a SKALAv2 type radio antenna.
-The SKALA antennas have two perpendicular polarizations, each with their own Low Noise Amplifier (LNA) housed in the top most part of the antenna, the trumpet; however, not all antennas in this prototype station have the same orientation (see INSERTLAYOUTWITHSCHEMATIC).
-The LNAs connect to type-N coaxial cables that are buried and connected to the TAXI DAQ while each scintillator panel is also connected to TAXI via buried coaxial cables.
-Power and communications for the DAQ come via buried cables from the Central Radio Station (CRS).
+The SKALA antennas have two perpendicular polarizations, each with their own Low Noise Amplifier (LNA) housed in the top most part of the antenna, the trumpet; however, not all antennas in this prototype station have the same orientation (see INSERTLAYOUTSCHEMATIC).
+The station DAQ, labeled as TAXI in INSERTLAYOUTSCHEMATIC, is housed in a weather proof aluminum box at the station center.
+The radio LNAs are connected to TAXI from buried type-N coaxial cables and the scintillator panels connect via custom made coaxial cables with 5-pin connectors at each end.
+A naked metal wire connects the metal TAXI housing to a buried copper rod and is used for grounding the TAXI electronics.
+The dirt surrounding the buried rod was salted to increase soil conductivity and provide a better grounding.
 
-Inside the CRS, a custom 12V to 24V DC-DC power converter is used to power the TAXI DAQ and a WhiteRabbit switch.
+Buried cables from the Central Radio Station (CRS) provide power and communications to TAXI.
+Communications come from a military grade optical fiber connected to a WhiteRabbit switch inside the CRS, while the power cable provides 24V DC power to TAXI.
+Inside the CRS, a custom 12V to 24V DC-DC power converter with two inputs and two outputs is used to power both the TAXI DAQ and the WhiteRabbit switch.
+The power to both systems can be controlled from a network connection to a GUI or with physical switches on the converter itself, allowing separate power cycling of TAXI and WhiteRabbit both remotely and inside the CRS. 
 
 %24V power for the DAQ and communications via a buried optical fiber come from the Central Radio Station (CRS).
 %The Central Radio Station (CRS) provides 24V power to the DAQ from a buried power cable.
