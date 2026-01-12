@@ -21,25 +21,49 @@ This chapter discusses deployment, hardware specifications, and preliminary anal
 IceCube-Gen2 is a future upgrade of the existing IceCube Neutrino Observatory at the South Pole.
 The upgrade plans to increase the volume of the current in-ice optical array from \SI{1}{\kilo\meter^{3}} to approximately \SI{8}{\kilo\meter^{3}}, in addition to deploying an in-ice radio array for neutrino detection and a surface array of scintillator panels and radio antennas for cosmic-ray air shower detection.
 The planned surface array will span nearly \SI{6}{\kilo\meter^{2}} to cover the full optical array extension, serving both as a veto to the optical array and to reconstruct cosmic-ray air showers and their properties.
-Each station of the surface array consists of eight scintillator panels, three SKALA radio antennas, and a central fieldhub hosting the local DAQ of the station.
-A schematic of the surface station layout at the South Pole is shown in INSERTFIGURE.
-A first prototype surface station was deployed at the South Pole in January 2020, with two more deployed in January 2025.
+Each station of the surface array consists of four pairs of scintillator panels, and three SKALA radio antennas arranged in a Mercedes-Benz like three-pointed star.
+An elevated fieldhub, hosting the local DAQ of the station, is located at the center of the star and connects directly to the IceCube Lab (ICL) for station power, data transfer, and communications.
+A general schematic of the surface station layout at the South Pole is shown in~\cref{fig:gen2_schematic_southpole}.
+The first prototype surface station was deployed at the South Pole in January 2020, with two more deployed in January 2025.
 All South Pole prototypes have been mostly stable in their operations and data taking since deployment.
 See INSERTREFERENCES for specifics regarding these stations.
 
+\begin{figure}
+    \centering
+    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.7\textwidth]{chapter7/Gen2Prototype_SouthPoleSchematic.png}
+    \caption[Prototype IceCube-Gen2 surface station schematic at the South Pole.]{The general schematic of a single prototype IceCube-Gen2 surface station deployed at the South Pole. Each station consists of eight scintillator panels, three SKALA radio antennas, and a central fieldhub hosting the local DAQ of the station. Figure taken from~\cite{gen2tdr}.}
+    \label{fig:gen2_schematic_southpole}
+\end{figure}
+
 In August 2022, a prototype surface station was deployed at the Pierre Auger Observatory.
+~\cref{fig:augermap_gen2prototype} shows the location of the prototype station adjacent to the Central Radio Station (CRS), which hosts the AERA DAQ and communications systems.
+The station is co-located in both the AERA footprint and the densest part of the SD array to serve the main science goals of coincident air-shower measurements with Auger detectors and a potential cross-calibration of the AERA radio antennas and SKALA antennas of the prototype station.
+
+\begin{figure}
+    \centering
+    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.6\textwidth]{chapter7/Gen2Prototype_ArrayPositionwCRS.pdf}
+    \caption[Location of the IceCube-Gen2 prototype station at Auger.]{A map of the Auger SD array with an inset showing the location of the IceCube-Gen2 prototype station deployed at Auger. The location of the Central Radio Station of Auger is also shown. AERA stations, co-located in the inset region, are not shown due to space constrains. Figure taken from~\cite{icrc2025_verpoest}.}
+    \label{fig:augermap_gen2prototype}
+\end{figure}
+
+\subsection{Station Design and Deployment}\label{sec:gen2design}
+
+%The layout of the deployed station is shown in INSERTLAYOUTSCHEMATIC.
 The Auger prototype station has roughly the same design as the South Pole prototype stations, yet slightly different geometry and spacing due to the topology of the location (see INSERTDRONEPICTURE).
 Other differences include the need for fencing around each detector position to prevent damage from roaming animals, and the lack of height adjustable stands, unnecessary in Argentina as constant snow accumulation is not an issue like at the South Pole.
-The prototype station is co-located in both the AERA footprint and the densest part of the SD array to serve the main science goal of coincident air-shower measurements with Auger detectors.
-
-\subsection{Station Design and Deployment}\label{sec:gen2layout}
-
-The layout of the deployed station is shown in INSERTLAYOUTSCHEMATIC.
 Each arm of the Auger prototype station spans about \SI{70}{\meter} in length, with a pair of scintillator panels at the ends of each arm and another pair of scintillator panels at the station center, 
 Halfway between the station center and the end of each arm is a SKALAv2 type radio antenna.
 The SKALA antennas have two perpendicular polarizations, each with their own Low Noise Amplifier (LNA) housed in the top most part of the antenna, the trumpet; however, not all antennas in this prototype station have the same orientation (see INSERTLAYOUTSCHEMATIC).
-The station DAQ, labeled as TAXI in INSERTLAYOUTSCHEMATIC, is housed in a weather proof aluminum box at the station center.
-The radio LNAs are connected to TAXI from buried type-N coaxial cables and the scintillator panels connect via custom made coaxial cables with 5-pin connectors at each end.
+The radio LNAs are connected to the station DAQ, labeled as TAXI in INSERTLAYOUTSCHEMATIC (and referred to as such from here on), from buried type-N coaxial cables.
+Each coaxial cable is approximately \SI{40}{\meter} in length, with extra cable wrapped in a loop around the antenna legs, and connects to the LNA via a type-N to SMA cable \SI{1}{\meter} in length.
+
+The scintillator panels connect to TAXI from buried, custom made coaxial cables with 5-pin connectors on each end.
+TAXI itself, the name of the DAQ electronics, has a metal housing and is stored in a weather proof aluminum box at the station center to protect it from the extreme weather conditions which can occur at the field in Argentina.
+The aluminum box also provides weather protection for the cables ends connecting directly to TAXI.
+While weather proof, the box can not prevent overheating of the electronics housed inside, with issues such as unstable programming of the scintillators from the microDAQ, heat related artifacts in the radio data, and thermal failure of the timing and communications board and its optical fiber.
+
+
+
 A naked metal wire connects the metal TAXI housing to a buried copper rod and is used for grounding the TAXI electronics.
 The dirt surrounding the buried rod was salted to increase soil conductivity and provide a better grounding.
 
@@ -52,6 +76,10 @@ The power to both systems can be controlled from a network connection to a GUI o
 %The Central Radio Station (CRS) provides 24V power to the DAQ from a buried power cable.
 
 
+\subsection{Observation of the Galactic Center with SKALA Radio Antennas}\label{sec:gen2galactic}
+
+
+\subsection{First Coincident Air-Shower Observations with the Auger Surface Detector}\label{sec:gen2airshowers}
 
 
 
