@@ -49,28 +49,50 @@ The station is co-located in both the AERA footprint and the densest part of the
 \subsection{Station Design and Deployment}\label{sec:gen2design}
 
 %The layout of the deployed station is shown in INSERTLAYOUTSCHEMATIC.
-The Auger prototype station has roughly the same design as the South Pole prototype stations, yet slightly different geometry and spacing due to the topology of the location (see INSERTDRONEPICTURE).
+The Auger prototype station has roughly the same design as the South Pole prototype stations, yet slightly different geometry and spacing due to the topology of the location (see~\cref{fig:gen2_dronephoto}).
 Other differences include the need for fencing around each detector position to prevent damage from roaming animals, and the lack of height adjustable stands, unnecessary in Argentina as constant snow accumulation is not an issue like at the South Pole.
 Each arm of the Auger prototype station spans about \SI{70}{\meter} in length, with a pair of scintillator panels at the ends of each arm and another pair of scintillator panels at the station center, 
 Halfway between the station center and the end of each arm is a SKALAv2 type radio antenna.
-The SKALA antennas have two perpendicular polarizations, each with their own Low Noise Amplifier (LNA) housed in the top most part of the antenna, the trumpet; however, not all antennas in this prototype station have the same orientation (see INSERTLAYOUTSCHEMATIC).
-The radio LNAs are connected to the station DAQ, labeled as TAXI in INSERTLAYOUTSCHEMATIC, from buried type-N coaxial cables.
+The SKALA antennas have two perpendicular polarizations, each with their own Low Noise Amplifier (LNA) housed in the top most part of the antenna, the trumpet; however, not all antennas in this prototype station have the same orientation (see~\cref{fig:gen2_schematic_auger}).
+The radio LNAs are connected to the station DAQ, labeled as TAXI in~\cref{fig:gen2_schematic_auger}, from buried type-N coaxial cables.
 Each coaxial cable is approximately \SI{40}{\meter} in length, with extra cable wrapped in a loop around the antenna legs, and connects to the LNA via a type-N to SMA cable \SI{1}{\meter} in length.
+
+\begin{figure}
+    \centering
+    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.5\textwidth]{chapter7/Gen2Prototype_DronePicture.JPG}
+    \caption[Aerial drone image of the IceCube-Gen2 prototype station at Auger.]{Aerial drone image of the IceCube-Gen2 prototype station deployed at Auger. Paths were cleared to each detector by Se~nor Porte using heavy machinery. The CRS is the large white shipping container at the bottom of the image. Nearby is the closest SD tank, Guili Jr. Drone image taken by Tim Huege.}
+    \label{fig:gen2_dronephoto}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.5\textwidth]{chapter7/Gen2Prototype_AugerSchematic_OUTDATED.pdf}
+    \caption[Schematic of the deployed IceCube-Gen2 prototype station at Auger.]{The schematic of the IceCube-Gen2 prototype station deployed at Auger. All scintillator panels and radio antennas are labeled with their respective numbers. Both the locations of the station DAQ, labeled TAXI, and the CRS are shown, along with the direction of magnetic North. Schematic originally made by Marcos Cerda. ++++NEEDS UPDATES TO SCHEMATIC++++}
+    \label{fig:gen2_schematic_auger}
+\end{figure}
 
 The scintillator panels connect to the DAQ from buried, custom made coaxial cables with 5-pin connectors on each end.
 TAXI itself, the name of the DAQ electronics, has a metal housing and is stored in a weather proof aluminum box at the station center to protect it from the extreme weather conditions which can occur at the field in Argentina.
 The aluminum box also provides weather protection for the cables ends connecting directly to TAXI.
-While weather proof, the box can not prevent overheating of the electronics housed inside, with issues such as unstable programming of the scintillators from the microDAQ (the DAQ system controlling the scintillators), heat related artifacts in the radio data, and thermal failure of the timing and communications board and its optical fiber.
+While weather proof, the box can not prevent overheating of the electronics housed inside, with issues such as a freezing of the microDAQs (the DAQ system controlling the scintillators), heat related artifacts in the radio data, and thermal failure of the timing and communications board (White Rabbit Line Extension, i.e. WR-LEN, explained later) and its connecting optical fiber.
+Each heat related issue has been resolved respectively by reprogramming the microDAQs, improving the artifact removal portion of the radio data analysis pipeline, and a full replacement of the WR-LEN board and its fiber.
 
+Buried cables from the CRS provide power, data transfer, communications, and timing to TAXI.
+The data transfer, communications, and timing of the station are all handled by a White Rabbit switch inside the CRS.
+The White Rabbit switch takes a master time signal and distributes it amongst connected systems to provide sub-nanosecond timing accuracy and synchronization between multiple detectors.
+The WR-LEN board, stored inside the TAXI housing, serves as a remote access point to the White Rabbit switch which is accessible over long distances using optical fibers.
+A \SI{100}{\meter} buried military grade optical fiber provides this connection between the White Rabbit switch in the CRS and the WR-LEN board of the prototype station.
+Another buried \SI{100}{\meter} cable from the CRS provides \SI{24}{\volt} DC power to TAXI.
+Inside the CRS, a custom DC-DC power converter takes two \SI{12}{\volt} DC inputs and converts them into two \SI{24}{\volt} DC outputs to power both the White Rabbit switch and TAXI.
+The power to both systems can be controlled from a network connection or with physical switches the custom power converter inside the CRS, allowing separate power cycling of the White Rabbit switch and TAXI.
+
+
+
+%setting the timing of the TAXI electronics from a \SI{10}{\mega\hertz} and PPS signal and controlling the communications and data transfer of the TAXI 
 
 
 A naked metal wire connects the metal TAXI housing to a buried copper rod and is used for grounding the TAXI electronics.
 The dirt surrounding the buried rod was salted to increase soil conductivity and provide a better grounding.
-
-Buried cables from the Central Radio Station (CRS) provide power and communications to TAXI.
-Communications come from a military grade optical fiber connected to a WhiteRabbit switch inside the CRS, while the power cable provides 24V DC power to TAXI.
-Inside the CRS, a custom 12V to 24V DC-DC power converter with two inputs and two outputs is used to power both the TAXI DAQ and the WhiteRabbit switch.
-The power to both systems can be controlled from a network connection to a GUI or with physical switches on the converter itself, allowing separate power cycling of TAXI and WhiteRabbit both remotely and inside the CRS. 
 
 %24V power for the DAQ and communications via a buried optical fiber come from the Central Radio Station (CRS).
 %The Central Radio Station (CRS) provides 24V power to the DAQ from a buried power cable.
