@@ -6,8 +6,13 @@ The Pierre Auger Observatory hosts several prototype detectors and pathfinder ai
 This location greatly benefits prototyping new detectors because of the existing structure of the Auger observatory, allowing ease of access for detector maintenance and assistance from the local observatory staff when feasible.
 Since 2022, 21 total SKALA (Square Kilometer Array Log-periodic Antenna) radio antennas have been deployed at Auger in the \SI{433}{\meter} spaced array of SD tanks.
 These SKALA antennas are Log-Periodic Dipole Antennas (LPDAs), similar to the AERA LPDA antennas, and were originally designed for the Square Kilometer Array's low frequency telescope in Western Australia.
-However, certain future cosmic-ray observatories with a surface radio component, such as IceCube-Gen2 and the Radio Neutrino Observatory Greenland (RNO-G), use SKALA antennas to reconstruct and/or veto cosmic ray air showers.
+However, future cosmic-ray observatories with a surface radio component, such as IceCube-Gen2 and the Radio Neutrino Observatory Greenland (RNO-G), use SKALA antennas to reconstruct and/or veto cosmic ray air showers.
 This chapter discusses deployment, hardware specifications, and preliminary analysis from SKALA antennas deployed at the Pierre Auger Observatory.
+
+%===============================
+% Explain similarities for all SKALA antennas at Auger here? I.e. the DAQ, data transfer, laptop in the CRS, etc.
+% Frank suggested doing this...
+%===============================
 
 %through the cross-calibration of the new detectors to well trusted air-shower reconstructions.
 
@@ -32,7 +37,7 @@ See INSERTREFERENCES for specifics regarding these stations.
     \centering
     \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.7\textwidth]{chapter7/Gen2Prototype_SouthPoleSchematic.png}
     \caption[Prototype IceCube-Gen2 surface station schematic at the South Pole.]{The general schematic of a single prototype IceCube-Gen2 surface station deployed at the South Pole. Each station consists of eight scintillator panels, three SKALA radio antennas, and a central fieldhub hosting the local DAQ of the station. Figure taken from~\cite{gen2tdr}.}
-    \label{fig:gen2_schematic_southpole}
+    \label{fig:gen2_schematic_southpole} % Remove, no need to show schematic here if showing schematic for the actual station at Auger!
 \end{figure}
 
 In August 2022, a prototype surface station was deployed at the Pierre Auger Observatory.
@@ -43,7 +48,7 @@ The station is co-located in both the AERA footprint and the densest part of the
     \centering
     \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.6\textwidth]{chapter7/Gen2Prototype_ArrayPositionwCRS.pdf}
     \caption[Location of the IceCube-Gen2 prototype station at Auger.]{A map of the Auger SD array with an inset showing the location of the IceCube-Gen2 prototype station deployed at Auger. The location of the Central Radio Station of Auger is also shown. AERA stations, co-located in the inset region, are not shown due to space constrains. Figure taken from~\cite{icrc2025_verpoest}.}
-    \label{fig:augermap_gen2prototype}
+    \label{fig:augermap_gen2prototype} % Include in first section of chapter, with locations of the ARISE antennas, ask Stef for code to make plot!
 \end{figure}
 
 \subsection{Station Design and Deployment}\label{sec:gen2design}
@@ -100,6 +105,30 @@ The dirt surrounding the buried rod was salted to increase soil conductivity and
 
 \subsection{Observation of the Galactic Center with SKALA Radio Antennas}\label{sec:gen2galactic}
 
+Explain radio analysis pipeline (cleaning and filtering, etc.).
+Determination of frequency bands with minimal noise contributions.
+Subtraces method to determine RMS.
+Fit moving average of RMS values.
+%Include for all 3 frequency bands?
+
+
+\begin{figure}
+    \centering
+    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.7\textwidth]{chapter7/AugerStation_spectrum_800MHz_deconvolved.pdf}
+    \caption[Radio frequency spectrum of the IceCube-Gen2 prototype station at Auger.]{Spectrum}
+    \label{fig:gen2_rf_spectrum}
+\end{figure}
+
+% Subtraces plot from slide 23 of talk in Grand Rapids for IC collaboration meeting?
+
+\begin{figure}
+    \centering
+    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.8\textwidth]{chapter7/AugerStation_galactic.png}
+    \caption[RMS time dependence of background radio signals.]{Time dependence of RMS}
+    \label{fig:gen2_galactic}
+\end{figure}
+
+Table of fit results for all antennas in \SIrange{110}{130}{\mega\hertz}.
 
 \subsection{First Coincident Air-Shower Observations with the Auger Surface Detector}\label{sec:gen2airshowers}
 
@@ -107,10 +136,19 @@ The dirt surrounding the buried rod was salted to increase soil conductivity and
 
 Air showers are measured by a coincidence requirement between scintillator triggers.
 
-Test Citation~\cite{key1}
-
-
-
-
 %reconstructions and vetoing air showers for the optical array.
 %In addition to increasing the size of the current in-ice optical array for neutrino detection, the next generation upgrade of IceCube plans to expand the current surface array 
+
+\section{ARISE: Auger Radio Infill SKALA Extension}\label{sec:arise}
+
+The Auger Radio Infill SKALA Extension (ARISE) was deployed in March of 2025, centered upon SD tank Lety Jr. of the \SI{433}{\meter} spaced array of the Auger SD.
+ARISE consists of six stations, with their centers organized in a hexagonal pattern surrounding Lety Jr.
+Each station consists of three SKALA antennas and a central hub hosting the local station DAQ and a solar power system for the station.
+The station centers are each located approximately \SI{75}{\meter} from Lety Jr., with the three station antennas deployed \SI{35}{meter} from the station center in a Mercedes-Benz like star pattern to have the same layout as the antennas of the IceCube-Gen2 prototype stations.
+One arm of each station is aligned such that there is an antenna halfway between Lety Jr. and each station center.
+
+Solar power system
+Triggering from Lety Jr.
+Lety Jr. has UMD also
+Science potential of array through simulation study, full efficiency for vertical showers
+
