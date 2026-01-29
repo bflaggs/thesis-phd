@@ -57,7 +57,7 @@ The station is co-located in both the AERA footprint and the densest part of the
 The Auger prototype station has roughly the same design as the South Pole prototype stations, yet slightly different geometry and spacing due to the topology of the location (see~\cref{fig:gen2_dronephoto}).
 Other differences include the need for fencing around each detector position to prevent damage from roaming animals, and the lack of height adjustable stands, unnecessary in Argentina as constant snow accumulation is not an issue like at the South Pole.
 Each arm of the Auger prototype station spans about \SI{70}{\meter} in length, with a pair of scintillator panels at the ends of each arm and another pair of scintillator panels at the station center, 
-Halfway between the station center and the end of each arm is a SKALAv2 type radio antenna.
+Halfway between the station center and the end of each arm is a SKALA-v2 type radio antenna.
 The SKALA antennas have two perpendicular polarizations, each with their own Low Noise Amplifier (LNA) housed in the top most part of the antenna, the trumpet; however, not all antennas in this prototype station have the same orientation (see~\cref{fig:gen2_schematic_auger}).
 The radio LNAs are connected to the station DAQ, labeled as TAXI in~\cref{fig:gen2_schematic_auger}, from buried type-N coaxial cables.
 Each coaxial cable is approximately \SI{40}{\meter} in length, with extra cable wrapped in a loop around the antenna legs, and connects to the LNA via a type-N to SMA cable \SI{1}{\meter} in length.
@@ -143,12 +143,21 @@ Air showers are measured by a coincidence requirement between scintillator trigg
 
 The Auger Radio Infill SKALA Extension (ARISE) was deployed in March of 2025, centered upon SD tank Lety Jr. of the \SI{433}{\meter} spaced array of the Auger SD.
 ARISE consists of six stations, with their centers organized in a hexagonal pattern surrounding Lety Jr.
-Each station consists of three SKALA antennas and a central hub hosting the local station DAQ and a solar power system for the station.
-The station centers are each located approximately \SI{75}{\meter} from Lety Jr., with the three station antennas deployed \SI{35}{meter} from the station center in a Mercedes-Benz like star pattern to have the same layout as the antennas of the IceCube-Gen2 prototype stations.
-One arm of each station is aligned such that there is an antenna halfway between Lety Jr. and each station center.
+The station centers are located approximately \SI{80}{\meter} from Lety Jr., each consisting of three SKALA-v2 antennas arranged in a Mercedes-Benz like star pattern with each antenna \SI{40}{\meter} from the station center. 
+One arm of each station is aligned such that an antenna is halfway between Lety Jr. and each station center.
+The final positions of the 18 SKALA-v2 antennas were optimized through a simulation study to maximize the number of vertical air showers above the threshold for full reconstruction efficiency.
+With the described antenna positions, full reconstruction efficiency ($>$ 97\%) is reached at \SI{300}{\peta\electronvolt} for near-vertical air showers ($\theta <$ \SI{30}{\degree})~\cite{uhecr2024_verpoest}.
+ 
+
+TAXI, the same DAQ as the IceCube-Gen2 prototype station, is used as the local DAQ for each station and is housed inside a weather proof box at the local station center.
+Communications to TAXI are performed via buried optical fiber cables from the station centers to the White Rabbit Switch in the CRS, in the same way as the IceCube-Gen2 prototype station. 
+The readout of the radio data is triggered by the local station T1 trigger of the Auger SD tank Lety Jr.
+Once the local station receives the 
 
 Solar power system
 Triggering from Lety Jr.
 Lety Jr. has UMD also
 Science potential of array through simulation study, full efficiency for vertical showers
 
+%Each station consists of three SKALA antennas and a central hub hosting the local station DAQ and a solar power system for the station.
+%The station centers are each located approximately \SI{75}{\meter} from Lety Jr., with the three station antennas deployed \SI{35}{meter} from the station center in a Mercedes-Benz like star pattern to have the same layout as the antennas of the IceCube-Gen2 prototype stations.
