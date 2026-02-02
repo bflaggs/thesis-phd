@@ -146,13 +146,66 @@ ARISE consists of six stations, with their centers organized in a hexagonal patt
 The station centers are located approximately \SI{80}{\meter} from Lety Jr., each consisting of three SKALA-v2 antennas arranged in a Mercedes-Benz like star pattern with each antenna \SI{40}{\meter} from the station center. 
 One arm of each station is aligned such that an antenna is halfway between Lety Jr. and each station center.
 The final positions of the 18 SKALA-v2 antennas were optimized through a simulation study to maximize the number of vertical air showers above the threshold for full reconstruction efficiency.
-With the described antenna positions, full reconstruction efficiency ($>$ 97\%) is reached at \SI{300}{\peta\electronvolt} for near-vertical air showers ($\theta <$ \SI{30}{\degree})~\cite{uhecr2024_verpoest}.
- 
+For this array of 18 SKALA antennas, a larger overall footprint will observe more air showers, but will increase the energy threshold for full efficiency due to the increased spacing between antennas. 
+With the described antenna positions, full reconstruction efficiency ($>$ 97\%) is reached at \SI{300}{\peta\electronvolt} for near-vertical air showers ($\theta <$ \SI{30}{\degree}), resulting in reconstruction statistics of $\simeq$\,45 air showers per year~\cite{uhecr2024_verpoest}.
+Current machine learning based radio denoising and reconstruction algorithms can lower this energy threshold by a factor of two once implemented in the data pipeline, increasing the statistics of reconstructed air showers~\cite{ABDUL_THESIS}.
+ARISE
+Radio reconstructions of near-vertical air showers now, for the first time, have full reconstruction efficiency above \SI{300}{\peta\electronvolt} within the footprint of ARISE.
+
+%ARISE is the first radio array of its kind for air shower detection at Auger with a studied threshold for full efficiency.
+
+%The scinece potential of ARISE is manifold. In addition to fully efficient air-shower reconstructions, the co-location of ARISE within the UMD and AERA footprints of Auger 
+%Combining ARISE radio detection with UMD measurements provide a direct way to simultaneously reconstruct $X_{\rm max}$ and $N_{\mu}$ for the same air showers, as previous analyses with SKALA-v2 antennas have proven their reconstruction potential for $X_{\rm max}$ (CITE XMAX ICECUBE ROXANNE).
+
+In addition to fully efficient air-shower reconstructions, the science potential of ARISE is manifold, as it is co-located within the UMD and AERA footprints of Auger.
+Combining ARISE radio detection with UMD measurements provide a direct way to simultaneously reconstruct $X_{\rm max}$ and $N_{\mu}$ for the same air showers, as previous analyses with SKALA-v2 antennas have proven their reconstruction potential for $X_{\rm max}$ (CITE XMAX ICECUBE ROXANNE).
+ARISE can then serve as a pathfinder array for this hybrid detection method, making progress towards major science goals of next-generation air-shower arrays in the quest for constraining high-energy hadronic interaction models and mass composition measurements.
+Furthermore, the co-location with AERA allows a potential cross-calibration to be performed between the AERA and SKALA radio energy scales.
+Given the currently foreseen runtime of Auger until 2035, approximately 500 air showers will be reconstructed with ARISE, providing a large dataset of air showers for high-quality analyses with intermittent results in the coming years.
+
+
+%Previous analyses with SKALA-v2 antennas have shown $X_{\rm max}$ reconstruction is feasible (CITE XMAX ICECUBE), therefore combining ARISE radio reconstructions with UMD measurements provide a direct way to combine  
+%The UMD provides a direct measurement of the muonic component of air showers, while the 
+
+
+%science goals of next-generation air-shower arrays in the quest for constraining high-energy hadronic interaction models and mass composition measurements.
+
 
 TAXI, the same DAQ as the IceCube-Gen2 prototype station, is used as the local DAQ for each station and is housed inside a weather proof box at the local station center.
-Communications to TAXI are performed via buried optical fiber cables from the station centers to the White Rabbit Switch in the CRS, in the same way as the IceCube-Gen2 prototype station. 
-The readout of the radio data is triggered by the local station T1 trigger of the Auger SD tank Lety Jr.
-Once the local station receives the 
+Communications to TAXI are performed via buried optical fiber cables from the station centers to the White Rabbit switch in the CRS, in the same way as the IceCube-Gen2 prototype station. 
+The readout of the radio data is triggered by the local station T1 trigger of the Auger SD tank Lety Jr (see section XXX for an explanation of Auger SD triggers).
+The software-level T1 trigger is routed through a \SI{50}{\ohm} terminated SMA cable from the TRIGGEROUT (input as code) port of the Auger UUB to a custom-made trigger splitter housed inside the electronics dome of Lety Jr.
+The custom designed aluminum box splits the electrical signal from the TRIGGEROUT (input as code) connector six ways, each feeding into an optical Tx, digital-to-optical signal converter, board.
+Six \SI{100}{\meter} military grade optical fibers are trenched from Lety Jr. to each of the six ARISE station centers, connecting the optical Tx boards to an optical Rx board inside the TAXI enclosure.
+The optical Rx board reconverts the signal from optical back to digital for TAXI to initiate the readout of the radio signal by each of the station's three SKALA antennas.
+In principle, the optical trigger signals should arrive at each TAXI simultaneously; however, nanosecond to sub-nanosecond time differences could occur due to the conversion and reconversion process (Check actual value with Stef/Carmen).
+
+Each of the TAXIs is autonomously powered from a solar power system at the station center.
+The solar power system consists of six batteries, a solar panel, and a charge controller to control the charging of the batteries and regulate the voltage supplied to TAXI.
+Six \SI{12}{\volt} batteries are used per station, connected in a three series two parallel configuration to provide the \SI{24}{\volt} necessary to power TAXI.
+The batteries are also stored in the station center at the bottom of the wooden box and separated from the TAXI and charge controller via a wooden plank separator.
+Station centers are equipped with a dual-sided solar panel of type (INPUT SP TYPE) to charge the batteries during good weather.
+Solar panels are aligned with the broad side perpendicular with compass North to maximize the amount of sunlight impacting the solar cells of the panels.
+
+Communications, data transfer, and timing of the TAXIs are all provided by buried military grade optical fibers trenched from the CRS to Lety Jr., and then to each ARISE station center along each arm of the array.
+This protocol and setup is the same as for the IceCube-Gen2 prototype station, except for in one of the ARISE stations where the WR-LEN board is housed outside of the TAXI housing itself and inside its original enclosure.
+The externally housed WR-LEN will reduce heat inside the TAXI housing as the original WR-LEN enclosure contains a heat sink over its full surface, allowing the heat to dissipate more efficiently in this configuration rather than within the TAXI housing and only with a small heat sink attached to the hottest FPGA chip of the WR-LEN.
+The WR-LEN temperatures can exceed \SI{80}{\degreeCelsius} in the field at Argentina because of the warm weather environment and heating from the Sun, therefore reducing the heat inside the TAXI enclosure is a safer environment for the electronics.
+%The original WR-LEN enclosure contains a heat sink over its full surface
+
+Beagle Bone Black
+
+
+%Inside the station center a charge controller is used to regulate the voltage between  
+
+%Each of the six station centers is solar power system for the station.
+
+
+
+%The optically converted signal from the Tx board travels from 
+%Once the local station receives the T1 
+
+
 
 Solar power system
 Triggering from Lety Jr.
