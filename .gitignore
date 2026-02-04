@@ -3,3 +3,6 @@ build/*
 
 # Output PDF
 *.pdf
+
+# Figures (maybe include once thesis is finished...)
+figures/*
