@@ -154,7 +154,7 @@ Radio reconstructions of near-vertical air showers at Auger now, for the first t
 
 %ARISE is the first radio array of its kind for air shower detection at Auger with a studied threshold for full efficiency.
 
-%The scinece potential of ARISE is manifold. In addition to fully efficient air-shower reconstructions, the co-location of ARISE within the UMD and AERA footprints of Auger 
+%The science potential of ARISE is manifold. In addition to fully efficient air-shower reconstructions, the co-location of ARISE within the UMD and AERA footprints of Auger 
 %Combining ARISE radio detection with UMD measurements provide a direct way to simultaneously reconstruct $X_{\rm max}$ and $N_{\mu}$ for the same air showers, as previous analyses with SKALA-v2 antennas have proven their reconstruction potential for $X_{\rm max}$ (CITE XMAX ICECUBE ROXANNE).
 
 In addition to fully efficient air-shower reconstructions, the science potential of ARISE is manifold, as it is co-located within the UMD and AERA footprints of Auger.
@@ -203,6 +203,25 @@ The externally housed WR-LEN will reduce heat inside the TAXI housing as the ori
 The WR-LEN temperatures can exceed \SI{80}{\degreeCelsius} in the field at Argentina because of the warm weather environment and heating from the Sun, therefore reducing the heat inside the TAXI enclosure is a safer environment for the electronics.
 %The original WR-LEN enclosure contains a heat sink over its full surface
 
+The T1 trigger that controls the readout of the radio signal at each station arrives at TAXI from Lety Jr. at an average rate of \SI{100}{\hertz}.
+Each radio binary file has a storage size of approximately \SI{100}{\mega\byte} resulting in a daily data volume of \SI{2}{\tera\byte} from ARISE; yet, in the current setup, data storage is limited to an \SI{8}{\tera\byte} SSD connected to the Fz-55 toughbook in the CRS.
+The T1 level trigger contains mostly low-energy air showers to be used for calibrating the PMTs.
+Therefore applying a match of the T1 timestamps at TAXI with the first physics level trigger (T3) timestamps of events in which Lety Jr. participates results in a lowering of the rate to $\mathcal{O}$(\SI{0.01}{\hertz}).
+Matching of events is done locally at the toughbook laptop in the CRS by a daily transfer of the Auger iklog files to the laptop and then matching by timestamp with each radio binary.
+Once matched the files are then transferred to a storage computer at the Karlsruhe Institute for Technology, and then further transferred to a data storage computer at the University of Delaware.
+
+The T1 trigger rate averages to \SI{100}{\hertz}, yet is a Poissonian process.
+Therefore, at any given moment the rate can reach values $>$\SI{500}{\hertz} that introduce an artificial deadtime in the radio data readout due to a buffer pileup at TAXI.
+Currently, this results in a deadtime of approximately 50\% in the radio data taking.
+Firmware updates for TAXI are being developed that will improve TAXI's handling of large data rates and in hand decrease the length of data taking deadtime.
+
+%Currently, the large trigger rate of \SI{100}{\hertz} that reaches each TAXI introduces an artificial deadtime in the radio data readout due to a buffer pileup.
+
+%Currently, the ARISE data is saved on an \SI{8}{\tera\byte} SSD connected to the Fz-55 toughbook in the CRS which handles all data transfer and storage
+
+%received at each TAXI from Lety Jr. arrives at a \SI{100}{\hertz} rate
+
+%Within ARISE, the T1 trigger received from the Lety Jr. arrives 
 
 
 Additional communication to the TAXIs comes from a Ubiquiti Rocket and LiteBeam system.
@@ -229,3 +248,25 @@ Science potential of array through simulation study, full efficiency for vertica
 
 %Each station consists of three SKALA antennas and a central hub hosting the local station DAQ and a solar power system for the station.
 %The station centers are each located approximately \SI{75}{\meter} from Lety Jr., with the three station antennas deployed \SI{35}{meter} from the station center in a Mercedes-Benz like star pattern to have the same layout as the antennas of the IceCube-Gen2 prototype stations.
+
+% Overlap with AERA is only with the Dutch stations, i.e. the non-functioning part of the array
+% Potential for comparing the energy scales indirectly from the SD.
+
+
+
+% List of plots to include here:
+% 1. Map of array w/ all SKALA antennas
+% 8. Network setup at CRS
+
+% 2. Map of IceCube station w/ scintillators and antennas, similar to Marcos' map but needs updates, include antenna orientation
+
+% 4. ARISE Station center schematic
+% 3. ARISE CHK box schematic
+% x. Inside station center (photo)
+% 5. Schematics showing fiber connections (see talk)
+% 6. Inside of TAXI (photo)
+% 7. Trigger splitter (photo)
+% x. Photo while debugging LiteBeam connection
+% 9. Background spectra of all ARISE antennas
+
+% Go through photos from deployment and pick ones which are relevant, past talks also...
