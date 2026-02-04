@@ -1,5 +1,9 @@
 {
+  // Where all latex generated files from latex workshop will go
   "latex-workshop.latex.outDir": "build",
+
+  // Defines the executable latex workshop will run to compile the PDF
+  // and additional arguments for the compilation execution 
   "latex-workshop.latex.tools": [
     {
       "name": "latexmk",
@@ -13,10 +17,38 @@
       ]
     }
   ],
+
+  // Tells latex workshop to use the tool defined above on compilation/build
   "latex-workshop.latex.recipes": [
     {
       "name": "latexmk (build)",
       "tools": ["latexmk"]
     }
+  ],
+
+  // Files and/or paths to ignore for the spell checker
+  "cSpell.ignorePaths": [
+    "dissertation-main.tex",
+    "references.bib",
+    ".vscode/settings.json"
+  ],
+
+  // Ignore words for spell checker!
+  // Add as needed for this project
+  "cSpell.words": [
+    "SKALA",
+    "LPDA",
+    "LPDAs",
+    "AERA",
+    "SD",
+    "FD",
+    "UMD",
+    "fieldhub",
+    "Guili",
+    "Lety",
+    "subtraces",
+    "denoising",
+    "IceCube",
+    "Ubiquiti"
   ]
 }
