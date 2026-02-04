@@ -18,6 +18,8 @@
 \usepackage{hyperref}
 \usepackage{cleveref}
 
+% Setup unicode encoding for hyperlinks from the hyperref package
+\hypersetup{pdfencoding=unicode}
 
 % Setup for SI unit package
 \sisetup{range-units = single, range-phrase = \,--\,}
@@ -27,12 +29,21 @@
                    % This file (dissertation-tap.tex) contains the Title
                    % and Approval Page information for a dissertation.
 
-\include{chap1}    % This file (chap1.tex) contains the text
-                   % for Chapter 1.
+\include{Body/CosmicRayAstrophysics}    % Chapter 1 text 
                    
-\include{chap2}    % This file (chap2.tex) contains the text
-                   % for Chapter 2.
+\include{Body/AirShowers}    % Chapter 2 text 
 
+\include{Body/PierreAugerObservatory}    % Chapter 3 text 
+
+\include{Body/SimulationsCombinations}    % Chapter 4 text 
+
+\include{Body/NeuralNetworkMuons}    % Chapter 5 text 
+
+\include{Body/CombinedRadioMuon}    % Chapter 6 text 
+
+\include{Body/SKALAatAuger}    % Chapter 7 text 
+
+                   
 %\include{ref}      % This file (ref.tex) contains the text
                    % for the references.
                    
