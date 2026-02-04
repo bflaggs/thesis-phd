@@ -150,7 +150,7 @@ For this array of 18 SKALA antennas, a larger overall footprint will observe mor
 With the described antenna positions, full reconstruction efficiency ($>$ 97\%) is reached at \SI{300}{\peta\electronvolt} for near-vertical air showers ($\theta <$ \SI{30}{\degree}), resulting in reconstruction statistics of $\simeq$\,45 air showers per year~\cite{uhecr2024_verpoest}.
 Current machine learning based radio denoising and reconstruction algorithms can lower this energy threshold by a factor of two once implemented in the data pipeline, increasing the statistics of reconstructed air showers~\cite{ABDUL_THESIS}.
 ARISE
-Radio reconstructions of near-vertical air showers now, for the first time, have full reconstruction efficiency above \SI{300}{\peta\electronvolt} within the footprint of ARISE.
+Radio reconstructions of near-vertical air showers at Auger now, for the first time, have full reconstruction efficiency above \SI{300}{\peta\electronvolt} within the footprint of ARISE.
 
 %ARISE is the first radio array of its kind for air shower detection at Auger with a studied threshold for full efficiency.
 
@@ -187,11 +187,26 @@ The batteries are also stored in the station center at the bottom of the wooden 
 Station centers are equipped with a dual-sided solar panel of type (INPUT SP TYPE) to charge the batteries during good weather.
 Solar panels are aligned with the broad side perpendicular with compass North to maximize the amount of sunlight impacting the solar cells of the panels.
 
+Connected in series between the charge controller and TAXI inside the station center is the ARISE Control and Housekeeping (CHK) box.
+The CHK box serves two purposes: 1. to allow remote power cycling of the TAXI, and 2. records the voltage and current supplied to TAXI.
+The heart of the CHK box is a BeagleBone Black (BBB) single-board debian computer which handles all operations using python and bash scripts to remotely turn on/off TAXI and control the power logging service.
+Connection to BBB is set from a Ubiquiti LiteBeam antenna the connects to a Ubiquiti Rocket housed at the CRS.
+The 24V powering TAXI is used to also power the LiteBeam antenna from a power over ethernet (PoE) converter.
+
+
+%Once connected to BBB, shell scripts can be executed to remotely turn on/off TAXI and start the power logging service.
+%All functions of the CHK box are handled by a BeagleBone Black single-board linux computer.
+
 Communications, data transfer, and timing of the TAXIs are all provided by buried military grade optical fibers trenched from the CRS to Lety Jr., and then to each ARISE station center along each arm of the array.
 This protocol and setup is the same as for the IceCube-Gen2 prototype station, except for in one of the ARISE stations where the WR-LEN board is housed outside of the TAXI housing itself and inside its original enclosure.
 The externally housed WR-LEN will reduce heat inside the TAXI housing as the original WR-LEN enclosure contains a heat sink over its full surface, allowing the heat to dissipate more efficiently in this configuration rather than within the TAXI housing and only with a small heat sink attached to the hottest FPGA chip of the WR-LEN.
 The WR-LEN temperatures can exceed \SI{80}{\degreeCelsius} in the field at Argentina because of the warm weather environment and heating from the Sun, therefore reducing the heat inside the TAXI enclosure is a safer environment for the electronics.
 %The original WR-LEN enclosure contains a heat sink over its full surface
+
+
+
+Additional communication to the TAXIs comes from a Ubiquiti Rocket and LiteBeam system.
+This 
 
 Beagle Bone Black
 
