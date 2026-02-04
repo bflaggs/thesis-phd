@@ -1,4 +1,3 @@
-% 
 % This is the Title and Approval Page file (dissertation-tap.tex) for
 % a dissertation.
 %
@@ -10,7 +9,7 @@
 
 % Title and author are also used for PDF file properties
 % No special character or commands can be used for the PDF definition; 
-% use the [options] paramater to specify a different title or author 
+% use the [options] parameter to specify a different title or author 
 % to remove special characters or commands like \\ for example.
 \title[I have no idea What to title this]{I have no idea\\
 What to title this}
@@ -21,18 +20,18 @@ What to title this}
 \degreedate{Fall 2026}
 % Optional PDF properties
 \keywords{Cosmic rays, Air showers, Neural networks}
-\subject{Subject}
+\subject{Cosmic-ray astrophysics}
 
 \maketitlepage % Generates Title Page
 
 \begin{approvalpage}
 \chair{Edward Nowak, Ph.D.}{Chair of the Department of Physics and Astronomy}
-\dean{Xxxx Xxxx, Highest Degree}{Dean of the College of Xxxx}
+\dean{Caleb Everett, Ph.D.}{Dean of the College of Arts and Sciences}
 \end{approvalpage}
 
 \begin{signedpage} % Up to 4 signatures
 \profmember{Frank G. Schr\"oder, Ph.D.}
-\member{Ioana C. Mari\'s, Ph.D.}
+\member{Ioana C. Mari\c{s}, Ph.D.}
 \member{Jamie Holder, Ph.D.}
 \member{Spencer G. Axani, Ph.D.}
 \end{signedpage}
@@ -45,8 +44,8 @@ What to title this}
 \begin{front} % Starts front material (Roman style page numbers)
 
 \prefacesection{Acknowledgements}
-%\input{acknowl} % This file (acknowl.tex) contains the text
-                % for the acknowledgments or type text here.
+\input{FrontMaterial/acknowledgments} % This file (acknowledgments.tex) contains the text
+                                      % for the acknowledgments or type text here.
 
 
 % Table of Contents is always created, but you
@@ -65,8 +64,8 @@ What to title this}
 \maketocloflot
 
 \prefacesectiontoc{Abstract}
-%\input{abstract} % This file (abstract.tex) contains the text
-                 % for an abstract or type text here.
+\input{FrontMaterial/abstract} % This file (abstract.tex) contains the text
+                               % for an abstract or type text here.
 
 \end{front}
 
