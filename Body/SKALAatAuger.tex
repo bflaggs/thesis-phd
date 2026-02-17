@@ -2,9 +2,9 @@
 % ARISE my SKALA antennas (will be chapter 7 in final product...)
 %
 \chapter{Future Prospects: SKALA Radio Antennas at Auger}\label{chap:skala}
-The Pierre Auger Observatory hosts several prototype detectors and pathfinder air-shower arrays in addition to the detectors discussed in~\cref{chap:cosmicrays}.
+The Pierre Auger Observatory hosts several prototype detectors and pathfinder air-shower arrays in addition to the detectors discussed in~\Cref{chap:cosmicrays}.
 This location greatly benefits prototyping new detectors because of the existing structure of the Auger observatory, allowing ease of access for detector maintenance and assistance from the local observatory staff when feasible.
-Since 2022, 21 total SKALA (Square Kilometer Array Log-periodic Antenna) radio antennas have been deployed at Auger in the \SI{433}{\meter} spaced array of SD tanks.
+Since 2022, 21 total Square Kilometer Array Log-periodic Antenna (SKALA) radio antennas have been deployed at Auger in the \SI{433}{\meter} spaced array of SD tanks.
 These SKALA antennas are Log-Periodic Dipole Antennas (LPDAs), similar to the AERA LPDA antennas, and were originally designed for the Square Kilometer Array's low frequency telescope in Western Australia.
 However, future cosmic-ray observatories with a surface radio component, such as IceCube-Gen2 and the Radio Neutrino Observatory Greenland (RNO-G), use SKALA antennas to reconstruct and/or veto cosmic ray air showers.
 This chapter discusses deployment, hardware specifications, and preliminary analysis from SKALA antennas deployed at the Pierre Auger Observatory.
@@ -13,6 +13,15 @@ This chapter discusses deployment, hardware specifications, and preliminary anal
 % Explain similarities for all SKALA antennas at Auger here? I.e. the DAQ, data transfer, laptop in the CRS, etc.
 % Frank suggested doing this...
 %===============================
+
+\begin{figure}
+    \centering
+    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter7/AugerArray_SKALAInset.pdf}
+    \caption[Map of all SKALA antennas at Auger.]{A map of the Auger SD array with an inset showing the location of all 21 SKALA antennas deployed at Auger. The location of the Central Radio Station of Auger is also shown. The antennas themselves are not to scale. AERA stations, co-located in the inset region, are not shown due to space constrains.}
+    \label{fig:auger_map_skala_inset}
+\end{figure}
+
+~\Cref{fig:auger_map_skala_inset} shows a map of all 21 SKALA antennas deployed in the \SI{433}{\meter} spaced SD array inset against the full Auger array of SD tanks. 
 
 %through the cross-calibration of the new detectors to well trusted air-shower reconstructions.
 
@@ -33,23 +42,23 @@ The first prototype surface station was deployed at the South Pole in January 20
 All South Pole prototypes have been mostly stable in their operations and data taking since deployment.
 See INSERTREFERENCES for specifics regarding these stations.
 
-\begin{figure}
-    \centering
-    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.7\textwidth]{chapter7/Gen2Prototype_SouthPoleSchematic.png}
-    \caption[Prototype IceCube-Gen2 surface station schematic at the South Pole.]{The general schematic of a single prototype IceCube-Gen2 surface station deployed at the South Pole. Each station consists of eight scintillator panels, three SKALA radio antennas, and a central fieldhub hosting the local DAQ of the station. Figure taken from~\cite{gen2tdr}.}
-    \label{fig:gen2_schematic_southpole} % Remove, no need to show schematic here if showing schematic for the actual station at Auger!
-\end{figure}
+%\begin{figure}
+%    \centering
+%    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.7\textwidth]{chapter7/Gen2Prototype_SouthPoleSchematic.png}
+%    \caption[Prototype IceCube-Gen2 surface station schematic at the South Pole.]{The general schematic of a single prototype IceCube-Gen2 surface station deployed at the South Pole. Each station consists of eight scintillator panels, three SKALA radio antennas, and a central fieldhub hosting the local DAQ of the station. Figure taken from~\cite{gen2tdr}.}
+%    \label{fig:gen2_schematic_southpole} % Remove, no need to show schematic here if showing schematic for the actual station at Auger!
+%\end{figure}
 
 In August 2022, a prototype surface station was deployed at the Pierre Auger Observatory.
 ~\cref{fig:augermap_gen2prototype} shows the location of the prototype station adjacent to the Central Radio Station (CRS), which hosts the AERA DAQ and communications systems.
 The station is co-located in both the AERA footprint and the densest part of the SD array to serve the main science goals of coincident air-shower measurements with Auger detectors and a potential cross-calibration of the AERA radio antennas and SKALA antennas of the prototype station.
 
-\begin{figure}
-    \centering
-    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.6\textwidth]{chapter7/Gen2Prototype_ArrayPositionwCRS.pdf}
-    \caption[Location of the IceCube-Gen2 prototype station at Auger.]{A map of the Auger SD array with an inset showing the location of the IceCube-Gen2 prototype station deployed at Auger. The location of the Central Radio Station of Auger is also shown. AERA stations, co-located in the inset region, are not shown due to space constrains. Figure taken from~\cite{icrc2025_verpoest}.}
-    \label{fig:augermap_gen2prototype} % Include in first section of chapter, with locations of the ARISE antennas, ask Stef for code to make plot!
-\end{figure}
+%\begin{figure}
+%    \centering
+%    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.6\textwidth]{chapter7/Gen2Prototype_ArrayPositionwCRS.pdf}
+%    \caption[Location of the IceCube-Gen2 prototype station at Auger.]{A map of the Auger SD array with an inset showing the location of the IceCube-Gen2 prototype station deployed at Auger. The location of the Central Radio Station of Auger is also shown. AERA stations, co-located in the inset region, are not shown due to space constrains. Figure taken from~\cite{icrc2025_verpoest}.}
+%    \label{fig:augermap_gen2prototype} % Include in first section of chapter, with locations of the ARISE antennas, ask Stef for code to make plot!
+%\end{figure}
 
 \subsection{Station Design and Deployment}\label{sec:gen2design}
 
@@ -69,12 +78,12 @@ Each coaxial cable is approximately \SI{40}{\meter} in length, with extra cable 
     \label{fig:gen2_dronephoto}
 \end{figure}
 
-\begin{figure}
-    \centering
-    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.5\textwidth]{chapter7/Gen2Prototype_AugerSchematic_OUTDATED.pdf}
-    \caption[Schematic of the deployed IceCube-Gen2 prototype station at Auger.]{The schematic of the IceCube-Gen2 prototype station deployed at Auger. All scintillator panels and radio antennas are labeled with their respective numbers. Both the locations of the station DAQ, labeled TAXI, and the CRS are shown, along with the direction of magnetic North. Schematic originally made by Marcos Cerda. ++++NEEDS UPDATES TO SCHEMATIC++++}
-    \label{fig:gen2_schematic_auger}
-\end{figure}
+%\begin{figure}
+%    \centering
+%    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.5\textwidth]{chapter7/Gen2Prototype_AugerSchematic_OUTDATED.pdf}
+%    \caption[Schematic of the deployed IceCube-Gen2 prototype station at Auger.]{The schematic of the IceCube-Gen2 prototype station deployed at Auger. All scintillator panels and radio antennas are labeled with their respective numbers. Both the locations of the station DAQ, labeled TAXI, and the CRS are shown, along with the direction of magnetic North. Schematic originally made by Marcos Cerda. ++++NEEDS UPDATES TO SCHEMATIC++++}
+%    \label{fig:gen2_schematic_auger}
+%\end{figure}
 
 The scintillator panels connect to the DAQ from buried, custom made coaxial cables with 5-pin connectors on each end.
 TAXI itself, the name of the DAQ electronics, has a metal housing and is stored in a weather proof aluminum box at the station center to protect it from the extreme weather conditions which can occur at the field in Argentina.
