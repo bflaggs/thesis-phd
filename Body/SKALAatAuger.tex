@@ -4,15 +4,18 @@
 \chapter{Future Prospects: SKALA Radio Antennas at Auger}\label{chap:skala}
 The Pierre Auger Observatory hosts several prototype detectors and pathfinder air-shower arrays in addition to the detectors discussed in~\Cref{chap:cosmicrays}.
 This location greatly benefits prototyping new detectors because of the existing structure of the Auger observatory, allowing ease of access for detector maintenance and assistance from the local observatory staff when feasible.
-Since 2022, 21 total Square Kilometer Array Log-periodic Antenna (SKALA) radio antennas have been deployed at Auger in the \SI{433}{\meter} spaced array of SD tanks.
+Recently, several stations consisting of Square Kilometer Array Log-periodic Antenna (SKALA) radio antennas have been deployed at Auger.
 These SKALA antennas are Log-Periodic Dipole Antennas (LPDAs), similar to the AERA LPDA antennas, and were originally designed for the Square Kilometer Array's low frequency telescope in Western Australia.
-However, future cosmic-ray observatories with a surface radio component, such as IceCube-Gen2 and the Radio Neutrino Observatory Greenland (RNO-G), use SKALA antennas to reconstruct and/or veto cosmic ray air showers.
+However, future cosmic-ray observatories with a surface radio component, such as IceCube-Gen2 and the Radio Neutrino Observatory Greenland (RNO-G), plan to use SKALA antennas to reconstruct and/or veto cosmic ray air showers.
 This chapter discusses deployment, hardware specifications, and preliminary analysis from SKALA antennas deployed at the Pierre Auger Observatory.
 
 %===============================
 % Explain similarities for all SKALA antennas at Auger here? I.e. the DAQ, data transfer, laptop in the CRS, etc.
 % Frank suggested doing this...
 %===============================
+
+%\section{Description of SKALA Stations, Data Acquisition Systems, and }
+\section{The SKALA Detector System}\label{sec:skala_system}
 
 \begin{figure}
     \centering
@@ -21,7 +24,14 @@ This chapter discusses deployment, hardware specifications, and preliminary anal
     \label{fig:auger_map_skala_inset}
 \end{figure}
 
-~\Cref{fig:auger_map_skala_inset} shows a map of all 21 SKALA antennas deployed in the \SI{433}{\meter} spaced SD array inset against the full Auger array of SD tanks. 
+Since 2022, 21 total SKALA-v2 radio antennas have been deployed at Auger in the \SI{433}{\meter} spaced array of SD tanks.
+~\Cref{fig:auger_map_skala_inset} shows a map of all 21 SKALA antennas deployed in this region of the Auger array, inset against the full Auger array of SD tanks.
+A single station for the SKALA detector system is formed by a group of three antennas arranged in a Mercedes-Benz like three-pointed star hence, in total, the 21 SKALA antennas at Auger constitute seven total stations.
+%The SKALA antennas are grouped in triplets to form a single station.
+One station forms the IceCube-Gen2 prototype station at Auger, while the other six stations form the Auger Radio Infill SKALA Extension (ARISE) array.
+In~\Cref{fig:auger_map_skala_inset}, the IceCube-Gen2 prototype station is composed of the three SKALA antennas to the Northeast of the Auger Central Radio Station (CRS), shown as the orange star on the map, while the 18 SKALA antennas surrounding the Auger SD to the Northwest of the CRS form the six stations of ARISE. 
+Stations for ARISE differ slightly from the IceCube-Gen2 prototype station, where these differences are described in more detail in the coming sections, one section for each the prototype station and ARISE.
+This section serves to describe the similarities of the SKALA detector system, providing a deeper understanding of the hardware, data acquisition system (DAQ), and data transfer and storage for the coming sections.
 
 %through the cross-calibration of the new detectors to well trusted air-shower reconstructions.
 
