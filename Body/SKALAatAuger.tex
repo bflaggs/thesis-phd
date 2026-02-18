@@ -44,11 +44,11 @@ One deployed, a \SI{180}{\degree} rotation of the antenna will yield the same me
 \begin{figure}
     \centering
     \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter7/skala_antenna_cad_drawing.png}
-    \caption[CAD drawing of a SKALA-v2 radio antenna.]{A CAD drawing of a SKALA-v2 radio antenna.}
+    \caption[CAD drawing of a SKALA-v2 radio antenna.]{A CAD drawing of a SKALA-v2 radio antenna. The antenna trumpet, at the top of the antenna, houses the two LNAs. The plastic square on the body of the antenna is called the antenna spider. The spider is used during antenna assembly to fix the arms perpendicularly and remains on the antenna body after deployment for stability. The SKALA antenna ends at the bottom black leg pieces. These pieces are the antenna legs and are used to fasten the antenna to a ground structure.}
     \label{fig:skala_cad_drawing}
 \end{figure}
 
-The metal arms of the LNAs are connected directly to the antenna metal of each antenna arm and fixed in place with screws to ensure adequate contact between the antenna and LNA.
+The metal arms of the LNAs are connected directly to the metal of each antenna arm and fixed in place with screws to ensure adequate contact between the antenna and LNA.
 Adequate metal contact is necessary for the LNA to properly boost the weak signal measured by the SKALA antennas.
 Without good contact, the radio signal has less amplification and is more prone to signal degradation in the coaxial cables on its travel to the DAQ electronics.
 The LNA pairs are interlocked in the antenna trumpet (see~\Cref{fig:lna_lab_picture}) with a plastic spacer separating them to prevent crosstalk in the electronics.
@@ -58,15 +58,27 @@ The antenna-opposite end of the \SI{40}{\meter} type-N cables connect directly t
 
 \begin{figure}
     \centering
-    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter7/LNAs_in_lab.jpg}
-    \caption[Picture of a SKALA-v2 antenna trumpet with visible LNA.]{A picture of the SKALA-v2 antenna trumpet taken during the LNA assembly at the main Auger observatory campus in Malarg\"ue.}
+    \includegraphics[trim={32cm 0cm 0cm 0cm},clip,width=0.6\textwidth,angle=270]{chapter7/LNAs_in_lab.jpg}
+    \caption[Picture of a SKALA-v2 antenna trumpet with visible LNA.]{A picture of the SKALA-v2 antenna trumpet taken during the LNA assembly at the main Auger observatory campus in Malarg\"ue. The protective cap for the antenna trumpet has been removed to show the interlocked LNAs. Three of the four metal points where the LNA to antenna contact happens are visible, along with the top LNA and its golden SMA connector. The blue tape was used by the deployment team to track the antenna orientation after placement of the protective cap. In this image, the antenna orientation is such that the polarization arms connected to the top LNA point into and out of the page, while the polarization arms for the bottom LNA point left and right.}
     \label{fig:lna_lab_picture}
 \end{figure}
 
 The DAQ for each station of three SKALA antennas is based on the DAQ developed for the Transportable Array for eXtremely large area Instrumentation studies (TAXI) project and is hosted in a single metal container, also referred to as the TAXI housing.
-The main DAQ responsibilities are handled by TAXI-v3.2, an updated version of the principal electronics board developed for the TAXI project.
-Two additional electronics boards connect to the TAXI-v3.2 board to complete the DAQ system for each station of SKALA antennas.
+The main DAQ components are handled by TAXI-v3.2, an updated version of the principal electronics board developed for the TAXI project.
+Two additional electronics boards connect to the TAXI-v3.2 board to complete the DAQ system.
 The first additional electronics board is the radioTad, a front-end radio electronics board to pre-process the radio signals received from the LNAs before propagating the signals forward through to the DAQ.
+The LNA signals are received at a type-N female connector of the TAXI housing and then are routed to the radioTad boards hosted internal to the housing via a coaxial cable.
+Each radioTad board connects to a single SKALA antenna and has two polarizations, labeled positive and negative, for the two antenna LNAs.
+For simplicity, it was chosen upon deployment to have all top LNAs connect to the "positive" radioTad polarizations and all bottom LNAs to connect to the "negative" polarizations.
+The radioTads power the LNAs using a bias-tee through the same coaxial cables with which they receive the LNA signals.
+Once a signal reaches the radioTad from the LNA, both a high-pass and low-pass filter are applied to filter the frequency range within \SIrange{70}{350}{\mega\hertz}.
+The filtered signals are converted to eight total differential signals for each LNA and fed to the TAXI board for further processing through a D-SUB 37 pin connector.
+Inside the TAXI housing, the radioTads are covered with a custom sized aluminum cover to prevent bi-directional RFI leakage.
+A more detailed description of the radioTad functionality and the TAXI-v3.2 processing of the radio signals is provided in ROXANNETHESIS.
+
+
+The LNA signals are received at the TAXI housing  a type-N female connector on the housing itself.
+Internal to the housing, this connection is then routed 
 
 
 %on a single electronics board, also referred to as the TAXI board.
