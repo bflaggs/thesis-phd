@@ -5,7 +5,7 @@
 The Pierre Auger Observatory hosts several prototype detectors and pathfinder air-shower arrays in addition to the detectors discussed in~\Cref{chap:cosmicrays}.
 This location greatly benefits prototyping new detectors because of the existing structure of the Auger observatory, allowing ease of access for detector maintenance and assistance from the local observatory staff when feasible.
 Recently, several stations for radio detection of cosmic-ray air showers using Square Kilometer Array Log-periodic Antenna (SKALA) radio antennas have been deployed at Auger.
-These SKALA antennas are Log-Periodic Dipole Antennas (LPDAs), similar to the AERA LPDA antennas, and were originally designed for the Square Kilometer Array's low frequency telescope in Western Australia.
+These SKALA antennas are Log-Periodic Dipole Antennas (LPDAs), similar to the AERA LPDA antennas, and were originally designed for the Square Kilometer Array's (SKA) low frequency telescope in Western Australia.
 However, future cosmic-ray observatories with a surface radio component, such as IceCube-Gen2 and the Radio Neutrino Observatory Greenland (RNO-G), plan to use SKALA antennas to reconstruct and/or veto cosmic ray air showers.
 This chapter discusses deployment, hardware specifications, and preliminary analysis from SKALA antennas deployed at the Pierre Auger Observatory.
 
@@ -30,7 +30,58 @@ A single station for the SKALA detector system is formed by a group of three ant
 One station forms the IceCube-Gen2 prototype station at Auger, while the other six stations form the Auger Radio Infill SKALA Extension (ARISE) array.
 In~\Cref{fig:auger_map_skala_inset}, the IceCube-Gen2 prototype station is composed of the three SKALA antennas to the Northeast of the Auger Central Radio Station (CRS), shown as the orange star on the map, while the 18 SKALA antennas surrounding the Auger SD to the Northwest of the CRS form the six stations of ARISE. 
 Stations for ARISE differ slightly from the IceCube-Gen2 prototype station, where these differences are described in more detail in the coming sections, one section each for the prototype station and ARISE.
-This section serves to describe the similarities of the SKALA detector systems, providing a deeper understanding of the hardware, data acquisition system (DAQ), and data transfer and storage for the coming sections.
+This section serves to describe the similarities of the SKALA detector systems, specifically describing the hardware, data acquisition system (DAQ), and the data transfer and storage as this is mostly similar between the two types of station.
+
+%providing a deeper understanding of the hardware, data acquisition system (DAQ), and data transfer and storage for the coming sections.
+
+The SKALA antennas themselves are all SKALA-v2 type antennas, shown in~\Cref{fig:skala_cad_drawing}, developed during antenna prototyping for the SKA-Low radio telescope.
+SKALA antennas have two perpendicular polarizations, each with their own Low Noise Amplifier (LNA) housed in the top most part of the antenna, known as the antenna trumpet.
+There are two types of LNA for SKALA-v2 antennas, a "top" LNA and a "bottom" LNA, referring to the LNA position inside the antenna trumpet with respect to its paired LNA.
+Top and bottom LNAs are always paired together, one for each of the two perpendicular polarizations; however, no specific orientation for the polarization-LNA pairings are defined by default.
+This must be defined and remain consistent between all antennas by the deployment team.
+One deployed, a \SI{180}{\degree} rotation of the antenna will yield the same measured radio signal in principle due to a degeneracy in the pairing of the antenna design and LNA response.
+
+\begin{figure}
+    \centering
+    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter7/skala_antenna_cad_drawing.png}
+    \caption[CAD drawing of a SKALA-v2 radio antenna.]{A CAD drawing of a SKALA-v2 radio antenna.}
+    \label{fig:skala_cad_drawing}
+\end{figure}
+
+The metal arms of the LNAs are connected directly to the antenna metal of each antenna arm and fixed in place with screws to ensure adequate contact between the antenna and LNA.
+Adequate metal contact is necessary for the LNA to properly boost the weak signal measured by the SKALA antennas.
+Without good contact, the radio signal has less amplification and is more prone to signal degradation in the coaxial cables on its travel to the DAQ electronics.
+The LNA pairs are interlocked in the antenna trumpet (see~\Cref{fig:lna_lab_picture}) with a plastic spacer separating them to prevent crosstalk in the electronics.
+Each LNA has a gold SMA connector used to transfer the radio signal post-LNA to the DAQ electronics, for the top LNA this SMA connector is visible in~\Cref{fig:lna_lab_picture}.
+The signal from the LNA first passes through an SMA male to type-N female coaxial cable \SI{1}{\meter} in length, connected to a type-N male to type-N male coaxial cable of \SI{40}{\meter} length.
+The antenna-opposite end of the \SI{40}{\meter} type-N cables connect directly to the station DAQ and are buried along the path between the antennas and DAQ to protect the cables from environmental factors, including roaming animals in the Argentinian Pampa such as cows, goats, and horses.
+
+\begin{figure}
+    \centering
+    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter7/LNAs_in_lab.jpg}
+    \caption[Picture of a SKALA-v2 antenna trumpet with visible LNA.]{A picture of the SKALA-v2 antenna trumpet taken during the LNA assembly at the main Auger observatory campus in Malarg\"ue.}
+    \label{fig:lna_lab_picture}
+\end{figure}
+
+The DAQ for each station of three SKALA antennas is based on the DAQ developed for the Transportable Array for eXtremely large area Instrumentation studies (TAXI) project and is hosted in a single metal container, also referred to as the TAXI housing.
+The main DAQ responsibilities are handled by TAXI-v3.2, an updated version of the principal electronics board developed for the TAXI project.
+Two additional electronics boards connect to the TAXI-v3.2 board to complete the DAQ system for each station of SKALA antennas.
+The first additional electronics board is the radioTad, a front-end radio electronics board to pre-process the radio signals received from the LNAs before propagating the signals forward through to the DAQ.
+
+
+%on a single electronics board, also referred to as the TAXI board.
+%All station DAQs for SKALA antennas in Argentina use TAXI-v3.2.
+
+%Two additional electronics boards connect to the TAXI-v3.2 board, the radioTad board tasked with 
+
+
+%The \SI{40}{\meter} type-N cables are buried along the path from the antennas
+
+
+%to amplify the weak radio signals rece 
+
+
+
 
 Describe antennas, LNAs, connectors of LNA and difference for top and bottom LNA. Describe TAXI and the triggering types. How TAXI interfaces with WR, power for TAXI, etc. Read into some of Roxanne's thesis for this. Discuss setup in CRS, transfer of data from CRS to Coihueco. Laptop in CRS.
 Include pictures of antennas, LNAs, TAXI, WRS (from website).
