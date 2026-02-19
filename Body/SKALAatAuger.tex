@@ -32,6 +32,15 @@ In~\Cref{fig:auger_map_skala_inset}, the IceCube-Gen2 prototype station is compo
 Stations for ARISE differ slightly from the IceCube-Gen2 prototype station, where these differences are described in more detail in the coming sections, one section each for the prototype station and ARISE.
 This section serves to describe the similarities of the SKALA detector systems, specifically describing the hardware, data acquisition system (DAQ), and the data transfer and storage as this is mostly similar between the two types of station.
 
+The backbone of all SKALA detector systems at Auger is housed inside the CRS, of which the main components are a laptop and a White Rabbit switch.
+The laptop is an FZ-55 toughbook 
+
+
+Inside the CRS, housed on an AERA DAQ rack, is the backbone of all SKALA stations at Auger, the White Rabbit switch.
+It controls the data transfer, communications, and timing for each station via buried military grade optical fiber connections to the WR-LEN board at each SKALA station.
+For timing, the White Rabbit switch takes a master time signal and distributes it amongst connected systems to provide sub-nanosecond timing accuracy and synchronization between multiple detectors.
+
+
 %providing a deeper understanding of the hardware, data acquisition system (DAQ), and data transfer and storage for the coming sections.
 
 The SKALA antennas themselves are all SKALA-v2 type antennas, shown in~\Cref{fig:skala_cad_drawing}, developed during antenna prototyping for the SKA-Low radio telescope.
@@ -65,10 +74,12 @@ The antenna-opposite end of the \SI{40}{\meter} type-N cables connect directly t
 
 The DAQ for each station of three SKALA antennas is based on the DAQ developed for the Transportable Array for eXtremely large area Instrumentation studies (TAXI) project and is hosted in a single metal container, also referred to as the TAXI housing.
 The main DAQ components are handled by TAXI-v3.2, an updated version of the principal electronics board developed for the TAXI project.
-Additional electronics boards connect to the TAXI-v3.2 board to complete the DAQ system.
+As power, TAXI takes \SI{24}{\volt} DC power input through a custom 5-pin connector on the TAXI housing.
+The \SI{24}{\volt} power is split into three separate DC-DC power converters of voltages \SI{3.3}{\volt}, \SI{4.5}{\volt}, and \SI{5}{\volt} to provide power to all TAXI components and all additional electronics.% connected to the TAXI-v3.2 board. 
+These additional electronics boards connect directly to the TAXI-v3.2 board to complete the DAQ system (see~\Cref{fig:inside_taxi}).
 The first additional electronics board is the radioTad, a front-end radio electronics board to pre-process the radio signals received from the LNAs before propagating the signals forward through to the DAQ.
 The LNA signals are received at a type-N female connector of the TAXI housing and then are routed to the radioTad boards hosted internal to the housing via a coaxial cable.
-Each radioTad board connects to a single SKALA antenna and has two polarizations, labeled positive and negative, for the two antenna LNAs.
+Each radioTad board required \SI{4.5}{\volt} DC power, connects to a single SKALA antenna, and has two polarizations, labeled positive and negative, for the two antenna LNAs.
 For simplicity, it was chosen upon deployment to have all top LNAs connect to the "positive" radioTad polarizations and all bottom LNAs to connect to the "negative" polarizations.
 The radioTads power the LNAs using a bias-tee through the same coaxial cables with which they receive the LNA signals.
 Once a signal reaches the radioTad from the LNA, both a high-pass and low-pass filter are applied to filter the frequency range within \SIrange{70}{350}{\mega\hertz}.
@@ -83,6 +94,44 @@ The second mode is an external trigger mode.
 In this case, an additional electronics board interfacing with an external detector is connected to TAXI and, upon fulfillment of a trigger condition set by the external detector electronics, sends the request to the TAXI FPGA to initiate the readout of the radio data.
 The SKALA antennas for the IceCube-Gen2 prototype station and ARISE interface with different external detectors and will be described in their respective sections.
 A more detailed description of the radioTad functionality and the TAXI-v3.2 processing of the radio signals is provided in ROXANNETHESIS.
+
+Also connected to the TAXI board is the White Rabbit Line Extension (WR-LEN) board.
+The WR-LEN board serves as a remote access point to the White Rabbit switch in the CRS, controlling the data transfer, communications, and timing of the station DAQ.
+Buried military grade optical fibers connect the White Rabbit switch to the WR-LEN boards at each SKALA station, where the WR-LEN boards connect directly to the TAXI board via a Cat7 ethernet cable to control the communications and data transfer.
+The Cat7 ethernet cables provide high-speed data transfer of approximately \SI{10}{Gbps}, allowing adequate data rates to transfer all data between TAXI and the White Rabbit switch, with minimal electromagnetic interference due to the cable shielding.
+In addition, timing from the WR-LEN board is distributed to the TAXI board using two SMA cables, one to distribute the PPS signal and another for the \SI{10}{\mega\hertz} signal.
+These timing signals originate at the White Rabbit switch in the CRS from a master timing signal.
+\SI{5}{\volt} DC power is necessary for powering the WR-LEN board, coming directly from the TAXI internal DC-DC voltage converter.
+
+\begin{figure}
+    \centering
+    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.6\textwidth]{chapter7/InsideTAXIHousing_Picture.jpg}
+    \caption[Picture inside of the TAXI housing.]{A picture inside the aluminum TAXI housing, specifically for the TAXI of the IceCube-Gen2 prototype station at Auger. The radioTad board is the exposed blue board in the lower half of the enclosure. Two additional radioTads are to the right of the exposed radioTad, but covered with their custom aluminum shielding. The WR-LEN board, in the internal TAXI housing configuration, is shown in the center on the upper aluminum rack of the housing. The green Cat7 ethernet cable connects directly to the TAXI-v3.2 electronics board sitting underneath all of the additional electronics. The eight red cables connect to an additional electronics board controlling the external detector used for triggering the radio read out of the IceCube-Gen2 prototype station. This electronics board will be described in further detail in~\Cref{sec:gen2prototype}.}
+    \label{fig:inside_taxi}
+\end{figure}
+
+The WR-LEN board can be housed both internal or external to the TAXI housing.
+When housed externally, the WR-LEN board can remain inside its original enclosure; however, modifications to the connectors of the TAXI housing and a custom power cable must be made in order to make all connections between WR-LEN and TAXI.
+The externally housed WR-LEN setup provides greater heat dissipation compared to the internal setup, as the fully upwards facing surface of the original WR-LEN enclosure acts as a heat sink. 
+When housed internal to the TAXI housing, the original enclosure for the WR-LEN does not fit inside the aluminum housing and must be removed from the board.
+Instead, for heat dispersion, a heat sink is placed on the main Application Specific Integrated Circuit (ASIC) chip of the WR-LEN.
+Summer temperature in Malarg\"ue can reach upwards of \SI{30}{\degreeCelsius}, with further heating from the Sun, while heat from the other electronics can increase the environmental temperature conditions surrounding the WR-LEN board to its upper limit for safe range of operation at \SI{50}{\degreeCelsius}.
+Therefore a heat sink is necessary to mitigate malfunction of the WR-LEN when enclosed inside the TAXI housing.
+For reference, thermal images using a FLIR infrared camera of WR-LEN boards operating outside of their original heat sink enclosure, without a heat sink on the main ASIC, and in normal lab conditions show temperature measurements of nearly \SI{100}{\degreeCelsius}.
+These high temperatures also provoke further spikes and corruptions in the radio data measured by TAXI, hence the externally housed WR-LEN board is optimal for reducing these effects, yet at the expense of less dust protection.
+As of now, the default for all SKALA stations is housing the WR-LEN board inside the TAXI housing.  
+
+
+
+% Maybe I should stop here for this section...
+Inside the CRS, housed on an AERA DAQ rack, is the backbone of all SKALA stations at Auger, the White Rabbit switch.
+It controls the data transfer, communications, and timing for each station via buried military grade optical fiber connections to the WR-LEN board at each SKALA station.
+For timing, the White Rabbit switch takes a master time signal and distributes it amongst connected systems to provide sub-nanosecond timing accuracy and synchronization between multiple detectors.
+
+The WR-LEN board, stored inside the TAXI housing, serves as a remote access point to the White Rabbit switch which is accessible over long distances using optical fibers.
+A \SI{100}{\meter} buried military grade optical fiber provides this connection between the White Rabbit switch in the CRS and the WR-LEN board of the prototype station.
+Inside the CRS, a custom DC-DC power converter takes two \SI{12}{\volt} DC inputs and converts them into two \SI{24}{\volt} DC outputs to power both the White Rabbit switch and TAXI.
+The power to both systems can be controlled from a network connection or with physical switches the custom power converter inside the CRS, allowing separate power cycling of the White Rabbit switch and TAXI.
 
 
 %The LNA signals are received at the TAXI housing  a type-N female connector on the housing itself.
