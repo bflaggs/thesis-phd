@@ -2,7 +2,7 @@
 % ARISE my SKALA antennas (will be chapter 7 in final product...)
 %
 \chapter{Future Prospects: SKALA Radio Antennas at Auger}\label{chap:skala}
-The Pierre Auger Observatory hosts several prototype detectors and pathfinder air-shower arrays in addition to the detectors discussed in~\Cref{chap:cosmicrays}.
+The Pierre Auger Observatory hosts several prototype detectors and pathfinder air-shower arrays in addition to the detectors discussed in~\Cref{chap:auger}.
 This location greatly benefits prototyping new detectors because of the existing structure of the Auger observatory, allowing ease of access for detector maintenance and assistance from the local observatory staff when feasible.
 Recently, several stations for radio detection of cosmic-ray air showers using Square Kilometer Array Log-periodic Antenna (SKALA) radio antennas have been deployed at Auger.
 These SKALA antennas are Log-Periodic Dipole Antennas (LPDAs), similar to the AERA LPDA antennas, and were originally designed for the Square Kilometer Array's (SKA) low frequency telescope in Western Australia.
@@ -20,7 +20,7 @@ This chapter discusses deployment, hardware specifications, and preliminary anal
 \begin{figure}
     \centering
     \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter7/AugerArray_SKALAInset.pdf}
-    \caption[Map of all SKALA antennas at Auger.]{A map of the Auger SD array with an inset showing the location of all 21 SKALA antennas deployed at Auger. The location of the Central Radio Station of Auger is also shown. The antennas themselves are not to scale. AERA stations, co-located in the inset region, are not shown due to space constrains.}
+    \caption[Map of all SKALA antennas at Auger.]{A map of the Auger SD array with an inset showing the location of all 21 SKALA antennas deployed at Auger. The location of the Central Radio Station (CRS) of Auger is also shown. The antennas markers themselves are not plotted to scale. AERA stations, co-located in the inset region, are not shown due to space constrains.}
     \label{fig:auger_map_skala_inset}
 \end{figure}
 
@@ -32,13 +32,61 @@ In~\Cref{fig:auger_map_skala_inset}, the IceCube-Gen2 prototype station is compo
 Stations for ARISE differ slightly from the IceCube-Gen2 prototype station, where these differences are described in more detail in the coming sections, one section each for the prototype station and ARISE.
 This section serves to describe the similarities of the SKALA detector systems, specifically describing the hardware, data acquisition system (DAQ), and the data transfer and storage as this is mostly similar between the two types of station.
 
-The backbone of all SKALA detector systems at Auger is housed inside the CRS, of which the main components are a laptop and a White Rabbit switch.
-The laptop is an FZ-55 toughbook 
+The backbone of all SKALA detector systems at Auger is housed inside the CRS, of which the main components are a laptop and a White Rabbit (WR) switch.
+The laptop is a Panasonic FZ-55 toughbook, chosen for its fanless design and ability to withstand dust and other harsh environments.
+It is used for directly interfacing with the SKALA detector systems, including the starting and stopping of data taking, storage and logging of data, and transfer of the data via Wi-Fi.
+The nearby Coihueco FD site provides Wi-Fi at the CRS yet is limited to a \SI{40}{Mbps} speed, with the total data volume for the SKALA detector systems capped at \SI{10}{Mbps}.
+This Wi-Fi connection is made possible from two Ubiquiti bullet directional radios pointed towards Coihueco.
+One Ubiquiti bullet link is used solely for AERA, while the second, originally a backup for AERA, is used to power a network switch inside the CRS to provide internet access for all devices connected to the switch, including the FZ-55 toughbook.
+Other devices connected to the network switch include the Grand@Auger computer, and a Wi-Fi router, powered by a DC-AC inverter, to provide internet access for those performing field work inside the CRS.
+
+The WR switch, shown in~\Cref{fig:wr_switch}, is a specialized network switch designed to provide precise synchronization between multiple detectors by distributing a master time signal with sub-nanosecond timing accuracy amongst all connected components.
+A GPS antenna, located on the roof of the CRS, connects to a GPS clock and level shifter system to provide the PPS and \SI{10}{\mega\hertz} input signals to the WR switch.
+For the SKALA detector system, the WR switch not only controls the timing, but also the communications and data transfer for each station.
+To this end, the WR switch connects via ethernet cables to the FZ-55 toughbook in two locations: 1. from the WR switch management port, and 2. from WR switch SFP port 17, converted for ethernet cable connections with an SFP to RJ45 transceiver module.
+The FZ-55 controls the network settings of the WR switch from the management port using a Network Time Protocol (NTP) server configured on the laptop.
+The configured NTP server should, in principle, be synchronized with the Auger NTP server to within a few milliseconds.
+General settings of the WR switch are also accessible through the management port and controlled from a graphical user interface on the laptop.
+
+\begin{figure}
+    \centering
+    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter7/WRSwitch_Picture.png}
+    \caption[Picture of a White Rabbit switch.]{A picture of the White Rabbit (WR) switch deployed inside the CRS. The RJ45 port labeled "MANAGEMENT" is the WR management port. Directly next to the management port are two SMC male connectors to take the PPS and \SI{10}{\mega\hertz} in signals from the GPS clock defining the master time signal of the WR system. The 18 SFP ports are used for providing sub-nanosecond synchronization to any connected components. For the setup inside the CRS, port 17 is used as a communications channel to the FZ-55 toughbook.}
+    \label{fig:wr_switch}
+\end{figure}
+
+Connection to WR switch port 17 forms the communications channel between the WR switch and FZ-55 toughbook.
+From the communications channel, all additional detectors connected to the WR switch can be accessed by the laptop and data can be transferred from these additional detectors directly to the FZ-55 toughbook.
+The additional detectors constitute all seven of the SKALA stations deployed at Auger.
+Buried military grade optical fibers connect the WR switch to White Rabbit Line Extension (WR-LEN) boards at each SKALA station, where the WR-LEN boards serve as remote access points to the WR switch in the CRS.
+The WR-LEN boards connect directly to the station DAQ electronics and control the timing, communications, and data transfer for the station.
+This information is all sent bidirectionally through the buried optical fiber to the WR switch, and can be accessed from the FZ-55 toughbook via WR switch port 17.
+Data from each SKALA station is stored at the laptop on one of three SSDs, creatively named \texttt{taxissd\_1}, \texttt{taxissd\_2}, and \texttt{taxissd\_3}.
+\texttt{taxissd\_1} is a \SI{2}{\tera\byte} SSD tasked with storing only data for the IceCube-Gen2 prototype station, whereas \texttt{taxissd\_2} and \texttt{taxissd\_3} are both \SI{8}{\tera\byte} SSDs, of SanDisk and Samsung brands respectively, to store data for the ARISE stations.
+Each of the SSDs is rated to withstand dust accumulation and all are powered by USB ports of the FZ-55 toughbook.
+
+Two USB hubs are connected to the FZ-55 laptop due to the amount of connections necessary for networking and data taking of the SKALA stations.
+One USB hub has ports for both USB-A and ethernet connections, therefore this hub hosts \texttt{taxissd\_1}, the ethernet connection to the WR management port, and a mechanical mouse for field work involving the laptop.
+The second USB hub is externally powered from \SI{12}{\volt} DC power of battery bank 1 of the CRS and hosts \texttt{taxissd\_2}, and provides power to the GPS clock and level shifter.
+Putting the second USB hub on external power removes some of the power strain placed on the laptop by the connections requiring power over USB.
+Power for both the FZ-55 toughbook and the WR switch are provided by \SI{12}{\volt} DC power outputs of battery bank 1 of the CRS.
+The \SI{12}{\volt} power line of battery bank 1 reserved for the toughbook is connected to a Lind electronics DC-DC auto power adapter and used to convert the \SI{12}{\volt} DC power to the necessary specifications to keep the toughbook on and charged at all times, except in the event of a power outage or poor charging of the batteries in battery bank 1.
+For the WR switch, a custom built DC-DC power converter takes two \SI{12}{\volt} DC inputs from battery bank 1 and converts them into a \SI{12}{\volt}, \SI{5}{\ampere} max, DC output and a \SI{24}{\volt}, \SI{2.5}{\ampere} max, DC output.
+The \SI{12}{\volt} DC output is used to power the WR switch, while the \SI{24}{\volt} output line can be used to power a station DAQ electronics board either in the field or inside the CRS for debugging.
+The specific ports used to power the laptop and WR switch can be controlled from an IP network switch, allowing remote power cycling of each component via the network GUI, with a physical switch in the case of the custom DC-DC converter used for the WR switch.
 
 
-Inside the CRS, housed on an AERA DAQ rack, is the backbone of all SKALA stations at Auger, the White Rabbit switch.
-It controls the data transfer, communications, and timing for each station via buried military grade optical fiber connections to the WR-LEN board at each SKALA station.
-For timing, the White Rabbit switch takes a master time signal and distributes it amongst connected systems to provide sub-nanosecond timing accuracy and synchronization between multiple detectors.
+
+
+%The custom DC-DC converter also has physical switches to turn on and off the output voltages, and can be used to manually restart the WR switch from inside the CRS.
+
+%The power to both systems can be controlled from a network connection or with physical switches the custom power converter inside the CRS, allowing separate power cycling of the White Rabbit switch and TAXI.
+
+%These input signals set the master time signal of the WR switch, where power for both the GPS antenna and level shifter comes from USB-A ports of the FZ-55 toughbook. 
+
+
+%All Wi-Fi data transfers occur from a Ubiquiti bullet bidirectional radio connecting to the Coihueco FD site.
+%unused for AERA
 
 
 %providing a deeper understanding of the hardware, data acquisition system (DAQ), and data transfer and storage for the coming sections.
@@ -84,7 +132,7 @@ For simplicity, it was chosen upon deployment to have all top LNAs connect to th
 The radioTads power the LNAs using a bias-tee through the same coaxial cables with which they receive the LNA signals.
 Once a signal reaches the radioTad from the LNA, both a high-pass and low-pass filter are applied to filter the frequency range within \SIrange{70}{350}{\mega\hertz}.
 The filtered signals are converted to eight total differential signals for each LNA and fed to the TAXI board for further processing through a D-SUB 37 pin connector.
-Inside the TAXI housing, the radioTads are covered with a custom made aluminum shielding to prevent bi-directional RFI leakage.
+Inside the TAXI housing, the radioTads are covered with a custom made aluminum shielding to prevent bidirectional RFI leakage.
 
 TAXI-v3.2 allows for two data taking modes to trigger the readout of the radio antennas, both controlled by the Field Programmable Gate Array (FPGA) of TAXI.
 The first mode is a "soft" trigger mode, or a software initiated trigger, to readout the radio data.
@@ -95,12 +143,11 @@ In this case, an additional electronics board interfacing with an external detec
 The SKALA antennas for the IceCube-Gen2 prototype station and ARISE interface with different external detectors and will be described in their respective sections.
 A more detailed description of the radioTad functionality and the TAXI-v3.2 processing of the radio signals is provided in ROXANNETHESIS.
 
-Also connected to the TAXI board is the White Rabbit Line Extension (WR-LEN) board.
-The WR-LEN board serves as a remote access point to the White Rabbit switch in the CRS, controlling the data transfer, communications, and timing of the station DAQ.
-Buried military grade optical fibers connect the White Rabbit switch to the WR-LEN boards at each SKALA station, where the WR-LEN boards connect directly to the TAXI board via a Cat7 ethernet cable to control the communications and data transfer.
-The Cat7 ethernet cables provide high-speed data transfer of approximately \SI{10}{Gbps}, allowing adequate data rates to transfer all data between TAXI and the White Rabbit switch, with minimal electromagnetic interference due to the cable shielding.
+Also connected to the TAXI board is the WR-LEN board, serving as a remote access point to the WR switch in the CRS, which controls all data transfer, communications, and timing for the station DAQ.
+Buried military grade optical fibers connect the WR switch to the WR-LEN boards at each SKALA station, where the WR-LEN boards connect directly to the TAXI board via a Cat7 ethernet cable to control the communications and data transfer.
+The Cat7 ethernet cables provide high-speed data transfer of approximately \SI{10}{Gbps}, allowing adequate data rates to transfer all data between TAXI and the WR switch, with minimal electromagnetic interference due to the cable shielding.
 In addition, timing from the WR-LEN board is distributed to the TAXI board using two SMA cables, one to distribute the PPS signal and another for the \SI{10}{\mega\hertz} signal.
-These timing signals originate at the White Rabbit switch in the CRS from a master timing signal.
+These timing signals originate at the WR switch in the CRS from the GPS locked master timing signal.
 \SI{5}{\volt} DC power is necessary for powering the WR-LEN board, coming directly from the TAXI internal DC-DC voltage converter.
 
 \begin{figure}
@@ -124,14 +171,15 @@ As of now, the default for all SKALA stations is housing the WR-LEN board inside
 
 
 % Maybe I should stop here for this section...
-Inside the CRS, housed on an AERA DAQ rack, is the backbone of all SKALA stations at Auger, the White Rabbit switch.
-It controls the data transfer, communications, and timing for each station via buried military grade optical fiber connections to the WR-LEN board at each SKALA station.
-For timing, the White Rabbit switch takes a master time signal and distributes it amongst connected systems to provide sub-nanosecond timing accuracy and synchronization between multiple detectors.
+%
+%Inside the CRS, housed on an AERA DAQ rack, is the backbone of all SKALA stations at Auger, the White Rabbit switch.
+%It controls the data transfer, communications, and timing for each station via buried military grade optical fiber connections to the WR-LEN board at each SKALA station.
+%For timing, the White Rabbit switch takes a master time signal and distributes it amongst connected systems to provide sub-nanosecond timing accuracy and synchronization between multiple detectors.
 
-The WR-LEN board, stored inside the TAXI housing, serves as a remote access point to the White Rabbit switch which is accessible over long distances using optical fibers.
-A \SI{100}{\meter} buried military grade optical fiber provides this connection between the White Rabbit switch in the CRS and the WR-LEN board of the prototype station.
-Inside the CRS, a custom DC-DC power converter takes two \SI{12}{\volt} DC inputs and converts them into two \SI{24}{\volt} DC outputs to power both the White Rabbit switch and TAXI.
-The power to both systems can be controlled from a network connection or with physical switches the custom power converter inside the CRS, allowing separate power cycling of the White Rabbit switch and TAXI.
+%The WR-LEN board, stored inside the TAXI housing, serves as a remote access point to the White Rabbit switch which is accessible over long distances using optical fibers.
+%A \SI{100}{\meter} buried military grade optical fiber provides this connection between the White Rabbit switch in the CRS and the WR-LEN board of the prototype station.
+%Inside the CRS, a custom DC-DC power converter takes two \SI{12}{\volt} DC inputs and converts them into two \SI{24}{\volt} DC outputs to power both the White Rabbit switch and TAXI.
+%The power to both systems can be controlled from a network connection or with physical switches the custom power converter inside the CRS, allowing separate power cycling of the White Rabbit switch and TAXI.
 
 
 %The LNA signals are received at the TAXI housing  a type-N female connector on the housing itself.
@@ -152,8 +200,8 @@ The power to both systems can be controlled from a network connection or with ph
 
 
 
-Describe antennas, LNAs, connectors of LNA and difference for top and bottom LNA. Describe TAXI and the triggering types. How TAXI interfaces with WR, power for TAXI, etc. Read into some of Roxanne's thesis for this. Discuss setup in CRS, transfer of data from CRS to Coihueco. Laptop in CRS.
-Include pictures of antennas, LNAs, TAXI, WRS (from website).
+%Describe antennas, LNAs, connectors of LNA and difference for top and bottom LNA. Describe TAXI and the triggering types. How TAXI interfaces with WR, power for TAXI, etc. Read into some of Roxanne's thesis for this. Discuss setup in CRS, transfer of data from CRS to Coihueco. Laptop in CRS.
+%Include pictures of antennas, LNAs, TAXI, WRS (from website).
 
 %through the cross-calibration of the new detectors to well trusted air-shower reconstructions.
 
