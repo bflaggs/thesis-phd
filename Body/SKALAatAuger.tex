@@ -227,28 +227,26 @@ An elevated fieldhub, hosting the local DAQ of the station, is located at the ce
 The first prototype surface station was deployed at the South Pole in January 2020, with two more deployed in January 2025.
 All South Pole prototypes have been mostly stable in their operations and data taking since deployment.
 See INSERTREFERENCES for specifics regarding these stations.
+This section discusses an IceCube-Gen2 prototype station deployed at the site of the Pierre Auger Observatory, describing the detector system and preliminary analyses performed with the station.
 
-In August 2022, a prototype surface station was deployed at the Pierre Auger Observatory.
-~\cref{fig:augermap_gen2prototype} shows the location of the prototype station adjacent to the Central Radio Station (CRS), which hosts the AERA DAQ and communications systems.
-The station is co-located in both the AERA footprint and the densest part of the SD array to serve the main science goals of coincident air-shower measurements with Auger detectors and a potential cross-calibration of the AERA radio antennas and SKALA antennas of the prototype station.
-
-%\begin{figure}
-%    \centering
-%    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.6\textwidth]{chapter7/Gen2Prototype_ArrayPositionwCRS.pdf}
-%    \caption[Location of the IceCube-Gen2 prototype station at Auger.]{A map of the Auger SD array with an inset showing the location of the IceCube-Gen2 prototype station deployed at Auger. The location of the Central Radio Station of Auger is also shown. AERA stations, co-located in the inset region, are not shown due to space constrains. Figure taken from~\cite{icrc2025_verpoest}.}
-%    \label{fig:augermap_gen2prototype} % Include in first section of chapter, with locations of the ARISE antennas, ask Stef for code to make plot!
-%\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter7/IceCubePrototypeMap.pdf}
+    \caption[The IceCube-Gen2 prototype station at Auger.]{A map of the IceCube-Gen2 prototype station deployed at Auger near the CRS. The station consists of three SKALA-v2 radio antennas and four pairs of scintillator panels, with the station DAQ, labeled TAXI, near the center of the three-pointed star. All antennas and scintillator panels are labeled and the orientations of the top and bottom antenna LNAs in each antenna are defined. The purple arrow for the top LNA orientation shows which antenna arm is connected to the SMA connector side of the top LNA. This has no impact on the physics, yet allows a full orientation definition for the SKALA antennas. Sizes of the scintillator panels and SKALA antennas are not to scale.}
+    \label{fig:gen2prototype_map}
+\end{figure}
 
 \subsection{Station Design and Deployment}\label{sec:gen2design}
 
-%The layout of the deployed station is shown in INSERTLAYOUTSCHEMATIC.
-The Auger prototype station has roughly the same design as the South Pole prototype stations, yet slightly different geometry and spacing due to the topology of the location (see~\cref{fig:gen2_dronephoto}).
+In August 2022, a prototype surface station was deployed at the Pierre Auger Observatory.
+~\Cref{fig:gen2prototype_map} shows the location of the prototype station adjacent to the CRS, which hosts the AERA DAQ and communications systems.
+The station is co-located in both the AERA footprint and the densest part of the SD array to serve the main science goals of coincident air-shower measurements with Auger detectors and a potential cross-calibration of the AERA radio antennas and SKALA antennas of the prototype station.
+The Auger prototype station has roughly the same design as the South Pole prototype stations, yet slightly different geometry and spacing due to the topology of the location (see both~\Cref{fig:gen2prototype_map,fig:gen2_dronephoto}).
 Other differences include the need for fencing around each detector position to prevent damage from roaming animals, and the lack of height adjustable stands, unnecessary in Argentina as constant snow accumulation is not an issue like at the South Pole.
-Each arm of the Auger prototype station spans about \SI{70}{\meter} in length, with a pair of scintillator panels at the ends of each arm and another pair of scintillator panels at the station center, 
-Halfway between the station center and the end of each arm is a SKALA-v2 type radio antenna.
-The SKALA antennas have two perpendicular polarizations, each with their own Low Noise Amplifier (LNA) housed in the top most part of the antenna, the trumpet; however, not all antennas in this prototype station have the same orientation (see~\cref{fig:gen2_schematic_auger}).
-The radio LNAs are connected to the station DAQ, labeled as TAXI in~\cref{fig:gen2_schematic_auger}, from buried type-N coaxial cables.
-Each coaxial cable is approximately \SI{40}{\meter} in length, with extra cable wrapped in a loop around the antenna legs, and connects to the LNA via a type-N to SMA cable \SI{1}{\meter} in length.
+Each arm of the Auger prototype station spans about \SI{70}{\meter} in length, with a pair of scintillator panels at the ends of each arm and another pair of scintillator panels at the station center.
+Halfway between the station center and the end of each arm is a SKALA-v2 radio antenna, with the orientation of each antenna polarization defined in~\Cref{fig:gen2prototype_map}.
+The radio LNAs are connected to TAXI from buried type-N coaxial cables as previously described.
+Each coaxial cable is approximately \SI{40}{\meter} in length, with extra cable wrapped in a loop around the antenna legs.
 
 \begin{figure}
     \centering
@@ -257,35 +255,26 @@ Each coaxial cable is approximately \SI{40}{\meter} in length, with extra cable 
     \label{fig:gen2_dronephoto}
 \end{figure}
 
-%\begin{figure}
-%    \centering
-%    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.5\textwidth]{chapter7/Gen2Prototype_AugerSchematic_OUTDATED.pdf}
-%    \caption[Schematic of the deployed IceCube-Gen2 prototype station at Auger.]{The schematic of the IceCube-Gen2 prototype station deployed at Auger. All scintillator panels and radio antennas are labeled with their respective numbers. Both the locations of the station DAQ, labeled TAXI, and the CRS are shown, along with the direction of magnetic North. Schematic originally made by Marcos Cerda. ++++NEEDS UPDATES TO SCHEMATIC++++}
-%    \label{fig:gen2_schematic_auger}
-%\end{figure}
-
-The scintillator panels connect to the DAQ from buried, custom made coaxial cables with 5-pin connectors on each end.
-TAXI itself, the name of the DAQ electronics, has a metal housing and is stored in a weather proof aluminum box at the station center to protect it from the extreme weather conditions which can occur at the field in Argentina.
+The scintillator panels connect to the TAXI housing from buried, custom made cables with 5-pin connectors on each end.
+The signals from the panels received at the TAXI housing are fed into a custom electronics board, named microDAQ, that controls the scintillator data taking and processing.
+There are eight microDAQ boards in total, one for each scintillator panel, and all are housed inside the TAXI housing.
+Each connects to the TAXI electronics board and sets the external detector trigger condition for the read out of the SKALA radio antenna data.
+If six of eight scintillators measure 4096 ADC counts within \SI{1}{\micro\second}, a signal is sent to TAXI to initiate the read out of the radio data.
+The metal TAXI housing is stored in a weather proof aluminum box near the center of the three-pointed star to protect it from the extreme weather conditions which can occur at the field in Argentina.
 The aluminum box also provides weather protection for the cables ends connecting directly to TAXI.
-While weather proof, the box can not prevent overheating of the electronics housed inside, with issues such as a freezing of the microDAQs (the DAQ system controlling the scintillators), heat related artifacts in the radio data, and thermal failure of the timing and communications board (White Rabbit Line Extension, i.e. WR-LEN, explained later) and its connecting optical fiber.
+While weather proof, the box can not prevent overheating of the electronics housed inside, with issues such as a freezing of the microDAQs, heat related artifacts in the radio data, and thermal failure WR-LEN board and its connecting optical fiber.
 Each heat related issue has been resolved respectively by reprogramming the microDAQs, improving the artifact removal portion of the radio data analysis pipeline, and a full replacement of the WR-LEN board and its fiber.
 
-Buried cables from the CRS provide power, data transfer, communications, and timing to TAXI.
-The data transfer, communications, and timing of the station are all handled by a White Rabbit switch inside the CRS.
-The White Rabbit switch takes a master time signal and distributes it amongst connected systems to provide sub-nanosecond timing accuracy and synchronization between multiple detectors.
-The WR-LEN board, stored inside the TAXI housing, serves as a remote access point to the White Rabbit switch which is accessible over long distances using optical fibers.
-A \SI{100}{\meter} buried military grade optical fiber provides this connection between the White Rabbit switch in the CRS and the WR-LEN board of the prototype station.
-Another buried \SI{100}{\meter} cable from the CRS provides \SI{24}{\volt} DC power to TAXI.
-Inside the CRS, a custom DC-DC power converter takes two \SI{12}{\volt} DC inputs and converts them into two \SI{24}{\volt} DC outputs to power both the White Rabbit switch and TAXI.
-The power to both systems can be controlled from a network connection or with physical switches the custom power converter inside the CRS, allowing separate power cycling of the White Rabbit switch and TAXI.
+A naked metal wire connects the metal TAXI housing to a buried copper rod and is used for grounding the TAXI electronics.
+The dirt surrounding the buried rod was salted to increase soil conductivity and provide a better grounding.
+A buried military grade optical fiber of \SI{100}{\meter} length provides the connection between the WR switch inside the CRS and the WR-LEN board inside the TAXI housing for the station.
+This fiber connection handles all data transfer, communications, and timing for the prototype station.
+Currently, the open \SI{24}{\volt} DC power line from the custom DC-DC converter in the CRS is used to power the IceCube-Gen2 prototype station from a buried \SI{100}{\meter} length 5-pin power cable with lightning protection.
+However, in the coming months, TAXI will be placed on a solar power system, removing the need for this power cable and freeing the \SI{24}{\volt} DC power line in the CRS for debugging other TAXIs during fieldwork.
 
 
 
 %setting the timing of the TAXI electronics from a \SI{10}{\mega\hertz} and PPS signal and controlling the communications and data transfer of the TAXI 
-
-
-A naked metal wire connects the metal TAXI housing to a buried copper rod and is used for grounding the TAXI electronics.
-The dirt surrounding the buried rod was salted to increase soil conductivity and provide a better grounding.
 
 %24V power for the DAQ and communications via a buried optical fiber come from the Central Radio Station (CRS).
 %The Central Radio Station (CRS) provides 24V power to the DAQ from a buried power cable.
@@ -303,7 +292,7 @@ Fit moving average of RMS values.
 \begin{figure}
     \centering
     \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.7\textwidth]{chapter7/AugerStation_spectrum_800MHz_deconvolved.pdf}
-    \caption[Radio frequency spectrum of the IceCube-Gen2 prototype station at Auger.]{Spectrum}
+    \caption[Radio frequency spectrum of the IceCube-Gen2 prototype station at Auger.]{Spectrum from~\cite{icrc2025_verpoest}.}
     \label{fig:gen2_rf_spectrum}
 \end{figure}
 
@@ -330,15 +319,21 @@ Air showers are measured by a coincidence requirement between scintillator trigg
 \section{ARISE: Auger Radio Infill SKALA Extension}\label{sec:arise}
 
 The Auger Radio Infill SKALA Extension (ARISE) was deployed in March of 2025, centered upon SD tank Lety Jr. of the \SI{433}{\meter} spaced array of the Auger SD.
-ARISE consists of six stations, with their centers organized in a hexagonal pattern surrounding Lety Jr.
+ARISE consists of six stations, with their centers organized in a hexagonal pattern surrounding Lety Jr as seen in~\Cref{fig:arise_map}.
 The station centers are located approximately \SI{80}{\meter} from Lety Jr., each consisting of three SKALA-v2 antennas arranged in a Mercedes-Benz like star pattern with each antenna \SI{40}{\meter} from the station center. 
 One arm of each station is aligned such that an antenna is halfway between Lety Jr. and each station center.
 The final positions of the 18 SKALA-v2 antennas were optimized through a simulation study to maximize the number of vertical air showers above the threshold for full reconstruction efficiency.
 For this array of 18 SKALA antennas, a larger overall footprint will observe more air showers, but will increase the energy threshold for full efficiency due to the increased spacing between antennas. 
 With the described antenna positions, full reconstruction efficiency ($>$ 97\%) is reached at \SI{300}{\peta\electronvolt} for near-vertical air showers ($\theta <$ \SI{30}{\degree}), resulting in reconstruction statistics of $\simeq$\,45 air showers per year~\cite{uhecr2024_verpoest}.
 Current machine learning based radio denoising and reconstruction algorithms can lower this energy threshold by a factor of two once implemented in the data pipeline, increasing the statistics of reconstructed air showers~\cite{ABDUL_THESIS}.
-ARISE
 Radio reconstructions of near-vertical air showers at Auger now, for the first time, have full reconstruction efficiency above \SI{300}{\peta\electronvolt} within the footprint of ARISE.
+
+\begin{figure}
+    \centering
+    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter7/ARISEMap.pdf}
+    \caption[A map of the ARISE array at Auger.]{A map of the ARISE array deployed at Auger surrounding SD tank Lety Jr. ARISE consists of six stations, of three SKALA-v2 antennas each, all labeled with their station numbers on the map. Orientations for the top and bottom antenna LNAs are defined, where the purple arrow points in the direction of the antenna polarization connected to the SMA connector side of the top LNA. Approximate locations of trenched antenna cables and optical fibers are included, along with the locations of the Lety Jr. UMD detector and the two closest AERA stations. Sizes of the detectors are not to scale.}
+    \label{fig:arise_map}
+\end{figure}
 
 %ARISE is the first radio array of its kind for air shower detection at Auger with a studied threshold for full efficiency.
 
@@ -349,6 +344,7 @@ In addition to fully efficient air-shower reconstructions, the science potential
 Combining ARISE radio detection with UMD measurements provide a direct way to simultaneously reconstruct $X_{\rm max}$ and $N_{\mu}$ for the same air showers, as previous analyses with SKALA-v2 antennas have proven their reconstruction potential for $X_{\rm max}$ (CITE XMAX ICECUBE ROXANNE).
 ARISE can then serve as a pathfinder array for this hybrid detection method, making progress towards major science goals of next-generation air-shower arrays in the quest for constraining high-energy hadronic interaction models and mass composition measurements.
 Furthermore, the co-location with AERA allows a potential cross-calibration to be performed between the AERA and SKALA radio energy scales.
+However, it remains to be seen how this cross-calibration will be performed, as the location of ARISE is in the currently decommissioned portion of the AERA footprint.
 Given the currently foreseen runtime of Auger until 2035, approximately 500 air showers will be reconstructed with ARISE, providing a large dataset of air showers for high-quality analyses with intermittent results in the coming years.
 
 
@@ -359,27 +355,27 @@ Given the currently foreseen runtime of Auger until 2035, approximately 500 air 
 %science goals of next-generation air-shower arrays in the quest for constraining high-energy hadronic interaction models and mass composition measurements.
 
 
-TAXI, the same DAQ as the IceCube-Gen2 prototype station, is used as the local DAQ for each station and is housed inside a weather proof box at the local station center.
+TAXI is housed inside a weather proof box at the local station center.
 Communications to TAXI are performed via buried optical fiber cables from the station centers to the White Rabbit switch in the CRS, in the same way as the IceCube-Gen2 prototype station. 
-The readout of the radio data is triggered by the local station T1 trigger of the Auger SD tank Lety Jr (see section XXX for an explanation of Auger SD triggers).
-The software-level T1 trigger is routed through a \SI{50}{\ohm} terminated SMA cable from the TRIGGEROUT (input as code) port of the Auger UUB to a custom-made trigger splitter housed inside the electronics dome of Lety Jr.
-The custom designed aluminum box splits the electrical signal from the TRIGGEROUT (input as code) connector six ways, each feeding into an optical Tx, digital-to-optical signal converter, board.
+The readout of the radio data is triggered by the local station T1 trigger of the Auger SD tank Lety Jr (see~\Cref{sec:sd} for an explanation of Auger SD triggers).
+The software-level T1 trigger is routed through a \SI{50}{\ohm} terminated SMA cable from the \texttt{TRIGGEROUT} port of the Auger UUB to a custom-made trigger splitter housed inside the electronics dome of Lety Jr.
+The custom designed aluminum box splits the electrical signal from the \texttt{TRIGGEROUT} connector six ways, each feeding into an optical Tx, digital-to-optical signal converter, board.
 Six \SI{100}{\meter} military grade optical fibers are trenched from Lety Jr. to each of the six ARISE station centers, connecting the optical Tx boards to an optical Rx board inside the TAXI enclosure.
 The optical Rx board reconverts the signal from optical back to digital for TAXI to initiate the readout of the radio signal by each of the station's three SKALA antennas.
-In principle, the optical trigger signals should arrive at each TAXI simultaneously; however, nanosecond to sub-nanosecond time differences could occur due to the conversion and reconversion process (Check actual value with Stef/Carmen).
+In principle, the optical trigger signals should arrive at each TAXI simultaneously; however, nanosecond to sub-nanosecond time differences could occur due to the conversion and reconversion process (Check actual value!!).
 
 Each of the TAXIs is autonomously powered from a solar power system at the station center.
 The solar power system consists of six batteries, a solar panel, and a charge controller to control the charging of the batteries and regulate the voltage supplied to TAXI.
 Six \SI{12}{\volt} batteries are used per station, connected in a three series two parallel configuration to provide the \SI{24}{\volt} necessary to power TAXI.
 The batteries are also stored in the station center at the bottom of the wooden box and separated from the TAXI and charge controller via a wooden plank separator.
-Station centers are equipped with a dual-sided solar panel of type (INPUT SP TYPE) to charge the batteries during good weather.
-Solar panels are aligned with the broad side perpendicular with compass North to maximize the amount of sunlight impacting the solar cells of the panels.
+Station centers are equipped with a dual-sided solar panel of type LX-440M108GG WM1 to charge the batteries during good weather.
+Solar panels are aligned with the broad, open-facing side perpendicular with compass North to maximize the amount of sunlight impacting the solar cells of the panels.
 
 Connected in series between the charge controller and TAXI inside the station center is the ARISE Control and Housekeeping (CHK) box.
 The CHK box serves two purposes: 1. to allow remote power cycling of the TAXI, and 2. records the voltage and current supplied to TAXI.
 The heart of the CHK box is a BeagleBone Black (BBB) single-board debian computer which handles all operations using python and bash scripts to remotely turn on/off TAXI and control the power logging service.
-Connection to BBB is set from a Ubiquiti LiteBeam antenna the connects to a Ubiquiti Rocket housed at the CRS.
-The 24V powering TAXI is used to also power the LiteBeam antenna from a power over ethernet (PoE) converter.
+Connection to BBB is set from a Ubiquiti LiteBeam antenna that connects to a Ubiquiti Rocket housed at the CRS.
+The \SI{24}{\volt} powering TAXI is used to also power the LiteBeam antenna from a power over ethernet (PoE) converter.
 
 
 %Once connected to BBB, shell scripts can be executed to remotely turn on/off TAXI and start the power logging service.
@@ -392,18 +388,18 @@ The WR-LEN temperatures can exceed \SI{80}{\degreeCelsius} in the field at Argen
 %The original WR-LEN enclosure contains a heat sink over its full surface
 
 The T1 trigger that controls the readout of the radio signal at each station arrives at TAXI from Lety Jr. at an average rate of \SI{100}{\hertz}.
-Each radio binary file has a storage size of approximately \SI{100}{\mega\byte} resulting in a daily data volume of \SI{2}{\tera\byte} from ARISE; yet, in the current setup, data storage is limited to an \SI{8}{\tera\byte} SSD connected to the Fz-55 toughbook in the CRS.
+Each radio binary file has a storage size of approximately \SI{100}{\mega\byte} resulting in a daily data volume of \SI{2}{\tera\byte} from ARISE; yet, in the current setup, data storage is limited between two \SI{8}{\tera\byte} SSDs connected to the FZ-55 toughbook in the CRS.
 The T1 level trigger contains mostly low-energy air showers to be used for calibrating the PMTs.
 Therefore applying a match of the T1 timestamps at TAXI with the first physics level trigger (T3) timestamps of events in which Lety Jr. participates results in a lowering of the rate to $\mathcal{O}$(\SI{0.01}{\hertz}).
 Matching of events is done locally at the toughbook laptop in the CRS by a daily transfer of the Auger iklog files to the laptop and then matching by timestamp with each radio binary.
 Once matched the files are then transferred to a storage computer at the Karlsruhe Institute for Technology, and then further transferred to a data storage computer at the University of Delaware.
 
 The T1 trigger rate averages to \SI{100}{\hertz}, yet is a Poissonian process.
-Therefore, at any given moment the rate can reach values $>$\SI{500}{\hertz} that introduce an artificial deadtime in the radio data readout due to a buffer pileup at TAXI.
-Currently, this results in a deadtime of approximately 50\% in the radio data taking.
-Firmware updates for TAXI are being developed that will improve TAXI's handling of large data rates and in hand decrease the length of data taking deadtime.
+Therefore, at any given moment the rate can reach values $>$\SI{500}{\hertz} that introduce an artificial dead time in the radio data readout due to a buffer pileup at TAXI.
+Currently, this results in a dead time of approximately 50\% in the radio data taking.
+Firmware updates for TAXI are being developed that will improve TAXI's handling of large data rates and in hand decrease the length of data taking dead time.
 
-%Currently, the large trigger rate of \SI{100}{\hertz} that reaches each TAXI introduces an artificial deadtime in the radio data readout due to a buffer pileup.
+%Currently, the large trigger rate of \SI{100}{\hertz} that reaches each TAXI introduces an artificial dead time in the radio data readout due to a buffer pileup.
 
 %Currently, the ARISE data is saved on an \SI{8}{\tera\byte} SSD connected to the Fz-55 toughbook in the CRS which handles all data transfer and storage
 
@@ -412,10 +408,10 @@ Firmware updates for TAXI are being developed that will improve TAXI's handling 
 %Within ARISE, the T1 trigger received from the Lety Jr. arrives 
 
 
-Additional communication to the TAXIs comes from a Ubiquiti Rocket and LiteBeam system.
-This 
+%Additional communication to the TAXIs comes from a Ubiquiti Rocket and LiteBeam system.
+%This 
 
-Beagle Bone Black
+%Beagle Bone Black
 
 
 %Inside the station center a charge controller is used to regulate the voltage between  
@@ -429,10 +425,10 @@ Beagle Bone Black
 
 
 
-Solar power system
-Triggering from Lety Jr.
-Lety Jr. has UMD also
-Science potential of array through simulation study, full efficiency for vertical showers
+%Solar power system
+%Triggering from Lety Jr.
+%Lety Jr. has UMD also
+%Science potential of array through simulation study, full efficiency for vertical showers
 
 %Each station consists of three SKALA antennas and a central hub hosting the local station DAQ and a solar power system for the station.
 %The station centers are each located approximately \SI{75}{\meter} from Lety Jr., with the three station antennas deployed \SI{35}{meter} from the station center in a Mercedes-Benz like star pattern to have the same layout as the antennas of the IceCube-Gen2 prototype stations.
