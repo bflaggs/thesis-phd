@@ -74,7 +74,14 @@ The \SI{12}{\volt} power line of battery bank 1 reserved for the toughbook is co
 For the WR switch, a custom built DC-DC power converter takes two \SI{12}{\volt} DC inputs from battery bank 1 and converts them into a \SI{12}{\volt}, \SI{5}{\ampere} max, DC output and a \SI{24}{\volt}, \SI{2.5}{\ampere} max, DC output.
 The \SI{12}{\volt} DC output is used to power the WR switch, while the \SI{24}{\volt} output line can be used to power a station DAQ electronics board either in the field or inside the CRS for debugging.
 The specific ports used to power the laptop and WR switch can be controlled from an IP network switch, allowing remote power cycling of each component via the network GUI, with a physical switch in the case of the custom DC-DC converter used for the WR switch.
+~\Cref{fig:skala_control} shows a diagram of all connections for power, networking, communications, and data transfer inside the CRS, including the connection to individual SKALA stations from the WR switch.
 
+\begin{figure}
+    \centering
+    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter7/CRS_SKALA_DAQControl.png}
+    \caption[Setup of the SKALA detector system control inside the CRS.]{A diagram showing the full SKALA detector system control inside the CRS, including the connection to each individual station DAQ via the White Rabbit switch. Components in light green represent power, all originating from battery bank 1 of the CRS and labeled as CRS power in the diagram.}
+    \label{fig:skala_control}
+\end{figure}
 
 
 
@@ -123,11 +130,11 @@ The antenna-opposite end of the \SI{40}{\meter} type-N cables connect directly t
 The DAQ for each station of three SKALA antennas is based on the DAQ developed for the Transportable Array for eXtremely large area Instrumentation studies (TAXI) project and is hosted in a single metal container, also referred to as the TAXI housing.
 The main DAQ components are handled by TAXI-v3.2, an updated version of the principal electronics board developed for the TAXI project.
 As power, TAXI takes \SI{24}{\volt} DC power input through a custom 5-pin connector on the TAXI housing.
-The \SI{24}{\volt} power is split into three separate DC-DC power converters of voltages \SI{3.3}{\volt}, \SI{4.5}{\volt}, and \SI{5}{\volt} to provide power to all TAXI components and all additional electronics.% connected to the TAXI-v3.2 board. 
+The \SI{24}{\volt} power is split into three separate DC-DC power converters of voltages \SI{3.3}{\volt}, \SI{4.5}{\volt}, and \SI{5}{\volt} to provide power to all TAXI components and all additional electronics inside the TAXI housing.% connected to the TAXI-v3.2 board. 
 These additional electronics boards connect directly to the TAXI-v3.2 board to complete the DAQ system (see~\Cref{fig:inside_taxi}).
 The first additional electronics board is the radioTad, a front-end radio electronics board to pre-process the radio signals received from the LNAs before propagating the signals forward through to the DAQ.
 The LNA signals are received at a type-N female connector of the TAXI housing and then are routed to the radioTad boards hosted internal to the housing via a coaxial cable.
-Each radioTad board required \SI{4.5}{\volt} DC power, connects to a single SKALA antenna, and has two polarizations, labeled positive and negative, for the two antenna LNAs.
+Each radioTad board requires \SI{4.5}{\volt} DC power, connects to a single SKALA antenna, and has two polarizations, labeled positive and negative, for the two antenna LNAs.
 For simplicity, it was chosen upon deployment to have all top LNAs connect to the "positive" radioTad polarizations and all bottom LNAs to connect to the "negative" polarizations.
 The radioTads power the LNAs using a bias-tee through the same coaxial cables with which they receive the LNA signals.
 Once a signal reaches the radioTad from the LNA, both a high-pass and low-pass filter are applied to filter the frequency range within \SIrange{70}{350}{\mega\hertz}.
@@ -137,7 +144,7 @@ Inside the TAXI housing, the radioTads are covered with a custom made aluminum s
 TAXI-v3.2 allows for two data taking modes to trigger the readout of the radio antennas, both controlled by the Field Programmable Gate Array (FPGA) of TAXI.
 The first mode is a "soft" trigger mode, or a software initiated trigger, to readout the radio data.
 In this mode, the FPGA sends a request to read the radio data every $X$ seconds, where $X$ is the FPGA clock time passed since the previous FPGA request.
-This time interval $X$ is a programmable setting for the TAXI FPGA which can be configured through the communications channel to TAXI (to be described in the coming paragraphs).
+This time interval $X$ is a programmable setting for the TAXI FPGA which can be configured through the communications channel to TAXI.
 The second mode is an external trigger mode.
 In this case, an additional electronics board interfacing with an external detector is connected to TAXI and, upon fulfillment of a trigger condition set by the external detector electronics, sends the request to the TAXI FPGA to initiate the readout of the radio data.
 The SKALA antennas for the IceCube-Gen2 prototype station and ARISE interface with different external detectors and will be described in their respective sections.
@@ -216,18 +223,10 @@ IceCube-Gen2 is a future upgrade of the existing IceCube Neutrino Observatory at
 The upgrade plans to increase the volume of the current in-ice optical array from \SI{1}{\kilo\meter^{3}} to approximately \SI{8}{\kilo\meter^{3}}, in addition to deploying an in-ice radio array for neutrino detection and a surface array of scintillator panels and radio antennas for cosmic-ray air shower detection.
 The planned surface array will span nearly \SI{6}{\kilo\meter^{2}} to cover the full optical array extension, serving both as a veto to the optical array and to reconstruct cosmic-ray air showers and their properties.
 Each station of the surface array consists of four pairs of scintillator panels, and three SKALA radio antennas arranged in a Mercedes-Benz like three-pointed star.
-An elevated fieldhub, hosting the local DAQ of the station, is located at the center of the star and connects directly to the IceCube Lab (ICL) for station power, data transfer, and communications.
-A general schematic of the surface station layout at the South Pole is shown in~\cref{fig:gen2_schematic_southpole}.
+An elevated fieldhub, hosting the local DAQ of the station, is located at the center of the star and connects directly to the IceCube Lab, the South Pole version of the CRS, for station power, data transfer, and communications.
 The first prototype surface station was deployed at the South Pole in January 2020, with two more deployed in January 2025.
 All South Pole prototypes have been mostly stable in their operations and data taking since deployment.
 See INSERTREFERENCES for specifics regarding these stations.
-
-%\begin{figure}
-%    \centering
-%    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.7\textwidth]{chapter7/Gen2Prototype_SouthPoleSchematic.png}
-%    \caption[Prototype IceCube-Gen2 surface station schematic at the South Pole.]{The general schematic of a single prototype IceCube-Gen2 surface station deployed at the South Pole. Each station consists of eight scintillator panels, three SKALA radio antennas, and a central fieldhub hosting the local DAQ of the station. Figure taken from~\cite{gen2tdr}.}
-%    \label{fig:gen2_schematic_southpole} % Remove, no need to show schematic here if showing schematic for the actual station at Auger!
-%\end{figure}
 
 In August 2022, a prototype surface station was deployed at the Pierre Auger Observatory.
 ~\cref{fig:augermap_gen2prototype} shows the location of the prototype station adjacent to the Central Radio Station (CRS), which hosts the AERA DAQ and communications systems.
