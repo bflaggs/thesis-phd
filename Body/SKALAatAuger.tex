@@ -148,7 +148,7 @@ This time interval $X$ is a programmable setting for the TAXI FPGA which can be 
 The second mode is an external trigger mode.
 In this case, an additional electronics board interfacing with an external detector is connected to TAXI and, upon fulfillment of a trigger condition set by the external detector electronics, sends the request to the TAXI FPGA to initiate the readout of the radio data.
 The SKALA antennas for the IceCube-Gen2 prototype station and ARISE interface with different external detectors and will be described in their respective sections.
-A more detailed description of the radioTad functionality and the TAXI-v3.2 processing of the radio signals is provided in ROXANNETHESIS.
+A more detailed description of the radioTad functionality and the TAXI-v3.2 processing of the radio signals is provided in~\cite{roxanneturcotte_phd2023}.
 
 Also connected to the TAXI board is the WR-LEN board, serving as a remote access point to the WR switch in the CRS, which controls all data transfer, communications, and timing for the station DAQ.
 Buried military grade optical fibers connect the WR switch to the WR-LEN boards at each SKALA station, where the WR-LEN boards connect directly to the TAXI board via a Cat7 ethernet cable to control the communications and data transfer.
@@ -219,14 +219,14 @@ As of now, the default for all SKALA stations is housing the WR-LEN board inside
 
 \section{An IceCube-Gen2 Prototype Station at the Pierre Auger Observatory}\label{sec:gen2prototype}
 
-IceCube-Gen2 is a future upgrade of the existing IceCube Neutrino Observatory at the South Pole.
+IceCube-Gen2 is a future upgrade of the existing IceCube Neutrino Observatory at the South Pole~\cite{gen2tdr}.
 The upgrade plans to increase the volume of the current in-ice optical array from \SI{1}{\kilo\meter^{3}} to approximately \SI{8}{\kilo\meter^{3}}, in addition to deploying an in-ice radio array for neutrino detection and a surface array of scintillator panels and radio antennas for cosmic-ray air shower detection.
-The planned surface array will span nearly \SI{6}{\kilo\meter^{2}} to cover the full optical array extension, serving both as a veto to the optical array and to reconstruct cosmic-ray air showers and their properties.
+The planned surface array will span nearly \SI{6}{\kilo\meter^{2}} to cover the full optical array extension, serving both as a veto to the optical array and to reconstruct cosmic-ray air showers and their properties~\cite{icrc2025_schroeder}.
 Each station of the surface array consists of four pairs of scintillator panels, and three SKALA radio antennas arranged in a Mercedes-Benz like three-pointed star.
 An elevated fieldhub, hosting the local DAQ of the station, is located at the center of the star and connects directly to the IceCube Lab, the South Pole version of the CRS, for station power, data transfer, and communications.
 The first prototype surface station was deployed at the South Pole in January 2020, with two more deployed in January 2025.
 All South Pole prototypes have been mostly stable in their operations and data taking since deployment.
-See INSERTREFERENCES for specifics regarding these stations.
+See~\cite{icrc2025_venugopal,icrc2025_koundal} for specifics regarding these stations.
 This section discusses an IceCube-Gen2 prototype station deployed at the site of the Pierre Auger Observatory, describing the detector system and preliminary analyses performed with the station.
 
 \begin{figure}
@@ -325,7 +325,7 @@ One arm of each station is aligned such that an antenna is halfway between Lety 
 The final positions of the 18 SKALA-v2 antennas were optimized through a simulation study to maximize the number of vertical air showers above the threshold for full reconstruction efficiency.
 For this array of 18 SKALA antennas, a larger overall footprint will observe more air showers, but will increase the energy threshold for full efficiency due to the increased spacing between antennas. 
 With the described antenna positions, full reconstruction efficiency ($>$ 97\%) is reached at \SI{300}{\peta\electronvolt} for near-vertical air showers ($\theta <$ \SI{30}{\degree}), resulting in reconstruction statistics of $\simeq$\,45 air showers per year~\cite{uhecr2024_verpoest}.
-Current machine learning based radio denoising and reconstruction algorithms can lower this energy threshold by a factor of two once implemented in the data pipeline, increasing the statistics of reconstructed air showers~\cite{ABDUL_THESIS}.
+Current machine learning based radio denoising and reconstruction algorithms can lower this energy threshold by a factor of two once implemented in the data pipeline, increasing the statistics of reconstructed air showers~\cite{abdulrehman_phd2024}.
 Radio reconstructions of near-vertical air showers at Auger now, for the first time, have full reconstruction efficiency above \SI{300}{\peta\electronvolt} within the footprint of ARISE.
 
 \begin{figure}
@@ -338,10 +338,10 @@ Radio reconstructions of near-vertical air showers at Auger now, for the first t
 %ARISE is the first radio array of its kind for air shower detection at Auger with a studied threshold for full efficiency.
 
 %The science potential of ARISE is manifold. In addition to fully efficient air-shower reconstructions, the co-location of ARISE within the UMD and AERA footprints of Auger 
-%Combining ARISE radio detection with UMD measurements provide a direct way to simultaneously reconstruct $X_{\rm max}$ and $N_{\mu}$ for the same air showers, as previous analyses with SKALA-v2 antennas have proven their reconstruction potential for $X_{\rm max}$ (CITE XMAX ICECUBE ROXANNE).
+%Combining ARISE radio detection with UMD measurements provide a direct way to simultaneously reconstruct $X_{\rm max}$ and $N_{\mu}$ for the same air showers, as previous analyses with SKALA-v2 antennas have proven their reconstruction potential for $X_{\rm max}$~\cite{icrc2023_turcotte}.
 
 In addition to fully efficient air-shower reconstructions, the science potential of ARISE is manifold, as it is co-located within the UMD and AERA footprints of Auger.
-Combining ARISE radio detection with UMD measurements provide a direct way to simultaneously reconstruct $X_{\rm max}$ and $N_{\mu}$ for the same air showers, as previous analyses with SKALA-v2 antennas have proven their reconstruction potential for $X_{\rm max}$ (CITE XMAX ICECUBE ROXANNE).
+Combining ARISE radio detection with UMD measurements provide a direct way to simultaneously reconstruct $X_{\rm max}$ and $N_{\mu}$ for the same air showers, as previous analyses with SKALA-v2 antennas have proven their reconstruction potential for $X_{\rm max}$~\cite{icrc2023_turcotte}.
 ARISE can then serve as a pathfinder array for this hybrid detection method, making progress towards major science goals of next-generation air-shower arrays in the quest for constraining high-energy hadronic interaction models and mass composition measurements.
 Furthermore, the co-location with AERA allows a potential cross-calibration to be performed between the AERA and SKALA radio energy scales.
 However, it remains to be seen how this cross-calibration will be performed, as the location of ARISE is in the currently decommissioned portion of the AERA footprint.
