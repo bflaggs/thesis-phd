@@ -231,8 +231,7 @@ As of now, the default for all SKALA stations is housing the WR-LEN board inside
 IceCube-Gen2 is a future upgrade of the existing IceCube Neutrino Observatory at the South Pole~\cite{gen2tdr}.
 The upgrade plans to increase the volume of the current in-ice optical array from \SI{1}{\kilo\meter^{3}} to approximately \SI{8}{\kilo\meter^{3}}, in addition to deploying an in-ice radio array for neutrino detection and a surface array of scintillator panels and radio antennas for cosmic-ray air shower detection.
 The planned surface array will span nearly \SI{6}{\kilo\meter^{2}} to cover the full optical array extension, serving both as a veto to the optical array and to reconstruct cosmic-ray air showers and their properties~\cite{icrc2025_schroeder}.
-Each station of the surface array consists of four pairs of scintillator panels, and three SKALA radio antennas arranged in a Mercedes-Benz like three-pointed star.
-An elevated fieldhub, hosting the local DAQ of the station, is located at the center of the star and connects directly to the IceCube Lab, the South Pole version of the CRS, for station power, data transfer, and communications.
+Each station of the surface array consists of a central fieldhub hosting the station DAQ, four pairs of scintillator panels, and three SKALA radio antennas arranged in a Mercedes-Benz like three-pointed star.
 The first prototype surface station was deployed at the South Pole in January 2020, with two more deployed in January 2025.
 All South Pole prototypes have been mostly stable in their operations and data taking since deployment.
 See~\cite{icrc2025_venugopal,icrc2025_koundal} for specifics regarding these stations.
@@ -253,7 +252,10 @@ The station is co-located in both the AERA footprint and the densest part of the
 The Auger prototype station has roughly the same design as the South Pole prototype stations, yet slightly different geometry and spacing due to the topology of the location (see both~\Cref{fig:gen2prototype_map,fig:gen2_dronephoto}).
 Other differences include the need for fencing around each detector position to prevent damage from roaming animals, and the lack of height adjustable stands, unnecessary in Argentina as constant snow accumulation is not an issue like at the South Pole.
 Each arm of the Auger prototype station spans about \SI{70}{\meter} in length, with a pair of scintillator panels at the ends of each arm and another pair of scintillator panels at the station center.
+Each scintillator panel is fixed to four poles in the ground, held in place by concrete, with a mounting bracket and a semicircular cotter pin on each pole.
 Halfway between the station center and the end of each arm is a SKALA-v2 radio antenna, with the orientation of each antenna polarization defined in~\Cref{fig:gen2prototype_map}.
+The legs of the SKALA antennas are screwed to a rectangular baseboard fixed to the ground with concrete.
+Concrete mounts for both the scintillators and SKALA antennas, shown in~\Cref{fig:gen2_deployed_hardware}, fix the detectors in place to withstand strong winds and storms in la Pampa Amarilla.
 The radio LNAs are connected to TAXI from buried type-N coaxial cables as previously described.
 Each coaxial cable is approximately \SI{40}{\meter} in length, with extra cable wrapped in a loop around the antenna legs.
 
@@ -271,7 +273,7 @@ Each connects to the TAXI electronics board and sets the external detector trigg
 If six of eight scintillators measure 4096 ADC counts within \SI{1}{\micro\second}, a signal is sent to TAXI to initiate the read out of the radio data.
 The metal TAXI housing is stored in a weather proof aluminum box near the center of the three-pointed star to protect it from the extreme weather conditions which can occur at the field in Argentina.
 The aluminum box also provides weather protection for the cables ends connecting directly to TAXI.
-While weather proof, the box can not prevent overheating of the electronics housed inside, with issues such as a freezing of the microDAQs, heat related artifacts in the radio data, and thermal failure WR-LEN board and its connecting optical fiber.
+While weather proof, the box can not prevent overheating of the electronics housed inside, with issues such as a freezing of the microDAQs, heat related artifacts in the radio data, and thermal failure of the WR-LEN board and its connecting optical fiber.
 Each heat related issue has been resolved respectively by reprogramming the microDAQs, improving the artifact removal portion of the radio data analysis pipeline, and a full replacement of the WR-LEN board and its fiber.
 
 A naked metal wire connects the metal TAXI housing to a buried copper rod and is used for grounding the TAXI electronics.
@@ -280,7 +282,15 @@ A buried military grade optical fiber of \SI{100}{\meter} length provides the co
 This fiber connection handles all data transfer, communications, and timing for the prototype station.
 Currently, the open \SI{24}{\volt} DC power line from the custom DC-DC converter in the CRS is used to power the IceCube-Gen2 prototype station from a buried \SI{100}{\meter} length 5-pin power cable with lightning protection.
 However, in the coming months, TAXI will be placed on a solar power system, removing the need for this power cable and freeing the \SI{24}{\volt} DC power line in the CRS for debugging other TAXIs during fieldwork.
+\Cref{fig:gen2_deployed_hardware} shows a picture of the aluminum box containing TAXI, the central scintillator pair, and one of the SKALA antennas of the IceCube-Gen2 prototype station.
 
+\begin{figure}
+    \centering
+    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.47\textwidth]{chapter7/IceCubeGen2_ScintillatorAndFieldhub_Auger.jpg}
+    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.47\textwidth]{chapter7/IceCubeGen2_Antenna_Auger.jpg}
+    \caption[Pictures of the fieldhub, scintillators, and an antenna of the IceCube-Gen2 prototype station.]{Left: Picture of the central pair of scintillators and the fieldhub of the IceCube-Gen2 prototype station. The fieldhub, the aluminum box with all entering cables, hosts and provides weather protection for TAXI. Right: Picture of one of the SKALA-v2 antennas of the prototype station. The cement cover on the ground behind the antenna is the access port for the buried coaxial cables connecting the antenna to TAXI. Extra coaxial cable is wrapped around the legs of the antenna. The CRS is visible in the background.}
+    \label{fig:gen2_deployed_hardware}
+\end{figure}
 
 
 %setting the timing of the TAXI electronics from a \SI{10}{\mega\hertz} and PPS signal and controlling the communications and data transfer of the TAXI 
@@ -328,7 +338,7 @@ Air showers are measured by a coincidence requirement between scintillator trigg
 \section{ARISE: Auger Radio Infill SKALA Extension}\label{sec:arise}
 
 The Auger Radio Infill SKALA Extension (ARISE) was deployed in March of 2025, centered upon SD tank Lety Jr. of the \SI{433}{\meter} spaced array of the Auger SD.
-ARISE consists of six stations, with their centers organized in a hexagonal pattern surrounding Lety Jr as seen in~\Cref{fig:arise_map}.
+ARISE consists of six stations, with their centers organized in a hexagonal pattern surrounding Lety Jr., as seen in~\Cref{fig:arise_map}.
 The station centers are located approximately \SI{80}{\meter} from Lety Jr., each consisting of three SKALA-v2 antennas arranged in a Mercedes-Benz like star pattern with each antenna \SI{40}{\meter} from the station center. 
 One arm of each station is aligned such that an antenna is halfway between Lety Jr. and each station center.
 The final positions of the 18 SKALA-v2 antennas were optimized through a simulation study to maximize the number of vertical air showers above the threshold for full reconstruction efficiency.
@@ -351,7 +361,7 @@ Radio reconstructions of near-vertical air showers at Auger now, for the first t
 
 In addition to fully efficient air-shower reconstructions, the science potential of ARISE is manifold, as it is co-located within the UMD and AERA footprints of Auger.
 Combining ARISE radio detection with UMD measurements provide a direct way to simultaneously reconstruct $X_{\rm max}$ and $N_{\mu}$ for the same air showers, as previous analyses with SKALA-v2 antennas have proven their reconstruction potential for $X_{\rm max}$~\cite{icrc2023_turcotte}.
-ARISE can then serve as a pathfinder array for this hybrid detection method, making progress towards major science goals of next-generation air-shower arrays in the quest for constraining high-energy hadronic interaction models and mass composition measurements.
+ARISE can then serve as a pathfinder array for this hybrid detection method, making progress towards major science goals of next-generation air-shower arrays in the quest for constraining high-energy hadronic interaction models, improved mass composition measurements, and potentially solving the muon puzzle.
 Furthermore, the co-location with AERA allows a potential cross-calibration to be performed between the AERA and SKALA radio energy scales.
 However, it remains to be seen how this cross-calibration will be performed, as the location of ARISE is in the currently decommissioned portion of the AERA footprint.
 Given the currently foreseen runtime of Auger until 2035, approximately 500 air showers will be reconstructed with ARISE, providing a large dataset of air showers for high-quality analyses with intermittent results in the coming years.
@@ -361,7 +371,7 @@ Given the currently foreseen runtime of Auger until 2035, approximately 500 air 
 %The UMD provides a direct measurement of the muonic component of air showers, while the 
 
 
-%science goals of next-generation air-shower arrays in the quest for constraining high-energy hadronic interaction models and mass composition measurements.
+%science goals of next-generation air-shower arrays in the quest for constraining high-energy hadronic interaction models and mass composition measurements. 
 
 
 TAXI is housed inside a weather proof box at the local station center.
