@@ -374,6 +374,8 @@ Given the currently foreseen runtime of Auger until 2035, approximately 500 air 
 %science goals of next-generation air-shower arrays in the quest for constraining high-energy hadronic interaction models and mass composition measurements. 
 
 
+\subsection{Hardware and Deployment of ARISE}\label{sec:arise_hardware}
+
 TAXI is housed inside a weather proof box at the local station center.
 Communications to TAXI are performed via buried optical fiber cables from the station centers to the White Rabbit switch in the CRS, in the same way as the IceCube-Gen2 prototype station. 
 The readout of the radio data is triggered by the local station T1 trigger of the Auger SD tank Lety Jr (see~\Cref{sec:sd} for an explanation of Auger SD triggers).
@@ -394,7 +396,7 @@ Connected in series between the charge controller and TAXI inside the station ce
 The CHK box serves two purposes: 1. to allow remote power cycling of the TAXI, and 2. records the voltage and current supplied to TAXI.
 The heart of the CHK box is a BeagleBone Black (BBB) single-board debian computer which handles all operations using python and bash scripts to remotely turn on/off TAXI and control the power logging service.
 Connection to BBB is set from a Ubiquiti LiteBeam antenna that connects to a Ubiquiti Rocket housed at the CRS.
-The \SI{24}{\volt} powering TAXI is used to also power the LiteBeam antenna from a power over ethernet (PoE) converter.
+The \SI{24}{\volt} powering TAXI is used to also power the LiteBeam antenna from a power over ethernet (PoE) injector.
 
 
 %Once connected to BBB, shell scripts can be executed to remotely turn on/off TAXI and start the power logging service.
@@ -417,6 +419,15 @@ The T1 trigger rate averages to \SI{100}{\hertz}, yet is a Poissonian process.
 Therefore, at any given moment the rate can reach values $>$\SI{500}{\hertz} that introduce an artificial dead time in the radio data readout due to a buffer pileup at TAXI.
 Currently, this results in a dead time of approximately 50\% in the radio data taking.
 Firmware updates for TAXI are being developed that will improve TAXI's handling of large data rates and in hand decrease the length of data taking dead time.
+
+
+\begin{figure}
+    \centering
+    \includegraphics[trim={0cm 6cm 0cm 6cm},clip,width=1.0\textwidth]{chapter7/ARISE_CHK_Ubiquiti_Network_Control.pdf}
+    \caption[Diagram of the remote control access to the ARISE station centers.]{A diagram of the remote control access to the ARISE station centers using a Ubiquiti network system. The Ubiquiti Rocket is connected to an omnidirectional antenna placed on the roof of the CRS to ensure adequate signal strength to all ARISE station LiteBeams. Sub-diagrams show the station center and the CRS connections for the Ubiquiti network and connected components. The internal ARISE CHK box connections, controlled by the Beagle Bone Black (BBB), are shown inside the dashed red box.}
+    \label{fig:arise_chk_network}
+\end{figure}
+
 
 %Currently, the large trigger rate of \SI{100}{\hertz} that reaches each TAXI introduces an artificial dead time in the radio data readout due to a buffer pileup.
 
