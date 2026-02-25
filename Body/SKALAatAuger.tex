@@ -340,10 +340,10 @@ Air showers are measured by a coincidence requirement between scintillator trigg
 The Auger Radio Infill SKALA Extension (ARISE) was deployed in March of 2025, centered upon SD tank Lety Jr. of the \SI{433}{\meter} spaced array of the Auger SD.
 ARISE consists of six stations, with their centers organized in a hexagonal pattern surrounding Lety Jr., as seen in~\Cref{fig:arise_map}.
 The station centers are located approximately \SI{80}{\meter} from Lety Jr., each consisting of three SKALA-v2 antennas arranged in a Mercedes-Benz like star pattern with each antenna \SI{40}{\meter} from the station center. 
-One arm of each station is aligned such that an antenna is halfway between Lety Jr. and each station center.
+One arm of each station is aligned such that an antenna is halfway between Lety Jr. and the station center.
 The final positions of the 18 SKALA-v2 antennas were optimized through a simulation study to maximize the number of vertical air showers above the threshold for full reconstruction efficiency.
 For this array of 18 SKALA antennas, a larger overall footprint will observe more air showers, but will increase the energy threshold for full efficiency due to the increased spacing between antennas. 
-With the described antenna positions, full reconstruction efficiency ($>$ 97\%) is reached at \SI{300}{\peta\electronvolt} for near-vertical air showers ($\theta <$ \SI{30}{\degree}), resulting in reconstruction statistics of $\simeq$\,45 air showers per year~\cite{uhecr2024_verpoest}.
+With the described antenna positions, full reconstruction efficiency ($>$ 97\%) is reached at \SI{300}{\peta\electronvolt} for near-vertical air showers ($\theta <$ \SI{30}{\degree}), resulting in the expected observation of $\simeq$\,45 air showers per year~\cite{uhecr2024_verpoest}.
 Current machine learning based radio denoising and reconstruction algorithms can lower this energy threshold by a factor of two once implemented in the data pipeline, increasing the statistics of reconstructed air showers~\cite{abdulrehman_phd2024}.
 Radio reconstructions of near-vertical air showers at Auger now, for the first time, have full reconstruction efficiency above \SI{300}{\peta\electronvolt} within the footprint of ARISE.
 
@@ -360,10 +360,10 @@ Radio reconstructions of near-vertical air showers at Auger now, for the first t
 %Combining ARISE radio detection with UMD measurements provide a direct way to simultaneously reconstruct $X_{\rm max}$ and $N_{\mu}$ for the same air showers, as previous analyses with SKALA-v2 antennas have proven their reconstruction potential for $X_{\rm max}$~\cite{icrc2023_turcotte}.
 
 In addition to fully efficient air-shower reconstructions, the science potential of ARISE is manifold, as it is co-located within the UMD and AERA footprints of Auger.
-Combining ARISE radio detection with UMD measurements provide a direct way to simultaneously reconstruct $X_{\rm max}$ and $N_{\mu}$ for the same air showers, as previous analyses with SKALA-v2 antennas have proven their reconstruction potential for $X_{\rm max}$~\cite{icrc2023_turcotte}.
+Previous analyses with SKALA-v2 antennas have proven their reconstruction potential for $X_{\rm max}$~\cite{icrc2023_turcotte}, therefore the combination of radio detection with ARISE and Auger UMD measurements provide a direct way to simultaneously reconstruct $X_{\rm max}$ and $N_{\mu}$ on a per-event basis.
 ARISE can then serve as a pathfinder array for this hybrid detection method, making progress towards major science goals of next-generation air-shower arrays in the quest for constraining high-energy hadronic interaction models, improved mass composition measurements, and potentially solving the muon puzzle.
-Furthermore, the co-location with AERA allows a potential cross-calibration to be performed between the AERA and SKALA radio energy scales.
-However, it remains to be seen how this cross-calibration will be performed, as the location of ARISE is in the currently decommissioned portion of the AERA footprint.
+Furthermore, the co-location with AERA allows a potential cross-calibration to be performed between the AERA and SKALA radio energy scales. 
+However, it remains to be seen how this cross-calibration will be performed, as ARISE is located in the currently decommissioned portion of the AERA footprint.
 Given the currently foreseen runtime of Auger until 2035, approximately 500 air showers will be reconstructed with ARISE, providing a large dataset of air showers for high-quality analyses with intermittent results in the coming years.
 
 
@@ -375,6 +375,44 @@ Given the currently foreseen runtime of Auger until 2035, approximately 500 air 
 
 
 \subsection{Hardware and Deployment of ARISE}\label{sec:arise_hardware}
+
+All hardware of ARISE, similar to the IceCube-Gen2 prototype station, must be fastened to concrete foundations in the ground to withstand the harsh environmental conditions of the deployment location in Argentina.
+Pre-deployment, the locations for the ARISE station centers and antennas were cleared of any large plants and rocks and flattened to provide a stable ground surface for laying the concrete foundations.
+Paths were cleared to each hardware element of ARISE for car access, with thick tubing buried along each path for deployment of the antenna cables and optical fibers.
+Buried inside the tubing was a strong metal wire, referred to by local staff as simply "alambre", to aid in the trenching of all cables and fibers during deployment.
+Tubing is connected via several white plastic access points in the ground, placed by the local contractor hired to prepare the deployment sites.
+Access points are located at each station center, each antenna between Lety Jr. and the station centers, and three access points in the immediate vicinity of Lety Jr. for fiber distribution.
+Tubing is also buried between Lety Jr. and the CRS, with access points placed every \SI{50}{\meter}, used to deploy an optical fiber that connects the WR switch in the CRS to a fiber distribution box inside a spare AMIGA battery box at Lety Jr.
+To finalize the site preparation, the local contractor placed fencing at the site of each station center and SKALA antenna to prevent interference from animals.
+Examples of the prepared sites for a station center and a SKALA antenna of ARISE are shown in~\Cref{fig:arise_foundations}.
+
+\begin{figure}
+    \centering
+    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter7/ARISE_StationCenter_Foundation.jpg}
+    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter7/ARISE_Antenna_Foundation.jpg}
+    \caption[Pre-deployment sites of an ARISE station center and antenna.]{Prepared sites of an ARISE station center (left) and SKALA antenna (right) pre-deployment. Each site is fenced off and has a concrete foundation prepared to secure the hardware of ARISE to the ground. A white plastic access point used for deploying the antenna cables and optical fibers is visible in the prepared site of the station center.}
+    \label{fig:arise_foundations}
+\end{figure}
+
+
+%, along with clearing paths to each hardware element for car access.
+
+%Pre-deployment, a local contractor in Argentina cleared and flattened the locations for the ARISE station centers and antennas of any large plants and rocks, along with clearing paths to each hardware element for car access.
+
+%and laid the concrete foundations.
+
+
+The station centers of the ARISE array consist of a thick wooden box fastened on the lateral sides to an aluminum solar panel frame.
+The frame supports a dual-sided solar panel of type LX-440M108GG WM1 for station power and fixes the station center to the concrete foundation through six concrete anchor bolts with a screw top to secure the station center in place.
+Inside the wooden box are two layers separated by a removable wooden plank.
+
+%The frame supports a dual-sided solar panel of type LX-440M108GG WM1 and fixes the station center to the concrete foundation .
+
+%Inside the wooden box are two layers separated by a removable wooden plank.
+%The wooden 
+
+%are two-layered wooden boxes with an aluminum top to reflect sunlight.
+
 
 TAXI is housed inside a weather proof box at the local station center.
 Communications to TAXI are performed via buried optical fiber cables from the station centers to the White Rabbit switch in the CRS, in the same way as the IceCube-Gen2 prototype station. 
