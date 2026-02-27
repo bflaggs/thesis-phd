@@ -159,7 +159,7 @@ The SKALA antennas for the IceCube-Gen2 prototype station and ARISE interface wi
 A more detailed description of the radioTad functionality and the TAXI-v3.2 processing of the radio signals is provided in~\cite{roxanneturcotte_phd2023}.
 
 Also connected to the TAXI board is the WR-LEN board, serving as a remote access point to the WR switch in the CRS, which controls all data transfer, communications, and timing for the station DAQ.
-Buried military grade optical fibers connect the WR switch to the WR-LEN boards at each SKALA station, where the WR-LEN boards connect directly to the TAXI board via a Cat7 ethernet cable to control the communications and data transfer.
+Buried OS2 9/125 single mode military grade optical fibers connect the WR switch to the WR-LEN boards at each SKALA station, where the WR-LEN boards connect directly to the TAXI board via a Cat7 ethernet cable to control the communications and data transfer.
 The Cat7 ethernet cables provide high-speed data transfer of approximately \SI{10}{Gbps}, allowing adequate data rates to transfer all data between TAXI and the WR switch, with minimal electromagnetic interference due to the cable shielding.
 Timing from the WR-LEN board is distributed to the TAXI board using two SMA cables, one to distribute the PPS signal and another for the \SI{10}{\mega\hertz} signal.
 Again, these timing signals originate at the WR switch in the CRS from the GPS locked master timing signal.
@@ -174,17 +174,17 @@ Again, these timing signals originate at the WR switch in the CRS from the GPS l
 
 The WR-LEN board can be housed both internal or external to the TAXI housing.
 When housed externally, the WR-LEN board can remain inside its original enclosure; however, modifications to the connectors of the TAXI housing and a custom power cable must be made in order to make all connections between WR-LEN and TAXI.
-The externally housed WR-LEN setup provides greater heat dissipation compared to the internal setup, as the fully upwards facing surface of the original WR-LEN enclosure acts as a heat sink. 
+The externally housed WR-LEN setup provides greater heat dissipation compared to the internal setup, as the original WR-LEN enclosure contains a heat sink over its entire upper surface.
 When housed internal to the TAXI housing, the original enclosure for the WR-LEN does not fit inside the aluminum housing and must be removed from the board.
 Instead, for heat dispersion, a heat sink is placed on the main Application-Specific Integrated Circuit (ASIC) chip of the WR-LEN.
-A heat sink is necessary to mitigate malfunction of the WR-LEN when enclosed inside the TAXI housing.
-For example, summer temperature in Malarg\"ue can reach upwards of \SI{30}{\degreeCelsius}, with further heating from the Sun.
-The high temperatures, in addition to the heat generated from the other electronics inside the housing, can increase the environmental temperature conditions surrounding the WR-LEN board to near or above its upper limit for safe range of operation at \SI{50}{\degreeCelsius}.
+A heat sink is necessary to mitigate malfunction of the WR-LEN and provide a safer environment for the electronics when enclosed inside the TAXI housing.
 For reference, thermal images using a FLIR infrared camera of WR-LEN boards operating outside of their original heat sink enclosure, without a heat sink on the main ASIC, and in normal lab conditions show temperature measurements of nearly \SI{100}{\degreeCelsius}.
+Summer temperatures in Malarg\"ue can reach upwards of \SI{30}{\degreeCelsius}, with further heating from the Sun.
+The high temperatures, in combination with the heat generated from the other electronics inside the housing, can increase the environmental temperature conditions surrounding the WR-LEN board to near or above its upper limit for safe range of operation at \SI{50}{\degreeCelsius}.
 These high temperatures also provoke further spikes and corruptions in the radio data measured by TAXI, hence the externally housed WR-LEN board is optimal for reducing these effects, yet at the expense of less dust protection.
-As of now, the default for all SKALA stations is housing the WR-LEN board inside the TAXI housing.
+As of now, the default for all SKALA stations is housing the WR-LEN board inside the TAXI housing except in one the case of one ARISE station.
 
-
+% I might need to include a few sentences on the fiber inside the TAXI for the WR-LEN board being an OM4 fiber that connects to an OS2 fiber, unless Sasha and Stef fix this in March
 
 % Maybe I should stop here for this section...
 %
@@ -380,7 +380,7 @@ All hardware of ARISE, similar to the IceCube-Gen2 prototype station, must be fa
 Pre-deployment, the locations for the ARISE station centers and antennas were cleared of any large plants and rocks and flattened to provide a stable ground surface for laying the concrete foundations.
 Paths were cleared to each hardware element of ARISE for car access, with thick tubing buried along each path for deployment of the antenna cables and optical fibers.
 Tubing is connected via several white plastic access points in the ground, located at each station center, each antenna between Lety Jr. and the station centers, and three access points in the immediate vicinity of Lety Jr. for fiber distribution.
-Tubing is also buried between Lety Jr. and the CRS, with access points placed every \SI{50}{\meter}, used to deploy an eight-headed \SI{500}{\meter} optical fiber that connects the WR switch in the CRS to a fiber distribution box at Lety Jr.
+Tubing is also buried between Lety Jr. and the CRS, with access points placed every \SI{50}{\meter}, used to deploy an eight-headed OS2 9/125 single mode \SI{600}{\meter} optical fiber that connects the WR switch in the CRS to a fiber distribution box at Lety Jr.
 Fencing is used at the site of each station center and SKALA antenna to prevent interference from animals.
 Examples of the prepared sites for a station center and a SKALA antenna of ARISE are shown in~\Cref{fig:arise_foundations}.
 
@@ -445,6 +445,10 @@ To increase the conductivity of the grounding, each grounding rod was buried in 
     \label{fig:arise_station_center}
 \end{figure}
 
+%Once connected to BBB, shell scripts can be executed to remotely turn on/off TAXI and start the power logging service.
+%All functions of the CHK box are handled by a BeagleBone Black single-board linux computer.
+
+%The original WR-LEN enclosure contains a heat sink over its full surface
 
 
 %The frame supports a dual-sided solar panel of type LX-440M108GG WM1 and fixes the station center to the concrete foundation .
@@ -456,38 +460,54 @@ To increase the conductivity of the grounding, each grounding rod was buried in 
 
 \subsection{ARISE Communication and Triggering}\label{sec:arise_fibers}
 
-Communications, data transfer, and timing of the TAXIs are all provided by buried military grade optical fibers trenched from the CRS to Lety Jr., and then to each ARISE station center along each arm of the array.
-This protocol and setup is the same as for the IceCube-Gen2 prototype station, except for in one of the ARISE stations where the WR-LEN board is housed outside of the TAXI housing itself and inside its original enclosure.
-The externally housed WR-LEN will reduce heat inside the TAXI housing as the original WR-LEN enclosure contains a heat sink over its full surface, allowing the heat to dissipate more efficiently in this configuration rather than within the TAXI housing and only with a small heat sink attached to the hottest FPGA chip of the WR-LEN.
-The WR-LEN temperatures can exceed \SI{80}{\degreeCelsius} in the field at Argentina because of the warm weather environment and heating from the Sun, therefore reducing the heat inside the TAXI enclosure is a safer environment for the electronics.
+Communications, data transfer, and timing of the TAXIs are all provided by buried OS2 9/125 single mode military grade optical fibers trenched from the CRS to Lety Jr., and then along each arm of the array to the ARISE station centers.
+The WR switch inside the CRS connects to a fiber distribution box at Lety Jr. via a \SI{600}{\meter} eight-headed fiber.
+Six of eight fiber heads are connected at the distribution box to six separate \SI{100}{\meter} optical fibers of the same type, each buried and connected to a WR-LEN board housed at the station centers of ARISE.
+See~\Cref{fig:arise_comms_fiber} for a visual showing the WR fiber connections of ARISE.
+For ARISE, the protocol and setup of the WR-LEN boards are the same as for the IceCube-Gen2 prototype station, except for in one of the ARISE stations where the WR-LEN board is housed outside of the TAXI housing and inside its original enclosure.
+The externally housed WR-LEN will reduce heat inside the TAXI housing, providing a safer operation temperature for the electronics as mentioned previously.
 
+\begin{figure}
+    \centering
+    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.7\textwidth]{chapter7/ARISE_TAXI_comms_fiber.pdf}
+    \caption[ARISE communications fiber distribution diagram.]{A diagram of the distribution of the fibers connecting the WR switch in the CRS to the WR-LEN housed at each of the six ARISE station centers. These fibers are used for communication, data transfer, and timing for each ARISE station.}
+    \label{fig:arise_comms_fiber}
+\end{figure}
 
-TAXI is housed inside a weather proof box at the local station center.
-Communications to TAXI are performed via buried optical fiber cables from the station centers to the White Rabbit switch in the CRS, in the same way as the IceCube-Gen2 prototype station. 
 The readout of the radio data is triggered by the local station T1 trigger of the Auger SD tank Lety Jr (see~\Cref{sec:sd} for an explanation of Auger SD triggers).
 The software-level T1 trigger is routed through a \SI{50}{\ohm} terminated SMA cable from the \texttt{TRIGGEROUT} port of the Auger UUB to a custom-made trigger splitter housed inside the electronics dome of Lety Jr.
-The custom designed aluminum box splits the electrical signal from the \texttt{TRIGGEROUT} connector six ways, each feeding into an optical Tx, digital-to-optical signal converter, board.
-Six \SI{100}{\meter} military grade optical fibers are trenched from Lety Jr. to each of the six ARISE station centers, connecting the optical Tx boards to an optical Rx board inside the TAXI enclosure.
-The optical Rx board reconverts the signal from optical back to digital for TAXI to initiate the readout of the radio signal by each of the station's three SKALA antennas.
-In principle, the optical trigger signals should arrive at each TAXI simultaneously; however, nanosecond to sub-nanosecond time differences could occur due to the conversion and reconversion process (Check actual value!!).
+This custom designed aluminum box splits the electrical signal from the \texttt{TRIGGEROUT} connector six ways, each feeding into an optical transmitter (Tx) board that converts the electrical signal into an optical signal.
+Six \SI{100}{\meter} OM2 50/125 multimode military grade optical fibers are trenched from Lety Jr. to each of the six ARISE station centers, connecting the optical Tx boards to an optical receiver (Rx) board inside the TAXI enclosure.
+The optical Rx board reconverts the signal from optical back to electrical for TAXI to initiate the readout of the radio signal of each of the station's three SKALA antennas.
+The conversion and reconversion of the signal introduce approximately a \SI{1}{\micro\second} delay each between the time the Auger T1 trigger is sent and the time it is received by TAXI.
+In principle, the trigger signals should arrive at each TAXI simultaneously; however, the widths of the timing distributions for the conversion and reconversion processes of the signal have not been studied and could induce timing differences between stations.
+A simple diagram showing the connections for the ARISE trigger system is given in~\Cref{fig:arise_trigger_system}.
 
+\begin{figure}
+    \centering
+    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.7\textwidth]{chapter7/ARISE_TAXI_trigger_fiber.pdf}
+    \caption[ARISE trigger system diagram.]{A diagram of the trigger system for ARISE, originating from the Auger SD T1 level trigger. The T1 trigger is output directly from the Auger UUB electronics board to a custom trigger splitter that splits the signal six ways and converts each to an optical signal. The optical signal is sent via fiber to each ARISE station center, where it is reconverted to an electrical signal and sent to TAXI to initiate the readout of the radio data.}
+    \label{fig:arise_trigger_system}
+\end{figure}
 
-%Once connected to BBB, shell scripts can be executed to remotely turn on/off TAXI and start the power logging service.
-%All functions of the CHK box are handled by a BeagleBone Black single-board linux computer.
+The T1 trigger arrives at TAXI from Lety Jr. at an average rate of \SI{100}{\hertz}, yet is a Poissonian process.
+Therefore, at any given moment the rate can reach values $>$\SI{500}{\hertz} that introduce an artificial dead time in the radio data readout due to a buffer pileup at TAXI.
+Recent firmware updates for TAXI have improved TAXI's handling of large data rates and result in a current data taking dead time of approximately 20\% for each ARISE station.
+This dead time is currently the largest hurdle to overcome with ARISE.
 
-%The original WR-LEN enclosure contains a heat sink over its full surface
+Radio data taking occurs in hourly runs, each generating one binary file per station per run.
+Each binary file contains the radio trace information for each antenna polarization, ...  and has a storage size of approximately \SI{20}{\giga\byte}.
 
-The T1 trigger that controls the readout of the radio signal at each station arrives at TAXI from Lety Jr. at an average rate of \SI{100}{\hertz}.
-Each radio binary file has a storage size of approximately \SI{100}{\mega\byte} resulting in a daily data volume of \SI{2}{\tera\byte} from ARISE; yet, in the current setup, data storage is limited between two \SI{8}{\tera\byte} SSDs connected to the FZ-55 toughbook in the CRS.
+resulting in a daily data volume of \SI{2}{\tera\byte} from ARISE; yet, in the current setup, data storage is limited between two \SI{8}{\tera\byte} SSDs connected to the FZ-55 toughbook in the CRS.
 The T1 level trigger contains mostly low-energy air showers to be used for calibrating the PMTs.
 Therefore applying a match of the T1 timestamps at TAXI with the first physics level trigger (T3) timestamps of events in which Lety Jr. participates results in a lowering of the rate to $\mathcal{O}$(\SI{0.01}{\hertz}).
 Matching of events is done locally at the toughbook laptop in the CRS by a daily transfer of the Auger iklog files to the laptop and then matching by timestamp with each radio binary.
 Once matched the files are then transferred to a storage computer at the Karlsruhe Institute for Technology, and then further transferred to a data storage computer at the University of Delaware.
 
-The T1 trigger rate averages to \SI{100}{\hertz}, yet is a Poissonian process.
-Therefore, at any given moment the rate can reach values $>$\SI{500}{\hertz} that introduce an artificial dead time in the radio data readout due to a buffer pileup at TAXI.
-Currently, this results in a dead time of approximately 50\% in the radio data taking.
-Firmware updates for TAXI are being developed that will improve TAXI's handling of large data rates and in hand decrease the length of data taking dead time.
+%The T1 trigger rate averages to \SI{100}{\hertz}, yet is a Poissonian process.
+%Therefore, at any given moment the rate can reach values $>$\SI{500}{\hertz} that introduce an artificial dead time in the radio data readout due to a buffer pileup at TAXI.
+%Currently, this results in a dead time of approximately 50\% in the radio data taking.
+%Firmware updates for TAXI are being developed that will improve TAXI's handling of large data rates and in hand decrease the length of data taking dead time.
 
 
 
