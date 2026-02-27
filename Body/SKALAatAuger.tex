@@ -496,13 +496,31 @@ Recent firmware updates for TAXI have improved TAXI's handling of large data rat
 This dead time is currently the largest hurdle to overcome with ARISE.
 
 Radio data taking occurs in hourly runs, each generating one binary file per station per run.
-Each binary file contains the radio trace information for each antenna polarization, ...  and has a storage size of approximately \SI{20}{\giga\byte}.
+Each radio event inside the binary file contains the digitized radio trace information with:
 
-resulting in a daily data volume of \SI{2}{\tera\byte} from ARISE; yet, in the current setup, data storage is limited between two \SI{8}{\tera\byte} SSDs connected to the FZ-55 toughbook in the CRS.
-The T1 level trigger contains mostly low-energy air showers to be used for calibrating the PMTs.
-Therefore applying a match of the T1 timestamps at TAXI with the first physics level trigger (T3) timestamps of events in which Lety Jr. participates results in a lowering of the rate to $\mathcal{O}$(\SI{0.01}{\hertz}).
-Matching of events is done locally at the toughbook laptop in the CRS by a daily transfer of the Auger iklog files to the laptop and then matching by timestamp with each radio binary.
-Once matched the files are then transferred to a storage computer at the Karlsruhe Institute for Technology, and then further transferred to a data storage computer at the University of Delaware.
+\begin{equation}
+    3 \frac{\rm antennas}{\rm event} \times 8 \frac{\rm channels}{\rm antenna} \times 1024 \frac{\rm samples}{\rm channel} \times 2 \frac{\rm byte}{\rm sample} \approx 49 \frac{\rm \kilo\byte}{\rm event},
+    \label{eq:radio_event_size}
+\end{equation}
+
+resulting in a storage size of approximately \SI{18}{\giga\byte} per binary file and therefore a daily data volume of approximately \SI{2}{\tera\byte} total from ARISE.
+Yet, in the current setup, data storage is limited between two \SI{8}{\tera\byte} SSDs connected to the FZ-55 Toughbook in the CRS.
+The T1 level trigger contains mostly low-energy air showers used for calibrating the PMTs in the SD tank.
+Therefore applying a match of the T1 timestamps at TAXI with the first physics level trigger (T3) timestamps of events in which SD Lety Jr. participates results in a much lower rate of $\mathcal{O}$(\SI{0.01}{\hertz}).
+Matching of events is done locally at the Toughbook laptop in the CRS by a daily transfer of the Auger iklog files to the laptop and then matching by timestamp with each radio binary.
+A simple diagram showing the trigger filtering of ARISE is shown in~\Cref{fig:arise_trigger_filtering}.
+Once matched, the files are then transferred to a storage computer at the Karlsruhe Institute for Technology, and then further transferred for redundancy to a data storage computer at the University of Delaware.
+
+\begin{figure}
+    \centering
+    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter7/ARISE_Triggger_Filtering_Diagram.png}
+    \caption[Diagram of the T1-T3 event matching for ARISE.]{A diagram showing the trigger and event filtering steps for ARISE. All solid black arrows represent physical connections between hardware components while the black dashed arrows represent non-physical connections, sometimes with multiple steps.}
+    \label{fig:arise_trigger_filtering}
+\end{figure}
+
+
+%Each binary file contains the radio trace information for each antenna polarization, ...  and has a storage size of approximately \SI{20}{\giga\byte}.
+
 
 %The T1 trigger rate averages to \SI{100}{\hertz}, yet is a Poissonian process.
 %Therefore, at any given moment the rate can reach values $>$\SI{500}{\hertz} that introduce an artificial dead time in the radio data readout due to a buffer pileup at TAXI.
