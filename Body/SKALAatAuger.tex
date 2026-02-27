@@ -374,16 +374,14 @@ Given the currently foreseen runtime of Auger until 2035, approximately 500 air 
 %science goals of next-generation air-shower arrays in the quest for constraining high-energy hadronic interaction models and mass composition measurements. 
 
 
-\subsection{Hardware and Deployment of ARISE}\label{sec:arise_hardware}
+\subsection{Preparation of ARISE Site}\label{sec:arise_preparation}
 
 All hardware of ARISE, similar to the IceCube-Gen2 prototype station, must be fastened to concrete foundations in the ground to withstand the harsh environmental conditions of the deployment location in Argentina.
 Pre-deployment, the locations for the ARISE station centers and antennas were cleared of any large plants and rocks and flattened to provide a stable ground surface for laying the concrete foundations.
 Paths were cleared to each hardware element of ARISE for car access, with thick tubing buried along each path for deployment of the antenna cables and optical fibers.
-Buried inside the tubing was a strong metal wire, referred to by local staff as simply "alambre", to aid in the trenching of all cables and fibers during deployment.
-Tubing is connected via several white plastic access points in the ground, placed by the local contractor hired to prepare the deployment sites.
-Access points are located at each station center, each antenna between Lety Jr. and the station centers, and three access points in the immediate vicinity of Lety Jr. for fiber distribution.
-Tubing is also buried between Lety Jr. and the CRS, with access points placed every \SI{50}{\meter}, used to deploy an optical fiber that connects the WR switch in the CRS to a fiber distribution box inside a spare AMIGA battery box at Lety Jr.
-To finalize the site preparation, the local contractor placed fencing at the site of each station center and SKALA antenna to prevent interference from animals.
+Tubing is connected via several white plastic access points in the ground, located at each station center, each antenna between Lety Jr. and the station centers, and three access points in the immediate vicinity of Lety Jr. for fiber distribution.
+Tubing is also buried between Lety Jr. and the CRS, with access points placed every \SI{50}{\meter}, used to deploy an eight-headed \SI{500}{\meter} optical fiber that connects the WR switch in the CRS to a fiber distribution box at Lety Jr.
+Fencing is used at the site of each station center and SKALA antenna to prevent interference from animals.
 Examples of the prepared sites for a station center and a SKALA antenna of ARISE are shown in~\Cref{fig:arise_foundations}.
 
 \begin{figure}
@@ -401,10 +399,53 @@ Examples of the prepared sites for a station center and a SKALA antenna of ARISE
 
 %and laid the concrete foundations.
 
+\subsection{ARISE Station Centers}\label{sec:arise_station_centers}
 
-The station centers of the ARISE array consist of a thick wooden box fastened on the lateral sides to an aluminum solar panel frame.
-The frame supports a dual-sided solar panel of type LX-440M108GG WM1 for station power and fixes the station center to the concrete foundation through six concrete anchor bolts with a screw top to secure the station center in place.
-Inside the wooden box are two layers separated by a removable wooden plank.
+\begin{figure}
+    \centering
+    \includegraphics[trim={18cm 6cm 18cm 1cm},clip,width=1.0\textwidth]{chapter7/ARISE_StationCenter_CrossSection.jpg}
+    \caption[Cross-section of an ARISE station centers.]{A diagram showing the cross-section of an ARISE station center. Six \SI{12}{\volt} batteries are housed in the bottom layer of the station and used to power TAXI stored in the top layer. The batteries are charged with the LX-440M108GG WM1 solar panel.}
+    \label{fig:arise_cross_section}
+\end{figure}
+
+For each ARISE station, the station center is a weather proofed wooden box fastened on the lateral sides to an aluminum solar panel frame.
+The frame fixes the station center to the concrete foundation and supports a bifacial solar panel of type LX-440M108GG WM1 connected to a solar power system inside the box.
+The TAXI for each station is housed inside the station center and is autonomously powered from the station's solar power system.
+The power system consists of six \SI{12}{\volt} batteries, the bifacial solar panel, and a charge controller to control the charging of the batteries and regulate the voltage supplied to TAXI.
+The charge controller is housed in its own metal box for RFI shielding.
+The batteries are connected in a three series two parallel configuration to provide the \SI{24}{\volt} necessary to power TAXI and are stored in the station center at the bottom of the wooden box, separated from TAXI and the charge controller via a wooden plank separator.
+All antenna cables (six per station) and optical fibers (two per station) enter the bottom of the wooden box and connect to TAXI in the top layer.
+The holes drilled for all entering cables and fibers are of exact cable/fiber width to prevent dust from entering the station center. 
+Solar panels face North (at ang angle of...) to maximize the amount of sunlight impacting the solar cells of the panels during winter and additionally provides shade to the wooden box.
+\Cref{fig:arise_cross_section} shows a cross-section of an ARISE station center.
+
+Connected in series between the charge controller and TAXI inside the station center is the ARISE Control and Housekeeping (CHK) box.
+The CHK box serves two purposes: 1. to allow remote power cycling of the TAXI, and 2. monitors the voltage and current supplied to TAXI and other environmental factors (temperature, pressure, dust, etc.).
+The heart of the CHK box is a BeagleBone Black (BBB) single-board debian computer which handles all operations using python and bash scripts to remotely turn on/off TAXI and control the power logging service.
+Connection to BBB is set from a Ubiquiti LiteBeam antenna that connects to a Ubiquiti Rocket housed at the CRS.
+The \SI{24}{\volt} powering TAXI is used to also power the LiteBeam antenna from a power over ethernet (PoE) injector.
+A diagram of the ARISE CHK box, its connections inside the station center, and how it is accessed via Wi-Fi is shown in~\Cref{fig:arise_chk_network}.
+
+\begin{figure}
+    \centering
+    \includegraphics[trim={0cm 6cm 0cm 6cm},clip,width=1.0\textwidth]{chapter7/ARISE_CHK_Ubiquiti_Network_Control.pdf}
+    \caption[Diagram of the Ubiquiti network used for access to the ARISE CHK boxes.]{A diagram of the remote control access to the ARISE CHK box using a Ubiquiti network system. The Ubiquiti Rocket is connected to an omnidirectional antenna placed on the roof of the CRS to ensure adequate signal strength to all ARISE station LiteBeams. Sub-diagrams show the station center and the CRS connections for the Ubiquiti network and connected components. The internal ARISE CHK box connections, controlled by the Beagle Bone Black (BBB), are shown inside the dashed red box.}
+    \label{fig:arise_chk_network}
+\end{figure}
+
+Grounding of all electronics in the station center comes from a \SI{1}{\meter} copper grounding rod buried next to each station center connected to the solar panel frame with a twisted copper wire, visible in~\Cref{fig:arise_station_center}.
+The frame is attached to the grounding line of the solar panel and sets the grounding of the charge controller from the power cable of the solar panel.
+All other electronics are then grounded indirectly through the charge controller.
+To increase the conductivity of the grounding, each grounding rod was buried in approximately \SI{0.9}{\meter} of Earth mixed with salt, used to retain moisture in the Earth.
+
+\begin{figure}
+    \centering
+    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter7/ARISE_StationCenter.jpg}
+    \caption[The deployed station center for ARISE station 6.]{A picture of the station center for ARISE station 6. The extra length for each antenna cable is coiled, secured, and stored in between the legs of the concrete foundation. Both the Ubiquiti LiteBeam antenna, pointing in the direction of the CRS, and the exposed head of the copper grounding rod are visible.}
+    \label{fig:arise_station_center}
+\end{figure}
+
+
 
 %The frame supports a dual-sided solar panel of type LX-440M108GG WM1 and fixes the station center to the concrete foundation .
 
@@ -412,6 +453,13 @@ Inside the wooden box are two layers separated by a removable wooden plank.
 %The wooden 
 
 %are two-layered wooden boxes with an aluminum top to reflect sunlight.
+
+\subsection{ARISE Communication and Triggering}\label{sec:arise_fibers}
+
+Communications, data transfer, and timing of the TAXIs are all provided by buried military grade optical fibers trenched from the CRS to Lety Jr., and then to each ARISE station center along each arm of the array.
+This protocol and setup is the same as for the IceCube-Gen2 prototype station, except for in one of the ARISE stations where the WR-LEN board is housed outside of the TAXI housing itself and inside its original enclosure.
+The externally housed WR-LEN will reduce heat inside the TAXI housing as the original WR-LEN enclosure contains a heat sink over its full surface, allowing the heat to dissipate more efficiently in this configuration rather than within the TAXI housing and only with a small heat sink attached to the hottest FPGA chip of the WR-LEN.
+The WR-LEN temperatures can exceed \SI{80}{\degreeCelsius} in the field at Argentina because of the warm weather environment and heating from the Sun, therefore reducing the heat inside the TAXI enclosure is a safer environment for the electronics.
 
 
 TAXI is housed inside a weather proof box at the local station center.
@@ -423,27 +471,10 @@ Six \SI{100}{\meter} military grade optical fibers are trenched from Lety Jr. to
 The optical Rx board reconverts the signal from optical back to digital for TAXI to initiate the readout of the radio signal by each of the station's three SKALA antennas.
 In principle, the optical trigger signals should arrive at each TAXI simultaneously; however, nanosecond to sub-nanosecond time differences could occur due to the conversion and reconversion process (Check actual value!!).
 
-Each of the TAXIs is autonomously powered from a solar power system at the station center.
-The solar power system consists of six batteries, a solar panel, and a charge controller to control the charging of the batteries and regulate the voltage supplied to TAXI.
-Six \SI{12}{\volt} batteries are used per station, connected in a three series two parallel configuration to provide the \SI{24}{\volt} necessary to power TAXI.
-The batteries are also stored in the station center at the bottom of the wooden box and separated from the TAXI and charge controller via a wooden plank separator.
-Station centers are equipped with a dual-sided solar panel of type LX-440M108GG WM1 to charge the batteries during good weather.
-Solar panels are aligned with the broad, open-facing side perpendicular with compass North to maximize the amount of sunlight impacting the solar cells of the panels.
-
-Connected in series between the charge controller and TAXI inside the station center is the ARISE Control and Housekeeping (CHK) box.
-The CHK box serves two purposes: 1. to allow remote power cycling of the TAXI, and 2. records the voltage and current supplied to TAXI.
-The heart of the CHK box is a BeagleBone Black (BBB) single-board debian computer which handles all operations using python and bash scripts to remotely turn on/off TAXI and control the power logging service.
-Connection to BBB is set from a Ubiquiti LiteBeam antenna that connects to a Ubiquiti Rocket housed at the CRS.
-The \SI{24}{\volt} powering TAXI is used to also power the LiteBeam antenna from a power over ethernet (PoE) injector.
-
 
 %Once connected to BBB, shell scripts can be executed to remotely turn on/off TAXI and start the power logging service.
 %All functions of the CHK box are handled by a BeagleBone Black single-board linux computer.
 
-Communications, data transfer, and timing of the TAXIs are all provided by buried military grade optical fibers trenched from the CRS to Lety Jr., and then to each ARISE station center along each arm of the array.
-This protocol and setup is the same as for the IceCube-Gen2 prototype station, except for in one of the ARISE stations where the WR-LEN board is housed outside of the TAXI housing itself and inside its original enclosure.
-The externally housed WR-LEN will reduce heat inside the TAXI housing as the original WR-LEN enclosure contains a heat sink over its full surface, allowing the heat to dissipate more efficiently in this configuration rather than within the TAXI housing and only with a small heat sink attached to the hottest FPGA chip of the WR-LEN.
-The WR-LEN temperatures can exceed \SI{80}{\degreeCelsius} in the field at Argentina because of the warm weather environment and heating from the Sun, therefore reducing the heat inside the TAXI enclosure is a safer environment for the electronics.
 %The original WR-LEN enclosure contains a heat sink over its full surface
 
 The T1 trigger that controls the readout of the radio signal at each station arrives at TAXI from Lety Jr. at an average rate of \SI{100}{\hertz}.
@@ -458,13 +489,6 @@ Therefore, at any given moment the rate can reach values $>$\SI{500}{\hertz} tha
 Currently, this results in a dead time of approximately 50\% in the radio data taking.
 Firmware updates for TAXI are being developed that will improve TAXI's handling of large data rates and in hand decrease the length of data taking dead time.
 
-
-\begin{figure}
-    \centering
-    \includegraphics[trim={0cm 6cm 0cm 6cm},clip,width=1.0\textwidth]{chapter7/ARISE_CHK_Ubiquiti_Network_Control.pdf}
-    \caption[Diagram of the remote control access to the ARISE station centers.]{A diagram of the remote control access to the ARISE station centers using a Ubiquiti network system. The Ubiquiti Rocket is connected to an omnidirectional antenna placed on the roof of the CRS to ensure adequate signal strength to all ARISE station LiteBeams. Sub-diagrams show the station center and the CRS connections for the Ubiquiti network and connected components. The internal ARISE CHK box connections, controlled by the Beagle Bone Black (BBB), are shown inside the dashed red box.}
-    \label{fig:arise_chk_network}
-\end{figure}
 
 
 %Currently, the large trigger rate of \SI{100}{\hertz} that reaches each TAXI introduces an artificial dead time in the radio data readout due to a buffer pileup.
