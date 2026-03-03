@@ -543,17 +543,32 @@ As of November 2025, ARISE has been stably recording data.
 
 Recently, a full analysis pipeline for reconstructing air showers with ARISE was implemented into Auger Offline, leading to the first cosmic-ray air shower detections with ARISE.
 Reconstructed ARISE air-shower directions are compared to air-shower reconstructions from Auger's \SI{433}{\meter} infill array of SD tanks and the measured radio emission is currently being verified using CORSIKA with CoREAS air-shower simulations, similar to the air-shower reconstructions for the IceCube-Gen2 prototype station.
-Future plans include using ARISE to reconstruct the air-shower energy and $X_{\rm max}$, both to be used for future physics analyses with ARISE.
+In the near future, reconstructions of the air-shower energy and $X_{\rm max}$ are planned with ARISE.
 Reconstructing the air-shower energy with ARISE provides a pathway for a cross-calibration between the SKALA antennas deployed at Auger and those at the South Pole, deployed within the surface array of the IceCube Neutrino Observatory, serving as an indirect comparison of the Auger and IceTop energy scales.
 Further, the energy reconstruction has potential for an energy scale comparison between the \SIrange{70}{350}{\mega\hertz} band of ARISE and the \SIrange{30}{80}{\mega\hertz} band of AERA.
 The location of ARISE in the decommissioned part of the AERA footprint, and its size with respect to the AERA footprint, complicate this comparison as ARISE and AERA will very rarely trigger from the same cosmic-ray events; however, an analysis comparing the average energy scales of ARISE and AERA, instead of an event-by-event analysis, is feasible.
 
-The ARISE energy threshold for full efficiency of near-vertical ($\theta <$\SI{30}{\degree}) air showers synergizes with UMD muon measurements.
+Synergies between ARISE and the Auger UMD can be exploited to simultaneously reconstruct observables related to the muonic and electromagnetic component of air showers.
+The UMD directly measures the muonic component of air showers for cosmic-ray energies between $10^{16.8}-10^{19}$\,eV, while ARISE is fully efficient for near-vertical ($\theta <$\,\SI{30}{\degree}) air showers for cosmic-ray energies above $10^{17.5}$\,eV. 
 A geometric effect that the projected surface area of the UMD scintillators in the shower plane is proportional to $\cos(\theta)$, convolved with muons from inclined showers having larger path lengths to the UMD in Earth's crust, result in an optimal triggering of the UMD for near-vertical air showers.
-Once an ARISE $X_{\rm max}$ reconstruction is reached, near-vertical showers within the footprint of ARISE would have simultaneous and independent $X_{\rm max}$ and muon measurements, allowing ARISE to test hadronic interaction models and potentially measure the composition of cosmic rays in the Galactic-to-extragalactic transition region of cosmic-ray origin.
-This thesis highlights the tandem use of $X_{\rm max}$ and muon reconstructions for uncovering the greatest current mysteries in cosmic-ray physics and ARISE provides the next step in this process.
+Once an ARISE $X_{\rm max}$ reconstruction is reached, near-vertical showers above approximately $10^{17.5}$\,eV within the footprint of ARISE would have simultaneous and independent $X_{\rm max}$ and muon measurements, allowing ARISE to test hadronic interaction models and potentially measure the composition of cosmic rays in the Galactic-to-extragalactic transition region of cosmic-ray origin.
 
-Updates to TAXI electronics..., putting more ARISE stations, interferometry
+Additional future studies could include a test of the radio interferometric technique to reconstruct air-shower observables.
+This technique requires nanosecond-level accuracy for interferometric reconstruction to compete with typical reconstruction techniques~\cite{schoorlemmer_interferometry_epjc}, yet this is feasible with the WR timing synchronization of ARISE.
+In the far future, the TAXI in each ARISE station will be replaced with a new DAQ currently in development at the Karlsruhe Institute for Technology.
+Another far future possibility is to expand the ARISE array to include more stations, providing a larger dataset for tandem $X_{\rm max}$ and muon reconstructions over those measured with the current ARISE footprint.
+
+%; however, this first pathfinder array .
+%However, this first pathfinder array of ARISE 
+
+%Updates to TAXI electronics..., putting more ARISE stations, interferometry
+
+%Future plans include using ARISE to reconstruct the air-shower energy and $X_{\rm max}$, both to be used for future physics analyses with ARISE.
+%The ARISE energy threshold for full efficiency of near-vertical ($\theta <$\SI{30}{\degree}) air showers synergizes with UMD muon measurements, which target muon measurements.
+%This thesis highlights the tandem use of $X_{\rm max}$ and muon reconstructions for uncovering the greatest current mysteries in cosmic-ray physics and ARISE provides the next step in this process.
+
+%This technique requires nanosecond-level accuracy to achieve the precision necessary to compete with typical reconstruction techniques~\cite{schoorlemmer_interferometry_epjc}, yet this is feasible with the WR timing synchronization of ARISE.
+
 
 %and proves the potential for using $X_{\rm max}$ and muon reconstructions in tandem for increased cosmic-ray science results 
 
