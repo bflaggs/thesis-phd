@@ -228,9 +228,9 @@ As of now, the default for all SKALA stations is housing the WR-LEN board inside
 
 \section{An IceCube-Gen2 Prototype Station at the Pierre Auger Observatory}\label{sec:gen2prototype}
 
-IceCube-Gen2 is a future upgrade of the existing IceCube Neutrino Observatory at the South Pole~\cite{gen2tdr}.
-The upgrade plans to increase the volume of the current in-ice optical array from \SI{1}{\kilo\meter^{3}} to approximately \SI{8}{\kilo\meter^{3}}, in addition to deploying an in-ice radio array for neutrino detection and a surface array of scintillator panels and radio antennas for cosmic-ray air shower detection.
-The planned surface array will span nearly \SI{6}{\kilo\meter^{2}} to cover the full optical array extension, serving both as a veto to the optical array and to reconstruct cosmic-ray air showers and their properties~\cite{icrc2025_schroeder}.
+IceCube-Gen2 is a proposed extension of the existing IceCube Neutrino Observatory at the South Pole~\cite{gen2tdr}.
+The upgrade plans to increase the volume of the current in-ice optical array from \qty{1}{\kilo\meter^{3}} to approximately \qty{8}{\kilo\meter^{3}}, in addition to deploying an in-ice radio array for neutrino detection and a surface array of scintillator panels and radio antennas for cosmic-ray air shower detection.
+The planned surface array will span nearly \qty{6}{\kilo\meter^{2}}, to cover the full optical array extension, serving both as a veto to the optical array and to reconstruct cosmic-ray air showers and their properties~\cite{icrc2025_schroeder}.
 Each station of the surface array consists of a central fieldhub hosting the station DAQ, four pairs of scintillator panels, and three SKALA radio antennas arranged in a Mercedes-Benz like three-pointed star.
 The first prototype surface station was deployed at the South Pole in January 2020, with two more deployed in January 2025.
 All South Pole prototypes have been mostly stable in their operations and data taking since deployment.
@@ -251,13 +251,13 @@ In August 2022, a prototype surface station was deployed at the Pierre Auger Obs
 The station is co-located in both the AERA footprint and the densest part of the SD array to serve the main science goals of coincident air-shower measurements with Auger detectors and a potential cross-calibration of the AERA radio antennas and SKALA antennas of the prototype station.
 The Auger prototype station has roughly the same design as the South Pole prototype stations, yet slightly different geometry and spacing due to the topology of the location (see both~\Cref{fig:gen2prototype_map,fig:gen2_dronephoto}).
 Other differences include the need for fencing around each detector position to prevent damage from roaming animals, and the lack of height adjustable stands, unnecessary in Argentina as constant snow accumulation is not an issue like at the South Pole.
-Each arm of the Auger prototype station spans about \SI{70}{\meter} in length, with a pair of scintillator panels at the ends of each arm and another pair of scintillator panels at the station center.
+Each arm of the Auger prototype station spans about \qty{70}{\meter} in length, with a pair of scintillator panels at the ends of each arm and another pair of scintillator panels at the station center.
 Each scintillator panel is fixed to four poles in the ground, held in place by concrete, with a mounting bracket and a semicircular cotter pin on each pole.
 Halfway between the station center and the end of each arm is a SKALA-v2 radio antenna, with the orientation of each antenna polarization defined in~\Cref{fig:gen2prototype_map}.
 The legs of the SKALA antennas are screwed to a rectangular baseboard fixed to the ground with concrete.
 Concrete mounts for both the scintillators and SKALA antennas, shown in~\Cref{fig:gen2_deployed_hardware}, fix the detectors in place to withstand strong winds and storms in la Pampa Amarilla.
-The radio LNAs are connected to TAXI from buried type-N coaxial cables as previously described.
-Each coaxial cable is approximately \SI{40}{\meter} in length, with extra cable wrapped in a loop around the antenna legs.
+The radio LNAs are connected to a TAXI DAQ in the station center from short LMR-240 coaxial cables that connect to buried LMR-400 coaxial cables as previously described.
+The LMR-240 and LMR-400 coaxial cables are \qty{1}{\meter} and \qty{50}{\meter} in length respectively, with extra cable wrapped in a loop around the antenna legs.
 
 \begin{figure}
     \centering
@@ -267,14 +267,20 @@ Each coaxial cable is approximately \SI{40}{\meter} in length, with extra cable 
 \end{figure}
 
 The scintillator panels connect to the TAXI housing from buried, custom made cables with 5-pin connectors on each end.
-The signals from the panels received at the TAXI housing are fed into a custom electronics board, named microDAQ, that controls the scintillator data taking and processing.
-There are eight microDAQ boards in total, one for each scintillator panel, and all are housed inside the TAXI housing.
-Each connects to the TAXI electronics board and sets the external detector trigger condition for the read out of the SKALA radio antenna data.
+Inside each scintillator panel is a custom electronics board, named $\mu$DAQ, that controls the scintillator data taking and processing.
+The signals from $\mu$DAQ are received at the TAXI housing and fed into another custom electronics board, the fanout board, that connects directly to the TAXI electronics board.
+Each (fanout?) connects to the TAXI electronics board and sets the external detector trigger condition for the read out of the SKALA radio antenna data.
 If six of eight scintillators measure 4096 ADC counts within \SI{1}{\micro\second}, a signal is sent to TAXI to initiate the read out of the radio data.
 The metal TAXI housing is stored in a weather proof aluminum box near the center of the three-pointed star to protect it from the extreme weather conditions which can occur at the field in Argentina.
 The aluminum box also provides weather protection for the cables ends connecting directly to TAXI.
 While weather proof, the box can not prevent overheating of the electronics housed inside, with issues such as a freezing of the microDAQs, heat related artifacts in the radio data, and thermal failure of the WR-LEN board and its connecting optical fiber.
 Each heat related issue has been resolved respectively by reprogramming the microDAQs, improving the artifact removal portion of the radio data analysis pipeline, and a full replacement of the WR-LEN board and its fiber.
+
+%The signals from the panels received at the TAXI housing are fed into another custom electronics board, the fanout board that 
+%Fanout at TAXI
+%The signals from the panels received at the TAXI housing are fed into a custom electronics board, named $\mu$DAQ, that controls the scintillator data taking and processing.
+%There are eight $\mu$DAQ boards in total, one for each scintillator panel, and all are housed inside the TAXI housing.
+
 
 A naked metal wire connects the metal TAXI housing to a buried copper rod and is used for grounding the TAXI electronics.
 The dirt surrounding the buried rod was salted to increase soil conductivity and provide a better grounding.
