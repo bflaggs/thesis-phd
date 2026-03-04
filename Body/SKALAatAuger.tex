@@ -275,7 +275,7 @@ The timing and charge of all signals passing the signal threshold is sent from u
 The signals from uDAQ are received at the TAXI housing and fed into another custom electronics board, the fanout board, that connects directly to the TAXI electronics board.
 The fanout board controls not only the communications to the uDAQs inside each scintillator, but also the timing and power.
 The fanout board interfaces directly with the TAXI FPGA to set the external detector trigger condition for the read out of the SKALA radio antenna data.
-If six of eight scintillators measure a signal above the predefined uDAQ threshold within \SI{1}{\micro\second}, a trigger is generated to initiate the read out of the radio data.
+If six of eight scintillators measure a signal above the predefined uDAQ threshold within \qty{1}{\micro\second}, a trigger is generated to initiate the read out of the radio data.
 See~\cite{marieoehler_master2022} for further explanations of the scintillators and the uDAQ functionality.
 
 For this prototype station in Argentina, a corrugated aluminum roofing was added to each scintillator panel for further weather proofing and sun protection.
@@ -290,12 +290,12 @@ Each heat related issue has been resolved respectively by reprogramming the uDAQ
 %There are eight $\mu$DAQ boards in total, one for each scintillator panel, and all are housed inside the TAXI housing.
 
 
-A naked metal wire connects the metal TAXI housing to a buried copper rod and is used for grounding the TAXI electronics.
+A naked metal wire connects the metal TAXI housing to a buried copper rod and is used for electric grounding of the TAXI electronics.
 The dirt surrounding the buried rod was salted to increase soil conductivity and provide a better grounding.
-A buried military grade optical fiber of \SI{100}{\meter} length provides the connection between the WR switch inside the CRS and the WR-LEN board inside the TAXI housing for the station.
+A buried OS2 9/125 military grade optical fiber of \qty{100}{\meter} length provides the connection between the WR switch inside the CRS and the WR-LEN board inside the TAXI housing for the station.
 This fiber connection handles all data transfer, communications, and timing for the prototype station.
-Currently, the open \SI{24}{\volt} DC power line from the custom DC-DC converter in the CRS is used to power the IceCube-Gen2 prototype station from a buried \SI{100}{\meter} length 5-pin power cable with lightning protection.
-However, in the coming months, TAXI will be placed on a solar power system, removing the need for this power cable and freeing the \SI{24}{\volt} DC power line in the CRS for debugging other TAXIs during fieldwork.
+Currently, the open \qty{24}{\volt} DC power line from the custom DC-DC converter in the CRS is used to power the IceCube-Gen2 prototype station from a buried \qty{100}{\meter} length 5-pin power cable with shielding for lightning protection.
+However, in the coming months, TAXI will be placed on a solar power system, removing the need for this power cable and freeing the \qty{24}{\volt} DC power line in the CRS for debugging other TAXIs during fieldwork.
 \Cref{fig:gen2_deployed_hardware} shows a picture of the aluminum box containing TAXI, the central scintillator pair, and one of the SKALA antennas of the IceCube-Gen2 prototype station.
 
 \begin{figure}
