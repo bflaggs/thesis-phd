@@ -266,15 +266,23 @@ The LMR-240 and LMR-400 coaxial cables are \qty{1}{\meter} and \qty{50}{\meter} 
     \label{fig:gen2_dronephoto}
 \end{figure}
 
-The scintillator panels connect to the TAXI housing from buried, custom made cables with 5-pin connectors on each end.
-Inside each scintillator panel is a custom electronics board, named $\mu$DAQ, that controls the scintillator data taking and processing.
-The signals from $\mu$DAQ are received at the TAXI housing and fed into another custom electronics board, the fanout board, that connects directly to the TAXI electronics board.
-Each (fanout?) connects to the TAXI electronics board and sets the external detector trigger condition for the read out of the SKALA radio antenna data.
-If six of eight scintillators measure 4096 ADC counts within \SI{1}{\micro\second}, a signal is sent to TAXI to initiate the read out of the radio data.
+Each scintillator panel is composed of 16 plastic scintillators bars that combined have a total collecting area of \qty{1.5}{\meter^{2}} per scintillator.
+32 wavelength shifting fibers, 2 per plastic scintillator bar, connect to a silicon photomultiplier (SiPM) of type S13360-6025PE~\cite{scintillator_sipm_note} that collects the total scintillation light in the scintillator from passing relativistic particles.
+The SiPM and a temperature sensor near the SiPM connect inside the scintillator panel to a custom electronics board, named uDAQ, that controls the scintillator data taking and processing.
+Specifically, uDAQ digitizes the signal from the SiPM across three amplification channels, used to increase the dynamic range of the signal.
+Then a discriminator assigns timing information of the digitized SiPM pulse once it exceeds a predefined signal threshold, configured on the microprocessor of the uDAQ.
+The timing and charge of all signals passing the signal threshold is sent from uDAQ to the local station DAQ via buried, custom made cables with 5-pin connectors on each end.
+The signals from uDAQ are received at the TAXI housing and fed into another custom electronics board, the fanout board, that connects directly to the TAXI electronics board.
+The fanout board controls not only the communications to the uDAQs inside each scintillator, but also the timing and power.
+The fanout board interfaces directly with the TAXI FPGA to set the external detector trigger condition for the read out of the SKALA radio antenna data.
+If six of eight scintillators measure a signal above the predefined uDAQ threshold within \SI{1}{\micro\second}, a trigger is generated to initiate the read out of the radio data.
+See~\cite{marieoehler_master2022} for further explanations of the scintillators and the uDAQ functionality.
+
+For this prototype station in Argentina, a corrugated aluminum roofing was added to each scintillator panel for further weather proofing and sun protection.
 The metal TAXI housing is stored in a weather proof aluminum box near the center of the three-pointed star to protect it from the extreme weather conditions which can occur at the field in Argentina.
-The aluminum box also provides weather protection for the cables ends connecting directly to TAXI.
-While weather proof, the box can not prevent overheating of the electronics housed inside, with issues such as a freezing of the microDAQs, heat related artifacts in the radio data, and thermal failure of the WR-LEN board and its connecting optical fiber.
-Each heat related issue has been resolved respectively by reprogramming the microDAQs, improving the artifact removal portion of the radio data analysis pipeline, and a full replacement of the WR-LEN board and its fiber.
+The aluminum box also provides weather protection for the cable ends connecting directly to TAXI.
+While weather proof, the box can not prevent overheating of the electronics housed inside the TAXI housing or inside the scintillator panels, with issues such as a freezing of the uDAQs, heat related artifacts in the radio data, and thermal failure of the WR-LEN board and its connecting optical fiber.
+Each heat related issue has been resolved respectively by reprogramming the uDAQs, improving the artifact removal algorithm of the radio data analysis pipeline, and a full replacement of the WR-LEN board and its fiber.
 
 %The signals from the panels received at the TAXI housing are fed into another custom electronics board, the fanout board that 
 %Fanout at TAXI
@@ -563,6 +571,7 @@ Additional future studies could include a test of the radio interferometric tech
 This technique requires nanosecond-level accuracy for interferometric reconstruction to compete with typical reconstruction techniques~\cite{schoorlemmer_interferometry_epjc}, yet this is feasible with the WR timing synchronization of ARISE.
 In the far future, the TAXI in each ARISE station will be replaced with a new DAQ currently in development at the Karlsruhe Institute for Technology.
 Another far future possibility is to expand the ARISE array to include more stations, providing a larger dataset for tandem $X_{\rm max}$ and muon reconstructions over those measured with the current ARISE footprint.
+The additional ARISE stations would likely use SKALA-v4 antennas, opposed to the SKALA-v2 antennas used for the current ARISE stations, 
 
 %; however, this first pathfinder array .
 %However, this first pathfinder array of ARISE 
