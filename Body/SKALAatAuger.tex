@@ -313,7 +313,64 @@ However, in the coming months, TAXI will be placed on a solar power system, remo
 %The Central Radio Station (CRS) provides 24V power to the DAQ from a buried power cable.
 
 
-\subsection{Observation of the Galactic Center with SKALA Radio Antennas}\label{sec:gen2galactic}
+\subsection{First Analyses with the Prototype Station: Observations of the Galactic Center and Air Showers}\label{sec:gen2_observations}
+
+The feasibility of air-shower measurements in the \qtyrange{70}{350}{\mega\hertz} frequency band had not been proven experimentally with the anthropogenic and environmental RFI at Auger prior to the deployment of the IceCube-Gen2 prototype station.
+To this end, a study was performed to measure the modulation of the radio noise floor in this frequency band correlated in time with the movement of the Galactic center across the Celestial sphere at the location of the prototype station.
+The hypothesis: if the external Galactic noise is visible, then the radio data is not flooded by the internal system and external environmental noise and therefore can be used to observe air showers.
+All analysis for this station was performed using the surface radio modules in IceTray, the IceCube software framework, and follows the pipeline described in~\cite{jinst2022_radcube} to prepare the measured electric fields at the antenna to an analysis ready stage.
+
+Radio data, collected every \qty{10}{\second} from a fixed-rate software trigger, is corrected for artifacts and used to investigate the frequency spectrum of the radio background for the prototype station.
+A clean frequency band, with minimal noise contributions from RFI, is determined from the frequency spectrum of each antenna polarization, shown in~\Cref{fig:gen2_rf_spectrum}.
+Anthropogenic RFI is visible in the spectrum near \qty{100}{\mega\hertz}, corresponding to the FM radio band, and near \qty{200}{\mega\hertz} from a local TV carrier band in Argentina.
+To observe the Galactic noise, the spectrum is bandpass filtered within \qtyrange{110}{130}{\mega\hertz} to remove the anthropogenic noise signals.
+The root mean square (RMS) of equal size subtraces of the bandpassed radio waveforms is calculated as a measure of the average amplitude of the radio noise floor in this frequency band.
+Splitting the waveforms into subtraces, known as the subtraces method, removes any time-varying RFI from the waveforms making the RMS calculation more robust against RFI not removed with the bandpass filter.
+The subtraces method is described in more detail in~\cite{roxanneturcotte_phd2023}.
+
+The moving average of RMS values over a multi-day period are fit to a sinusoidal function of the form
+
+\begin{equation}
+    A_{1} \sin\left( \frac{2 \pi t}{T_{\rm sidereal}} + \phi_{1} \right) + A_{2} \sin\left( \frac{2 \pi t}{T_{\rm solar}} + \phi_{2} \right) + B,
+    \label{eq:galactic_fit}
+\end{equation}
+
+\noindent
+containing both a sidereal and solar sinusoidal component to describe noise components with different periodicities.
+Fit results for a 10 day period are presented visibly in~\Cref{fig:gen2_galactic} and numerically in~\Cref{tab:gen2_galactic_results}, with results shown for only one of the three antennas yet hold generally for all antennas and polarizations of the prototype station.
+From the fit, the sidereal sinusoid has a larger amplitude than the solar sinusoid, highlighting a time-varying radio noise floor with the same period as the traversal of the Galactic center across the sky.
+We attribute this periodicity in the noise level to the radio emission of the Galactic center, proving frequency band of the SKALA-v2 antennas at the location of Auger can be used for air-shower measurements. 
+
+
+\begin{table}
+    \caption{Results of fitting~\Cref{eq:galactic_fit} to a moving average of the radio waveform RMS values over a 10 day period. The waveforms were bandpass filtered to \qtyrange{110}{130}{\mega\hertz} and the RMS was calculated using the subtraces method.}
+    \label{tab:gen2_galactic_results}
+    \vspace*{.5\baselineskip}
+    \centering
+    \begin{ruledtabular}
+    \begin{tabular}{ c c c c }
+        Location & Primary & Zenith & Number of Showers \\
+        \colrule
+         & & & \\[-1.0em]
+        IceCube & Proton & 0$^{\circ}-$71.6$^{\circ}$ & 45000 \\
+        IceCube & Helium & 0$^{\circ}-$71.6$^{\circ}$ & 45000 \\
+        IceCube & Oxygen & 0$^{\circ}-$71.6$^{\circ}$ & 45000 \\
+        IceCube & Iron & 0$^{\circ}-$71.6$^{\circ}$ & 45000 \\
+        Auger & Proton & 0$^{\circ}-$65$^{\circ}$ & 25000 \\
+        Auger & Helium & 0$^{\circ}-$65$^{\circ}$ & 25000 \\
+        Auger & Oxygen & 0$^{\circ}-$65$^{\circ}$ & 25000 \\
+        Auger & Iron & 0$^{\circ}-$65$^{\circ}$ & 25000 \\
+    \end{tabular}
+    \end{ruledtabular}
+\end{table}
+
+
+The subtraces method, which calculates the root mean square (RMS) of equal size subtraces of the radio waveforms 
+
+The root mean square (RMS) for each bandpassed, software triggered, trace is calculated using the subtraces method, which 
+
+%Before the deployment of the SKALA antennas at Auger, the feasibility of 
+%To prove the 
 
 Explain radio analysis pipeline (cleaning and filtering, etc.).
 Determination of frequency bands with minimal noise contributions.
