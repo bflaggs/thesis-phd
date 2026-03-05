@@ -328,80 +328,74 @@ The root mean square (RMS) of equal size subtraces of the bandpassed radio wavef
 Splitting the waveforms into subtraces, known as the subtraces method, removes any time-varying RFI from the waveforms making the RMS calculation more robust against RFI not removed with the bandpass filter.
 The subtraces method is described in more detail in~\cite{roxanneturcotte_phd2023}.
 
+\begin{figure}
+    \centering
+    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.7\textwidth]{chapter7/AugerStation_spectrum_800MHz_deconvolved.pdf}
+    \caption[Background radio frequency spectrum of the IceCube-Gen2 prototype station at Auger.]{The background radio frequency spectrum for the SKALA-v2 antennas of the IceCube-Gen2 prototype station at the Pierre Auger Observatory. The spectra for the top LNA polarizations are plotted as the solid blue curves and labeled Ch 0, while the spectra for the bottom LNA polarizations are plotted as the dashed orange curves and labeled Ch 1. Plot from~\cite{icrc2025_verpoest}.}
+    \label{fig:gen2_rf_spectrum}
+\end{figure}
+
 The moving average of RMS values over a multi-day period are fit to a sinusoidal function of the form
 
 \begin{equation}
-    A_{1} \sin\left( \frac{2 \pi t}{T_{\rm sidereal}} + \phi_{1} \right) + A_{2} \sin\left( \frac{2 \pi t}{T_{\rm solar}} + \phi_{2} \right) + B,
+    A_{1} \sin\left( \frac{2 \pi t}{T_{\rm sidereal}} + \phi_{1} \right) + A_{2} \sin\left( \frac{2 \pi t}{T_{\rm solar}} + \phi_{2} \right),
     \label{eq:galactic_fit}
 \end{equation}
 
 \noindent
-containing both a sidereal and solar sinusoidal component to describe noise components with different periodicities.
-Fit results for a 10 day period are presented visibly in~\Cref{fig:gen2_galactic} and numerically in~\Cref{tab:gen2_galactic_results}, with results shown for only one of the three antennas yet hold generally for all antennas and polarizations of the prototype station.
-From the fit, the sidereal sinusoid has a larger amplitude than the solar sinusoid, highlighting a time-varying radio noise floor with the same period as the traversal of the Galactic center across the sky.
-We attribute this periodicity in the noise level to the radio emission of the Galactic center, proving frequency band of the SKALA-v2 antennas at the location of Auger can be used for air-shower measurements. 
-
+containing both a sidereal and solar sinusoidal component, with periods of \qty{86164.0905}{\second} and \qty{86400}{\second} respectively, to describe noise components with different periodicities.
+Fit results for a 10 day period are presented visibly in~\Cref{fig:gen2_galactic} and numerically in~\Cref{tab:gen2_galactic_results}, with results shown for only one of the three antennas, yet hold generally for all antennas and polarizations of the prototype station.
+From the fit, the sidereal sinusoid has a larger amplitude than the solar sinusoid, highlighting a time-varying radio background with the same period as the traversal of the Galactic center across the sky.
+We attribute this periodicity in the noise level to the radio emission of the Galactic center, proving the frequency band of the SKALA-v2 antennas at the location of Auger is not dominated by RFI across all frequencies and can be used for air-shower measurements. 
 
 \begin{table}
-    \caption{Results of fitting~\Cref{eq:galactic_fit} to a moving average of the radio waveform RMS values over a 10 day period. The waveforms were bandpass filtered to \qtyrange{110}{130}{\mega\hertz} and the RMS was calculated using the subtraces method.}
+    \caption[Galactic noise fit results to antenna 1 of the IceCube-Gen2 prototype station]{Results of fitting~\Cref{eq:galactic_fit} to a moving average of the radio waveform RMS values of antenna 1 of the prototype station over a 10 day period. The waveforms were bandpass filtered to \qtyrange{110}{130}{\mega\hertz} and the RMS was calculated using the subtraces method. Fit results obtained by Sara Reina.}
     \label{tab:gen2_galactic_results}
     \vspace*{.5\baselineskip}
     \centering
-    \begin{ruledtabular}
-    \begin{tabular}{ c c c c }
-        Location & Primary & Zenith & Number of Showers \\
-        \colrule
-         & & & \\[-1.0em]
-        IceCube & Proton & 0$^{\circ}-$71.6$^{\circ}$ & 45000 \\
-        IceCube & Helium & 0$^{\circ}-$71.6$^{\circ}$ & 45000 \\
-        IceCube & Oxygen & 0$^{\circ}-$71.6$^{\circ}$ & 45000 \\
-        IceCube & Iron & 0$^{\circ}-$71.6$^{\circ}$ & 45000 \\
-        Auger & Proton & 0$^{\circ}-$65$^{\circ}$ & 25000 \\
-        Auger & Helium & 0$^{\circ}-$65$^{\circ}$ & 25000 \\
-        Auger & Oxygen & 0$^{\circ}-$65$^{\circ}$ & 25000 \\
-        Auger & Iron & 0$^{\circ}-$65$^{\circ}$ & 25000 \\
+    \begin{tabular}{| c || c | c | c | c |}
+        \hline
+                   & \multicolumn{2}{c|}{Sidereal Component} & \multicolumn{2}{c|}{Solar Component}\\
+        \hline
+        Antenna 1  & $A_{1}$ [ADC]   & $\phi_{1}$ [$^{\circ}$] & $A_{2}$ [ADC]   & $\phi_{2}$ [$^{\circ}$]\\
+        \hline
+        \hline
+        Top LNA    & 0.98 $\pm$ 0.01 & -144.29 $\pm$ 0.02      & 0.23 $\pm$ 0.01 & 159.01 $\pm$ 0.11\\
+        Bottom LNA & 0.86 $\pm$ 0.01 & -133.51 $\pm$ 0.02      & 0.15 $\pm$ 0.01 & 159.28 $\pm$ 0.02\\
+        \hline
     \end{tabular}
-    \end{ruledtabular}
 \end{table}
-
-
-The subtraces method, which calculates the root mean square (RMS) of equal size subtraces of the radio waveforms 
-
-The root mean square (RMS) for each bandpassed, software triggered, trace is calculated using the subtraces method, which 
-
-%Before the deployment of the SKALA antennas at Auger, the feasibility of 
-%To prove the 
-
-Explain radio analysis pipeline (cleaning and filtering, etc.).
-Determination of frequency bands with minimal noise contributions.
-Subtraces method to determine RMS.
-Fit moving average of RMS values.
-%Include for all 3 frequency bands?
-
-
-\begin{figure}
-    \centering
-    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.7\textwidth]{chapter7/AugerStation_spectrum_800MHz_deconvolved.pdf}
-    \caption[Radio frequency spectrum of the IceCube-Gen2 prototype station at Auger.]{Spectrum from~\cite{icrc2025_verpoest}.}
-    \label{fig:gen2_rf_spectrum}
-\end{figure}
-
-% Subtraces plot from slide 23 of talk in Grand Rapids for IC collaboration meeting?
 
 \begin{figure}
     \centering
     \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.8\textwidth]{chapter7/AugerStation_galactic.png}
-    \caption[RMS time dependence of background radio signals.]{Time dependence of RMS}
+    \caption[RMS time dependence of background radio signals.]{The RMS of background radio waveforms measured with antenna 1 of the IceCube-Gen2 prototype station for a 10 day period. A moving average is calculated from the RMS values and fit to~\Cref{eq:galactic_fit}, with fit results reported in~\Cref{tab:gen2_galactic_results}. Plot by Sara Reina and published in~\cite{arena2024_verpoest}.}
     \label{fig:gen2_galactic}
 \end{figure}
 
-Table of fit results for all antennas in \SIrange{110}{130}{\mega\hertz}.
 
-\subsection{First Coincident Air-Shower Observations with the Auger Surface Detector}\label{sec:gen2airshowers}
+%The subtraces method, which calculates the root mean square (RMS) of equal size subtraces of the radio waveforms 
+
+%The root mean square (RMS) for each bandpassed, software triggered, trace is calculated using the subtraces method, which 
+
+%Before the deployment of the SKALA antennas at Auger, the feasibility of 
+%To prove the 
+
+%Explain radio analysis pipeline (cleaning and filtering, etc.).
+%Determination of frequency bands with minimal noise contributions.
+%Subtraces method to determine RMS.
+%Fit moving average of RMS values.
+%Include for all 3 frequency bands?
+
+% Subtraces plot from slide 23 of talk in Grand Rapids for IC collaboration meeting?
+
+%Table of fit results for all antennas in \SIrange{110}{130}{\mega\hertz}.
+
+%\subsection{First Coincident Air-Shower Observations with the Auger Surface Detector}\label{sec:gen2airshowers}
 
 
 
-Air showers are measured by a coincidence requirement between scintillator triggers.
+%Air showers are measured by a coincidence requirement between scintillator triggers.
 
 %reconstructions and vetoing air showers for the optical array.
 %In addition to increasing the size of the current in-ice optical array for neutrino detection, the next generation upgrade of IceCube plans to expand the current surface array 
