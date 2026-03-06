@@ -156,6 +156,29 @@ Once a signal reaches the radioTad from the LNA, both a high-pass and low-pass f
 The filtered signals are converted to eight total differential signals for each LNA and fed to the TAXI board for further processing through a D-SUB 37 pin connector.
 Inside the TAXI housing, the radioTads are covered with a custom made aluminum shielding to prevent against RFI.
 
+The eight differential signals from the radioTad are supplied to a DRS4 chip that regulates the radio data taking and quantifies the timing of the radio signals.
+There is one DRS4 chip for each radioTad, and therefore for each antenna.
+The DRS4 chips themselves have eight channels, four channels each for the two antenna polarizations, with 1024 samples per channel.
+The DRS4 chips have three data taking modes, cascaded, semi-cascaded, and non-cascaded, that determine the time length of the radio waveform.
+Cascaded mode records a single waveform per polarization of 4096 samples total, split equally across the four channels.
+Semi-cascaded mode records two waveform copies of 2048 samples, split across pairs of channels.
+Non-cascaded mode records four copies of 1024 samples of a single waveform, one copy each per polarization channel.
+Copies of the recorded waveforms, such as in non-cascaded and semi-cascaded mode, enable the waveforms to be corrected for bin spikes from overheating of the DRS4 chip.
+Currently, the TAXIs for the SKALA stations in Argentina can only function in the non-cascaded or semi-cascaded mode.
+The time window of waveform measurement is set by the sampling rate of the DRS4 chip, which can be configured between \qty{700}{Msps} and \qty{5}{Gsps}, but is nominally set at \qty{800}{Msps}.
+The result is a sample timing accuracy of \qty{1.25}{\nano\second} and a Nyquist frequency of \qty{400}{\mega\hertz}, well above the upper end of the SKALA frequency band.
+The output from the DRS4 chips is digitized by a 14-bit ADC and read by the TAXI FPGA.
+A more detailed description of the radioTad functionality and the TAXI-v3.2 processing of the radio signals is provided in~\cite{roxanneturcotte_phd2023}.
+
+%The sampling rate of the electronics can be configured between \qty{700}{Msps} and \qty{5}{Gsps}, but is nominally set at \qty{800}{Msps}, resulting in a time per sample of \qty{1.25}{\nano\second} and a Nyquist frequency of \qty{400}{\mega\hertz}, well above the upper end of the SKALA freqeuncy band.
+%The sampling speed and samples of the DRS4 chip limit the ring buffer of the electronics to a \qty{1.28}{\micro\second} time window.
+
+
+%the waveforms for each polarization are duplicated four times, once for each of the four DRS4 channels per polarization, over a \qty{1280}{\nano\second} time window.
+%In semi-cascaded mode, each polarization is 
+
+% I should mention the FPGA clock of TAXI somewhere, and how that sets an internal uncertainty of 8.403ns from the clock rate (119 MHz), I should also mention the 1000MSps rate used originally for the prototype station
+
 TAXI-v3.2 allows for two data taking modes to trigger the readout of the radio antennas, both controlled by the Field Programmable Gate Array (FPGA) of TAXI.
 The first mode is a "soft" trigger mode, or a software initiated trigger, to readout the radio data.
 In this mode, the FPGA sends a request to read the radio data every $X$ seconds, where $X$ is the FPGA clock time passed since the previous FPGA request.
@@ -164,7 +187,6 @@ Typically, $X$ is set to a \qty{10}{\second} time interval.
 The second mode is an external trigger mode.
 In this case, an additional electronics board interfacing with an external detector is connected to TAXI and triggers the request to the TAXI FPGA to initiate the readout of the radio data.
 The SKALA antennas for the IceCube-Gen2 prototype station and ARISE interface with different external detectors and will be described in their respective sections.
-A more detailed description of the radioTad functionality and the TAXI-v3.2 processing of the radio signals is provided in~\cite{roxanneturcotte_phd2023}.
 
 % Add description of DRS4 chips, traces with different sample sizes i.e. 1024, 2048, or 4096 samples. Add sampling rate info of 800 Msps. Some specifics about power consumption.
 
@@ -651,12 +673,21 @@ As of November 2025, ARISE has been stably recording data.
 
 \subsection{The Outlook of ARISE}\label{sec:arise_outlook}
 
+The fully deployed ARISE array is shown in~\Cref{fig:arise_drone_photo}.
 Recently, a full analysis pipeline for reconstructing air showers with ARISE was implemented into Auger Offline, leading to the first cosmic-ray air shower detections with ARISE.
 Reconstructed ARISE air-shower directions are compared to air-shower reconstructions from Auger's \qty{433}{\meter} infill array of SD tanks and the measured radio emission is currently being verified using CORSIKA with CoREAS air-shower simulations, similar to the air-shower reconstructions for the IceCube-Gen2 prototype station.
 In the near future, reconstructions of the air-shower energy and $X_{\rm max}$ are planned with ARISE.
 Reconstructing the air-shower energy with ARISE provides a pathway for a cross-calibration between the SKALA antennas deployed at Auger and those at the South Pole, deployed within the surface array of the IceCube Neutrino Observatory, serving as an indirect comparison of the Auger and IceTop energy scales.
 Further, the energy reconstruction has potential for an energy scale comparison between the \qtyrange{70}{350}{\mega\hertz} band of ARISE and the \qtyrange{30}{80}{\mega\hertz} band of AERA.
 The location of ARISE in the decommissioned part of the AERA footprint, and its size with respect to the AERA footprint, complicate this comparison as ARISE and AERA will very rarely trigger from the same cosmic-ray events; however, an analysis comparing the average energy scales of ARISE and AERA, instead of an event-by-event analysis, is feasible.
+
+\begin{figure}
+    \centering
+    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter7/ARISE_DronePicture.jpg}
+    \caption[Aerial drone image of the ARISE array.]{Aerial drone image of the ARISE array. Access roads to all stations map the footprint of ARISE, with SD Lety Jr.~is visible at the center of the array. The access road to the CRS is also visible, cutting through the left side of ARISE. Drone image taken by Tim Huege.}
+    \label{fig:arise_drone_photo}
+\end{figure}
+
 
 Synergies between ARISE and the Auger UMD can be exploited to simultaneously reconstruct observables related to the muonic and electromagnetic component of air showers.
 The UMD directly measures the muonic component of air showers for cosmic-ray energies between \qtyrange[parse-numbers=false]{10^{16.8}}{10^{19}}{\electronvolt} while ARISE is fully efficient for near-vertical ($\theta <$\,\qty{30}{\degree}) air showers for cosmic-ray energies above \qty[parse-numbers=false]{10^{17.5}}{\electronvolt}.
