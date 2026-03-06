@@ -316,15 +316,15 @@ However, in the coming months, TAXI will be placed on a solar power system, remo
 \subsection{First Analyses with the Prototype Station: Observations of the Galactic Center and Air Showers}\label{sec:gen2_observations}
 
 The feasibility of air-shower measurements in the \qtyrange{70}{350}{\mega\hertz} frequency band had not been proven experimentally with the anthropogenic and environmental RFI at Auger prior to the deployment of the IceCube-Gen2 prototype station.
-To this end, a study was performed to measure the modulation of the radio noise floor in this frequency band correlated in time with the movement of the Galactic center across the Celestial sphere at the location of the prototype station.
+To this end, a study was performed to measure the modulation of the radio noise background in this frequency band correlated in time with the movement of the Galactic center across the Celestial sphere at the location of the prototype station.
 The hypothesis: if the external Galactic noise is visible, then the radio data is not flooded by the internal system and external environmental noise and therefore can be used to observe air showers.
 All analysis for this station was performed using the surface radio modules in IceTray, the IceCube software framework, and follows the pipeline described in~\cite{jinst2022_radcube} to prepare the measured electric fields at the antenna to an analysis ready stage.
 
 Radio data, collected every \qty{10}{\second} from a fixed-rate software trigger, is corrected for artifacts and used to investigate the frequency spectrum of the radio background for the prototype station.
-A clean frequency band, with minimal noise contributions from RFI, is determined from the frequency spectrum of each antenna polarization, shown in~\Cref{fig:gen2_rf_spectrum}.
+To observe the Galactic noise, a clean frequency band, with minimal noise contributions from RFI, is determined from the frequency spectrum of each antenna polarization, shown in~\Cref{fig:gen2_rf_spectrum}.
 Anthropogenic RFI is visible in the spectrum near \qty{100}{\mega\hertz}, corresponding to the FM radio band, and near \qty{200}{\mega\hertz} from a local TV carrier band in Argentina.
-To observe the Galactic noise, the spectrum is bandpass filtered within \qtyrange{110}{130}{\mega\hertz} to remove the anthropogenic noise signals.
-The root mean square (RMS) of equal size subtraces of the bandpassed radio waveforms is calculated as a measure of the average amplitude of the radio noise floor in this frequency band.
+The spectrum is bandpass filtered within \qtyrange{110}{130}{\mega\hertz} to remove the anthropogenic noise signals.
+The root mean square (RMS) of equal size subtraces of the bandpassed radio waveforms is calculated as a measure of the average amplitude of the radio noise background in this frequency band.
 Splitting the waveforms into subtraces, known as the subtraces method, removes any time-varying RFI from the waveforms making the RMS calculation more robust against RFI not removed with the bandpass filter.
 The subtraces method is described in more detail in~\cite{roxanneturcotte_phd2023}.
 
@@ -343,10 +343,10 @@ The moving average of RMS values over a multi-day period are fit to a sinusoidal
 \end{equation}
 
 \noindent
-containing both a sidereal and solar sinusoidal component, with periods of \qty{86164.0905}{\second} and \qty{86400}{\second} respectively, to describe noise components with different periodicities.
+containing both a sidereal and solar component, with periods of \qty{86164.0905}{\second} and \qty{86400}{\second} respectively, to describe noise sources with different periodicities.
 Fit results for a 10 day period are presented visibly in~\Cref{fig:gen2_galactic} and numerically in~\Cref{tab:gen2_galactic_results}, with results shown for only one of the three antennas, yet hold generally for all antennas and polarizations of the prototype station.
 From the fit, the sidereal sinusoid has a larger amplitude than the solar sinusoid, highlighting a time-varying radio background with the same period as the traversal of the Galactic center across the sky.
-We attribute this periodicity in the noise level to the radio emission of the Galactic center, proving the frequency band of the SKALA-v2 antennas at the location of Auger is not dominated by RFI across all frequencies and can be used for air-shower measurements. 
+The periodicity in the noise level is attributed to the radio emission of the Galactic center, proving the frequency band of the SKALA-v2 antennas at the location of Auger is not dominated by RFI across all frequencies and can be used for air-shower measurements. 
 
 \begin{table}
     \caption[Galactic noise fit results to antenna 1 of the IceCube-Gen2 prototype station]{Results of fitting~\Cref{eq:galactic_fit} to a moving average of the radio waveform RMS values of antenna 1 of the prototype station over a 10 day period. The waveforms were bandpass filtered to \qtyrange{110}{130}{\mega\hertz} and the RMS was calculated using the subtraces method. Fit results obtained by Sara Reina.}
@@ -357,7 +357,7 @@ We attribute this periodicity in the noise level to the radio emission of the Ga
         \hline
                    & \multicolumn{2}{c|}{Sidereal Component} & \multicolumn{2}{c|}{Solar Component}\\
         \hline
-        Antenna 1  & $A_{1}$ [ADC]   & $\phi_{1}$ [$^{\circ}$] & $A_{2}$ [ADC]   & $\phi_{2}$ [$^{\circ}$]\\
+        Antenna 1  & $A_{1}$ / ADC   & $\phi_{1}$ / $^{\circ}$ & $A_{2}$ / ADC   & $\phi_{2}$ / $^{\circ}$\\
         \hline
         \hline
         Top LNA    & 0.98 $\pm$ 0.01 & -144.29 $\pm$ 0.02      & 0.23 $\pm$ 0.01 & 159.01 $\pm$ 0.11\\
@@ -373,6 +373,38 @@ We attribute this periodicity in the noise level to the radio emission of the Ga
     \label{fig:gen2_galactic}
 \end{figure}
 
+The search for air-shower events measured with the IceCube-Gen2 prototype station is performed with a timing and direction coincidence between the scintillator triggered events of the prototype station and the air showers reconstructed by the SD-433 of Auger.
+The coincidence condition with the well trusted SD reconstruction of Auger ensures the prototype station detects real cosmic-ray events. 
+Before being considered for the coincidence analysis, air-shower candidates of the prototype station must first pass a radio selection criteria.
+The selection criteria is determined from background radio waveforms collected with the fixed-rate software trigger.
+The background waveforms are corrected for artifacts and bandpass filtered to \qtyrange{110}{185}{\mega\hertz} to remove the anthropogenic RFI previously described.
+Additional notch filters are applied using the frequency weighting described in~\cite{icrc2021_coleman} to remove narrow band RFI.
+
+The signal-to-noise ratio (SNR), defined as
+
+\begin{equation}
+    \text{SNR} = \left( \frac{\text{Hilbert Peak Amplitude}}{\text{RMS}} \right)^{2},
+    \label{eq:snr}
+\end{equation}
+
+\noindent
+is calculated from the filtered background waveforms and a signal threshold, defined as 95\% of the polarization's SNR distribution, is calculated for each antenna polarization.
+A scintillator triggered event is considered an air-shower candidate if at least four polarizations measure a SNR greater than the polarization's signal threshold.
+A plane wave fit to the peak signal times in each antenna of the candidate events is performed to obtain a radio directional reconstruction.
+The timing and direction of the candidate radio and SD-433 reconstructions are compared and conditions for coincident events were set by $\pm$\qty{50}{\milli\second} for timing (after offset corrections between the prototype station and the Auger SD) and $\pm$\qty{5}{\degree} for opening angle.
+118 coincident air showers were measured within 241 days of runtime split across two different sampling speeds of the radio DAQ, \qty{1000}{Msps} and \qty{800}{Msps}.
+The air-shower energy reconstructed by the SD-433 for the coincident events peaks around \qty[parse-numbers=false]{10^{17.5}}{\electronvolt}, the expected full efficiency of the ARISE array.
+Further details of the coincident air-shower search are published in~\cite{icrc2025_verpoest}.
+
+
+
+%If at least four polarizations pass th
+
+%hen a scintillator triggered event is observed, if at least four antenna polarizations pass th
+
+%To ensure the prototype station observes real cosmic-ray air showers, 
+
+%Air-shower events measured with the prototype station are searched for through a timing coincidence between the scintillator triggered events of the prototype station 
 
 %The subtraces method, which calculates the root mean square (RMS) of equal size subtraces of the radio waveforms 
 
