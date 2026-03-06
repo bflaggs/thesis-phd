@@ -3,10 +3,11 @@
 %
 \chapter{Future Prospects: SKALA Radio Antennas at Auger}\label{chap:skala}
 The Pierre Auger Observatory hosts several prototype detectors and pathfinder air-shower arrays in addition to the detectors discussed in~\Cref{chap:auger}.
-This location greatly benefits prototyping new detectors because of the existing structure of the Auger observatory, allowing ease of access for detector maintenance and assistance from the local observatory staff when feasible.
-Recently, several stations for radio detection of cosmic-ray air showers using Square Kilometer Array Log-periodic Antenna (SKALA) radio antennas have been deployed at Auger.
-These SKALA antennas are Log-Periodic Dipole Antennas (LPDAs), similar to the AERA LPDA antennas, and were originally designed for the Square Kilometer Array's (SKA) low frequency telescope in Western Australia.
-However, future cosmic-ray observatories with a surface radio component, such as IceCube-Gen2 and the Radio Neutrino Observatory Greenland (RNO-G), plan to use SKALA antennas to reconstruct and/or veto cosmic ray air showers.
+This includes prototype layered water Cherenkov detectors for the Global Cosmic Ray Observatory (GCOS), a prototype surface station for IceCube-Gen2, and the Auger Radio Infill SKALA Extension (ARISE), of which the latter two will be the focus of this chapter.
+The location of Malarg\"ue and the surrounding area greatly benefits prototyping new detectors because of the existing structure of the Auger observatory, allowing ease of access for detector maintenance, assistance from the local observatory staff when feasible, and potential cross calibration of prototype detectors with the well understood Auger detectors.
+Recently, several stations for radio detection of cosmic-ray air showers using Square Kilometer Array Log-periodic Antenna (SKALA)~\cite{SKALA2015_eloy} radio antennas have been deployed at Auger.
+These SKALA antennas are Log-Periodic Dipole Antennas (LPDAs) and were originally designed for the Square Kilometer Array's (SKA) low frequency telescope in Western Australia~\cite{SKA_designreport}.
+However, IceCube-Gen2, a future upgrade to the IceCube Neutrino Observatory with a surface radio component, plans to use SKALA antennas to reconstruct and/or veto cosmic-ray air showers.
 This chapter discusses deployment, hardware specifications, and preliminary analysis from SKALA antennas deployed at the Pierre Auger Observatory.
 
 %===============================
@@ -24,27 +25,27 @@ This chapter discusses deployment, hardware specifications, and preliminary anal
     \label{fig:auger_map_skala_inset}
 \end{figure}
 
-Since 2022, 21 total SKALA-v2 radio antennas have been deployed at Auger in the \SI{433}{\meter} spaced array of SD tanks.
-\Cref{fig:auger_map_skala_inset} shows a map of all 21 SKALA antennas deployed in this region of the Auger array, inset against the full Auger array of SD tanks.
+Between 2022 and 2025, 21 total SKALA-v2 radio antennas have been deployed at Auger in the \qty{433}{\meter} spaced infill array of SD tanks.
+\Cref{fig:auger_map_skala_inset} shows a map of all 21 SKALA antennas deployed in this region of the Auger array, inset against the full Auger SD array.
 A single station for the SKALA detector system is formed by a group of three antennas arranged in a Mercedes-Benz like three-pointed star hence, in total, the 21 SKALA antennas at Auger constitute seven total stations.
-One station forms the IceCube-Gen2 prototype station at Auger, while the other six stations form the Auger Radio Infill SKALA Extension (ARISE) array.
-In~\Cref{fig:auger_map_skala_inset}, the IceCube-Gen2 prototype station is composed of the three SKALA antennas to the Northeast of the Auger Central Radio Station (CRS), shown as the orange star on the map, while the 18 SKALA antennas surrounding the Auger SD to the Northwest of the CRS form the six stations of ARISE. 
+One station forms the IceCube-Gen2 prototype station at Auger, which also includes four pairs of scintillation panels, while the other six stations form the ARISE array, comprised of only radio antennas.
+In~\Cref{fig:auger_map_skala_inset}, the three SKALA antennas to the Northeast of the Auger Central Radio Station (CRS), shown as the orange star on the map, form the radio component of the IceCube-Gen2 prototype station, while the 18 SKALA antennas surrounding the Auger SD to the Northwest of the CRS form the six stations of ARISE.
 Stations for ARISE differ slightly from the IceCube-Gen2 prototype station, where these differences are described in more detail in the coming sections, one section each for the prototype station and ARISE.
 This section serves to describe the similarities of the SKALA detector systems, specifically describing the hardware, data acquisition system (DAQ), and the data transfer and storage.
 
-The backbone of all SKALA detector systems at Auger is housed inside the CRS, of which the main components are a laptop and a White Rabbit (WR) switch.
-The laptop is a Panasonic FZ-55 toughbook, chosen for its fanless design and ability to withstand dust and other harsh environments.
-It is used for directly interfacing with the SKALA detector systems, including the starting and stopping of data taking, storage and logging of data, and transfer of the data via Wi-Fi.
-The nearby Coihueco FD site provides Wi-Fi at the CRS yet is limited to a \SI{40}{Mbps} speed, with the total data volume for the SKALA detector systems capped at \SI{10}{Mbps}.
-This Wi-Fi connection is made possible from two Ubiquiti Bullet bidirectional radio transceivers pointed towards Coihueco.
-One Ubiquiti bullet link is used solely for AERA, while the second, originally a backup for AERA, is used to power a network switch inside the CRS to provide internet access for all devices connected to the switch, including the FZ-55 toughbook.
+The backbone of all SKALA detector systems at Auger is housed inside the CRS, of which the main components are a laptop for data acquisition and a White Rabbit (WR) switch for data transfer, communications, and timing.
+The laptop is a Panasonic FZ-55 Toughbook, chosen for its ability to withstand dust and other harsh environments.
+It is used for directly interfacing with the SKALA detector systems, including the starting and stopping of data taking, storage and logging of data, and transfer of data to the nearby Coihueco FD site.
+The data transfer is performed over a Wi-Fi connection between Coihueco and the CRS provided by two Ubiquiti Bullet bidirectional radio transceivers pointed towards Coihueco, each with a network speed of \qty{40}{Mbps}.
+One Ubiquiti bullet link is used solely for AERA, while the second, originally a backup for AERA, is used to power a network switch inside the CRS to provide internet access for all devices connected to the switch.
+The FZ-55 Toughbook connects to the switch, with a total data rate for the SKALA detector system limited to \qty{10}{Mbps}.
 Other devices connected to the network switch include the Grand@Auger computer, and a Wi-Fi router, powered by a DC-AC inverter, to provide internet access for those performing field work inside the CRS.
 
 The WR switch, shown in~\Cref{fig:wr_switch}, is a specialized network switch designed to provide precise synchronization between multiple detectors by distributing a master time signal with sub-nanosecond timing accuracy amongst all connected components.
 The switch has 18 SFP ports, used for distribution of the master timing signal and communications to all connected devices, a management port, for configuring and monitoring the WR switch, and SMC connections for both input and output PPS and \SI{10}{\mega\hertz} timing signals.
 A GPS antenna, located on the roof of the CRS, connects to a GPS clock and level shifter system to provide the PPS and \SI{10}{\mega\hertz} input signals to the WR switch and is used as the master timing signal for the system.
 For the SKALA detector system, the WR switch not only controls the timing, but also the communications and data transfer for each station.
-To this end, the WR switch connects via ethernet cables to the FZ-55 toughbook in two locations: 1. from the WR switch management port, and 2. from SFP port 17, converted for an ethernet cable connection with an SFP to RJ45 transceiver module.
+To this end, the WR switch connects via ethernet cables to the FZ-55 Toughbook in two locations: 1. from the WR switch management port, and 2. from Small Form-factor Pluggable (SFP) port 17, converted for an ethernet cable connection with an SFP to RJ45 transceiver module.
 The FZ-55 controls the settings configuration of the WR switch and timing selection from the management port, as well as provides a monitoring interface and SSH access to the switch.
 Timing information of the WR switch network is transferred to the FZ-55 laptop from the connection to SFP port 17.
 The laptop internal time is synchronized to the Auger Network Time Protocol (NTP) server, therefore comparisons between the Auger array timing and the internal WR network timing can be performed.
@@ -61,12 +62,11 @@ Yet this comparison is limited in accuracy to $\mathcal{O}$(\SI{1}{\milli\second
     \label{fig:wr_switch}
 \end{figure}
 
-Connection to WR switch port 17 also forms the communications channel between the WR switch and FZ-55 toughbook.
-From the communications channel, all additional detectors connected to the WR switch can be accessed by the laptop and data can be transferred from these additional detectors directly to the FZ-55 toughbook.
-The additional detectors constitute all seven of the SKALA stations deployed at Auger.
-Buried military grade optical fibers connect the WR switch to White Rabbit Line Extension (WR-LEN) boards at each SKALA station, where the WR-LEN boards serve as remote access points to the WR switch in the CRS.
-The WR-LEN boards connect directly to the station DAQ electronics and control the timing, communications, and data transfer for the station.
-This information is all sent bidirectionally through the buried optical fiber to the WR switch, and can then be accessed from the FZ-55 toughbook via WR switch port 17.
+Connection to WR switch port 17 also forms the communications channel between the WR switch and FZ-55 Toughbook.
+From this communications channel, all additional detectors connected to the WR switch can be accessed by the laptop and data can be transferred from these additional detectors directly to the FZ-55 Toughbook.
+These additional detectors constitute all seven of the SKALA stations deployed at Auger.
+Buried OS2 9/125 military grade optical fibers connect the WR switch to White Rabbit Line Extension (WR-LEN) boards at each SKALA station, where the WR-LEN boards serve as remote access points to the WR switch in the CRS.
+The WR-LEN boards connect directly to the station DAQ electronics, named TAXI, and control the timing, communications, and data transfer for the station.
 Data from each SKALA station is stored at the laptop on one of three SSDs, creatively named \texttt{taxissd\_1}, \texttt{taxissd\_2}, and \texttt{taxissd\_3}.
 \texttt{taxissd\_1} is a \SI{2}{\tera\byte} SSD tasked with storing only data for the IceCube-Gen2 prototype station, whereas \texttt{taxissd\_2} and \texttt{taxissd\_3} are both \SI{8}{\tera\byte} SSDs, of SanDisk and Samsung brands respectively, to store data for the ARISE stations.
 Each of the SSDs is rated to withstand dust accumulation and all are powered by USB ports of the FZ-55 toughbook.
@@ -75,9 +75,9 @@ Two USB hubs are connected to the FZ-55 laptop due to the amount of connections 
 One USB hub has ports for both USB-A and ethernet connections, therefore this hub hosts \texttt{taxissd\_1}, the ethernet connection to the WR management port, and a mechanical mouse for field work involving the laptop.
 The second USB hub is externally powered from \SI{12}{\volt} DC power of battery bank 1 of the CRS and hosts \texttt{taxissd\_2}, and provides power to the GPS clock and level shifter.
 Putting the second USB hub on external power removes some of the power strain placed on the laptop by the connections requiring power over USB.
-Power for both the FZ-55 toughbook and the WR switch are provided by \SI{12}{\volt} DC power outputs of battery bank 1 of the CRS.
-The \SI{12}{\volt} power line of battery bank 1 reserved for the toughbook is connected to a Lind electronics DC-DC auto power adapter and used to convert the \SI{12}{\volt} DC power to the necessary specifications to keep the toughbook on and charged at all times, except in the event of a power outage or poor charging of the batteries in battery bank 1.
-For the WR switch, a custom built DC-DC power converter takes two \SI{12}{\volt} DC inputs from battery bank 1 and converts them into a \SI{12}{\volt}, \SI{5}{\ampere} max, DC output and a \SI{24}{\volt}, \SI{2.5}{\ampere} max, DC output.
+Power for both the FZ-55 Toughbook and the WR switch are provided by \SI{12}{\volt} DC power outputs of battery bank 1 of the CRS.
+The \SI{12}{\volt} power line of battery bank 1 reserved for the Toughbook is connected to a Lind electronics DC-DC auto power adapter and used to convert the \SI{12}{\volt} DC power to the necessary specifications to keep the Toughbook on and charged at all times, except in the event of a power outage or poor charging of the batteries in battery bank 1.
+For the WR switch, a custom built DC-DC power converter takes two \SI{12}{\volt} DC inputs from battery bank 1 and converts them into a \SI{12}{\volt}, \SI{5}{\ampere} max, DC output and a \SI{24}{\volt}, \SI{2.5}{\ampere} max, DC output, respectively.
 The \SI{12}{\volt} DC output is used to power the WR switch, while the \SI{24}{\volt} output line can be used to power a station DAQ either in the field or inside the CRS for debugging.
 The specific ports used to power the laptop and WR switch can be controlled from an IP network switch, allowing remote power cycling of each component via the network GUI.
 Two physical switches on the custom DC-DC converter can also be used to control the \SI{12}{\volt} power output, for the WR switch, and the \SI{24}{\volt} power output. 
@@ -105,12 +105,13 @@ Two physical switches on the custom DC-DC converter can also be used to control 
 
 %providing a deeper understanding of the hardware, data acquisition system (DAQ), and data transfer and storage for the coming sections.
 
+\subsection{The SKALA Radio Antennas}\label{sec:skala_antennas}
+
 The SKALA antennas themselves are all SKALA-v2 type antennas, shown in~\Cref{fig:skala_cad_drawing}, developed during antenna prototyping for the SKA-Low radio telescope.
 SKALA antennas have two perpendicular polarizations, each with their own Low Noise Amplifier (LNA) housed in the top most part of the antenna, known as the antenna trumpet.
 There are two types of LNA for SKALA-v2 antennas, a "top" LNA and a "bottom" LNA, referring to the LNA position inside the antenna trumpet with respect to its paired LNA.
 Top and bottom LNAs are always paired together, one for each of the two perpendicular polarizations; however, no specific orientation for the polarization-LNA pairings are defined by default.
-This must be defined and remain consistent between all antennas by the deployment team.
-Once deployed, a \SI{180}{\degree} rotation of the antenna will yield the same measured radio signal in principle due to a degeneracy in the pairing of the antenna design and LNA response.
+This must be defined and remain consistent between all antennas by the deployment team to ensure the polarity of the measured radio signals is consistent for all antennas.
 
 \begin{figure}
     \centering
@@ -120,13 +121,16 @@ Once deployed, a \SI{180}{\degree} rotation of the antenna will yield the same m
 \end{figure}
 
 The metal arms of the LNAs are connected directly to the metal of each antenna arm and fixed in place with screws to ensure adequate contact between the antenna and LNA.
-Adequate metal contact is necessary for the LNA to properly boost the weak signal measured by the SKALA antennas.
-Without good contact, the radio signal has less amplification and is more prone to signal degradation in the coaxial cables on its travel to the DAQ electronics.
+The LNAs receive the raw input signal from the antenna and amplify it with an approximate gain of \qty{40}{\decibel} across the \qtyrange{70}{350}{\mega\hertz} frequency band.
+With this gain, the amplified signal can withstand signal degradation from the coaxial cables and is measurable above the internal noise floor of the electronics.
+Yet, adequate metal contact is necessary for the LNA to properly amplify the weak signal measured by the SKALA antennas.
+Without good contact, the LNA gain factor would change leading to an incorrect calibration of the SKALA antennas.
+Less severely, the poor contact results in less amplification of the radio signal and therefore is more prone to signal degradation in the coaxial cables on its travel to the DAQ electronics.
 The LNA pairs are interlocked in the antenna trumpet (see~\Cref{fig:lna_lab_picture}) with a plastic spacer separating them to prevent crosstalk in the electronics.
 Each LNA has a gold SMA connector used to transfer the radio signal post-LNA to the DAQ electronics.
 This SMA connector for the top LNA is visible in~\Cref{fig:lna_lab_picture}.
-The signal from the LNA first passes through an SMA male to type-N female coaxial cable \SI{1}{\meter} in length, connected to a type-N male to type-N male coaxial cable of \SI{40}{\meter} length.
-The antenna-opposite end of the \SI{40}{\meter} type-N cables connect directly to the station DAQ and are buried along the path between the antennas and DAQ to protect the cables from environmental factors, including roaming animals in the Argentinian Pampa such as cows, goats, and horses.
+The signal from the LNA first passes through a LMR-240 SMA male to type-N female coaxial cable \qty{1}{\meter} in length, connected to a LMR-400 type-N male to type-N male coaxial cable of \qty{50}{\meter} length.
+The antenna-opposite end of the \SI{50}{\meter} LMR-400 cables connect directly to the station DAQ with type-N connectors and are buried along the path between the antennas and DAQ to protect the cables from environmental factors, including roaming animals in the Argentinian Pampa such as cows, goats, and horses.
 
 \begin{figure}
     \centering
@@ -135,32 +139,38 @@ The antenna-opposite end of the \SI{40}{\meter} type-N cables connect directly t
     \label{fig:lna_lab_picture}
 \end{figure}
 
+\subsection{TAXI: The Local Station DAQ for the SKALA Detector System}\label{sec:taxi_daq}
+
 The DAQ for each station of three SKALA antennas is based on the DAQ developed for the Transportable Array for eXtremely large area Instrumentation studies (TAXI)~\cite{arena2014_taxi} and is hosted in a single metal container, also referred to as the TAXI housing.
-The main DAQ components are handled by TAXI-v3.2, referred to solely as TAXI from now on, an updated version of the principal electronics board developed for the original project.
-As power, TAXI takes \SI{24}{\volt} DC power input through a custom 5-pin connector on the TAXI housing.
-The \SI{24}{\volt} power is split internally on the board into three separate voltages of \SI{3.3}{\volt}, \SI{4.5}{\volt}, and \SI{5}{\volt} using a DC-DC power converter. 
-These voltages provide power to all TAXI components and all additional electronics inside the TAXI housing, where the additional electronics boards connect directly to the TAXI-v3.2 board to complete the DAQ system (see~\Cref{fig:inside_taxi}).
-The first additional electronics board is the radioTad, a front-end radio electronics board to pre-process the radio signals received from the LNAs before propagating the signals forward through to the DAQ.
+An updated version of the principal TAXI electronics board, TAXI-v3.2, was developed as the local station DAQ for the surface stations of radio antennas and scintillation panels for the next-generation upgrade to the IceCube Neutrino Observatory. 
+The main DAQ components for all local stations of SKALA antennas in Argentina are handled by TAXI-v3.2, referred to solely as TAXI from now on.
+As power supply, TAXI takes \qty{24}{\volt} DC input through a custom 5-pin connector on the TAXI housing.
+The \qty{24}{\volt} power is converted internally on the board into three separate voltages of \SI{3.3}{\volt}, \SI{4.5}{\volt}, and \SI{5}{\volt} using a DC-DC power converter. 
+These voltages provide power to all TAXI components and all additional electronics inside the TAXI housing, where the additional electronics boards attach directly to the TAXI-v3.2 board to complete the DAQ system (see~\Cref{fig:inside_taxi}).
+The first additional electronics board is the radioTad, a front-end analog electronics board to filter and amplify the radio signals received from the LNAs before propagating the signals forward to the main board of the TAXI DAQ.
 The LNA signals are received at a type-N female connector of the TAXI housing and then are routed to the radioTad boards hosted internal to the TAXI housing via a coaxial cable.
 Each radioTad board requires \SI{4.5}{\volt} DC power, connects to a single SKALA antenna, and has two polarizations, labeled positive and negative, for the two antenna LNAs.
-For simplicity, it was chosen upon deployment to have all top LNAs connect to the "positive" radioTad polarizations and all bottom LNAs to connect to the "negative" polarizations.
+The positive and negative labels have no meaning, so it was chosen upon deployment to have all top LNAs connect to the positive radioTad polarizations and all bottom LNAs to connect to the negative polarizations for consistency.
 The radioTads power the LNAs using a bias-tee through the same coaxial cables with which they receive the LNA signals.
 Once a signal reaches the radioTad from the LNA, both a high-pass and low-pass filter are applied to filter the frequency range within \SIrange{70}{350}{\mega\hertz}.
 The filtered signals are converted to eight total differential signals for each LNA and fed to the TAXI board for further processing through a D-SUB 37 pin connector.
-Inside the TAXI housing, the radioTads are covered with a custom made aluminum shielding to prevent bidirectional RFI leakage.
+Inside the TAXI housing, the radioTads are covered with a custom made aluminum shielding to prevent against RFI.
 
 TAXI-v3.2 allows for two data taking modes to trigger the readout of the radio antennas, both controlled by the Field Programmable Gate Array (FPGA) of TAXI.
 The first mode is a "soft" trigger mode, or a software initiated trigger, to readout the radio data.
 In this mode, the FPGA sends a request to read the radio data every $X$ seconds, where $X$ is the FPGA clock time passed since the previous FPGA request.
 This time interval $X$ is a programmable setting for the TAXI FPGA which can be configured through the communications channel to TAXI.
+Typically, $X$ is set to a \qty{10}{\second} time interval.
 The second mode is an external trigger mode.
-In this case, an additional electronics board interfacing with an external detector is connected to TAXI and, upon fulfillment of a trigger condition set by the external detector electronics, sends the request to the TAXI FPGA to initiate the readout of the radio data.
+In this case, an additional electronics board interfacing with an external detector is connected to TAXI and triggers the request to the TAXI FPGA to initiate the readout of the radio data.
 The SKALA antennas for the IceCube-Gen2 prototype station and ARISE interface with different external detectors and will be described in their respective sections.
 A more detailed description of the radioTad functionality and the TAXI-v3.2 processing of the radio signals is provided in~\cite{roxanneturcotte_phd2023}.
 
+% Add description of DRS4 chips, traces with different sample sizes i.e. 1024, 2048, or 4096 samples. Add sampling rate info of 800 Msps. Some specifics about power consumption.
+
 Also connected to the TAXI board is the WR-LEN board, serving as a remote access point to the WR switch in the CRS, which controls all data transfer, communications, and timing for the station DAQ.
 Buried OS2 9/125 single mode military grade optical fibers connect the WR switch to the WR-LEN boards at each SKALA station, where the WR-LEN boards connect directly to the TAXI board via a Cat7 ethernet cable to control the communications and data transfer.
-The Cat7 ethernet cables provide high-speed data transfer of approximately \SI{10}{Gbps}, allowing adequate data rates to transfer all data between TAXI and the WR switch, with minimal electromagnetic interference due to the cable shielding.
+The Cat7 ethernet cables provide high-speed data transfer of approximately \SI{10}{Gbps}, allowing for adequate data rates to transfer all data between TAXI and the WR switch, with minimal electromagnetic interference due to the cable shielding.
 Timing from the WR-LEN board is distributed to the TAXI board using two SMA cables, one to distribute the PPS signal and another for the \SI{10}{\mega\hertz} signal.
 Again, these timing signals originate at the WR switch in the CRS from the GPS locked master timing signal.
 \SI{5}{\volt} DC power is necessary for powering the WR-LEN board, coming directly from the TAXI internal DC-DC voltage converter.
