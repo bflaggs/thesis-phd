@@ -399,7 +399,7 @@ The signal-to-noise ratio (SNR), defined as
 
 \noindent
 is calculated from the filtered background waveforms and a signal threshold, defined as 95\% of the polarization's SNR distribution, is calculated for each antenna polarization.
-A scintillator triggered event is considered an air-shower candidate if at least four polarizations measure a SNR greater than the polarization's signal threshold.
+A scintillator triggered event is considered an air-shower candidate if at least four polarizations measure an SNR greater than the polarization's signal threshold.
 A plane wave fit to the peak signal times in each antenna of the candidate events is performed to obtain a radio directional reconstruction.
 The timing and direction of the candidate radio and SD-433 reconstructions are compared and conditions for coincident events were set by $\pm$\qty{50}{\milli\second} for timing (after offset corrections between the prototype station and the Auger SD) and $\pm$\qty{5}{\degree} for opening angle.
 118 coincident air showers were measured within 241 days of runtime split across two different sampling speeds of the radio DAQ, \qty{1000}{Msps} and \qty{800}{Msps}.
@@ -444,20 +444,21 @@ Further details of the coincident air-shower search are published in~\cite{icrc2
 
 \section{ARISE: Auger Radio Infill SKALA Extension}\label{sec:arise}
 
-The Auger Radio Infill SKALA Extension (ARISE) was deployed in March of 2025, centered upon SD tank Lety Jr. of the \SI{433}{\meter} spaced array of the Auger SD.
-ARISE consists of six stations, with their centers organized in a hexagonal pattern surrounding Lety Jr., as seen in~\Cref{fig:arise_map}.
-The station centers are located approximately \SI{80}{\meter} from Lety Jr., each consisting of three SKALA-v2 antennas arranged in a Mercedes-Benz like star pattern with each antenna \SI{40}{\meter} from the station center. 
-One arm of each station is aligned such that an antenna is halfway between Lety Jr. and the station center.
+The Auger Radio Infill SKALA Extension (ARISE) was deployed in March of 2025, centered around SD tank Lety Jr.~of the \qty{433}{\meter} spaced infill array of the Auger SD.
+ARISE consists of six stations, with their centers organized in a hexagonal pattern surrounding Lety Jr.~as seen in~\Cref{fig:arise_map}.
+The station centers are located approximately \qty{80}{\meter} from Lety Jr.,~each consisting of three SKALA-v2 antennas arranged in a Mercedes-Benz like star pattern with each antenna \qty{35}{\meter} from the station center. 
+One arm of each station is aligned such that an antenna is approximately halfway between Lety Jr.~and the station center.
 The final positions of the 18 SKALA-v2 antennas were optimized through a simulation study to maximize the number of vertical air showers above the threshold for full reconstruction efficiency.
-For this array of 18 SKALA antennas, a larger overall footprint will observe more air showers, but will increase the energy threshold for full efficiency due to the increased spacing between antennas. 
-With the described antenna positions, full reconstruction efficiency ($>$ 97\%) is reached at \SI{300}{\peta\electronvolt} for near-vertical air showers ($\theta <$ \SI{30}{\degree}), resulting in the expected observation of $\simeq$\,45 air showers per year~\cite{uhecr2024_verpoest}.
-Current machine learning based radio denoising and reconstruction algorithms can lower this energy threshold by a factor of two once implemented in the data pipeline, increasing the statistics of reconstructed air showers~\cite{abdulrehman_phd2024}.
-Radio reconstructions of near-vertical air showers at Auger now, for the first time, have full reconstruction efficiency above \SI{300}{\peta\electronvolt} within the footprint of ARISE.
+For this array of 18 SKALA antennas, a larger overall footprint would observe more air showers, but would increase the energy threshold for full efficiency due to the increased spacing between antennas. 
+With the described antenna positions, full reconstruction efficiency is predicted at \qty{300}{\peta\electronvolt} for near-vertical air showers ($\theta <$\,\qty{30}{\degree}) using a traditional method requiring an SNR threshold to be exceeded in at least three antennas. 
+Full reconstruction efficiency is defined as having at least 97\% of air showers with a core landing within the ARISE footprint to pass the SNR threshold, resulting in the expected observation of $\simeq$\,45 air showers per year~\cite{uhecr2024_verpoest}.
+Current machine learning based radio denoising and reconstruction algorithms may lower this energy threshold by a factor of two once implemented in the data pipeline, increasing the statistics of reconstructed air showers~\cite{abdulrehman_phd2024}.
+Radio reconstructions of near-vertical air showers at Auger thus, for the first time, will have full reconstruction efficiency above \qty{300}{\peta\electronvolt} within the footprint of ARISE.
 
 \begin{figure}
     \centering
     \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter7/ARISEMap.pdf}
-    \caption[A map of the ARISE array at Auger.]{A map of the ARISE array deployed at Auger surrounding SD tank Lety Jr. ARISE stations are labeled with their station number on the map. Orientations for the top and bottom antenna LNAs are defined, where the purple arrow points in the direction of the antenna polarization connected to the SMA connector side of the top LNA. Approximate locations of trenched antenna cables and optical fibers are included, along with the locations of the Lety Jr. UMD detector and the two closest AERA stations. Sizes of the detectors are not to scale.}
+    \caption[A map of the ARISE array at Auger.]{A map of the ARISE array deployed at Auger surrounding SD tank Lety Jr. ARISE stations are labeled with their station number on the map. Orientations for the top and bottom antenna LNAs are defined, where the purple arrow points in the direction of the antenna polarization connected to the SMA connector side of the top LNA. Approximate locations of trenched antenna cables and optical fibers are included, along with the locations of the Lety Jr.~UMD detector and the two closest AERA stations. Sizes of the detectors are not to scale.}
     \label{fig:arise_map}
 \end{figure}
 
@@ -467,12 +468,13 @@ Radio reconstructions of near-vertical air showers at Auger now, for the first t
 %Combining ARISE radio detection with UMD measurements provide a direct way to simultaneously reconstruct $X_{\rm max}$ and $N_{\mu}$ for the same air showers, as previous analyses with SKALA-v2 antennas have proven their reconstruction potential for $X_{\rm max}$~\cite{icrc2023_turcotte}.
 
 In addition to fully efficient air-shower reconstructions, the science potential of ARISE is manifold, as it is co-located within the UMD and AERA footprints of Auger.
-Previous analyses with SKALA-v2 antennas have proven their reconstruction potential for $X_{\rm max}$~\cite{icrc2023_turcotte}, therefore the combination of radio detection with ARISE and Auger UMD measurements provide a direct way to simultaneously reconstruct $X_{\rm max}$ and $N_{\mu}$ on a per-event basis.
-ARISE can then serve as a pathfinder array for this hybrid detection method, making progress towards major science goals of next-generation air-shower arrays in the quest for constraining high-energy hadronic interaction models, improved mass composition measurements, and potentially solving the muon puzzle.
-Furthermore, the co-location with AERA allows a potential cross-calibration to be performed between the AERA and SKALA radio energy scales. 
+The co-location with AERA allows a potential cross-calibration to be performed between the AERA and SKALA radio energy scales. 
 However, it remains to be seen how this cross-calibration will be performed, as ARISE is located in the currently decommissioned portion of the AERA footprint.
-Given the currently foreseen runtime of Auger until 2035, approximately 500 air showers will be reconstructed with ARISE, providing a large dataset of air showers for high-quality analyses with intermittent results in the coming years.
+Combining ARISE radio detections with UMD measurements provide a direct way to simultaneously reconstruct $X_{\rm max}$ and $N_{\mu}$ on a per-event basis, as previous analyses with SKALA-v2 antennas have proven their reconstruction potential for $X_{\rm max}$~\cite{icrc2023_turcotte}.
+ARISE can then serve as a pathfinder array for this hybrid detection method, making progress towards major science goals of next-generation air-shower arrays in the quest for constraining high-energy hadronic interaction models, improved mass composition measurements, and potentially solving the muon puzzle.
+Given the currently foreseen runtime of Auger until 2035, approximately 500 air showers above \qty{300}{\peta\electronvolt} and within the ARISE footprint are expected, providing a large dataset of air showers for high-quality analyses with intermittent results in the coming years.
 
+% How many for 100 PeV? Will be less because I am discussing in terms of those measured above full efficiency and 100 PeV is below that threshold...
 
 %Previous analyses with SKALA-v2 antennas have shown $X_{\rm max}$ reconstruction is feasible (CITE XMAX ICECUBE), therefore combining ARISE radio reconstructions with UMD measurements provide a direct way to combine  
 %The UMD provides a direct measurement of the muonic component of air showers, while the 
@@ -486,8 +488,8 @@ Given the currently foreseen runtime of Auger until 2035, approximately 500 air 
 All hardware of ARISE, similar to the IceCube-Gen2 prototype station, must be fastened to concrete foundations in the ground to withstand the harsh environmental conditions of the deployment location in Argentina.
 Pre-deployment, the locations for the ARISE station centers and antennas were cleared of any large plants and rocks and flattened to provide a stable ground surface for laying the concrete foundations.
 Paths were cleared to each hardware element of ARISE for car access, with thick tubing buried along each path for deployment of the antenna cables and optical fibers.
-Tubing is connected via several white plastic access points in the ground, located at each station center, each antenna between Lety Jr. and the station centers, and three access points in the immediate vicinity of Lety Jr. for fiber distribution.
-Tubing is also buried between Lety Jr. and the CRS, with access points placed every \SI{50}{\meter}, used to deploy an eight-headed OS2 9/125 single mode \SI{600}{\meter} optical fiber that connects the WR switch in the CRS to a fiber distribution box at Lety Jr.
+Tubing is connected via several white plastic access points in the ground, located at each station center, each antenna between Lety Jr.~and the station centers, and three access points in the immediate vicinity of Lety Jr.~for fiber distribution.
+Tubing is also buried between Lety Jr.~and the CRS, with access points approximately placed every \qty{50}{\meter}, used to deploy an eight-headed OS2 9/125 single mode \qty{600}{\meter} optical fiber that connects the WR switch in the CRS to a fiber distribution box at Lety Jr.
 Fencing is used at the site of each station center and SKALA antenna to prevent interference from animals.
 Examples of the prepared sites for a station center and a SKALA antenna of ARISE are shown in~\Cref{fig:arise_foundations}.
 
@@ -495,7 +497,7 @@ Examples of the prepared sites for a station center and a SKALA antenna of ARISE
     \centering
     \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter7/ARISE_StationCenter_Foundation.jpg}
     \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter7/ARISE_Antenna_Foundation.jpg}
-    \caption[Pre-deployment sites of an ARISE station center and antenna.]{Prepared sites of an ARISE station center (left) and SKALA antenna (right) pre-deployment. Each site is fenced off and has a concrete foundation prepared to secure the hardware of ARISE to the ground. A white plastic access point used for deploying the antenna cables and optical fibers is visible in the prepared site of the station center.}
+    \caption[Pre-deployment sites of an ARISE station center and antenna.]{Prepared sites of an ARISE station center (left) and SKALA antenna (right) pre-deployment. Each site is fenced off and has a concrete foundation prepared to secure the hardware of ARISE to the ground. A white plastic access point, used for deploying the antenna cables and optical fibers, is visible in the prepared site of the station center.}
     \label{fig:arise_foundations}
 \end{figure}
 
@@ -511,26 +513,26 @@ Examples of the prepared sites for a station center and a SKALA antenna of ARISE
 \begin{figure}
     \centering
     \includegraphics[trim={18cm 6cm 18cm 1cm},clip,width=1.0\textwidth]{chapter7/ARISE_StationCenter_CrossSection.jpg}
-    \caption[Cross-section of an ARISE station centers.]{A diagram showing the cross-section of an ARISE station center. Six \SI{12}{\volt} batteries are housed in the bottom layer of the station and used to power TAXI stored in the top layer. The batteries are charged with the LX-440M108GG WM1 solar panel.}
+    \caption[Cross-section of an ARISE station centers.]{A diagram showing the cross-section of an ARISE station center. Six \qty{12}{\volt} batteries are housed in the bottom layer of the station and used to power TAXI stored in the top layer. The batteries are charged with the LX-440M108GG WM1 solar panel.}
     \label{fig:arise_cross_section}
 \end{figure}
 
 For each ARISE station, the station center is a weather proofed wooden box fastened on the lateral sides to an aluminum solar panel frame.
 The frame fixes the station center to the concrete foundation and supports a bifacial solar panel of type LX-440M108GG WM1 connected to a solar power system inside the box.
 The TAXI for each station is housed inside the station center and is autonomously powered from the station's solar power system.
-The power system consists of six \SI{12}{\volt} batteries, the bifacial solar panel, and a charge controller to control the charging of the batteries and regulate the voltage supplied to TAXI.
+The power system consists of six \qty{12}{\volt} batteries, the bifacial solar panel, and a charge controller to control the charging of the batteries and regulate the voltage supplied to TAXI.
 The charge controller is housed in its own metal box for RFI shielding.
-The batteries are connected in a three series two parallel configuration to provide the \SI{24}{\volt} necessary to power TAXI and are stored in the station center at the bottom of the wooden box, separated from TAXI and the charge controller via a wooden plank separator.
+The batteries are connected in a three series two parallel configuration to provide the \qty{24}{\volt} necessary to power TAXI and are stored in the station center at the bottom of the wooden box, separated from TAXI and the charge controller via a wooden plank separator.
 All antenna cables (six per station) and optical fibers (two per station) enter the bottom of the wooden box and connect to TAXI in the top layer.
-The holes drilled for all entering cables and fibers are of exact cable/fiber width to prevent dust from entering the station center. 
-Solar panels face North (at ang angle of...) to maximize the amount of sunlight impacting the solar cells of the panels during winter and additionally provides shade to the wooden box.
+The holes drilled for all entering cables and fibers are of exact cable/fiber width to prevent dust from entering the bottom of the station center. 
+Solar panels face approximately North to maximize the amount of sunlight impacting the solar cells of the panels during winter and additionally provides shade to the wooden box.
 \Cref{fig:arise_cross_section} shows a cross-section of an ARISE station center.
 
 Connected in series between the charge controller and TAXI inside the station center is the ARISE Control and Housekeeping (CHK) box.
 The CHK box serves two purposes: 1. to allow remote power cycling of the TAXI, and 2. monitors the voltage and current supplied to TAXI and other environmental factors (temperature, pressure, dust, etc.).
 The heart of the CHK box is a BeagleBone Black (BBB) single-board debian computer which handles all operations using python and bash scripts to remotely turn on/off TAXI and control the power logging service.
 Connection to BBB is set from a Ubiquiti LiteBeam antenna that connects to a Ubiquiti Rocket housed at the CRS.
-The \SI{24}{\volt} powering TAXI is used to also power the LiteBeam antenna from a power over ethernet (PoE) injector.
+The \qty{24}{\volt} powering TAXI is used to also power the LiteBeam antenna from a power over ethernet (PoE) injector.
 A diagram of the ARISE CHK box, its connections inside the station center, and how it is accessed via Wi-Fi is shown in~\Cref{fig:arise_chk_network}.
 
 \begin{figure}
@@ -540,10 +542,11 @@ A diagram of the ARISE CHK box, its connections inside the station center, and h
     \label{fig:arise_chk_network}
 \end{figure}
 
-Grounding of all electronics in the station center comes from a \SI{1}{\meter} copper grounding rod buried next to each station center connected to the solar panel frame with a twisted copper wire, visible in~\Cref{fig:arise_station_center}.
+Grounding of all electronics in the station center comes from a \qty{1}{\meter} copper grounding rod buried next to each station center connected to the solar panel frame with a twisted copper wire, visible in~\Cref{fig:arise_station_center}.
+Each grounding rod is buried nearly \qty{0.9}{\meter} underground to maximize contact with the Earth while keeping the head exposed for connection to the solar panel frame.
 The frame is attached to the grounding line of the solar panel and sets the grounding of the charge controller from the power cable of the solar panel.
 All other electronics are then grounded indirectly through the charge controller.
-To increase the conductivity of the grounding, each grounding rod was buried in approximately \SI{0.9}{\meter} of Earth mixed with salt, used to retain moisture in the Earth.
+To increase the conductivity of the grounding, each grounding rod was buried in a mixture of Earth and salt, used to retain moisture in the Earth.
 
 \begin{figure}
     \centering
@@ -567,9 +570,9 @@ To increase the conductivity of the grounding, each grounding rod was buried in 
 
 \subsection{ARISE Communication and Triggering}\label{sec:arise_fibers}
 
-Communications, data transfer, and timing of the TAXIs are all provided by buried OS2 9/125 single mode military grade optical fibers trenched from the CRS to Lety Jr., and then along each arm of the array to the ARISE station centers.
-The WR switch inside the CRS connects to a fiber distribution box at Lety Jr. via a \SI{600}{\meter} eight-headed fiber.
-Six of eight fiber heads are connected at the distribution box to six separate \SI{100}{\meter} optical fibers of the same type, each buried and connected to a WR-LEN board housed at the station centers of ARISE.
+Communications, data transfer, and timing of the TAXIs are all provided by buried OS2 9/125 single mode military grade optical fibers trenched from the CRS to Lety Jr.,~and then along each arm of the array to the ARISE station centers.
+The WR switch inside the CRS connects to a fiber distribution box at Lety Jr.~via a \qty{600}{\meter} eight-headed fiber.
+Six of eight fiber heads are connected at the distribution box to six separate \qty{100}{\meter} optical fibers of the same type, each buried and connected to a WR-LEN board housed at the station centers of ARISE.
 See~\Cref{fig:arise_comms_fiber} for a visual showing the WR fiber connections of ARISE.
 For ARISE, the protocol and setup of the WR-LEN boards are the same as for the IceCube-Gen2 prototype station, except for in one of the ARISE stations where the WR-LEN board is housed outside of the TAXI housing and inside its original enclosure.
 The externally housed WR-LEN will reduce heat inside the TAXI housing, providing a safer operation temperature for the electronics as mentioned previously.
@@ -581,12 +584,12 @@ The externally housed WR-LEN will reduce heat inside the TAXI housing, providing
     \label{fig:arise_comms_fiber}
 \end{figure}
 
-The readout of the radio data is triggered by the local station T1 trigger of the Auger SD tank Lety Jr (see~\Cref{sec:sd} for an explanation of Auger SD triggers).
-The software-level T1 trigger is routed through a \SI{50}{\ohm} terminated SMA cable from the \texttt{TRIGGEROUT} port of the Auger UUB to a custom-made trigger splitter housed inside the electronics dome of Lety Jr.
+The readout of the radio data is triggered by the local station T1 trigger of the Auger SD tank Lety Jr.~(see~\Cref{sec:sd} for an explanation of Auger SD triggers).
+The software-level T1 trigger is routed through a \qty{50}{\ohm} terminated SMA cable from the \texttt{TRIGGEROUT} port of the Auger UUB to a custom-made trigger splitter housed inside the electronics dome of Lety Jr.
 This custom designed aluminum box splits the electrical signal from the \texttt{TRIGGEROUT} connector six ways, each feeding into an optical transmitter (Tx) board that converts the electrical signal into an optical signal.
-Six \SI{100}{\meter} OM2 50/125 multimode military grade optical fibers are trenched from Lety Jr. to each of the six ARISE station centers, connecting the optical Tx boards to an optical receiver (Rx) board inside the TAXI enclosure.
+Six \qty{100}{\meter} OM2 50/125 multimode military grade optical fibers are trenched from Lety Jr.~to each of the six ARISE station centers, connecting the optical Tx boards to an optical receiver (Rx) board inside the TAXI enclosure.
 The optical Rx board reconverts the signal from optical back to electrical for TAXI to initiate the readout of the radio signal of each of the station's three SKALA antennas.
-The conversion and reconversion of the signal introduce approximately a \SI{1}{\micro\second} delay each between the time the Auger T1 trigger is sent and the time it is received by TAXI.
+The conversion and reconversion of the signal introduce approximately a \qty{1}{\micro\second} delay each between the time the Auger T1 trigger is sent and the time it is received by TAXI.
 In principle, the trigger signals should arrive at each TAXI simultaneously; however, the widths of the timing distributions for the conversion and reconversion processes of the signal have not been studied and could induce timing differences between stations.
 A simple diagram showing the connections for the ARISE trigger system is given in~\Cref{fig:arise_trigger_system}.
 
@@ -597,9 +600,9 @@ A simple diagram showing the connections for the ARISE trigger system is given i
     \label{fig:arise_trigger_system}
 \end{figure}
 
-The T1 trigger arrives at TAXI from Lety Jr. at an average rate of \SI{100}{\hertz}, yet is a Poissonian process.
-Therefore, at any given moment the rate can reach values $>$\SI{500}{\hertz} that introduce an artificial dead time in the radio data readout due to a buffer pileup at TAXI.
-Recent updates to the firmware settings for TAXI have improved TAXI's handling of large data rates and result in a current data taking dead time of approximately 10\% for each ARISE station.
+The T1 trigger arrives at TAXI from Lety Jr.~at an average rate of \qty{100}{\hertz}, yet is a Poissonian process.
+Therefore, at any given moment the rate can reach values $>$\,\qty{500}{\hertz} that introduce an artificial dead time in the radio data readout due to a buffer pileup at TAXI.
+Recent updates to the firmware settings for TAXI have improved its handling of large data rates and result in a current data taking dead time of approximately 10\% for each ARISE station.
 Future electronics to replace TAXI as the local station DAQ are currently under development and plan to further reduce this dead time.
 %This dead time is currently the largest hurdle to overcome with ARISE.
 
@@ -611,10 +614,10 @@ Each radio event inside the binary file contains the digitized radio trace infor
     \label{eq:radio_event_size}
 \end{equation}
 
-\noindent resulting in a storage size of approximately \SI{18}{\giga\byte} per binary file and therefore a daily data volume of approximately \SI{2}{\tera\byte} total from ARISE.
-Yet, in the current setup, data storage is limited between two \SI{8}{\tera\byte} SSDs connected to the FZ-55 Toughbook in the CRS.
+\noindent resulting in a storage size of approximately \qty{18}{\giga\byte} per binary file and therefore a daily data volume of approximately \qty{2}{\tera\byte} total from ARISE.
+Yet, in the current setup, data storage is limited between two \qty{8}{\tera\byte} SSDs connected to the FZ-55 Toughbook in the CRS.
 The T1 level trigger contains mostly low-energy air showers used for calibrating the PMTs in the SD tank and are not useful for physics analyses.
-Applying a match of the T1 timestamps at TAXI with the first physics level trigger (T3) timestamps of events in which SD Lety Jr. participates results in a much lower rate of $\mathcal{O}$(\SI{0.01}{\hertz}).
+Applying a match of the T1 timestamps at TAXI with the first physics level trigger (T3) timestamps of events in which SD Lety Jr.~participates results in a much lower rate of $\mathcal{O}$(\qty{0.01}{\hertz}).
 Matching of events is done locally at the Toughbook laptop in the CRS after transferring Auger data logging files that report T3 events triggering the SD array, known as IkLog files, from the observatory's Central Data Acquisition System (CDAS) to the laptop.
 A simple diagram showing the trigger filtering of ARISE is shown in~\Cref{fig:arise_trigger_filtering}.
 The filtered radio binary files are then transferred to a storage computer at the Karlsruhe Institute for Technology, and then further transferred for redundancy to a data storage computer at the University of Delaware.
@@ -649,22 +652,22 @@ As of November 2025, ARISE has been stably recording data.
 \subsection{The Outlook of ARISE}\label{sec:arise_outlook}
 
 Recently, a full analysis pipeline for reconstructing air showers with ARISE was implemented into Auger Offline, leading to the first cosmic-ray air shower detections with ARISE.
-Reconstructed ARISE air-shower directions are compared to air-shower reconstructions from Auger's \SI{433}{\meter} infill array of SD tanks and the measured radio emission is currently being verified using CORSIKA with CoREAS air-shower simulations, similar to the air-shower reconstructions for the IceCube-Gen2 prototype station.
+Reconstructed ARISE air-shower directions are compared to air-shower reconstructions from Auger's \qty{433}{\meter} infill array of SD tanks and the measured radio emission is currently being verified using CORSIKA with CoREAS air-shower simulations, similar to the air-shower reconstructions for the IceCube-Gen2 prototype station.
 In the near future, reconstructions of the air-shower energy and $X_{\rm max}$ are planned with ARISE.
 Reconstructing the air-shower energy with ARISE provides a pathway for a cross-calibration between the SKALA antennas deployed at Auger and those at the South Pole, deployed within the surface array of the IceCube Neutrino Observatory, serving as an indirect comparison of the Auger and IceTop energy scales.
-Further, the energy reconstruction has potential for an energy scale comparison between the \SIrange{70}{350}{\mega\hertz} band of ARISE and the \SIrange{30}{80}{\mega\hertz} band of AERA.
+Further, the energy reconstruction has potential for an energy scale comparison between the \qtyrange{70}{350}{\mega\hertz} band of ARISE and the \qtyrange{30}{80}{\mega\hertz} band of AERA.
 The location of ARISE in the decommissioned part of the AERA footprint, and its size with respect to the AERA footprint, complicate this comparison as ARISE and AERA will very rarely trigger from the same cosmic-ray events; however, an analysis comparing the average energy scales of ARISE and AERA, instead of an event-by-event analysis, is feasible.
 
 Synergies between ARISE and the Auger UMD can be exploited to simultaneously reconstruct observables related to the muonic and electromagnetic component of air showers.
-The UMD directly measures the muonic component of air showers for cosmic-ray energies between $10^{16.8}-10^{19}$\,eV, while ARISE is fully efficient for near-vertical ($\theta <$\,\SI{30}{\degree}) air showers for cosmic-ray energies above $10^{17.5}$\,eV. 
+The UMD directly measures the muonic component of air showers for cosmic-ray energies between \qtyrange[parse-numbers=false]{10^{16.8}}{10^{19}}{\electronvolt} while ARISE is fully efficient for near-vertical ($\theta <$\,\qty{30}{\degree}) air showers for cosmic-ray energies above \qty[parse-numbers=false]{10^{17.5}}{\electronvolt}.
 A geometric effect that the projected surface area of the UMD scintillators in the shower plane is proportional to $\cos(\theta)$, convolved with muons from inclined showers having larger path lengths to the UMD in Earth's crust, result in an optimal triggering of the UMD for near-vertical air showers.
-Once an ARISE $X_{\rm max}$ reconstruction is reached, near-vertical showers above approximately $10^{17.5}$\,eV within the footprint of ARISE would have simultaneous and independent $X_{\rm max}$ and muon measurements, allowing ARISE to test hadronic interaction models and potentially measure the composition of cosmic rays in the Galactic-to-extragalactic transition region of cosmic-ray origin.
+Once an ARISE $X_{\rm max}$ reconstruction is reached, near-vertical showers above approximately \qty[parse-numbers=false]{10^{17.5}}{\electronvolt} within the footprint of ARISE would have simultaneous and independent $X_{\rm max}$ and muon measurements, allowing ARISE to test hadronic interaction models and potentially measure the composition of cosmic rays in the Galactic-to-extragalactic transition region of cosmic-ray origin.
 
 Additional future studies could include a test of the radio interferometric technique to reconstruct air-shower observables.
 This technique requires nanosecond-level accuracy for interferometric reconstruction to compete with typical reconstruction techniques~\cite{schoorlemmer_interferometry_epjc}, yet this is feasible with the WR timing synchronization of ARISE.
 In the far future, the TAXI in each ARISE station will be replaced with a new DAQ currently in development at the Karlsruhe Institute for Technology.
 Another far future possibility is to expand the ARISE array to include more stations, providing a larger dataset for tandem $X_{\rm max}$ and muon reconstructions over those measured with the current ARISE footprint.
-The additional ARISE stations would likely use SKALA-v4 antennas, opposed to the SKALA-v2 antennas used for the current ARISE stations, 
+The additional ARISE stations would likely use SKALA-v4 antennas, opposed to the SKALA-v2 antennas used for the current ARISE stations, as the SKALA-v4 antennas will be mass produced as the final antenna design chosen for SKA Low. 
 
 %; however, this first pathfinder array .
 %However, this first pathfinder array of ARISE 
