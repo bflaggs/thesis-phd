@@ -7,19 +7,47 @@ The Pierre Auger Observatory is located near the town of Malarg\"ue in the Mendo
 Auger, as the observatory is commonly referred to, is the world's largest cosmic-ray observatory, covering a total area of \qty{3000}{\kilo\meter^{2}}.
 In context, this is about the size of the state of Rhode Island, or for those with a more worldly perspective, slightly larger than the size of Luxembourg.
 The observatory's size allows the detection of ultra-high-energy cosmic rays, starting at energies of $\approx$\qty[parse-numbers=false]{10^{17}}{\electronvolt}, with high statistics.
-However, the observatory is ground based and therefore indirectly detects the highest energy particles in the known Universe through the air showers they initiate after colliding with atmospheric nuclei.
+However, the observatory is ground based and therefore indirectly detects the highest energy particles in the known Universe from the air showers they initiate after colliding with atmospheric nuclei.
 
 Not only is Auger the world's largest cosmic-ray observatory, but adding to the novelty is the hybrid detection mode employed by the observatory.
+The hybrid design allows simultaneous air-shower observations with two separate, yet complimentary techniques.
 The observatory consists of two primary detectors, the surface detector (SD), an array of over 1600 water-Cherenkov detectors (WCDs) spread across the full \qty{3000}{\kilo\meter^{2}} footprint of the observatory, and a fluorescence detector (FD), 24 fluorescence telescopes overlooking the SD array at four locations around the edges of the array.
 Auger has been recording data in hybrid mode for over 20 years, officially starting in 2004 and with full completion of the SD in 2008.
 In March 2026, Auger finished deploying detectors for the next-generation upgrade of the observatory, AugerPrime.
-An international funding agreement will keep the observatory in operation until at least 2035, allowing for high-quality air-shower measurements with AugerPrime, and the potential for prototyping future detectors in the Argentinian Pampa.
+An international funding agreement will keep the observatory in operation until at least 2035, allowing for high-quality air-shower measurements with AugerPrime, and the potential for prototyping detectors for future experiments in the Argentinian Pampa.
 This chapter will describe the Pierre Auger Observatory and its detectors systems in detail.
 
 
-\section{Surface Detectors}\label{sec:sd}
+\section{Surface Detector}\label{sec:sd}
 
-\section{Fluorescence Detectors}\label{sec:fd}
+The Pierre Auger Observatory SD consists of 1660 WCDs deployed on a triangular grid to cover the full surface area of the array.
+The spacing of the grid is \qty{1500}{\meter}, designed such that all cosmic rays landing within the array grid and above an energy of \qty[parse-numbers=false]{10^{18.5}}{\electronvolt} are detected.
+Within the SD-1500 are two nested triangular sub-arrays of WCDs with denser spacing to lower the energy threshold of cosmic-ray detection.
+They are the SD-750, with \qty{750}{\meter} spacing between each detector and the SD-433, nested within the SD-750 and with a detector spacing of \qty{433}{\meter}.
+The SD-750 consists of 61 WCDs covering an area of \qty{23.5}{\kilo\meter^{2}}, lowering the energy detection threshold to \qty[parse-numbers=false]{10^{17.5}}{\electronvolt}, while the SD-433 consists of 19 WCDs over an area of \qty{1.95}{\kilo\meter^{2}} and can detect air showers as low as \qty[parse-numbers=false]{10^{16.5}}{\electronvolt} in energy.
+A map of the Pierre Auger Observatory, including all three SD arrays, is shown in INSERTFIGURE.
+
+Each WCD is a cylinder of \qty{1.2}{\meter} height and \qty{3.6}{\meter} diameter filled with \qty{11000}{\liter} of ultra-pure water.
+The water is contained in a bladder composed of Tyvek with a fully reflective inner surface and stored inside the WCD.
+At the top of each WCD are three, equally spaced, 9-inch phototmultiplier tubes (PMTs) to detect the Cherenkov radiation generated from ultra-relativistic secondary particles from cosmic-ray air showers traversing the ultra-pure water.
+The PMT signals are digitized by a \qty{40}{\mega\hertz} flash analog-to-digital converters, resulting in a time bin integration of \qty{25}{\nano\second} for the conversion.
+Two signals are digitized per PMT, the low-gain channel, taken directly from the PMT anode, and the high-gain channel, taken from the last PMT dynode corresponding to a nominal amplification of 32 times the anode channel.
+All processes are handled by the Auger Unified Board (UB), the main electronics board of each SD station and described in more detail at REFERENCE.
+Other components of the individual WCD include an standalone communications system, used to communicate with the Central Data Acquisition System (CDAS) of the observatory, and a solar power system, used to power the station.
+The solar power system allows and approximate 100\% uptime of the SD.
+
+Triggers
+
+
+%The PMTs measure both direct and reflected Cherenkov radiation.
+
+
+
+
+
+Discuss hardware specifics, trigger system, 
+
+\section{Fluorescence Detector}\label{sec:fd}
 
 \section{Event Reconstruction}\label{sec:reconstruction}
 
@@ -29,7 +57,9 @@ This chapter will describe the Pierre Auger Observatory and its detectors system
 
 \section{AugerPrime: The Upgrade of the Pierre Auger Observatory}\label{sec:augerprime}
 
+\subsection{AMIGA: Auger Muon Infill Ground Array}\label{sec:amiga}
+
 \subsection{Surface Scintillator Detector}\label{sec:ssd}
 
+\subsection{Radio Detector}\label{sec:rd}
 
-\subsection{Underground Muon Detectors}\label{sec:umd}
