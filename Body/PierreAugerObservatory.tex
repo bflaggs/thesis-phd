@@ -31,7 +31,7 @@ Each WCD is a cylinder of \qty{1.2}{\meter} height and \qty{3.6}{\meter} diamete
 The water inside the WCD is contained in a bladder composed of Tyvek with a fully reflective inner surface.
 At the top of each WCD are three, equally spaced, 9-inch phototmultiplier tubes (PMTs) to detect the Cherenkov radiation generated from ultra-relativistic secondary particles from cosmic-ray air showers traversing the ultra-pure water.
 The PMT signals are digitized by a \qty{40}{\mega\hertz} flash analog-to-digital converter (FADC), corresponding to a bin width of \qty{25}{\nano\second} for the FADC conversion.
-Two signals are digitized per PMT, the low-gain channel, taken directly from the PMT anode, and the high-gain channel, taken from the last PMT dynode with a nominal amplification of 32 times the anode channel.
+Two signals are digitized per PMT, the low-gain channel, taken directly from the PMT anode, and the high-gain channel, taken from the last PMT dynode with a nominal amplification of 32 times the anode channel, providing a total dynamic range of approximately 17 bits.
 All processes are handled by the Auger Unified Board (UB), the main electronics board of each SD station and is described in more detail at REFERENCE.
 Other components of the individual WCDs include a standalone communications system, for communications and data transfer to the Central Data Acquisition System (CDAS) of the observatory, and a solar power system for powering the station.
 The solar power system allows an approximate 100\% uptime of the SD.
@@ -131,7 +131,7 @@ The Fluorescence Detector (FD) of the Pierre Auger Observatory consists of 24 fl
 As an air shower develops, the ultra-relativistic charged secondary particles will excite nitrogen molecules in Earth's atmosphere, which, upon de-excitation, generate fluorescence light measurable by the fluorescence telescopes.
 The telescopes are split between four locations surrounding the SD array: Los Leones, Los Morados, Loma Amarilla, and Coihueco.
 Each location hosts six fluorescence telescopes covering a combined \qty{180}{\degree} azimuthal field of view overlooking the SD array, with individual telescopes providing an azimuthal and elevation field of view of \qty{30}{\degree}$\,\times\,$\qty{30}{\degree}.
-Operation of the telescopes is possible only on clear, moonless lights, without rain or strong winds, limiting the uptime of the FD to approximately 15\%.
+Operation of the telescopes is possible only on clear, moonless nights, without rain or strong winds, limiting the uptime of the FD to approximately 15\%.
 
 The fluorescence telescopes follow a Schmidt optics design to minimize coma aberrations, arising from incoming light rays not being parallel to the axis of the mirror.
 The basics of the telescope system consist of a spherical aperture with a UV filter and Schmidt corrector ring, a segmented mirror, and a camera of PMTs.
@@ -144,7 +144,7 @@ Three additional fluorescence telescopes, known as the High Elevation Auger Tele
 HEAT is similar to the other fluorescence telescopes, but the main difference is each telescope of HEAT can observe in either an upwards or downwards configuration.
 In the upwards configuration, the telescopes of HEAT are pointed upwards by \qty{29}{\degree} in elevation, providing an elevation field of view of approximately \qtyrange{30}{58}{\degree}.
 The downwards configuration has the same field of view in elevation as the other 24 fluorescence telescopes.
-Elevating the telescope field of view allows measurements of the longitudinal development of lower energy air showers that reach their maximum development at higher altitudes than those of higher energies, with HEAT lowering the fluorescence detection threshold to approximately \qty[parse-numbers=false]{10^{17}}{\electronvolt} in energy.
+Elevating the telescope field of view allows measurements of the longitudinal development of lower energy air showers that reach their maximum development at higher altitudes, with HEAT lowering the fluorescence detection threshold to approximately \qty[parse-numbers=false]{10^{17}}{\electronvolt} in energy.
 The HEAT field of view overlooks the SD-750 and SD-433 arrays, delivering high-quality hybrid detections of air showers at energies near and between the second knee and ankle of the cosmic ray energy spectrum.
 
 
@@ -192,6 +192,59 @@ The HEAT field of view overlooks the SD-750 and SD-433 arrays, delivering high-q
 %to observe the atmosphere 
 
 \section{Event Reconstruction}\label{sec:reconstruction}
+
+The event reconstruction for the Pierre Auger Observatory occurs separately for the SD and FD, and is later combined for hybrid air-shower analyses.
+All reconstruction occurs within Offline, the observatory's software package for analyzing air-shower data.
+For the SD reconstruction, two main measurements are needed for each station that recorded event data: the start time of the signal in the station, to determine the geometry of the arriving cosmic-ray air shower, and the total signal in the station's PMTs, to determine an event-level observable related to the air-shower energy.
+Determination of the time range of the event in the station and the conversion of the PMT signals from FADC units to VEM must be done before analyzing the station data for event-level analyses.
+The time range is determined using the procedure described in REF2020JINST, and the conversion of FADC to VEM is performed using the SD calibration histograms described in~\cref{sec:sd_triggers}, with further information on the conversion provided in REF.
+
+%Within a station, the signal baseline of all PMTs (both high and low-gain channels) must first be subtracted.
+%A total baseline is determined by linearly interpolating between constant baseline segments to account for the affect of the signal on the baseline.
+%Baseline segments are defined as at least \qty{1}{\micro\second} of consecutive FADC bins (40 bins) within a signal range of $\bar{b}\pm\sigma_{b}$, with $\bar{b}$ the average baseline in the segment and $\sigma_{b}$ nominally set to 2 FADC counts (see REF2020JINST for further details).
+%After baseline subtraction, the PMT signals are converted from FADC units to VEM.   
+
+Signal time windows are determined on a PMT-to-PMT basis.
+Therefore, the nominal start and stop times for the station are taken from the station PMT with the longest signal time window.
+The station's PMTs are averaged bin-by-bin, where the averaged PMT signal will be integrated over the nominal time window of the signal to determine the total signal measured in VEM within the SD station.
+When the station is close to the air-shower axis, large signals are measured in the tank which can saturate either the high-gain, low-gain, or both channels of the PMT.
+The saturation is dependent on both the distance to the air-shower axis and the energy of the arriving shower (REF 2020JINST).
+In the case of no PMT saturation, the high-gain PMT channels are used to determine the total measured PMT signal, whereas in the case of high-gain saturation, the low-gain PMT channels are used instead.
+In the case of both high-gain and low-gain saturation, the station is labeled as a saturated station.
+Software within the Offline framework is used to recover the signals of such saturated stations for analysis (REF GAP2008-030, Darko ICRC2013).
+However, identifying the signal window of the individual PMTs is always done with the high-gain PMT channel.
+
+The air-shower geometry (point of impact on the ground and arrival direction) are reconstructed from an iterative procedure involving both the signal start times and total signals of the SD stations participating in the event.
+A signal-weighted barycenter, determined from the center-of-mass of stations in the event, is used as the first estimate of the impact point on ground.
+Assuming speed of light propagation of the particles, a plane wave fit to the start times of the three stations with the largest signal closest to the barycenter determines the first estimate of the arrival direction.
+All stations with start times outside of the range \qtyrange{-2}{+1}{\micro\second} from the arrival time determined by the fit are labeled as accidental stations, stations that do not participate in the event yet were triggered, likely from accidental muons.
+Stations participating in the event are fit using a chi-squared minimization process to a timing model of the wavefront arrival that accounts for wavefront curvature.
+Four values are fit: the directional cosines, $u$ and $v$, of the unit vector describing the shower arrival direction (i.e. $\hat{a} = u\,\hat{x} + v\,\hat{y} + \sqrt{1 - u^{2} - v^{2}}\,\hat{z}$), the time the air-shower core intersects with the ground ($t_{c}$), and the radius of curvature of the shower front, where the radius of curvature is only used as a free parameter if at least 5 stations are participating in the event.
+Otherwise, it is parameterized from events where the radius of curvature could be determined from the fit (REF2020JINST).
+
+Once the shower timing and wavefront properties are determined, the total shower size is estimated from a fit to the lateral distribution function (LDF) of the station signals as a function of their distance to the shower axis.
+
+
+
+
+
+
+
+
+
+
+
+%The nominal case is that of no PMT saturation, in which the high-gain PMT channels are used for the total signal measurements  
+%In the case of high-gain saturation, the low-gain PMT channels are used to determine the total measured signal.
+%In the case of both the high-gain, and low-gain 
+
+
+
+%The PMTs can saturate if too much signal is measured within the station, typically oc 
+
+
+%The PMT signals are then averaged within this time window over all working PMTs within the station
+
 
 \section{Auger Engineering Radio Array}\label{sec:aera}
 
