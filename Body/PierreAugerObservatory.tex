@@ -222,8 +222,42 @@ Stations participating in the event are fit using a chi-squared minimization pro
 Four values are fit: the directional cosines, $u$ and $v$, of the unit vector describing the shower arrival direction (i.e. $\hat{a} = u\,\hat{x} + v\,\hat{y} + \sqrt{1 - u^{2} - v^{2}}\,\hat{z}$), the time the air-shower core intersects with the ground ($t_{c}$), and the radius of curvature of the shower front, where the radius of curvature is only used as a free parameter if at least 5 stations are participating in the event.
 Otherwise, it is parameterized from events where the radius of curvature could be determined from the fit (REF2020JINST).
 
-Once the shower timing and wavefront properties are determined, the total shower size is estimated from a fit to the lateral distribution function (LDF) of the station signals as a function of their distance to the shower axis.
+Once the shower timing and wavefront properties are determined, the shower size at an optimal distance to the air-shower axis, i.e. $S(r_{\rm opt})$, is determined from a fit to the lateral distribution function (LDF) of the station signals.
+The LDF describes the measured station signals as a function of the station distance to the shower axis.
+The SD reconstruction of the Auger Observatory uses a modified Nishimura-Kamata-Greisen (NKG) function for the LDF fit:
 
+\begin{equation}
+    S(r) = S(r_{\rm opt})\,\left( \frac{r}{r_{\rm opt}} \right)^{\beta}\,\left( \frac{r\,+\,r_{\rm s}}{r_{\rm opt}\,+\,r_{\rm s}} \right)^{\beta + \gamma}, \label{eq:modified_NKG_ldf}
+\end{equation}
+
+\noindent
+with $r_{\rm s}$ a scale distance fixed to \qty{700}{\meter}.
+$\beta$ and $\gamma$ are handled with data-driven parameterizations, dependent upon energy and zenith angle, unless their respective ``lever-arm'' criteria described in REF2020JINST are met.
+If this criteria is met for $\beta$, it is treated as a free parameter in the LDF fit, and similarly for $\gamma$.
+
+$S(r_{\rm opt})$ is the shower size estimated for the fit at the reference distance $r_{\rm opt}$.
+Note that given the same energy, mass, and arrival direction of a primary particle, shower-to-shower fluctuations in the air-shower development lead to the air shower being measured at ground in different stages of the shower development.
+The impact is an intrinsic variation in $S(r_{\rm opt})$.
+Therefore, the reference distance was determined to minimize the variations in the shower-size estimator arising from shower-to-shower fluctuations and depends on the spacing of the SD array (REF24IN2020JINST).
+ADDASFOOTNOTE For a general particle detector array, the reference distance also depends on the array structure, which for the Auger SD is an isometric triangular grid.
+The optimal reference distances for the SD-1500, SD-750, and SD-433 arrays are \qtylist{1000;450;300}{\meter} respectively.
+In each case, $S(r_{\rm opt})$ is a free parameter in the LDF fit.
+The fit itself determines $S(r_{\rm opt})$ and the position of the air-shower core intersection with ground ($\vec{x}_{\rm c}$) by minimizing a log-likelihood function of the form:
+
+\begin{equation}
+    \ln\mathcal{L} = \sum_{i}\,\ln P\left( S(r_{\rm opt}),\vec{x}_{\rm c} | S_{i},\vec{x}_{i} \right), \label{eq:sd_ll}
+\end{equation}
+
+\noindent
+with $S_{i}$ and $\vec{x}_{i}$ the measured signal and positions of the $i$-th station.
+The probability model, $P$, depends on the signal measured by the station, with each model described in REF2020JINST.
+
+
+
+
+
+%The sampling of the LDF is sparse due to the detector spacing constraints of the SD, leading to imprecise constraints on the LDF shape on an event level.
+%To offset this, the fit is performed to an average LDF, $f_{\rm LDF}(r)$:
 
 
 
