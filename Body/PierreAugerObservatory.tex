@@ -252,30 +252,45 @@ The fit itself determines $S(r_{\rm opt})$ and the position of the air-shower co
 with $S_{i}$ and $\vec{x}_{i}$ the measured signal and positions of the $i$-th station.
 The probability model, $P$, depends on the signal measured by the station, with each model described in REF2020JINST.
 
+For a given air-shower energy, less particles will reach the ground for inclined air showers than for vertical air showers due to attenuation effects as the air shower develops.
+This directly affects the signal measured by the WCDs of Auger, introducing a zenith angle dependence on the reference distance signal, $S(r_{\rm opt})$.
+To correct for this dependence, the constant intensity cut (CIC) method is used to derive an attenuation correction as a function of zenith angle, i.e. $f_{\rm att}(\theta)$ REFGAP2015-065.
+The correction is applied following equation
 
+\begin{equation}
+    S_{\theta_{\rm ref}} = \frac{S(r_{\rm opt})}{f_{\rm att}(\theta)}, \label{eq:Sref_correction}
+\end{equation}
+
+\noindent
+with $f_{\rm att}(\theta)$ a third-degree polynomial in $x = \cos^{2}(\theta) - \cos^{2}(\theta_{\rm ref})$.
+The applied correction represents the average signal at reference distance $r_{\rm opt}$ measured if the incoming cosmic ray arrived at a zenith angle of $\theta_{\rm ref}$.
+The reference angle changes depending upon the spacing of the SD array, with reference angles of \qtylist{38;35}{\degree} respectively used for the SD-1500 and SD-750 arrays REFSARXIV2008.06486, REFARXIV2109.13400.
+The attenuation corrected signals are referred to as $S_{38}$ and $S_{35}$, and can be used in conjunction with hybrid FD measurements to derive an energy estimate from the SD.
+
+
+
+%The applied correction yields the signal at a reference angle $\theta_{\rm ref}$, which represents the 
+
+%The reference angle depends upon the spacing of the SD array, as it is chosen to be the median zenith angle for the distribution of cosmic rays measured with the array.
+%The SD-1500 measured cosmic rays 
+%is the median zenith angle for the distribution of cosmic rays measured with the array, and therefore depends on the spacing of the SD array
+
+%After the depth of shower maximum is reached for an air shower, its development in the atmosphere is dominated by attenuation effects
+
+%The signal measured by the SD is sensitive to attenuation effects, as the SD stations measure less signal for inclined air showers than vertical air showers of the same energy.
+
+%The reference distance signal, $S(r_{\rm opt})$ is sensitive to attenuation effects, must be corrected for zenith angle dependencies 
 
 
 
 %The sampling of the LDF is sparse due to the detector spacing constraints of the SD, leading to imprecise constraints on the LDF shape on an event level.
 %To offset this, the fit is performed to an average LDF, $f_{\rm LDF}(r)$:
 
-
-
-
-
-
-
-
-
-
 %The nominal case is that of no PMT saturation, in which the high-gain PMT channels are used for the total signal measurements  
 %In the case of high-gain saturation, the low-gain PMT channels are used to determine the total measured signal.
 %In the case of both the high-gain, and low-gain 
 
-
-
 %The PMTs can saturate if too much signal is measured within the station, typically oc 
-
 
 %The PMT signals are then averaged within this time window over all working PMTs within the station
 
