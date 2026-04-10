@@ -267,16 +267,41 @@ The applied correction represents the average signal at reference distance $r_{\
 The reference angle changes depending upon the spacing of the SD array, with reference angles of \qtylist{38;35}{\degree} respectively used for the SD-1500 and SD-750 arrays REFSARXIV2008.06486, REFARXIV2109.13400.
 The attenuation corrected signals are referred to as $S_{38}$ and $S_{35}$, and can be used in conjunction with hybrid FD measurements to derive an energy estimate from the SD.
 
-For the FD reconstruction, the shower-detector plane, the plane including the telescope with triggered pixels and the air-shower axis, is first determined using the timing information of the triggered fluorescence telescope pixels.
+For the FD reconstruction, the shower-detector plane, the plane connecting the triggered pixels of the telescope and the air-shower axis, is first determined using the timing information of the triggered fluorescence telescope pixels.
 Uncertainties in the shower-detector plane reconstruction are validated with laser measurements from the Central Laser Facility (CLF) located within the SD-1500 array, as the distance and direction of the CLF laser is known with an accuracy better than the FD reconstruction resolution.
-In the case of hybrid events where SD stations also participate in the event, then the shower-detector plane geometry is more precisely constrained than when no SD reconstruction is available.
+In the case of hybrid events where SD stations also participate in the event the shower-detector plane geometry is more precisely constrained than when no SD reconstruction is available.
 For a majority of FD events, an SD reconstruction is available due to the approximate 100\% duty cycle of the SD.
-For hybrid events, resolutions of \qty{50}{\meter} for the air-shower core and \qty{0.6}{\degree} for the air-shower arrival direction are possible REFARXIV0907.4282.
+For these hybrid events, resolutions of \qty{50}{\meter} for the air-shower core and \qty{0.6}{\degree} for the air-shower arrival direction are possible REFARXIV0907.4282.
 
 The longitudinal development of the air shower, including the location of the depth of shower maximum ($X_{\rm max}$), can be reconstructed with the FD.
-The time-dependent fluorescence light signals collected by the telescope pixels are converted to energy deposited by the shower in a portion of atmosphere, $\rm{d}E / \rm{d}X$, as a function of slant depth, $X$, and fit to a Gaisser-Hillas function
+The time-dependent fluorescence light signals collected by the telescope pixels are converted to energy deposited by the shower in a portion of atmosphere, $\rm{d}E / \rm{d}X$, as a function of atmospheric slant depth, $X$, and fit to a Gaisser-Hillas function
 
+\begin{equation}
+    f_{\rm GH}(X) = \left( \frac{\rm{d}E}{\rm{d}X} \right)_{\rm max}\,\left( \frac{X - X_{0}}{X_{\rm max} - X_{0}} \right)^{(X_{\rm max} - X_{0}) / \lambda}\,\exp\left(\frac{X_{\rm max} - X}{\lambda}\right). \label{eq:gh}
+\end{equation}
 
+\noindent
+$\left(\frac{\rm{d}E}{\rm{d}X}\right)_{\rm max}$ is the energy deposit in the atmosphere at shower maximum, i.e. $X_{\rm max}$. 
+$X_{0}$ and $\lambda$ are shape parameters of the longitudinal profile, with $X_{0}$ related to the point of first interaction in the atmosphere and $\lambda$ representing an effective interaction length.
+The shape parameters, along with $X_{\rm max}$ are parameters of the fit determined by the FD reconstruction.
+Integrating~\Cref{eq:gh} yields an estimate of the calorimetric energy of the air-shower representing roughly 85\% of the total air-shower energy.
+The remaining 15\% of the total energy is referred to as the ``invisible'' energy, representing the energy in the shower carried by high-energy muons and neutrinos, and is not measurable with the fluorescence technique.
+A data-driven analysis determines the invisible energy and is used to correct the measured calorimetric energy of the FD to obtain an estimate for the air-shower energy REFARXIV1901.08040.
+
+For hybrid events, the attenuation corrected SD signals from~\Cref{eq:Sref_correction} ($S_{38}$ for the SD-1500 and $S_{35}$ for the SD-750) can be related to the FD reconstructed energy following
+
+\begin{equation}
+    E_{\rm FD} = A\,\left( \frac{S_{\theta_{\rm ref}}}{\rm VEM} \right)^{B}. \label{eq:energy_scale}
+\end{equation}
+
+\noindent
+A log-likelihood fit is performed to determine the $A$ and $B$ fit parameters REFARXIV1503.09027 using a selection of high-quality hybrid events.
+The resulting $A$ and $B$ fit parameters for the SD-1500 are presented in REFPoS(ICRC2019)450, and for the SD-750 are presented in REFARXIV2109.13400.
+The data-derived relationship between the FD energy scale and the SD reference signal is used to set the SD energy scale, even when FD data are not available.
+
+%The calorimetric energy is then corrected for the ``invisible'' energy of the shower in a data-driven
+
+%from shower particles that do not deposit their energy in the atmosphere through the fluorescence mechanism, suc.
 
 %The applied correction yields the signal at a reference angle $\theta_{\rm ref}$, which represents the 
 
