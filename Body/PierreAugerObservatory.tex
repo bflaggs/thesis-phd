@@ -335,11 +335,12 @@ The data-derived relationship between the FD energy scale and the SD reference s
 The Auger Engineering Radio Array (AERA) consists of 153 radio antennas deployed over a \qty{17}{\kilo\meter^{2}} area to observe the radio emission of air showers within a frequency band of \qtyrange{30}{80}{\mega\hertz}.
 AERA is designed to measure the radio emission of air showers above approximately \qty[parse-numbers=false]{10^{17}}{\electronvolt} in energy and is co-located with the SD-750 array and within the field of view of the Coihueco FD site, providing coincident radio detections of air showers with the SD and FD.
 AERA stations are autonomously powered with solar panels, providing an approximate 100\% duty cycle of the antennas.
-Further, each station is equipped with a GPS system for timing information, a separate \qty{5}{\giga\hertz} wireless radio system for data transfer and communications, and fencing to prevent interference from wildlife.
-Two types of antenna were used for AERA, the log-periodic dipole antenna (LPDA) and the butterfly antenna, both with two orthogonal polarizations with one aligned in the North-South direction and the other in the East-West direction.
+Further, each station is equipped with a GPS system for timing information, a \qty{5}{\giga\hertz} wireless radio system for data transfer and communications, and fencing to prevent interference from wildlife.
+Two types of antenna were used for AERA, the log-periodic dipole antenna (LPDA) and the butterfly antenna.
+Both have two orthogonal polarizations, one aligned in the North-South direction (aligned with the local magnetic field) and the other in the East-West direction.
 The signal processing chain for the LPDA and butterfly antennas is similar (described in REFAERA), yet differences arise within the responses of the antennas to air-shower radio emission.
 LPDA antennas are more sensitive than the butterfly antennas, and therefore have a lower signal threshold, while the butterfly antennas have a signal dependence on local ground conditions, as this antenna's total measured signal is a combination of signals reflected from the ground that interfere constructively with the direct shower radio emission.
-Both antennas are more sensitive to ``vertical'' air showers with arrival directions of \qtyrange{0}{55}{\degree} in zenith angle.
+Both antennas are more sensitive to ``vertical'' air showers, i.e. air showers with arrival directions of \qtyrange{0}{55}{\degree} in zenith angle.
 
 %The response of the LPDA and butterfly antennas to air-shower radio emission is mostly similar, with the exception that LPDA antennas are more sensitive to the butterfly antennas and therefore 
 %The two antenna types both measure the radio emission from air showers within a frequency band of \qtyrange{30}{80}{\mega\hertz}.
@@ -352,13 +353,21 @@ In 2015, AERA phase III consisting of 29 butterfly antennas was deployed on a \q
 Two trigger types exist for the AERA stations: an external trigger, supplied by local detector triggers from CDAS (mostly triggers from the SD), and a radio self trigger, that triggers directly on the radio signal itself.
 The station electronics differ depending on the type of trigger algorithm used by the antenna.
 Externally-triggered stations continually measure and digitize radio signals with a 12-bit digitizer at a \qty{180}{\mega\hertz} sampling rate.
-The signals are then stored on a ring buffer of \qty{7.4}{\second} where they wait for the arrival of an external trigger from CDAS, typically about \qty{6}{\second} from the generation of the trigger to its arrival at the AERA stations (Ricardo private communication). % Include??
+The signals are then stored on a ring buffer of \qty{7.4}{\second} where they wait for the arrival of an external trigger from CDAS, taking about \qty{6}{\second} to arrive at the AERA stations in the case of SD generated triggers (Ricardo private communication). % Include??
 The GPS timestamp of the trigger is used to readout the ring buffer data where it is transferred to the AERA data acquisition system at the Coihueco FD site, either directly from the antenna itself or from a Ubiquiti Bullet link at the CRS.
 The self-triggered stations measure and digitize radio signals with a 14-bit digitizer at a \qty{200}{\mega\hertz} sampling rate.
 The digitized signals are passed to an electronics board for threshold and signal determinations over the omnipresent radio background, where radio signals are sent to the CRS if the self-trigger signal conditions are met.
 Since January 2023, all self-triggered AERA stations have been decommissioned, 10 of which have been repurposed for GRAND@Auger (REFGRAND@AUGER).
 
-AERA was used to prove in principle the radio detection technique at the Auger observatory in the frequency band of \qtyrange{30}{80}{\mega\hertz} and to serve as a testbed for a radio array to be deployed over the full surface array of the Pierre Auger Observatory as part is the observatory's next generation upgrade.
+A major science goal of AERA was to serve as a testbed for deploying a radio array in the \qtyrange{30}{80}{\mega\hertz} band over the full surface array of the Auger observatory as part of it's next generation upgrade.
+However, high-quality radio data and important analyses with AERA strengthened the cosmic-ray science potential of the future radio array.
+Science highlights include an $X_{\rm max}$ reconstruction with AERA (PRDPRL BJARNI), deriving an absolute energy scale from radio measurements (ICRC2025TIM), and a Galactic calibration of the AERA antennas proving their long-term stability (CITEGALCALPAPER).
+A recent analysis combines AERA radio measurements, which probe the electromagnetic air-shower component, with SD reconstructions of inclined ($\theta_{\rm zen}\,>\,$\qty{60}{\degree}) to provide a simultaneous muon and radio measurement on a per-shower basis and serves as a proof of principle for the radio component of the Auger observatory's next generation upgrade (see~\Cref{sec:rd} for further details).
+The aim of this thesis is to study simultaneous muon and radio measurements in the context of vertical ($\theta_{\rm zen}\,<\,$\qty{55}{\degree}) air showers measured by the Auger detector systems.
+
+%However, AERA not only improved the understanding of the radio detection technique for air showers in this frequency range in Argentina, but also important science results with AERA strengthened the cosmic-ray science potential of the future radio array.
+
+%AERA was used to prove in principle the radio detection technique at the Auger observatory in the frequency band of \qtyrange{30}{80}{\mega\hertz} and to serve as a testbed for a radio array to be deployed over the full surface array of the Pierre Auger Observatory as part is the observatory's next generation upgrade.
 
 %prepare for the next generation upgrade of the Pierre Auger Observatory, AugerPrime, 
 
