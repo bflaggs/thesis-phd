@@ -388,6 +388,7 @@ Compared to the UB, the UUB increases the dynamic range from 10 to 12 bits and i
 Other electronics updates include improvements to the processing power, local stations monitoring system, and the local trigger and calibration capabilities.
 See REFJINST202318P10016 for further information on the SD electronics of AugerPrime.
 Deployment of the UUB electronics was completed in June 2023.
+
 AugerPrime has also improved the duty cycle of the FD up to 29\% by lowering the PMT gain.
 Lowering the gain allows observation nights with moonlight, i.e. nights with a higher night sky background, without risk of deteriorating the FD PMTs from high anode currents.
 The new detector systems added as part of the AugerPrime upgrade will be discussed in the following subsections.
@@ -400,7 +401,40 @@ The new detector systems added as part of the AugerPrime upgrade will be discuss
 %The science objective of AugerPrime is to determine with precision the mass composition of ultra-high-energy cosmic rays, with focus on improving the observatory's composition sensitivity   
 
 
-\subsection{Underground Muon Detector}\label{sec:amiga}
+\subsection{Underground Muon Detector}\label{sec:umd}
+
+The Underground Muon Detector (UMD) is part of both the AugerPrime upgrade and the Auger Muons and Infill for the Ground Array (AMIGA) enhancement of the observatory REFARXIV0710.1646.
+The UMD consists of an array of scintillator panels buried \qty{2.3}{\meter} underground at the locations of the SD-750 and SD-433 stations.
+The \qty{2.3}{\meter} vertical soil overburden, corresponding to \qty{540}{\gram\per\centi\meter^{2}}, will attenuate to an immeasurable level all electromagnetic particles in the air shower, providing a direct measurement of the muonic air-shower component.
+However, the muonic signal measured at the UMD is not the same as the muonic signal at ground, with the UMD only measuring muons above approximately \qty{1}{\giga\electronvolt} in energy due to the traversal of \qty{540}{\gram\per\centi\meter^{2}} soil equivalent.
+Therefore, the direct muon measurements with the UMD can be used to study the muon puzzle and hadronic model interpretations in detail given this caveat.
+
+%as the muons lose energy from ionization throughout their \qty{2.3}{\meter} traversal of soil.
+
+Each UMD station consists of three \qty{10}{\meter^{2}} scintillators, totaling a \qty{30}{\meter^{2}} collecting area for each station.
+The individual scintillators consist of 64 scintillation bars of \qty{400}{\centi\meter} length, \qty{4}{\centi\meter} width, and \qty{1}{\centi\meter} thickness, separated into two identical strips of 32 bars.
+A 64 channel Hamamatsu silicon phototmultiplier (SiPM) of type S13361-2050NE-08, along with the UMD electronics, is placed at the center separation of the two strips of 32 bars.
+Minimum ionizing particles, in this case muons above $\approx\,$\qty{1}{\giga\electronvolt} in energy, entering the scintillator bar will ionize the doped material of the bar producing scintillation light.
+At the center of each of the 64 bars is a wavelength shifting fiber that collects the scintillation light and directs it to one channel of the UMD SiPM.
+The scintillator bars are surrounded with a reflective coating to prevent light leakage.
+UMD data are saved as \qty{6.4}{\micro\second} traces, with the trigger for data readout originating from the SD T1 trigger.
+%Readout of the UMD data is triggered directly by the SD T1 trigger, where UMD data are saved as \qty{6.4}{\micro\second} traces covering the time range of \qty{-1.6}{\micro\second} before and \qty{4.8}{\micro\second} after the SD trigger time.
+
+
+The SiPM signal traces are digitized in one of two acquisition modes of the UMD, designed for different phase spaces of muon density.
+Designed for low muon densities is the binary mode, a counting mode recording data if the SiPM signal is above a set discriminator threshold to generate 64 independent binary traces that are subsequently analyzed, resulting in a muon count.
+The calorimetric mode (sometimes referred to as the ADC mode) sums and integrates the SiPM measured signals from all scintillator bars, similar to the WCD charge integration method, and was designed for high muon densities.
+Both acquisition modes of the UMD electronics operate simultaneously, with further description of the electronics and acquisition modes provided in REFJINST202116P01026.
+
+To date, the UMD has provided direct muon measurements, that combined with FD measurements of $X_{\rm max}$ can test the accuracy of hadronic interaction model predictions with measured data.
+
+
+%each with an integrated wavelength shifting fiber that connects to one channel of a 64 channel H.
+%The bars are surrounded with a reflective coating to prevent light leakage.
+%It connects to a 64 channel Hamamatsu silicon phototmultiplier (SiPM).
+
+
+
 
 \subsection{Surface Scintillator Detector}\label{sec:ssd}
 
