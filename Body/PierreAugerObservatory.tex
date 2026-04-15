@@ -382,6 +382,7 @@ To this end, the observatory has upgraded its current detectors, in addition to 
 Deployment of all AugerPrime components finished in March 2026.
 
 Each WCD of the SD was outfitted with a surface scintillator detector (see~\Cref{sec:ssd}) and a radio antenna (see~\Cref{sec:rd}), both deployed on top of the WCDs and directly integrated into the SD detector system and electronics.
+See IMAGE for a picture of an AugerPrime WCD.
 A small PMT (SPMT), a Hamamatsu R8619 PMT of 1-inch diameter, was installed inside each WCD to increase the dynamic range of the SD, allowing SD measurements without PMT saturation to within \qty{250}{\meter} of the reconstructed air-shower core REFICRC2023343.
 In addition, the electronics of the SD were updated with an Upgraded Unified Board (UUB).
 Compared to the UB, the UUB increases the dynamic range from 10 to 12 bits and increases the sampling rate from \qty{40}{\hertz} to \qty{120}{\hertz}, respectively resulting in improved signal amplitude and timing accuracy of the PMT signals REFARXIV1604.03637.
@@ -412,7 +413,7 @@ The UMD inherits the energy range of the co-located SD-433 and SD-750 arrays, wi
 
 %as the muons lose energy from ionization throughout their \qty{2.3}{\meter} traversal of soil.
 
-Each UMD station consists of three \qty{10}{\meter^{2}} scintillators, totaling a \qty{30}{\meter^{2}} collecting area for each station.
+Each UMD station consists of three \qty{10}{\meter^{2}} scintillators (see FIGURE), totaling a \qty{30}{\meter^{2}} collecting area for each station.
 As with all flat detectors, the UMD scintillators are more sensitive to vertical air showers ($\theta_{\rm zen}\,<\,$\qty{55}{\degree}) from the $\cos\theta$ dependence on the projected detector surface area in the shower plane.
 The individual scintillators consist of 64 scintillation bars of \qty{400}{\centi\meter} length, \qty{4}{\centi\meter} width, and \qty{1}{\centi\meter} thickness, separated into two identical strips of 32 bars.
 A 64 channel Hamamatsu silicon phototmultiplier (SiPM) of type S13361-2050NE-08, along with the UMD electronics, is placed at the center separation of the two strips of 32 bars.
@@ -428,14 +429,13 @@ The SiPM signal traces are digitized in one of two acquisition modes of the UMD,
 Designed for low muon densities is the binary mode, a counting mode recording data if the SiPM signal is above a set discriminator threshold to generate 64 independent binary traces that are subsequently analyzed, resulting in a muon count.
 The calorimetric mode (sometimes referred to as the ADC mode) sums and integrates the SiPM measured signals from all scintillator bars, similar to the WCD charge integration method, and was designed for high muon densities.
 Both acquisition modes of the UMD electronics operate simultaneously, with further description of the electronics and acquisition modes provided in REFJINST202116P01026.
-Deployment of the UMD was completed in March 2026, with the most recent analyses of the UMD presented in REFCARMINA, REFJOAQUIN, REFMARINA.
+Deployment of the UMD was completed in March 2026, finalizing the deployment of AugerPrime.
+The most recent analyses of the UMD include a muon LDF fit from measured UMD data, cross-validating the muon measurements of the UMD with the SD, and examining the muon content of UMD measurements, presented in REFCARMINA, REFJOAQUIN, REFMARINA.
 
 
 %each with an integrated wavelength shifting fiber that connects to one channel of a 64 channel H.
 %The bars are surrounded with a reflective coating to prevent light leakage.
 %It connects to a 64 channel Hamamatsu silicon phototmultiplier (SiPM).
-
-
 
 
 \subsection{Surface Scintillator Detector}\label{sec:ssd}
@@ -449,3 +449,25 @@ Yet, the SSD is mostly sensitive to air showers with $\theta_{\rm zen}\,<\,$\qty
 
 \subsection{Radio Detector}\label{sec:rd}
 
+In addition to the SSD, a short aperiodic loaded loop antenna (SALLA) radio antenna was deployed on top of each WCD.
+The SALLA radio antennas measure the radio emission of cosmic-ray air showers in the \qtyrange{30}{80}{\mega\hertz} band, forming the radio detector (RD) of AugerPrime.
+The RD electronics has been fully integrated into the UUB, with RD power coming from the SD solar power system.
+Hence, RD is a subsystem of the SD, with the same duty cycle of nearly 100\% and the RD readout triggered directly from the SD.
+Similar to AERA, the SALLA antennas of RD consist of two polarizations, one aligned with the local magnetic field (North-South) and an orthogonal polarization aligned in the East-West direction.
+A full description of the RD signal chain and electronics is presented in XXX.
+
+Inclined air showers ($\theta_{\rm zen}\,>\,$\qty{65}{\degree}) with energies above \qty[parse-numbers=false]{10^{18.5}}{\electronvolt} generate radio footprints at ground spanning several kilometers in distance.
+The RD, due to its spacing of \qty{1500}{\meter} between antennas, is suited to measure the radio emission of these air showers with high precision.
+For these inclined showers, the electromagnetic particles will attenuate further in the atmosphere than for vertical showers, resulting in the WCDs measuring a mostly muonic signal at the ground.
+However, the radio emission generated from the electromagnetic particles does not attenuate in the atmosphere, traveling through the air unaffected where it is measured at ground by the RD.
+The addition of RD results in a separate and distinct measurements of the electromagnetic and muonic air-shower components for air showers with $\theta_{\rm zen}\,>\,$\qty{65}{\degree}, further complimenting the SSD deployment which is more suited for electromagnetic-muonic separation of vertical air showers.
+The pipeline for simultaneously reconstructing the electromagnetic air-shower component with radio antennas and the muonic component with the SD has been established for AERA REFMARVIN, and can be applied with minimal changes to the RD dataset yielding high-quality, high-statistics results.
+Further, the RD can be used to extend the AERA energy scale and $X_{\rm max}$ results beyond the AERA energy range with high statistics for the phase space of inclined air showers.
+The RD deployment was completed in November 2024, with the first physics data presented in REFBJARNIICRC2025.
+High-level physics analyses with the RD are expected soon due to the extensive commissioning of RD, aided by the lessons learned from more than 10 years of data taking with AERA.
+
+%The addition of RD results in a separate and distinct measurements of the electromagnetic and muonic air-shower components based on basic principles of air showers and the detector designs of both the WCD and RD.
+
+%The RD, due to its spacing of \qty{1500}{\meter} between antennas, is suited to measure the radio emission of inclined air showers ($\theta_{\rm zen}\,>\,$\qty{65}{\degree}) 
+
+%Furthermore, as AERA has validated the radio detection technique in this frequency band, many of the AERA analyses can be repeated with an extended energy range using the RD antennas, including the AERA energy scale and $X_{\rm max}$ results
