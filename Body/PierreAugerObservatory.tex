@@ -407,17 +407,20 @@ The Underground Muon Detector (UMD) is part of both the AugerPrime upgrade and t
 The UMD consists of an array of scintillator panels buried \qty{2.3}{\meter} underground at the locations of the SD-750 and SD-433 stations.
 The \qty{2.3}{\meter} vertical soil overburden, corresponding to \qty{540}{\gram\per\centi\meter^{2}}, will attenuate to an immeasurable level all electromagnetic particles in the air shower, providing a direct measurement of the muonic air-shower component.
 However, the muonic signal measured at the UMD is not the same as the muonic signal at ground, with the UMD only measuring muons above approximately \qty{1}{\giga\electronvolt} in energy due to the traversal of \qty{540}{\gram\per\centi\meter^{2}} soil equivalent.
-Therefore, the direct muon measurements with the UMD can be used to study the muon puzzle and hadronic model interpretations in detail given this caveat.
+Therefore, the direct muon measurements with the UMD can be used to study the muon puzzle and hadronic model interpretations in detail given this constraint.
+The UMD inherits the energy range of the co-located SD-433 and SD-750 arrays, with the UMD measuring the air-shower muonic component between primary energies of approximately \qtyrange[parse-numbers=false]{10^{16.5}}{10^{19}}{\electronvolt}.
 
 %as the muons lose energy from ionization throughout their \qty{2.3}{\meter} traversal of soil.
 
 Each UMD station consists of three \qty{10}{\meter^{2}} scintillators, totaling a \qty{30}{\meter^{2}} collecting area for each station.
+As with all flat detectors, the UMD scintillators are more sensitive to vertical air showers ($\theta_{\rm zen}\,<\,$\qty{55}{\degree}) from the $\cos\theta$ dependence on the projected detector surface area in the shower plane.
 The individual scintillators consist of 64 scintillation bars of \qty{400}{\centi\meter} length, \qty{4}{\centi\meter} width, and \qty{1}{\centi\meter} thickness, separated into two identical strips of 32 bars.
 A 64 channel Hamamatsu silicon phototmultiplier (SiPM) of type S13361-2050NE-08, along with the UMD electronics, is placed at the center separation of the two strips of 32 bars.
 Minimum ionizing particles, in this case muons above $\approx\,$\qty{1}{\giga\electronvolt} in energy, entering the scintillator bar will ionize the doped material of the bar producing scintillation light.
 At the center of each of the 64 bars is a wavelength shifting fiber that collects the scintillation light and directs it to one channel of the UMD SiPM.
 The scintillator bars are surrounded with a reflective coating to prevent light leakage.
 UMD data are saved as \qty{6.4}{\micro\second} traces, with the trigger for data readout originating from the SD T1 trigger.
+
 %Readout of the UMD data is triggered directly by the SD T1 trigger, where UMD data are saved as \qty{6.4}{\micro\second} traces covering the time range of \qty{-1.6}{\micro\second} before and \qty{4.8}{\micro\second} after the SD trigger time.
 
 
@@ -425,8 +428,7 @@ The SiPM signal traces are digitized in one of two acquisition modes of the UMD,
 Designed for low muon densities is the binary mode, a counting mode recording data if the SiPM signal is above a set discriminator threshold to generate 64 independent binary traces that are subsequently analyzed, resulting in a muon count.
 The calorimetric mode (sometimes referred to as the ADC mode) sums and integrates the SiPM measured signals from all scintillator bars, similar to the WCD charge integration method, and was designed for high muon densities.
 Both acquisition modes of the UMD electronics operate simultaneously, with further description of the electronics and acquisition modes provided in REFJINST202116P01026.
-
-To date, the UMD has provided direct muon measurements, that combined with FD measurements of $X_{\rm max}$ can test the accuracy of hadronic interaction model predictions with measured data.
+Deployment of the UMD was completed in March 2026, with the most recent analyses of the UMD presented in REFCARMINA, REFJOAQUIN, REFMARINA.
 
 
 %each with an integrated wavelength shifting fiber that connects to one channel of a 64 channel H.
@@ -437,6 +439,13 @@ To date, the UMD has provided direct muon measurements, that combined with FD me
 
 
 \subsection{Surface Scintillator Detector}\label{sec:ssd}
+
+With AugerPrime, a Surface Scintillator Detector (SSD) was deployed on top of each WCD of the Pierre Auger Observatory.
+The SSDs are flat scintillator panels covering a surface area of \qty{3.8}{\meter^{2}} above the WCD and have been fully integrated into the UUB electronics, providing the same duty cycle for both the WCD and SSD.
+The scintillators of the SSD are similar in function and design to the scintillators of the UMD, with a more detailed description of the SSD provided in REFARXIV1604 (Find SSD specific citation).
+The SSD measures minimum ionizing air-shower particles with no distinction between electromagnetic and muonic particles triggering the scintillator.
+Combined with the more muon sensitive WCD measurements, the muonic and electromagnetic contributions to the total signal measured in each detector can be estimated REF4647JOAQUIN.
+Yet, the SSD is mostly sensitive to air showers with $\theta_{\rm zen}\,<\,$\qty{55}{\degree} due to the same geometrical constraints for flat detectors described in the previous section.
 
 \subsection{Radio Detector}\label{sec:rd}
 
