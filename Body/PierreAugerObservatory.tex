@@ -153,7 +153,7 @@ A schematic of a single fluorescence telescope is shown in~\Cref{fig:auger_fd}.
 
 \begin{figure}
     \centering
-    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter3/fd_telescope_schematic.eps}
+    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.5\textwidth]{chapter3/fd_telescope_schematic.eps}
     \caption[Schematic of an FD telescope.]{A diagram showing a single fluorescence telescope of the FD. An average sized adult is included for size reference. Figure taken from~\cite{auger_nima2010_fd}.}
     \label{fig:auger_fd}
 \end{figure}
@@ -394,22 +394,29 @@ The aim of this thesis is to study simultaneous muon and radio measurements in t
 
 \section{AugerPrime: The Upgrade of the Pierre Auger Observatory}\label{sec:augerprime}
 
-AugerPrime is the next generation upgrade to the Pierre Auger Observatory in the quest to determine the astrophysical origin of ultra-high-energy cosmic rays.
+AugerPrime is the next generation upgrade to the Pierre Auger Observatory in the quest to determine the astrophysical origin of ultra-high-energy cosmic rays~\cite{augerprime_pdr}.
 The main science objective of AugerPrime is to improve the observatory's composition sensitivity, to be achieved with more stringent separation of the electromagnetic and muonic air-shower components.
 Independent measurements of the muonic component are crucial, as the muon puzzle highlights the incompleteness of our interaction models in extrapolated energy ranges (see~\Cref{sec:models}), and directly serve another science goal of AugerPrime: studying and constraining hadronic interaction models. 
 To this end, the observatory has upgraded its current detectors, in addition to adding new detector systems over the full array.
 Deployment of all AugerPrime components finished in March 2026.
 
-Each WCD of the SD was outfitted with a surface scintillator detector (see~\Cref{sec:ssd}) and a radio antenna (see~\Cref{sec:rd}), both deployed on top of the WCDs and directly integrated into the SD detector system and electronics.
-See IMAGE for a picture of an AugerPrime WCD.
-A small PMT (SPMT), a Hamamatsu R8619 PMT of 1-inch diameter, was installed inside each WCD to increase the dynamic range of the SD, allowing SD measurements without PMT saturation to within \qty{250}{\meter} of the reconstructed air-shower core REFICRC2023343.
-In addition, the electronics of the SD were updated with an Upgraded Unified Board (UUB).
-Compared to the UB, the UUB increases the dynamic range from 10 to 12 bits and increases the sampling rate from \qty{40}{\hertz} to \qty{120}{\hertz}, respectively resulting in improved signal amplitude and timing accuracy of the PMT signals REFARXIV1604.03637.
-Other electronics updates include improvements to the processing power, local stations monitoring system, and the local trigger and calibration capabilities.
-See REFJINST202318P10016 for further information on the SD electronics of AugerPrime.
-Deployment of the UUB electronics was completed in June 2023.
+\begin{figure}
+    \centering
+    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.7\textwidth]{chapter3/augerprime_wcd_labeled.png}
+    \caption[Schematic of an AugerPrime water-Cherenkov detector.]{A diagram showing an AugerPrime WCD, outfitted with a surface scintillator detector and a radio detector. The electronics dome houses the UUB, protecting it from dust and other environmental conditions. Figure taken from~\cite{bjarnipont_phd2021}.}
+    \label{fig:augerprime_wcd}
+\end{figure}
 
-AugerPrime has also improved the duty cycle of the FD up to 29\% by lowering the PMT gain.
+Each WCD of the SD was outfitted with a surface scintillator detector (see~\Cref{sec:ssd}) and a radio antenna (see~\Cref{sec:rd}), both deployed on top of the WCDs and directly integrated into the SD detector system and electronics.
+See~\Cref{fig:augerprime_wcd} for a picture of an AugerPrime WCD.
+A small PMT (SPMT), a Hamamatsu R8619 PMT of 1-inch diameter, was installed inside each WCD to increase the dynamic range of the SD, allowing SD measurements without PMT saturation to within \qty{250}{\meter} of the reconstructed air-shower core~\cite{auger_icrc2023_dynamicrange}.
+In addition, the electronics of the SD were updated with an Upgraded Unified Board (UUB).
+Compared to the UB, the UUB increases the dynamic range from 10 to 12 bits and increases the sampling rate from \qty{40}{\hertz} to \qty{120}{\hertz}, respectively resulting in improved signal amplitude and timing accuracy of the PMT signals~\cite{augerprime_pdr}.
+Other electronics updates include improvements to the processing power, local stations monitoring system, and the local trigger and calibration capabilities.
+Deployment of the UUB electronics was completed in June 2023.
+See~\cite{auger_jinst2023_sdeu} for further information on the SD electronics of AugerPrime.
+
+AugerPrime has also improved the duty cycle of the FD up to 29\% by lowering the PMT gain given certain observing conditions.
 Lowering the gain allows observation nights with moonlight, i.e. nights with a higher night sky background, without risk of deteriorating the FD PMTs from high anode currents.
 The new detector systems added as part of the AugerPrime upgrade will be discussed in the following subsections.
 
@@ -423,7 +430,7 @@ The new detector systems added as part of the AugerPrime upgrade will be discuss
 
 \subsection{Underground Muon Detector}\label{sec:umd}
 
-The Underground Muon Detector (UMD) is part of both the AugerPrime upgrade and the Auger Muons and Infill for the Ground Array (AMIGA) enhancement of the observatory REFARXIV0710.1646.
+The Underground Muon Detector (UMD) is part of both the AugerPrime upgrade and the Auger Muons and Infill for the Ground Array (AMIGA) enhancement of the observatory~\cite{auger_icrc2007_amiga}.
 The UMD consists of an array of scintillator panels buried \qty{2.3}{\meter} underground at the locations of the SD-750 and SD-433 stations.
 The \qty{2.3}{\meter} vertical soil overburden, corresponding to \qty{540}{\gram\per\centi\meter^{2}}, will attenuate to an immeasurable level all electromagnetic particles in the air shower, providing a direct measurement of the muonic air-shower component.
 However, the muonic signal measured at the UMD is not the same as the muonic signal at ground, with the UMD only measuring muons above approximately \qty{1}{\giga\electronvolt} in energy due to the traversal of \qty{540}{\gram\per\centi\meter^{2}} soil equivalent.
@@ -432,10 +439,17 @@ The UMD inherits the energy range of the co-located SD-433 and SD-750 arrays, wi
 
 %as the muons lose energy from ionization throughout their \qty{2.3}{\meter} traversal of soil.
 
-Each UMD station consists of three \qty{10}{\meter^{2}} scintillators (see FIGURE), totaling a \qty{30}{\meter^{2}} collecting area for each station.
+\begin{figure}
+    \centering
+    \includegraphics[trim={2cm 7cm 1cm 7cm},clip,width=0.7\textwidth]{chapter3/auger_umd_labeled.pdf}
+    \caption[Schematic of an Underground Muon Detector.]{A diagram showing a WCD of the Pierre Auger Observatory with a UMD. Each scintillator of the UMD is buried \qty{2.3}{\meter} underground. The SiPM and UMD electronics are housed inside the central protruding of each scintillator, with 32 scintillator bars on each lateral side. The UMD has a solar power system separate from the WCD. Looking closely, one can see the second battery box for this power system, referred to as the AMIGA battery box.}
+    \label{fig:auger_umd}
+\end{figure}
+
+Each UMD station consists of three \qty{10}{\meter^{2}} scintillators, totaling a \qty{30}{\meter^{2}} collecting area for each station.
 As with all flat detectors, the UMD scintillators are more sensitive to vertical air showers ($\theta_{\rm zen}\,<\,$\qty{55}{\degree}) from the $\cos\theta$ dependence on the projected detector surface area in the shower plane.
 The individual scintillators consist of 64 scintillation bars of \qty{400}{\centi\meter} length, \qty{4}{\centi\meter} width, and \qty{1}{\centi\meter} thickness, separated into two identical strips of 32 bars.
-A 64 channel Hamamatsu silicon phototmultiplier (SiPM) of type S13361-2050NE-08, along with the UMD electronics, is placed at the center separation of the two strips of 32 bars.
+A 64 channel Hamamatsu silicon phototmultiplier (SiPM) of type S13361-2050NE-08, along with the UMD electronics, is placed at the center separation of the two strips of 32 bars (see~\Cref{fig:auger_umd}).
 Minimum ionizing particles, in this case muons above $\approx\,$\qty{1}{\giga\electronvolt} in energy, entering the scintillator bar will ionize the doped material of the bar producing scintillation light.
 At the center of each of the 64 bars is a wavelength shifting fiber that collects the scintillation light and directs it to one channel of the UMD SiPM.
 The scintillator bars are surrounded with a reflective coating to prevent light leakage.
@@ -443,13 +457,12 @@ UMD data are saved as \qty{6.4}{\micro\second} traces, with the trigger for data
 
 %Readout of the UMD data is triggered directly by the SD T1 trigger, where UMD data are saved as \qty{6.4}{\micro\second} traces covering the time range of \qty{-1.6}{\micro\second} before and \qty{4.8}{\micro\second} after the SD trigger time.
 
-
 The SiPM signal traces are digitized in one of two acquisition modes of the UMD, designed for different phase spaces of muon density.
-Designed for low muon densities is the binary mode, a counting mode recording data if the SiPM signal is above a set discriminator threshold to generate 64 independent binary traces that are subsequently analyzed, resulting in a muon count.
+Designed for low muon densities is the binary mode, a counting mode recording data if the SiPM signal is above a set discriminator threshold, which generates 64 independent binary traces that are subsequently analyzed, resulting in a muon count.
 The calorimetric mode (sometimes referred to as the ADC mode) sums and integrates the SiPM measured signals from all scintillator bars, similar to the WCD charge integration method, and was designed for high muon densities.
-Both acquisition modes of the UMD electronics operate simultaneously, with further description of the electronics and acquisition modes provided in REFJINST202116P01026.
+Both acquisition modes of the UMD electronics operate simultaneously, with further description of the electronics and acquisition modes provided in~\cite{auger_jinst2021_amigasipm}.
 Deployment of the UMD was completed in March 2026, finalizing the deployment of AugerPrime.
-The most recent analyses of the UMD include a muon LDF fit from measured UMD data, cross-validating the muon measurements of the UMD with the SD, and examining the muon content of UMD measurements, presented in REFCARMINA, REFJOAQUIN, REFMARINA.
+The most recent analyses of the UMD include a muon LDF fit from measured UMD data, cross-validating the muon measurements of the UMD with the SD, and examining the muon content of UMD measurements, presented in~\cite{carminaperez_phd2026, joaquindejesus_phd2025, marinascornavacche_phd2025}.
 
 
 %each with an integrated wavelength shifting fiber that connects to one channel of a 64 channel H.
@@ -461,28 +474,28 @@ The most recent analyses of the UMD include a muon LDF fit from measured UMD dat
 
 With AugerPrime, a Surface Scintillator Detector (SSD) was deployed on top of each WCD of the Pierre Auger Observatory.
 The SSDs are flat scintillator panels covering a surface area of \qty{3.8}{\meter^{2}} above the WCD and have been fully integrated into the UUB electronics, providing the same duty cycle for both the WCD and SSD.
-The scintillators of the SSD are similar in function and design to the scintillators of the UMD, with a more detailed description of the SSD provided in REFARXIV1604 (Find SSD specific citation).
+The scintillators of the SSD are similar in function and design to the scintillators of the UMD, with a more detailed description of the SSD provided in~\cite{auger_jinst2025_ssd}.
 The SSD measures minimum ionizing air-shower particles with no distinction between electromagnetic and muonic particles triggering the scintillator.
-Combined with the more muon sensitive WCD measurements, the muonic and electromagnetic contributions to the total signal measured in each detector can be estimated REF4647JOAQUIN.
+Combined with the more muon sensitive WCD measurements, the muonic and electromagnetic contributions to the total signal measured in each detector can be estimated.
 Yet, the SSD is mostly sensitive to air showers with $\theta_{\rm zen}\,<\,$\qty{55}{\degree} due to the same geometrical constraints for flat detectors described in the previous section.
 
 \subsection{Radio Detector}\label{sec:rd}
 
-In addition to the SSD, a short aperiodic loaded loop antenna (SALLA) radio antenna was deployed on top of each WCD.
+In addition to the SSD, a short aperiodic loaded loop antenna (SALLA) was deployed on top of each WCD.
 The SALLA radio antennas measure the radio emission of cosmic-ray air showers in the \qtyrange{30}{80}{\mega\hertz} band, forming the radio detector (RD) of AugerPrime.
 The RD electronics has been fully integrated into the UUB, with RD power coming from the SD solar power system.
 Hence, RD is a subsystem of the SD, with the same duty cycle of nearly 100\% and the RD readout triggered directly from the SD.
 Similar to AERA, the SALLA antennas of RD consist of two polarizations, one aligned with the local magnetic field (North-South) and an orthogonal polarization aligned in the East-West direction.
-A full description of the RD signal chain and electronics is presented in XXX.
+A description of the RD event reconstruction is presented in~\cite{auger_icrc2025_rdreconstruction}.
 
 Inclined air showers ($\theta_{\rm zen}\,>\,$\qty{65}{\degree}) with energies above \qty[parse-numbers=false]{10^{18.5}}{\electronvolt} generate radio footprints at ground spanning several kilometers in distance.
 The RD, due to its spacing of \qty{1500}{\meter} between antennas, is suited to measure the radio emission of these air showers with high precision.
-For these inclined showers, the electromagnetic particles will attenuate further in the atmosphere than for vertical showers, resulting in the WCDs measuring a mostly muonic signal at the ground.
+For these inclined showers, the electromagnetic particles will suffer greater attenuation in the atmosphere than for vertical showers, resulting in the WCDs measuring a mostly muonic signal at the ground.
 However, the radio emission generated from the electromagnetic particles does not attenuate in the atmosphere, traveling through the air unaffected where it is measured at ground by the RD.
-The addition of RD results in a separate and distinct measurements of the electromagnetic and muonic air-shower components for air showers with $\theta_{\rm zen}\,>\,$\qty{65}{\degree}, further complimenting the SSD deployment which is more suited for electromagnetic-muonic separation of vertical air showers.
-The pipeline for simultaneously reconstructing the electromagnetic air-shower component with radio antennas and the muonic component with the SD has been established for AERA REFMARVIN, and can be applied with minimal changes to the RD dataset yielding high-quality, high-statistics results.
+The addition of RD results in separate and distinct measurements of the electromagnetic and muonic air-shower components for air showers with $\theta_{\rm zen}\,>\,$\qty{65}{\degree}, further complimenting the SSD deployment which is more suited for electromagnetic-muonic separation of vertical air showers.
+The pipeline for simultaneously reconstructing the electromagnetic air-shower component with radio antennas and the muonic component with the SD has been established for AERA~\cite{auger_prd2025_aeramuoninclined}, and can be applied with minimal changes to the RD dataset yielding high-quality, high-statistics results.
 Further, the RD can be used to extend the AERA energy scale and $X_{\rm max}$ results beyond the AERA energy range with high statistics for the phase space of inclined air showers.
-The RD deployment was completed in November 2024, with the first physics data presented in REFBJARNIICRC2025.
+The RD deployment was completed in November 2024, with the first physics data presented in~\cite{auger_icrc2025_rdfirstdata}.
 High-level physics analyses with the RD are expected soon due to the extensive commissioning of RD, aided by the lessons learned from more than 10 years of data taking with AERA.
 
 %The addition of RD results in a separate and distinct measurements of the electromagnetic and muonic air-shower components based on basic principles of air showers and the detector designs of both the WCD and RD.
