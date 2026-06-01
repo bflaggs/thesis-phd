@@ -6,27 +6,25 @@
 
 Mass sensitivity of individual air-shower observables is described in the context of state-of-the-art air-shower models presented in~\Cref{chap:airshowers}.
 Statistically, there is an average correlation between individual observables and cosmic-ray mass; however, also described is the stochastic nature of the particle interactions within the air shower, resulting in shower-to-shower fluctuations of air-shower observables between primary cosmic rays of the same initial parameters.
-Shower-to-shower fluctuations limit the separative power of individual observables for cosmic-ray mass, complicating mass determination of single events.
+Shower-to-shower fluctuations limit the separative power of individual observables for cosmic-ray mass, complicating the mass determination of single events.
 Yet, simultaneously combining multiple, mass-sensitive, air-shower observables can improve the mass separation power at event level.
 Improvements in mass separation when studying multiple observables have been shown in both simulations and preliminary data analyses, highlighting the science potential for combining multiple observables in cosmic-ray analyses. CITATIONS
 
-This chapter presents the results of a mass sensitivity study of individual air-shower observables, and their combination, from cosmic-ray air showers simulated with CORSIKA (COsmic Ray SImulations for KAscade). 
+This chapter presents the results of a mass sensitivity study of individual air-shower observables, and their combination, from cosmic-ray air showers simulated with CORSIKA (COsmic Ray SImulations for KAscade).
 All analysis is performed using a general purpose software framework for studying the cosmic-ray mass separation of observables.
-The mantra of this framework is to study the intrinsic potential of air-shower observables for event-by-event cosmic-ray mass separation.
-Although, CORSIKA simulations are the backbone of this  
-for a set of parameters defined by the characteristics of the CORSIKA simulation library.
+The mantra of this framework is to study the intrinsic potential of air-shower observables for event-by-event cosmic-ray mass separation, although CORSIKA simulations need to be computed for location specific conditions such as the elevation above sea level of the observation plane, local geomagnetic field, and atmospheric properties.
+With the recently deployed detectors of AugerPrime, the Pierre Auger Observatory simultaneously measures several, complimentary, air-shower observables for primary cosmic-ray mass determination and therefore serves as a promising location choice for the application of this framework.
+
+
+%Originally, this analysis framework was applied to both the locations of the IceCube Neutrino Observatory and the Pierre Auger Observatory 
+
+%for a set of parameters defined by the characteristics of the CORSIKA simulation library.
 
 %resents a software framework to study the separation power of 
 
-
-
-
-With the recently deployed detectors of AugerPrime, the Pierre Auger Observatory simultaneously measures several, complimentary, air-shower observables for primary cosmic-ray mass determination.
-In preparation for understanding the mass s
+%In preparation for understanding the mass s
 
 %In real analyses, not all detectors will be functioning at the same time, and definitely not all detectors will simultaneously measure high-quality data.
-
-
 
 %From the air-shower models described in~\Cref{chap:airshowers},  
 
@@ -36,6 +34,19 @@ In preparation for understanding the mass s
 %reconstructing cosmic-ray mass, energy, and arrival direction.
 
 %Air-shower universality presented in~\Cref{chap:airshowers} predicts air showers can be fully described using a combination of  ???
+\section{CORSIKA Air-Shower Simulation Library for the Pierre Auger Observatory}\label{sec:simulationdataset}
+Within this chapter, a general use CORSIKA simulation library of air showers simulated at the location of the Pierre Auger Observatory is used. ADD FOOTNOTE WITH WIKI LINK: These simulations are available for members of the Pierre Auger Observatory with a description at the following link: ADDLINK
+CORSIKA v7.8010 was used to simulate air showers for three separate high-energy hadronic interaction models: EPOS LHC-R, Sibyll 2.3e, and QGSJET III-01.
+All low-energy hadronic interactions were modeled with FLUKA 2024.
+For each high-energy hadronic interaction model, simulations were performed for proton, Helium, Oxygen, and Iron primary cosmic rays over an energy range of $\lg(E / \rm eV)$ = 16.0-20.5.
+Simulations are computed in energy bins of width $\lg(E / \rm eV)$ = 0.5 distributed with an energy spectrum of $dN/dE \propto E^{-1}$.
+Each energy bin contains 5000 air showers per primary constituted by 1250 simulations for each of four atmospheric models representing the months of January, March, August, and September in Malarg\"ue, Argentina (in CORSIKA, these respectively are atmospheric models \texttt{MODATM}= 18, 20, 25, 26). FOOTNOTE ABOUT EPOS PROTON: EPOS LHC-R proton simulations have 10000 air showers per energy bin, but only half were used in this analysis to maintain consistent statistics for each primary.
+
+Zenith angles are distributed with $dN/d\theta \propto \sin\theta\cos\theta$ between a range of $\theta$ = 0$^{\circ}$-65$^{\circ}$ and azimuth angles are chosen at random.
+Table INSERT lists the air-shower simulation statistics for each hadronic model and primary particle used within the context of this analysis.
+The total number of simulations available for each hadronic model and primary is approximate as some simulated events contain broken simulation files.
+
+% Maybe make this part of the intro???
 
 
 \section{Simulated Air-Shower Observables and their Reconstruction Accuracy}\label{sec:observables}
