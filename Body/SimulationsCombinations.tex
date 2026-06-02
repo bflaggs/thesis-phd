@@ -34,25 +34,57 @@ With the recently deployed detectors of AugerPrime, the Pierre Auger Observatory
 %reconstructing cosmic-ray mass, energy, and arrival direction.
 
 %Air-shower universality presented in~\Cref{chap:airshowers} predicts air showers can be fully described using a combination of  ???
-\section{CORSIKA Air-Shower Simulation Library for the Pierre Auger Observatory}\label{sec:simulationdataset}
+\section{CORSIKA Air-Shower Simulations at the Pierre Auger Observatory}\label{sec:simulationdataset}
 Within this chapter, a general use CORSIKA simulation library of air showers simulated at the location of the Pierre Auger Observatory is used. ADD FOOTNOTE WITH WIKI LINK: These simulations are available for members of the Pierre Auger Observatory with a description at the following link: ADDLINK
-CORSIKA v7.8010 was used to simulate air showers for three separate high-energy hadronic interaction models: EPOS LHC-R, Sibyll 2.3e, and QGSJET III-01.
+The dataset contains CORSIKA v7.8010 air-shower simulations for three separate high-energy hadronic interaction models: EPOS LHC-R, Sibyll 2.3e, and QGSJET III-01.
 All low-energy hadronic interactions were modeled with FLUKA 2024.
-For each high-energy hadronic interaction model, simulations were performed for proton, Helium, Oxygen, and Iron primary cosmic rays over an energy range of $\lg(E / \rm eV)$ = 16.0-20.5.
-Simulations are computed in energy bins of width $\lg(E / \rm eV)$ = 0.5 distributed with an energy spectrum of $dN/dE \propto E^{-1}$.
+For each high-energy hadronic interaction model, simulations are available for proton, Helium, Oxygen, and Iron primary cosmic rays over an energy range of $\lg(E / \rm eV)$\,=\,\numrange{14.0}{20.5}, yet only simulations above an energy of $\lg(E / \rm eV)$\,=\,16.0 are studied for this analysis.
+Photon primaries are also available in the dataset, but excluded in this analysis.
+Simulations are separated in energy bins of width $\lg(E / \rm eV)$\,=\,0.5, each distributed with an energy spectrum of $dN/dE \propto E^{-1}$.
 Each energy bin contains 5000 air showers per primary constituted by 1250 simulations for each of four atmospheric models representing the months of January, March, August, and September in Malarg\"ue, Argentina (in CORSIKA, these respectively are atmospheric models \texttt{MODATM}= 18, 20, 25, 26). FOOTNOTE ABOUT EPOS PROTON: EPOS LHC-R proton simulations have 10000 air showers per energy bin, but only half were used in this analysis to maintain consistent statistics for each primary.
 
-Zenith angles are distributed with $dN/d\theta \propto \sin\theta\cos\theta$ between a range of $\theta$ = 0$^{\circ}$-65$^{\circ}$ and azimuth angles are chosen at random.
+Zenith angles are distributed with $dN/d\theta \propto \sin\theta\cos\theta$ between a range of $\theta$\,=\,\qtyrange{0}{65}{\degree} and azimuth angles are chosen at random.
 Table INSERT lists the air-shower simulation statistics for each hadronic model and primary particle used within the context of this analysis.
 The total number of simulations available for each hadronic model and primary is approximate as some simulated events contain broken simulation files.
-
+All hadronic models listed in the table will be studied as each model yields differences in the predicted values of the studied mass-sensitive observables.  
+% put above sentence in following subsection?
 % Maybe make this part of the intro???
 
+\subsection{Simulated Air-Shower Observables}\label{sec:observables}
+Air-shower observables which can be reconstructed with current ground-based detection techniques were extracted from each CORSIKA simulation.
+Extracted from the longitudinal profile of the simulations were the depth of shower maximum ($X_{\rm max}$), the shower width ($L$), the shower asymmetry ($R$), and the electromagnetic particle number at shower maximum ($N_{\rm e, max}$).
+Each of these observables was derived from a fit to the longitudinal profile, described in detail within~\Cref{sec:profilefitting}.
+From the CORSIKA particle block, both total muon number at ground ($N_{\mu}$) and the number of electromagnetic particles at ground (($N_{\rm e}$)) are obtained.
+Both $N_{\rm e}$ and $N_{\rm e, max}$ correspond only to the combined electron and positron numbers within this study, hence photons are not included in any aspect.
+Additionally, both $N_{\mu}$ and $N_{\rm e}$ are counted above an energy threshold, where this threshold is intrinsic to the energy limits of tracking separate particle types within the CORSIKA simulations.
+These thresholds are \qty{10}{\mega\electronvolt} for muons and \qty{0.25}{\mega\electronvolt} for electrons and positrons within this CORSIKA dataset.
+
+Using the muon and electron numbers at ground, the electron-muon ratio at ground ($\rm R_{\rm e/\mu}$) is calculated.
+This ratio has been shown to be a mass-sensitive observable CITEREF5FROMMYPRD, yet requires disentangling signals from electrons in particle detector arrays at ground from those of photons.
+Discriminating between the two signal types is feasible at Auger from the addition of the SSD.
+In addition to the total muon and electron numbers at ground, these particle numbers are also counted within annuli at different distances to the air-shower axis.
+A total of 20 annuli are included, each of \qty{50}{\meter} width, starting from \qtyrange{0}{50}{\meter} from the air-shower axis and ending with an annulus of \qtyrange{950}{1000}{\meter} from the air-shower axis.
+Within each annulus, the electron-muon ratio is also calculated.
+The annuli are calculated as a distance from the air-shower axis (i.e perpendicular to the direction of the primary cosmic ray) and then projected onto the ground, hence asymmetries and a zenith dependence on the counted particle numbers are expected.
+As the absolute number and ratios are used, there is no expected asymmetry dependence that propagates through the analysis of the mass sensitivity for these observables; however, there is a zenith dependence.
+This zenith dependence from the air-shower axis calculation is second order in comparison to the zenith angle dependence from total atmospheric depth traversed by the shower.
+This is further discussed in~\Cref{sec:annuli} while describing the choice of annulus used for the mass sensitivity analysis.
+
+%The ground-based observables' zenith dependence from the air-shower axis calculation is second order in comparison to the zenith angle dependence from total atmospheric depth traversed for the shower and therefore is assumed to 
+
+%For both the muon and electron numbers at ground, not only are the total particle numbers extracted from CORSIKA, but also are the particle num
+
+%were the total muon number at ground ($N_{\mu}$), the number of electromagnetic particles both at ground and at shower maximum 
+
+%From each CORSIKA simulation, 
+
+%The number of electromagnetic particles at Xmax, Ne;max, can be accessed in experiments, e.g., by fluorescence or radio detectors, and serves as an energy proxy to scale air-shower observables.
 
 \section{Simulated Air-Shower Observables and their Reconstruction Accuracy}\label{sec:observables}
 \subsection{Fitting the Longitudinal Profile of Air Showers}\label{sec:profilefitting}
 
-\section{Principal Component Analysis to Model Mass Sensitivity}\label{sec:pca}
+\section{Fisher Linear Discriminant Analysis to Model Mass Sensitivity}\label{sec:fisher}
+\subsection{Choosing a Muon Annulus for Mass Sensitivity}\label{sec:annulus}
 
 \section{Gradient Boosted Decision Trees to Improve Mass Sensitivity}\label{sec:gbdt}
 Include containment plots
