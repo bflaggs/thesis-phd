@@ -36,13 +36,13 @@ With the recently deployed detectors of AugerPrime, the Pierre Auger Observatory
 
 %Air-shower universality presented in~\Cref{chap:airshowers} predicts air showers can be fully described using a combination of  ???
 \section{CORSIKA Air-Shower Simulations at the Pierre Auger Observatory}\label{sec:simulationdataset}
-Within this chapter, a general use CORSIKA simulation library of air showers simulated at the location of the Pierre Auger Observatory is used. ADD FOOTNOTE WITH WIKI LINK: These simulations are available for members of the Pierre Auger Observatory with a description at the following link: ADDLINK
+Within this chapter, a general use CORSIKA simulation library of air showers simulated at the location of the Pierre Auger Observatory is used\footnote[1]{These simulations are available for members of the Pierre Auger Observatory. A brief overview of the library is available at the following link: \href{https://www.auger.unam.mx/AugerWiki/VerticalSimulations78010}{https://www.auger.unam.mx/AugerWiki/VerticalSimulations78010}}.
 The dataset contains CORSIKA v7.8010 air-shower simulations for three separate high-energy hadronic interaction models: EPOS LHC-R, Sibyll 2.3e, and QGSJET III-01.
 All low-energy hadronic interactions were modeled with FLUKA v2024.
 For each high-energy hadronic interaction model, simulations are available for proton, helium, oxygen, and iron primary cosmic rays over an energy range of $\lg(E / \rm eV)$\,=\,\numrange{14.0}{20.5}, yet only simulations above an energy of $\lg(E / \rm eV)$\,=\,16.0 are studied for this analysis.
 Photon primaries are also available in the dataset, but excluded here.
 Simulations are separated in energy bins of width $\lg(E / \rm eV)$\,=\,0.5, distributed with an energy spectrum of $dN/dE \propto E^{-1}$ inside the bin resulting in a flat distribution in $\lg(E / \rm eV)$.
-Each energy bin contains 5000 air showers per primary constituted by 1250 simulations for each of four atmospheric models representing the months of January, March, August, and September in Malarg\"ue, Argentina (in CORSIKA, these respectively are atmospheric models \texttt{MODATM}= 18, 20, 25, 26). FOOTNOTE ABOUT EPOS PROTON: EPOS LHC-R proton simulations have 10000 air showers per energy bin, but only half were used in this analysis to maintain consistent statistics for each primary.
+Each energy bin contains 5000 air showers per primary constituted by 1250 simulations for each of four atmospheric models representing the months of January, March, August, and September in Malarg\"ue, Argentina (in CORSIKA, these respectively are atmospheric models \texttt{MODATM}= 18, 20, 25, 26)\footnote[2]{EPOS LHC-R proton simulations have 10000 air showers per energy bin, but only half were used in this analysis to maintain consistent statistics for each primary}.
 
 Zenith angles are distributed with $dN/d\theta \propto \sin\theta\cos\theta$ between a range of $\theta$\,=\,\qtyrange{0}{65}{\degree} and azimuth angles are chosen at random.
 Table INSERT lists the air-shower simulation statistics for each hadronic model and primary particle used within the context of this analysis.
