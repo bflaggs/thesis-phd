@@ -4,7 +4,7 @@
 \appendix{Choosing a Muon Annulus for Mass Sensitivity}\label{app:annulus}
 
 As presented in~\Cref{sec:observables}, a single muon annulus was chosen to use in the mass sensitivity analysis from a total of 20 studied annuli.
-The annulus spanning \qtyrange{800}{850}{\meter} from the air-shower axis was chosen by maximizing the proton-iron separation power using the FOM metric in~\Cref{eq:fom} while, with lesser weight, attempting to minimize the ratio of $N_{\mu}$ uncertainty-to-counts.
+The annulus spanning \qtyrange{800}{850}{\meter} from the air-shower axis was chosen by maximizing the proton-iron separation power using the FOM metric in~\Cref{eq:fom} while simultaneously attempting to minimize the ratio of $N_{\mu}$ uncertainty-to-counts.
 The proton-iron merit factors as a function of true air-shower for muon numbers within annuli of different spacings from the shower axis are shown in~\Cref{fig:muon_annuli}.
 The uncertainty bands in the FOM values were estimated with the same bootstrapping method described in~\Cref{sec:fisher}.
 
@@ -19,12 +19,15 @@ The muon annulus farthest from the air-shower axis (\qtyrange{950}{1000}{\meter}
 However, there are only small differences (0.1 or less) in the proton-iron separation power between the \qtyrange{950}{1000}{\meter} annulus and other annuli far from the shower axis.
 Moving closer to the shower axis lessens the ratio of $N_{\mu}$ uncertainty-to-counts due to both the Poissonian statistics of counting single muons in surface particle detectors and the lateral distribution of muons at ground.
 As air-shower energy decreases so does the size of the particle footprint on ground, further affecting the difference in $N_{\mu}$ uncertainty-to-counts between distances close (a few hundred meters) and far (near 1000 meters) from the air-shower axis.
-Therefore, the \qtyrange{800}{850}{\meter} muon annulus was chosen as the nominal annulus for use in this mass sensitivity analysis to compromise between mass sensitivity and statistical limitations for the studied energy range spanning several decades in energy.
+Therefore, the \qtyrange{800}{850}{\meter} muon annulus was chosen as the nominal annulus for use in this mass sensitivity analysis to compromise between mass sensitivity and statistical limitations for the studied energy range, spanning several decades in energy.
 
 \Cref{fig:muon_annuli} shows the proton-iron separation of muon annuli for EPOS LHC-R simulations within a zenith range of \qtyrange{40}{50}{\degree}; however, the above described reasoning holds for other zenith angles and hadronic interaction models.
 The EPOS LHC-R proton-iron separation power for the same annuli in zenith bins of \qtyrange{0}{20}{\degree} and \qtyrange{20}{40}{\degree} is presented in~\Cref{fig:muon_annuli_zenith}.
-Annuli farther from the shower axis in general...
-Additionally, a past study showed the optimum air-shower axis distance for proton-iron separation using vertical air showers (\qtyrange{0}{55}{\degree}) is between \qtyrange{600}{800}{\meter}
+Annuli farther from the shower axis, in general, exhibit a higher proton-iron mass separation power in most energy bins except at the highest energies, where the annulus \qtyrange{500}{550}{\meter} from the shower axis provides a larger separation than the \qtyrange{950}{1000}{\meter} annulus.
+The chosen annulus of \qtyrange{800}{850}{\meter} lies between these extremes in the highest energy bins, balancing this compromise of mass sensitivity and statistics well across all energies and zenith angles.
+Additionally,~\Cref{fig:muon_annuli_hadronic_model} shows the muon annulus proton-iron separation for QGSJETIII-01 and Sibyll 2.3e simulations.
+The resulting FOM curves have a similar relationship with energy as the EPOS LHC-R curves shown in~\Cref{fig:muon_annuli}, highlighting this choice of annulus is independent of hadronic interaction model using the criteria assumed in this analysis.
+As an additional crosscheck, a past study showed the optimum air-shower axis distance for proton-iron separation using vertical air showers (\qtyrange{0}{55}{\degree}) is between \qtyrange{600}{800}{\meter}
 
 \begin{figure}
   \centering
@@ -34,6 +37,15 @@ Additionally, a past study showed the optimum air-shower axis distance for proto
   \label{fig:muon_annuli_zenith}
 \end{figure}
 
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.45\textwidth]{appendix/B/QGSJETIII01_MassFOM_MuonRings_zen40_50_last10rings_wDataCuts_pFe_electronAtXmaxScaling.pdf}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.45\textwidth]{appendix/B/Sibyll23e_MassFOM_MuonRings_zen40_50_last10rings_wDataCuts_pFe_electronAtXmaxScaling.pdf}
+  \caption[Muon annulus merit factors for different hadronic models.]{The proton-iron figure of merit for the muon annuli $>\,$\qty{500}{\meter} from the air-shower axis, studied within a zenith bin of \qtyrange{40}{50}{\degree} for the QGSJETIII-01 (left) and Sibyll 2.3e (right) hadronic interaction models.}
+  \label{fig:muon_annuli_hadronic_model}
+\end{figure}
+
+
 
 A further study of the mass sensitivity at the location of Auger should be performed at ultra-high-energies ($>$\,\qty[parse-numbers=false]{10^{18.0}}{\electronvolt}) using the muon annulus \qty{1000}{\meter} from the air-shower axis as this annulus is related to $S_{1000}$, the total signal in the Auger WCD \qty{1000}{\meter} from the air-shower axis.
 
@@ -41,7 +53,7 @@ A further study of the mass sensitivity at the location of Auger should be perfo
 SD-1500 energy estimator, $S_{1000}$ measured in VEM units. 
 
 
-
+%In particular, this is not true in the highest energy bins where the annulus \qtyrange{500}{550}{\meter} from the shower axis provides a larger separation than the \qtyrange{950}{1000}{\meter} annulus
 
 %This analysis spans several decades in air-shower energy, hence a compromise was made in selecting the \qtyrange{800}{850}{\meter} muon annulus as the nominal annulus 
 
