@@ -55,19 +55,21 @@ All hadronic models listed in the table will be studied as each model yields dif
 Air-shower observables which can be reconstructed with current ground-based detection techniques were extracted from each CORSIKA simulation.
 A parameterized Gaisser-Hillas function, defined by~\Cref{eq:gh_parameterized} in~\Cref{sec:development}, was used to fit the normalized CORSIKA electron-positron longitudinal profile.
 Extracted from the fit are the depth of shower maximum ($X_{\rm max}$), the shower width ($L$), and the shower asymmetry ($R$).
-Precise air-fluorescence observations of ultra-high-energy cosmic-ray air showers can be used to reconstruct $X_{\rm max}$, $L$, and $R$ (i.e. the full longitudinal profile), while air-shower observations with an ultradense array of radio antennas (such as SKA-low) can reconstruct $X_{\rm max}$ and $L$.
-An array of radio antennas with high-quality data, without the need of ultradense spacing, can reconstruct $X_{\rm max}$ alone, with AERA reporting radio $X_{\rm max}$ reconstructions compatible with the Auger fluorescence measurements.
+Precise air-fluorescence observations of ultra-high-energy cosmic-ray air showers can be used to reconstruct $X_{\rm max}$, $L$, and $R$ (i.e. the full longitudinal profile information) CITEAUGERFDRL, while air-shower observations with an ultra-dense array of radio antennas (such as SKA-low) can reconstruct $X_{\rm max}$ and $L$ CITESKA.
+An array of radio antennas with high-quality data, without the need of ultra-dense spacing, can reconstruct $X_{\rm max}$ alone, with AERA reporting radio $X_{\rm max}$ reconstructions compatible with the Auger fluorescence measurements CITEAERAXMAX.
 The electron-positron number at shower maximum ($N_{\rm e, max}$) was determined directly from the combined electron-positron CORSIKA longitudinal profile.
-$N_{\rm e, max}$ can be reconstructed by either fluorescence telescopes or radio detectors and will be used in this analysis as a proxy to the true air-shower energy for scaling the other observables.
+$N_{\rm e, max}$ can be reconstructed by either fluorescence telescopes or radio detectors and will be used in this analysis as a proxy to the true air-shower energy for scaling the other observables (see~\Cref{sec:scaling}) CITE3334FROMPRD.
 
 From the CORSIKA particle block, both total muon number at ground ($N_{\mu}$) and the number of electromagnetic particles at ground ($N_{\rm e}$) are obtained.
 $N_{\rm e}$ and $N_{\rm e, max}$ correspond only to the combined electron and positron numbers within this study, hence photons are not included in any aspect.
 Both $N_{\mu}$ and $N_{\rm e}$ are counted above an energy threshold, where this threshold is intrinsic to the energy limits of tracking separate particle types within the CORSIKA simulations.
 These thresholds are \qty{10}{\mega\electronvolt} for muons and \qty{0.25}{\mega\electronvolt} for electrons and positrons within this CORSIKA dataset.
 Using the muon and electron numbers at ground, the electron-muon ratio at ground ($\rm R_{\rm e/\mu}$) is calculated.
-This ratio has been shown to be a mass-sensitive observable CITEREF5FROMMYPRD, yet requires a particle detector array at ground to have the ability to separate electromagnetic and muonic generated signals.
-Discriminating between the two signal types is feasible at Auger from the addition of the SSD.
-Refer to~\Cref{chap:airshowers} for theory describing the mass sensitivity of each studied observable. 
+This ratio has been shown to be a mass-sensitive observable CITEREF5FROMMYPRD, yet requires a particle detector array at ground with the ability to separate electromagnetic and muonic particle types.
+The individual particle numbers themselves are not physically accessible using ground-based detector arrays; however, the total signal strength deposited into the detectors serves as a proxy to the total particle number. 
+The detector signal of surface-particle detector arrays is dominated by electromagnetic particles, complicating measurements of the muon signal for individual events unless detectors have different responses for electromagnetic and muon particles.
+Discriminating between the two particle types based on the detector response and signal types is feasible at Auger from the addition of the SSD.
+%Refer to~\Cref{chap:airshowers} for theory describing the mass sensitivity of each studied observable. 
 
 In ground-based air shower experiments, the total muon number in an air shower is not directly accessible.
 Instead, the muon number is sampled at different distances to the air-shower axis, each serving as a proxy to the total muon content of the air shower. 
@@ -75,9 +77,15 @@ In addition to the total muon and electron numbers at ground, these particle num
 A total of 20 annuli are included, each of \qty{50}{\meter} width, starting from \qtyrange{0}{50}{\meter} from the air-shower axis and ending with an annulus of \qtyrange{950}{1000}{\meter} from the air-shower axis.
 Within each annulus, the electron-muon ratio is also calculated.
 The annuli are calculated as a distance from the air-shower axis (i.e perpendicular to the direction of the primary cosmic ray) and then projected onto the ground.
-This removes the early-late effect in the absolute particle numbers at ground by ensuring particles within a single annulus are sampled from the same shower development region.
-The choice of annulus to use for the final mass sensitivity analysis is the \qtyrange{800}{850}{\meter} annulus, referred to as $N_{\mu}$\,\qty{800}{m} and $\rm R_{\rm e/\mu}$\,\qty{800}{\meter} respectively for this annulus' muon number and electron-muon ratio.
-This choice of annulus is discussed in~\Cref{app:annulus}. 
+This ensures particles within a single annulus are sampled from the same shower development region.
+The choice of annulus to use for the final mass sensitivity analysis is the \qtyrange{800}{850}{\meter} annulus, where this choice of annulus is discussed in~\Cref{app:annulus}.
+For the analysis, the base-10 logarithm of the muon number and the electron-muon ratio within this annulus is used, referred to as $\lg(N_{\mu})$\,\qty{800}{\meter} and $\rm R_{\rm e/\mu} = \lg(N_{\rm e} / N_{\mu})$\,\qty{800}{\meter} respectively.
+
+%, referred to as $N_{\mu}$\,\qty{800}{m} and $\rm R_{\rm e/\mu} = \lg(N_{\rm e} / N_{\mu})$\,\qty{800}{\meter} respectively for this annulus' muon number and electron-muon ratio.
+%In particular, the base-10 logarithm of the muon number and the electron-muon ratio at ground are used, and therefore are respectively referred to as $\lg(N_{\mu})$\,\qty{800}{m} and $\rm R_{\rm e/\mu} = \lg(N_{\rm e} / N_{\mu})$\,\qty{800}{\meter}.
+%This choice of annulus is discussed in~\Cref{app:annulus}.
+
+%This removes the early-late effect in the absolute particle numbers at ground by ensuring particles within a single annulus are sampled from the same shower development region.
 
 
 \subsubsection{Fitting the Longitudinal Profile of Air Showers}\label{sec:profilefitting}
@@ -109,7 +117,7 @@ Yet, there is no clear pattern for proton or helium having the longest distribut
 Not including the fit quality cuts ($\sigma_{X_{\rm max}}\,<\,$\qty{5}{\gram\per\centi\meter\squared}, $\sigma_{L}\,<\,$\qty{5}{\gram\per\centi\meter\squared}, and $\sigma_{R}\,<\,$0.05) yields similar distributions.
 Without cuts, the tails of both the proton and helium distributions become extended, specifically for energies below \qty[parse-numbers=false]{10^{17.0}}{\electronvolt} and above \qty[parse-numbers=false]{10^{19.5}}{\electronvolt}.
 Although the difference in the proton-helium 90\% quantiles remains between \qtyrange{5}{10}{\gram\per\centi\meter\squared}, while the medians remain unchanged.
-Hence, this further confirms the potential role the $L$ observable tail for discriminating helium primaries from other mass groups if precise reconstructions of $L$ are achieved.
+Hence, this further confirms the potential role the $L$ observable tail for discriminating helium primaries from other mass groups if precise reconstructions of $L$ are achieved and large statistics are available.
 
 %\subsubsection{Choosing a Muon Annulus for Mass Sensitivity}\label{sec:annulus}
 
@@ -132,6 +140,43 @@ Hence, this further confirms the potential role the $L$ observable tail for disc
 %Uncertainties in these FOM curves were estimated from a bootstrapping method, as described in. 
 
 \subsection{Energy Proxy Scaling Corrections for Air-Shower Observables}\label{sec:scaling}
+Air-shower observables studied in this analysis must be corrected for their energy dependence, as observable distributions will be smeared from binning simulated air showers with respect to their energy.
+All studied observables are scaled with respect to $N_{\rm e, max}$ as this observable serves as a proxy to the total air-shower energy and, as in real experiments, the true energy is unknown.
+The evolution of the average $N_{\rm e, max}$ in bins true air-shower energy is shown in XXX for EPOS LHC-R simulations, while the evolution of the average values of all other observables in this analysis in bins of $N_{\rm e, max}$ is shown in XXX for the same hadronic model.
+The uncertainty in the average observable value for each bin is included, yet in most cases is too small to be discernible.
+The zenith range of $\theta_{\rm zen}\,=\,$\qtyrange{40}{50}{\degree} was chosen as an example due to the efficiency of SKALA type radio antennas for air-shower detection in this zenith range CITE33FROMPRD.
+
+%The average dependence of $N_{\rm e, max}$ on air-shower energy is shown in XXX for EPOS LHC-R simulations while the average dependence of all studied observables in the analysis is shown in XXX for the same hadronic model.
+
+%FIGURE_FOR_NEMAX_SCALING_EPOSLHCR
+
+% FIGURE_FOR_ALL_OBSERVABLE_SCALINGS_VS_NEMAX_EPOSLHCR
+
+Each plot in XXX has an event number cut of xxx applied to the $N_{\rm e, max}$ bins to ensure good statistics for all four primaries and full coverage of the electron number at $X_{\rm max}$ phase space, the spread in which is caused by shower-to-shower fluctuations.
+This event number cut removes bins to the left and right of the energy reference range shown in XXX plots, as they do not follow the typical trendlines shown due to their limited phase space coverage.
+Removing the bins with limited statistics allows the trendlines to accurately represent the observable scalings, within the energy range used in this analysis.
+A linear fit is then applied individually to all primaries to be used for scaling the observable.
+The resulting per-primary linear fits are shown in BOTHFIGURES.
+
+Analysis observables $a$ are scaled to the energy proxy per event following 
+
+\begin{equation}
+  a = a_{\rm true} - m \times \lg \left( \frac{N_{\rm e, max}}{N_{\rm EeV}} \right), \label{eq:scaling}
+\end{equation}
+
+\noindent
+where $a_{\rm true}$ is the per-event observable value pre-scaling, $N_{\rm e, max}$ is the electron number at shower maximum for the event, and $N_{\rm EeV}$ is the average electron number at shower maximum for \qty{1}{\exa\electronvolt} air showers.
+$m$ is the average slope of the linear fits to all four primaries for the observable $a$.
+Note that the functional form of~\Cref{eq:scaling} works for the annulus based muon number at ground because the base-10 logarithm of these particle numbers is used in the analysis.
+For EPOS LHC-R, 0.01 was then added to the average slope $m$ for all observable scalings to correct for the weak deviation of $N_{\rm e, max}$ from an exact linear energy scaling, as 1.01 is the average of the linear fit slopes shown in XXX.
+Scaling is different for each hadronic model because each model predicts different observable distributions, hence this correction to $m$ could be different for each hadronic model as well. 
+Table XXX lists the scaling constants of the studied observables for each hadronic interaction model.
+
+Scaling the air-shower observables removes the energy dependence of these observables as seen in the simulations, allowing for the use of wide energy bins in our analysis without risk of smearing the observable distributions.
+As a consequence, this scaling also increases the mass separation of the individual observables, as illustrated by the proton-iron contour plots in XXX.
+Only proton and iron distributions are shown in this figure for clarity, highlighting the effect of scaling on the surface muon and $X_{\rm max}$ observables.
+
+% FIGURE showing 2d contours pre and post-scaling for surface muon annulus and Xmax combined. Proton-iron only, EPOSLHCR
 
 %ensures the particles within an annulus 
 

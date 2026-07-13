@@ -5,18 +5,18 @@
 
 As presented in~\Cref{sec:observables}, a single muon annulus was chosen to use in the mass sensitivity analysis from a total of 20 studied annuli.
 The annulus spanning \qtyrange{800}{850}{\meter} from the air-shower axis was chosen by maximizing the proton-iron separation power using the FOM metric in~\Cref{eq:fom} while simultaneously attempting to minimize the ratio of $N_{\mu}$ uncertainty-to-counts.
-The proton-iron merit factors as a function of true air-shower for muon numbers within annuli of different spacings from the shower axis are shown in~\Cref{fig:muon_annuli}.
+The proton-iron merit factors as a function of true air-shower energy for muon numbers within annuli of different spacings from the shower axis are shown in~\Cref{fig:muon_annuli}.
 The uncertainty bands in the FOM values were estimated with the same bootstrapping method described in~\Cref{sec:fisher}.
 
 \begin{figure}
   \centering
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.6\textwidth]{appendix/B/EPOSLHCR_MassFOM_MuonRings_zen40_50_last10rings_wDataCuts_pFe_electronAtXmaxScaling.pdf}
-  \caption[Muon annulus merit factors.]{The proton-iron figure of merit for several muon annuli ranging from \qtyrange{500}{1000}{\meter} from the air-shower axis. Each annulus has a width of \qty{50}{\meter} in the shower plane and is then projected onto the ground. Below \qty{500}{\meter} to the shower axis the mass sensitivity of the \qty{50}{\meter} width annuli decrease and therefore were not considered for use in the mass sensitivity study.}
+  \caption[Muon annulus proton-iron merit factors.]{The proton-iron figure of merit for several muon annuli ranging from \qtyrange{500}{1000}{\meter} from the air-shower axis. Each annulus has a width of \qty{50}{\meter} in the shower plane and is then projected onto the ground. Below \qty{500}{\meter} to the shower axis the mass sensitivity of the \qty{50}{\meter} width annuli decrease and therefore were not considered for use in the mass sensitivity study.}
   \label{fig:muon_annuli}
 \end{figure}
 
 The muon annulus farthest from the air-shower axis (\qtyrange{950}{1000}{\meter}) exhibits the maximum proton-iron separation power amongst all energy bins.
-However, there are only small differences (0.1 or less) in the proton-iron separation power between the \qtyrange{950}{1000}{\meter} annulus and other annuli far from the shower axis.
+However, there are only small differences (approximately 0.1 or less) in the proton-iron separation power between the \qtyrange{950}{1000}{\meter} annulus and other annuli far from the shower axis.
 Moving closer to the shower axis lessens the ratio of $N_{\mu}$ uncertainty-to-counts due to both the Poissonian statistics of counting single muons in surface particle detectors and the lateral distribution of muons at ground.
 As air-shower energy decreases so does the size of the particle footprint on ground, further affecting the difference in $N_{\mu}$ uncertainty-to-counts between distances close (a few hundred meters) and far (near 1000 meters) from the air-shower axis.
 Therefore, the \qtyrange{800}{850}{\meter} muon annulus was chosen as the nominal annulus for use in this mass sensitivity analysis to compromise between mass sensitivity and statistical limitations for the studied energy range, spanning several decades in energy.
@@ -27,7 +27,7 @@ Annuli farther from the shower axis, in general, exhibit a higher proton-iron ma
 The chosen annulus of \qtyrange{800}{850}{\meter} lies between these extremes in the highest energy bins, balancing this compromise of mass sensitivity and statistics well across all energies and zenith angles.
 Additionally,~\Cref{fig:muon_annuli_hadronic_model} shows the muon annulus proton-iron separation for QGSJETIII-01 and Sibyll 2.3e simulations.
 The resulting FOM curves have a similar relationship with energy as the EPOS LHC-R curves shown in~\Cref{fig:muon_annuli}, highlighting this choice of annulus is independent of hadronic interaction model using the criteria assumed in this analysis.
-As an additional crosscheck, a past study showed the optimum air-shower axis distance for proton-iron separation using vertical air showers (\qtyrange{0}{55}{\degree}) is between \qtyrange{600}{800}{\meter}
+As an additional crosscheck, a past study showed the optimum air-shower axis distance for proton-iron separation using vertical air showers (\qtyrange{0}{55}{\degree}) of \qty[parse-numbers=false]{10^{19.0}}{\electronvolt} in simulated energy is between \qtyrange{600}{800}{\meter}.
 
 \begin{figure}
   \centering
