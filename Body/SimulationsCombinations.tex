@@ -10,6 +10,7 @@ However, after the start of the cascade, it develops in the forward region where
 Stochasticities in these first few interactions propagate throughout the shower development yielding shower-to-shower fluctuations in air-shower observables for cosmic-ray primaries of the same mass, energy, and arrival direction.
 Averaged over many events, certain shower observables are correlated with the cosmic-ray mass, yet fluctuations limit the event-by-event separation for individual observables.
 Per-event separation between different primary species can be improved by simultaneously studying multiple mass-sensitive observables.
+The aim of this chapter is to study the mass sensitivity of individual observables and their combinations for a variety of factors including air-shower energy, zenith angle, hadronic interaction model, and the observable's assumed reconstruction resolution. 
 
 This chapter presents the results of a mass sensitivity study of individual air-shower observables, and their combination, from cosmic-ray air showers simulated with CORSIKA (COsmic Ray SImulations for KAscade).
 All analysis is performed using a general purpose software framework for studying the cosmic-ray mass separation of observables.
@@ -88,7 +89,7 @@ For the analysis, the base-10 logarithm of the muon number and the electron-muon
 %This removes the early-late effect in the absolute particle numbers at ground by ensuring particles within a single annulus are sampled from the same shower development region.
 
 
-\subsubsection{Fitting the Longitudinal Profile of Air Showers}\label{sec:profilefitting}
+\subsection{Fitting the Longitudinal Profile of Air Showers}\label{sec:profilefitting}
 The particle longitudinal distributions for this CORSIKA simulation library are sampled every \qty{10}{\gram\per\centi\meter\squared} in slant depth.
 The combined electron-positron profile is normalized to $N_{\rm e, max}$ and fit as a function of slant depth to~\Cref{eq:gh_parameterized}, where $X^{\prime}$ is replaced with $X - X_{\rm max}$ to enable a direct $X_{\rm max}$ extraction from the fit.
 To ensure precise $X_{\rm max}$ values, the normalized particle numbers were weighted with respect to their Poissonian fluctuations, which applied more importance to fitting the longitudinal profile peak.
@@ -142,7 +143,7 @@ Hence, this further confirms the potential role the $L$ observable tail for disc
 \subsection{Energy Proxy Scaling Corrections for Air-Shower Observables}\label{sec:scaling}
 Air-shower observables studied in this analysis must be corrected for their energy dependence, as observable distributions will be smeared from binning simulated air showers with respect to their energy.
 All studied observables are scaled with respect to $N_{\rm e, max}$ as this observable serves as a proxy to the total air-shower energy and, as in real experiments, the true energy is unknown.
-The evolution of the average $N_{\rm e, max}$ in bins true air-shower energy is shown in XXX for EPOS LHC-R simulations, while the evolution of the average values of all other observables in this analysis in bins of $N_{\rm e, max}$ is shown in XXX for the same hadronic model.
+The evolution of the average $N_{\rm e, max}$ in bins of true air-shower energy is shown in XXX for EPOS LHC-R simulations, while the evolution of the average values of all other observables in this analysis in bins of $N_{\rm e, max}$ is shown in XXX for the same hadronic model.
 The uncertainty in the average observable value for each bin is included, yet in most cases is too small to be discernible.
 The zenith range of $\theta_{\rm zen}\,=\,$\qtyrange{40}{50}{\degree} was chosen as an example due to the efficiency of SKALA type radio antennas for air-shower detection in this zenith range CITE33FROMPRD.
 
@@ -167,14 +168,15 @@ Analysis observables $a$ are scaled to the energy proxy per event following
 \noindent
 where $a_{\rm true}$ is the per-event observable value pre-scaling, $N_{\rm e, max}$ is the electron number at shower maximum for the event, and $N_{\rm EeV}$ is the average electron number at shower maximum for \qty{1}{\exa\electronvolt} air showers.
 $m$ is the average slope of the linear fits to all four primaries for the observable $a$.
-Note that the functional form of~\Cref{eq:scaling} works for the annulus based muon number at ground because the base-10 logarithm of these particle numbers is used in the analysis.
+Note that the functional form of~\Cref{eq:scaling} works for the annulus based muon number at ground because the base-10 logarithm of this observable is used in the analysis.
 For EPOS LHC-R, 0.01 was then added to the average slope $m$ for all observable scalings to correct for the weak deviation of $N_{\rm e, max}$ from an exact linear energy scaling, as 1.01 is the average of the linear fit slopes shown in XXX.
-Scaling is different for each hadronic model because each model predicts different observable distributions, hence this correction to $m$ could be different for each hadronic model as well. 
+Scaling slopes $m$ and the average electron number at shower maximum for \qty{1}{\exa\electronvolt} air showers ($N_{\rm EeV}$) are different for each hadronic model because each model predicts different observable distributions, hence this correction to $m$ could be different for each hadronic model as well. 
 Table XXX lists the scaling constants of the studied observables for each hadronic interaction model.
 
 Scaling the air-shower observables removes the energy dependence of these observables as seen in the simulations, allowing for the use of wide energy bins in our analysis without risk of smearing the observable distributions.
 As a consequence, this scaling also increases the mass separation of the individual observables, as illustrated by the proton-iron contour plots in XXX.
 Only proton and iron distributions are shown in this figure for clarity, highlighting the effect of scaling on the surface muon and $X_{\rm max}$ observables.
+From this point forward, any mention of the analysis observables refers to the observables post-scaling.
 
 % FIGURE showing 2d contours pre and post-scaling for surface muon annulus and Xmax combined. Proton-iron only, EPOSLHCR
 
@@ -203,6 +205,75 @@ Only proton and iron distributions are shown in this figure for clarity, highlig
 %\subsection{Fitting the Longitudinal Profile of Air Showers}\label{sec:profilefitting}
 
 \section{Fisher Linear Discriminant Analysis to Model Mass Sensitivity}\label{sec:fisher}
+The mean mass separation between different mass primaries is visible from the scaling plots presented in FIGURES, but to study the event-by-event mass separation both the separation of the mean observable values and the statistical shower-to-shower fluctuations of the observables are important.
+Using multiple observables with their full distributions is then necessary to study the event-level mass separation.
+XXX shows the two-dimensional contour plot of $\lg\left(N_{\mu}\right)$\,\qty{800}{\meter} and $X_{\rm max}$ for all four primaries within an energy range of \qtyrange[parse-numbers=false]{10^{17.0}}{10^{17.5}}{\electronvolt} and zenith range of \qtyrange{40}{50}{\degree} for EPOS LHC-R simulations.
+The width of the energy and zenith bins has been chosen narrow enough to see trends over energy and zenith angles, on the one hand, and to provide sufficient statistics in each bin, on the other hand.
+Both the 68\% and 90\% contour lines are shown for each primary population, with minimal overlap visible specifically between the proton and iron distributions.
+
+The visible separation gives a qualitative sense of separation between distributions; however, this separation must be quantified mathematically.
+A Fisher linear discriminant analysis was performed to investigate the mass separation between distributions of two primary particle populations.
+This analysis finds the line of best separation, known as the Fisher axis, between two particle populations in a multi-dimensional space, essentially reducing the dimensionality of the multivariate analysis to a single dimension without the loss of separation information between populations.
+Here, each variable/dimension represents an observable included in the mass sensitivity analysis.
+From the Fisher analysis, a figure of merit (FOM) value, defined as 
+
+\begin{equation}
+  \rm{FOM} = \frac{|\mu_{\rm x} - \mu_{\rm y}|}{\sqrt{\sigma_{\rm x}^{2} + \sigma_{\rm y}^{2}}}, \label{eq:fom}
+\end{equation}
+
+\noindent
+is calculated from multivariate projections onto the Fisher axis.
+The $\mu$ and $\sigma$ values respectively represent the mean and standard deviation of the primary particle distributions, after being projected onto the one-dimensional Fisher axis.
+The subscript x and y represent the type of primary particle, i.e. $\rm{x}\epsilon\left[\rm{p, He, O, Fe}\right]$ and $\rm{y}\epsilon\left[\rm{p, He, O, Fe}\right]$, with the condition that x = y is zero and the degeneracy xy = yx.
+The FOM is calculated statistically from knowledge of the observable distributions, but serves as a measure of the mass-separation power on an event-by-event basis.
+Separation power between the distributions increases with increasing FOM values, where it is typically held that FOM values larger than 1.5 correspond to distributions which can be reasonably separated.
+
+\subsection{Visualizing the Quantified Mass Sensitivity}\label{sec:projections}
+The distribution projections onto the Fisher axis are used to visualize how the formal mathematical definition translates graphically.
+XXX shows the two-dimensional contour plots of $L$ and $X_{\rm max}$ and $\rm R_{\rm e/\mu}$\,\qty{800}{\meter} and $X_{\rm max}$ proton-iron distributions for EPOS LHC-R simulations.
+The same energy and zenith ranges as the contour plots in the previous section are used.
+Projections onto the one-dimensional Fisher axis, for the same distributions from XXX, are presented in XXX, with the average and 1$\sigma$ band of each population included.
+FOM values are calculated using~\Cref{eq:fom} for each projection plot to numerically represent the separation power for the observable combination.
+From the calculated merit factors, the $\rm R_{\rm e/\mu}$\,\qty{800}{\meter} and $X_{\rm max}$ observable combination yields the better proton-iron mass separation power from the two projections.
+This is in agreement with the lesser overlap of the proton-iron distributions for this observable combination in both the projection plots and their respective two-dimensional contours.
+
+\subsection{Studying the Effect of Reconstruction Resolution on Observable Mass Sensitivity}\label{sec:resolution}
+Important for any air-shower analysis is the resolution at which air-shower observables can be reconstructed.
+For a given observable, both the type of ground-based detection technique and detector specific systematics play a role in the reconstruction accuracy and precision.
+In this analysis, a range of uncertainties for observable reconstruction can be investigated, where the baseline uncertainties are motivated by current detectors and their reconstruction techniques.
+This allows a systematic study of how an individual observable's reconstruction resolution impacts the event-by-event mass separation power of the observable.
+Only the reconstruction resolution effect on the proton-iron separation of each observable is studied. 
+
+For each air-shower observable, proton-iron separation power curves as a function of air-shower energy were calculated using the FOM metric.
+To estimate the uncertainty of the FOM, a bootstrapping random sampling with replacement method was performed.
+This process was repeated to calculate 30 FOM values, of which the average and standard deviation were taken as the nominal FOM and its 1$\sigma$ uncertainty band.
+Each observable had five curves calculated, one with exact knowledge of the scaled observable, one assuming the observable is known within a baseline uncertainty, and three additional curves with reconstruction uncertainties different from the assumed baseline.
+
+The FOM values for all observables were calculated with knowledge of both the observable in question and the energy reference, $N_{\rm{e, max}}$.
+Except for the FOM values labeled ''exact knowledge'', an uncertainty in $N_{\rm{e, max}}$ of 10\% was applied, motivated by the order of magnitude of current uncertainties of radio and air-fluorescence energy measurements CITATIONSPRD36TO39.
+Separate resolutions for this observable were not investigated.
+The baseline $X_{\rm max}$ uncertainty is assumed to be \qty{20}{\gram\per\centi\meter\squared}, in between the uncertainty from CITATIONSPRD40AND41.
+The baseline uncertainties for $\lg(N_{\rm{e}})$ and $\lg\left(N_{\mu}\right)$ at ground within the \qtyrange{800}{850}{\meter} annulus are each assumed to be 0.1.
+The electron-muon ratio within this annulus has its baseline uncertainty calculated by error propagation of the electron and muon component individual uncertainties.
+Motivated by CITATIONPRD28, the $R$ baseline uncertainty is assumed to be 0.05.
+The $L$ baseline uncertainty is assumed to be \qty{5}{\gram\per\centi\meter\squared} which is lower than the reconstruction uncertainty from CITATIONPRD28; however, the $L$ resolution has little impact on the proton-iron separation power for this observable.
+
+
+%As shown in Fig.~\ref{fig:IC_single_observables}, the proton-iron separation for certain air-shower observables, such as $\log(N_{\text{e}})$, is not heavily influenced by the observable's reconstruction uncertainty.
+%Whereas other observables, such as $\log(N_{\mu})$, have a much higher dependence of the proton-iron discrimination power on the assumed observable reconstruction uncertainty.
+
+%the primary particle distributions projected onto the Fisher axis.
+
+%quantified using a Fisher linear discriminant analysis. 
+
+%However, the separation must be quantified in a mathematical way to study 
+%Minimal overlap of the contour lines is seen, specifically for the proton and iron distributions
+
+
+%This can bu studied using the full observable distributions in multiple dimensions. 
+%The two-dimensional contour plots from XXX exhibit this separation including fluctuations where th 
+
+
 %\subsection{Choosing a Muon Annulus for Mass Sensitivity}\label{sec:annulus}
 
 \section{Gradient Boosted Decision Trees to Improve Mass Sensitivity}\label{sec:gbdt}
