@@ -38,7 +38,7 @@ With the recently deployed detectors of AugerPrime, the Pierre Auger Observatory
 %Air-shower universality presented in~\Cref{chap:airshowers} predicts air showers can be fully described using a combination of  ???
 \section{CORSIKA Air-Shower Simulations at the Pierre Auger Observatory}\label{sec:simulationdataset}
 Within this chapter, a general use CORSIKA simulation library of air showers simulated at the location of the Pierre Auger Observatory is used\footnote[1]{These simulations are available for members of the Pierre Auger Observatory. A brief overview of the library is available at the following link: \href{https://www.auger.unam.mx/AugerWiki/VerticalSimulations78010}{https://www.auger.unam.mx/AugerWiki/VerticalSimulations78010.}}.
-The dataset contains CORSIKA v7.8010 air-shower simulations for three separate high-energy hadronic interaction models: EPOS LHC-R, Sibyll 2.3e, and QGSJET III-01.
+The dataset contains CORSIKA v7.8010 air-shower simulations for three separate high-energy hadronic interaction models: EPOS LHC-R, Sibyll 2.3e, and QGSJETIII-01.
 All low-energy hadronic interactions were modeled with FLUKA v2024.
 For each high-energy hadronic interaction model, simulations are available for proton, helium, oxygen, and iron primary cosmic rays over an energy range of $\lg(E / \rm eV)$\,=\,\numrange{14.0}{20.5}, yet only simulations above an energy of $\lg(E / \rm eV)$\,=\,16.0 are studied for this analysis.
 Photon primaries are also available in the dataset, but excluded here.
@@ -287,7 +287,7 @@ While higher-dimensional contour plots are difficult to visualize, the Fisher li
 As a quantitative estimate of the event-by-event mass separation between proton and iron primaries, the FOM was calculated as a function of binned primary particle energy for knowledge of each observable individually and when knowledge of all observables is combined.
 The individual knowledge FOM values for all observables were calculated with knowledge of both the observable in question and the energy reference, $N_{\rm{e, max}}$.
 
-XXX shows the proton-iron separation power curves for each observable individually, along with their combined knowledge curves, for the three studied hadronic interaction models: Sibyll 2.3e, EPOS LHC-R, and QGSJET III-01.
+XXX shows the proton-iron separation power curves for each observable individually, along with their combined knowledge curves, for the three studied hadronic interaction models: Sibyll 2.3e, EPOS LHC-R, and QGSJETIII-01.
 FOM curves of the combination of all observables are shown twice, once with the assumed reconstruction uncertainties for all observables (magenta), and once with exact knowledge of all observables (dark blue).
 Knowledge of individual observables were calculated within the baseline reconstruction uncertainties stated in~\Cref{sec:resolution}.
 All FOM values, along with their uncertainty bands, were calculated from a bootstrap method, as described in~\Cref{sec:resolution}.
@@ -295,14 +295,35 @@ The proton-iron separation power curves for each hadronic interaction model were
 
 As expected, exact knowledge of all observables yields the best proton-iron separation for all three of the studied hadronic interaction models.
 Knowledge of all observables within their assumed baseline reconstruction uncertainties yields promising event-by-event mass separation between proton and iron primaries, with FOM values of nearly 2.0 at for all three models that decrease slightly with increasing energy.
-This decrease in overall separation power is driven by the decrease in separation power of the $\lg\left(N_{\mu}\right)$\,\qty{800}{\meter} observable and has a larger impact on total separation power for the EPOS LHC-R and QGSJET III-01 models than for Sibyll 2.3e.
-The largest difference between models is for the low-energy $N_{\mu}$ observable of QGSJET III-01, which exhibits a systematically higher proton-iron mass separation than both the Sibyll 2.3e and EPOS LHC-R models.
-This difference also increases the QGSJET III-01 mass separation curves when combined knowledge of all observables is known.
+This decrease in overall separation power is driven by the decrease in separation power of the $\lg\left(N_{\mu}\right)$\,\qty{800}{\meter} observable and has a larger impact on total separation power for the EPOS LHC-R and QGSJETIII-01 models than for Sibyll 2.3e.
+The largest difference between models is for the low-energy $N_{\mu}$ observable of QGSJETIII-01, which exhibits a systematically higher proton-iron mass separation than both the Sibyll 2.3e and EPOS LHC-R models.
+This difference also increases the QGSJETIII-01 mass separation curves when combined knowledge of all observables is known.
 Otherwise, between models, the proton-iron separation curves are generally consistent.
 
-%Discuss decrease in proton-iron separation for R and muons and increase in L. Discuss origin...
-%Add text for vertical (0-30) shower FOM plots
+At energies above approximately \qty[parse-numbers=false]{10^{18.5}}{\electronvolt}, all three hadronic interaction models exhibit a decrease in the proton-iron mass separation of both the $\lg\left(N_{\mu}\right)$\,\qty{800}{\meter} and $R$ observables, while the mass separation of the $L$ observable increases.
+%Sentence here about using full muon number instead in the analysis...
+The physical cause of the increase in mass sensitivity of the $L$ observable is unknown; however, a possible explanation is the Landau-Pomeranchuk-Migdal (LPM) effect which causes an elongation of the electromagnetic shower development at ultra-high energies CITELPM.
+This mechanism affects the overall shower development and therefore, in turn, could also cause the decrease in mass sensitivity of the $R$ observable, yet should be studied in greater detail for confirmation.
+Above approximately \qty[parse-numbers=false]{10^{20.0}}{\electronvolt}, the proton-iron mass sensitivity of the $L$ observable becomes higher than the low-energy muon observable when reconstruction uncertainties are included.
+Yet, when studied in combination with both $X_{\rm max}$ and $\lg\left(N_{\mu}\right)$\,\qty{800}{\meter}, the $L$ observable adds little to no extra mass sensitivity (see~\Cref{sec:combinations}).
+Hence, while increasingly mass sensitive at the highest energies, $L$ adds little to no information about per-event mass separation if knowledge of both $X_{\rm max}$ and surface muons is already known.
 
+%However, when studying combinations of observables, the \xmax and low-energy $N_{\mu}$ combination remains the most mass sensitive.
+%$Including the $L$ observable with both \xmax and low-energy $N_{\mu}$ increases the FOM by approximately 0.01, only.
+
+%These results for the additional Auger simulations hold for both the helium-oxygen and helium-proton separations, where helium-oxygen (helium-proton) FOMs are about a factor of two (three) less than proton-iron FOMs.
+%However, for helium-proton separation, $L$ as an individual observable does not exhibit an increase in separation power above $10^{18.5}$\,eV.
+
+XXX presents the same FOM curves as XXX now calculated in the zenith angle range of \qtyrange{0}{30}{\degree}.
+Between hadronic models in this zenith angle range, no major qualitative differences are seen except for the increased mass sensitivity of the $\lg\left(N_{\mu}\right)$\,\qty{800}{\meter} observable for QGSJETIII-01 compared to the other models, which was also seen in XXX.
+Comparing between the \qtyrange{0}{30}{\degree} and \qtyrange{40}{60}{\degree} zenith angle ranges, there is no difference in the overall mass separation curves when combined knowledge of all observables is known, either exactly or within their baseline reconstruction uncertainties.
+Although differences in the individual observable FOM curves is apparent.
+For each hadronic model, the $\lg\left(N_{\mu}\right)$\,\qty{800}{\meter} observable is more mass sensitive for vertical showers (\qtyrange{0}{30}{\degree}) than for inclined showers (\qtyrange{40}{60}{\degree}), yet the decrease in mass sensitivity of this observable with energy is still present.
+The mass sensitivity of the $\rm R_{\rm e/\mu}$\,\qty{800}{\meter} observable also decreases with energy for vertical showers, while it remained constant for inclined showers.
+The values $m$ from~\Cref{eq:scaling} used to scale each observable were calculated in a zenith range of \qtyrange{40}{50}{\degree} and therefore may not fully remove the observable energy dependence in other zenith ranges.
+This could impact the energy evolution of the $\lg\left(N_{\mu}\right)$\,\qty{800}{\meter} and $\rm R_{\rm e/\mu}$\,\qty{800}{\meter} mass sensitivity as both observables have a dependence on zenith angle.
+This zenith range used for scaling has little difference for the longitudinal profile observables ($X_{\rm max}$, $R$, and $L$) because the longitudinal profile is sampled in terms of slant depth rather than atmospheric depth.
+This is confirmed as the $X_{\rm max}$, $R$ and $L$ observables show similar energy evolutions in their mass sensitivities regardless of the investigated zenith range (i.e. stable $X_{\rm max}$, decreasing $R$, and increasing $L$ above approximately \qty[parse-numbers=false]{10^{18.5}}{\electronvolt} in true cosmic-ray energy).
 
 %both IceCube and Auger for the zenith range of $\theta_{\text{zen}}$ = 40$^{\circ}-$60$^{\circ}$ and slightly higher separation power for nearly vertical showers within a zenith range of $\theta_{\text{zen}}$ = 0$^{\circ}-$20$^{\circ}$.
 %This dependence of the separation power on zenith angle is driven by the particles detectable at the surface.
