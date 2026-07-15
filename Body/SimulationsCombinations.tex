@@ -245,9 +245,16 @@ This allows a systematic study of how an individual observable's reconstruction 
 Only the reconstruction resolution effect on the proton-iron separation of each observable is studied. 
 
 For each air-shower observable, proton-iron separation power curves as a function of air-shower energy were calculated using the FOM metric.
+Each observable had five curves calculated, one with exact knowledge of the scaled observable, one assuming the observable is known within a baseline uncertainty, and three additional curves with reconstruction uncertainties different from the assumed baseline.
+The simulated observable values are smeared by a Gaussian distribution to incorporate the reconstruction uncertainties in the FOM calculations.
+Per-event, a random value is drawn from a Gaussian centered on zero and with a width of the assumed observable reconstruction uncertainty and then is added to the true observable value from simulations.
+The result is the underlying true observable distribution convolved with a Gaussian distribution with a width of the assumed reconstruction uncertainty, from which the FOM is calculated.
 To estimate the uncertainty of the FOM, a bootstrapping random sampling with replacement method was performed.
 This process was repeated to calculate 30 FOM values, of which the average and standard deviation were taken as the nominal FOM and its 1$\sigma$ uncertainty band.
-Each observable had five curves calculated, one with exact knowledge of the scaled observable, one assuming the observable is known within a baseline uncertainty, and three additional curves with reconstruction uncertainties different from the assumed baseline.
+XXX shows the proton-iron merit factors as a function of air-shower energy and observable reconstruction uncertainty for knowledge of single air-shower observables simulated with hadronic interaction model EPOS LHC-R.
+A larger zenith range of \qtyrange{40}{60}{\degree} is used compared to the observable scaling to increase the statistics within each energy bin for the FOM calculation.
+
+%The per-event observable values are smeared by adding to the true value a random value drawn from a Gaussian distribution to incorporate the reconstruction uncertainties in the FOM calculations, where this Gaussian is centered on zero with a width of the assumed observable reconstruction uncertainty.
 
 The FOM values for all observables were calculated with knowledge of both the observable in question and the energy reference, $N_{\rm{e, max}}$.
 Except for the FOM values labeled ''exact knowledge'', an uncertainty in $N_{\rm{e, max}}$ of 10\% was applied, motivated by the order of magnitude of current uncertainties of radio and air-fluorescence energy measurements CITATIONSPRD36TO39.
@@ -257,10 +264,11 @@ The baseline uncertainties for $\lg(N_{\rm{e}})$ and $\lg\left(N_{\mu}\right)$ a
 The electron-muon ratio within this annulus has its baseline uncertainty calculated by error propagation of the electron and muon component individual uncertainties.
 Motivated by CITATIONPRD28, the $R$ baseline uncertainty is assumed to be 0.05.
 The $L$ baseline uncertainty is assumed to be \qty{5}{\gram\per\centi\meter\squared} which is lower than the reconstruction uncertainty from CITATIONPRD28; however, the $L$ resolution has little impact on the proton-iron separation power for this observable.
+As shown in XXX, the proton-iron separation for certain air-shower observables, such as $L$, is not heavily influenced by the observable's reconstruction uncertainty.
+Whereas other observables, such as $\lg\left(N_{\mu}\right)$\,\qty{800}{\meter}, have a much higher dependence of the proton-iron discrimination power on the assumed observable reconstruction uncertainty.
 
-
-%As shown in Fig.~\ref{fig:IC_single_observables}, the proton-iron separation for certain air-shower observables, such as $\log(N_{\text{e}})$, is not heavily influenced by the observable's reconstruction uncertainty.
-%Whereas other observables, such as $\log(N_{\mu})$, have a much higher dependence of the proton-iron discrimination power on the assumed observable reconstruction uncertainty.
+%XXX shows the proton-iron merit factors as a function of air-shower energy for knowledge of single air-shower observables.
+%Each individual figure represents the mass sensitivity of a single observable, studied 
 
 %the primary particle distributions projected onto the Fisher axis.
 
@@ -269,12 +277,43 @@ The $L$ baseline uncertainty is assumed to be \qty{5}{\gram\per\centi\meter\squa
 %However, the separation must be quantified in a mathematical way to study 
 %Minimal overlap of the contour lines is seen, specifically for the proton and iron distributions
 
-
 %This can bu studied using the full observable distributions in multiple dimensions. 
 %The two-dimensional contour plots from XXX exhibit this separation including fluctuations where th 
 
+\subsection{Event-by-Event Mass Separation from Combined Knowledge of All Studied Air-Shower Observables}\label{sec:combined}
+Naturally, the overall separation power between primaries will increase with the addition of more mass sensitive observables.
+\Cref{sec:projections} used two-dimensional contour plots to exhibit the increase in separation power when adding knowledge of a second observable.
+While higher-dimensional contour plots are difficult to visualize, the Fisher linear discriminant can easily be used to calculate the FOM for the combination of any number of shower observables.
+As a quantitative estimate of the event-by-event mass separation between proton and iron primaries, the FOM was calculated as a function of binned primary particle energy for knowledge of each observable individually and when knowledge of all observables is combined.
+The individual knowledge FOM values for all observables were calculated with knowledge of both the observable in question and the energy reference, $N_{\rm{e, max}}$.
 
-%\subsection{Choosing a Muon Annulus for Mass Sensitivity}\label{sec:annulus}
+XXX shows the proton-iron separation power curves for each observable individually, along with their combined knowledge curves, for the three studied hadronic interaction models: Sibyll 2.3e, EPOS LHC-R, and QGSJET III-01.
+FOM curves of the combination of all observables are shown twice, once with the assumed reconstruction uncertainties for all observables (magenta), and once with exact knowledge of all observables (dark blue).
+Knowledge of individual observables were calculated within the baseline reconstruction uncertainties stated in~\Cref{sec:resolution}.
+All FOM values, along with their uncertainty bands, were calculated from a bootstrap method, as described in~\Cref{sec:resolution}.
+The proton-iron separation power curves for each hadronic interaction model were calculated in the zenith angle range of \qtyrange{40}{60}{\degree} to increase the statistics within each energy bin.
+
+As expected, exact knowledge of all observables yields the best proton-iron separation for all three of the studied hadronic interaction models.
+Knowledge of all observables within their assumed baseline reconstruction uncertainties yields promising event-by-event mass separation between proton and iron primaries, with FOM values of nearly 2.0 at for all three models that decrease slightly with increasing energy.
+This decrease in overall separation power is driven by the decrease in separation power of the $\lg\left(N_{\mu}\right)$\,\qty{800}{\meter} observable and has a larger impact on total separation power for the EPOS LHC-R and QGSJET III-01 models than for Sibyll 2.3e.
+The largest difference between models is for the low-energy $N_{\mu}$ observable of QGSJET III-01, which exhibits a systematically higher proton-iron mass separation than both the Sibyll 2.3e and EPOS LHC-R models.
+This difference also increases the QGSJET III-01 mass separation curves when combined knowledge of all observables is known.
+Otherwise, between models, the proton-iron separation curves are generally consistent.
+
+%Discuss decrease in proton-iron separation for R and muons and increase in L. Discuss origin...
+%Add text for vertical (0-30) shower FOM plots
+
+
+%both IceCube and Auger for the zenith range of $\theta_{\text{zen}}$ = 40$^{\circ}-$60$^{\circ}$ and slightly higher separation power for nearly vertical showers within a zenith range of $\theta_{\text{zen}}$ = 0$^{\circ}-$20$^{\circ}$.
+%This dependence of the separation power on zenith angle is driven by the particles detectable at the surface.
+%In particular, the electron-muon ratio observables (for both high and low energies) and the low-energy surface muon observable provide large contributions, as there appears to be little to no zenith dependence on the \xmax, high-energy muon number, $L$, or $R$ observables.
+%Doubling the assumed baseline uncertainties for all observables decreases the combined knowledge FOM values by approximately 0.5 for both zenith ranges at the IceCube and Auger locations, resulting in lesser yet still promising event-by-event mass separation.
+
+\subsection{Studying Highly Mass Sensitive Observable Combinations}\label{sec:combinations}
+% Discuss event-by-event separation of L observable in combination with Xmax and muons.
+
+\subsection{Event-by-Event Mass Separation of Helium from Proton and Oxygen Primaries}\label{sec:intermediate}
+
 
 \section{Gradient Boosted Decision Trees to Improve Mass Sensitivity}\label{sec:gbdt}
 Include containment plots
