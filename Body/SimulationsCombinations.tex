@@ -331,10 +331,119 @@ This is confirmed as the $X_{\rm max}$, $R$ and $L$ observables show similar ene
 %Doubling the assumed baseline uncertainties for all observables decreases the combined knowledge FOM values by approximately 0.5 for both zenith ranges at the IceCube and Auger locations, resulting in lesser yet still promising event-by-event mass separation.
 
 \subsection{Studying Highly Mass Sensitive Observable Combinations}\label{sec:combinations}
+Within this multivariate analysis, the combined knowledge mass separation curves are heavily influenced by only a handful of the studied observables.
+The addition of more mass sensitive air-shower observables will improve mass separation; however, the individual separation power curves do not add linearly, making it hard to disentangle which combinations of observables contribute most to the overall mass separation curves in XXX.
+To study this, FOM values for observable pairs were calculated using~\Cref{eq:fom} for an energy range of \qtyrange[parse-numbers=false]{10^{18.0}}{10^{18.1}}{\electronvolt} and zenith range of \qtyrange{40}{60}{\degree}.
+All possible combinations of observable pairs are studied.
+Table XXX shows the resulting FOM values for the observable pairs using the EPOS LHC-R hadronic interaction model, where all observables were scaled with respect to the energy reference observable.
+The diagonal of Table XXX, shown in boldface font, represents the FOM for knowledge of only the scaled observable in question.
+For reference, combining knowledge of all studied observables for this hadronic model, energy and zenith range results in a FOM value of XXX.
+
+The highest FOM value corresponds to the observable combination of the XXX with the XXX.
+%Although, the FOM value for this observable combination is only fractionally better than the combination of electrons at ground and high-energy muons.
+%Another notable observable pair is the combination of \xmax and low-energy surface muon number, as this combination yields the largest FOM value for any observable combination when excluding the high-energy muons.
+
 % Discuss event-by-event separation of L observable in combination with Xmax and muons.
+% Discuss which observables contribute MOST to the overall mass separation power
+
 
 \subsection{Event-by-Event Mass Separation of Helium from Proton and Oxygen Primaries}\label{sec:intermediate}
+A multitude of cosmic-ray studies would benefit from the ability to discriminate between helium and the CNO group (carbon, nitrogen, oxygen), as well as proton and helium cosmic rays.
+Measurements of the proton-to-helium ratio in the energy range of the Galactic to extragalactic transition, as well as the fraction of CNO, can help to distinguish certain scenarios for the origin of the highest energy Galactic cosmic rays CITE44FROMPRD.
+Moreover, it is possible that these highest energy Galactic cosmic rays are rich in CNO while the extragalactic cosmic rays in the transition region may be rich in protons and possibly helium CITE45FROMPRD (maybe updated reference?).
+In such scenarios, discrimination between cosmic rays of these mass groups (p, He, CNO) on an event-by-event basis may effectively enable to separate Galactic from extragalactic cosmic rays, allow for mass-group specific anisotropy measurements, and potentially enable rigidity-based particle astronomy of the most energetic Galactic sources.
 
+The FOM metric was applied to measure the helium-oxygen and helium-proton separation power when using knowledge of all observables investigated within this analysis.
+All observables were scaled with respect to the energy reference observable and the FOM curves were calculated following the same method as in~\Cref{sec:combined}.
+XXX presents the helium-oxygen separation power as a function of true air-shower energy for each hadronic interaction model within a zenith angle range of \qtyrange{40}{60}{\degree}.
+The helium-oxygen separation power is approximately two times lower than the proton-iron separation power for all FOM curves, with all curves showing similar relationships as a function of energy.
+Reasonable event-by-event helium-oxygen separation is not feasible for any hadronic interaction model when knowledge of all observables is known within their baseline uncertainties.
+Having exact knowledge of all studied observables for helium-oxygen separation is near the limit of what is considered reasonable for event-by-event separation, yet this is not attainable with true air-shower experiments.
+
+XXX shows this same helium-oxygen separation power now calculated within a zenith angle range of \qtyrange{0}{30}{\degree}.
+A difference from XXX is the steeply declining FOM curve when exact knowledge of all observables is known.
+This is caused from the decreasing mass sensitivity of the $\lg\left(N_{\mu}\right)$\,\qty{800}{\meter} observable with energy when this observable is known with exact precision.
+Notably, the same FOM curve for proton-iron separation does not exhibit this energy dependence, therefore the muon observables could have a greater influence on the overall mass separation between intermediate masses than between light and heavy masses. 
+
+FIGURESXXX show the same results as FIGURESXXX but now for helium-proton separation rather than helium-oxygen.
+In each case, the helium-proton separation is less than the helium-oxygen separation, with the helium-proton separation power systematically about three times lower than the proton-iron separation power.
+Visible is a decrease with energy of the \qtyrange{0}{30}{\degree} helium-proton FOM curves when exact knowledge of all observables is known, yet the slope of this decrease has a less rapid decline than the helium-oxygen exact knowledge curves.
+Additionally, the $L$ observable FOM curve does not contribute much to the overall helium-proton separation in either zenith angle range.
+Hence, our results show $L$ is not a good observable for use in event-by-event mass discrimination between helium and proton primaries, although it may still be a good observable to determine the proton-helium ratio statistically for a large sample of events. 
+The difference between $\ln(A)$ for helium and oxygen primaries is similar to this difference for helium and proton primaries, therefore the difference in $\mu$ from~\Cref{eq:fom} for these primary combinations is similar.
+However, oxygen has smaller shower-to-shower fluctuations, leading to narrower distributions for all observables than for proton.
+This smaller spread increases the separation between the helium and oxygen distributions, resulting in larger FOM values for the helium-oxygen separation power than those of helium-proton separation.
+
+% Add a place for the text from the discussion section of PRD paper about event-by-event separation vs. average mass composition!!!
 
 \section{Gradient Boosted Decision Trees to Improve Mass Sensitivity}\label{sec:gbdt}
-Include containment plots
+\Cref{sec:intermediate} clearly illustrates the difficulty of separation for intermediate and lighter mass primaries on a per-event basis.
+However, the Fisher analysis presented here only accounts for linear correlations between observables in each shower, and therefore a more advanced analysis technique could enhance the event-by-event mass separation beyond the one presented above.
+A pipeline was established to train a gradient boosted decision tree (GBDT) for the regression task of predicting population ''zero-like'' and ''one-like'' events, where regression values of 0.0 and 1.0 represent populations zero and one respectively, corresponding to two different primary masses.
+Several GBDTs were trained, where each individual decision tree is trained and validated on data from a single combination of the four options: hadronic interaction model (EPOS LHC-R, Sibyll 2.3e, or QGSJETIII-01), primary mass group separation (proton-iron, helium-oxygen, or helium-proton), zenith angle range (\qtyrange{0}{30}{\degree} or \qtyrange{40}{60}{\degree}) and assumed observable reconstruction accuracy (exact knowledge or within the assumed baseline uncertainties from~\Cref{sec:resolution}).
+Each GBDT was defined using the scikit-learn python package CITE46FROMPRD where no hyperparameter optimization was performed.
+Only default hyperparameters were used, other than the random seed used for each regression tree to control reproducibility.
+Knowledge of all studied observables, $X_{\rm max}$, $R$, $L$, $\lg\left(N_{\mu}\right)$\,\qty{800}{\meter}, and $\rm R_{\rm e/\mu}$\,\qty{800}{\meter} were used as input features to the regression task.
+Observables were scaled with respect to the energy reference observable, $N_{\rm{e, max}}$, prior to training.
+The same quality cuts for $X_{\rm max}$, $R$, and $L$ as described in~\Cref{sec:profilefitting} were employed to ensure the same data was used in both the GBDT and Fisher analyses.
+
+A training-validation ratio of 4:1 was used, where the validation set was further divided into primary energy bins of width $\lg(E / \text{eV})$ = 0.2.
+Using a wider energy binning than the Fisher analysis is necessary to ensure reasonable event statistics per energy bin.
+A FOM was calculated using the validation output from the GBDTs following~\Cref{eq:fom} where x and y are respectively replaced with 0 and 1 to represent the ''zero-like'' and ''one-like'' populations.
+The GBDT validation set results for proton-iron separation of EPOS LHC-R simulations within an energy range of \qtyrange[parse-numbers=false]{10^{18.0}}{10^{18.2}}{\electronvolt} are shown in XXX.
+Iron primaries are defined as the ''zero-like'' population and proton primaries are defined as the ''one-like'' population where the zenith range used for this validation set is \qtyrange{40}{60}{\degree}.
+The FOM is calculated in the same way as described in~\Cref{sec:projections} and is reported within the plot; however, no bootstrapping is performed to estimate the nominal FOM or an uncertainty band.
+Instead the nominal FOM is taken to be the single value output from this calculation.
+Also plotted as dashed and dotted lines are the points of 5\% and 1\% contamination of iron in the proton distribution.
+Reported with these lines are the fraction of proton separable from iron given this contamination percentage, calculated by integrating the fraction of the proton distribution to the right from each contamination line.
+Clearly, a high FOM value corresponds to a high fraction of proton primaries which can be separated from iron primaries with minimal contamination. 
+
+XXX shows the proton-iron FOM as a function of primary particle energy for the GBDT output using combined knowledge of all observables, both known exactly and within the assumed baseline reconstruction uncertainties, for the three hadronic interaction models within a zenith range of \qtyrange{40}{60}{\degree}.
+The FOM values from the Fisher analysis are included for comparison.
+For proton-iron separation, the GBDT performs substantially better than the Fisher analysis in the complete energy range studied within this analysis across all three hadronic interaction models.
+The GBDT results accounting for reconstruction uncertainties provide greater proton-iron mass separation than the Fisher analysis with exact knowledge of all observables across all energies and hadronic models.
+However, when including reconstruction uncertainties, the QGSJETIII-01 GBDT results approach the Fisher analysis results at the highest cosmic-ray energies studied.
+Looking at the GBDT results for vertical showers presented in XXX similar behavior is seen.
+Again, the GBDT analysis performs better than the Fisher analysis on all accounts, yet the GBDT and Fisher QGSJETIII-01 results including uncertainties are similar for the highest energy cosmic rays.
+Also seen for QGSJETIII-01 vertical showers only are large fluctuations between adjacent energy bins in the exact knowledge FOMs predicted by the GBDT.
+Possible explanations include a lack of statistics in the QGSJET validation set or potentially overfitting of the GBDT results in certain energy bins.
+
+\subsection{Separating Helium from Proton and Oxygen Primaries using GBDTs}\label{sec:gbdt_intermediate}
+Proton-iron mass separation clearly improves when using a GBDT over the Fisher linear discriminant to quantify the event-by-event separation power.
+However, with the Fisher analysis, the event-by-event proton-iron separation was already reasonable, and instead the intermediate and light mass separation proved difficult to achieve.
+The same pipeline described in~\Cref{sec:gbdt} of training a GBDT and extracting a FOM value from the results was used to calculate helium-oxygen and helium-proton FOM curves for all three studied hadronic interaction models.
+Results for helium-oxygen separation of inclined showers are shown in XXX, while the same results for vertical showers are shown in XXX.
+In terms of helium-oxygen separation, the GBDT shows little to no improvement over the simple Fisher analysis, further highlighting the difficulty of separating intermediate mass groups.
+The same results for helium-proton separation are presented in FIGURESXXX, again with no improvement over the Fisher analysis.
+
+% Containment factors and plot for Helium-Oxygen
+The similarity of results between the GBDT and Fisher analysis for helium-oxygen and helium-proton mass separation can be further studied by directly comparing the distributions from which the FOMs are calculated.
+XXX shows the resulting helium-oxygen distributions of EPOS LHC-R simulations in a single energy and zenith bin for the GBDT analysis (left) and the Fisher analysis (right) when exact knowledge of all observables is assumed.
+Results are shown within the same energy and zenith bin in both analyses to allow a direct comparison.  
+The GBDT presents a higher FOM for helium-oxygen separation compared to the Fisher analysis in this figure; however, the fractions of separable helium with 5\% and 1\% contamination from oxygen are similar between the methods.
+Studying these same distributions including reconstruction uncertainties results in similar FOM and contamination values between both analyses, yet at lower absolute values compared to the distributions assuming exact knowledge of the observables.
+Overall, these results highlight that the GBDT performs equally well (helium-oxygen and helium-proton) or better (proton-iron) than the Fisher linear discriminant analysis, with consistency in this conclusion across hadronic interaction model, zenith angle, primary energy, and observable reconstruction uncertainty.
+
+The lack of improvement from the GBDT over the Fisher analysis for intermediate and light mass separation highlights the difficulty of per-event mass sensitivity going forward.
+Future studies need to show whether this is an intrinsic limitation or whether this can be overcome by more sophisticated, optimized GBDTs or by more advanced machine learning models, such as neural networks.
+The latter could be better suited for this task, yet these methods pose their own risks, given the mismatch to data of different high-energy hadronic interaction models currently available.
+Hyperparamter optimization could improve the mass separation of the GBDT analysis, yet is prone to overfitting the training data.
+Also, including finer details of the air showers, such as the azimuthal symmetry and smoothness of the radio and of the particle footprints, might further increase the mass separation.
+These finer details, while important, require knowledge of air-shower array spacing, size, and sensitivity on a station level to determine reasonable reconstruction uncertainties.  
+Hence, these observables were not studied here to provide an analysis of a more general purpose.
+
+\subsection{The Observable Importance Factors in the GBDT Analysis}\label{sec:importances}
+For each trained GBDT, the observable importance was calculated from the purity gained by splitting the observable (i.e. the Gini importance).
+For all GBDTs trained on EPOS LHC-R simulations, the observable yielding the most purity gain was either the $X_{\rm max}$ or low-energy $N_{\mu}$ observable, depending on the mass of the primary particles studied and the assumed observable reconstruction uncertainties.
+In particular, $X_{\rm max}$ is most important when observable uncertainties are included and for exact knowledge proton-iron separation, yet low-energy $N_{\mu}$ is most important for the helium-oxygen and helium-proton separations when exact knowledge of the observables is known.
+% Report for other models also.
+% Compare to Fisher most sensitive observable pairs.
+Table XXX lists the Gini importance of observables for proton-iron separation of EPOS LHC-R simulations, both when observables are known exactly or known within reconstruction uncertainties.
+
+
+%Hence, the GBDT analysis performs equally well (helium-oxygen and helium-proton) to better (proton-iron) than the Fisher analysis, with consistencies for the most mass sensitive observables between the analysis methods.
+
+
+
+
+%Include containment plots
