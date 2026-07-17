@@ -170,21 +170,33 @@ Hence, this further confirms the potential role the $L$ observable tail for disc
 \subsection{Energy Proxy Scaling Corrections for Air-Shower Observables}\label{sec:scaling}
 Air-shower observables studied in this analysis must be corrected for their energy dependence, as observable distributions will be smeared from binning simulated air showers with respect to their energy.
 All studied observables are scaled with respect to $N_{\rm e, max}$ as this observable serves as a proxy to the total air-shower energy and, as in real experiments, the true energy is unknown.
-The evolution of the average $N_{\rm e, max}$ in bins of true air-shower energy is shown in XXX for EPOS LHC-R simulations, while the evolution of the average values of all other observables in this analysis in bins of $N_{\rm e, max}$ is shown in XXX for the same hadronic model.
+The evolution of the average $N_{\rm e, max}$ in bins of true air-shower energy is shown in~\Cref{fig:energy_reference} for EPOS LHC-R simulations, while the evolution of the average values of all other observables in this analysis in bins of $N_{\rm e, max}$ is shown in~\Cref{fig:scalings} for the same hadronic model.
 The uncertainty in the average observable value for each bin is included, yet in most cases is too small to be discernible.
 The zenith range of $\theta_{\rm zen}\,=\,$\qtyrange{40}{50}{\degree} was chosen as an example due to the efficiency of SKALA type radio antennas for air-shower detection in this zenith range~\cite{icrc2021_coleman}.
 
-%The average dependence of $N_{\rm e, max}$ on air-shower energy is shown in XXX for EPOS LHC-R simulations while the average dependence of all studied observables in the analysis is shown in XXX for the same hadronic model.
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.45\textwidth]{chapter4/nEM_energyScaling_EPOSLHCR.pdf}
+  \caption[Energy scaling of the energy proxy observable.]{The energy proxy observable $N_{\rm e, max}$ plotted as a function of true air-shower energy, binned in energy bins of width $\lg$(E / eV) = 0.1. All four primaries are shown for the EPOS LHC-R hadronic model within a zenith range of \qtyrange{40}{50}{\degree}. A linear fit is applied to the distribution of $N_{\rm e, max}$ for each primary, with the fit results reported in the legend.}
+  \label{fig:energy_reference}
+\end{figure}
 
-%FIGURE_FOR_NEMAX_SCALING_EPOSLHCR
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.45\textwidth]{chapter4/Xmax_energyProxyScaling_EPOSLHCR.pdf}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.45\textwidth]{chapter4/L_energyProxyScaling_EPOSLHCR.pdf}\\
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.45\textwidth]{chapter4/R_energyProxyScaling_EPOSLHCR.pdf}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.45\textwidth]{chapter4/nMu800m_energyProxyScaling_EPOSLHCR.pdf}\\
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.45\textwidth]{chapter4/R_EMMu800m_energyProxyScaling_EPOSLHCR.pdf}
+  \caption[Energy scaling of all observables with respect to the energy proxy observable.]{The scaling of each investigated observable as a function of the energy proxy observable, $N_{\rm e, max}$. All four primaries are shown for the EPOS LHC-R hadronic model within a zenith range of \qtyrange{40}{50}{\degree}. A linear fit is applied to the observable distributions for each primary, with the fit results reported in the legend. Notable is the distinct behavior of the $L$ observable scaling.}
+  \label{fig:scalings}
+\end{figure}
 
-% FIGURE_FOR_ALL_OBSERVABLE_SCALINGS_VS_NEMAX_EPOSLHCR
-
-Each plot in XXX has an event number cut of 160 applied to the $N_{\rm e, max}$ bins to ensure good statistics for all four primaries and full coverage of the electron number at $X_{\rm max}$ phase space, the spread in which is caused by shower-to-shower fluctuations.
-This event number cut removes bins to the left and right of the energy reference range shown in XXX plots, as they do not follow the typical trendlines shown due to their limited phase space coverage.
+Each plot in~\Cref{fig:scalings} has an event number cut of 160 applied to the $N_{\rm e, max}$ bins to ensure good statistics for all four primaries and full coverage of the electron number at $X_{\rm max}$ phase space, the spread in which is caused by shower-to-shower fluctuations.
+This event number cut removes bins to the left and right of the energy reference range shown in the figures, as they do not follow the typical trendlines shown due to their limited phase space coverage.
 Removing the bins with limited statistics allows the trendlines to accurately represent the observable scalings, within the energy range used in this analysis.
 A linear fit is then applied individually to all primaries to be used for scaling the observable.
-The resulting per-primary linear fits are shown in BOTHFIGURES.
+The resulting per-primary linear fits are shown in the both figures, where the result of each linear fit is reported in their respective figure legends.
 
 Analysis observables $a$ are scaled to the energy proxy per event following 
 
@@ -196,7 +208,7 @@ Analysis observables $a$ are scaled to the energy proxy per event following
 where $a_{\rm true}$ is the per-event observable value pre-scaling, $N_{\rm e, max}$ is the electron number at shower maximum for the event, and $N_{\rm EeV}$ is the average electron number at shower maximum for \qty{1}{\exa\electronvolt} air showers.
 $m$ is the average slope of the linear fits to all four primaries for the observable $a$.
 Note that the functional form of~\Cref{eq:scaling} works for the annulus based muon number at ground because the base-10 logarithm of this observable is used in the analysis.
-For EPOS LHC-R, 0.01 was then added to the average slope $m$ for all observable scalings to correct for the weak deviation of $N_{\rm e, max}$ from an exact linear energy scaling, as 1.01 is the average of the linear fit slopes shown in XXX.
+For EPOS LHC-R, 0.01 was then added to the average slope $m$ for all observable scalings to correct for the weak deviation of $N_{\rm e, max}$ from an exact linear energy scaling, as 1.01 is the average of the linear fit slopes shown in~\Cref{fig:energy_reference}.
 Scaling slopes $m$ and the average electron number at shower maximum for \qty{1}{\exa\electronvolt} air showers ($N_{\rm EeV}$) are different for each hadronic model because each model predicts different observable distributions, hence this correction to $m$ could be different for each hadronic model as well. 
 \Cref{tab:scaling} lists the scaling constants of the studied observables for each hadronic interaction model.
 
@@ -222,11 +234,17 @@ Scaling slopes $m$ and the average electron number at shower maximum for \qty{1}
 \end{table}
 
 Scaling the air-shower observables removes the energy dependence of these observables as seen in the simulations, allowing for the use of wide energy bins in our analysis without risk of smearing the observable distributions.
-As a consequence, this scaling also increases the mass separation of the individual observables, as illustrated by the proton-iron contour plots in XXX.
+As a consequence, this scaling also increases the mass separation of the individual observables, as illustrated by the proton-iron contour plots in~\Cref{fig:pre_post_scaling_contours}.
 Only proton and iron distributions are shown in this figure for clarity, highlighting the effect of scaling on the surface muon and $X_{\rm max}$ observables.
 From this point forward, any mention of the analysis observables refers to the observables post-scaling.
 
-% FIGURE showing 2d contours pre and post-scaling for surface muon annulus and Xmax combined. Proton-iron only, EPOSLHCR
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.45\textwidth]{chapter4/nMu800m_Xmax_pFe_contours_noScaling_EPOSLHCR.pdf}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.45\textwidth]{chapter4/nMu800m_Xmax_pFe_contours_EPOSLHCR.pdf}
+  \caption[Contours of surface muons and $X_{\rm max}$ pre- and post-scaling.]{The two-dimensional contours of the $\lg\left(N_{\mu}\right)$\,\qty{800}{\meter} and $X_{\rm max}$ observables for proton and iron primaries both before scaling with respect to the energy reference observable (left) and after scaling with respect to the energy reference observable (right). Note scaling the observables inadvertently increases the mass separation between the primary particle distributions as they are no longer smeared over a large range of air-shower energies. These contours are for the EPOS LHC-R hadronic model within a zenith range of \qtyrange{40}{50}{\degree} and an energy range of \qtyrange[parse-numbers=false]{10^{17.0}}{10^{17.5}}{\electronvolt}.}
+  \label{fig:pre_post_scaling_contours}
+\end{figure}
 
 %ensures the particles within an annulus 
 
@@ -253,11 +271,18 @@ From this point forward, any mention of the analysis observables refers to the o
 %\subsection{Fitting the Longitudinal Profile of Air Showers}\label{sec:profilefitting}
 
 \section{Fisher Linear Discriminant Analysis to Model Mass Sensitivity}\label{sec:fisher}
-The mean mass separation between different mass primaries is visible from the scaling plots presented in FIGURES, but to study the event-by-event mass separation both the separation of the mean observable values and the statistical shower-to-shower fluctuations of the observables are important.
+The mean mass separation between different mass primaries is visible from the scaling plots presented in~\Cref{fig:scalings}, but to study the event-by-event mass separation both the separation of the mean observable values and the statistical shower-to-shower fluctuations of the observables are important.
 Using multiple observables with their full distributions is then necessary to study the event-level mass separation.
-XXX shows the two-dimensional contour plot of $\lg\left(N_{\mu}\right)$\,\qty{800}{\meter} and $X_{\rm max}$ for all four primaries within an energy range of \qtyrange[parse-numbers=false]{10^{17.0}}{10^{17.5}}{\electronvolt} and zenith range of \qtyrange{40}{50}{\degree} for EPOS LHC-R simulations.
+\Cref{fig:muon_xmax_contour} shows the two-dimensional contour plot of $\lg\left(N_{\mu}\right)$\,\qty{800}{\meter} and $X_{\rm max}$ for all four primaries within an energy range of \qtyrange[parse-numbers=false]{10^{17.0}}{10^{17.5}}{\electronvolt} and zenith range of \qtyrange{40}{50}{\degree} for EPOS LHC-R simulations.
 The width of the energy and zenith bins has been chosen narrow enough to see trends over energy and zenith angles, on the one hand, and to provide sufficient statistics in each bin, on the other hand.
 Both the 68\% and 90\% contour lines are shown for each primary population, with minimal overlap visible specifically between the proton and iron distributions.
+
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.45\textwidth]{chapter4/nMu800m_Xmax_allprimaries_contours_EPOSLHCR.pdf}
+  \caption[Contours of surface muons and $X_{\rm max}$ for all primaries.]{The two-dimensional contours of the $\lg\left(N_{\mu}\right)$\,\qty{800}{\meter} and $X_{\rm max}$ observables for all studied primaries. EPOS LHC-R simulations are shown, within a zenith range of \qtyrange{40}{50}{\degree} and an energy range of \qtyrange[parse-numbers=false]{10^{17.0}}{10^{17.5}}{\electronvolt}.}
+  \label{fig:muon_xmax_contour}
+\end{figure}
 
 The visible separation gives a qualitative sense of separation between distributions; however, this separation must be quantified mathematically.
 A Fisher linear discriminant analysis was performed to investigate the mass separation between distributions of two primary particle populations.
@@ -278,12 +303,28 @@ Separation power between the distributions increases with increasing FOM values,
 
 \subsection{Visualizing the Quantified Mass Sensitivity}\label{sec:projections}
 The distribution projections onto the Fisher axis are used to visualize how the formal mathematical definition translates graphically.
-XXX shows the two-dimensional contour plots of $L$ and $X_{\rm max}$ and $\rm R_{\rm e/\mu}$\,\qty{800}{\meter} and $X_{\rm max}$ proton-iron distributions for EPOS LHC-R simulations.
+\Cref{fig:proton_iron_contours} shows the two-dimensional contour plots of $L$ and $X_{\rm max}$ and $\rm R_{\rm e/\mu}$\,\qty{800}{\meter} and $X_{\rm max}$ proton-iron distributions for EPOS LHC-R simulations.
 The same energy and zenith ranges as the contour plots in the previous section are used.
-Projections onto the one-dimensional Fisher axis, for the same distributions from XXX, are presented in XXX, with the average and 1$\sigma$ band of each population included.
+Projections onto the one-dimensional Fisher axis, for the same distributions from~\Cref{fig:proton_iron_contours}, are presented in~\Cref{fig:proton_iron_projections}, with the average and 1$\sigma$ band of each population included.
 FOM values are calculated using~\Cref{eq:fom} for each projection plot to numerically represent the separation power for the observable combination.
 From the calculated merit factors, the $\rm R_{\rm e/\mu}$\,\qty{800}{\meter} and $X_{\rm max}$ observable combination yields the better proton-iron mass separation power from the two projections.
 This is in agreement with the lesser overlap of the proton-iron distributions for this observable combination in both the projection plots and their respective two-dimensional contours.
+
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.45\textwidth]{chapter4/L_Xmax_pFe_contours_EPOSLHCR.pdf}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.45\textwidth]{chapter4/R_EMMu800m_Xmax_pFe_contours_EPOSLHCR.pdf}
+  \caption[Proton-iron contours of $L$ and $X_{\rm max}$ and $\rm R_{\rm e/\mu}$\,\qty{800}{\meter} and $X_{\rm max}$ for EPOS LHC-R.]{The two-dimensional proton-iron contours of the $L$ and $X_{\rm max}$ observables (left) and the $\rm R_{\rm e/\mu}$\,\qty{800}{\meter} and $X_{\rm max}$ observables (right). Contours are shown for EPOS LHC-R simulations, within a zenith range of \qtyrange{40}{50}{\degree} and an energy range of \qtyrange[parse-numbers=false]{10^{17.0}}{10^{17.5}}{\electronvolt}. Lesser overlap in the contours of the $\rm R_{\rm e/\mu}$\,\qty{800}{\meter} and $X_{\rm max}$ observables is seen compared to the same contours for the $L$ and $X_{\rm max}$ observables.}
+  \label{fig:proton_iron_contours}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.45\textwidth]{chapter4/L_Xmax_pFe_fisherprojection_EPOSLHCR.pdf}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.45\textwidth]{chapter4/R_EMMu800m_Xmax_pFe_fisherprojection_EPOSLHCR.pdf}
+  \caption[Fisher projections of the contours from~\Cref{fig:proton_iron_contours}.]{The projections onto the Fisher axis of the contours presented in~\Cref{fig:proton_iron_contours}. The $L$ and $X_{\rm max}$ observable projections are presented on the left and the $\rm R_{\rm e/\mu}$\,\qty{800}{\meter} and $X_{\rm max}$ observable on the right. The scale of the Fisher projection axis is arbitrary, so it is scaled here such that the means of each distribution sit at -1 and 1 respectively. This effectively fixes the numerator in~\Cref{eq:fom}. The FOM values calculated from the projections are included in the plot, with the $\rm R_{\rm e/\mu}$\,\qty{800}{\meter} and $X_{\rm max}$ observable combination exhibiting higher proton-iron separation power.}
+  \label{fig:proton_iron_projections}
+\end{figure}
 
 \subsection{Studying the Effect of Reconstruction Resolution on Observable Mass Sensitivity}\label{sec:resolution}
 Important for any air-shower analysis is the resolution at which air-shower observables can be reconstructed.
@@ -299,10 +340,17 @@ Per-event, a random value is drawn from a Gaussian centered on zero and with a w
 The result is the underlying true observable distribution convolved with a Gaussian distribution with a width of the assumed reconstruction uncertainty, from which the FOM is calculated.
 To estimate the uncertainty of the FOM, a bootstrapping random sampling with replacement method was performed.
 This process was repeated to calculate 30 FOM values, of which the average and standard deviation were taken as the nominal FOM and its 1$\sigma$ uncertainty band.
-XXX shows the proton-iron merit factors as a function of air-shower energy and observable reconstruction uncertainty for knowledge of single air-shower observables simulated with hadronic interaction model EPOS LHC-R.
+\Cref{fig:reconstruction_resolution} shows the proton-iron merit factors as a function of air-shower energy and observable reconstruction uncertainty for knowledge of single air-shower observables simulated with hadronic interaction model EPOS LHC-R.
 A larger zenith range of \qtyrange{40}{60}{\degree} is used compared to the observable scaling to increase the statistics within each energy bin for the FOM calculation.
 
 %The per-event observable values are smeared by adding to the true value a random value drawn from a Gaussian distribution to incorporate the reconstruction uncertainties in the FOM calculations, where this Gaussian is centered on zero with a width of the assumed observable reconstruction uncertainty.
+
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter4/Observable_resolutions_pFe_EPOSLHCR.pdf}
+  \caption[Effect of observable resolution on proton-iron mass separation.]{Proton-iron separation power plots as a function of air-shower energy for knowledge of a single air-shower observable. A range of reconstruction uncertainties for each observable are assumed and their respective separation power curves are included within the plots, where the assumed baseline uncertainties are in boldface font within the legend. See text for details.}
+  \label{fig:reconstruction_resolution}
+\end{figure}
 
 The FOM values for all observables were calculated with knowledge of both the observable in question and the energy reference, $N_{\rm{e, max}}$.
 Except for the FOM values labeled ''exact knowledge'', an uncertainty in $N_{\rm{e, max}}$ of 10\% was applied, motivated by the order of magnitude of current uncertainties of radio and air-fluorescence energy measurements~\cite{auger_prd2016_aeraenergyscale, auger_prl2016_aeraenergyscale, tunkarex_jcap2016_xmax, lopes_epjc2021_finalresults, auger_astropartphys2017_fdcalibration}.
@@ -312,7 +360,7 @@ The baseline uncertainties for $\lg(N_{\rm{e}})$ and $\lg\left(N_{\mu}\right)$ a
 The electron-muon ratio within this annulus has its baseline uncertainty calculated by error propagation of the electron and muon component individual uncertainties.
 Motivated by~\cite{auger_jcap2019_longitudinalprofiles}, the $R$ baseline uncertainty is assumed to be 0.05.
 The $L$ baseline uncertainty is assumed to be \qty{5}{\gram\per\centi\meter\squared} which is lower than the reconstruction uncertainty from~\cite{auger_jcap2019_longitudinalprofiles}; however, the $L$ resolution has little impact on the proton-iron separation power for this observable.
-As shown in XXX, the proton-iron separation for certain air-shower observables, such as $L$, is not heavily influenced by the observable's reconstruction uncertainty.
+As shown in~\Cref{fig:reconstruction_resolution}, the proton-iron separation for certain air-shower observables, such as $L$, is not heavily influenced by the observable's reconstruction uncertainty.
 Whereas other observables, such as $\lg\left(N_{\mu}\right)$\,\qty{800}{\meter}, have a much higher dependence of the proton-iron discrimination power on the assumed observable reconstruction uncertainty.
 
 %XXX shows the proton-iron merit factors as a function of air-shower energy for knowledge of single air-shower observables.
@@ -335,11 +383,18 @@ While higher-dimensional contour plots are difficult to visualize, the Fisher li
 As a quantitative estimate of the event-by-event mass separation between proton and iron primaries, the FOM was calculated as a function of binned primary particle energy for knowledge of each observable individually and when knowledge of all observables is combined.
 The individual knowledge FOM values for all observables were calculated with knowledge of both the observable in question and the energy reference, $N_{\rm{e, max}}$.
 
-XXX shows the proton-iron separation power curves for each observable individually, along with their combined knowledge curves, for the three studied hadronic interaction models: EPOS LHC-R, Sibyll 2.3e, and QGSJETIII-01.
+\Cref{fig:fisher_protoniron_inclined} shows the proton-iron separation power curves for each observable individually, along with their combined knowledge curves, for the three studied hadronic interaction models: EPOS LHC-R, Sibyll 2.3e, and QGSJETIII-01.
 FOM curves of the combination of all observables are shown twice, once with the assumed reconstruction uncertainties for all observables (magenta), and once with exact knowledge of all observables (dark blue).
 Knowledge of individual observables were calculated within the baseline reconstruction uncertainties stated in~\Cref{sec:resolution}.
 All FOM values, along with their uncertainty bands, were calculated from a bootstrap method, as described in~\Cref{sec:resolution}.
 The proton-iron separation power curves for each hadronic interaction model were calculated in the zenith angle range of \qtyrange{40}{60}{\degree} to increase the statistics within each energy bin.
+
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter4/Fisher_FOM_pFe_zen40_60_allmodels.pdf}
+  \caption[FOM curves of proton-iron mass separation for inclined air showers.]{Proton-iron separation power curves of inclined (\qtyrange{40}{60}{\degree}) showers for all studied observables in this analysis. Included on each plot are the separation power curves showing what is possible when combined knowledge of all observables is known, either exactly (dark blue) or within assumed reconstruction uncertainties (magenta). The individual observable curves represent having knowledge of only that observable, and the energy proxy observable, within the uncertainty stated in the legend. Each plot shows the results for an individual hadronic interaction model.}
+  \label{fig:fisher_protoniron_inclined}
+\end{figure}
 
 As expected, exact knowledge of all observables yields the best proton-iron separation for all three of the studied hadronic interaction models.
 Knowledge of all observables within their assumed baseline reconstruction uncertainties yields promising event-by-event mass separation between proton and iron primaries, with FOM values of nearly 2.0 at for all three models that decrease slightly with increasing energy.
@@ -362,8 +417,8 @@ Hence, while increasingly mass sensitive at the highest energies, $L$ adds littl
 %These results for the additional Auger simulations hold for both the helium-oxygen and helium-proton separations, where helium-oxygen (helium-proton) FOMs are about a factor of two (three) less than proton-iron FOMs.
 %However, for helium-proton separation, $L$ as an individual observable does not exhibit an increase in separation power above $10^{18.5}$\,eV.
 
-XXX presents the same FOM curves as XXX now calculated in the zenith angle range of \qtyrange{0}{30}{\degree}.
-Between hadronic models in this zenith angle range, no major qualitative differences are seen except for the increased mass sensitivity of the $\lg\left(N_{\mu}\right)$\,\qty{800}{\meter} observable for QGSJETIII-01 compared to the other models, which was also seen in XXX.
+\Cref{fig:fisher_protoniron_vertical} presents the same FOM curves as~\Cref{fig:fisher_protoniron_inclined}, now calculated in the zenith angle range of \qtyrange{0}{30}{\degree}.
+Between hadronic models in this zenith angle range, no major qualitative differences are seen except for the increased mass sensitivity of the $\lg\left(N_{\mu}\right)$\,\qty{800}{\meter} observable for QGSJETIII-01 compared to the other models, which was also seen in~\Cref{fig:fisher_protoniron_inclined}.
 Comparing between the \qtyrange{0}{30}{\degree} and \qtyrange{40}{60}{\degree} zenith angle ranges, there is no difference in the overall mass separation curves when combined knowledge of all observables is known, either exactly or within their baseline reconstruction uncertainties.
 Although differences in the individual observable FOM curves is apparent.
 For each hadronic model, the $\lg\left(N_{\mu}\right)$\,\qty{800}{\meter} observable is more mass sensitive for vertical showers (\qtyrange{0}{30}{\degree}) than for inclined showers (\qtyrange{40}{60}{\degree}), yet the decrease in mass sensitivity of this observable with energy is still present.
@@ -373,6 +428,13 @@ This could impact the energy evolution of the $\lg\left(N_{\mu}\right)$\,\qty{80
 This zenith range used for scaling has little difference for the longitudinal profile observables ($X_{\rm max}$, $R$, and $L$) because the longitudinal profile is sampled in terms of slant depth rather than atmospheric depth.
 This is confirmed as the $X_{\rm max}$, $R$ and $L$ observables show similar energy evolutions in their mass sensitivities regardless of the investigated zenith range (i.e. stable $X_{\rm max}$, decreasing $R$, and increasing $L$ above approximately \qty[parse-numbers=false]{10^{18.5}}{\electronvolt} in true cosmic-ray energy).
 
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter4/Fisher_FOM_pFe_zen0_30_allmodels.pdf}
+  \caption[FOM curves of proton-iron mass separation for vertical air showers.]{The same plot as~\Cref{fig:fisher_protoniron_vertical}, but now showing proton-iron separation power curves of vertical (\qtyrange{0}{30}{\degree}) showers for all studied observables.}
+  \label{fig:fisher_protoniron_vertical}
+\end{figure}
+
 %both IceCube and Auger for the zenith range of $\theta_{\text{zen}}$ = 40$^{\circ}-$60$^{\circ}$ and slightly higher separation power for nearly vertical showers within a zenith range of $\theta_{\text{zen}}$ = 0$^{\circ}-$20$^{\circ}$.
 %This dependence of the separation power on zenith angle is driven by the particles detectable at the surface.
 %In particular, the electron-muon ratio observables (for both high and low energies) and the low-energy surface muon observable provide large contributions, as there appears to be little to no zenith dependence on the \xmax, high-energy muon number, $L$, or $R$ observables.
@@ -380,7 +442,7 @@ This is confirmed as the $X_{\rm max}$, $R$ and $L$ observables show similar ene
 
 \subsection{Studying Highly Mass Sensitive Observable Combinations}\label{sec:combinations}
 Within this multivariate analysis, the combined knowledge mass separation curves are heavily influenced by only a handful of the studied observables.
-The addition of more mass sensitive air-shower observables will improve mass separation; however, the individual separation power curves do not add linearly, making it hard to disentangle which combinations of observables contribute most to the overall mass separation curves in XXX.
+The addition of more mass sensitive air-shower observables will improve mass separation; however, the individual separation power curves do not add linearly, making it hard to disentangle which combinations of observables contribute most to the overall mass separation curves in~\Cref{fig:fisher_protoniron_inclined,fig:fisher_protoniron_vertical}.
 To study this, FOM values for observable pairs were calculated using~\Cref{eq:fom} for an energy range of \qtyrange[parse-numbers=false]{10^{18.0}}{10^{18.1}}{\electronvolt} and zenith range of \qtyrange{40}{60}{\degree}.
 All possible combinations of observable pairs are studied.
 \Cref{tab:combinations} shows the resulting FOM values for the observable pairs using the EPOS LHC-R hadronic interaction model, where all observables were scaled with respect to the energy reference observable.
@@ -440,17 +502,31 @@ In such scenarios, discrimination between cosmic rays of these mass groups (p, H
 
 The FOM metric was applied to measure the helium-oxygen and helium-proton separation power when using knowledge of all observables investigated within this analysis.
 All observables were scaled with respect to the energy reference observable and the FOM curves were calculated following the same method as in~\Cref{sec:combined}.
-XXX presents the helium-oxygen separation power as a function of true air-shower energy for each hadronic interaction model within a zenith angle range of \qtyrange{40}{60}{\degree}.
+\Cref{fig:fisher_heliumoxygen_inclined} presents the helium-oxygen separation power as a function of true air-shower energy for each hadronic interaction model within a zenith angle range of \qtyrange{40}{60}{\degree}.
 The helium-oxygen separation power is approximately two times lower than the proton-iron separation power for all FOM curves, with all curves showing similar relationships as a function of energy.
 Reasonable event-by-event helium-oxygen separation is not feasible for any hadronic interaction model when knowledge of all observables is known within their baseline uncertainties.
 Having exact knowledge of all studied observables for helium-oxygen separation is near the limit of what is considered reasonable for event-by-event separation, yet this is not attainable with true air-shower experiments.
 
-XXX shows this same helium-oxygen separation power now calculated within a zenith angle range of \qtyrange{0}{30}{\degree}.
-A difference from XXX is the steeply declining FOM curve when exact knowledge of all observables is known.
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter4/Fisher_FOM_HeO_zen40_60_allmodels.pdf}
+  \caption[FOM curves of helium-oxygen mass separation for inclined air showers.]{Helium-oxygen separation power curves of inclined (\qtyrange{40}{60}{\degree}) showers for all studied observables in this analysis for all three hadronic interaction models. For each model, the helium-oxygen separation power curves are approximately two times lower than the curves for proton-iron separation power.}
+  \label{fig:fisher_heliumoxygen_inclined}
+\end{figure}
+
+\Cref{fig:fisher_heliumoxygen_vertical} shows this same helium-oxygen separation power now calculated within a zenith angle range of \qtyrange{0}{30}{\degree}.
+A difference from the inclined showers is the steeply declining FOM curve when exact knowledge of all observables is known.
 This is caused from the decreasing mass sensitivity of the $\lg\left(N_{\mu}\right)$\,\qty{800}{\meter} observable with energy when this observable is known with exact precision.
 Notably, the same FOM curve for proton-iron separation does not exhibit this energy dependence, therefore the muon observables could have a greater influence on the overall mass separation between intermediate masses than between light and heavy masses. 
 
-FIGURESXXX show the same results as FIGURESXXX but now for helium-proton separation rather than helium-oxygen.
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter4/Fisher_FOM_HeO_zen0_30_allmodels.pdf}
+  \caption[FOM curves of helium-oxygen mass separation for vertical air showers.]{The same plot as~\Cref{fig:fisher_heliumoxygen_inclined}, but now showing helium-oxygen separation power curves of vertical (\qtyrange{0}{30}{\degree}) showers for all studied observables.}
+  \label{fig:fisher_heliumoxygen_vertical}
+\end{figure}
+
+\Cref{fig:fisher_heliumproton_inclined,fig:fisher_heliumproton_vertical} show the same results as~\Cref{fig:fisher_heliumoxygen_inclined,fig:fisher_heliumoxygen_vertical}, but now for helium-proton separation rather than helium-oxygen.
 In each case, the helium-proton separation is less than the helium-oxygen separation, with the helium-proton separation power systematically about three times lower than the proton-iron separation power.
 Visible is a decrease with energy of the \qtyrange{0}{30}{\degree} helium-proton FOM curves when exact knowledge of all observables is known, yet the slope of this decrease has a less rapid decline than the helium-oxygen exact knowledge curves.
 Additionally, the $L$ observable FOM curve does not contribute much to the overall helium-proton separation in either zenith angle range.
@@ -458,6 +534,20 @@ Hence, our results show $L$ is not a good observable for use in event-by-event m
 The difference between $\ln(A)$ for helium and oxygen primaries is similar to this difference for helium and proton primaries, therefore the difference in $\mu$ from~\Cref{eq:fom} for these primary combinations is similar.
 However, oxygen has smaller shower-to-shower fluctuations, leading to narrower distributions for all observables than for proton.
 This smaller spread increases the separation between the helium and oxygen distributions, resulting in larger FOM values for the helium-oxygen separation power than those of helium-proton separation.
+
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter4/Fisher_FOM_pHe_zen40_60_allmodels.pdf}
+  \caption[FOM curves of helium-proton mass separation for inclined air showers.]{Helium-proton separation power curves of inclined (\qtyrange{40}{60}{\degree}) showers for all studied observables in this analysis. Fisher results for all three hadronic models are shown. For each model, the helium-proton separation power curves are approximately three times lower than the curves for proton-iron separation power.}
+  \label{fig:fisher_heliumproton_inclined}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter4/Fisher_FOM_pHe_zen0_30_allmodels.pdf}
+  \caption[FOM curves of helium-proton mass separation for vertical air showers.]{The same plot as~\Cref{fig:fisher_heliumproton_inclined}, but now showing helium-proton separation power curves of vertical (\qtyrange{0}{30}{\degree}) showers for all studied observables.}
+  \label{fig:fisher_heliumproton_vertical}
+\end{figure}
 
 % Add a place for the text from the discussion section of PRD paper about event-by-event separation vs. average mass composition!!!
 
@@ -475,7 +565,7 @@ The same quality cuts for $X_{\rm max}$, $R$, and $L$ as described in~\Cref{sec:
 A training-validation ratio of 4:1 was used, where the validation set was further divided into primary energy bins of width $\lg(E / \text{eV})$ = 0.2.
 Using a wider energy binning than the Fisher analysis is necessary to ensure reasonable event statistics per energy bin.
 A FOM was calculated using the validation output from the GBDTs following~\Cref{eq:fom} where x and y are respectively replaced with 0 and 1 to represent the ''zero-like'' and ''one-like'' populations.
-The GBDT validation set results for proton-iron separation of EPOS LHC-R simulations within an energy range of \qtyrange[parse-numbers=false]{10^{18.0}}{10^{18.2}}{\electronvolt} are shown in XXX.
+The GBDT validation set results for proton-iron separation of EPOS LHC-R simulations within an energy range of \qtyrange[parse-numbers=false]{10^{18.0}}{10^{18.2}}{\electronvolt} are shown in~\Cref{fig:gbdt_protoniron_validation}.
 Iron primaries are defined as the ''zero-like'' population and proton primaries are defined as the ''one-like'' population where the zenith range used for this validation set is \qtyrange{40}{60}{\degree}.
 The FOM is calculated in the same way as described in~\Cref{sec:projections} and is reported within the plot; however, no bootstrapping is performed to estimate the nominal FOM or an uncertainty band.
 Instead the nominal FOM is taken to be the single value output from this calculation.
@@ -483,31 +573,88 @@ Also plotted as dashed and dotted lines are the points of 5\% and 1\% contaminat
 Reported with these lines are the fraction of proton separable from iron given this contamination percentage, calculated by integrating the fraction of the proton distribution to the right from each contamination line.
 Clearly, a high FOM value corresponds to a high fraction of proton primaries which can be separated from iron primaries with minimal contamination. 
 
-XXX shows the proton-iron FOM as a function of primary particle energy for the GBDT output using combined knowledge of all observables, both known exactly and within the assumed baseline reconstruction uncertainties, for the three hadronic interaction models within a zenith range of \qtyrange{40}{60}{\degree}.
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.5\textwidth]{chapter4/pFe_GBDT_distributions_singlebin.pdf}
+  \caption[Single bin validation set results from GBDT analysis.]{Validation set predicted proton-iron distributions from the GBDT analysis when exact knowledge of all observables is known. The predictions are performed in an energy bin of width $\lg\left(E / \rm{eV}\right)$\,=\,0.2 for inclined (\qtyrange{40}{60}{\degree}) EPOS LHC-R showers. The FOM calculated from the predicted distributions is also reported in the plot.}
+  \label{fig:gbdt_protoniron_validation}
+\end{figure}
+
+\Cref{fig:gbdt_protoniron_inclined} shows the proton-iron FOM as a function of primary particle energy for the GBDT output using combined knowledge of all observables, both known exactly and within the assumed baseline reconstruction uncertainties, for the three hadronic interaction models within a zenith range of \qtyrange{40}{60}{\degree}.
 The FOM values from the Fisher analysis are included for comparison.
 For proton-iron separation, the GBDT performs substantially better than the Fisher analysis in the complete energy range studied within this analysis across all three hadronic interaction models.
 The GBDT results accounting for reconstruction uncertainties provide greater proton-iron mass separation than the Fisher analysis with exact knowledge of all observables across all energies and hadronic models.
 However, when including reconstruction uncertainties, the QGSJETIII-01 GBDT results approach the Fisher analysis results at the highest cosmic-ray energies studied.
-Looking at the GBDT results for vertical showers presented in XXX similar behavior is seen.
+Similar behavior is seen when looking at the GBDT results for vertical showers, presented in~\Cref{fig:gbdt_protoniron_vertical}.
 Again, the GBDT analysis performs better than the Fisher analysis on all accounts, yet the GBDT and Fisher QGSJETIII-01 results including uncertainties are similar for the highest energy cosmic rays.
 Also seen for QGSJETIII-01 vertical showers only are large fluctuations between adjacent energy bins in the exact knowledge FOMs predicted by the GBDT.
 Possible explanations include a lack of statistics in the QGSJET validation set or potentially overfitting of the GBDT results in certain energy bins.
+
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter4/GBDT_FOM_pFe_zen40_60_allmodels.pdf}
+  \caption[Proton-iron mass separation predicted from a GBDT for inclined showers.]{The proton-iron FOM values as a function of true air-shower energy as predicted from the GBDT analysis both when exact knowledge of all observables is known (dark blue stars) and when observables are known within their baseline reconstruction uncertainty (magenta stars). FOM values are calculated within energy bins of width $\lg\left(E / \rm{eV}\right)$\,=\,0.2 for inclined (\qtyrange{40}{60}{\degree}) showers. The Fisher analysis results are included for comparison.}
+  \label{fig:gbdt_protoniron_inclined}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter4/GBDT_FOM_pFe_zen0_30_allmodels.pdf}
+  \caption[Proton-iron mass separation predicted from a GBDT for vertical showers.]{The proton-iron FOM values as predicted from the GBDT analysis for vertical (\qtyrange{0}{30}{\degree}) showers. The Fisher analysis results are included for comparison.}
+  \label{fig:gbdt_protoniron_vertical}
+\end{figure}
 
 \subsection{Separating Helium from Proton and Oxygen Primaries using GBDTs}\label{sec:gbdt_intermediate}
 Proton-iron mass separation clearly improves when using a GBDT over the Fisher linear discriminant to quantify the event-by-event separation power.
 However, with the Fisher analysis, the event-by-event proton-iron separation was already reasonable, and instead the intermediate and light mass separation proved difficult to achieve.
 The same pipeline described in~\Cref{sec:gbdt} of training a GBDT and extracting a FOM value from the results was used to calculate helium-oxygen and helium-proton FOM curves for all three studied hadronic interaction models.
-Results for helium-oxygen separation of inclined showers are shown in XXX, while the same results for vertical showers are shown in XXX.
+Results for helium-oxygen separation of inclined showers are shown in~\Cref{fig:gbdt_heliumoxygen_inclined}, while the same results for vertical showers are shown in~\Cref{fig:gbdt_heliumoxygen_vertical}.
 In terms of helium-oxygen separation, the GBDT shows little to no improvement over the simple Fisher analysis, further highlighting the difficulty of separating intermediate mass groups.
-The same results for helium-proton separation are presented in FIGURESXXX, again with no improvement over the Fisher analysis.
+The same results for helium-proton separation are presented in~\Cref{fig:gbdt_heliumproton_inclined,fig:gbdt_heliumproton_vertical}, again with no improvement over the Fisher analysis.
+
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter4/GBDT_FOM_HeO_zen40_60_allmodels.pdf}
+  \caption[Helium-oxygen mass separation predicted from a GBDT for inclined showers.]{The helium-oxygen FOM values as a function of true air-shower energy as predicted from the GBDT analysis both when exact knowledge of all observables is known (dark blue stars) and when observables are known within their baseline reconstruction uncertainty (magenta stars). Results are for inclined (\qtyrange{40}{60}{\degree}) showers. As in~\Cref{fig:gbdt_protoniron_inclined}, FOM values are calculated within energy bins of width $\lg\left(E / \rm{eV}\right)$\,=\,0.2. The Fisher analysis results are included for comparison.}
+  \label{fig:gbdt_heliumoxygen_inclined}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter4/GBDT_FOM_HeO_zen0_30_allmodels.pdf}
+  \caption[Helium-oxygen mass separation predicted from a GBDT for vertical showers.]{The helium-oxygen FOM values as predicted from the GBDT analysis for vertical (\qtyrange{0}{30}{\degree}) showers. The Fisher analysis results are included for comparison.}
+  \label{fig:gbdt_heliumoxygen_vertical}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter4/GBDT_FOM_pHe_zen40_60_allmodels.pdf}
+  \caption[Helium-proton mass separation predicted from a GBDT for inclined showers.]{The helium-proton FOM values as predicted from the GBDT analysis for inclined (\qtyrange{40}{60}{\degree}) showers. The Fisher analysis results are included for comparison.}
+  \label{fig:gbdt_heliumproton_inclined}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter4/GBDT_FOM_pHe_zen0_30_allmodels.pdf}
+  \caption[Helium-proton mass separation predicted from a GBDT for vertical showers.]{The helium-proton FOM values as predicted from the GBDT analysis for vertical (\qtyrange{0}{30}{\degree}) showers. The Fisher analysis results are included for comparison.}
+  \label{fig:gbdt_heliumproton_vertical}
+\end{figure}
 
 % Containment factors and plot for Helium-Oxygen
 The similarity of results between the GBDT and Fisher analysis for helium-oxygen and helium-proton mass separation can be further studied by directly comparing the distributions from which the FOMs are calculated.
-XXX shows the resulting helium-oxygen distributions of EPOS LHC-R simulations in a single energy and zenith bin for the GBDT analysis (left) and the Fisher analysis (right) when exact knowledge of all observables is assumed.
+\Cref{fig:containment_heliumoxygen} shows the resulting helium-oxygen distributions of EPOS LHC-R simulations in a single energy and zenith bin for the GBDT analysis (left) and the Fisher analysis (right) when exact knowledge of all observables is assumed.
 Results are shown within the same energy and zenith bin in both analyses to allow a direct comparison.  
 The GBDT presents a higher FOM for helium-oxygen separation compared to the Fisher analysis in this figure; however, the fractions of separable helium with 5\% and 1\% contamination from oxygen are similar between the methods.
 Studying these same distributions including reconstruction uncertainties results in similar FOM and contamination values between both analyses, yet at lower absolute values compared to the distributions assuming exact knowledge of the observables.
 Overall, these results highlight that the GBDT performs equally well (helium-oxygen and helium-proton) or better (proton-iron) than the Fisher linear discriminant analysis, with consistency in this conclusion across hadronic interaction model, zenith angle, primary energy, and observable reconstruction uncertainty.
+
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.45\textwidth]{chapter4/HeO_GBDT_distributions_singlebin.pdf}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.45\textwidth]{chapter4/HeO_fisher_distributions_singlebin.pdf}
+  \caption[Comparison of Fisher and GBDT results in a single energy bin.]{The helium-oxygen distributions predicted by the GBDT (left) and projected onto the Fisher axis (right) having true knowledge of all investigated observables in a single energy bin spanning \qtyrange[parse-numbers=false]{10^{18.2}}{10^{18.4}}{\electronvolt}. The FOM values calculated from these distributions, as well as the fraction of helium with 5\% and 1\% oxygen contamination, are presented in each plot.}
+  \label{fig:containment_heliumoxygen}
+\end{figure}
 
 The lack of improvement from the GBDT over the Fisher analysis for intermediate and light mass separation highlights the difficulty of per-event mass sensitivity going forward.
 Future studies need to show whether this is an intrinsic limitation or whether this can be overcome by more sophisticated, optimized GBDTs or by more advanced machine learning models, such as neural networks.
@@ -521,9 +668,7 @@ Hence, these observables were not studied here to provide an analysis of a more 
 For each trained GBDT, the observable importance was calculated from the purity gained by splitting the observable (i.e. the Gini importance).
 For all GBDTs trained on EPOS LHC-R simulations, the observable yielding the most purity gain was either the $X_{\rm max}$ or low-energy $N_{\mu}$ observable, depending on the mass of the primary particles studied and the assumed observable reconstruction uncertainties.
 In particular, $X_{\rm max}$ is most important when observable uncertainties are included and for exact knowledge proton-iron separation, yet low-energy $N_{\mu}$ is most important for the helium-oxygen and helium-proton separations when exact knowledge of the observables is known.
-% Report for other models also.
-% Compare to Fisher most sensitive observable pairs.
-\Cref{tab:importances} lists the Gini importance of observables for proton-iron, helium-xygen, and helium-proton separation of EPOS LHC-R simulations, both when observables are known exactly or known within reconstruction uncertainties.
+\Cref{tab:importances} lists the Gini importance of observables for proton-iron, helium-oxygen, and helium-proton separation of EPOS LHC-R simulations, both when observables are known exactly or known within reconstruction uncertainties.
 
 \begin{table}
     \hbox to \textwidth{\hfill
@@ -548,6 +693,9 @@ In particular, $X_{\rm max}$ is most important when observable uncertainties are
     \end{minipage}}\hfill}
 \end{table}
 
+
+% Report for other models also.
+% Compare to Fisher most sensitive observable pairs.
 
 %Hence, the GBDT analysis performs equally well (helium-oxygen and helium-proton) to better (proton-iron) than the Fisher analysis, with consistencies for the most mass sensitive observables between the analysis methods.
 
