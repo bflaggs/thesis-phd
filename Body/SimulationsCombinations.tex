@@ -9,10 +9,10 @@ Studying these mass-sensitive observables in detail is one method used for mass 
 However, after the start of the cascade, it develops in the forward region where particle interactions occur in a phase space with few experimental constraints from terrestrial accelerators and are instead described by collider informed high-energy hadronic interaction models.
 Stochasticities in these first few interactions propagate throughout the shower development yielding shower-to-shower fluctuations in air-shower observables for cosmic-ray primaries of the same mass, energy, and arrival direction.
 Averaged over many events, certain shower observables are correlated with the cosmic-ray mass, yet fluctuations limit the event-by-event separation for individual observables.
-Per-event separation between different primary species can be improved by simultaneously studying multiple mass-sensitive observables.
+Per-event separation between different primary species can be improved by simultaneously studying multiple mass-sensitive observables~\cite{holt_epjc2019_radiomuon}.
 The aim of this chapter is to study the mass sensitivity of individual observables and their combinations for a variety of factors including air-shower energy, zenith angle, hadronic interaction model, and the observable's assumed reconstruction resolution. 
 
-This chapter presents the results of a mass sensitivity study of individual air-shower observables, and their combination, from cosmic-ray air showers simulated with CORSIKA (COsmic Ray SImulations for KAscade).
+This chapter presents the results of a mass sensitivity study of individual air-shower observables, and their combination, from cosmic-ray air showers simulated with CORSIKA (COsmic Ray SImulations for KAscade)~\cite{heck_1998_corsika}.
 All analysis is performed using a general purpose software framework for studying the cosmic-ray mass separation of observables.
 The mantra of this framework is to study the intrinsic potential of air-shower observables for event-by-event cosmic-ray mass separation, although CORSIKA simulations need to be computed for location specific conditions such as the elevation above sea level of the observation plane, local geomagnetic field, and atmospheric properties.
 With the recently deployed detectors of AugerPrime, the Pierre Auger Observatory simultaneously measures several, complimentary, air-shower observables for primary cosmic-ray mass determination and therefore serves as a promising location choice for the application of this framework.
@@ -38,35 +38,61 @@ With the recently deployed detectors of AugerPrime, the Pierre Auger Observatory
 %Air-shower universality presented in~\Cref{chap:airshowers} predicts air showers can be fully described using a combination of  ???
 \section{CORSIKA Air-Shower Simulations at the Pierre Auger Observatory}\label{sec:simulationdataset}
 Within this chapter, a general use CORSIKA simulation library of air showers simulated at the location of the Pierre Auger Observatory is used\footnote[1]{These simulations are available for members of the Pierre Auger Observatory. A brief overview of the library is available at the following link: \href{https://www.auger.unam.mx/AugerWiki/VerticalSimulations78010}{https://www.auger.unam.mx/AugerWiki/VerticalSimulations78010.}}.
-The dataset contains CORSIKA v7.8010 air-shower simulations for three separate high-energy hadronic interaction models: EPOS LHC-R, Sibyll 2.3e, and QGSJETIII-01.
-All low-energy hadronic interactions were modeled with FLUKA v2024.
+The dataset contains CORSIKA v7.8010 air-shower simulations for three separate high-energy hadronic interaction models: EPOS LHC-R~\cite{icrc2025_pierog}, Sibyll 2.3e~\cite{riehn_prd2019_sibyll23d}, and QGSJETIII-01~\cite{ostapchenko_prd2024_qgsjet3_formalism,ostapchenko_prd2024_qgsjet3_production}.
+All low-energy hadronic interactions were modeled with FLUKA v2024~\cite{fluka_2005_original,fluka_2024_overview}.
 For each high-energy hadronic interaction model, simulations are available for proton, helium, oxygen, and iron primary cosmic rays over an energy range of $\lg(E / \rm eV)$\,=\,\numrange{14.0}{20.5}, yet only simulations above an energy of $\lg(E / \rm eV)$\,=\,16.0 are studied for this analysis.
 Photon primaries are also available in the dataset, but excluded here.
 Simulations are separated in energy bins of width $\lg(E / \rm eV)$\,=\,0.5, distributed with an energy spectrum of $dN/dE \propto E^{-1}$ inside the bin resulting in a flat distribution in $\lg(E / \rm eV)$.
 Each energy bin contains 5000 air showers per primary\footnote[2]{EPOS LHC-R proton simulations have 10000 air showers per energy bin, but only half were used in this analysis to maintain consistent statistics for each primary}, constituted by 1250 simulations for each of four atmospheric models representing the months of January, March, August, and September in Malarg\"ue, Argentina (in CORSIKA, these respectively are atmospheric models \texttt{MODATM}= 18, 20, 25, 26).
 
 Zenith angles are distributed with $dN/d\theta \propto \sin\theta\cos\theta$ between a range of $\theta$\,=\,\qtyrange{0}{65}{\degree} and azimuth angles are chosen at random.
-Table INSERT lists the air-shower simulation statistics for each hadronic model and primary particle used within the context of this analysis.
+\Cref{tab:simulations} lists the air-shower simulation statistics for each hadronic model and primary particle used within the context of this analysis.
 The total number of simulations available for each hadronic model and primary is approximate as some simulated events contain broken simulation files.
 All hadronic models listed in the table will be studied as each model yields differences in the predicted values of the studied mass-sensitive observables that potentially affect their resulting mass sensitivity.  
-% put above sentence in following subsection?
-% Maybe make this part of the intro???
+
+\begin{table}
+    \caption[Summary of simulated air-shower datasets for mass sensitivity analysis.]{A summary table describing all air-shower simulations used for the mass sensitivity analysis presented in this chapter. The approximate total number of simulated air showers for each hadronic model and primary particle combination is listed. Each row has simulations distributed across an energy range of $\lg(E / \rm eV)$\,=\,\numrange{16.0}{20.5}, a zenith range of \qtyrange{0}{65}{\degree}, and equally spaced across four atmospheric models (see text).} \label{tab:simulations}
+    \vspace*{.5\baselineskip}
+    \centering
+    \begin{tabular}{|| c | c | c ||}
+      \hline
+        Hadronic Model & Primary & Number \\ %[0.5ex] % will add some extra space in the top box if uncommented
+        \hline
+        \hline
+        EPOS LHC-R & Proton & 45000 \\
+        EPOS LHC-R & Helium & 45000 \\
+        EPOS LHC-R & Oxygen & 45000 \\
+        EPOS LHC-R & Iron & 45000 \\
+        \hline
+        Sibyll 2.3e & Proton & 45000 \\
+        Sibyll 2.3e & Helium & 45000 \\
+        Sibyll 2.3e & Oxygen & 45000 \\
+        Sibyll 2.3e & Iron & 45000 \\
+        \hline
+        QGSJETIII-01 & Proton & 45000 \\
+        QGSJETIII-01 & Helium & 45000 \\
+        QGSJETIII-01 & Oxygen & 45000 \\
+        QGSJETIII-01 & Iron & 45000 \\
+        \hline
+    \end{tabular}
+\end{table}
+
 
 \subsection{Simulated Air-Shower Observables}\label{sec:observables}
 Air-shower observables which can be reconstructed with current ground-based detection techniques were extracted from each CORSIKA simulation.
 A parameterized Gaisser-Hillas function, defined by~\Cref{eq:gh_parameterized} in~\Cref{sec:development}, was used to fit the normalized CORSIKA electron-positron longitudinal profile.
 Extracted from the fit are the depth of shower maximum ($X_{\rm max}$), the shower width ($L$), and the shower asymmetry ($R$).
-Precise air-fluorescence observations of ultra-high-energy cosmic-ray air showers can be used to reconstruct $X_{\rm max}$, $L$, and $R$ (i.e. the full longitudinal profile information) CITEAUGERFDRL, while air-shower observations with an ultra-dense array of radio antennas (such as SKA-low) can reconstruct $X_{\rm max}$ and $L$ CITESKA.
-An array of radio antennas with high-quality data, without the need of ultra-dense spacing, can reconstruct $X_{\rm max}$ alone, with AERA reporting radio $X_{\rm max}$ reconstructions compatible with the Auger fluorescence measurements CITEAERAXMAX.
+Precise air-fluorescence observations of ultra-high-energy cosmic-ray air showers can be used to reconstruct $X_{\rm max}$, $L$, and $R$ (i.e. the full longitudinal profile information)~\cite{auger_jcap2019_longitudinalprofiles, icrc2023_bellido_longitudinalprofiles}, while air-shower observations with an ultra-dense array of radio antennas (such as SKA-low) can potentially reconstruct $X_{\rm max}$, $L$, and $R$~\cite{icrc2023_corstanje_ska, arena2024_buitink_ska}, where approaches using information field theory allow simultaneous reconstruction of these observables~\cite{icrc2025_watanabe}.
+An array of radio antennas with high-quality data, without the need of ultra-dense spacing, can reconstruct $X_{\rm max}$ alone, with AERA reporting radio $X_{\rm max}$ reconstructions compatible with the Auger fluorescence measurements~\cite{auger_prd2024_aeraxmax, auger_prl2024_aeraxmax}.
 The electron-positron number at shower maximum ($N_{\rm e, max}$) was determined directly from the combined electron-positron CORSIKA longitudinal profile.
-$N_{\rm e, max}$ can be reconstructed by either fluorescence telescopes or radio detectors and will be used in this analysis as a proxy to the true air-shower energy for scaling the other observables (see~\Cref{sec:scaling}) CITE3334FROMPRD.
+$N_{\rm e, max}$ can be reconstructed by either fluorescence telescopes or radio detectors and will be used in this analysis as a proxy to the true air-shower energy for scaling the other observables (see~\Cref{sec:scaling})~\cite{schroeder_ppnp2017_radio, huege_physrep2016_radio}.
 
 From the CORSIKA particle block, both total muon number at ground ($N_{\mu}$) and the number of electromagnetic particles at ground ($N_{\rm e}$) are obtained.
 $N_{\rm e}$ and $N_{\rm e, max}$ correspond only to the combined electron and positron numbers within this study, hence photons are not included in any aspect.
 Both $N_{\mu}$ and $N_{\rm e}$ are counted above an energy threshold, where this threshold is intrinsic to the energy limits of tracking separate particle types within the CORSIKA simulations.
 These thresholds are \qty{10}{\mega\electronvolt} for muons and \qty{0.25}{\mega\electronvolt} for electrons and positrons within this CORSIKA dataset.
 Using the muon and electron numbers at ground, the electron-muon ratio at ground ($\rm R_{\rm e/\mu}$) is calculated.
-This ratio has been shown to be a mass-sensitive observable CITEREF5FROMMYPRD, yet requires a particle detector array at ground with the ability to separate electromagnetic and muonic particle types.
+This ratio has been shown to be a mass-sensitive observable~\cite{kascade_astropartphys2008}, yet requires a particle detector array at ground with the ability to separate electromagnetic and muonic particle types.
 The individual particle numbers themselves are not physically accessible using ground-based detector arrays; however, the total signal strength deposited into the detectors serves as a proxy to the total particle number. 
 The detector signal of surface-particle detector arrays is dominated by electromagnetic particles, complicating measurements of the muon signal for individual events unless detectors have different responses for electromagnetic and muon particles.
 Discriminating between the two particle types based on the detector response and signal types is feasible at Auger from the addition of the SSD.
@@ -94,18 +120,19 @@ The particle longitudinal distributions for this CORSIKA simulation library are 
 The combined electron-positron profile is normalized to $N_{\rm e, max}$ and fit as a function of slant depth to~\Cref{eq:gh_parameterized}, where $X^{\prime}$ is replaced with $X - X_{\rm max}$ to enable a direct $X_{\rm max}$ extraction from the fit.
 To ensure precise $X_{\rm max}$ values, the normalized particle numbers were weighted with respect to their Poissonian fluctuations, which applied more importance to fitting the longitudinal profile peak.
 For all analyses presented within this chapter, only simulated events with fit uncertainties $\sigma_{X_{\rm max}}\,<\,$\qty{5}{\gram\per\centi\meter\squared}, $\sigma_{L}\,<\,$\qty{5}{\gram\per\centi\meter\squared}, and $\sigma_{R}\,<\,$0.05 are included.
-This removes from the analysis all simulated air showers with anomalous shower profiles, resulting in the removal of X.X\% of all proton showers and X.X\% of all iron showers.
-These are similar to the estimates of anomalous profiles presented in~\cite{Baus:2011kc} and allow for precise knowledge of $X_{\rm max}$, $L$, and $R$ for the simulated events.
+This removes from the analysis all simulated air showers with anomalous shower profiles, resulting in the removal of 2.4\% of proton showers and 0.9\% of iron showers for the EPOS LHC-R hadronic model across the full studied zenith and energy range.
+The same cuts for the Sibyll 2.3e (QGSJETIII-01) hadronic model over the full zenith and energy ranges remove 1.4\% (1.8\%) of proton showers and 0.2\% (0.3\%) of iron showers.
+These are similar to the estimates of anomalous profiles presented in~\cite{icrc2011_baus_anomalousprofiles} and allow for precise knowledge of $X_{\rm max}$, $L$, and $R$ for the simulated events.
 
 %Anomalous shower profiles are typically described by those of double bump showers, air showers where a large portion of the primary energy is transferred to a secondary hadron which travels through the atmosphere before interacting again to initiate a second subshower. 
 %Also occurring from this mechanism are elongated air showers with large reconstructed values of $L$.
 
-As shown in XXX, and confirmed in XXX, the $L$ observable can be used in tandem with $X_{\rm max}$ to constrain hadronic interaction models and potentially determine a helium fraction using datasets with large statistics by studying the tail of the $L$ distribution.
+As shown in~\cite{icrc2021_buitink_ska, arena2022_buitink_showerlength}, and confirmed in~\cite{flaggs_prd2024_mso}, the $L$ observable can be used in tandem with $X_{\rm max}$ to constrain hadronic interaction models and potentially determine a helium fraction using datasets with large statistics by studying the tail of the $L$ distribution.
 To study this further, the full $L$ distributions binned in true energy by $\lg$(E / eV)\,=\,0.5 were investigated.
 \Cref{fig:tails} shows the proton and helium $L$ distributions for EPOS LHC-R in a zenith range of \qtyrange{0}{20}{\degree}.
 Only proton and helium are included to reduce overcrowding on the plot and because these two mass groups have the largest tails in their respective $L$ distributions.
 In this plot, helium consistently has a larger median (thick solid line) and 90\% quantile value (star with thick dotted line) than proton for all energy bins up to \qty[parse-numbers=false]{10^{19.0}}{\electronvolt}, with an up to \qty{10}{\gram\per\centi\meter\squared} difference in the proton-helium 90\% quantile values and differences in the medians of approximately \qty{5}{\gram\per\centi\meter\squared}.
-These same results hold for zenith angles $<$\,$\theta_{\rm zen}$\,=\,\qty{40}{\degree} and for the same zenith range using hadronic models QGSJET III-01 and Sibyll 2.3e, yet the exact energy bin where proton transitions to have an equal or larger median and 90\% quantile varies between \qtyrange[parse-numbers=false]{10^{18.0}}{10^{19.0}}{\electronvolt} depending on the hadronic interaction model.
+These same results hold for zenith angles $<$\,$\theta_{\rm zen}$\,=\,\qty{40}{\degree} and for the same energy range using hadronic models Sibyll 2.3e and QGSJETIII-01, yet the exact energy bin where proton transitions to have an equal or larger median and 90\% quantile varies between \qtyrange[parse-numbers=false]{10^{18.0}}{10^{19.0}}{\electronvolt} depending on the hadronic interaction model.
 Yet, there is no clear pattern for proton or helium having the longest distribution tail, regardless of energy, zenith, or hadronic model.
 
 \begin{figure}
@@ -145,7 +172,7 @@ Air-shower observables studied in this analysis must be corrected for their ener
 All studied observables are scaled with respect to $N_{\rm e, max}$ as this observable serves as a proxy to the total air-shower energy and, as in real experiments, the true energy is unknown.
 The evolution of the average $N_{\rm e, max}$ in bins of true air-shower energy is shown in XXX for EPOS LHC-R simulations, while the evolution of the average values of all other observables in this analysis in bins of $N_{\rm e, max}$ is shown in XXX for the same hadronic model.
 The uncertainty in the average observable value for each bin is included, yet in most cases is too small to be discernible.
-The zenith range of $\theta_{\rm zen}\,=\,$\qtyrange{40}{50}{\degree} was chosen as an example due to the efficiency of SKALA type radio antennas for air-shower detection in this zenith range CITE33FROMPRD.
+The zenith range of $\theta_{\rm zen}\,=\,$\qtyrange{40}{50}{\degree} was chosen as an example due to the efficiency of SKALA type radio antennas for air-shower detection in this zenith range~\cite{icrc2021_coleman}.
 
 %The average dependence of $N_{\rm e, max}$ on air-shower energy is shown in XXX for EPOS LHC-R simulations while the average dependence of all studied observables in the analysis is shown in XXX for the same hadronic model.
 
@@ -153,7 +180,7 @@ The zenith range of $\theta_{\rm zen}\,=\,$\qtyrange{40}{50}{\degree} was chosen
 
 % FIGURE_FOR_ALL_OBSERVABLE_SCALINGS_VS_NEMAX_EPOSLHCR
 
-Each plot in XXX has an event number cut of xxx applied to the $N_{\rm e, max}$ bins to ensure good statistics for all four primaries and full coverage of the electron number at $X_{\rm max}$ phase space, the spread in which is caused by shower-to-shower fluctuations.
+Each plot in XXX has an event number cut of 160 applied to the $N_{\rm e, max}$ bins to ensure good statistics for all four primaries and full coverage of the electron number at $X_{\rm max}$ phase space, the spread in which is caused by shower-to-shower fluctuations.
 This event number cut removes bins to the left and right of the energy reference range shown in XXX plots, as they do not follow the typical trendlines shown due to their limited phase space coverage.
 Removing the bins with limited statistics allows the trendlines to accurately represent the observable scalings, within the energy range used in this analysis.
 A linear fit is then applied individually to all primaries to be used for scaling the observable.
@@ -171,7 +198,28 @@ $m$ is the average slope of the linear fits to all four primaries for the observ
 Note that the functional form of~\Cref{eq:scaling} works for the annulus based muon number at ground because the base-10 logarithm of this observable is used in the analysis.
 For EPOS LHC-R, 0.01 was then added to the average slope $m$ for all observable scalings to correct for the weak deviation of $N_{\rm e, max}$ from an exact linear energy scaling, as 1.01 is the average of the linear fit slopes shown in XXX.
 Scaling slopes $m$ and the average electron number at shower maximum for \qty{1}{\exa\electronvolt} air showers ($N_{\rm EeV}$) are different for each hadronic model because each model predicts different observable distributions, hence this correction to $m$ could be different for each hadronic model as well. 
-Table XXX lists the scaling constants of the studied observables for each hadronic interaction model.
+\Cref{tab:scaling} lists the scaling constants of the studied observables for each hadronic interaction model.
+
+\begin{table}
+    \caption[Energy proxy scaling factors for the observables of each hadronic interaction model.]{The constants used in~\Cref{eq:scaling} to scale each of the observables used in the analysis. In the table, observable names represent the $m$ values used to scale that specific observable with respect to the energy reference, while the energy reference ($N_{\rm e, max}$) represents the value applied to $m$ that corrects for the deviation of $N_{\rm e, max}$ from a linear energy scaling. Values are reported for each hadronic interaction model, where each value was calculated in a zenith range of \qtyrange{40}{50}{\degree}. Also included is the $N_{\rm EeV}$ value for each model, but this is instead calculated over all zenith angles included in the analysis (i.e. \qtyrange{0}{65}{\degree}).}
+    \label{tab:scaling}
+    \vspace*{.5\baselineskip}
+    \centering
+    \begin{tabular}{| c || c | c | c |}
+        \hline
+                                                     & EPOS LHC-R & Sibyll 2.3e & QGSJETIII-01\\
+        \hline
+        \hline
+        $X_{\rm max}$                                & 60.02     & 60.71     & 58.17\\
+        $L$                                          & 6.44      & 7.75      & 6.28\\
+        $R$                                          & -0.03     & -0.03     & -0.03\\
+        $\lg\left(N_{\mu}\right)$\,\qty{800}{\meter} & 0.92      & 0.93      & 0.92\\
+        $\rm R_{\rm e/\mu}$\,\qty{800}{\meter}       & 0.11      & 0.13      & 0.13\\
+        $N_{\rm e, max}$                             & 0.01      & 0.00      & 0.01\\
+        $N_{\rm EeV}$                                & 585508500 & 619514957 & 621701444\\
+        \hline
+    \end{tabular}
+\end{table}
 
 Scaling the air-shower observables removes the energy dependence of these observables as seen in the simulations, allowing for the use of wide energy bins in our analysis without risk of smearing the observable distributions.
 As a consequence, this scaling also increases the mass separation of the individual observables, as illustrated by the proton-iron contour plots in XXX.
@@ -257,13 +305,13 @@ A larger zenith range of \qtyrange{40}{60}{\degree} is used compared to the obse
 %The per-event observable values are smeared by adding to the true value a random value drawn from a Gaussian distribution to incorporate the reconstruction uncertainties in the FOM calculations, where this Gaussian is centered on zero with a width of the assumed observable reconstruction uncertainty.
 
 The FOM values for all observables were calculated with knowledge of both the observable in question and the energy reference, $N_{\rm{e, max}}$.
-Except for the FOM values labeled ''exact knowledge'', an uncertainty in $N_{\rm{e, max}}$ of 10\% was applied, motivated by the order of magnitude of current uncertainties of radio and air-fluorescence energy measurements CITATIONSPRD36TO39.
+Except for the FOM values labeled ''exact knowledge'', an uncertainty in $N_{\rm{e, max}}$ of 10\% was applied, motivated by the order of magnitude of current uncertainties of radio and air-fluorescence energy measurements~\cite{auger_prd2016_aeraenergyscale, auger_prl2016_aeraenergyscale, tunkarex_jcap2016_xmax, lopes_epjc2021_finalresults, auger_astropartphys2017_fdcalibration}.
 Separate resolutions for this observable were not investigated.
-The baseline $X_{\rm max}$ uncertainty is assumed to be \qty{20}{\gram\per\centi\meter\squared}, in between the uncertainty from CITATIONSPRD40AND41.
+The baseline $X_{\rm max}$ uncertainty is assumed to be \qty{20}{\gram\per\centi\meter\squared}, in between the uncertainty from~\cite{lofar_prd2014_xmax, tunkarex_prd2018_xmax}.
 The baseline uncertainties for $\lg(N_{\rm{e}})$ and $\lg\left(N_{\mu}\right)$ at ground within the \qtyrange{800}{850}{\meter} annulus are each assumed to be 0.1.
 The electron-muon ratio within this annulus has its baseline uncertainty calculated by error propagation of the electron and muon component individual uncertainties.
-Motivated by CITATIONPRD28, the $R$ baseline uncertainty is assumed to be 0.05.
-The $L$ baseline uncertainty is assumed to be \qty{5}{\gram\per\centi\meter\squared} which is lower than the reconstruction uncertainty from CITATIONPRD28; however, the $L$ resolution has little impact on the proton-iron separation power for this observable.
+Motivated by~\cite{auger_jcap2019_longitudinalprofiles}, the $R$ baseline uncertainty is assumed to be 0.05.
+The $L$ baseline uncertainty is assumed to be \qty{5}{\gram\per\centi\meter\squared} which is lower than the reconstruction uncertainty from~\cite{auger_jcap2019_longitudinalprofiles}; however, the $L$ resolution has little impact on the proton-iron separation power for this observable.
 As shown in XXX, the proton-iron separation for certain air-shower observables, such as $L$, is not heavily influenced by the observable's reconstruction uncertainty.
 Whereas other observables, such as $\lg\left(N_{\mu}\right)$\,\qty{800}{\meter}, have a much higher dependence of the proton-iron discrimination power on the assumed observable reconstruction uncertainty.
 
@@ -287,7 +335,7 @@ While higher-dimensional contour plots are difficult to visualize, the Fisher li
 As a quantitative estimate of the event-by-event mass separation between proton and iron primaries, the FOM was calculated as a function of binned primary particle energy for knowledge of each observable individually and when knowledge of all observables is combined.
 The individual knowledge FOM values for all observables were calculated with knowledge of both the observable in question and the energy reference, $N_{\rm{e, max}}$.
 
-XXX shows the proton-iron separation power curves for each observable individually, along with their combined knowledge curves, for the three studied hadronic interaction models: Sibyll 2.3e, EPOS LHC-R, and QGSJETIII-01.
+XXX shows the proton-iron separation power curves for each observable individually, along with their combined knowledge curves, for the three studied hadronic interaction models: EPOS LHC-R, Sibyll 2.3e, and QGSJETIII-01.
 FOM curves of the combination of all observables are shown twice, once with the assumed reconstruction uncertainties for all observables (magenta), and once with exact knowledge of all observables (dark blue).
 Knowledge of individual observables were calculated within the baseline reconstruction uncertainties stated in~\Cref{sec:resolution}.
 All FOM values, along with their uncertainty bands, were calculated from a bootstrap method, as described in~\Cref{sec:resolution}.
@@ -302,7 +350,7 @@ Otherwise, between models, the proton-iron separation curves are generally consi
 
 At energies above approximately \qty[parse-numbers=false]{10^{18.5}}{\electronvolt}, all three hadronic interaction models exhibit a decrease in the proton-iron mass separation of both the $\lg\left(N_{\mu}\right)$\,\qty{800}{\meter} and $R$ observables, while the mass separation of the $L$ observable increases.
 %Sentence here about using full muon number instead in the analysis...
-The physical cause of the increase in mass sensitivity of the $L$ observable is unknown; however, a possible explanation is the Landau-Pomeranchuk-Migdal (LPM) effect which causes an elongation of the electromagnetic shower development at ultra-high energies CITELPM.
+The physical cause of the increase in mass sensitivity of the $L$ observable is unknown; however, a possible explanation is the Landau-Pomeranchuk-Migdal (LPM) effect which causes an elongation of the electromagnetic shower development at ultra-high energies~\cite{landau_sssr1953_lpm, migdal_pr1956_lpm}.
 This mechanism affects the overall shower development and therefore, in turn, could also cause the decrease in mass sensitivity of the $R$ observable, yet should be studied in greater detail for confirmation.
 Above approximately \qty[parse-numbers=false]{10^{20.0}}{\electronvolt}, the proton-iron mass sensitivity of the $L$ observable becomes higher than the low-energy muon observable when reconstruction uncertainties are included.
 Yet, when studied in combination with both $X_{\rm max}$ and $\lg\left(N_{\mu}\right)$\,\qty{800}{\meter}, the $L$ observable adds little to no extra mass sensitivity (see~\Cref{sec:combinations}).
@@ -335,12 +383,49 @@ Within this multivariate analysis, the combined knowledge mass separation curves
 The addition of more mass sensitive air-shower observables will improve mass separation; however, the individual separation power curves do not add linearly, making it hard to disentangle which combinations of observables contribute most to the overall mass separation curves in XXX.
 To study this, FOM values for observable pairs were calculated using~\Cref{eq:fom} for an energy range of \qtyrange[parse-numbers=false]{10^{18.0}}{10^{18.1}}{\electronvolt} and zenith range of \qtyrange{40}{60}{\degree}.
 All possible combinations of observable pairs are studied.
-Table XXX shows the resulting FOM values for the observable pairs using the EPOS LHC-R hadronic interaction model, where all observables were scaled with respect to the energy reference observable.
-The diagonal of Table XXX, shown in boldface font, represents the FOM for knowledge of only the scaled observable in question.
-For reference, combining knowledge of all studied observables for this hadronic model, energy and zenith range results in a FOM value of XXX.
+\Cref{tab:combinations} shows the resulting FOM values for the observable pairs using the EPOS LHC-R hadronic interaction model, where all observables were scaled with respect to the energy reference observable.
+The diagonal of~\Cref{tab:combinations}, shown in boldface font, represents the FOM for knowledge of only the scaled observable in question.
+For reference, combining knowledge of all studied observables for this hadronic model, energy and zenith range results in a FOM value of 2.18.
 
-The highest FOM value corresponds to the observable combination of the XXX with the XXX.
-%Although, the FOM value for this observable combination is only fractionally better than the combination of electrons at ground and high-energy muons.
+\begin{table}
+    \caption[Proton-iron merit factors for observable combinations from EPOS LHC-R simulations.]{Proton-iron FOM values calculated from~\Cref{eq:fom} for all investigated observable combinations for EPOS LHC-R simulations. All FOM values were calculated within an energy range of \qtyrange[parse-numbers=false]{10^{18.0}}{10^{18.1}} and a zenith range of \qtyrange{40}{60}{\degree}. All observables are scaled with respect to the energy reference observable prior to calculating the FOM values. The diagonal FOM values, listed in boldface font, correspond to knowledge of only that scaled observable.}
+    \label{tab:combinations}
+    \vspace*{.5\baselineskip}
+    \centering
+    \begin{tabular}{| c || c | c | c | c | c |}
+        \hline
+                                                     & $X_{\rm max}$ & $L$ & $R$ & $\lg\left(N_{\mu}\right)$\,\qty{800}{\meter} & $\rm R_{\rm e/\mu}$\,\qty{800}{\meter} \\
+        \hline
+        \hline
+        $X_{\rm max}$                                & \bf{1.30} & 1.35      & 1.48      & 1.92      & 1.32\\
+        $L$                                          &           & \bf{0.11} & 1.31      & 1.39      & 0.72\\
+        $R$                                          &           &           & \bf{1.29} & 1.69      & 1.33\\
+        $\lg\left(N_{\mu}\right)$\,\qty{800}{\meter} &           &           &           & \bf{1.28} & 1.94\\
+        $\rm R_{\rm e/\mu}$\,\qty{800}{\meter}       &           &           &           &           & \bf{0.72}\\
+        \hline
+    \end{tabular}
+\end{table}
+
+The observable combination of $\lg\left(N_{\mu}\right)$\,\qty{800}{\meter} with $\rm R_{\rm e/\mu}$\,\qty{800}{\meter} corresponds to the highest FOM value in~\Cref{tab:combinations}.
+Although, the FOM value for this observable combination is only fractionally better than the combination of $\lg\left(N_{\mu}\right)$\,\qty{800}{\meter} and $X_{\rm max}$, with a difference of 0.02 in FOM values for this phase space of EPOS LHC-R simulations.
+The other hadronic interaction models result in similar FOM values within these energy and zenith ranges, with Sibyll 2.3e predicting the most mass sensitive observable combination to be $\lg\left(N_{\mu}\right)$\,\qty{800}{\meter} and $X_{\rm max}$ with a merit factor of 2.02, and QGSJETIII-01 predicting $\lg\left(N_{\mu}\right)$\,\qty{800}{\meter} and $\rm R_{\rm e/\mu}$\,\qty{800}{\meter} to be the most mass sensitive combination with a FOM of 2.47.
+Interestingly, the $\rm R_{\rm e/\mu}$\,\qty{800}{\meter} is not highly mass sensitive on its own for any model, yet shows high mass sensitivity when combined with $\lg\left(N_{\mu}\right)$\,\qty{800}{\meter}, where this information is already included in the ratio calculation.
+Hence, ways of combining the surface electron and muon numbers other than a simple ratio could enhance the per-event mass sensitivity of this observable combination.
+As seen in~\Cref{sec:profilefitting}, the $L$ observable could be an interesting option to determine the proton-helium fraction in the mass composition of cosmic rays when measuring $L$ with high precision and statistics; however, here it is shown to have little event-by-event mass sensitivity.
+This per-event mass sensitivity increase with increasing air-shower energy, yet adds little to no additional information when combined with surface muons and $X_{\rm max}$.
+For example, with an energy range of \qtyrange[parse-numbers=false]{10^{18.0}}{10^{18.1}}{\electronvolt} and a zenith range of \qtyrange{40}{60}{\degree} for EPOS LHC-R, the proton-iron FOM for exact knowledge of $\lg\left(N_{\mu}\right)$\,\qty{800}{\meter}, $X_{\rm max}$, and $L$ combined is 1.96, whereas the FOM is 1.95 for only exact knowledge of $\lg\left(N_{\mu}\right)$\,\qty{800}{\meter} and $X_{\rm max}$.
+
+In all models, and across all zenith and energy ranges, the $\lg\left(N_{\mu}\right)$\,\qty{800}{\meter} and $X_{\rm max}$ combination is either the most mass sensitive or second most mass sensitive.
+In the latter case, the FOM values are close in absolute value to the most mass sensitive observable combination.
+Therefore, when combining observables, the simultaneous measurement of the muonic shower component and $X_{\rm max}$ will enhance the per-event mass sensitivity.
+A different, yet also important goal of air-shower experiments is to determine the average mass composition of incoming primary cosmic rays.
+For the mass composition, averaging over large samples of events can reduce statistical uncertainties.
+Thus, the per-event mass sensitivity becomes less important, as a lower mass sensitivity can be compensated by larger statistics.
+Therefore, for measuring the mass composition, systematic uncertainties play a crucial role.
+This includes uncertainties in the interpretation of air-shower observables when determining the absolute values of the atomic mass numbers.
+The muon puzzle, a mismatch between air-shower simulations and muon measurements observed in several experiments~\cite{whisp_2019, icrc2021_soldin_whisp}, is an obvious indication that such systematic uncertainties exist at least regarding surface muon observables.
+Hence, although muon observables will provide a higher event-by-event mass separation, experiments aiming at a low systematic uncertainty for the average mass composition should include $X_{\rm max}$ sensitive detectors.
+
 %Another notable observable pair is the combination of \xmax and low-energy surface muon number, as this combination yields the largest FOM value for any observable combination when excluding the high-energy muons.
 
 % Discuss event-by-event separation of L observable in combination with Xmax and muons.
@@ -349,8 +434,8 @@ The highest FOM value corresponds to the observable combination of the XXX with 
 
 \subsection{Event-by-Event Mass Separation of Helium from Proton and Oxygen Primaries}\label{sec:intermediate}
 A multitude of cosmic-ray studies would benefit from the ability to discriminate between helium and the CNO group (carbon, nitrogen, oxygen), as well as proton and helium cosmic rays.
-Measurements of the proton-to-helium ratio in the energy range of the Galactic to extragalactic transition, as well as the fraction of CNO, can help to distinguish certain scenarios for the origin of the highest energy Galactic cosmic rays CITE44FROMPRD.
-Moreover, it is possible that these highest energy Galactic cosmic rays are rich in CNO while the extragalactic cosmic rays in the transition region may be rich in protons and possibly helium CITE45FROMPRD (maybe updated reference?).
+Measurements of the proton-to-helium ratio in the energy range of the Galactic to extragalactic transition, as well as the fraction of CNO, can help to distinguish certain scenarios for the origin of the highest energy Galactic cosmic rays~\cite{thoudam_aa2016_spectrum}.
+Moreover, it is possible that these highest energy Galactic cosmic rays are rich in CNO while the extragalactic cosmic rays in the transition region may be rich in protons and possibly helium~\cite{auger_jcap2023_sources, auger_submittedprd2026_xmax}.
 In such scenarios, discrimination between cosmic rays of these mass groups (p, He, CNO) on an event-by-event basis may effectively enable to separate Galactic from extragalactic cosmic rays, allow for mass-group specific anisotropy measurements, and potentially enable rigidity-based particle astronomy of the most energetic Galactic sources.
 
 The FOM metric was applied to measure the helium-oxygen and helium-proton separation power when using knowledge of all observables investigated within this analysis.
@@ -381,7 +466,7 @@ This smaller spread increases the separation between the helium and oxygen distr
 However, the Fisher analysis presented here only accounts for linear correlations between observables in each shower, and therefore a more advanced analysis technique could enhance the event-by-event mass separation beyond the one presented above.
 A pipeline was established to train a gradient boosted decision tree (GBDT) for the regression task of predicting population ''zero-like'' and ''one-like'' events, where regression values of 0.0 and 1.0 represent populations zero and one respectively, corresponding to two different primary masses.
 Several GBDTs were trained, where each individual decision tree is trained and validated on data from a single combination of the four options: hadronic interaction model (EPOS LHC-R, Sibyll 2.3e, or QGSJETIII-01), primary mass group separation (proton-iron, helium-oxygen, or helium-proton), zenith angle range (\qtyrange{0}{30}{\degree} or \qtyrange{40}{60}{\degree}) and assumed observable reconstruction accuracy (exact knowledge or within the assumed baseline uncertainties from~\Cref{sec:resolution}).
-Each GBDT was defined using the scikit-learn python package CITE46FROMPRD where no hyperparameter optimization was performed.
+Each GBDT was defined using the scikit-learn python package~\cite{pedregosa_jmlr2011_scikit} where no hyperparameter optimization was performed.
 Only default hyperparameters were used, other than the random seed used for each regression tree to control reproducibility.
 Knowledge of all studied observables, $X_{\rm max}$, $R$, $L$, $\lg\left(N_{\mu}\right)$\,\qty{800}{\meter}, and $\rm R_{\rm e/\mu}$\,\qty{800}{\meter} were used as input features to the regression task.
 Observables were scaled with respect to the energy reference observable, $N_{\rm{e, max}}$, prior to training.
@@ -438,7 +523,30 @@ For all GBDTs trained on EPOS LHC-R simulations, the observable yielding the mos
 In particular, $X_{\rm max}$ is most important when observable uncertainties are included and for exact knowledge proton-iron separation, yet low-energy $N_{\mu}$ is most important for the helium-oxygen and helium-proton separations when exact knowledge of the observables is known.
 % Report for other models also.
 % Compare to Fisher most sensitive observable pairs.
-Table XXX lists the Gini importance of observables for proton-iron separation of EPOS LHC-R simulations, both when observables are known exactly or known within reconstruction uncertainties.
+\Cref{tab:importances} lists the Gini importance of observables for proton-iron, helium-xygen, and helium-proton separation of EPOS LHC-R simulations, both when observables are known exactly or known within reconstruction uncertainties.
+
+\begin{table}
+    \hbox to \textwidth{\hfill
+    \rotatebox{90}{
+    \begin{minipage}{\textheight}
+    \caption[Gini importance of GBDT for EPOS LHC-R simulations.]{Gini importance of observables when separating EPOS LHC-R simulated proton-iron, helium-oxygen, and helium-proton primaries with a GBDT in a zenith range of \qtyrange{40}{60}{\degree}. Results when observables are known exactly (exact) or within reconstruction uncertainties (reco.) are shown. Importance values are normalized such that their sum is one within a column, where dashes (--) represent importance values of less than 0.005. The two observables with the most importance in each column are shown in bold.}
+    \label{tab:importances}
+    \vspace*{.5\baselineskip}
+    \centering
+    \begin{tabular}{| c || c | c | c | c | c | c |}
+        \hline
+                                                     & p-Fe (exact) & p-Fe (reco.) & He-O (exact) & He-O (reco.) & He-p (exact) & He-p (reco.) \\
+        \hline
+        \hline
+        $X_{\rm max}$                                & \bf{0.69} & \bf{0.82} & \bf{0.28} & \bf{0.60} & \bf{0.27} & \bf{0.47}\\
+        $L$                                          & --        & --        & 0.02      & 0.05      & 0.02      & 0.07\\
+        $R$                                          & 0.03      & 0.02      & 0.05      & 0.06      & 0.03      & 0.03\\
+        $\lg\left(N_{\mu}\right)$\,\qty{800}{\meter} & \bf{0.21} & \bf{0.13} & \bf{0.38} & \bf{0.22} & \bf{0.44} & \bf{0.32}\\
+        $\rm R_{\rm e/\mu}$\,\qty{800}{\meter}       & 0.07      & 0.03      & 0.27      & 0.07      & 0.24      & 0.11\\
+        \hline
+    \end{tabular}
+    \end{minipage}}\hfill}
+\end{table}
 
 
 %Hence, the GBDT analysis performs equally well (helium-oxygen and helium-proton) to better (proton-iron) than the Fisher analysis, with consistencies for the most mass sensitive observables between the analysis methods.
