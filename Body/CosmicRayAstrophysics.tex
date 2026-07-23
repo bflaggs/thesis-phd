@@ -3,8 +3,8 @@
 %
 \chapter{Cosmic Ray Astrophysics}\label{chap:cosmicrays}
 Cosmic rays are ultra-relativistic charged particles of astrophysical origin.
-They were discovered in 1912 when Victor Hess, armed with his electroscope and a will to execute a daring idea, performed several hot-air balloon flights to study radiation in the atmosphere~\cite{victorhess_1912}.
-Hess measured increasing levels of atmospheric radiation as his balloon increased up to \qty{5}{\kilo\meter} in altitude, leading him to hypothesize the existence of a ``radiation of cosmic origin'', to which he gave the name cosmic rays.
+They were discovered in 1912 when Victor Hess, armed with his electroscope and a daring idea, performed several high-altitude hot-air balloon flights to study radiation in the atmosphere~\cite{victorhess_1912}.
+Hess measured increasing levels of atmospheric radiation as his balloon rose in altitude up to \qty{5}{\kilo\meter}, leading him to hypothesize the existence of a ``radiation of cosmic origin'', to which he gave the name cosmic rays.
 He was later awarded the physics Nobel prize in 1936 for his discovery and the misnomer given to these particles of astrophysical origin stuck.
 
 Cosmic rays have been studied for over a century since their discovery, yet the acceleration mechanisms producing ultra-high-energy cosmic rays, those above \qty{1}{\exa\electronvolt}\,=\,\qty[parse-numbers=false]{10^{18}}{\electronvolt} in energy, and their astrophysical sources are still a mystery.
@@ -81,8 +81,8 @@ This chapter will mostly discuss the astrophysical implications of cosmic-ray ph
 
 
 \section{Energy Spectrum}\label{sec:spectrum}
-Cosmic rays span over 10 orders of magnitude in energy, starting from \qty[parse-numbers=false]{10^{9}}{\electronvolt} up to nearly \qty[parse-numbers=false]{10^{21}}{\electronvolt} and possibly beyond, with the highest-energy cosmic ray measured to have an energy of \qty{320}{\exa\electronvolt} by the Fly's Eye detector in 1991~\cite{flyseye_prl1995_omg}.
-The flux of these cosmic particles arriving at Earth above an energy $E$, per unit area $A$, solid angle $\Omega$, and time $t$, is given by
+Cosmic rays span over 10 orders of magnitude in energy, starting from \qty[parse-numbers=false]{10^{9}}{\electronvolt} up to nearly \qty[parse-numbers=false]{10^{21}}{\electronvolt} and possibly beyond, with the highest-energy cosmic ray measured at an energy of \qty{320}{\exa\electronvolt} by the Fly's Eye detector in 1991~\cite{flyseye_prl1995_omg}.
+The flux of these cosmic particles arriving at Earth above an energy $E$, per unit area $A$,per solid angle $\Omega$, and per time $t$, is given by
 
 \begin{equation}
     \Phi(E) = \frac{\text{d}N}{\text{d}A\,\text{d}\Omega\,\text{d}t}. \label{eq:flux}
@@ -97,11 +97,12 @@ The energy-dependent flux is typically reported as a differential flux $J$ that 
 
 \noindent
 with $\gamma$ an energy-dependent spectral index, constrained to $\gamma>0$.
-Shown in~\Cref{fig:spectrum_measurements} is the differential flux of cosmic rays, i.e. the cosmic-ray energy spectrum, above nearly \qty[parse-numbers=false]{10^{15}}{\electronvolt} in energy as measured by various cosmic-ray experiments.
+Shown in~\Cref{fig:spectrum_measurements} is the differential flux of cosmic rays, i.e. the cosmic-ray energy spectrum, above \qty[parse-numbers=false]{10^{15}}{\electronvolt} in energy as measured by various cosmic-ray experiments.
 The differential flux is scaled by $E^{3}$ to highlight features in the cosmic-ray energy spectrum.
-At these ultra-high energies, cosmic rays are extremely rare, with a flux of \qty{1}{\per\meter\squared\per\year} at roughly \qty{10}{\peta\electronvolt} and \qty{1}{\per\kilo\meter\squared\per\year} at nearly \qty{10}{\exa\electronvolt}.
-Measuring ultra-high-energy cosmic rays with meaningful statistics therefore requires large observatories spanning several hundreds to thousands of kilometers squared in surface area.
-Hence, the lack of measurements and large measurement uncertainties at the highest energies of the cosmic-ray energy spectrum.
+At these ultra-high energies, cosmic rays are extremely rare, with a flux of \qty{1}{\per\meter\squared\per\year} at roughly \qty[parse-numbers=false]{10^{16}}{\electronvolt} and \qty{1}{\per\kilo\meter\squared\per\year} at nearly \qty[parse-numbers=false]{10^{19}}{\electronvolt}.
+Measuring ultra-high-energy cosmic rays with meaningful statistics therefore requires large observatories covering detection areas of several hundreds to thousands of kilometers squared.
+The impact on cosmic-ray measurements are large measurement uncertainties and only few experiments (Auger and TA) with measurements at the highest energies of the cosmic-ray energy spectrum.
+%Hence, the lack of measurements and large measurement uncertainties at the highest energies of the cosmic-ray energy spectrum.
 % Add the above three sentences at the end of the section leading into mass composition?
 
 The spectral features are deviations from a constant power law and are described by changes in the energy-dependent spectral index $\gamma$.
@@ -109,9 +110,9 @@ The primary features of the energy spectrum are as follows:
 \begin{itemize}
     \item \textit{Knee}: a spectral softening from $\gamma$\,=\,2.74 to $\gamma$\,=\,3.13 at an energy of \\\qty[parse-numbers=false]{(3.67\,$\pm$\,0.05\,$\pm$\,0.15)$\times$10^{15}}{\electronvolt} measured by LHAASO~\cite{lhaaso_prl2024_spectrum}.
     \item \textit{Second Knee}: a spectral softening from $\gamma$\,=\,2.85 to $\gamma$\,=\,3.28 at an energy of \\\qty[parse-numbers=false]{(1.58\,$\pm$\,0.05\,$\pm$\,0.2)$\times$10^{17}}{\electronvolt} measured from the combined spectrum fit of the \qty{750}{\meter} and \qty{1500}{\meter} spaced particle detector arrays measurements with the fluorescence telescope measurements of the Pierre Auger Observatory~\cite{icrc2021_novotny_spectrum}.
-    \item \textit{Ankle}: a spectral hardening from $\gamma$\,=\,3.29 to $\gamma$\,=\,2.51 at an energy of \\\qty[parse-numbers=false]{(5.0\,$\pm$\,0.1\,$\pm$\,0.8)$\times$10^{18}}{\electronvolt}~\cite{auger_prd2020_spectrum, auger_prl2020_spectrum}.
-    \item \textit{Instep}: a flattening of the $E^{3}$ weighted spectrum, resulting from a spectral index change of $\gamma$\,=\,2.51 to $\gamma$\,=\,3.05 at an energy of \qty[parse-numbers=false]{(1.3\,$\pm$\,0.1\,$\pm$\,0.2)$\times$10^{19}}{\electronvolt}~\cite{auger_prd2020_spectrum, auger_prl2020_spectrum}.
-    \item \textit{Cutoff}: an extreme suppression in the flux, changing the spectral index from $\gamma$\,=\,3.05 to $\gamma$\,=\,5.1 at an energy of \qty[parse-numbers=false]{(4.6\,$\pm$\,0.3\,$\pm$\,0.6)$\times$10^{19}}{\electronvolt}~\cite{auger_prd2020_spectrum, auger_prl2020_spectrum}.
+    \item \textit{Ankle}: a spectral hardening from $\gamma$\,=\,3.25 to $\gamma$\,=\,2.51 at an energy of \\\qty[parse-numbers=false]{(5.1\,$\pm$\,0.1\,$\pm$\,1.1)$\times$10^{18}}{\electronvolt}~\cite{auger_prl2025_spectrum}.
+    \item \textit{Instep}: a flattening of the $E^{3}$ weighted spectrum, resulting from a spectral index change of $\gamma$\,=\,2.51 to $\gamma$\,=\,2.99 at an energy of \qty[parse-numbers=false]{(1.3\,$\pm$\,0.1\,$\pm$\,0.2)$\times$10^{19}}{\electronvolt}~\cite{auger_prl2025_spectrum}.
+    \item \textit{Cutoff}: an extreme suppression in the cosmic-ray flux, changing the spectral index from $\gamma$\,=\,2.99 to $\gamma$\,=\,5.4 at an energy of \qty[parse-numbers=false]{(4.8\,$\pm$\,0.2\,$\pm$\,0.5)$\times$10^{19}}{\electronvolt}~\cite{auger_prl2025_spectrum}.
 \end{itemize}
 
 \begin{figure}
@@ -123,12 +124,18 @@ The primary features of the energy spectrum are as follows:
 
 \noindent
 The knee of the cosmic-ray energy spectrum has been observed by several other cosmic-ray observatories CITATIONSFROMLHAASOPAPER, most of which are in agreement with the highly precise LHAASO results.
-The second knee has also been measured using only the \qty{433}{\meter} spaced particle detector array of the Pierre Auger Observatory, yielding a cosmic-ray energy of \qty[parse-numbers=false]{(2.3\,$\pm$\,0.5)$\times$10^{17}} for the spectral break~\cite{icrc2023_gaby_spectrum}.
-The above-stated energy transitions of the ankle, instep, and cutoff spectral features were derived using Phase I measurements of the Pierre Auger Observatory and shown to be mostly declination independent~\cite{auger_prl2020_spectrum}.
+The second knee has also been measured using only the \qty{433}{\meter} spaced particle detector array of the Pierre Auger Observatory, yielding a cosmic-ray energy of \qty[parse-numbers=false]{(2.3\,$\pm$\,0.5)$\times$10^{17}} for the spectral feature~\cite{icrc2023_gaby_spectrum}; however, this feature is not a sharp break but rather an extended softening which occurs between a range of \qtyrange[parse-numbers=false]{1$\times$10^{17}}{2$\times$10^{17}}{\electronvolt}.
+The above-stated energy transitions of the ankle, instep, and cutoff spectral features were derived using Phase I measurements of the Pierre Auger Observatory and shown to be mostly declination independent~\cite{auger_prl2025_spectrum}.
 Phase II Auger measurements are in agreement with the Phase I results, within uncertainties~\cite{icrc2025_diego_spectrum}.
-The Telescope Array experiment reports measurements for the energy of the ankle, instep, and cutoff spectral features which agree with the Pierre Auger Observatory results within systematic uncertainties FINDCITATIONS.
-Therefore, the two largest cosmic-ray observatories in the world are in agreement.
-Now leaves open the question of understanding these measurements for progressing towards determining sources of ultra-high-energy cosmic rays.
+The Telescope Array experiment reports measurements for the energy of the ankle, instep, and cutoff spectral features which generally agree with the Pierre Auger Observatory results within systematic uncertainties accounting for the energy scale difference between the experiments~\cite{icrc2025_ta_spectrum}.
+There is tension between the two experiments at the spectral cutoff feature in both the energy of the cutoff and the post-cutoff spectral index, yet this is most probably caused from differences in the analysis method rather than astrophysics~\cite{icrc2025_augerta_spectrum}.
+Overall, measurements of these spectral features are in agreement between cosmic-ray experiments, yet the exact astrophysical cause for each feature is still unknown.
+Understanding the astrophysics producing these features will provide insight to the origin of ultra-high-energy cosmic rays. 
+
+
+%The exact cause for each spectral feature is still unknown, yet determining th
+%Determining the cause of these spectral features provide
+%Now leaves open the question of understanding these measurements for progressing towards determining sources of ultra-high-energy cosmic rays.
 
 
 %The above-stated energy transitions of the ankle, instep, and cutoff spectral features were derived using Phase I measurements of the Pierre Auger Observatory; however, Phase II Auger measurements agree within uncertainties of those from Phase I~\cite{icrc2025_diego_spectrum}.
@@ -141,7 +148,7 @@ Now leaves open the question of understanding these measurements for progressing
 
 %Cosmic rays follow a steeply declining energy spectrum.
 
-\section{Mass}\label{sec:mass}
+\section{Mass Composition}\label{sec:mass}
 Directly related to determining the cosmic-ray energy is also determining its mass.
 
 \section{Anisotropy}\label{sec:anisotropy}
