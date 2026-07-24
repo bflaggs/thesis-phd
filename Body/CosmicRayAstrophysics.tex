@@ -82,7 +82,7 @@ This chapter will mostly discuss the astrophysical implications of cosmic-ray ph
 
 \section{Energy Spectrum}\label{sec:spectrum}
 Cosmic rays span over 10 orders of magnitude in energy, starting from \qty[parse-numbers=false]{10^{9}}{\electronvolt} up to nearly \qty[parse-numbers=false]{10^{21}}{\electronvolt} and possibly beyond, with the highest-energy cosmic ray measured at an energy of \qty{320}{\exa\electronvolt} by the Fly's Eye detector in 1991~\cite{flyseye_prl1995_omg}.
-The flux of these cosmic particles arriving at Earth above an energy $E$, per unit area $A$,per solid angle $\Omega$, and per time $t$, is given by
+The flux of these cosmic particles arriving at Earth above an energy $E$, per unit area $A$, per solid angle $\Omega$, and per time $t$, is given by
 
 \begin{equation}
     \Phi(E) = \frac{\text{d}N}{\text{d}A\,\text{d}\Omega\,\text{d}t}. \label{eq:flux}
@@ -98,10 +98,10 @@ The energy-dependent flux is typically reported as a differential flux $J$ that 
 \noindent
 with $\gamma$ an energy-dependent spectral index, constrained to $\gamma>0$.
 Shown in~\Cref{fig:spectrum_measurements} is the differential flux of cosmic rays, i.e. the cosmic-ray energy spectrum, above \qty[parse-numbers=false]{10^{15}}{\electronvolt} in energy as measured by various cosmic-ray experiments.
-The differential flux is scaled by $E^{3}$ to highlight features in the cosmic-ray energy spectrum.
 At these ultra-high energies, cosmic rays are extremely rare, with a flux of \qty{1}{\per\meter\squared\per\year} at roughly \qty[parse-numbers=false]{10^{16}}{\electronvolt} and \qty{1}{\per\kilo\meter\squared\per\year} at nearly \qty[parse-numbers=false]{10^{19}}{\electronvolt}.
 Measuring ultra-high-energy cosmic rays with meaningful statistics therefore requires large observatories covering detection areas of several hundreds to thousands of kilometers squared.
 The impact on cosmic-ray measurements are large measurement uncertainties and only few experiments (Auger and TA) with measurements at the highest energies of the cosmic-ray energy spectrum.
+In the figure, the differential flux is scaled by $E^{3}$ to highlight features in the cosmic-ray energy spectrum.
 %Hence, the lack of measurements and large measurement uncertainties at the highest energies of the cosmic-ray energy spectrum.
 % Add the above three sentences at the end of the section leading into mass composition?
 
@@ -124,13 +124,18 @@ The primary features of the energy spectrum are as follows:
 
 \noindent
 The knee of the cosmic-ray energy spectrum has been observed by several other cosmic-ray observatories CITATIONSFROMLHAASOPAPER, most of which are in agreement with the highly precise LHAASO results.
-The second knee has also been measured using only the \qty{433}{\meter} spaced particle detector array of the Pierre Auger Observatory, yielding a cosmic-ray energy of \qty[parse-numbers=false]{(2.3\,$\pm$\,0.5)$\times$10^{17}} for the spectral feature~\cite{icrc2023_gaby_spectrum}; however, this feature is not a sharp break but rather an extended softening which occurs between a range of \qtyrange[parse-numbers=false]{1$\times$10^{17}}{2$\times$10^{17}}{\electronvolt}.
+The second knee has also been measured using only the \qty{433}{\meter} spaced particle detector array of the Pierre Auger Observatory, yielding a cosmic-ray energy of \qty[parse-numbers=false]{(2.3\,$\pm$\,0.5)$\times$10^{17}}{\electronvolt} for the spectral feature~\cite{icrc2023_gaby_spectrum}; however, this feature is not a sharp break but rather an extended softening which occurs between a range of \qtyrange[parse-numbers=false]{1$\times$10^{17}}{2$\times$10^{17}}{\electronvolt}.
 The above-stated energy transitions of the ankle, instep, and cutoff spectral features were derived using Phase I measurements of the Pierre Auger Observatory and shown to be mostly declination independent~\cite{auger_prl2025_spectrum}.
 Phase II Auger measurements are in agreement with the Phase I results, within uncertainties~\cite{icrc2025_diego_spectrum}.
 The Telescope Array experiment reports measurements for the energy of the ankle, instep, and cutoff spectral features which generally agree with the Pierre Auger Observatory results within systematic uncertainties accounting for the energy scale difference between the experiments~\cite{icrc2025_ta_spectrum}.
-There is tension between the two experiments at the spectral cutoff feature in both the energy of the cutoff and the post-cutoff spectral index, yet this is most probably caused from differences in the analysis method rather than astrophysics~\cite{icrc2025_augerta_spectrum}.
+There is tension between the two experiments at the spectral cutoff feature, in both the energy of the cutoff and the post-cutoff spectral index.
+This is most probably caused from differences in the analysis method rather than astrophysics~\cite{icrc2025_augerta_spectrum}.
+
 Overall, measurements of these spectral features are in agreement between cosmic-ray experiments, yet the exact astrophysical cause for each feature is still unknown.
-Understanding the astrophysics producing these features will provide insight to the origin of ultra-high-energy cosmic rays. 
+%Discuss astrophysical models for each spectral feature.
+
+%Astrophysical acceleration and propagation processes are energy dependent, leading to an energy dependence on the mass composition of cosmic rays.
+%Understanding the astrophysics producing these features will provide insight to the origin of ultra-high-energy cosmic rays. 
 
 
 %The exact cause for each spectral feature is still unknown, yet determining th
@@ -149,7 +154,83 @@ Understanding the astrophysics producing these features will provide insight to 
 %Cosmic rays follow a steeply declining energy spectrum.
 
 \section{Mass Composition}\label{sec:mass}
-Directly related to determining the cosmic-ray energy is also determining its mass.
+Astrophysical acceleration and propagation processes are energy dependent, leading to an energy dependence on the mass composition of cosmic rays.
+Therefore, inherent to interpreting the astrophysical meaning of the spectral features is determining the mass of the incoming cosmic rays, both the average mass composition and, hopefully with future work, on a per-event basis.
+The latter would allow for charged particle astronomy, which when used with particle backtracking would point towards cosmic-ray sources.
+Direct mass measurements of incoming cosmic rays have been made using both balloon and satellite instruments for cosmic rays below approximately \qty[parse-numbers=false]{10^{15}}{\electronvolt}.
+At higher energies, the cosmic-ray flux becomes too small for feasible measurements with small scale detectors, and instead requires large-scale ground based detector systems.
+For ground-based observatories, direct cosmic-ray mass measurements are no longer possible as the primary cosmic ray will interact with atmospheric molecules to initiate an extensive air shower of secondary particles and radiation that propagate through the atmosphere until reaching the ground.
+Indirect cosmic-ray observations occur for cosmic-ray energies above nearly \qty[parse-numbers=false]{10^{14}}{\electronvolt}, complicating mass measurements above this energy threshold.
+
+Ground-based observatories instead determine the mass composition of cosmic rays with energy by reconstructing air-shower properties which are sensitive to the primary cosmic ray mass.
+One property heavily studied is the atmospheric depth of shower maximum, referred to as $X_{\rm max}$, and known to be correlated with primary particle mass.
+The average $X_{\rm max}$ and its fluctuations as measured by various ground-based experiments is presented in~\Cref{fig:mean_and_sigma_xmax}.
+Data used for these figures are available from the references within~\cite{snowmass_2023_uhecr}.
+Clearly visible are the different predicted values of the $X_{\rm max}$ distributions from hadronic interaction models.
+Therefore, interpretation of air-shower data is heavily dependent on the assumed hadronic interaction model.
+This generates an additional systematic uncertainty in the data interpretation as these models are extrapolated into an energy regime beyond LHC energies where the handling of hadronic interactions with full precision is not yet known.
+A description of air showers and their properties with more depth is given in~\Cref{chap:airshowers}.
+
+%These models are extrapolated beyond LHC particle accelerator energies to described the hadronic interactions within cosmic-ray air showers, yet
+%as the handling of hadronic interactions with full precision is not yet known.
+%the fully 
+%This generates an additional systematic uncertainty in the data interpretation as these models are extrapolated beyond the particle accelerator energies of the LHC to describe hadronic interactions within air showers at ulta-high energies.
+%, which to date is still an active research area as these models are extrapolated beyond particle accelerator energies of the LHC to ultra-high-energy cosmic ray energies.
+%Examples of these properties include the atmospheric depth of shower maximum, referred to as $X_{\rm max}$, and the muon content of the air shower, $N_{\mu}$.
+%A description of air showers and their properties with more depth is given in~\Cref{chap:airshowers}.
+%Particularly, the average values and their fluctuations 
+
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter1/meanXmax_data_snowmass.pdf}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter1/sigmaXmax_data_snowmass.pdf}
+  \caption[The measured mean shower maximum and fluctuations for multiple experiments.]{The average $X_{\rm max}$ (left) and fluctuations in $X_{\rm max}$ (right) as measured by numerous ground-based observatories using various detection techniques. Results are shown for the following detection techniques: fluorescence-light detectors (FD), Cherenkov-light detectors (Cherenkov), surface water-Cherenkov particle detectors (SD), and radio antennas (RD). Grey lines represent the average $X_{\rm max}$ and fluctuations as predicted with hadronic interaction models. Figure taken from~\cite{snowmass_2023_uhecr}.}
+  \label{fig:mean_and_sigma_xmax}
+\end{figure}
+
+Changes in the $X_{\rm max}$ distributions seen in~\Cref{fig:mean_and_sigma_xmax} are the manifestations of changes in the cosmic-ray mass composition in air-shower data.
+Assuming a hadronic interaction model and using Monte Carlo simulations as truth, the mass fractions as a function of energy can be predicted for an experimental dataset, providing a handle on how the cosmic-ray mass composition evolves with energy.
+Correlations of energy dependent changes in mass composition with spectral features of the cosmic-ray energy spectrum can then provide information of potential rigidity dependencies on cosmic-ray acceleration and propagation processes.
+The inferred mass composition therefore constrains astrophysical theories for features in the cosmic-ray energy spectrum and informs cosmic-ray source modeling.
+The mass and spectrum results from various experiments, both using direct and indirect cosmic-ray measurements, have also been combined to perform a ``global fit'' to the individual mass spectra~\cite{icrc2017_gsf2017, icrc2025_gsf2025}.
+The goal of this ``Global Spline Fit'' (GSF) model, shown in~\Cref{fig:gsf}, is to simultaneously describe the mass composition and energy spectra of cosmic rays for interpreting cosmic-ray data and influencing astrophysical source models within the context of a singular, coherent model.
+
+\begin{figure}
+  \centering
+  \includegraphics[trim={3.9cm 18.4cm 3.9cm 3.4cm},clip,width=1.0\textwidth]{chapter1/gsf2025_page.pdf}
+  \caption[Global spline fit of cosmic-ray data.]{The most recent Global Spline Fit (GSF) of both cosmic-ray mass and energy spectrum experimental data. Both direct and indirect cosmic-ray measurements are included and simultaneously used in the data-driven parameterization. This GSF model is an update of the original GSF model from 2017~\cite{icrc2017_gsf2017}, but uses updated data from the references within~\cite{icrc2025_gsf2025}. Figure taken from~\cite{icrc2025_gsf2025}.}
+  \label{fig:gsf}
+\end{figure}
+
+
+%with the goal of having a comprehensive model of cosmic 
+
+%to simultaneously describe the mass composition and energy spectra of cosmic rays.
+%XXX shows the results of this ``Global Spline Fit'' (GSF) model, which can be used to interpret cosmic-ray data and influence astrophysical source modeling within the context of a singular, coherent model.
+
+%influence both astrophysical source models and analysis techniques for mass-sensitive data to result in combined efforts in astroparticle physics to determine a coherent understanding of cosmic-ray astrophysics to date.
+
+%to possible rigidity dependencies of cosmic-ray acceleration and propagation processes.
+
+%provide insight to potential source evolution 
+
+%rigidity dependencies on cosmic-ray source evolution 
+
+
+%The mass and spectrum results from various experiments, both using direct and indirect cosmic-ray mass measurements, have been combined to perform a ``global fit'' to the mass spectra with the goal of having a single, comprehensive and coherent model to simultaneously describe the mass composition and energy spectra of cosmic rays.
+%XXX shows the results of this ``Global Spline Fit'' (GSF) model, which can be used to influence both astrophysical source models and analysis techniques for mass-sensitive data to result in combined efforts in astroparticle physics to determine a coherent understanding of cosmic-ray astrophysics to date.
+
+
+
+%Correlating the energy of these mass changes with the energy of the spectral breaks influences 
+
+%The inferred mass composition constrains astrophysical theories for features in the cosmic-ray energy spectrum and informs cosmic-ray source modeling.
+
+%Determining the mass composition, both on average and per-event, can then constrain astrophysical models of the acceleration and propagation processes which are used to describe the features in the cosmic-ray energy spectrum.
+
+%The cosmic-ray elemental composition changes with energy, affected by astrophysical acceleration and propagation processes 
+
+%Directly related to determining the cosmic-ray energy is also determining its mass.
 
 \section{Anisotropy}\label{sec:anisotropy}
 Cosmic rays serve as a probe to the deepest depths of the known Universe.
