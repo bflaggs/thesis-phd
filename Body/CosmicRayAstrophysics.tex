@@ -107,6 +107,7 @@ In the figure, the differential flux is scaled by $E^{3}$ to highlight features 
 
 The spectral features are deviations from a constant power law and are described by changes in the energy-dependent spectral index $\gamma$.
 The primary features of the energy spectrum are as follows:
+
 \begin{itemize}
     \item \textit{Knee}: a spectral softening from $\gamma$\,=\,2.74 to $\gamma$\,=\,3.13 at an energy of \\\qty[parse-numbers=false]{(3.67\,$\pm$\,0.05\,$\pm$\,0.15)$\times$10^{15}}{\electronvolt} as measured by LHAASO~\cite{lhaaso_prl2024_spectrum}.
     \item \textit{Second Knee}: a spectral softening from $\gamma$\,=\,2.85 to $\gamma$\,=\,3.28 at an energy of \\\qty[parse-numbers=false]{(1.58\,$\pm$\,0.05\,$\pm$\,0.2)$\times$10^{17}}{\electronvolt} measured from the combined spectrum fit of the \qty{750}{\meter} and \qty{1500}{\meter} spaced particle detector array measurements with the fluorescence telescope measurements of the Pierre Auger Observatory~\cite{icrc2021_novotny_spectrum}.
@@ -125,9 +126,9 @@ The primary features of the energy spectrum are as follows:
 \noindent
 The knee of the cosmic-ray energy spectrum has been observed by several other cosmic-ray observatories CITATIONSFROMLHAASOPAPER, most of which are in agreement with the highly precise LHAASO results.
 The second knee has also been measured using only the \qty{433}{\meter} spaced particle detector array of the Pierre Auger Observatory, yielding a cosmic-ray energy of \qty[parse-numbers=false]{(2.3\,$\pm$\,0.5)$\times$10^{17}}{\electronvolt} for the spectral feature~\cite{icrc2023_gaby_spectrum}; however, this feature is not a sharp break but rather an extended softening which occurs between a range of \qtyrange[parse-numbers=false]{1$\times$10^{17}}{2$\times$10^{17}}{\electronvolt}.
-The given energies of the ankle, instep, and cutoff spectral features were derived using Phase I measurements of the Pierre Auger Observatory and shown to be mostly declination independent~\cite{auger_prl2025_spectrum}.
+The given energies of the ankle, instep, and cutoff spectral features were determined using Phase I measurements of the Pierre Auger Observatory and shown to be mostly declination independent~\cite{auger_prl2025_spectrum}.
 Phase II Auger measurements are in agreement with the Phase I results, within uncertainties~\cite{icrc2025_diego_spectrum}.
-The Telescope Array experiment reports measurements for the energy of the ankle, instep, and cutoff spectral features which generally agree with the Pierre Auger Observatory results within systematic uncertainties and accounting for the energy scale difference between the experiments~\cite{icrc2025_ta_spectrum}.
+The Telescope Array experiment reports energies of the ankle, instep, and cutoff spectral features which generally agree with the Pierre Auger Observatory results within systematic uncertainties and accounting for the energy scale difference between the experiments~\cite{icrc2025_ta_spectrum}.
 There is tension between the two experiments regarding the spectral cutoff feature, in both the energy of the cutoff and the post-cutoff spectral index.
 Yet, this is hypothesized to be caused from differences in the analysis method rather than astrophysics~\cite{icrc2025_augerta_spectrum}.
 
@@ -162,11 +163,11 @@ At higher energies, the cosmic-ray flux becomes too small for feasible measureme
 For ground-based observatories, direct cosmic-ray mass measurements are no longer possible as the primary cosmic ray will interact with atmospheric molecules to initiate an extensive air shower of secondary particles and radiation that propagate through the atmosphere until reaching the ground.
 Indirect cosmic-ray observations occur for cosmic-ray energies above nearly \qty[parse-numbers=false]{10^{14}}{\electronvolt}, complicating mass measurements above this energy threshold.
 
-Ground-based observatories instead determine the mass composition of cosmic rays with energy by reconstructing air-shower properties which are sensitive to the primary cosmic ray mass.
-One property heavily studied is the atmospheric depth of shower maximum, referred to as $X_{\rm max}$, and known to be correlated with primary particle mass.
-The average $X_{\rm max}$ and its fluctuations as measured by various ground-based experiments is presented in~\Cref{fig:mean_and_sigma_xmax}.
+Ground-based observatories instead determine the mass composition of cosmic rays by reconstructing air-shower properties which are sensitive to the primary cosmic-ray mass.
+One heavily studied property is the atmospheric depth of shower maximum, referred to as $X_{\rm max}$, and known to be correlated with primary particle mass.
+The average $X_{\rm max}$ and its fluctuations, as measured by various ground-based experiments, are presented in~\Cref{fig:mean_and_sigma_xmax}.
 Data used for these figures are available from the references within~\cite{snowmass_2023_uhecr}.
-Clearly visible are the different predicted values of the $X_{\rm max}$ distributions from hadronic interaction models.
+Clearly visible are the different predicted values of the $X_{\rm max}$ distributions from various hadronic interaction models.
 Therefore, interpretation of air-shower data is heavily dependent on the assumed hadronic interaction model.
 This generates an additional systematic uncertainty in the data interpretation as these models are extrapolated into an energy regime beyond LHC energies where the handling of hadronic interactions with full precision is not yet known.
 A description of air showers and their properties with more depth is given in~\Cref{chap:airshowers}.
@@ -235,11 +236,50 @@ The goal of this ``Global Spline Fit'' (GSF) model, shown in~\Cref{fig:gsf}, is 
 %Directly related to determining the cosmic-ray energy is also determining its mass.
 
 \section{Anisotropy}\label{sec:anisotropy}
-Cosmic rays serve as a probe to the deepest depths of the known Universe.
+The large scale structure of the Universe is assumed to be isotropic on length scales greater than roughly \qty{100}{\mega\parsec}, with the potential cosmic-ray source distribution following the assumed homogeneity beyond this ``horizon''.
+Yet, at distances greater than \qty{100}{\mega\parsec} from Earth, cosmic rays above roughly \qty[parse-numbers=false]{10^{18}}{\electronvolt} are subject to energy loss effects from propagation (see~\Cref{sec:propagation}).
+This requires the highest energy cosmic rays reaching Earth to be generated in a region where the homogeneity assumption of the Universe breaks down, resulting in an expected deviation from isotropy in ultra-high-energy cosmic ray arrival directions at Earth.
+Studying cosmic-ray arrival directions for anisotropies can then provide evidence of sources for the most energetic charged particles in the known Universe.
+Combined with event-by-event mass measurements and extensive Galactic and extragalactic magnetic field models, charged particle astronomy is possible which would determine individual sources of ultra-high-energy cosmic rays.
+
+In 2017, the Pierre Auger Observatory measured a dipolar anisotropy in the arrival direction of cosmic rays above \qty{8}{\exa\electronvolt} with a 5.2$\sigma$ significance in the direction pointing away from the Galactic center, supporting theories that the highest energy cosmic rays are of extragalactic origin~\cite{auger_science2017_anisotropy}.
+Recently, the observatory updated their analysis with increased statistics and reported an increase in this dipolar anisotropy to 6.8$\sigma$~\cite{auger_apj2024_anisotropy}, with the dipolar amplitude increasing with energy as expected from a shrinking ``horizon'' due to propagation effects.
+Although, when searching for anisotropies at small and intermediate scales, a 5$\sigma$ detection has not yet been reached, with respective significances of 4.2$\sigma$ for a catalog of starburst galaxy locations~\cite{icrc2025_anisotropy} and 4.0$\sigma$ for the Centaurus A region~\cite{icrc2023_geraldina_anisotropy}.
+Current Auger analysis models are attempting to combine mass information with arrival directions to perform mass-informed anisotropy studies, showing with simulations that rigidity-dependent anisotropies are detectable with the Pierre Auger Observatory~\cite{uhecr2024_lorenzo, uhecr2024_emily, icrc2025_geraldina_anisotropy}.
+An application to Auger data will come soon, the results of which can be used to further inform source models of ultra-high-energy cosmic rays and their acceleration processes.
+
+%These studies have shown with simulations that rigidity-dependent anisotropies are detectable with Auger 
+
+%The mass-informed studies using simulations have shown that rigidity-dependent anisotropies are detectable with  
+
+%The dipole was measured in the direction pointing away from the Galactic center, supporting theories that the highest energy cosmic rays are of extragalactic origin.
+
+%an increase in the probability of cosmic-ray propagation effects with energy.
+
+%can determine individual sources of UHECRs.
+
+%Cosmic-ray arrival directions can then be studied for anisotropies 
+%Measuring the expected anisotropies in cosmic-ray arrival direction
+%Combined with event-by-event mass measurements and extensive Galactic and extragalactic magnetic field models, can determine individual sources of UHECRs.
+
+%In data this
+%requiring these cosmic rays reaching Earth to be generated within our Universe's local neighborhood.
+%Not only are the highest energy cosmic rays measured at Earth generated 
+
+%Therefore the cosmic-ray source distribution 
+
+%Studying the cosmic-ray arrival directions at Earth can provide information about the environment from which they originated.
+%Anisotropies in their arrival directions can provide hints towards cosmic-ray sources.
+%The source distribution within the Universe is assumed to be homogenous, with a constant isotropic flux of cosmic rays following the energy spectrum.
+%Propagation effects constrain the path length of the highest energy cosmic rays 
+
+%Specifically, at certain energy regimes, the homogeneous 
+
+%Cosmic rays serve as a probe to the deepest depths of the known Universe.
+
+\section{Propagation Effects}\label{sec:propagation}
+Further complicating the source determination of cosmic rays, and contributing to the generation of neutral particles along the path of travel to Earth, are propagation effects.
 
 \section{Sources, Acceleration Mechanisms, and MM}\label{sec:sources}
 In addition to cosmic rays, their acceleration sites also produce other particle without charge and high-energy electromagnetic radiation in the form of gamma rays.
 Hillas criterion sets geometric and energy constraints on UHECR sources based on acceleration and the like.
-
-\section{Propagation Effects}\label{sec:propagation}
-Further complicating the source determination of cosmic rays, and contributing to the generation of neutral particles along the path of travel to Earth, are propagation effects.
