@@ -124,7 +124,7 @@ The primary features of the energy spectrum are as follows:
 \end{figure}
 
 \noindent
-The knee of the cosmic-ray energy spectrum has been observed by several other cosmic-ray observatories CITATIONSFROMLHAASOPAPER, most of which are in agreement with the highly precise LHAASO results.
+The knee of the cosmic-ray energy spectrum has been observed by several other cosmic-ray observatories to occur at approximately \qty[parse-numbers=false]{3$\times$10^{15}}{\electronvolt}~\cite{tibet3_apj2008_spectrum, tunka_nima2014_spectrum, icecube_prd2020_spectrum}, in agreement with the highly precise LHAASO results.
 The second knee has also been measured using only the \qty{433}{\meter} spaced particle detector array of the Pierre Auger Observatory, yielding a cosmic-ray energy of \qty[parse-numbers=false]{(2.3\,$\pm$\,0.5)$\times$10^{17}}{\electronvolt} for the spectral feature~\cite{icrc2023_gaby_spectrum}; however, this feature is not a sharp break but rather an extended softening which occurs between a range of \qtyrange[parse-numbers=false]{1$\times$10^{17}}{2$\times$10^{17}}{\electronvolt}.
 The given energies of the ankle, instep, and cutoff spectral features were determined using Phase I measurements of the Pierre Auger Observatory and shown to be mostly declination independent~\cite{auger_prl2025_spectrum}.
 Phase II Auger measurements are in agreement with the Phase I results, within uncertainties~\cite{icrc2025_diego_spectrum}.
@@ -278,7 +278,66 @@ An application to Auger data will come soon, the results of which can be used to
 %Cosmic rays serve as a probe to the deepest depths of the known Universe.
 
 \section{Propagation Effects}\label{sec:propagation}
-Further complicating the source determination of cosmic rays, and contributing to the generation of neutral particles along the path of travel to Earth, are propagation effects.
+Probing cosmic-ray sources and their source evolution becomes complicated at ultra-high-energies due to cosmic-ray energy losses due to propagation effects.
+Above an energy of approximately \qty[parse-numbers=false]{10^{18}}{\electronvolt}, cosmic ray interactions with background photon fields become the dominant energy loss mechanism over the adiabatic energy losses from the expansion of the Universe.
+Above this threshold, proton cosmic rays will begin to interact with the Cosmic Microwave Background (CMB) via Bethe-Heitler pair production:
+
+\begin{equation}
+  p + \gamma_{\text{CMB}} \rightarrow p + e^{+} + e^{-}, \label{eq:cmb_pairproduction}
+\end{equation}
+
+\noindent
+which can impact the cosmic-ray energy spectrum and its features~\cite{blumenthal_prd1970}.
+At roughly \qty[parse-numbers=false]{7$\times$10^{19}}{\electronvolt}, photopion production:
+
+\begin{equation}
+  p + \gamma_{\text{CMB}} \rightarrow p + \pi^{0}, \label{eq:cmb_photopion}
+\end{equation}
+
+\noindent
+becomes the dominant energy loss effect.
+This effect, known as the Greisen-Zatsepin-Kuzmin (GZK) effect, suppresses the flux of ultra-high-energy cosmic rays above this threshold~\cite{greisen_prl1966_gzk, zatsepin_jetp1966_gzk} and influences the observed cutoff in the cosmic-ray energy spectrum occurring near \qty[parse-numbers=false]{5$\times$10^{19}}{\electronvolt}.
+Further, the energy loss length of photopion production decreases with increasing energy, until a plateau in the energy loss length of nearly \qty{20}{\mega\parsec} is reached above cosmic-ray energies of \qty[parse-numbers=false]{3$\times$10^{20}}{\electronvolt}~\cite{allard_astropartphys2011_propagation}.
+Hence the large scale structure of the Universe is opaque to ultra-high-energy cosmic rays, as referenced in the previous section with the approximate \qty{100}{\mega\parsec} horizon for the sources of the most energetic cosmic rays.
+
+Cosmic ray nuclei (i.e. those heavier than proton) also interact with photon backgrounds via the energy loss processes of adiabatic expansion of the Universe and Bethe-Heitler pair production; however, they interact via a third energy loss process specific to nuclei interactions with photons: photodisintegration.
+Photodisintegration processes are those where a background photon is Lorentz boosted to gamma ray energies in the rest frame of the ultra-high-energy cosmic ray nucleus, resulting in the excitation of the nucleus to a nuclear resonance which decays rapidly via the ejection of one or more nucleons or particles, namely
+
+\begin{equation}
+  \,_{Z}^{A}X + \gamma_{\text{BGL}} \rightarrow \,_{Z - Z^{\prime}}^{A - A^{\prime}}X^{\prime} + b, \label{eq:cmb_photodisintegration}
+\end{equation}
+
+\noindent
+where the subscript BGL represents a photon from any background light field.
+Both the CMB and infrared background radiation are important photon fields for this interaction~\cite{puget_apj1976_photodisintegration, stecker_apj1999_photodisintegration}.
+The energy threshold for these photodisintegration processes is proportional to the mass number $A$ of the cosmic-ray nucleus, therefore this extragalactic propagation process could impose a mass dependent ordering on the composition of ultra-high-energy cosmic rays observed at Earth~\cite{tom_book}.
+A more complete theoretical description of photonuclear interactions for understanding cosmic-ray propagation is given in~\cite{rachen_phdthesis}.
+A full description of all understood cosmic-ray propagation processes is included in CRPropa~\cite{rafa_crpropa}, a state-of-the-art Monte Carlo code for simulating cosmic-ray extragalactic and Galactic propagation.
+
+%CRPropa~\cite{rafa_crpropa}, a state-of-the-art Monte Carlo code for cosmic-ray propagation, accounts for the full description of propagation processes in simulations.
+
+%a mass dependence in the composition of ultra-high-energy cosmic rays could indicate 
+
+%a direct mass dependence from these propagation processes
+
+%The photodisintegration processes have a direct effect on the composition of ultra-high-energy cosmic rays reaching Earth, where the energy threshold for these processes is proportional to the mass number $A$ of the cosmic-ray nucleus
+%The energy threshold for photodisintegration processes
+
+%a third energy loss process specific to nuclei interactions is photodisintegration.
+
+%The above stated propagation effects were discussed in terms of proton cosmic rays interacting with background photon fields.
+
+%of ultra-high-energy cosmic rays interacting with , known as the Greisen-Zatsepin-Kuzmin (GZK) effect, 
+
+%propagation effects become the dominant energy loss mechanism for cosmic rays over the adiabatic energy loss mechanism from the expansion of the Universe.
+%Specifically, 
+
+%Cosmic rays above an energy of approximately \qty[parse-numbers=false]{10^{18}}{\electronvolt} 
+
+%begin to interact with background photon fields, such as the Cosmic Microwave Background (CMB), where these propagation effects become the dominant energy loss 
+
+%As cosmic rays traverse through the intergalactic medium, interaction
+%Further complicating the source determination of cosmic rays, and contributing to the generation of neutral particles along the path of travel to Earth, are propagation effects.
 
 \section{Sources, Acceleration Mechanisms, and MM}\label{sec:sources}
 In addition to cosmic rays, their acceleration sites also produce other particle without charge and high-energy electromagnetic radiation in the form of gamma rays.
