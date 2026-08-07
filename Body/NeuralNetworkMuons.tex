@@ -14,9 +14,9 @@ The radio $X_{\rm max}$ reconstruction will eventually be ported to the RD anten
 %%%% Figure here showing UMD and Bjarni bias free histograms of reconstructed zenith angle
 
 Instead a neural network based method to reconstruct a per-event muon observable, to be later combined with previously recorded AERA measurements, is investigated over the following two chapters.
-A previous Auger analysis has used deep learning methods to reconstruct the station level muonic component of the PMT traces for the SD-1500~\cite{auger_jinst2021_dnnmuons}.
-This chapter updates the previous deep learning analysis to predict the station level muon trace of the SD-750 array, essentially lowering the energy threshold of the prediction by one decade in energy.
-Another analysis had updated the SD-1500 muon trace predictions including station ageing effects, yet this is not investigated here for the SD-750 as this requires a large library of extremely detailed detector simulations~\cite{orazio_phd2023}.
+A previous Auger analysis has used deep learning methods to reconstruct the station level muonic component of the PMT traces bin-by-bin for the SD-1500~\cite{auger_jinst2021_dnnmuons}.
+This chapter updates the previous deep learning analysis to predict the station level muon traces of the SD-750 array, essentially lowering the energy threshold of the prediction by one decade in energy.
+Another analysis had updated the SD-1500 muon trace predictions including station ageing effects, yet this is not investigated here for the SD-750 as it requires a large library of highly detailed detector simulations~\cite{orazio_phd2023}.
 
 %This has already been implemented a the Pierre Auger Observatory for the SD-1500, proving 
 
@@ -30,10 +30,56 @@ Another analysis had updated the SD-1500 muon trace predictions including statio
 
 %fluorescence measurements 
 
+\section{Network Architecture}\label{sec:architecture}
+The network architecture was inherited from~\cite{auger_jinst2021_dnnmuons} and is classified as a conditional recurrent neural network (RNN), meaning static features set the initial state and inform the hidden layers of the time-series prediction blocks of the RNN.
+The RNN blocks are formed by long short-term memory (LSTM) layers that process information sequentially, predicting the outcome at the present time based on knowledge of the previous time evolution of the dataset.
+The static features are first input to several fully connected, i.e. dense, layers to encode their information and are then combined with the LSTM blocks to set the initial conditions of the time evolution.
+Finally, the LSTM output is transposed and fed to a final dense layer.
+This transpose and final dense layer removes the strict causality requirement of the temporal data from in the LSTM blocks, allowing a bidirectional flow of predictive information across the time series.
+A bidirectional LSTM architecture would induce a similar effect.
 
-\section{Simulation Dataset}\label{sec:training}
+%information late in the time series data to inform the network's predictions early in the 
+%that allows mixing between subsequent bins, 
+
+The input to the network is a vector of length 203, with three static features and one time series input with a length of 200 time bins.
+The goal of the conditional RNN is to predict the muonic component of the Auger water-Cherenkov detector PMT traces at the station level, therefore static variables with a high dependence on the air-shower muon number are chosen.
+The static variables are the station distance to the air-shower axis ($r$), the azimuthal angle in the shower plane between the station and the incoming air-shower direction ($\psi$), and the secant of the zenith angle ($\sec\theta$).
+The end goal is a station level result meaning the inputs should also be station level to remove any inherent event level dependencies leaking into the analysis; however, the use of the zenith angle is unavoidable as the incoming direction of the air shower directly influences the muonic component of the air shower that reaches ground because of attenuation effects.
+The time series input is the first 200 times bins of the PMT traces from the Auger water-Cherenkov detector, averaged over all active PMTs for that station.
+All analysis will be performed for the Phase I data of the Pierre Auger Observatory, recorded with the UB electronics of the Auger SD.
+These 200 bins then correspond to the first \qty{5}{\micro\second} of the \qty{19.2}{\micro\second} PMT trace.
+99\% of the muonic component of the signal is recorded within this first 26\% of the trace data~\cite{auger_jinst2021_dnnmuons, juanmiguel_phd2020}.
+Check this
+
+
+As the end goal is a station level result, 
+
+%There are three LSTM blocks in total, the first of which has the hidden layers informed by the static features.
+%The final two LSTM blocks instead have their hidden and current states initialized to zero, with only the output of the previous LSTM block as input. 
+
+
+%to introduce non-causality to the temporal signals 
+%The network takes as input three static features and one time series with a length of 200 bins.
+%The goal of the RNN is to predict the muonic component of the PMT traces at the station level, therefore static variables with a high dependence on the air-shower number should be chosen.
+
+%The static features are the 
+
+%air-shower event and station level static features as input, along with 
+
+%Physically, the network takes air-shower event information as the static features and the full 
+%The static features are combined in several fully connected dense layers to define these initial conditions.
+%The RNN consists of three long short-term memory (LSTM) blocks  
+
+
+
+\section{Simulation Dataset and Preprocessing}\label{sec:preprocessing}
+As with any machine learning analysis, preprocessing and understanding the training dataset is a necessary step to ensure proper predictions output by the network and can inform both the architecture and hyperparameter choice of the network.
+
+
 Simulation cuts
 Training and testing results, testing for biases
+
+\section{Network Architecture and Training}\label{sec:training}
 
 \section{Application to Reconstructed Surface Detector Data}\label{sec:application}
 
