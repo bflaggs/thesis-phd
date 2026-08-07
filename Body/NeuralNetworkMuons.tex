@@ -2,7 +2,34 @@
 % A dense neural network to reconstruct the muonic component of Auger Infill PMT traces (chapter 5)
 %
 \chapter{Neural Network Based Reconstructions of a Muon Observable}\label{chap:nn}
-Description of past analysis and network architecture
+The previous chapter highlights the importance of combining radio $X_{\rm max}$ and muon measurements for the prospect of increasing the event-by-event mass separation between primary cosmic-ray mass groups.
+At the Pierre Auger Observatory, an event level $X_{\rm max}$ reconstruction using the radio technique is well established, with results from AERA already published~\cite{auger_prd2024_aeraxmax,auger_prl2024_aeraxmax}.
+The UMD provides direct muon measurements of air showers on a per-event basis, which in principle can be combined with per-event radio $X_\text{max}$ reconstructions to increase the overall mass sensitivity of Auger, both per-event and for the average mass composition.
+While feasible, implementation is difficult due to both geometrical and timeline restrictions for each detector system.
+The AERA and UMD footprints are co-located; however, the geometry of UMD scintillator panels is optimal for vertical air-shower reconstructions while the spacing of the AERA radio antennas makes the AERA $X_{\rm max}$ reconstruction more efficient for air showers with $\theta_{\rm zen}\,>\,$\qty{40}{\degree} (see XXX).
+Regarding timeline constraints, AERA, recording air showers since 2011, has fulfilled its primary science goal of proving the usefulness of air-shower reconstructions in the \qtyrange{30}{80}{\mega\hertz} band near Malarg\"{u}e and will soon enter the decomissioning phase.
+Although the UMD did not obtain a stable reconstruction until January 2018, with deployment only finishing in March 2026, severely limiting the data overlap between the two reconstruction methods.
+The radio $X_{\rm max}$ reconstruction will eventually be ported to the RD antennas, deployed at each Auger SD, yet the spacing of RD will incur the same reconstruction efficiency constraint as AERA.
+
+%%%% Figure here showing UMD and Bjarni bias free histograms of reconstructed zenith angle
+
+Instead a neural network based method to reconstruct a per-event muon observable, to be later combined with previously recorded AERA measurements, is investigated over the following two chapters.
+A previous Auger analysis has used deep learning methods to reconstruct the station level muonic component of the PMT traces for the SD-1500~\cite{auger_jinst2021_dnnmuons}.
+This chapter updates the previous deep learning analysis to predict the station level muon trace of the SD-750 array, essentially lowering the energy threshold of the prediction by one decade in energy.
+Another analysis had updated the SD-1500 muon trace predictions including station ageing effects, yet this is not investigated here for the SD-750 as this requires a large library of extremely detailed detector simulations~\cite{orazio_phd2023}.
+
+%This has already been implemented a the Pierre Auger Observatory for the SD-1500, proving 
+
+%spacing of the AERA radio antennas makes 
+
+%deployment of the UMD array was not complete until March 2026, with  
+
+%However, the implementation of this idea has not yet been feasible, 
+
+%$X_\text{max}$ determination is well studied, with established techniques using fluorescence telescopes or radio antennas for air-shower measurements.
+
+%fluorescence measurements 
+
 
 \section{Simulation Dataset}\label{sec:training}
 Simulation cuts
