@@ -5,10 +5,10 @@
 The previous chapter highlights the importance of combining radio $X_{\rm max}$ and muon measurements for the prospect of increasing the event-by-event mass separation between primary cosmic-ray mass groups.
 At the Pierre Auger Observatory, an event level $X_{\rm max}$ reconstruction using the radio technique is well established, with results from AERA already published~\cite{auger_prd2024_aeraxmax,auger_prl2024_aeraxmax}.
 The UMD provides direct muon measurements of air showers on a per-event basis, which in principle can be combined with per-event radio $X_\text{max}$ reconstructions to increase the overall mass sensitivity of Auger, both per-event and for the average mass composition.
-While feasible, implementation is difficult due to both geometrical and timeline restrictions for each detector system.
-The AERA and UMD footprints are co-located; however, the geometry of UMD scintillator panels is optimal for vertical air-shower reconstructions while the spacing of the AERA radio antennas makes the AERA $X_{\rm max}$ reconstruction more efficient for air showers with $\theta_{\rm zen}\,>\,$\qty{40}{\degree} (see XXX).
+The AERA and UMD footprints are co-located making simultaneous measurements feasible; however, implementation is difficult due to both geometrical and timeline restrictions for each detector system.
+The geometry of UMD scintillator panels is optimal for vertical air-shower reconstructions while the spacing of the AERA radio antennas makes the AERA $X_{\rm max}$ reconstruction more efficient for air showers with $\theta_{\rm zen}\,>\,$\qty{40}{\degree} (see XXX).
 Regarding timeline constraints, AERA, recording air showers since 2011, has fulfilled its primary science goal of proving the usefulness of air-shower reconstructions in the \qtyrange{30}{80}{\mega\hertz} band near Malarg\"{u}e and will soon enter the decomissioning phase.
-Although the UMD did not obtain a stable reconstruction until January 2018, with deployment only finishing in March 2026, severely limiting the data overlap between the two reconstruction methods.
+The UMD did not obtain a stable reconstruction until January 2018, with deployment only finishing in March 2026, severely limiting the data overlap between the two reconstruction methods.
 The radio $X_{\rm max}$ reconstruction will eventually be ported to the RD antennas, deployed at each Auger SD, yet the spacing of RD will incur the same reconstruction efficiency constraint as AERA.
 
 %%%% Figure here showing UMD and Bjarni bias free histograms of reconstructed zenith angle
@@ -30,29 +30,39 @@ Another analysis had updated the SD-1500 muon trace predictions including statio
 
 %fluorescence measurements 
 
-\section{Network Architecture}\label{sec:architecture}
+\section{Network Architecture and Inputs}\label{sec:architecture}
 The network architecture was inherited from~\cite{auger_jinst2021_dnnmuons} and is classified as a conditional recurrent neural network (RNN), meaning static features set the initial state and inform the hidden layers of the time-series prediction blocks of the RNN.
-The RNN blocks are formed by long short-term memory (LSTM) layers that process information sequentially, predicting the outcome at the present time based on knowledge of the previous time evolution of the dataset.
-The static features are first input to several fully connected, i.e. dense, layers to encode their information and are then combined with the LSTM blocks to set the initial conditions of the time evolution.
-Finally, the LSTM output is transposed and fed to a final dense layer.
+The RNN block is formed by three long short-term memory (LSTM) layers that process information sequentially, predicting the outcome at the present time based on knowledge of the previous time evolution of the dataset.
+The static features are first progressed through two fully connected, i.e. dense, layers to encode their information and are then combined with the first LSTM block to set the initial conditions and hidden layers of the time evolution.
+The RNN then passes through two additional LSTM layers, both with their hidden and current layers initialized to zero meaning the only input comes from the previous LSTM layer.
+Finally, the output of the third LSTM layer is transposed and fed to a final dense layer.
 This transpose and final dense layer removes the strict causality requirement of the temporal data from in the LSTM blocks, allowing a bidirectional flow of predictive information across the time series.
 A bidirectional LSTM architecture would induce a similar effect.
 
 %information late in the time series data to inform the network's predictions early in the 
 %that allows mixing between subsequent bins, 
 
-The input to the network is a vector of length 203, with three static features and one time series input with a length of 200 time bins.
+The input to the network is a vector of length 203.
+Three of the inputs are static features and the remaining 200 constitute a single time series vector spanning 200 time bins.
 The goal of the conditional RNN is to predict the muonic component of the Auger water-Cherenkov detector PMT traces at the station level, therefore static variables with a high dependence on the air-shower muon number are chosen.
-The static variables are the station distance to the air-shower axis ($r$), the azimuthal angle in the shower plane between the station and the incoming air-shower direction ($\psi$), and the secant of the zenith angle ($\sec\theta$).
-The end goal is a station level result meaning the inputs should also be station level to remove any inherent event level dependencies leaking into the analysis; however, the use of the zenith angle is unavoidable as the incoming direction of the air shower directly influences the muonic component of the air shower that reaches ground because of attenuation effects.
-The time series input is the first 200 times bins of the PMT traces from the Auger water-Cherenkov detector, averaged over all active PMTs for that station.
-All analysis will be performed for the Phase I data of the Pierre Auger Observatory, recorded with the UB electronics of the Auger SD.
-These 200 bins then correspond to the first \qty{5}{\micro\second} of the \qty{19.2}{\micro\second} PMT trace.
-99\% of the muonic component of the signal is recorded within this first 26\% of the trace data~\cite{auger_jinst2021_dnnmuons, juanmiguel_phd2020}.
-Check this
+The static variables are the station distance to the air-shower axis ($r$), the azimuthal angle in the shower plane between the station and the incoming air-shower direction ($\zeta$), and the secant of the zenith angle ($\sec\theta$).
+The end goal is a station level result, therefore the inputs should also be station level to prevent any unexpected event level dependencies from leaking into the analysis.
+However, the zenith angle as an input feature is unavoidable, as this observable is directly related to the atmospheric attenuation of the air-shower particles.
 
+The time-series input is the first 200 times bins of the PMT traces from a single Auger water-Cherenkov detector, averaged over all active PMTs for that station.
+All analysis will be performed using the Phase I data of the Pierre Auger Observatory, recorded with the UB electronics of the Auger SD.
+These 200 bins then correspond to the first \qty{5}{\micro\second} of the \qty{19.2}{\micro\second} long PMT traces.
+The previous analyses show using 200 time bins provides an optimal mix of speed and accuracy, as 99\% of the station's muonic component is recorded in the first \qty{5}{\micro\second} for air showers with energies less than \qty[parse-numbers=false]{10^{19}}{\electronvolt}~\cite{auger_jinst2021_dnnmuons, juanmiguel_phd2020}.
+The final output of the network is a time series of 200 bins predicting the bin-by-bin muon content of the input time series. 
+The architecture, inputs, and predictions are the same as those reported in~\cite{orazio_phd2023}, minus the station age as a static input feature.
+XXX shows a full schematic of the network.
+Note that all dense layers in the architecture have a rectified linear unit (ReLU) activation function while all LSTM layers use a hyperbolic tangent (tanh) activation function.
 
-As the end goal is a station level result, 
+%%% Insert the schematic of the network here
+
+%The SD measures a larger fraction of muonic signal for inclined showers as atmospheric attenuation prevents electromagnetic particles from reaching the ground, creating a high dependence in the SD muon signal with zenith angle 
+
+%the incoming direction of the air shower directly influences the muonic component of the air shower that reaches ground because of attenuation effects.
 
 %There are three LSTM blocks in total, the first of which has the hidden layers informed by the static features.
 %The final two LSTM blocks instead have their hidden and current states initialized to zero, with only the output of the previous LSTM block as input. 
@@ -73,7 +83,8 @@ As the end goal is a station level result,
 
 
 \section{Simulation Dataset and Preprocessing}\label{sec:preprocessing}
-As with any machine learning analysis, preprocessing and understanding the training dataset is a necessary step to ensure proper predictions output by the network and can inform both the architecture and hyperparameter choice of the network.
+As with any machine learning analysis, understanding and preprocessing the training dataset is a necessary step to ensure proper predictions output by the network and can inform the choice of network hyperparameters.
+
 
 
 Simulation cuts
