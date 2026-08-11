@@ -136,7 +136,36 @@ These averaged traces will be used as the time-series input of the neural networ
 %The network training is performed per station, 
 
 \subsection{Data Selection}\label{sec:selection}
-Simulation cuts
+An adage in machine learning, and one of my favorite sayings about these analyses, is ``if you put crap in, you get crap out.''
+Following this dogma, a high-quality subset of the station-level simulated traces must be selected to train the RNN.
+This subset should mimic measured data traces of high quality, as eventually the network will be applied to real measured traces from SD-750 reconstructed air showers.
+For training and validating the network, only the Offline production for EPOS LHC-R simulations will be used.
+Therefore this section and the sections following it only contain results for simulations using this hadronic model, unless otherwise stated. 
+
+The selection cuts applied to the dataset are the same as in~\cite{orazio_phd2023} and will be described briefly here.
+Some of the selection cuts are applied at the event level to ensure high-quality data for the full event, while others are applied at the station (i.e. trace) level to ensure the signal in the station is of acceptable quality.
+The event-level selections require a converged LDF fit and a 6T5 trigger for the event.
+An additional event-level selection requires the reconstructed zenith angle to be $<$\qty{58}{\degree}.
+This cut was not used in~\cite{orazio_phd2023}, yet must be applied here due to the poor quality of SD-750 reconstructions for inclined air showers.
+XXX highlights this for the SD-750, showing a histogram of the reconstructed zenith angle for all simulations with a difference in the reconstructed and true (MC) energies greater than half a decade.
+Furthermore, the end goal is to predict the muonic signal for air showers between \qtyrange{0}{55}{\degree}, therefore training on a larger zenith range will eliminate possible edge effects in the network's predictive power.
+The \qty{55}{degree} goal is set from the ``bias-free'' AERA $X_{\rm max}$ data selection, which applies a zenith angle selection of $<$\qty{55}{\degree} on the SD reconstruction.
+
+%%% Figure of the energy outlier histogram here, change axis to be for reconstructed zenith angle
+
+%the end goal is to combine the predictions of this network with the ``bias-free'' AERA $X_{\rm max}$ data selection 
+
+%, and the reconstructed zenith angle to be $<$\qty{58}{\degree}.
+The station level selections require the LDF fit evaluated at the station distance from the reconstructed shower axis to contain at least \qty{5}{VEM} of signal, and that there is at least no low-gain saturation of the PMTs within the station.
+
+
+%, the event is required to have a reconstruct 
+
+%to ensure high-quality data reconstructions, whereas 
+
+%the station-level simulated traces must be vetted for a high-quality subset which mimics true data traces of high quality.
+
+%High-quality simulated traces must be selected from the full dataset to mi
 
 
 \subsection{Studying the Training and Validation Sets Pre-Training}\label{sec:pretraining}
