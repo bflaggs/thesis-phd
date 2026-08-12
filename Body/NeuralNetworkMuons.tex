@@ -136,7 +136,7 @@ These averaged traces will be used as the time-series input of the neural networ
 %The network training is performed per station, 
 
 \subsection{Data Selection}\label{sec:selection}
-An adage in machine learning, and one of my favorite sayings about these analyses, is ``if you put crap in, you get crap out.''
+An adage in machine learning, and one of my favorite sayings about these analyses: ``if you put crap in, you get crap out.''
 Following this dogma, a high-quality subset of the station-level simulated traces must be selected to train the RNN.
 This subset should mimic measured data traces of high quality, as eventually the network will be applied to real measured traces from SD-750 reconstructed air showers.
 For training and validating the network, only the Offline production for EPOS LHC-R simulations will be used.
@@ -156,7 +156,30 @@ The \qty{55}{degree} goal is set from the ``bias-free'' AERA $X_{\rm max}$ data 
 %the end goal is to combine the predictions of this network with the ``bias-free'' AERA $X_{\rm max}$ data selection 
 
 %, and the reconstructed zenith angle to be $<$\qty{58}{\degree}.
-The station level selections require the LDF fit evaluated at the station distance from the reconstructed shower axis to contain at least \qty{5}{VEM} of signal, and that there is at least no low-gain saturation of the PMTs within the station.
+The station level selections require the LDF fit evaluated at the station distance from the reconstructed shower axis to contain at least \qty{5}{VEM} of signal(i.e. LDF($r_{\rm station}$)$>$\qty{5}{VEM}), and that there is at least no low-gain saturation of the PMTs within the station.
+Data with high-gain PMT saturation is included as these signals can be recovered by analyzing the low-gain PMTs, allowing the network to include the phase space closer to the air-shower axis within its training dataset.
+\Cref{tab:cuts} shows a summary of the selection cuts and the resulting statistics for each primary of the EPOS LHC-R simulation set.
+After cuts, there are a total of 1,280,885 traces for use in training, validating, and testing the RNN, split approximately equally across all four primaries. 
+
+\begin{table}
+    \caption[Statistical summary of the selection cuts to the RNN input dataset.]{The selection cuts and resulting statistics of each cut for the EPOS LHC-R simulation set used to train, validate, and test the RNN used in this chapter. Statistics for each primary are listed, along with the total number of traces and the efficiency of each cut with respect to the total number of traces pre-cuts. In total, for EPOS LHC-R, nearly 1.3 million high-quality traces are available for the RNN training and analysis.}
+    \label{tab:cuts}
+    \vspace*{.5\baselineskip}
+    \centering
+    \begin{tabular}{| c || c | c | c | c || c | c |}
+        \hline
+        Selection Cut                         & Proton  & Helium  & Oxygen  & Iron    & Sum       & $\varepsilon$ (\%)\\
+        \hline
+        \hline
+        Total traces                          & 500 402 & 524 139 & 548 890 & 573 847 & 2 147 278 & 100.0\\
+        Converged LDF fit                     & 497 637 & 522 096 & 546 810 & 572 431 & 2 138 974 &  99.6\\
+        LDF($r_{\rm station}$)$>$\qty{5}{VEM} & 371 128 & 383 562 & 393 653 & 405 595 & 1 553 938 &  72.4\\
+        No LG saturation                      & 359 964 & 372 331 & 382 741 & 394 982 & 1 510 018 &  70.3\\
+        6T5 trigger                           & 354 808 & 366 847 & 376 587 & 388 482 & 1 486 724 &  69.2\\
+        $\theta_{\rm zen}<$\qty{58}{\degree}  & 308 933 & 317 578 & 323 641 & 330 733 & 1 280 885 &  59.7\\
+        \hline
+    \end{tabular}
+\end{table}
 
 
 %, the event is required to have a reconstruct 
@@ -169,12 +192,38 @@ The station level selections require the LDF fit evaluated at the station distan
 
 
 \subsection{Studying the Training and Validation Sets Pre-Training}\label{sec:pretraining}
-Training and testing results, testing for biases
+%Training and testing results, testing for biases
+The final 1,280,885 traces after selection cuts from~\Cref{tab:cuts} were split randomly into training and testing subsets with a respective 80\%-20\% split.
+The larger training set was then further split randomly, again using an 80\%-20\% split, into the true training subset and a validation subset.
+The validation subset was used to analyze the results of the trained RNN predictions on simulations not yet seen by the network, allowing the network to go through multiple iterations of training and updating the hyperparameters typical of training neural networks (see~\Cref{sec:training} for details).
+Both the train-test and train-validation splits were performed event wise to ensure stations from the same event occupy the same data subset.
+This serves two purposes.
+On the one hand, the network performance can be studied as a function of event-level observables, such as energy and zenith angle, with confidence that any biases visible in the performance plots are from the network predictions rather than biases arising from the data splits used.
+On the other hand, the final analysis plans to use the station level network predictions of the muonic signal and combine them for single events for the purpose of fitting a muon LDF, therefore extracting an event-level muon observable from a station-level prediction.
+This event-level splitting of the datasets preserves the information necessary to make this plan feasible.
+After splitting the subsets event wise the training set contains 822,099 traces, the validation set contains XXX,XXX traces, and the testing set contains XXX,XXX traces.
+
+%combine the station level network predictions for individual events to fit a muon LDF, therefore predicting an event-level muon observable from  
+%The network performance can then be studi
+
+%a measure of the network performance before finally applying network predictions to the testing subset.
+
+%Testing subset: 256,177 traces???
+
+%and  before updating various network hyperparameters 
+Before training the network, the training and validation sets are investigated to determine and correct any potential biases from the splitting process, or if additional selection cuts are necessary.
+XXX shows two-dimensional histograms comparing the SD-750 reconstructed (SD) and the Monte Carlo truth (MC) values of both event-level and station-level observables for the training set of 822,099 traces.
+Included are the observables used as the static feature inputs to the neural network ($r$, $\zeta$, and $\sec\theta$) and the air-shower energy. 
+
+
+the observables used as the static feature inputs to the neural network for the training set of 
 
 \section{Network Training}\label{sec:training}
 % Preprocessing here or in a subsection of the previous section names Final Preprocessing
 
 \section{Network Performance}\label{sec:performance}
+
+\subsection{Feasibility of Using Predictions for an Event-Level Muon Observable}\label{sec:feasibility}
 
 \section{Application to Reconstructed Surface Detector Data}\label{sec:application}
 % Save for following chapter?
