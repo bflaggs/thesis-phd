@@ -295,6 +295,7 @@ Final training is reached after 150 epochs of training and is stopped here to pr
 
 %%% figure showing final training and validation loss curves
 
+%During the optimization phase of the network hyperparameters
 %which are not generalizable to before unseen data
 %general information from the training data and training should halt to prevent overfitting specific features of the training dataset.
 
@@ -317,10 +318,37 @@ Final training is reached after 150 epochs of training and is stopped here to pr
 
 
 \section{Network Performance}\label{sec:performance}
-After final training of the network the general performance of the network on the validation set is studied.
+After final training of the network the general network performance on the validation set is studied.
 This performance can also be studied as a function of epoch during the training of the network.
-XXX shows the average difference between the total predicted and true muon signal in the PMTs, and the spread in this difference, as a function of training epoch.
+XXX shows the average difference between the total predicted muon signal ($\hat{S}^{\mu}$) and true muon signal ($S^{\mu}$) in the PMTs, and the spread in this difference, as a function of training epoch.
+As the final epoch is approached the average difference approaches roughly \qty{0}{VEM}, indicating little bias in the network's predicted muon signals; however, the standard deviation of the difference distribution approaches roughly \qty{5}{VEM} indicating a large spread in differences over the full range of values.
+This standard deviation is calculated for all primaries, zenith angles, distances to the air-shower axis, etc. in the validation set and therefore a large spread is expected.
 
+%%% figure showing average difference and standard deviation in difference vs. epoch
+
+As the network predicts the muonic component of the signal at the station level, verifying the bin-by-bin network predictive power for individual stations is paramount.
+XXX shows the PMT traces in VEM units for the total PMT signal, the total muonic component of the signal from simulations, and the total muonic component of the signal as predicted from the neural network.
+Examples for two different stations are shown, one station with a small total signal and therefore a small muonic component ($<$\qty{1}{VEM}) of the signal, and one station with a larger total and muonic signal in the tank.
+For the example with a larger true muonic component of the signal, the neural network accurately predicts the amplitude and location of the muonic contributions to the signal.
+The network underestimates the true muonic signal by only 3.3\%.
+
+%%% two figures, medium S_mu and low S_mu examples
+
+For the example station with little muonic signal the results are not nearly as precise, with an overestimation in the muonic signal by the neural network of 142\%.
+The network picks locations and peaks which are ``fast and spiky'', generally associated with muonic particles.
+Yet, both the total and muonic signals in the tank are low, complicating the network's predictive power.
+The total true muonic contribution to the signal is less than \qty{1}{VEM}, meaning the relativistic muons depositing energy in the water-Cherenkov detector have a path length smaller than the height of the tank.
+The 
+%This requires at least \qty{1}{VEM} of muonic 
+
+%These low signals complicate the network's relative predictive power 
+%Any of the muonic component of the signal therefore comes from muons that do not deposit a full track length in the detector, as this would deposit at least \qty{1}{VEM} of energy in the tank for a relativistic muon.
+
+%with a relative difference of only 
+
+%This spread highlights a large range in the full distribution values for this difference
+
+%fluctuations in both the average difference and its spread decrease.
 
 %The general performance of the network on the validation set can 
 
