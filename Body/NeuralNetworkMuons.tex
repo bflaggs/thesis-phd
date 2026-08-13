@@ -15,6 +15,9 @@ The radio $X_{\rm max}$ reconstruction will eventually be ported to the RD anten
 
 Instead a neural network based method to reconstruct a per-event muon observable, to be later combined with previously recorded AERA measurements, is investigated over the following two chapters.
 A previous Auger analysis has used deep learning methods to reconstruct the station level muonic component of the PMT traces bin-by-bin for the SD-1500~\cite{auger_jinst2021_dnnmuons}.
+The general concept derives from the knowledge that muons in air showers arrive at ground faster and, on average, with larger energies than their electromagnetic counterparts.
+Muonic particles reaching the Auger water-Cherenkov detectors generate Cherenkov light within the water tank that produces sharp peaks over short time windows within the measured PMT traces.
+The characteristics of this ``fast and spiky'' muonic component of the PMT traces are difficult to distinguish, yet can be done using deep learning methods. 
 This chapter updates the previous deep learning analysis to predict the station level muon traces of the SD-750 array, essentially lowering the energy threshold of the prediction by one decade in energy.
 Another analysis had updated the SD-1500 muon trace predictions including station ageing effects, yet this is not investigated here for the SD-750 as it requires a large library of highly detailed detector simulations~\cite{orazio_phd2023}.
 
@@ -211,17 +214,115 @@ After splitting the subsets event wise the training set contains 822,099 traces,
 %Testing subset: 256,177 traces???
 
 %and  before updating various network hyperparameters 
-Before training the network, the training and validation sets are investigated to determine and correct any potential biases from the splitting process, or if additional selection cuts are necessary.
+Before training the network, the training and validation sets are investigated to determine and correct any potential biases induced from the splitting process, and to determine if additional selection cuts are necessary.
 XXX shows two-dimensional histograms comparing the SD-750 reconstructed (SD) and the Monte Carlo truth (MC) values of both event-level and station-level observables for the training set of 822,099 traces.
-Included are the observables used as the static feature inputs to the neural network ($r$, $\zeta$, and $\sec\theta$) and the air-shower energy. 
+Included are the observables used as the static feature inputs to the neural network ($r$, $\zeta$, and $\sec\theta$) and the air-shower energy.
+A linear function of slope one is included on each plot to provide an example of exact agreement between the reconstruction and MC truth.
 
+%%% 2-d histograms of training dataset here
 
-the observables used as the static feature inputs to the neural network for the training set of 
+The distributions for the $r$, $\zeta$, and $\sec\theta$ observables show agreement with the linear function of slope one for the SD-MC observable relationships, highlighting no biases in the dataset are induced from the SD reconstruction or from the selection cuts.
+Yet, the SD-750 reconstructed energy underestimates the MC energy by $\sim$20\% across the full energy range of the training dataset.
+The reconstruction-MC mismatch does not represent an unknown bias from the selection cuts; however, is an expected bias due to the muon deficit.DAVIDCITE.
+MC simulations generate lower muon content than what is measured in data for the same air-shower energy, thereby generating less signal at ground measurable by the SD array.
+Applying the SD energy reconstruction to simulations then results in an energy estimate systematically lower than the true MC energy because the SD energy reconstruction uses a measurement-derived calibration, as described in~\Cref{sec:reconstruction}.
+The energy reconstruction itself will not introduce any biases in the network predictions as the energy is not an input to the network, although the muon deficit will.
+The muon deficit bias can not be corrected for because of the use of simulations in the training, and instead induces a systematic uncertainty on the result.
+
+XXX shows the same two-dimensional histograms as XXX, yet instead using data from the XXX,XXX traces of the validation set for EPOS LHC-R simulations.
+The validation set exhibits the same SD-MC observable relationships as the training set, highlighting that the data splitting process does not introduce any unforeseen biases that will propagate forward in the analysis into either the training or validation data.
+The testing set was not studied to maintain the integrity of having a dataset available for network predictions unseen by both the researcher and the network before application to real data.
+However, no biases (other than the muon deficit) are assumed in the training set because the same selection cuts and data splitting used for the training and validation sets were also applied to the testing set.
+
+%%% 2-d histograms of validation dataset here
+
+%The SD energy reconstruction for this 
+
+%applied to the simulations uses the energy estimate derived from hybrid measurements described in~\Cref{sec:reconstruction}
+
+%: an observation of MC simulations generating lower muon content than what is measured in data.
+%Simulations therefore produce less 
+
+%MC simulations generate lower muon content than that which is measured in data.
+
+%an observation of higher muon content measured in data than observed in simulations
+
+%compared to simulations for the same .
+%In air-shower data, higher muon content is ob 
+%As described in~\Cref{sec:reconstruction}, the SD energy scale is derived using hybrid fluorescence measurements and SD measured signals at a reference distance from the air-shower axis.
+
+%The distribution for the air-shower energy does show an overestimate of the SD reconstructed energy compared to the true energy from simulations; however, this is a known bias in the SD reconstruction arising from    
 
 \section{Network Training}\label{sec:training}
 % Preprocessing here or in a subsection of the previous section names Final Preprocessing
+The final data preprocessing step before training the network is to scale the network inputs to similar levels.
+This allows the network to assign weighting factors of features based on percentage differences rather than the absolute differences, essentially assigning an equal weighting factor to the same percentage difference regardless of the studied input feature.
+Other purposes serve to increase the speed at which the network converges and to provide a numerical range favorable for the chosen activation function of the network.
+All inputs to the network are min-max scaled $\in$[0,1] with the exception of $r$.
+$r$ is instead divided by 1500 to approximately scale the $r$ values used as network inputs within this same range.
+
+The origin for $\zeta$ occurs in the azimuthal direction of the incoming air shower, constraining the $\zeta$ phase space to [$-\pi$,$\pi$].
+The $\zeta$ values are therefore shifting by $\pi$ to occupy a fully positive phase space before scaling.
+More importantly, the averaged PMT traces used as the time series input to the network can contain negative signals due to baseline fluctuations or incorrectly subtracted baselines due to errors in the generalized subtraction procedure.
+To mitigate this issue the trace bins with negative signal are explicitly set to zero pre-training.
+Each trace is scaled individually by its maximum value, where this maximum value is saved to rescale the network output.
+
+An optimization process of selecting network hyperparameters and re-training the network was implemented until a final selection of hyperparameters resulted in a final network training.
+All network training was performed using \texttt{PyTorch} version 1.13.1 and was trained on an NVIDIA A100 GPU.
+Training for the network takes between \qtyrange{1}{2}{\hour} depending on the chosen hyperparameters, with the final training taking \qty{1.06}{\hour} in total.
+The loss function used in training is a root mean square error (MSE) function of the form
+
+\begin{equation}
+    L = \sqrt{\frac{1}{200}\sum_{t=1}^{200}\left(\hat{S}_{t}^{\mu} - S_{t}^{\mu}\right)^{2}} \label{eq:loss}
+\end{equation}
+
+\noindent
+where $\hat{S}_{t}^{\mu}$ is the neural network predicted muonic signal of the trace in time bin $t$, and $S_{t}^{\mu}$ is the true muonic signal of the trace in time bin $t$.
+The training dataset is split into batches where the loss is calculated per batch of data and then summed over the full training dataset.
+A batch size of 512 was used to train the network, where a size of 1024 provided no improvement on network performance.
+
+During the training, an adaptive movement estimation (Adam) optimizer was used.
+The optimizer actively adjusts the individual learning rates of network input features based on the moving average of the loss function gradients and their squares.
+A gradient clipping with a normalization of 1.0 was added to the optimizer to stabilize the network training by preventing extreme loss function gradients.
+The addition of gradient clipping added little to no improvement on network training, yet was maintained to prevent unstable or divergent loss functions in future network implementations.
+A baseline learning rate of 0.001 was used and set with a learning rate scheduler which decreases this learning rate by 0.5 if there is no loss improvement after 10 epochs of training.
+
+XXX shows the evolution of the training and validation loss functions with training epoch.
+The sharp visible drops in loss are epochs where the learning rate scheduler reduced the learning rate.
+Smoothness of the training loss curve shows a stable training of the network is achieved, while some fluctuation on the validation loss is expected from the network's blindness to the validation data during training.
+The plateau of the validation loss highlights the network has learned all general information shared between the training data and a before unseen dataset necessary for the network prediction.
+Final training is reached after 150 epochs of training and is stopped here to prevent overfitting of specific features within the training dataset.
+
+%%% figure showing final training and validation loss curves
+
+%which are not generalizable to before unseen data
+%general information from the training data and training should halt to prevent overfitting specific features of the training dataset.
+
+%no further information is learned by the network for a previously un
+%Final training is reached after 150 epochs of training 
+
+%Stable training of the network is achieved 
+
+%to prevent extreme changes in the loss function 
+
+%a learning rate scheduler with an initial learning rate of 0.001 was used with the learning rate reducing by 0.5 if 
+%The loss is calculated per batch of training data and summed over the full training dataset until the loss plateaus as a function of training epoch.
+%The batch size for network training was chosen at 512, where a size of 1024 was also studied with no improvement on network performance.
+
+%Multiple network trainings were performed until an optimized set of network hyperparameters was decided.
+
+%having one or a few dominating features due to the scale of the  
+
+%while containing the gradients of changing feature values within a predefined numerical window.
+
 
 \section{Network Performance}\label{sec:performance}
+After final training of the network the general performance of the network on the validation set is studied.
+This performance can also be studied as a function of epoch during the training of the network.
+XXX shows the average difference between the total predicted and true muon signal in the PMTs, and the spread in this difference, as a function of training epoch.
+
+
+%The general performance of the network on the validation set can 
 
 \subsection{Feasibility of Using Predictions for an Event-Level Muon Observable}\label{sec:feasibility}
 
