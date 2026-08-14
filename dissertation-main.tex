@@ -23,11 +23,21 @@
 \usepackage{hyperref}
 \usepackage{cleveref}
 
+% Package for spacing
+\usepackage{xspace}
+
+
 % Setup unicode encoding for hyperlinks from the hyperref package
 \hypersetup{pdfencoding=unicode}
 
 % Setup for SI unit package
 \sisetup{range-units = single, range-phrase = \,--\,}
+
+% Command for Offline call in text
+\def\Offline{\mbox{$\overline{\text % .
+      {Off}}$\hspace{.05em}\protect\raisebox{.4ex} % .
+    {$\protect\underline{\text{line}}$}}\xspace}
+
 
 \begin{document}
 \include{dissertation-tap}
