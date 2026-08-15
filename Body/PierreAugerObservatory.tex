@@ -51,7 +51,7 @@ A WCD equipped with an RDC hodoscope was used to experimentally confirm the conv
 The calibration histograms are generated from \qty{60}{\second} of atmospheric muon data recorded with the \texttt{muon\_buffer} of the local station.
 See~\Cref{app:layered_wcd} for further discussion of the \texttt{muon\_buffer}.
 
-\subsection{SD Triggers}\label{sec:sd_triggers}
+\subsection{SD Triggers}\label{ssec:sd_triggers}
 
 The atmospheric muons recorded for local station calibration arrive at an approximate rate of \qty{3}{\kilo\hertz}.
 A tiered SD trigger system reduces this to a feasible rate for physics analyses.
@@ -215,7 +215,7 @@ The event reconstruction for the Pierre Auger Observatory occurs separately for 
 All reconstruction occurs within Offline, the observatory's software package for analyzing air-shower data.
 For the SD reconstruction, two main measurements are needed for each station that recorded event data: the start time of the signal in the station, to determine the geometry of the arriving cosmic-ray air shower, and the total signal in the station's PMTs, to determine an event-level observable related to the air-shower energy.
 Determination of the time range of the event in the station and the conversion of the PMT signals from FADC units to VEM must be done before analyzing the station data for event-level analyses.
-The time range is determined using the procedure described in~\cite{auger_jinst2020_sdreconstruction}, and the conversion of FADC to VEM is performed using the SD calibration histograms described in~\Cref{sec:sd_triggers}, with further information on the conversion provided in~\cite{auger_nima2006_sdcalibration}.
+The time range is determined using the procedure described in~\cite{auger_jinst2020_sdreconstruction}, and the conversion of FADC to VEM is performed using the SD calibration histograms described in~\Cref{ssec:sd_triggers}, with further information on the conversion provided in~\cite{auger_nima2006_sdcalibration}.
 
 %Within a station, the signal baseline of all PMTs (both high and low-gain channels) must first be subtracted.
 %A total baseline is determined by linearly interpolating between constant baseline segments to account for the affect of the signal on the baseline.
@@ -381,7 +381,7 @@ All self-triggered AERA stations have been decommissioned since January 2023.
 A major science goal of AERA was to serve as a testbed for deploying a radio array in the \qtyrange{30}{80}{\mega\hertz} band over the full surface array of the Auger observatory as part of it's next generation upgrade.
 However, high-quality radio data and important analyses with AERA strengthened the cosmic-ray science potential of the future radio array.
 Science highlights include an $X_{\rm max}$ reconstruction with AERA~\cite{auger_prd2024_aeraxmax, auger_prl2024_aeraxmax}, deriving an absolute energy scale from radio measurements~\cite{auger_icrc2025_aeraenergyscale}, and a Galactic calibration of the AERA antennas proving their long-term stability~\cite{auger_jinst2025_aeracalibration}.
-A recent analysis combines AERA radio measurements, which probe the electromagnetic air-shower component, with SD reconstructions of inclined ($\theta_{\rm zen}\,>\,$\qty{60}{\degree}) to provide a simultaneous muon and radio measurement on a per-shower basis~\cite{auger_prd2025_aeramuoninclined} and serves as a proof of principle for the radio component of the Auger observatory's next generation upgrade (see~\Cref{sec:rd} for further details).
+A recent analysis combines AERA radio measurements, which probe the electromagnetic air-shower component, with SD reconstructions of inclined ($\theta_{\rm zen}\,>\,$\qty{60}{\degree}) to provide a simultaneous muon and radio measurement on a per-shower basis~\cite{auger_prd2025_aeramuoninclined} and serves as a proof of principle for the radio component of the Auger observatory's next generation upgrade (see~\Cref{ssec:rd} for further details).
 The aim of this thesis is to study simultaneous muon and radio measurements in the context of vertical ($\theta_{\rm zen}\,<\,$\qty{55}{\degree}) air showers measured by the Pierre Auger Observatory.
 
 %The signals are then stored on a ring buffer of \qty{7.4}{\second} where they wait for the arrival of an external trigger from CDAS, taking about \qty{6}{\second} to arrive at the AERA stations in the case of SD generated triggers~\cite{sato_privcomm_2025}. % Include??
@@ -407,7 +407,7 @@ Deployment of all AugerPrime components finished in March 2026.
     \label{fig:augerprime_wcd}
 \end{figure}
 
-Each WCD of the SD was outfitted with a surface scintillator detector (see~\Cref{sec:ssd}) and a radio antenna (see~\Cref{sec:rd}), both deployed on top of the WCDs and directly integrated into the SD detector system and electronics.
+Each WCD of the SD was outfitted with a surface scintillator detector (see~\Cref{ssec:ssd}) and a radio antenna (see~\Cref{ssec:rd}), both deployed on top of the WCDs and directly integrated into the SD detector system and electronics.
 See~\Cref{fig:augerprime_wcd} for a picture of an AugerPrime WCD.
 A small PMT (SPMT), a Hamamatsu R8619 PMT of 1-inch diameter, was installed inside each WCD to increase the dynamic range of the SD, allowing SD measurements without PMT saturation to within \qty{250}{\meter} of the reconstructed air-shower core~\cite{auger_icrc2023_dynamicrange}.
 In addition, the electronics of the SD were updated with an Upgraded Unified Board (UUB).
@@ -428,7 +428,7 @@ The new detector systems added as part of the AugerPrime upgrade will be discuss
 %The science objective of AugerPrime is to determine with precision the mass composition of ultra-high-energy cosmic rays, with focus on improving the observatory's composition sensitivity   
 
 
-\subsection{Underground Muon Detector}\label{sec:umd}
+\subsection{Underground Muon Detector}\label{ssec:umd}
 
 The Underground Muon Detector (UMD) is part of both the AugerPrime upgrade and the Auger Muons and Infill for the Ground Array (AMIGA) enhancement of the observatory~\cite{auger_icrc2007_amiga}.
 The UMD consists of an array of scintillator panels buried \qty{2.3}{\meter} underground at the locations of the SD-750 and SD-433 stations.
@@ -470,7 +470,7 @@ The most recent analyses of the UMD include a muon LDF fit from measured UMD dat
 %It connects to a 64 channel Hamamatsu silicon phototmultiplier (SiPM).
 
 
-\subsection{Surface Scintillator Detector}\label{sec:ssd}
+\subsection{Surface Scintillator Detector}\label{ssec:ssd}
 
 With AugerPrime, a Surface Scintillator Detector (SSD) was deployed on top of each WCD of the Pierre Auger Observatory.
 The SSDs are flat scintillator panels covering a surface area of \qty{3.8}{\meter^{2}} above the WCD and have been fully integrated into the UUB electronics, providing the same duty cycle for both the WCD and SSD.
@@ -479,7 +479,7 @@ The SSD measures minimum ionizing air-shower particles with no distinction betwe
 Combined with the more muon sensitive WCD measurements, the muonic and electromagnetic contributions to the total signal measured in each detector can be estimated.
 Yet, the SSD is mostly sensitive to air showers with $\theta_{\rm zen}\,<\,$\qty{55}{\degree} due to the same geometrical constraints for flat detectors described in the previous section.
 
-\subsection{Radio Detector}\label{sec:rd}
+\subsection{Radio Detector}\label{ssec:rd}
 
 In addition to the SSD, a short aperiodic loaded loop antenna (SALLA) was deployed on top of each WCD.
 The SALLA radio antennas measure the radio emission of cosmic-ray air showers in the \qtyrange{30}{80}{\mega\hertz} band, forming the radio detector (RD) of AugerPrime.
