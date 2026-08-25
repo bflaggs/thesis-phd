@@ -3,22 +3,28 @@
 %
 \chapter{Neural Network Based Reconstructions of a Muon Observable}\label{chap:nn}
 The previous chapter highlights the importance of combining radio $X_{\rm max}$ and muon measurements for the prospect of increasing the event-by-event mass separation between primary cosmic-ray mass groups.
-At the Pierre Auger Observatory, an event level $X_{\rm max}$ reconstruction using the radio technique is well established, with results from AERA already published~\cite{auger_prd2024_aeraxmax,auger_prl2024_aeraxmax}.
+At the Pierre Auger Observatory, an event-level $X_{\rm max}$ reconstruction using the radio technique is well established, with results from AERA already published~\cite{auger_prd2024_aeraxmax,auger_prl2024_aeraxmax}.
 The UMD provides direct muon measurements of air showers on a per-event basis, which in principle can be combined with per-event radio $X_\text{max}$ reconstructions to increase the overall mass sensitivity of Auger, both per-event and for the average mass composition.
 The AERA and UMD footprints are co-located making simultaneous measurements feasible; however, implementation is difficult due to both geometrical and timeline restrictions for each detector system.
-The geometry of UMD scintillator panels is optimal for vertical air-shower reconstructions while the spacing of the AERA radio antennas makes the AERA $X_{\rm max}$ reconstruction more efficient for air showers with $\theta_{\rm zen}\,>\,$\qty{40}{\degree} (see XXX).
+The geometry of UMD scintillator panels is optimal for vertical air-shower reconstructions while the spacing of the AERA radio antennas makes the AERA $X_{\rm max}$ reconstruction more efficient for air showers with $\theta_{\rm zen}\,>\,$\qty{40}{\degree} (see~\Cref{fig:aera_umd_histograms}).
 Regarding timeline constraints, AERA, recording air showers since 2011, has fulfilled its primary science goal of proving the usefulness of air-shower reconstructions in the \qtyrange{30}{80}{\mega\hertz} band near Malarg\"{u}e and will soon enter the decomissioning phase.
 The UMD did not obtain a stable reconstruction until January 2018, with deployment only finishing in March 2026, severely limiting the data overlap between the two reconstruction methods.
 The radio $X_{\rm max}$ reconstruction will eventually be ported to the RD antennas, deployed at each Auger SD, yet the spacing of RD will incur the same reconstruction efficiency constraint as AERA.
 
-%%%% Figure here showing UMD and Bjarni bias free histograms of reconstructed zenith angle
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/AERA_BiasFreeXmax_ZenithHistogram.pdf}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/MDSD750_ICRC2025_test7_reconstructions_ZenithHistogram.pdf}
+  \caption[Reconstructed zenith angle histograms for AERA and UMD.]{Reconstructed zenith angle histograms from the bias free sample of the AERA $X_\text{max}$ reconstructions (left) and the standard UMD + SD-750 reconstruction of the Pierre Auger Observatory (right). The label ``icrc2025-test7'' refers to the version tag for the Auger observatory's reconstruction software. Both reconstructions shown here are for Auger Phase I data only.}
+  \label{fig:aera_umd_histograms}
+\end{figure}
 
 Instead a neural network based method to reconstruct a per-event muon observable, to be later combined with previously recorded AERA measurements, is investigated over the following two chapters.
-A previous Auger analysis has used deep learning methods to reconstruct the station level muonic component of the PMT traces bin-by-bin for the SD-1500~\cite{auger_jinst2021_dnnmuons,juanmiguel_phd2020}.
-The general concept derives from the knowledge that muons in air showers arrive at ground faster and, on average, with larger energies than their electromagnetic counterparts.
+A previous Auger analysis has used deep learning methods to reconstruct the station-level muonic component of the PMT traces bin-by-bin for the SD-1500~\cite{auger_jinst2021_dnnmuons,juanmiguel_phd2020}.
+The general concept is driven from the knowledge that muons in air showers arrive at ground faster and, on average, with larger energies than their electromagnetic counterparts.
 Muonic particles reaching the Auger water-Cherenkov detectors generate Cherenkov light within the water tank that produces sharp peaks over short time windows within the measured PMT traces.
-The characteristics of this ``fast and spiky'' muonic component of the PMT traces are difficult to distinguish, yet can be done using deep learning methods. 
-This chapter updates the previous deep learning analysis to predict the station level muon traces of the SD-750 array, essentially lowering the energy threshold of the prediction by one decade in energy.
+The characteristics of this ``fast and spiky'' muonic component of the PMT traces are difficult to disentangle from their electromagnetic counterpart, yet can be distinguished using deep learning methods. 
+This chapter updates the previous deep learning analysis to predict the station-level muon traces of the SD-750 array, essentially lowering the energy threshold of the prediction by one decade in energy.
 Another analysis had updated the SD-1500 muon trace predictions including station ageing effects, yet this is not investigated here for the SD-750 as it requires a large library of highly detailed detector simulations~\cite{orazio_phd2023}.
 
 %This has already been implemented a the Pierre Auger Observatory for the SD-1500, proving 
@@ -36,9 +42,9 @@ Another analysis had updated the SD-1500 muon trace predictions including statio
 \section{Network Architecture and Inputs}\label{sec:architecture}
 The network architecture was inherited from~\cite{auger_jinst2021_dnnmuons} and is classified as a conditional recurrent neural network (RNN), meaning static features set the initial state and inform the hidden layers of the time-series prediction blocks of the RNN.
 The RNN block is formed by three long short-term memory (LSTM) layers that process information sequentially, predicting the outcome at the present time based on knowledge of the previous time evolution of the dataset.
-The static features are first progressed through two fully connected, i.e. dense, layers to encode their information and are then combined with the first LSTM block to set the initial conditions and hidden layers of the time evolution.
-The RNN then passes through two additional LSTM layers, both with their hidden and current layers initialized to zero meaning the only input comes from the previous LSTM layer.
-Finally, the output of the third LSTM layer is transposed and fed to a final dense layer.
+The static features are first progressed through two fully connected, i.e. dense, layers to encode their information and are then combined with the first LSTM block to set the initial conditions and hidden states of the time evolution.
+The RNN then passes through two additional LSTM layers, both with their hidden and cell states initialized to zero meaning the only input comes from the previous LSTM layer.
+Finally, the output of the third LSTM layer is sliced to only take the first of 32 features to be transposed and fed to a final dense layer.
 This transpose and final dense layer removes the strict causality requirement of the temporal data from in the LSTM blocks, allowing a bidirectional flow of predictive information across the time series.
 A bidirectional LSTM architecture would induce a similar effect.
 
@@ -48,12 +54,12 @@ A bidirectional LSTM architecture would induce a similar effect.
 The input to the network is a vector of length 203.
 Three of the inputs are static features and the remaining 200 constitute a single time series vector spanning 200 time bins.
 The goal of the conditional RNN is to predict the muonic component of the Auger water-Cherenkov detector PMT traces at the station level, therefore static variables with a high dependence on the air-shower muon number are chosen.
-The static variables are the station distance to the air-shower axis ($r$), the azimuthal angle in the shower plane between the station and the incoming air-shower direction ($\zeta$), and the secant of the zenith angle ($\sec\theta$).
-The end goal is a station level result, therefore the inputs should also be station level to prevent any unexpected event level dependencies from leaking into the analysis.
+The static variables are the station distance to the air-shower axis ($r$), the azimuthal angle in the shower plane between the station and the incoming air-shower direction ($\zeta$), and the secant of the air-shower zenith angle ($\sec\theta$).
+The end goal is a station-level result, therefore the inputs should also be station level to prevent any unexpected event-level dependencies from leaking into the analysis.
 However, the zenith angle as an input feature is unavoidable, as this observable is directly related to the atmospheric attenuation of the air-shower particles.
 
 The time-series input is the first 200 times bins of the PMT traces from a single Auger water-Cherenkov detector, averaged over all active PMTs for that station.
-All analysis will be performed using the Phase I data of the Pierre Auger Observatory, recorded with the UB electronics of the Auger SD.
+All analysis/training will be performed using the Phase I data/simulations of the Pierre Auger Observatory, recorded with the UB electronics of the Auger SD.
 These 200 bins then correspond to the first \qty{5}{\micro\second} of the \qty{19.2}{\micro\second} long PMT traces.
 The previous analyses show using 200 time bins provides an optimal mix of speed and accuracy, as 99\% of the station's muonic component is recorded in the first \qty{5}{\micro\second} for air showers with energies less than \qty[parse-numbers=false]{10^{19}}{\electronvolt}~\cite{auger_jinst2021_dnnmuons, juanmiguel_phd2020}.
 The final output of the network is a time series of 200 bins predicting the bin-by-bin muon content of the input time series. 
@@ -107,16 +113,17 @@ The production is based on CORSIKA v7.8010 air showers simulated with hadronic m
 For each hadronic model, simulations are available for proton, helium, oxygen, and iron.
 For each primary, 5000 showers were simulated for each of two energy bins, \qtyrange[parse-numbers=false]{10^{17.5}}{10^{18}}{\electronvolt} and \qtyrange[parse-numbers=false]{10^{18}}{10^{18.5}}{\electronvolt}, where zenith angles range between \qtyrange{0}{65}{\degree} within each bin.
 The energy spectra and zenith angles within each bin are distributed with $dN/dE \propto E^{-1}$ and $dN/d\theta \propto \sin\theta\cos\theta$ respectively, resulting in a flat distribution in $\lg(E / \rm eV)$ for the energies and a flat distribution in $\sin^{2}(\theta)$ for the zenith angles, similar to the simulation library used in~\Cref{chap:simulations}.
-Within each energy bin, the 5000 simulated showers are split evenly between different atmospheric models, resulting in 1250 showers for each of the January, March, August, and September atmospheres in Malarg\"ue, Argentina.
+Within each energy bin, the 5000 simulated showers are split evenly between different atmospheric models, resulting in 1250 showers for each of the January, March, August, and September atmospheres in Malarg\"{u}e, Argentina.
 
-Atmospheric changes in temperature and pressure directly impact the attenuation of particles and muon production within the atmosphere and hence have a direct impact on the muonic signal measured by ground-based detectors.
-In this analysis, the impact on the network predictions from differences in the atmospheric modeling is not studied, yet will be crucial to study in the future to fully capture minute details in the muon signal measured by the SD.
-Further updates to the network could include expanding the architecture to train on and provide predictions for productions using Phase II data. 
+Atmospheric changes in temperature and pressure directly impact the attenuation of particles and muon production within the atmosphere, inducing a seasonal effect on the absolute number of muons in air showers. CITESTEF. 
+Furthermore, changes in temperature also affect the VEM calibration of water-Cherenkov detectors (see~\Cref{app:layered_wcd}) and hence have a direct impact on the muonic signal measured by ground-based detectors.
+In this analysis, the impact on the network predictions from differences in the atmospheric models is not studied, yet will be crucial to study in the future to fully capture minute details in the muon signal measured by the SD.
+Further updates to the network could include expanding the architecture to train on and provide predictions for Auger Phase II data productions. 
 The upgraded SD electronics used for Phase II data increased the data sampling rate (see~\Cref{sec:augerprime}), therefore to encapsulate the same physics in the network using Phase II data/simulations would require an increase in the length of the input time series.
 Currently, there is not an available simulation production of both the UMD and SD-750 for Auger Phase II data using the most current hadronic interaction models.
 
-\Offline places the simulated core of each air shower in the library at random within the footprint of the SD-750 array and then runs SD-750 and UMD reconstructions, both following the icrc2025-test7 standard module sequences for the respective detector system.
-The event information for each reconstruction is stored in an ADST, along with the station level information as the network architecture trains and predicts at the station level.
+\Offline places the simulated core of each air shower in the library at random within the footprint of the SD-750 array and then runs the SD-750 and UMD reconstructions, both following the icrc2025-test7 standard module sequences for the respective detector system.
+The event information for each reconstruction is stored in an ADST, along with the individual station-level information, as the network architecture trains and predicts at the station level.
 For each station, the first 200 time bins (\qty{5}{\micro\second}) of the total signal measured by the PMTs is averaged over all active PMTs and saved in the ADST.
 Nominally, the number of active PMTs is three.
 These averaged traces will be used as the time-series input of the neural network.
@@ -131,24 +138,30 @@ An adage in machine learning, and one of my favorite sayings about these analyse
 Following this dogma, a high-quality subset of the station-level simulated traces must be selected to train the RNN.
 This subset should mimic measured data traces of high quality, as eventually the network will be applied to real measured traces from SD-750 reconstructed air showers.
 For training and validating the network, only the \Offline production for EPOS LHC-R simulations will be used.
-Therefore this section and the sections following it only contain results for simulations using this hadronic model, unless otherwise stated. 
+Therefore this section, and the sections following it, only contain results for simulations using this hadronic model unless otherwise stated. 
 
 The selection cuts applied to the dataset are the same as in~\cite{orazio_phd2023} and will be described briefly here.
 Some of the selection cuts are applied at the event level to ensure high-quality data for the full event, while others are applied at the station (i.e. trace) level to ensure the signal in the station is of acceptable quality.
 The event-level selections require a converged LDF fit and a 6T5 trigger for the event.
 An additional event-level selection requires the reconstructed zenith angle to be $<$\qty{58}{\degree}.
 This cut was not used in~\cite{orazio_phd2023}, yet must be applied here due to the poor quality of SD-750 reconstructions for inclined air showers.
-XXX highlights this for the SD-750, showing a histogram of the reconstructed zenith angle for all simulations with a difference in the reconstructed and true (MC) energies greater than half a decade.
-Furthermore, the end goal is to predict the muonic signal for air showers between \qtyrange{0}{55}{\degree}, therefore training on a larger zenith range will eliminate possible edge effects in the network's predictive power.
-The \qty{55}{degree} goal is set from the ``bias-free'' AERA $X_{\rm max}$ data selection, which applies a zenith angle selection of $<$\qty{55}{\degree} on the SD reconstruction.
+\Cref{fig:zenith_outliers} highlights this for the SD-750, showing a histogram of the reconstructed zenith angle for all simulations with a difference in the reconstructed and Monte Carlo truth (MC) energies greater than half a decade in energy.
+Furthermore, the end goal is to predict the muonic signal for air showers between \qtyrange{0}{55}{\degree}.
+Therefore training on a larger zenith range will eliminate possible edge effects in the network's predictive power.
+The \qty{55}{degree} limit is set from the ``bias-free'' AERA $X_{\rm max}$ data selection, which applies a zenith angle selection of $<$\qty{55}{\degree} on both the SD and AERA directional reconstructions.
 
-%%% Figure of the energy outlier histogram here, change axis to be for reconstructed zenith angle
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter5/outliers_zen_degrees_histogram.pdf}
+  \caption[Histogram of zenith angles for poor energy reconstructions.]{A histogram of the reconstructed zenith angle of simulated air showers reconstructed with the SD-750 of the Pierre Auger Observatory. Only air showers with an absolute difference between the true MC energy and the SD reconstructed energy of greater than 0.5 are included. Histograms for each simulated primary are shown, where most poorly reconstructed air-shower energies correspond to air showers with $\theta_{\rm zen}>$\qty{55}{\degree}. A histogram of the true MC zenith angles exhibits the same behavior.}
+  \label{fig:zenith_outliers}
+\end{figure}
 
 %the end goal is to combine the predictions of this network with the ``bias-free'' AERA $X_{\rm max}$ data selection 
 
 %, and the reconstructed zenith angle to be $<$\qty{58}{\degree}.
-The station level selections require the LDF fit evaluated at the station distance from the reconstructed shower axis to contain at least \qty{5}{VEM} of signal(i.e. LDF($r_{\rm station}$)$>$\qty{5}{VEM}), and that there is at least no low-gain saturation of the PMTs within the station.
-Data with high-gain PMT saturation is included as these signals can be recovered by analyzing the low-gain PMTs, allowing the network to include the phase space closer to the air-shower axis within its training dataset.
+The station-level selections require the LDF fit evaluated at the station distance from the reconstructed shower axis to contain at least \qty{5}{VEM} of signal(i.e. LDF($r_{\rm station}$)$>$\qty{5}{VEM}), and that there is at least no low-gain saturation of the PMTs within the station.
+Data with high-gain PMT saturation is included as these signals can be recovered by analyzing the low-gain PMTs, allowing the network to include a phase space closer to the air-shower axis within its training dataset.
 \Cref{tab:cuts} shows a summary of the selection cuts and the resulting statistics for each primary of the EPOS LHC-R simulation set.
 After cuts, there are a total of 1,280,885 traces for use in training, validating, and testing the RNN, split approximately equally across all four primaries. 
 
@@ -185,29 +198,35 @@ After cuts, there are a total of 1,280,885 traces for use in training, validatin
 \subsection{Studying the Training and Validation Sets Pre-Training}\label{ssec:pretraining}
 %Training and testing results, testing for biases
 The final 1,280,885 traces after selection cuts from~\Cref{tab:cuts} were split randomly into training and testing subsets with a respective 80\%-20\% split.
-The larger training set was then further split randomly, again using an 80\%-20\% split, into the true training subset and a validation subset.
+The larger training set was then further split randomly, again using an 80\%-20\% split, into the final training subset and a validation subset.
 The validation subset was used to analyze the results of the trained RNN predictions on simulations not yet seen by the network, allowing the network to go through multiple iterations of training and updating the hyperparameters typical of training neural networks (see~\Cref{sec:training} for details).
 Both the train-test and train-validation splits were performed event wise to ensure stations from the same event occupy the same data subset.
 This serves two purposes.
 On the one hand, the network performance can be studied as a function of event-level observables, such as energy and zenith angle, with confidence that any biases visible in the performance plots are from the network predictions rather than biases arising from the data splits used.
-On the other hand, the final analysis plans to use the station level network predictions of the muonic signal and combine them for single events for the purpose of fitting a muon LDF, therefore extracting an event-level muon observable from a station-level prediction.
+On the other hand, the final analysis plans to take the station-level network predictions of the muonic signal, combine the predictions for single events, and fit a muon LDF to the station predictions for each event, therefore extracting an event-level muon observable from a station-level prediction.
 This event-level splitting of the datasets preserves the information necessary to make this plan feasible.
-After splitting the subsets event wise the training set contains 822,099 traces, the validation set contains XXX,XXX traces, and the testing set contains XXX,XXX traces.
+After splitting the subsets event wise, the training set contains 822,099 traces, the validation set contains 203,297 traces, and the testing set contains 255,489 traces.
 
 %combine the station level network predictions for individual events to fit a muon LDF, therefore predicting an event-level muon observable from  
 %The network performance can then be studi
 
 %a measure of the network performance before finally applying network predictions to the testing subset.
 
-%Testing subset: 256,177 traces???
-
 %and  before updating various network hyperparameters 
 Before training the network, the training and validation sets are investigated to determine and correct any potential biases induced from the splitting process, and to determine if additional selection cuts are necessary.
-XXX shows two-dimensional histograms comparing the SD-750 reconstructed (SD) and the Monte Carlo truth (MC) values of both event-level and station-level observables for the training set of 822,099 traces.
+\Cref{fig:training} shows two-dimensional histograms comparing the SD-750 reconstructed (SD) and the Monte Carlo truth (MC) values of both event-level and station-level observables for the training set of 822,099 traces.
 Included are the observables used as the static feature inputs to the neural network ($r$, $\zeta$, and $\sec\theta$) and the air-shower energy.
 A linear function of slope one is included on each plot to provide an example of exact agreement between the reconstruction and MC truth.
 
-%%% 2-d histograms of training dataset here
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/2d_en_mc_trainingset_histogram.pdf}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/2d_zen_mc_trainingset_histogram.pdf} \\
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/2d_r_mc_trainingset_histogram.pdf}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/2d_azimuth_mc_station_trainingset_histogram.pdf}
+  \caption[2D histograms of the SD-MC observables for the RNN training data.]{2D histograms of the event-level (energy: top left, zenith angle: top right) and station-level (distance to shower axis: bottom left, azimuthal axis in shower plane: bottom right) observables of the RNN training dataset. The SD-750 reconstructed values (SD) are shown on the y-axis and the true MC values are shown on the x-axis. Nearly exact linear SD-MC agreement is seen for all observables except energy (see text).}
+  \label{fig:training}
+\end{figure}
 
 The distributions for the $r$, $\zeta$, and $\sec\theta$ observables show agreement with the linear function of slope one for the SD-MC observable relationships, highlighting no biases in the dataset are induced from the SD reconstruction or from the selection cuts.
 Yet, the SD-750 reconstructed energy underestimates the MC energy by $\sim$20\% across the full energy range of the training dataset.
@@ -215,15 +234,23 @@ The reconstruction-MC mismatch does not represent an unknown bias from the selec
 MC simulations generate lower muon content than what is measured in data for the same air-shower energy, thereby generating less signal at ground measurable by the SD array.
 Applying the SD energy reconstruction to simulations then results in an energy estimate systematically lower than the true MC energy because the SD energy reconstruction uses a measurement-derived calibration, as described in~\Cref{sec:reconstruction}.
 This underestimation compared to MC is also seen in the SD-1500 reconstructed energies~\cite{auger_gap2025_muondeficit}.
-The energy reconstruction itself will not introduce any biases in the network predictions as the energy is not an input to the network, although the muon deficit will.
-The muon deficit bias can not be corrected for because of the use of simulations in the training, and instead induces a systematic uncertainty on the result.
+The energy reconstruction itself will not introduce any biases in the network predictions because the energy is not an input to the network, although the muon deficit will.
+Bias from the muon deficit can not be corrected for because of the use of simulations in the network training, and instead induces a systematic uncertainty on the result.
 
-XXX shows the same two-dimensional histograms as XXX, yet instead using data from the XXX,XXX traces of the validation set for EPOS LHC-R simulations.
+\Cref{fig:validation} shows the same two-dimensional histograms as~\Cref{fig:training}, yet instead using data from the 255,489 traces of the validation set for EPOS LHC-R simulations.
 The validation set exhibits the same SD-MC observable relationships as the training set, highlighting that the data splitting process does not introduce any unforeseen biases that will propagate forward in the analysis into either the training or validation data.
 The testing set was not studied to maintain the integrity of having a dataset available for network predictions unseen by both the researcher and the network before application to real data.
 However, no biases (other than the muon deficit) are assumed in the training set because the same selection cuts and data splitting used for the training and validation sets were also applied to the testing set.
 
-%%% 2-d histograms of validation dataset here
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/2d_en_mc_validationset_histogram.pdf}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/2d_zen_mc_validationset_histogram.pdf} \\
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/2d_r_mc_validationset_histogram.pdf}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/2d_azimuth_mc_station_validationset_histogram.pdf}
+  \caption[2D histograms of the SD-MC observables for the RNN validation data.]{The same 2D histograms as in~\Cref{fig:training}, but showing the SD-MC observable agreement for the RNN validation dataset.}
+  \label{fig:validation}
+\end{figure}
 
 %The SD energy reconstruction for this 
 
@@ -245,16 +272,17 @@ However, no biases (other than the muon deficit) are assumed in the training set
 \section{Network Training}\label{sec:training}
 % Preprocessing here or in a subsection of the previous section names Final Preprocessing
 The final data preprocessing step before training the network is to scale the network inputs to similar levels.
-This allows the network to assign weighting factors of features based on percentage differences rather than the absolute differences, essentially assigning an equal weighting factor to the same percentage difference regardless of the studied input feature.
+This allows the network to assign weighting factors to features based on percentage differences rather than absolute differences, essentially assigning an equal weighting factor to the same percentage difference regardless of the studied input feature.
 Other purposes serve to increase the speed at which the network converges and to provide a numerical range favorable for the chosen activation function of the network.
 All inputs to the network are min-max scaled $\in$[0,1] with the exception of $r$.
-$r$ is instead divided by 1500 to approximately scale the $r$ values used as network inputs within this same range.
+$r$ is instead divided by \qty{1500}{\meter} to approximately scale the $r$ values within this same range.
 
 The origin for $\zeta$ occurs in the azimuthal direction of the incoming air shower, constraining the $\zeta$ phase space to [$-\pi$,$\pi$].
 The $\zeta$ values are therefore shifting by $\pi$ to occupy a fully positive phase space before scaling.
-More importantly, the averaged PMT traces used as the time series input to the network can contain negative signals due to baseline fluctuations or incorrectly subtracted baselines due to errors in the generalized subtraction procedure.
-To mitigate this issue the trace bins with negative signal are explicitly set to zero pre-training.
-Each trace is scaled individually by its maximum value, where this maximum value is saved to rescale the network output.
+More importantly, the averaged PMT traces used as the time series input to the network can contain negative signals due to baseline fluctuations or incorrectly subtracted baselines from errors in the generalized subtraction procedure.
+The trace bins with negative signal are explicitly set to zero pre-training to mitigate this issue.
+Each trace is scaled individually by its maximum value, fixing the trace input also within the range of [0,1].
+The trace maximum values are saved to rescale the network outputs.
 
 An optimization process of selecting network hyperparameters and re-training the network was implemented until a final selection of hyperparameters resulted in a final network training.
 The network implementation was built using \texttt{PyTorch} version 1.13.1~\cite{pytorch_neurips2019} and was trained on an NVIDIA A100 GPU.
@@ -268,7 +296,8 @@ The loss function used in training is a root mean square error (MSE) function of
 \noindent
 where $\hat{S}_{t}^{\mu}$ is the neural network predicted muonic signal of the trace in time bin $t$, and $S_{t}^{\mu}$ is the true muonic signal of the trace in time bin $t$.
 The training dataset is split into batches where the loss is calculated per batch of data and then summed over the full training dataset.
-A batch size of 512 was used to train the network, where a size of 1024 provided no improvement on network performance.
+A batch size of 512 was used in the final network training. 
+Also tested to train the network was a batch size of 1024, yet this was not used in the final training as it provided no improvement on network performance.
 
 During the training, an adaptive movement estimation (Adam) optimizer was used.
 The optimizer actively adjusts the individual learning rates of network input features based on the moving average of the loss function gradients and their squares.
@@ -276,13 +305,18 @@ A gradient clipping with a normalization of 1.0 was added to the optimizer to st
 The addition of gradient clipping added little to no improvement on network training, yet was maintained to prevent unstable or divergent loss functions in future network implementations.
 A baseline learning rate of 0.001 was used and set with a learning rate scheduler which decreases this learning rate by 0.5 if there is no loss improvement after 10 epochs of training.
 
-XXX shows the evolution of the training and validation loss functions with training epoch.
+\Cref{fig:loss_curves} shows the evolution of the training and validation loss functions with training epoch.
 The sharp visible drops in loss are epochs where the learning rate scheduler reduced the learning rate.
 Smoothness of the training loss curve shows a stable training of the network is achieved, while some fluctuation on the validation loss is expected from the network's blindness to the validation data during training.
-The plateau of the validation loss highlights the network has learned all general information shared between the training data and a before unseen dataset necessary for the network prediction.
+The plateau of the validation loss highlights the network has learned all general information useful for the network prediction that is shared between the training data and a before unseen dataset.
 Final training is reached after 150 epochs of training and is stopped here to prevent overfitting of specific features within the training dataset.
 
-%%% figure showing final training and validation loss curves
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter5/LossCurves_finaltraining_allprimaries_removedFirstEpoch.pdf}
+  \caption[Training and validation loss curves for the final RNN training.]{The training and validation loss curves of the final trained network. The validation loss curve plateaus after 150 training epochs, indicating the network has learned all general dataset features to inform its predictions. The validation loss curve starts to slowly rise if trained for further epochs, indicating the network starts to overfit the training data after 150 epochs. The first training epoch is removed in the plot to highlight the behavior of the loss curves later in the training time.}
+  \label{fig:loss_curves}
+\end{figure}
 
 %During the optimization phase of the network hyperparameters
 %which are not generalizable to before unseen data
@@ -373,14 +407,10 @@ XXX shows the bias and resolution metric plots for all four primaries as a funct
 
 \subsection{Feasibility of Using Predictions for an Event-Level Muon Observable}\label{ssec:feasibility}
 
-\section{Application to Reconstructed Surface Detector Data}\label{sec:application}
-% Save for following chapter?
-
-\section{Crosschecks that Orazio and Juan Miguel did}\label{sec:checks}
-Direct comparison of simulated muonic PMT signal per bin with prediction from NN.
-Crosschecks with Underground Muon Detector Reconstructions.
-Crosschecks with Margita's NN? Or Carmina's reconstruction?
-
+\subsection{Parameterization of the Bias and Uncertainty in the Network Predictions}\label{ssec:parameterization}
 
 \section{Construction of a Likelihood for Fitting a Muon LDF}\label{sec:likelihood}
 
+
+\section{Application to Reconstructed Surface Detector Data}\label{sec:application}
+% Save for following chapter? I think yes
