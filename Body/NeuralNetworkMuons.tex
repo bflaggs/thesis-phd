@@ -341,28 +341,39 @@ Final training is reached after 150 epochs of training and is stopped here to pr
 
 
 \section{Network Performance}\label{sec:performance}
-After final training of the network the general network performance on the validation set is studied.
+The general network performance on the validation set is studied after final training of the network.
 This performance can also be studied as a function of epoch during the training of the network.
-XXX shows the average difference between the total predicted muon signal ($\hat{S}^{\mu}$) and true muon signal ($S^{\mu}$) in the PMTs, and the spread in this difference, as a function of training epoch.
+\Cref{fig:metric_training} shows the average difference between the total predicted muon signal ($\hat{S}^{\mu}$) and true muon signal ($S^{\mu}$) in the PMTs, and the spread in this difference, as a function of training epoch for the validation data.
 As the final epoch is approached the average difference approaches roughly \qty{0}{VEM}, indicating little bias in the network's predicted muon signals when averaged over all traces; however, the standard deviation of the difference distribution approaches roughly \qty{5}{VEM} indicating a large spread in differences over the full range of values.
 This standard deviation is calculated for all primaries, zenith angles, distances to the air-shower axis, etc. in the validation set and therefore a large spread is expected.
 
-%%% figure showing average difference and standard deviation in difference vs. epoch
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter5/MetricCurves_finaltraining_allprimaries.pdf}
+  \caption[Network difference metrics as a function of training epoch.]{The evolution with training epoch of the average difference between the predicted muon signal ($\hat{S}^{\mu}$) and the true muon signal ($S^{\mu}$) in the stations for all simulations in the validation set. Also included is the standard deviation of the difference between the predicted and true muon signals.}
+  \label{fig:metric_training}
+\end{figure}
 
 As the network predicts the muonic component of the signal at the station level, verifying the bin-by-bin network predictive power for individual stations is paramount.
-XXX shows the PMT traces in VEM units for the total PMT signal, the total muonic component of the signal from simulations, and the total muonic component of the signal as predicted from the neural network.
-Examples for two different stations are shown, one station with a small total signal and therefore a small muonic component ($<$\qty{1}{VEM}) of the signal, and one station with a larger total and muonic signal.
+\Cref{fig:nn_traces} shows the PMT traces in VEM units for the total PMT signal, the total muonic component of the signal from simulations, and the total muonic component of the signal as predicted from the neural network.
+Examples for two different stations are shown, one station with a small total signal and therefore a small muonic component of the signal ($<$\qty{1}{VEM}), and one station with a larger total and muonic signal.
 For the example with a larger true muonic component of the signal, the neural network accurately predicts the amplitude and location of the muonic contributions to the signal.
 The network underestimates the true muonic signal by only 3.3\%.
 
-%%% two figures, medium S_mu and low S_mu examples
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/TracePrediction_118_proton_lowSmu_.pdf}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/TracePrediction_48959_helium_mediumSmu_.pdf}
+  \caption[Bin-by-bin muon trace predictions of the RNN.]{The RNN predicted bin-by-bin muon traces for two stations, one with a small total and muonic component of the signal (left) and one with a larger total and muonic signal component (right). Small here refers to a total muonic contribution to the signal in the tank of $<$\qty{1}{VEM}. The true muon trace and total signal traces are included for each plot. The RNN poorly predicts the trace with little muon signal with an overestimation in the muon signal of over 100\%. However, the muon signal, and therefore the RNN prediction, also depends on the event and station observables included as text on each plot.}
+  \label{fig:nn_traces}
+\end{figure}
 
 For the example station with little muonic signal the results are not nearly as precise, with an overestimation in the muonic signal by the neural network of 142\%.
 The network picks locations and peaks which are ``fast and spiky'', generally associated with muonic particles.
 Yet, both the total and muonic signals of the PMT trace are low, complicating the network's predictive power.
 Multiple variables such as energy, zenith angle, and distance to the air-shower core, have an effect on the total and muonic signals measured by the detector and therefore an effect on the network's predictions.
-This effect must be evaluated; however, traces with less than \qty{1}{VEM} of MC muon signal will be disregarded from this evaluation.
-This removes X.X\% of traces from the EPOS LHC-R validation set.
+This effect must be evaluated; however, traces with less than \qty{1}{VEM} of MC muon signal will be disregarded from the evaluation of the network's performance.
+This removes 1.6\% of traces (3,244 traces in total) from the EPOS LHC-R validation set.
 
 %studying the effect for detectors with low total signal will 
 %When analyzing the performance of the network
@@ -378,8 +389,8 @@ The network performance is evaluated using the relative difference metric, defin
 \end{equation}
 
 \noindent
-$\hat{S}^{\mu}$ is the total, bin-by-bin summed, muon signal in the trace predicted by the neural network and $S^{\mu}$ is this the MC truth of this value.
-The relative difference is histogrammed individually for each primary (p, He, O, Fe) of the EPOS LHC-R validation set, shown in XXX.
+$\hat{S}^{\mu}$ is the total, bin-by-bin summed, muon signal in the trace predicted by the neural network and $S^{\mu}$ is the MC truth of this value.
+The relative difference is histogrammed individually for each primary (p, He, O, Fe) of the EPOS LHC-R validation set, shown in~\Cref{fig:relative_difference}.
 The bias ($\mu$) and resolution ($\sigma$) are included for each histogram, along with a dashed line at a relative difference of 0.0 to represent no bias.
 Proton has the largest positive bias which decreases with the mass ordering to iron with the largest negative bias.
 Similarly, the resolution decreases as primary mass increases, with proton having the largest resolution.
@@ -387,9 +398,67 @@ Proton showers have larger shower-to-shower fluctuations compared to heavier pri
 Visible are asymmetries in the relative difference histograms, arising from dependencies on other event and station variables.
 Investigating the evolution of this metric with each variable is a necessary step to understand the limitation of the network's accuracy in various phase spaces.
 
-%%% histograms of relative difference metric, 2x2 grid
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter5/metric_histogram_relative_delta_muon_signal_2x2primaries_fulldataset.pdf}
+  \caption[Histograms of the muon signal relative difference.]{Histograms of the relative difference metric presented in~\Cref{eq:metric}. Each histogram is for all stations for a single primary particle (i.e. over all energies, zenith angles, etc.). $\mu$ is the mean relative difference for that primary and $\sigma$ is the standard deviation. These are respectively known as the bias and resolution of the network within the given phase space they are calculated over. A dashed vertical line at a relative difference of 0.0 represents no bias, meaning the network exactly predicts the total muonic signal in the station as compared to simulations.}
+  \label{fig:relative_difference}
+\end{figure}
 
-XXX shows the bias and resolution metric plots for all four primaries as a function of the monte carlo air-shower energy.
+\Cref{fig:mc_energy} shows the bias and resolution plots using the relative difference metric,~\Cref{eq:metric}, for all four primaries as a function of the Monte Carlo air-shower energy.
+A bias of zero represents an RNN that exactly predicts the true muon signal per station, while a resolution of zero represents no spread on the RNN predictions.
+A mathematical corollary to a metric for an RNN with both a bias and resolution of zero would be a dirac delta function.
+The bias shows a spread in the individual mass groups centered around zero bias.
+Proton simulations have the largest bias and over-predict the muon signals on average, while iron simulations have the most negative bias and under-predict the muon signals on average.
+This behavior is expected, as iron initiated air showers have on average more muons than the other studied primaries, with proton initiated showers having the least amount of muons on average.
+As the network was trained on nearly average mass fractions, the expectation would be for the network bias averaged over all primaries to sit between the two extremes of proton and iron, as seen in the figure.
+The resolution plot shows proton has the largest resolution, with decreasing resolution as mass increases to iron, which has the smallest resolution.
+This behavior is foreseen due to protons having larger shower-to-shower fluctuations compared to iron air showers.
+Important to note is the network resolution decreases with increasing air-shower energy.
+The plots in~\Cref{fig:mc_energy} therefore show stable network predictive power as a function of air-shower energy, with less stability for lower energy air showers. 
+
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/relativedifference_enmc_bias.pdf}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/relativedifference_enmc_resolution.pdf}
+  \caption[RNN bias and resolution plots of the true air-shower energy.]{The bias (left) and resolution (right) plots of the relative difference metric binned as a function of true (MC) air-shower energy. The bias plot includes a dashed black horizontal line at 0.0 to represent no bias.}
+  \label{fig:mc_energy}
+\end{figure}
+
+The RNN bias and resolution should also be investigated for air-shower observables which serve as the static input features to the network.
+\Cref{fig:sd_zenith} shows the bias and resolution per primary in bins of the secant of the SD-750 reconstructed zenith angle ($\sec\theta_{\rm SD}$),~\Cref{fig:sd_r} shows these plots for the reconstructed distance of the station to the shower core ($r_{\rm SD}$), and~\Cref{fig:sd_zeta} shows these same plots for the reconstructed azimuthal angle between the station and the air-shower axis in the shower plane ($\zeta_{\rm SD}$).
+The same y-axis limits are chosen between all bias plots, and similarly for all resolution plots, allowing for by eye comparisons of the bias and resolutions between observables.
+Similar primary distributions as in~\Cref{fig:mc_energy} (over-predictions for proton and under-predictions for iron, with everything else in between) are seen.
+The most notable bias plot is that of $r_{\rm SD}$, which shows all primaries approaching a bias of zero then deviating from their general trendlines in the bins farthest from the shower axis.
+This is at least expected in the final distance bin due to lesser statistics compared to other bins.
+The resolution plot of $r_{\rm SD}$ is also notable, as the RNN resolution for all primaries other than proton increases with increasing distance from the air-shower axis.
+Further dependencies on the other observables exists within each bias and resolution plot and need to be accounted for to more completely describe the predictive accuracy and precision of the RNN (see~\Cref{ssec:parameterization} for a full description.)
+
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/relativedifference_zenSD_bias.pdf}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/relativedifference_zenSD_resolution.pdf}
+  \caption[RNN bias and resolution plots of the reconstructed zenith angle.]{The bias (left) and resolution (right) plots of the relative difference metric binned as a function of the secant of the SD-750 reconstructed zenith angle. This observable is used as a static input feature to the network.}
+  \label{fig:sd_zenith}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/relativedifference_rSD_bias.pdf}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/relativedifference_rSD_resolution.pdf}
+  \caption[RNN bias and resolution plots of the reconstructed distance to shower axis.]{The same plots as~\Cref{fig:sd_zenith}, but instead binned as a function of the SD-750 reconstructed distance to the air-shower core.}
+  \label{fig:sd_r}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/relativedifference_zetaSD_bias.pdf}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/relativedifference_zetaSD_resolution.pdf}
+  \caption[RNN bias and resolution plots of the reconstructed station azimuthal angle.]{The same plots as~\Cref{fig:sd_zenith}, but instead binned as a function of the SD-750 reconstructed azimuthal angle between the station and the incoming air-shower direction.}
+  \label{fig:sd_zeta}
+\end{figure}
+
+
 
 %Cosmic-ray mass is known to be sensitive to the muon number in air showers (see~\Cref{chap:airshowers}), therefore studying the performance of the network predictions for each mass group of the validation data is a litmus test of the network's ability to predict  
 
