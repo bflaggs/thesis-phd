@@ -115,7 +115,7 @@ For each primary, 5000 showers were simulated for each of two energy bins, \qtyr
 The energy spectra and zenith angles within each bin are distributed with $dN/dE \propto E^{-1}$ and $dN/d\theta \propto \sin\theta\cos\theta$ respectively, resulting in a flat distribution in $\lg(E / \rm eV)$ for the energies and a flat distribution in $\sin^{2}(\theta)$ for the zenith angles, similar to the simulation library used in~\Cref{chap:simulations}.
 Within each energy bin, the 5000 simulated showers are split evenly between different atmospheric models, resulting in 1250 showers for each of the January, March, August, and September atmospheres in Malarg\"{u}e, Argentina.
 
-Atmospheric changes in temperature and pressure directly impact the attenuation of particles and muon production within the atmosphere, inducing a seasonal effect on the absolute number of muons in air showers. CITESTEF. 
+Atmospheric changes in temperature and pressure directly impact the attenuation of particles and muon production within the atmosphere, inducing a seasonal effect on the absolute number of high-energy muons in air showers~\cite{stef_astropartphys2024_muons}. 
 Furthermore, changes in temperature also affect the VEM calibration of water-Cherenkov detectors (see~\Cref{app:layered_wcd}) and hence have a direct impact on the muonic signal measured by ground-based detectors.
 In this analysis, the impact on the network predictions from differences in the atmospheric models is not studied, yet will be crucial to study in the future to fully capture minute details in the muon signal measured by the SD.
 Further updates to the network could include expanding the architecture to train on and provide predictions for Auger Phase II data productions. 
@@ -432,7 +432,7 @@ Similar primary distributions as in~\Cref{fig:mc_energy} (over-predictions for p
 The most notable bias plot is that of $r_{\rm SD}$, which shows all primaries approaching a bias of zero then deviating from their general trendlines in the bins farthest from the shower axis.
 This is at least expected in the final distance bin due to lesser statistics compared to other bins.
 The resolution plot of $r_{\rm SD}$ is also notable, as the RNN resolution for all primaries other than proton increases with increasing distance from the air-shower axis.
-Further dependencies on the other observables exists within each bias and resolution plot and need to be accounted for to more completely describe the predictive accuracy and precision of the RNN (see~\Cref{ssec:parameterization} for a full description.)
+Further dependencies on the other observables exists within each bias and resolution plot and need to be accounted for to more completely describe the predictive accuracy and precision of the RNN (see both~\Cref{ssec:multi_performance} and~\Cref{ssec:parameterization} for more complete descriptions.)
 
 \begin{figure}
   \centering
@@ -458,7 +458,50 @@ Further dependencies on the other observables exists within each bias and resolu
   \label{fig:sd_zeta}
 \end{figure}
 
+Another litmus test of the network performance is to see the correlation between the NN predicted muon signals and the Monte Carlo truth muon signals.
+\Cref{fig:muon_fraction} shows the RNN predicted muon fraction plotted against the MC truth muon fraction for all stations of the proton and iron validation data.
+The muon fractions are defined as $S^{\mu} / S_{\rm total}$, where $S_{\rm total}$ is the total signal in the station averaged over all active PMTs.
+A dashed black line with a slope of 1.0 is included on both plots, representing exact agreement between the RNN predictions and MC truth.
+The station distribution for proton is densest above this black line, while the distribution for iron is densest slightly below this line.
+This is expected given the network over-prediction for proton and under-prediction for iron as seen in the bias plots above.
+In general, both the proton and iron muon fractions follow a clear linear distribution, with Pearson r values of 0.88 and 0.90 for proton and iron respectively.
 
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/pearsonr_Proton_2d_muon_fraction_mc_histogram.pdf}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/pearsonr_Iron_2d_muon_fraction_mc_histogram.pdf}
+  \caption[Correlation of the RNN and MC truth muon fractions.]{A density plot showing the RNN predicted muon fraction correlation with the MC truth muon fraction for proton (left) and iron (right) data in the validation set. The lower left of each plot represents a fully electromagnetic trace (muon fraction = 0.0) while the upper right represents a fully muonic trace (muon fraction = 1.0). The Pearson r value for each plot is included to mathematically describe the correlation.}
+  \label{fig:muon_fraction}
+\end{figure}
+
+The plots in~\Cref{fig:muon_fraction} include traces from stations over all zenith angles, distances to the air-shower axis, etc.
+The plots were remade in~\Cref{fig:muon_fraction_distance_bin} including only stations with a reconstructed distance to the air-shower axis between \qtyrange{400}{500}{\meter}.
+Similar distributions as within the full validation dataset are seen, with the majority of the proton distribution above the diagonal line and the majority of the iron distribution below it.
+Within this distance bin, the Pearson r correlation factor for proton increased to 0.90 and for iron increased to 0.92, indicating a stronger NN-MC linear relationship. 
+
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/pearsonr_subslice_Proton_2d_muon_fraction_mc_histogram.pdf}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/pearsonr_subslice_Iron_2d_muon_fraction_mc_histogram.pdf}
+  \caption[RNN vs. MC truth muon fractions in a distance bin.]{The same plot as~\Cref{fig:muon_fraction} including only stations with a reconstructed distance to the air-shower axis between \qtyrange{400}{500}{\meter}.}
+  \label{fig:muon_fraction_distance_bin}
+\end{figure}
+
+
+\subsection{Studying the Network Performance as a Function of Multiple Observables}\label{ssec:multi_performance}
+As described in the previous section, the bias and resolution plots above contain further dependencies on the other observables.
+Studying the bias and resolution as functions of these dependencies provides a visualization of the phase spaces where the network performs well and where it performs poorly.
+
+
+%To study the performance of the RNN within a specific phase space these plots are remade, applying a data cut to 
+
+
+%and therefore include hidden relationships not visible upon a first look at the plot. 
+
+%For reference, a muon fraction of 0.0 means the station signal contains no muonic c
+
+%Specifically, this should be performed as a muon fraction to the total signal in the station.
+% Update plots to be sub-slices of reconstructed observables not MC
 
 %Cosmic-ray mass is known to be sensitive to the muon number in air showers (see~\Cref{chap:airshowers}), therefore studying the performance of the network predictions for each mass group of the validation data is a litmus test of the network's ability to predict  
 
