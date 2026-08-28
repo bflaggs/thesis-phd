@@ -489,8 +489,45 @@ Within this distance bin, the Pearson r correlation factor for proton increased 
 
 
 \subsection{Studying the Network Performance as a Function of Multiple Observables}\label{ssec:multi_performance}
-As described in the previous section, the bias and resolution plots above contain further dependencies on the other observables.
+As described in the previous section, the network bias and resolution do not depend solely on one variable, but rather have complex dependencies on multiple event and station observables.
 Studying the bias and resolution as functions of these dependencies provides a visualization of the phase spaces where the network performs well and where it performs poorly.
+In particular, the bias and resolution dependence on three observables is studied, the total signal in the station, the reconstructed distance to the air-shower axis, and the reconstructed zenith angle of the event.
+Binning for the three observables is as follows: eight bins of $\lg(S_{\rm total}$ / VEM), ten bins of $r_{\rm SD}$, and six bins of $\sec\theta_{\rm SD}$.
+The binning for total signal and zenith angle is quantile based to ensure equal statistics within each bin; however, the ten equidistant bins ranging between \qtyrange{0}{1500}{\meter} are chosen for $r_{\rm SD}$.
+
+\Cref{fig:density} shows a $2\times2$ collection of density histograms of the relative difference metric (\Cref{eq:metric}) for individual mass groups as a function of binned distance to the shower axis.
+Data is further binned in zenith angle and total station signal, where a zenith angle bin of $\sec\theta_{\rm SD}$=\numrange{1.41}{1.60} ($\theta_{\rm SD}$=\qtyrange{44.9}{51.2}{\degree}) and a total signal bin of $\lg(S_{\rm total}$ / VEM)=\numrange{1.37}{1.61} (\qtyrange{23.4}{40.7}{VEM}) were chosen for this example.
+The black data points and their uncertainties represent the average difference metric $\mu$ (the network bias) and its standard deviation $\sigma$ (the network resolution), allowing a visualization of the network accuracy and precision as functions of the multiple variables.
+Within this zenith and total signal phase space, the network predicts a station's muonic signal with less precision for stations closer to the shower axis.
+Both a large spread in the predictions and limited prediction statistics are seen for the closest data occupied distance bin to the air-shower axis, possibly from the network reaching the edge of its predictive power.
+The network accuracy approximately follows the mass ordering as in the single-variable bias plots from~\Cref{sec:performance}, with the network over-predicting the muon signal for proton primaries and under-predicting the muon signal for iron primaries.
+This holds in all but the first and final distance bins with data, which are statistics limited.
+
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter5/reldiff_vs_r_log10Stotal_1.4_1.6_sectheta_1.4_1.6.pdf}
+  \caption[Multi-variable density histograms of the relative difference metric.]{The relative difference metric for individual mass groups plotted as density histograms binned in zenith angle, total station signal in VEM, and distance to the shower axis. The black data points show the bias (mean) and resolution (standard deviation) within each distance bin. The bin statistics are shown at the top of each plot and the bins of zenith angle and total signal are listed at the bottom of the proton density histogram (upper left).}
+  \label{fig:density}
+\end{figure}
+
+Visible is not only the multivariate dependence on the bias and resolution, but also the network's predictive phase space for this combination of observables.
+For example, within the given ranges for the zenith angle and total signal within a station, and for stations farther than \qty{1100}{\meter} from the reconstructed air-shower core, or for stations closer than approximately \qty{100}{\meter} to the air-shower core, no stations have signal.
+Assuming the validation and training datasets occupy the same data phase space, a fair assumption to make given the results in~\Cref{ssec:pretraining}, then the network has not been trained on any data outside of this phase space.
+Hence, the predictive space of the network is seen from this visualization.
+
+Generally speaking, for less total station signal and the same zenith angle range as the above example, bin statistics increase for stations farther from the shower axis, yet decrease in the opposite direction closer to the shower axis.
+The opposite is true when stations record larger total signal, again for the same zenith range.
+In the case of less total signal, network accuracy improves to only a few percent, but the network precision degrades to roughly 25\% or more.
+No major difference is apparent in the network bias or resolution from the example in~\Cref{fig:density} in the case of larger total signal yet with the same zenith range.
+The zenith angle has an impact on the network bias and resolution, yet is highly correlated with the station's distance to the shower axis and, to a smaller extent, the station's total signal, making the exact impact in a multi-variable phase space difficult to distinguish.
+
+
+%those closer than approximately \qty{100}{\meter} to the air-shower core and farther than roughly \qty{1100}{\meter} from the core.
+
+%Take, for instance, the lack of data points within roughly \qty{100}{\meter} and further than approximately \qty{1100}{\meter} from the air-shower axis.
+
+
+%The base-10 logarithm of the total signal in the station is taken and eight 
 
 
 %To study the performance of the RNN within a specific phase space these plots are remade, applying a data cut to 
@@ -518,10 +555,14 @@ Studying the bias and resolution as functions of these dependencies provides a v
 %The general performance of the network on the validation set can 
 
 \subsection{Feasibility of Using Predictions for an Event-Level Muon Observable}\label{ssec:feasibility}
+The end goal of the RNN results are to combine the station-level predictions to extract an event-level muon observable.
+To this end, the feasibility of performing such an analysis is investigated, first using the MC truth muonic signals before investigating this idea with the RNN predictions.
 
-\subsection{Parameterization of the Bias and Uncertainty in the Network Predictions}\label{ssec:parameterization}
+
 
 \section{Construction of a Likelihood for Fitting a Muon LDF}\label{sec:likelihood}
+
+\subsection{Parameterization of the Bias and Uncertainty in the Network Predictions}\label{ssec:parameterization}
 
 
 \section{Application to Reconstructed Surface Detector Data}\label{sec:application}
