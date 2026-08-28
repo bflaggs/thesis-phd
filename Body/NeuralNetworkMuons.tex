@@ -554,15 +554,59 @@ The zenith angle has an impact on the network bias and resolution, yet is highly
 
 %The general performance of the network on the validation set can 
 
-\subsection{Feasibility of Using Predictions for an Event-Level Muon Observable}\label{ssec:feasibility}
-The end goal of the RNN results are to combine the station-level predictions to extract an event-level muon observable.
-To this end, the feasibility of performing such an analysis is investigated, first using the MC truth muonic signals before investigating this idea with the RNN predictions.
+\subsection{Feasibility of Using RNN Predictions for an Event-Level Muon Observable}\label{ssec:feasibility}
+One of the final goals of this analysis is to combine the station-level RNN predictions to extract an event-level muon observable.
+To this end, the feasibility of performing such an analysis is investigated by studying the MC truth and RNN predicted muon-signal lateral distribution functions (LDFs).
+\Cref{fig:mldf} shows the station-level muon signals as a function of the reconstructed distance to the air-shower axis for all four primary mass groups of the validation dataset.
+The data are further binned in energy and zenith angle to minimize contributions from event-level dependencies to the muon-signal LDF, where the example plot shown here is for an energy range of $\lg(E_{\rm MC}$ / eV)=\numrange{18.3}{18.5} and a zenith range of $\sec\theta_{\rm SD}$=\numrange{1.0}{1.2} ($\theta_{\rm SD}$=\qtyrange{0}{34}{\degree}).
+The RNN predicted signals exhibit a narrower distribution of the muon LDF compared to the MC truth signals.
+This narrowing of the prediction distribution highlights general features of the muonic signal are learned by the network, while more intricate features, either at the station-level or event-level, are still unaccounted for.
+The results are network predictions that, as expected, generally regress to the mean true value, yet the network output still preserves some of the indirect mass information.
+
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/logsignal_muon_signal_mc_ldf_zenbin1.0_1.2_enbin18.3_18.5.pdf}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/logsignal_muon_signal_pred_ldf_zenbin1.0_1.2_enbin18.3_18.5.pdf}
+  \caption[True and predicted muon-signal LDFs for all mass groups.]{The muon-signal lateral distribution functions for the MC truth station-level muon signals (left) and the RNN predicted station-level muon signals (right). The LDFs are shown for each mass group of the validation dataset, within the zenith and energy ranges shown on the plots. The zenith angle and distance to the shower axis use the SD reconstructed values because they are used as inputs to the network. Visible is a narrower muon-signal LDF for the RNN predictions.}
+  \label{fig:mldf}
+\end{figure}
+
+To visualize how much mass information is preserved, the proton and iron muon-signal LDFs are studied with greater depth.
+Only proton and iron are studied for this visualization as these represent the two mass extrema in the dataset, and therefore should contain the greatest separation between their LDFs.
+Specifically, the muon signals are separated into \qty{100}{\meter} width bins of $r_{\rm SD}$.
+Within each bin, the average proton and iron muon signals are calculated and used to construct an average muon-signal LDF for each of the two mass groups.
+These average LDFs are shown in~\Cref{fig:average_mldf} for the same energy and zenith ranges as in~\Cref{fig:mldf}.
+A clear separation is visible between the average proton-iron LDFs, both for the MC truth muon signals and for the RNN predicted muon signals.
+This separation is larger for the MC truth muon signals, as expected from the results presented in~\Cref{fig:mldf}; however, the visible separation in the RNN predicted muon-signal LDFs still shows promise.
+This result holds across all zenith angles and energies, where the RNN predictions show the greatest separation between the average proton-iron LDFs for the highest energy, most inclined, air showers in the validation dataset, corresponding to an energy range of $\lg(E_{\rm MC}$ / eV)=\numrange{18.3}{18.5} and a zenith range of $\sec\theta_{\rm SD}$=\numrange{1.6}{1.8} ($\theta_{\rm SD}$=\qtyrange{51}{56}{\degree}).
+The zenith range of this maximum separation is near the peak in the zenith angle histogram of AERA bias-free $X_{\rm max}$ reconstructions (the left plot in~\Cref{fig:aera_umd_histograms}), motivating the analysis idea of~\Cref{chap:radiomuon} to combine an event-level muon prediction based on this neural network with the high-quality radio $X_{\rm max}$ reconstructions from AERA.
+
+%this radio dataset with the RNN muon predictions.
+
+%aligning serendipitously with the analysis goal of~\Cref{chap:radiomuon} to combine this radio dataset with the RNN muon predictions.
+
+%The RNN results can therefore be used to construct an event-level muon observable directly from the station-level predictions.
+%This event-level observable may struggle to determine an event-level mass, particularly for the intermediate masses of helium and oxygen, yet an average mass determination based on the magnitude of the muonic signal component at a specific reference distance to the air-shower core is feasible.
+
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/logsignal_p_fe_only_muon_signal_mc_ldf_zenbin1.0_1.2_enbin18.3_18.5.pdf}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/logsignal_p_fe_only_muon_signal_pred_ldf_zenbin1.0_1.2_enbin18.3_18.5.pdf}
+  \caption[Average muon-signal LDFs for proton and iron mass groups.]{The average muon-signal LDFs of proton and iron primary mass groups for the true MC muon signals (left) and for the RNN predicted muon signals (right). The same energy and zenith binning as in the previous plot is used. The visible proton-iron LDF separation for the RNN predictions demonstrates an average event-level mass sensitivity from the station-level muon predictions.}
+  \label{fig:average_mldf}
+\end{figure}
 
 
 
-\section{Construction of a Likelihood for Fitting a Muon LDF}\label{sec:likelihood}
+
+\section{Fitting a Muon LDF to the Network Predictions}\label{sec:mldf}
+The previous section shows the RNN results can be used to construct an event-level muon observable directly from the station-level predictions.
+This event-level observable may struggle to determine an event-level mass, particularly for the intermediate masses of helium and oxygen, yet an average mass determination based on the magnitude of the muonic signal component at a specific reference distance to the air-shower core is feasible.
+
 
 \subsection{Parameterization of the Bias and Uncertainty in the Network Predictions}\label{ssec:parameterization}
+
+\subsection{Construction of a Fit Likelihood}\label{ssec:likelihood}
 
 
 \section{Application to Reconstructed Surface Detector Data}\label{sec:application}
