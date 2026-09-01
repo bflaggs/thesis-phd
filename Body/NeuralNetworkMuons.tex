@@ -491,9 +491,9 @@ Within this distance bin, the Pearson r correlation factor for proton increased 
 \subsection{Studying the Network Performance as a Function of Multiple Observables}\label{ssec:multi_performance}
 As described in the previous section, the network bias and resolution do not depend solely on one variable, but rather have complex dependencies on multiple event and station observables.
 Studying the bias and resolution as functions of these dependencies provides a visualization of the phase spaces where the network performs well and where it performs poorly.
-In particular, the bias and resolution dependence on three observables is studied, the total signal in the station, the reconstructed distance to the air-shower axis, and the reconstructed zenith angle of the event.
+In particular, the bias and resolution dependencies of three observables are studied, the total signal in the station, the reconstructed distance to the air-shower axis, and the reconstructed zenith angle of the event.
 Binning for the three observables is as follows: eight bins of $\lg(S_{\rm total}$ / VEM), ten bins of $r_{\rm SD}$, and six bins of $\sec\theta_{\rm SD}$.
-The binning for total signal and zenith angle is quantile based to ensure equal statistics within each bin; however, the ten equidistant bins ranging between \qtyrange{0}{1500}{\meter} are chosen for $r_{\rm SD}$.
+The binning for total signal and zenith angle is quantile based to ensure equal statistics within each bin; however, the ten bins chosen for $r_{\rm SD}$ are equidistant, with a total range between \qtyrange{0}{1500}{\meter}.
 
 \Cref{fig:density} shows a $2\times2$ collection of density histograms of the relative difference metric (\Cref{eq:metric}) for individual mass groups as a function of binned distance to the shower axis.
 Data is further binned in zenith angle and total station signal, where a zenith angle bin of $\sec\theta_{\rm SD}$=\numrange{1.41}{1.60} ($\theta_{\rm SD}$=\qtyrange{44.9}{51.2}{\degree}) and a total signal bin of $\lg(S_{\rm total}$ / VEM)=\numrange{1.37}{1.61} (\qtyrange{23.4}{40.7}{VEM}) were chosen for this example.
@@ -578,7 +578,7 @@ Within each bin, the average proton and iron muon signals are calculated and use
 These average LDFs are shown in~\Cref{fig:average_mldf} for the same energy and zenith ranges as in~\Cref{fig:mldf}.
 A clear separation is visible between the average proton-iron LDFs, both for the MC truth muon signals and for the RNN predicted muon signals.
 This separation is larger for the MC truth muon signals, as expected from the results presented in~\Cref{fig:mldf}; however, the visible separation in the RNN predicted muon-signal LDFs still shows promise.
-This result holds across all zenith angles and energies, where the RNN predictions show the greatest separation between the average proton-iron LDFs for the highest energy, most inclined, air showers in the validation dataset, corresponding to an energy range of $\lg(E_{\rm MC}$ / eV)=\numrange{18.3}{18.5} and a zenith range of $\sec\theta_{\rm SD}$=\numrange{1.6}{1.8} ($\theta_{\rm SD}$=\qtyrange{51}{56}{\degree}).
+This result holds across all zenith angles and energies, where the RNN predictions show the greatest separation between the average proton-iron LDFs for the highest energy, most inclined, air showers in the validation dataset, corresponding to an energy range of $\lg(E_{\rm MC}$ / eV) = \numrange{18.3}{18.5} and a zenith range of $\sec\theta_{\rm SD}$ = \numrange{1.6}{1.8} ($\theta_{\rm SD}$ = \qtyrange{51}{56}{\degree}).
 The zenith range of this maximum separation is near the peak in the zenith angle histogram of AERA bias-free $X_{\rm max}$ reconstructions (the left plot in~\Cref{fig:aera_umd_histograms}), motivating the analysis idea of~\Cref{chap:radiomuon} to combine an event-level muon prediction based on this neural network with the high-quality radio $X_{\rm max}$ reconstructions from AERA.
 
 %this radio dataset with the RNN muon predictions.
@@ -601,13 +601,216 @@ The zenith range of this maximum separation is near the peak in the zenith angle
 
 \section{Fitting a Muon LDF to the Network Predictions}\label{sec:mldf}
 The previous section shows the RNN results can be used to construct an event-level muon observable directly from the station-level predictions.
-This event-level observable may struggle to determine an event-level mass, particularly for the intermediate masses of helium and oxygen, yet an average mass determination based on the magnitude of the muonic signal component at a specific reference distance to the air-shower core is feasible.
+This event-level observable may struggle to determine an event-by-event mass, particularly for the intermediate masses of helium and oxygen, yet an average mass determination based on the magnitude of the muonic signal component at a specific reference distance to the air-shower core is feasible.
+To extract this event-level observable, a modified NKG function, given by
 
+\begin{equation}
+  S^{\mu}(r) = S^{\mu}_{\rm ref} \left(\frac{r}{r_{\rm ref}}\right)^{-\alpha} \left(\frac{1 + r / r_{0}}{1 + r_{\rm ref} / r_{0}}\right)^{-\beta} \left(\frac{1 + (r / 10\,r_{0})^{2}}{1 + (r_{\rm ref} / 10\,r_{0})^{2}}\right)^{-\gamma}, \label{eq:mldf}
+\end{equation}
+
+\noindent
+is used as a model to fit the lateral distribution of muon signals.
+Auger UMD analyses show this muon lateral distribution function (LDF) provides an accurate model of the measured UMD data, hence motivating this choice of model to fit the neural network predictions. CITE JOAQUIN AND OTHERS.
+An important distinction between the models is the model used to fit the UMD data predicts the muon density at a reference distance; however, this model predicts the muon signal at a reference distance instead.
+The assumption taken within this analysis is the muon signal LDF follows the muon density LDF up to an unaccounted for multiplicative factor.
+
+Mathematically, the LDF shape is determined by three separate terms, $\alpha$, $\beta$, and $\gamma$, which describe how stations at different distances contribute to the overall LDF.
+To a first-order approximation, the $\alpha$ term describes stations close to the air-shower core, the $\beta$ term describes stations at intermediate distances, and the $\gamma$ term describes stations far from the shower core.
+``Far'' and ``close'' are relative distances to the shower core, dependent on the $r_{0}$ and $r_{\rm ref}$ terms.
+For the model and fit process used in this analysis the $\alpha$, $\gamma$, and $r_{0}$ parameters are fixed to $\alpha=0.75$, $\gamma=3.0$, and $r_{0}=$\qty{320}{\meter} as these definitions describe well the average UMD-measured muon LDF CITE 70 FROM JOAQUIN.
+
+The reference distance, as described in~\Cref{chap:auger}, depends on the geometry of the detector array at ground.
+The neural network predicts the muon signal at station level for the SD-750 array, therefore \qty{450}{\meter} is chosen for $r_{\rm ref}$.
+This distance minimizes systematic effects within the LDF shape for both the SD as previously described, and also for the UMD CITE 63 FROM JOAQUIN.
+Left as free parameters of the model are $\beta$, which determines the slope of the muon LDF near the reference distance, and $S^{\mu}_{450}$, a per-event measurement of the muonic signal within a station located at \qty{450}{\meter} from the air-shower core.
+However, the neural network accuracy and precision need to be quantified and a fit likelihood must be defined prior to fitting the network predictions to~\Cref{eq:mldf}.
+
+%using $S^{\mu}_{450}$ as a per-event muon observable reconstructed from fitting the network predictions to the model in
+
+%Prior to fitting the network predictions to 
+%$S^{\mu}_{450}$ can be used as an event-level muon observable reconstructed from the network predictions once the network accuracy and precision have been quantified and a 
+
+%This lateral distribution function (LDF) choice was motivated by Auger UMD analyses that show this muon LDF is accurately represented 
+%with $\alpha$, $\gamma$, and $r_{0}$ fixed to 0.75, 3.0, and \qty{320}{\meter} respectively.
+%This choice of LDF was motivated by Auger analyses fitting the muon LDF of UMD measurements
+
+%modeling the muonic signal is assumed foll
+
+%is used to fit the neural network predicted muon signals.  
 
 \subsection{Parameterization of the Bias and Uncertainty in the Network Predictions}\label{ssec:parameterization}
+The accuracy and precision of the neural network predictions will be quantified by the network bias and resolution, as measured using the relative difference metric from~\Cref{eq:metric}.
+As shown in~\Cref{ssec:multi_performance}, both the bias and resolution exhibit dependencies on multiple air-shower observables.
+The same three observables from~\Cref{ssec:multi_performance}, the total signal measured by the station, the reconstructed station distance to the air-shower axis, and the reconstructed zenith angle of the event, are used to parameterize the neural network accuracy and precision.
+These parameterization observables were chosen for two reasons.
+First, all three observables directly influence the muonic component of the signal, and second, all three observables are available for both simulations and data.
+The network predictive power has an additional dependence on the true primary-particle mass, as seen in the plots and described in the text of~\Cref{sec:performance}, therefore parameterizations must be built per primary.
 
-\subsection{Construction of a Fit Likelihood}\label{ssec:likelihood}
+Observable binning is performed on the full EPOS LHC-R validation dataset, where these bins are used to to build the per-primary parameterizations.
+The base-10 logarithm of the total signal is binned in six bins of equal statistics and $r_{\rm SD}$ is binned in eight bins of equal distance.
+Each of these observables have a binning range defined by their minimum and maximum values within the validation set.
+$\theta_{\rm SD}$ is binned within four equally spaced bins of $\sin^{2}(\theta_{\rm SD})$, with a bin range between $\theta_{\rm SD}=$\qtyrange{0}{58}{\degree}.
+The $\theta_{\rm SD}$ approximately contain equal statistics because the distribution of $\theta_{\rm SD}$ is flat under a $\sin^{2}$ transformation.
+To visualize the parameterization space, think of these bins as mapping a three-dimensional box, where the box origin is the starting bin edge of each observable and each observable is a single dimension of the box.
+In this thought experiment of the bin mapping, valid bins follow the diagonal of the box due to the inverse relationship of $S_{\rm total}$ and $r_{\rm SD}$, meaning bins close to the shower axis have high total signals and bins far from the shower axis have low total signals.
+A bin far from the shower axis with high total signal is unphysical, making this an unfilled bin in the phase space.
 
+Per-primary, the average and standard deviation of the relative difference metric distribution are calculated within each bin of the three-dimensional phase space.
+A count-weighted average of the nearest-neighbor metric values are used to fill bins with less than 20 stations to prevent low statistics holes in the parameterized space.
+This same nearest-neighbor calculation is used to extend the three-dimensional parameterized space one bin along its diagonal to mitigate edge cases from falling outside the parameterization region.
+Only the diagonal is extended because these are soft limits, whereas the edges of the three-dimensional parameterization box form hard limits on the network predictive power.
+Additionally, the parameterization region for each primary can differ slightly.
+Bins must contain at least 20 stations of data for each primary; however, if one or more primaries do not meet the minimum statistics threshold then a count-weighted average of nearest-neighbor bins is used to fill the bin.
+The count-weighted average is calculated per primary, meaning only neighboring bins of the same primary particle contribute to the weighted average of the low statistics bin. 
+
+Once all valid bins have been defined, an interpolation between the bins is performed to generate two smooth three-dimensional meshes, one of the bias and one of the resolution.
+The interpolations are built per primary; however, the bias and resolution must be each be reported as a single value.
+A mass-weighted bias and resolution are therefore calculated from the interpolations to construct an effective bias, $b_{\rm eff}$, and an effective resolution, $\sigma_{\rm eff}$.
+The effective bias and resolution can be derived using the laws of total expectation and variance applied to $\delta$, where $\delta$ is defined as the relative difference from~\Cref{eq:metric}.
+Additional assumptions for the derivation include $P(A)=w_{A}$, with $\sum_{A}w_{A}=1$, and the conditional statements $E\left[\delta|A\right]=b_{A}$ and Var$(\delta|A)=\sigma_{A}^{2}$, where $b_{A}$ and $\sigma_{A}$ are the bias and resolution of mass group $A$. 
+The derivation is left as an exercise for the reader.
+
+Following the derivation, the effective bias is just the mass-weighted average of the individual mass biases,
+
+\begin{equation}
+  b_{\rm eff} = \sum_{A} w_{A} b_{A}, \label{eq:effective_bias}
+\end{equation}
+
+\noindent
+with the square of the effective resolution (the effective variance) given by
+
+\begin{equation}
+  \sigma_{\rm eff}^{2} = \sum_{A} w_{A} \sigma_{A}^{2} + \sum_{A} w_{A}\left(b_{A} - b_{\rm eff}\right)^{2}. \label{eq:effective_resolution}
+\end{equation}
+
+\noindent
+In both equations $w_{A}$ represents the mass weights, with $A\in\left[\rm p, He, O, Fe\right]$.
+The mass weights are defined as the mass fractions of the input dataset to the network, which for the validation set is 0.25 for each of the four primary mass groups.
+With data, a measurement of the mass fractions independent of the neural network, such as the Auger FD measurements, should be used; however, this introduces an energy dependence on the mass fractions and therefore also on the effective bias and resolution.
+Furthermore, the individual mass biases and resolutions are functions of total signal, reconstructed distance to the air-shower axis, and reconstructed zenith angle, i.e. $b_{A}\left(S_{\rm total}, r_{\rm SD}, \theta_{\rm SD}\right)$ and $\sigma_{A}\left(S_{\rm total}, r_{\rm SD}, \theta_{\rm SD}\right)$.
+Hence, an effective bias and resolution can be calculated for any station with values of these three observables within their defined phase spaces.
+This is necessary for triggered stations to inform the fit likelihood, as discussed in the following section. 
+Equally as important, this allows the same parameterization of the network bias and resolution to be used for both simulations and data, up to the assumed mass fractions.
+
+%allowing a parameterization of the network bias and resolution usable for both simulations and data and which only depends on 
+
+%and must be combined into a single 
+%This allows a single data point to qu
+
+%yet an effective parameterization requires all 
+%The union of all primaries 
+
+%and bins at the edge of the 3d space.
+%This prevents holes in the parameterized space and extends the 
+%If less than 20 stations occupy a single bin, the average and standard deviation are calculated 
+
+%having bin limits defined between their minimum and maximum values within the validation set.
+
+%between the minimum and maximum observed station signal in the validation set.
+
+%The parameterizations are built per primary and must be combined into a single, effective parameterization.
+
+%parameterizations must be built per primary 
+
+%because of both their dependence on the muonic component of the signal and 
+
+\subsection{Construction of a Per-Event Fit Likelihood}\label{ssec:likelihood}
+%Before any fitting can occur, a fit likelihood to describe the model parameters must be defined.
+A well constructed likelihood is physics informed, meaning the physics of the situation influences the choice of likelihood used in the analysis.
+In this analysis, particles arrive at water-Cherenkov detectors following Poissonian statistics and deposit energy within the detector as Cherenkov radiation.
+The particle energy deposit follows a Landau distribution, which becomes convolved with the Gaussian detector response once the PMTs of the detector measure the Cherenkov radiation.
+The total signal measured by the detector is then fed to the neural network previously described, resulting in a station-level prediction of the total muonic signal for the detector.
+The station-level predictions for single events are combined and fit to a lateral distribution function of the form given by~\Cref{eq:mldf}.
+The likelihood used in the fitting procedure is defined by $\mathcal{L}\left(S^{\mu}_{450}, \beta|\hat{S}^{\mu}\right)$, meaning ``how likely is it the model values $S^{\mu}_{450}$ and $\beta$ describe the $\hat{S}^{\mu}$ station data for this event,'' where this likelihood is the product of all probabilities for each station.
+
+%``what is the likelihood of measuring $\hat{S}^{\mu}$ given the values of $S^{\mu}_{450}$ and $\beta$ for the function modeling the data.''
+
+For an air-shower array with fully functioning detectors, three station statuses are possible within an event.
+Statuses include:
+
+\begin{itemize}
+  \item \textit{Saturated stations}: stations measuring a total signal above the saturation threshold, $S_{\rm sat}$, of the PMTs.
+  \item \textit{Triggered stations}: stations measuring a total signal above the trigger threshold, $S_{\rm th}$, but below the saturation threshold.
+  \item \textit{Silent stations}: stations that did not trigger and therefore do not have a measured signal, also known as non-triggered stations.
+\end{itemize}
+
+\noindent
+
+
+saturated stations, stations which measure a total signal above the saturation threshold ($S_{\rm th}$) of the PMTs, triggered stations 
+
+
+Each station status has different probabilities of occurrence based on detector physics and counting statistics and therefore each status must be described by a separate probability which each contribute to the overall likelihood of the event. 
+
+
+Within an air-shower event, three station statuses are possible: saturated stations, triggered stations, and silent stations.
+
+%For an air-shower array with fully functioning detectors, three station statuses are possible within an event. where each status must be handled by separate likelihoods, each contributing to the total likelihood for the event.
+
+
+For simplicity, the Langau (the Landau convolved with the Gaussian detector response) energy deposit is ignored and instead it is assumed the muons only deposit energy in the detector dependent upon their track length through the detector.
+Further, it si assumed there is no spread in this value and that all muons travel perpendicular to the air-shower axis, meaning a simple zenith angle dependence is sufficient.
+
+
+%%%% Crap from here, just crazy notes...
+The muons are fast (nearly traveling at the speed of light), charged,  therefore their energy deposited as Cherenkov radiation within the detector follows a Landau distribution.
+The Cherenkov radiation is measured by the PMTs of the detector which have a Gaussian response 
+
+We have muons from a simulation or data hitting the tank.
+The muons hit the tank following Poissonian statistics and deposit energy within the tank (typically a langau from the energy deposit, landau, convolved with the detector response, Gaussian; however, here we assume for simplicity muons deposit the same energy only dependent upon their track length through the detector with no uncertainty in this value).
+Our simulations/data contain the muon signal deposited within the tank, but we have no knowledge of the number of muons hitting the tank or the exact muon signal itself.
+We only know, prior to the network predictions, the statistical and physical processes for these tank hits, and the total measured signal within the tank, meaning we can include the uncertainty in the number of muons hitting the tank (i.e. the physics) as an uncertainty in our likelihood construction for the fit.
+
+Furthermore, what we reconstruct from the tank measurements are the neural network predicted muon signals, which also has an uncertainty based on the accuracy and precision (i.e. bias and resolution) of our network.
+The network inputs are the total signal in the tank, and the other static observables given above, and the network will predict the muonic component of the signal within the tank.
+Further, for our muon LDF model we will fit to, we know what the expected muon signal in the tank should be given the assumed fit parameters of Sref and beta.
+
+
+
+The likelihood used in the fitting procedure is most simply defined by $L\left(\hat{S}^{\mu}|S^{\mu}_{450}, \beta\right)$, meaning ``what is the likelihood of measuring $\hat{S}^{\mu}$ given the values of $S^{\mu}_{450}$ and $\beta$ for the function modeling the data.''
+A well chosen likelihood is one chosen based on influences from the physics of the problem, i.e. the likelihood model is physics informed.
+The physics of this analysis includes both statistical and physical 
+
+To accurately build the liklihood
+The likelihood model is physics informed, meaning the physics of the problem influences the choice of likelihood used in the analysis.
+
+
+
+
+The Poissonian statistics of muon counting is woven into the true MC muon signals used as targets for the network.
+
+We have muons from a simulations hitting the tank.
+The muons hit the tank following Poissonian statistics and deposit energy within the tank (typically a langau from the energy deposit, landau, convolved with the detector response, Gaussian).
+Our simulations contain the muon signal deposited within the tank, but we have no knowledge of the number of muons hitting the tank.
+We only know the statistical and physical processes for these tank hits and the final measured signal, meaning we can include the uncertainty in the number of muons hitting the tank (i.e. the physics) as an uncertainty in our likelihood construction for the fit.
+
+Furthermore, what we reconstruct from the tank measurements are the RNN predicted muon signals, which also has an uncertainty based on the accuracy and precision (i.e. bias and resolution) of our network.
+The network inputs are the total signal in the tank and reconstruct the muonic component within the tank.
+Further, for our muon LDF model, we know what the expected muon signal in the tank should be.
+We hence want to reconstruct the probability of the neural network predictions given the muon LDF model.
+The network predictions however contain two major uncertainties: 1. the uncertainty from the network itself (bias and resolution, accounted for with the effective bias and effective resolution) and 2. the uncertainty from the physics of detecting muons.
+A further uncertainty, the systematics such as the muon deficit inherent to the network by training only on EPOS LHC-R simulations, should also be included at a future stage.
+
+
+%%%
+We have muons from a simulation or data hitting the tank.
+The muons hit the tank following Poissonian statistics and deposit energy within the tank (typically a langau from the energy deposit, landau, convolved with the detector response, Gaussian; however, here we assume for simplicity muons deposit the same energy only dependent upon their track length through the detector with no uncertainty in this value).
+Our simulations/data contain the muon signal deposited within the tank, but we have no knowledge of the number of muons hitting the tank or the exact muon signal itself.
+We only know, prior to the network predictions, the statistical and physical processes for these tank hits, and the total measured signal within the tank, meaning we can include the uncertainty in the number of muons hitting the tank (i.e. the physics) as an uncertainty in our likelihood construction for the fit.
+
+Furthermore, what we reconstruct from the tank measurements are the neural network predicted muon signals, which also has an uncertainty based on the accuracy and precision (i.e. bias and resolution) of our network.
+The network inputs are the total signal in the tank, and the other static observables given above, and the network will predict the muonic component of the signal within the tank.
+Further, for our muon LDF model we will fit to, we know what the expected muon signal in the tank should be given the assumed fit parameters of Sref and beta.
+We hence want to reconstruct the probability of the neural network predictions given the muon LDF model, which can be approximated as a simple Gaussian likelihood, where the likelihood variance is determined via two major uncertainties: 1. the uncertainty from the network itself (the effective bias and effective resolution) and 2. the uncertainty from the physics of detecting muons, woven into the signal not by us directly but indirectly from the physical processes underlying muon counting statistics.
+Note there is another uncertainty from shower physics, such as the muon deficit and shower-to-shower fluctuations related to the depth of first interaction; however, these additional uncertainties are not yet considered here.
+They should be in a future implementation of this fit.
+This assumption does not accurately assign probabilities for low-signal stations; however, to first order approximations it works.
+The likelihood is L(Spred | Smodel) and therefore we wish to calculate the variance of Spred and mean of Spred to inform our Gaussian likelihood.
+The predicted signal itself is given by Spred = Strue * ((1 + beff) + sigmaeff * epsilon) where epsilon is a normal distribution with mean 0 and width 1.
+The inclusion of epsilon is purely theoretical to describe the mathematics that the network predictions result in a Gaussian smearing of Strue by Strue*sigmaeff, and a shift in the mean of Strue by Strue*beff.
+Then the expectation value of of Spred and the variance of Spred, used for the likelihood, can be calculated as E(Spred) and Var(Spred) = E(Spred2) - E(Spred)2 respectively.
+Note, I only discuss the case of triggered stations here.
+Non-triggered and saturated stations also are accounted for yet non-triggered stations should follow a Poissonian likelihood and saturated stations should follow a Gaussian likelihood CDF integrated from the saturation signal to infinity.
 
 \section{Application to Reconstructed Surface Detector Data}\label{sec:application}
 % Save for following chapter? I think yes
