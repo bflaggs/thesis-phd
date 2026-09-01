@@ -610,18 +610,18 @@ To extract this event-level observable, a modified NKG function, given by
 
 \noindent
 is used as a model to fit the lateral distribution of muon signals.
-Auger UMD analyses show this muon lateral distribution function (LDF) provides an accurate model of the measured UMD data, hence motivating this choice of model to fit the neural network predictions. CITE JOAQUIN AND OTHERS.
+Auger UMD analyses show this muon lateral distribution function (LDF) provides an accurate model of the measured UMD data, hence motivating this choice of model to fit the neural network predictions~\cite{joaquindejesus_phd2025}.
 An important distinction between the models is the model used to fit the UMD data predicts the muon density at a reference distance; however, this model predicts the muon signal at a reference distance instead.
 The assumption taken within this analysis is the muon signal LDF follows the muon density LDF up to an unaccounted for multiplicative factor.
 
 Mathematically, the LDF shape is determined by three separate terms, $\alpha$, $\beta$, and $\gamma$, which describe how stations at different distances contribute to the overall LDF.
 To a first-order approximation, the $\alpha$ term describes stations close to the air-shower core, the $\beta$ term describes stations at intermediate distances, and the $\gamma$ term describes stations far from the shower core.
 ``Far'' and ``close'' are relative distances to the shower core, dependent on the $r_{0}$ and $r_{\rm ref}$ terms.
-For the model and fit process used in this analysis the $\alpha$, $\gamma$, and $r_{0}$ parameters are fixed to $\alpha=0.75$, $\gamma=3.0$, and $r_{0}=$\qty{320}{\meter} as these definitions describe well the average UMD-measured muon LDF CITE 70 FROM JOAQUIN.
+The $\alpha$, $\gamma$, and $r_{0}$ parameters are fixed to $\alpha=0.75$, $\gamma=3.0$, and $r_{0}=$\qty{320}{\meter} for the model and fit process used in this analysis, as these definitions describe well the average UMD-measured muon LDF~\cite{flaviagesualdi_phd2022}.
 
 The reference distance, as described in~\Cref{chap:auger}, depends on the geometry of the detector array at ground.
 The neural network predicts the muon signal at station level for the SD-750 array, therefore \qty{450}{\meter} is chosen for $r_{\rm ref}$.
-This distance minimizes systematic effects within the LDF shape for both the SD as previously described, and also for the UMD CITE 63 FROM JOAQUIN.
+This distance minimizes systematic effects within the LDF shape for both the SD as stated in~\Cref{sec:reconstruction}, and also for the UMD~\cite{diego_astropartphys2015_mldf}.
 Left as free parameters of the model are $\beta$, which determines the slope of the muon LDF near the reference distance, and $S^{\mu}_{450}$, a per-event measurement of the muonic signal within a station located at \qty{450}{\meter} from the air-shower core.
 However, the neural network accuracy and precision need to be quantified and a fit likelihood must be defined prior to fitting the network predictions to~\Cref{eq:mldf}.
 
@@ -715,15 +715,12 @@ Equally as important, this allows the same parameterization of the network bias 
 %because of both their dependence on the muonic component of the signal and 
 
 \subsection{Construction of a Per-Event Fit Likelihood}\label{ssec:likelihood}
-%Before any fitting can occur, a fit likelihood to describe the model parameters must be defined.
 A well constructed likelihood is physics informed, meaning the physics of the situation influences the choice of likelihood used in the analysis.
-In this analysis, particles arrive at water-Cherenkov detectors following Poissonian statistics and deposit energy within the detector as Cherenkov radiation.
+In this analysis, particles arrive at water-Cherenkov detectors following Poissonian statistics and deposit energy within the detector in the form of Cherenkov radiation.
 The particle energy deposit follows a Landau distribution, which becomes convolved with the Gaussian detector response once the PMTs of the detector measure the Cherenkov radiation.
 The total signal measured by the detector is then fed to the neural network previously described, resulting in a station-level prediction of the total muonic signal for the detector.
 The station-level predictions for single events are combined and fit to a lateral distribution function of the form given by~\Cref{eq:mldf}.
-The likelihood used in the fitting procedure is defined by $\mathcal{L}\left(S^{\mu}_{450}, \beta|\hat{S}^{\mu}\right)$, meaning ``how likely is it the model values $S^{\mu}_{450}$ and $\beta$ describe the $\hat{S}^{\mu}$ station data for this event,'' where this likelihood is the product of all probabilities for each station.
-
-%``what is the likelihood of measuring $\hat{S}^{\mu}$ given the values of $S^{\mu}_{450}$ and $\beta$ for the function modeling the data.''
+The likelihood used in the fitting procedure is then defined by $\mathcal{L}\left(S^{\mu}_{450}, \beta|\hat{S}^{\mu}\right)$, meaning ``how likely is it the model values $S^{\mu}_{450}$ and $\beta$ describe the $\hat{S}^{\mu}$ station data for this event,'' where this likelihood is the product of all probabilities for each station.
 
 For an air-shower array with fully functioning detectors, three station statuses are possible within an event.
 Statuses include:
@@ -735,82 +732,122 @@ Statuses include:
 \end{itemize}
 
 \noindent
+Each station status has different probabilities of occurrence based on detector physics and counting statistics and therefore each status must be described by a separate probability, each contributing to the overall likelihood of the event. 
+The total, or joint, likelihood is defined as
 
+\begin{eqnarray}
+  \mathcal{L}\left(S^{\mu}_{450}, \beta\right) & = & \prod_{i \in \rm sat}^{N_{i}} P_{\rm sat}\left(S_{\text{total}, i} > S_{\rm sat} | S^{\mu}_{450}, \beta\right) \times \nonumber\\
+   & & \prod_{j \in \rm trig}^{N_{j}} P_{\rm trig}\left(\hat{S}^{\mu}_{j} | S^{\mu}_{450}, \beta\right) \times \nonumber\\
+   & & \prod_{k \in \rm sil}^{N_{k}} P_{\rm sil}\left(S_{\text{total}, k} < S_{\rm th}| S^{\mu}_{450}, \beta\right) \label{eq:likelihood}
+\end{eqnarray}
 
-saturated stations, stations which measure a total signal above the saturation threshold ($S_{\rm th}$) of the PMTs, triggered stations 
+\noindent
+where the saturated and silent station probabilities are calculated with respect to the total signal ($S_{\rm total}$) measured by the detector because the thresholds for saturation and triggering are dependent only upon the detector's total measured signal.
+In addition, the total signal traces for saturated and silent stations can not be used as inputs to the neural network, and therefore these stations have no prediction of the station muonic component.
 
+The probability of triggered stations will be modeled using a Gaussian:
 
-Each station status has different probabilities of occurrence based on detector physics and counting statistics and therefore each status must be described by a separate probability which each contribute to the overall likelihood of the event. 
+\begin{equation}
+  P_{\rm trig}\left(\hat{S}^{\mu}_{j} | S^{\mu}_{450}, \beta\right) = \frac{1}{\sqrt{2\pi\sigma_{\rm tot}^{2}}}\exp\left( - \frac{(\hat{S}^{\mu}_{j} - \mu)^{2}}{2\,\sigma_{\rm tot}^{2}}\right) \label{eg:triggered}
+\end{equation}
 
+\noindent
+where $\mu$ and $\sigma_{\rm tot}^{2}$ are respectively the expectation value and variance of the network predicted muon signal, $\hat{S}^{\mu}$.
+The predicted muon signal can be defined mathematically by
 
-Within an air-shower event, three station statuses are possible: saturated stations, triggered stations, and silent stations.
+\begin{equation}
+  \hat{S}^{\mu} = S^{\mu}_{\rm MC} \left[\left(1 + b_{\rm eff}\right) + \sigma_{\rm eff}\epsilon\right] \label{eq:muon_signal_prediction_math}
+\end{equation}
 
-%For an air-shower array with fully functioning detectors, three station statuses are possible within an event. where each status must be handled by separate likelihoods, each contributing to the total likelihood for the event.
+\noindent
+where $\epsilon$ is a normal distribution with mean 0 and width 1.
+The inclusion of $\epsilon$ is purely theoretical and only used to describe the mathematics that the network predictions result in a Gaussian smearing of $S^{\mu}_{\rm MC}$ by $S^{\mu}_{\rm MC}\sigma_{\rm eff}$, and a shift in the mean of $S^{\mu}_{\rm MC}$ by $S^{\mu}_{\rm MC}b_{\rm eff}$.
+The laws of total expectation and variance can then be used to derive $E\left[\hat{S}^{\mu}\right]=\mu$ and Var$(\hat{S}^{\mu})=\sigma_{\rm tot}^{2}$.
+The true signal is assumed to be $S^{\mu}_{\rm MC}\,=\,kN$ with $k$ the per-muon signal in VEM measured at the station, and $N$ the number of muons arriving at the tank following a Poisson distribution.
+$k$ is dependent upon how muons deposit energy within the water-Cherenkov detectors; however, for simplicity, the Langau (the Landau convolved with the Gaussian detector response) energy deposit is ignored and instead it is assumed the muons only deposit energy in the detector dependent upon their track length.
+Further, it is assumed there is no spread in this value and that all muons travel perpendicular to the air-shower axis, meaning a simple zenith angle dependence of $k$ is sufficient.
 
+With these assumptions, $k$ is given by
 
-For simplicity, the Langau (the Landau convolved with the Gaussian detector response) energy deposit is ignored and instead it is assumed the muons only deposit energy in the detector dependent upon their track length through the detector.
-Further, it si assumed there is no spread in this value and that all muons travel perpendicular to the air-shower axis, meaning a simple zenith angle dependence is sufficient.
+\begin{equation}
+  k(\theta) = \frac{k_{\rm VEM}}{h} \frac{\pi\,R\,h}{\pi\,R\,\cos\theta + 2\,h\,\sin\theta} \label{eq:track_length}
+\end{equation}
 
+\noindent
+where the second term is the volume of the water-Cherenkov detector, with radius $R$ and height $h$, divided by its projected into the shower axis, yielding a track length through the detector.
+The first term is ratio of signal to height deposited for a vertical, central, and through-going muon.
+In reality, this ratio is measured to calibrate the water-Cherenkov detectors of Auger and depends on the muon energy deposit and detector response; however, again for simplicity, it is assumed that $k_{\rm VEM}\,=\,$\qty{1}{VEM}.
+Returning to the expectation and variance of $\hat{S}^{\mu}$, the derivations, given all assumptions, result in
 
-%%%% Crap from here, just crazy notes...
-The muons are fast (nearly traveling at the speed of light), charged,  therefore their energy deposited as Cherenkov radiation within the detector follows a Landau distribution.
-The Cherenkov radiation is measured by the PMTs of the detector which have a Gaussian response 
+\begin{eqnarray}
+  \mu & = & S^{\mu}\left(1 + b_{\rm eff}\right) \label{eq:smu_expectation} \\
+  \sigma_{\rm tot}^{2} & = & k(\theta)S^{\mu}\left[\left(1 + b_{\rm eff}\right)^{2} + \sigma_{\rm eff}^{2}\right] + \left(S^{\mu}\sigma_{\rm eff}\right)^{2} \label{eq:smu_total_variance}
+\end{eqnarray}
 
-We have muons from a simulation or data hitting the tank.
-The muons hit the tank following Poissonian statistics and deposit energy within the tank (typically a langau from the energy deposit, landau, convolved with the detector response, Gaussian; however, here we assume for simplicity muons deposit the same energy only dependent upon their track length through the detector with no uncertainty in this value).
-Our simulations/data contain the muon signal deposited within the tank, but we have no knowledge of the number of muons hitting the tank or the exact muon signal itself.
-We only know, prior to the network predictions, the statistical and physical processes for these tank hits, and the total measured signal within the tank, meaning we can include the uncertainty in the number of muons hitting the tank (i.e. the physics) as an uncertainty in our likelihood construction for the fit.
+\noindent
+where $S^{\mu}$ is the muon signal model,~\Cref{eq:mldf}.
+The derivations again are left as exercises for the reader.
+The total variance of the Gaussian likelihood is driven by two major components, the uncertainty from the neural network predictions, and a component from the physics of detecting muons, the latter of which is only introduced in the derivation of~\Cref{eq:smu_total_variance}.
+However, there is a third component from shower-to-shower fluctuations which should be quantified and added in quadrature with the total variance. 
+This additional uncertainty is not yet considered here; however, it should be added in a future implementation of this fit to more fully describe the physics.
 
-Furthermore, what we reconstruct from the tank measurements are the neural network predicted muon signals, which also has an uncertainty based on the accuracy and precision (i.e. bias and resolution) of our network.
-The network inputs are the total signal in the tank, and the other static observables given above, and the network will predict the muonic component of the signal within the tank.
-Further, for our muon LDF model we will fit to, we know what the expected muon signal in the tank should be given the assumed fit parameters of Sref and beta.
+The probability of saturated stations will also be modeled using a Gaussian; however, the saturated station signal is not known exactly and only known to be within the range $S_{\rm total}\in\left[S_{\rm sat}, \infty\right]$.
+This signal phase space requires the saturated station probability to be modeled as the complementary cumulative distribution function of a Gaussian, defined by
 
+\begin{equation}
+  P_{\rm sat}\left(S_{\text{total}} > S_{\rm sat} | S^{\mu}_{450}, \beta\right) = 1 - \Phi\left(\frac{S_{\rm sat} - \mu}{\sigma}\right) \label{eg:saturated}
+\end{equation}
 
+\noindent
+with $\Phi$ the cumulative distribution function of a Gaussian distribution.
+The mean and variance of the saturated station distribution is derived in the same manner as for the triggered station distribution, therefore $\mu$ and $\sigma$ of this equation are given by~\Cref{eq:smu_expectation} and~\Cref{eq:smu_total_variance} respectively.
+Yet, an effective bias and effective resolution can not be calculated directly because the saturated stations measure total signals outside the parameterization region defined in~\Cref{ssec:parameterization}.
+Instead, the effective bias and resolutions for saturated stations are assumed to be the median values of the effective bias and resolution across the entire triggered-station phase space, resulting in $b_{\rm eff}\,=\,0.0129$ and $\sigma_{\rm eff}\,=\,0.2153$ for the saturated stations.
 
-The likelihood used in the fitting procedure is most simply defined by $L\left(\hat{S}^{\mu}|S^{\mu}_{450}, \beta\right)$, meaning ``what is the likelihood of measuring $\hat{S}^{\mu}$ given the values of $S^{\mu}_{450}$ and $\beta$ for the function modeling the data.''
-A well chosen likelihood is one chosen based on influences from the physics of the problem, i.e. the likelihood model is physics informed.
-The physics of this analysis includes both statistical and physical 
+In the low-signal regime, the Gaussian approximation of the likelihood begins to worsen.
+This approximation is worst in the limit of non-triggered stations, therefore the probability of silent stations is modeled using a Poissonian distribution with
 
-To accurately build the liklihood
-The likelihood model is physics informed, meaning the physics of the problem influences the choice of likelihood used in the analysis.
+\begin{equation}
+  P_{\rm sil}\left(S_{\text{total}, i} < S_{\rm th}| S^{\mu}_{450}, \beta\right) = P_{\rm sil}\left(N_{i} < N_{\rm th}| S^{\mu}_{450}, \beta\right) = \sum_{N = 0}^{N_{\rm th}} \frac{\lambda_{i}^{N}e^{-\lambda_{i}}}{N!} \label{eq:silent}
+\end{equation}
 
+\noindent
+where the signals must be converted into single muons.
+Signal conversions are defined as $N_{i}\,=\,S_{\text{total}, i} / k(\theta)$ and $N_{\rm th}\,=\,S_{\rm th} / k(\theta)$, with $k(\theta)$ the zenith-dependent per-muon signal from~\Cref{eq:track_length}.
+The assumption taken here is the total signal for the low-signal regimes of silent stations is completely muonic.
+This is an incomplete, but fair, assumption to make for silent stations as these will be stations far from the air-shower core where little to no electromagnetic shower component survives.
+Additionally, this sum is only taken to $N_{\rm th}\,=\,1$ in the likelihood because single muons should be enough to trigger a water-Cherenkov detector.
 
+In the fitting procedure, a negative log likelihood minimization process will be used to estimate $S^{\mu}_{450}$ and $\beta$.
+The joint likelihood then becomes,
 
+\begin{eqnarray}
+  -\ln\mathcal{L}\left(S^{\mu}_{450}, \beta\right) & = & -\sum_{i = 1}^{N_{\rm sat}} \ln\left[1 - \Phi\left(\frac{S_{\rm sat} - \mu}{\sigma}\right)\right] \times \nonumber\\
+   & & -\sum_{i = 1}^{N_{\rm trig}} \ln\left[\frac{1}{\sqrt{2\pi\sigma_{\rm tot}^{2}}}\exp\left( - \frac{(\hat{S}^{\mu}_{i} - \mu)^{2}}{2\,\sigma_{\rm tot}^{2}}\right)\right] \times \nonumber\\
+   & & -\sum_{i = 1}^{N_{\rm sil}} \ln\left[\sum_{N = 0}^{1} \frac{\lambda_{i}^{N}e^{-\lambda_{i}}}{N!}\right]. \label{eq:joint_nll}
+\end{eqnarray}
 
-The Poissonian statistics of muon counting is woven into the true MC muon signals used as targets for the network.
+\noindent
+Note the joint likelihood does not apply a penalty for the uncertainty in the Auger SD reconstructed core location.
+Uncertainties in the core position for Auger SD reconstructed air showers are typically between \qtyrange{50}{100}{\meter}, with both an energy and zenith dependence~\cite{auger_jinst2020_sdreconstruction}.
+Shifting the core location within this uncertainty has an impact not only on the total signal measured by each station, but also on the potential status of each station.
+Accounting for the Auger SD reconstructed core uncertainty should be implemented to the joint likelihood in a future iteration of the analysis.
 
-We have muons from a simulations hitting the tank.
-The muons hit the tank following Poissonian statistics and deposit energy within the tank (typically a langau from the energy deposit, landau, convolved with the detector response, Gaussian).
-Our simulations contain the muon signal deposited within the tank, but we have no knowledge of the number of muons hitting the tank.
-We only know the statistical and physical processes for these tank hits and the final measured signal, meaning we can include the uncertainty in the number of muons hitting the tank (i.e. the physics) as an uncertainty in our likelihood construction for the fit.
+The validation and test datasets contains no silent or saturated stations because stations with these signals were removed from the dataset prior to applying the splits described in~\Cref{ssec:selection}.
+Hence, for the remainder of the chapter, only triggered stations are included.
+The fit likelihood simplifies to only the triggered station component:
 
-Furthermore, what we reconstruct from the tank measurements are the RNN predicted muon signals, which also has an uncertainty based on the accuracy and precision (i.e. bias and resolution) of our network.
-The network inputs are the total signal in the tank and reconstruct the muonic component within the tank.
-Further, for our muon LDF model, we know what the expected muon signal in the tank should be.
-We hence want to reconstruct the probability of the neural network predictions given the muon LDF model.
-The network predictions however contain two major uncertainties: 1. the uncertainty from the network itself (bias and resolution, accounted for with the effective bias and effective resolution) and 2. the uncertainty from the physics of detecting muons.
-A further uncertainty, the systematics such as the muon deficit inherent to the network by training only on EPOS LHC-R simulations, should also be included at a future stage.
+\begin{equation}
+  -\ln\mathcal{L}\left(S^{\mu}_{450}, \beta\right) = -\sum_{i = 1}^{N_{\rm trig}} \ln\left[\frac{1}{\sqrt{2\pi\sigma_{\rm tot}^{2}}}\exp\left( - \frac{(\hat{S}^{\mu}_{i} - \mu)^{2}}{2\,\sigma_{\rm tot}^{2}}\right)\right], \label{eq:triggered_only_nll}
+\end{equation}
 
+\noindent
+and will be used exclusively in the following sections.
+The application to data in~\Cref{chap:radiomuon} will use the full joint likelihood (\Cref{eq:joint_nll}).
 
-%%%
-We have muons from a simulation or data hitting the tank.
-The muons hit the tank following Poissonian statistics and deposit energy within the tank (typically a langau from the energy deposit, landau, convolved with the detector response, Gaussian; however, here we assume for simplicity muons deposit the same energy only dependent upon their track length through the detector with no uncertainty in this value).
-Our simulations/data contain the muon signal deposited within the tank, but we have no knowledge of the number of muons hitting the tank or the exact muon signal itself.
-We only know, prior to the network predictions, the statistical and physical processes for these tank hits, and the total measured signal within the tank, meaning we can include the uncertainty in the number of muons hitting the tank (i.e. the physics) as an uncertainty in our likelihood construction for the fit.
+\subsection{Fitting the Validation Set}\label{ssec:fitting}
 
-Furthermore, what we reconstruct from the tank measurements are the neural network predicted muon signals, which also has an uncertainty based on the accuracy and precision (i.e. bias and resolution) of our network.
-The network inputs are the total signal in the tank, and the other static observables given above, and the network will predict the muonic component of the signal within the tank.
-Further, for our muon LDF model we will fit to, we know what the expected muon signal in the tank should be given the assumed fit parameters of Sref and beta.
-We hence want to reconstruct the probability of the neural network predictions given the muon LDF model, which can be approximated as a simple Gaussian likelihood, where the likelihood variance is determined via two major uncertainties: 1. the uncertainty from the network itself (the effective bias and effective resolution) and 2. the uncertainty from the physics of detecting muons, woven into the signal not by us directly but indirectly from the physical processes underlying muon counting statistics.
-Note there is another uncertainty from shower physics, such as the muon deficit and shower-to-shower fluctuations related to the depth of first interaction; however, these additional uncertainties are not yet considered here.
-They should be in a future implementation of this fit.
-This assumption does not accurately assign probabilities for low-signal stations; however, to first order approximations it works.
-The likelihood is L(Spred | Smodel) and therefore we wish to calculate the variance of Spred and mean of Spred to inform our Gaussian likelihood.
-The predicted signal itself is given by Spred = Strue * ((1 + beff) + sigmaeff * epsilon) where epsilon is a normal distribution with mean 0 and width 1.
-The inclusion of epsilon is purely theoretical to describe the mathematics that the network predictions result in a Gaussian smearing of Strue by Strue*sigmaeff, and a shift in the mean of Strue by Strue*beff.
-Then the expectation value of of Spred and the variance of Spred, used for the likelihood, can be calculated as E(Spred) and Var(Spred) = E(Spred2) - E(Spred)2 respectively.
-Note, I only discuss the case of triggered stations here.
-Non-triggered and saturated stations also are accounted for yet non-triggered stations should follow a Poissonian likelihood and saturated stations should follow a Gaussian likelihood CDF integrated from the saturation signal to infinity.
+\section{Application to the Test Set}\label{ssec:test}
 
 \section{Application to Reconstructed Surface Detector Data}\label{sec:application}
 % Save for following chapter? I think yes
