@@ -846,6 +846,26 @@ and will be used exclusively in the following sections.
 The application to data in~\Cref{chap:radiomuon} will use the full joint likelihood (\Cref{eq:joint_nll}).
 
 \subsection{Fitting the Validation Set}\label{ssec:fitting}
+Using the likelihood constructed in the previous section, the neural network predicted muon signals are fit per event to the muon LDF given in~\Cref{eq:mldf}.
+\Cref{fig:mldf_fit_example} shows an example muon LDF fit for a single event.
+In addition, the per-event MC truth muon signals were fit to the muon LDF to test the validity of the fit.
+\Cref{fig:nn_mc_comparison} 
+
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.55\textwidth]{chapter5/nn_prediction_fits_triggered_highgain_mldf_fit_simid_217680006_eventid_800060101.pdf}
+  \caption[Example muon LDF fit.]{An example muon LDF fit to~\Cref{eq:mldf} using the likelihood constructed in~\Cref{ssec:likelihood}. The station error bars represent the effective resolution, $\sigma_{\rm eff}$, of the three-dimensional parameterization.}
+  \label{fig:mldf_fit_example}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/triggered_highgain_pearsonr_2d_mc_S_mu_ref_histogram.pdf}
+  \caption[Example muon LDF fit.]{An example muon LDF fit to~\Cref{eq:mldf} using the likelihood constructed in~\Cref{ssec:likelihood}. The station error bars represent the effective resolution, $\sigma_{\rm eff}$, of the three-dimensional parameterization.}
+  \label{fig:nn_mc_comparison}
+\end{figure}
+
+
 
 \section{Application to the Test Set}\label{ssec:test}
 
