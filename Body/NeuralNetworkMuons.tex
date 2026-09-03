@@ -846,10 +846,11 @@ and will be used exclusively in the following sections.
 The application to data in~\Cref{chap:radiomuon} will use the full joint likelihood (\Cref{eq:joint_nll}).
 
 \subsection{Fitting the Validation Set}\label{ssec:fitting}
-Using the likelihood constructed in the previous section, the neural network predicted muon signals are fit per event to the muon LDF given in~\Cref{eq:mldf}.
-\Cref{fig:mldf_fit_example} shows an example muon LDF fit for a single event.
-In addition, the per-event MC truth muon signals were fit to the muon LDF to test the validity of the fit.
-\Cref{fig:nn_mc_comparison} 
+Both the neural network predicted muon signals and the MC truth muon signals were fit on a per-event basis to the muon LDF given in~\Cref{eq:mldf} using the likelihood constructed in the previous section.
+\Cref{fig:mldf_fit_example} shows an example muon LDF fit for a single event using the neural network predictions.
+The parameterization of the effective resolution provides the uncertainties shown in the plot.
+At first look, the muon LDF characterizes well the muonic signal component measured by the Auger water-Cherenkov detector, with a well constrained estimate of $S^{\mu}_{450}$.
+$\beta$, serving as the ``lever arm'' of the fit near the reference distance, is much less constrained in this example.
 
 \begin{figure}
   \centering
@@ -858,16 +859,74 @@ In addition, the per-event MC truth muon signals were fit to the muon LDF to tes
   \label{fig:mldf_fit_example}
 \end{figure}
 
+\Cref{fig:nn_mc_comparison} plots a two-dimensional histogram of the per-event fit results of $S^{\mu}_{450}$ for fits to the neural network predictions and to the MC truth muon signals of the validation dataset.
+A clear, almost one-to-one, linear relationship is seen between the muon signal at the reference distance of the neural network predictions ($\hat{S}^{\mu}_{450}$) and the same value for the MC truth data ($S^{\mu}_{450}$).
+Small, off-diagonal, islands in the two-dimensional histogram are bins with a single entry showing disagreement between the RNN predicted and MC truth muon LDF fit.
+The Pearson $r$ to quantify is the correlation between the two values is also calculated and shown to be 0.96, proving a high correlation between the fits.
+This Pearson $r$ near one further validates the network's predictive power; however, is calculated for the full dataset.
+Further cutting the dataset to contain only near-vertical air showers with $\sec(\theta_{\rm SD}\,=\,$\numrange{1.0}{1.2} results in a Pearson $r$ correlation of 0.93.
+
 \begin{figure}
   \centering
-  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/triggered_highgain_pearsonr_2d_mc_S_mu_ref_histogram.pdf}
-  \caption[Example muon LDF fit.]{An example muon LDF fit to~\Cref{eq:mldf} using the likelihood constructed in~\Cref{ssec:likelihood}. The station error bars represent the effective resolution, $\sigma_{\rm eff}$, of the three-dimensional parameterization.}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.7\textwidth]{chapter5/triggered_highgain_pearsonr_2d_mc_S_mu_ref_histogram.pdf}
+  \caption[Comparison of the RNN predicted and MC true reference distance muon signals.]{A two-dimensional histogram comparing the muon signals at the nominal reference distance of \qty{450}{\meter} extracted from the fits to the RNN predicted muon signals and the MC truth muon signals. A dashed black diagonal line is included to highlight a slope of one showing exact agreement between the two fits. The data follow this diagonal line closely, with some spread.}
   \label{fig:nn_mc_comparison}
 \end{figure}
 
+Investigating this correlation for individual primaries shows similar results, as seen in~\Cref{fig:nn_mc_comparison_primaries}.
+Again, the bias introduced from the neural networks is seen, with the neural network prediction showing an overprediction of $S^{\mu}_{450}$ compared to the MC truth for proton, and an underprediction observed for iron.
+The shower physics can also be seen within the plots, with proton having a larger spread than iron highlighting the larger shower-to-shower fluctuations for proton.
+This effect is also visible within the Pearson $r$ correlation coefficient, with iron yielding a coefficient closer to one.
+
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/triggered_highgain_pearsonr_Proton_2d_mc_S_mu_ref_histogram.pdf}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/triggered_highgain_pearsonr_Iron_2d_mc_S_mu_ref_histogram.pdf}
+  \caption[Comparison of the NN-MC reference distance muon signals for proton and iron.]{Comparisons of the muon signal at a reference distance of \qty{450}{\meter} extracted from fits to the neural network predictions and the true MC muon signals for proton (left) and iron (right) primaries. The Pearson $r$ correlation coefficient is included for each plot.}
+  \label{fig:nn_mc_comparison_primaries}
+\end{figure}
+
+The final goal is to use this per-event muon observable as a proxy to the total muon content of the air shower and therefore an indirect proxy of the primary cosmic-ray mass.
+The mass sensitivity of this observable as a function of true air-shower energy can already be approximated here using the validation dataset.
+\Cref{fig:smu450_energy} shows the proton and iron distributions of $S^{\mu}_{450}$ as a function of the true MC air-shower energy for both the fits performed to the true MC muon signals and the RNN predicted muon signals.
+The average of the proton and iron distributions is calculated in bins of width $\lg(E_{\rm MC}$ / eV)$\,=\,$0.2 and included on the plots as a show of the average separation between the proton and iron primaries.
+Both the true and predicted muon signals show an average separation between proton and iron primaries for this per-event muon observable with the tru muon signals showing a higher separation.
+This is expected given the proton-iron separation seen in the average muon LDFs discussed in~\Cref{ssec:feasibility}.
+
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.9\textwidth]{chapter5/smu450_energy_mctruth.pdf} \\
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.9\textwidth]{chapter5/smu450_energy_nnpredictions.pdf}
+  \caption[MC energy evolution of the muon signal reference distance.]{$S^{\mu}_{450}$ extracted from the muon LDF fit plotted as a function of the true air-shower energy for both the true muon signals (top) and predicted muon signals (bottom). Only proton and iron signals are included to exhibit the separation between the two most extreme mass groups for this event-level observable.}
+  \label{fig:smu450_energy}
+\end{figure}
+
+The figure of merit, given in~\Cref{eq:fom}, is calculated for both the true and predicted $S^{\mu}_{450}$ observables in the above-stated bins of true air-shower energy, allowing a direct comparison to the results in~\Cref{chap:simulations}.
+\Cref{fig:smu450_foms} shows the FOMs as a function of the air-shower energy.
+The true muon signal as measured at \qty{450}{\meter} from the air-shower axis exhibits a higher proton-iron mass separation than the same observable extracted from the network predicted muon signals.
+Intermediate mass separation seems challenging with the neural network predicted signals given the absolute proton-iron merit factor values reported here.
+However, this observable still stands to enhance the air-shower mass sensitivity in combination with $X_{\rm max}$.
+
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter5/foms_energy.pdf}
+  \caption[FOM plot of the reference distance muon signals.]{The proton-iron FOM calculated for the $S^{\mu}_{450}$ observable as a function of true air-shower energy. The FOMs calculated for both the muon signal at the reference distance for the neural network predicted muon signals and the MC truth muon signals are shown.}
+  \label{fig:smu450_foms}
+\end{figure}
+
+As a natural next step, the network was used to predict the muonic signal component of all stations in the EPOS LHC-R test set, which were then further used to extract the $S^{\mu}_{450}$ event-level observable as described in this chapter.
+The network's application to the test set shows nearly the same results as the application to the validation set.
+This performance on a before unseen dataset highlights the network learns the general features needed to predict the station-level muonic signal.
+The plots to analyze the network predictive power and extracted observables for the test set are the same as in this chapter and therefore are included in~\Cref{app:test}.
 
 
-\section{Application to the Test Set}\label{ssec:test}
+%Yet, the several network iterations 
+%A true test of the network's predictive power is done using a 
 
-\section{Application to Reconstructed Surface Detector Data}\label{sec:application}
+%The previous sections show the neural network predictions perform well on the validation dataset at both the station and event level.
+%However, a truly blind test of the network's predictive power on a general dataset is done with the test dataset.
+
+%the muonic component of the water-Cherenkov detector signals
+
+%\section{Application to Reconstructed Surface Detector Data}\label{sec:application}
 % Save for following chapter? I think yes
