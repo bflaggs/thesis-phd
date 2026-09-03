@@ -1,0 +1,25 @@
+%
+% This is the Appendix C file (appC.tex)
+% This appendix describes the application of the NN to the test set
+%
+\appendix{Application of the Neural Network and Subsequent Analysis to the EPOS LHC-R Test Set}\label{app:test}
+
+The neural network described and used in~\Cref{chap:nn} is shown to perform well on the EPOS LHC-R validation dataset when predicting the station-level muonic trace component and when further using these predictions to construct an event-level muon observable.
+Yet, the validation set was not fully blind to the network, as several trainings were performed to optimize the network hyperparameters based upon the validation set performance.
+Instead a truly blind dataset to the network is better suited to analyze it's predictive power.
+The test set is used for this purpose, as this dataset was fully blind to the network at all steps of the training and analysis.
+
+The same two dimensional histograms of the muon fractions presented in~\Cref{fig:muon_fraction} are shown in~\Cref{fig:muon_fraction_testset} for the test set.
+Similar results to the validation dataset are shown, where the Pearson $r$ correlation coefficient for the test set is slightly higher than the validation set for proton and is the same value between the datasets for iron.
+The general agreement between the predicted and true muon fractions, shown visually by the data distribution in the density histogram and mathematically with the Pearson correlation coefficient, highlight the network performs well on the test set.
+
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{appendix/C/testset_pearsonr_Proton_2d_muon_fraction_mc_histogram.pdf}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{appendix/C/testset_pearsonr_Iron_2d_muon_fraction_mc_histogram.pdf}
+  \caption[The RNN and MC truth muon fractions for the test set.]{A density plot showing the correlation of the RNN predicted muon fraction with the MC truth muon fraction for proton (left) and iron (right) data in the EPOS LHC-R test set. The Pearson $r$ correlation coefficient for each plot is included to mathematically describe the linearity.}
+  \label{fig:muon_fraction_testset}
+\end{figure}
+
+The muon signal predictions for the test data are then fit to the muon LDF per-event to extract the event-level muon observable $S^{\mu}_{450}$.
+This fitting procedure uses the likelihood described in~\Cref{ssec:likelihood}.
