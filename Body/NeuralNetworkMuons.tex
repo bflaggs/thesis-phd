@@ -897,7 +897,7 @@ The plots to analyze the network predictive power and extracted observables from
 The final goal is to use this per-event muon observable as a proxy to the total muon content of the air shower and therefore an indirect proxy of the primary cosmic-ray mass.
 The mass sensitivity of this observable as a function of true air-shower energy can already be approximated here using the validation dataset.
 \Cref{fig:smu450_energy} shows the proton and iron distributions of $S^{\mu}_{450}$ as a function of the true MC air-shower energy for both the fits performed to the true MC muon signals and the RNN predicted muon signals.
-The average of the proton and iron distributions is calculated in bins of width $\lg(E_{\rm MC}$ / eV)$\,=\,$0.2 and included on the plots as a show of the average separation between the proton and iron primaries.
+The average of the proton and iron distributions are calculated in bins of width $\lg(E_{\rm MC}$ / eV)$\,=\,$0.2 and included on the plots to highlight the average separation between the proton and iron primaries.
 Both the true and predicted muon signals show a separation between proton and iron primaries for this per-event muon observable, with the true muon signals showing a higher separation.
 This is expected given the proton-iron separation seen in the average muon LDFs from~\Cref{ssec:feasibility}.
 
@@ -913,8 +913,6 @@ The figure of merit, given in~\Cref{eq:fom}, is calculated for both the MC and n
 \Cref{tab:smu450_foms} shows the FOMs calculated without bootstrapping in bins of the true air-shower energy, each with a width of $\lg(E_{\rm MC}$ / eV)$\,=\,$0.2.
 The true muon signal as measured at \qty{450}{\meter} from the air-shower axis exhibits a higher proton-iron mass separation than the same observable extracted from the network predicted muon signals.
 Notably, this observable exhibits lesser proton-iron separation power than the $\lg(N_{\mu})$\,\qty{800}{\meter} observable used in the mass sensitivity analysis of~\Cref{chap:simulations}, even when both observables are known exactly from MC simulations.
-This is expected given the results of~\Cref{app:annulus}, which show the muon number, as measured within reference annuli at different distances to the air-shower axis, increases in proton-iron mass sensitivity as the distance to the air-shower axis also increases.
-Using an event-level muon observable farther than \qty{450}{\meter} from the air-shower axis could improve the proton-iron mass separation; however, the LDF fit quality to SD-750 measurements will degrade when using a reference distance further from the shower axis.
 
 \begin{table}
     \caption[FOM values of the reference distance muon signals.]{The proton-iron FOM calculated for the $S^{\mu}_{450}$ observable within several bins of the true air-shower energy. The true FOMs (no bootstrapping) for this event-level muon observable are shown for both the neural network predicted muon signals ($\hat{S}^{\mu}_{450}$) and the MC truth muon signals ($S^{\mu}_{450}$).}
@@ -928,11 +926,11 @@ Using an event-level muon observable farther than \qty{450}{\meter} from the air
         $\lg(E_{\rm MC}$ / eV)  & $S^{\mu}_{450}$ (MC)   & $\hat{S}^{\mu}_{450}$ (NN)\\
         \hline
         \hline
-        \numrange{17.5}{17.7}   & 0.61                   & 0.31\\
-        \numrange{17.7}{17.9}   & 0.70                   & 0.37\\
-        \numrange{17.9}{18.1}   & 0.83                   & 0.47\\
-        \numrange{18.1}{18.3}   & 0.98                   & 0.59\\
-        \numrange{18.3}{18.5}   & 1.08                   & 0.66\\
+        \numrange{17.5}{17.7}   & 0.62                   & 0.32\\
+        \numrange{17.7}{17.9}   & 0.71                   & 0.39\\
+        \numrange{17.9}{18.1}   & 0.82                   & 0.47\\
+        \numrange{18.1}{18.3}   & 0.96                   & 0.58\\
+        \numrange{18.3}{18.5}   & 1.09                   & 0.67\\
         \hline
     \end{tabular}
 \end{table}
@@ -967,6 +965,174 @@ The neural network based observable also adds to the overall mass sensitivity at
   \label{fig:smu450_xmax_fom}
 \end{figure}
 
+\subsection{Investigating a Muon Observable at a Larger Distance From the Air-Shower Core}\label{ssec:smu800}
+The mass sensitivity results of combining the $S^{\mu}_{450}$ and $X_{\rm max}$ observables are not as promising as previously hoped.
+$S^{\mu}_{450}$ as extracted from fitting a muon LDF to the true muon signals from Monte Carlo simulations increases the proton-iron mass sensitivity by a small, yet appreciable, amount across the full energy range of $\lg(E_{\rm MC}$ / eV)$\,=\,$\numrange{17.5}{18.5} studied here.
+However, the mass sensitivity decreases when replacing this event-level muon observable by its equivalent value extracted from fitting a muon LDF to the neural network predicted muon signals.
+The results still show an increase in mass sensitivity over knowledge of $X_{\rm max}$ alone, but this additional mass sensitivity is relatively small for the neural network based event-level $S^{\mu}_{450}$ muon observable.
+
+As stated in the previous section, the $S^{\mu}_{450}$ observable exhibits lesser proton-iron separation power than the $\lg(N_{\mu})$\,\qty{800}{\meter} observable used in the mass sensitivity analysis of~\Cref{chap:simulations}.
+The lesser separation power is partly dependent on the choice of reference distance, as the results of~\Cref{app:annulus} show the muon number, as measured within reference annuli at different distances to the air-shower axis, generally increases in proton-iron mass sensitivity as the distance to the air-shower axis also increases.
+In the context of the neural network derived muon observable, a distance from the air-shower axis greater than \qty{450}{\meter} could therefore improve the mass sensitivity of the muon LDF fit-derived observable.
+Yet, changing the reference distance used in the muon LDF fit is not feasible with the SD-750 array, as \qty{450}{\meter} is the optimized reference distance for this array spacing and geometry.
+
+%Contributing to this difference in proton-iron separation power is both the difference between the type of the observables, one being a muon-induced signal inside a water-Cherenkov detector and the other being a raw muon number, and the difference in the chosen reference distance to the air-shower axis.
+%The results of~\Cref{app:annulus} further corroborate this, showing that the muon number, as measured within reference annuli at different distances to the air-shower axis, generally increases in proton-iron mass sensitivity as the distance to the air-shower axis also increases.
+
+%Instead, a feasible approach is to maintain the same functional form of the muon LDF, yet to evaluate this muon LDF at a farther distance to the air-shower axis and use this LDF evaluated signal in a mass sensitivity study.
+
+%Instead the resulting muon LDF fit is evaluated at a distance farther than \qty{450}{\meter} to the air-shower axis 
+
+%the same functional form of the muon LDF is kept, where the resulting muon LDF fit is evaluated at a farther distance to the air-shower axis than 
+%yet to evaluate this muon LDF at a farther distance to the air-shower axis and use this LDF evaluated signal in a mass sensitivity study.
+
+Instead, a per-event muon observable is calculated from evaluating the muon LDF at \qty{800}{\meter} from the air-shower axis, where the muon LDF values of $S^{\mu}_{450}$ and $\beta$ are assumed to be the resulting fit parameters as determined from the minimized NLL fit to that event's muon LDF.
+The mass sensitivity of this new muon observable, $S^{\mu}_{800}$, is studied in the same way as the previous subsection.
+\Cref{fig:smu800_energy} shows the energy evolution of the average $S^{\mu}_{800}$ values of proton and iron simulations using $S^{\mu}_{800}$ as derived from the muon LDF fits to the MC muon signals (top) and the fits to the network predicted signals (bottom).
+Little difference between the absolute proton-iron separation is perceivable between the MC and NN derived $S^{\mu}_{800}$ values.
+Furthermore, a visual improvement of the proton-iron mass separation is seen for the $S^{\mu}_{800}$ observable when comparing the network predicted $S^{\mu}_{800}$ observable to its $S^{\mu}_{450}$ counterpart.
+This result is also seen in~\Cref{fig:average_mldf}, where the largest separation between the average proton and iron muon-signal LDFs occurs within a distance range of roughly \qtyrange{800}{1100}{\meter} from the shower axis, both for the MC and NN predicted muon signals. 
+
+% Smu800 vs. mc energy plots
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.9\textwidth]{chapter5/smu800_energy_mctruth.pdf} \\
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.9\textwidth]{chapter5/smu800_energy_nnpredictions.pdf}
+  \caption[MC energy evolution of the muon LDF signal evaluated at \qty{800}{\meter}.]{The muon LDF signal \qty{800}{\meter} from the air-shower axis plotted as a function of the true air-shower energy for both the true muon signals (top) and predicted muon signals (bottom). Only proton and iron signals are included.}
+  \label{fig:smu800_energy}
+\end{figure}
+
+The additional mass sensitivity $S^{\mu}_{800}$ adds when combined with knowledge of $X_{\rm max}$ is studied using the Fisher linear discriminant in tandem with the FOM metric.
+Both the individual and combined proton-iron separation power curves of $S^{\mu}_{800}$ and $X_{\rm max}$ as functions of true air-shower energy are presented in~\Cref{fig:smu800_xmax_fom}.
+The top plot shows these results for $S^{\mu}_{800}$ derived from the MC muon signals, while the bottom plot shows results for $S^{\mu}_{800}$ derived from the network predicted signals.
+$S^{\mu}_{800}$ adds to the overall mass sensitivity of $X_{\rm max}$ alone across the full studied energy range, where the mass sensitivity of the combined $S^{\mu}_{800}$ and $X_{\rm max}$ observables is clearly greater than the mass sensitivity of the combined $S^{\mu}_{450}$ and $X_{\rm max}$ observables presented in~\Cref{fig:smu450_xmax_fom}.
+Furthermore, when comparing the mass sensitivity of individual observables, the $S^{\mu}_{800}$ observable is more mass sensitive than the $S^{\mu}_{450}$ for all studied energies and zenith angles.
+These results hold for both the muon observables as determined from fits to the true muon signals from MC or from fits to the neural network predicted muon signals.
+
+%regardless of the data used to in the fit procedure to determine the muon observables, whether taken directly from the MC or 
+
+%both for the exact muon observables as determined from the MC or for the neural network predicted muon 
+
+%regardless of how the muon observables are derived, whether directly from the MC or from the neural network predictions.
+
+% Smu800 and Xmax FOM plot
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.75\textwidth]{chapter5/fom_xmax_smu800_mc_zen0_58.pdf} \\
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.75\textwidth]{chapter5/fom_xmax_smu800_nn_zen0_58.pdf}
+  \caption[Proton-iron FOM for $S^{\mu}_{800}$ combined with $X_{\rm max}$.]{The proton-iron FOM curves of true $X_{\rm max}$ in combination with $S^{\mu}_{800}$ derived from fits to the true muon signals from simulations (top) and fits to the neural network predicted muon signals (bottom). The neural network based observable is differentiated with a hat. These FOM curves are calculated using all data in the EPOS LHC-R validation set, spanning a zenith angle range of $\theta_{\rm SD}\,=\,$\qtyrange{0}{58}{\degree}.}
+  \label{fig:smu800_xmax_fom}
+\end{figure}
+
+Overall, this chapter shows a reconstruction of the muonic signal at the SD-750 reference distance is feasible in simulations using neural network based predictions of the station-level muonic signal traces.
+This event-level muon signal at the SD-750 reference distance is mass sensitive; however, its mass sensitivity increases when measured at a distance farther than \qty{450}{\meter} from the reconstructed air-shower axis.
+The increased mass sensitivity of the muon observable at farther distances to the air-shower axis could be exploited with the SD-1500 array, which has a reference distance of \qty{1000}{\meter} based on its array spacing and geometry.
+An application of this network and muon LDF fitting procedure to vertical air showers measured by the SD-1500 array, combined with $X_{\rm max}$ measurements from the Auger FD, could yield a higher mass separation over FD $X_{\rm max}$ measurements or SD-1500 muon predictions from a neural network alone.
+
+This exact study was performed in~\cite{orazio_phd2023} and applied to data within a limited energy range, assuming a simple power-law for the muon signal LDF.
+The study uses the NN predicted muon and $X_{\rm max}$ observables taken from simulations weighted with the Auger mass fractions and compares them to the data-derived observable values, confirming the muon deficit between data and simulation.
+A future study can build upon the combined work of the previous analysis and the analysis presented in this dissertation by applying a more rigorous muon LDF fit to the SD-1500 network predictions, with the potential for using the combined observable information for mass composition results.
+In the context of this dissertation, the co-location of AERA radio antennas with the SD-750 array is optimal for studying a muon observable measurable with the SD-750 array for vertical air showers in combination with the high-quality $X_{\rm max}$ reconstructions of AERA.
+The following chapter will investigate exactly this with data.
+
+
+%A comparison of the Auger, resulting in a preliminary result for this observable combination.
+%A future study 
+%However, this study was performed only for a very limited energy range 
+
+%where separate reference distances of \qtylist{800,1000,1200}{\meter} were used.
+
+%, and would be an interesting study to perform in the future.
+
+%mass sensitivity of the muon observable increases for distances farther than \qty{450}{\meter} from the reconstructed air-shower axis.
+
+%This mass sensitivity could be exploited using the SD-1500 array, as the reference distance 
+
+%this mass sensitivity increases at farther distances than \qty{450}{\meter} from the reconstructed air-shower core, such as at the reference distance of \qty{1000}{\meter} used for the SD-1500.
+
+%Furthermore, the analysis of~\Cref{chap:nn} shows a reconstruction of the muonic signal at the SD-750 reference distance is feasible in simulations using neural network based predictions of the station-level muonic signal traces.
+%This event-level muon signal the SD-750 is mass sensitive; however, this mass sensitivity could increase at farther distances than \qty{450}{\meter} from the reconstructed air-shower core, such as at the reference distance of \qty{1000}{\meter} used for the SD-1500.
+%The results of this thesis hence motivate the application of the procedure and analysis of~\Cref{chap:nn} to the SD-1500 array.
+
+%However, the SD-1500 array has a reference distance of \qty{1000}{\meter} from the air-shower axis.
+%An application of this network and muon LDF fitting procedure to vertical air showers measured by the SD-1500 array, combined with $X_{\rm max}$ measurements from the Auger FD, could yield a higher mass separation over FD $X_{\rm max}$ measurements or SD-1500 muon measurements alone, and would be an interesting study to perform in the future.
+%Furthermore, the co-location of AERA with the SD-750 array is optimal for studying a muon observable measurable with the SD-750 array for vertical air showers in combination with the high-quality $X_{\rm max}$ reconstructions of AERA.
+%The following chapter will investigate exactly this with data, even given the result that this observable combination with simulations is not as mass sensitive as originally hoped.
+
+
+%The Fisher linear discriminant is used to combined knowledge of the $S^{\mu}_{800}$ and $X_{\rm max}$ observables, where their combined and individual mass sensitivities are calculated using the FOM method.
+
+%$X_{\rm max}$ is highly mass sensitive as a single observable; however, the additional knowledge of $S^{\mu}_{800}$ adds to the overall mass sensitivity across the full studied energy range.
+
+
+%The $S^{\mu}_{800}$ observable clearly adds mass sensitivity over know
+
+%Knowledge of both the $S^{\mu}_{800}$ and $X_{\rm max}$ observables clearly adds information of the mass sensitivity over either observable alone across the full energy range studied.
+
+%The FOM is calculated to quantify the mass sensitivity of the $S^{\mu}_{800}$ observable 
+
+%To study the additional mass information added by including $S^{\mu}_{800}$ over knowledge of $X_{\rm max}$ alone, the Fisher linear discriminant and 
+
+%better proton-iron mass separation of the network predicted $S^{\mu}_{800}$ observable is seen compared to the mass separation of the network predicted $S^{\mu}_{450}$ observable.
+%This result was already visible in~\Cref{fig:average_mldf}, where the average muon-signal LDFs show the largest separation between proton and iron within a distance range of roughly \qtyrange{800}{1100}{\meter} for both the MC and NN predicted muon signals. 
+%The proton-iron mass sensitivity of th
+
+%However, \qty{450}{\meter} is the optimized reference distance for the specific spacing and geometry of the SD-750
+
+%Using a reference distance greater than \qty{450}{\meter} from the shower axis would require changing the functional form of the muon LDF
+
+%Yet, this is not feasible with the SD-750 array, as \qty{450}{\meter} is the optimized reference distance for this array spacing and geometry.
+
+%A feasible approach is to keep the same functional form of the muon LDF, and therefore the same muon reference distance, but to study the mass sensitivity of the 
+
+%same reference distance and functional form of the muon LDF while using a distance farther from the shower axis than the reference distance to study the mass sensitivity.
+
+%Instead, the reference distance of the muon LDF remains \qty{450}{\meter} from the shower axis, yet the mass sensitivity 
+
+%a per-event muon observable is calculated from evaluating the muon LDF at \qty{800}{\meter} from the air-shower axis, where the muon LDF values of $S^{\mu}_{450}$ and $\beta$ are assumed to be the fit parameters taken from the minimized NLL fit to that event's muon LDF.
+%The mass sensitivity of this new muon observable, $S^{\mu}_{800}$, is studied in the same way as the previous subsection.
+%XXX shows the average energy evolution of $S^{\mu}_{800}$ of proton and iron simulations for both the $S^{\mu}_{800}$ derived from the muon LDF fits to the MC muon signals and the fits to the network predicted signals.
+%A better proton-iron mass separation of the network predicted $S^{\mu}_{800}$ observable is seen compared to the mass separation of the network predicted $S^{\mu}_{450}$ observable.
+%This result was already visible in~\Cref{fig:average_mldf}, where the average muon-signal LDFs show the largest separation between proton and iron within a distance range of roughly \qtyrange{800}{1100}{\meter} for both the MC and NN predicted muon signals. 
+%The proton-iron mass sensitivity of th
+
+%with the evaluation of the muon LDF performed assuming 
+
+%where that event's nominal fit parameters of $S^{\mu}_{450}$ and $\beta$ from the muon LDF fit are assumed.
+%The mass sensitivity of this $S^{\mu}_{800}$ muon observable is studied 
+
+%the muon LDF is evaluated per-event at \qty{800}{\meter} from the air-shower core using the nominal fit parameter values of $S^{\mu}_{450}$ and $\beta$ derived from that event's muon LDF fit to the neural network predicted muon signals.
+%The resulting 
+
+%nominal $S^{\mu}_{450}$ and $\beta$ fit parameters are used to evaluate the muon LDF per-event at \qty{800}{\meter} from the air-shower core, resulting in a measurement of 
+
+%the per-event nominal fit parameters are used to e
+
+%to test the mass sensitivity of a neural network derived muon observable at a larger distance from the
+
+%a simple test of evaluating the muon LDF per-event using the 
+
+%Using a reference distance from the air-shower core greater than \qty{450}{\meter} could improve the mass sensitivity of the muon observable derived from the muon LDF fit
+
+%Using a reference distance for the muon LDF fit farther than \qty{450}{\meter} from the air-shower core could improve the mass sensitivity of the muon observable and, therefore, improve the mass sensitivity of this observable's combination with $X_{\rm max}$.
+
+% Smu800 vs. mc energy plots
+% smu800 vs. xmax contours
+% smu800 FOM plots
+
+%is hypothesized to improve the mass sensitivity of this combination.
+%This is not feasible with the SD-750 array as \qty{450}{\meter} is the optimized reference distance for this array spacing and geometry.
+
+%Using an event-level muon observable farther than \qty{450}{\meter} from the air-shower axis could therefore improve the proton-iron mass separation; however, the LDF fit quality to SD-750 measurements will degrade when using a reference distance further from the shower axis.
+
+%Using a reference distance farther than \qty{450}{\meter} is hypothesized to improve the mass sensitivity of this combination.
+%This is not feasible with the SD-750 array as \qty{450}{\meter} is the optimized reference distance for this array spacing and geometry.
+%However, the SD-1500 array has a reference distance of \qty{1000}{\meter} from the air-shower axis.
+%An application of this network and muon LDF fitting procedure to vertical air showers measured by the SD-1500 array, combined with $X_{\rm max}$ measurements from the Auger FD, could yield a higher mass separation over FD $X_{\rm max}$ measurements or SD-1500 muon measurements alone, and would be an interesting study to perform in the future.
+%Furthermore, the co-location of AERA with the SD-750 array is optimal for studying a muon observable measurable with the SD-750 array for vertical air showers in combination with the high-quality $X_{\rm max}$ reconstructions of AERA.
+%The following chapter will investigate exactly this with data, even given the result that this observable combination with simulations is not as mass sensitive as originally hoped.
+
+
 \section{Chapter Summary}\label{sec:ch5_summary}
 This chapter introduces a neural network based method to determine a per-event muon observable for use in mass sensitivity studies.
 The network itself predicts a station-level estimate of the muonic signal component measured by the water-Cherenkov detectors of the Pierre Auger Observatory.
@@ -978,19 +1144,14 @@ A negative log likelihood minimization procedure was used to determine the nomin
 An in depth parameterization of the network accuracy and precision was performed to characterize the major uncertainties in the fit.
 The mass sensitivity of the neural network based event-level muon observable was studied using the same Fisher linear discriminant and figure of merit analysis described in~\Cref{chap:simulations}, providing a direct link between the results of the two chapters.
 The event-level muon observable derived within this chapter was then combined with $X_{\rm max}$ to study the proton-iron mass sensitivity of the combined observable information.
-This both provides a test of and builds upon a major result from~\Cref{chap:simulations}, showing the combination of muon and $X_{\rm max}$ observables is a promising way to separate cosmic rays by their mass on an event-by-event basis. 
+This both provides a test of and builds upon a major result from~\Cref{chap:simulations}, showing the combination of muon and $X_{\rm max}$ observables is a promising way to separate cosmic rays by their mass on an event-by-event basis.
+The neural network derived muon observable evaluated at \qty{800}{\meter} from the shower axis, $S^{\mu}_{800}$, was proven to be more mass sensitive than a muon observable evaluated at the SD-750 reference distance, $S^{\mu}_{450}$, both as an individual observable and when combined with $X_{\rm max}$.
+The neural network derived $S^{\mu}_{800}$ observable will therefore be used in the next chapter in the application to real air-shower data.
 
-The mass sensitivity results of combining the $S^{\mu}_{450}$ and $X_{\rm max}$ observables of this chapter are not as promising as previously hoped.
-$S^{\mu}_{450}$ as extracted from fitting a muon LDF to the true muon signals from Monte Carlo simulations increases the proton-iron mass sensitivity by a small, yet appreciable, amount across the full energy range of $\lg(E_{\rm MC}$ / eV)$\,=\,$\numrange{17.5}{18.5} studied here.
-However, this mass sensitivity decreases when replacing this event-level muon observable by its equivalent value instead extracted from fitting a muon LDF to the neural network predicted muon signals.
-The results still show an increase in mass sensitivity over knowledge of $X_{\rm max}$ alone, but this additional mass sensitivity is relatively small for the neural network based event-level muon observable.
-
-Using a reference distance farther than \qty{450}{\meter} is hypothesized to improve the mass sensitivity of this combination.
-This is not feasible with the SD-750 array as \qty{450}{\meter} is the optimized reference distance for this array spacing and geometry.
-However, the SD-1500 array has a reference distance of \qty{1000}{\meter} from the air-shower axis.
-An application of this network and muon LDF fitting procedure to vertical air showers measured by the SD-1500 array, combined with $X_{\rm max}$ measurements from the Auger FD, could yield a higher mass separation over FD $X_{\rm max}$ measurements or SD-1500 muon measurements alone, and would be an interesting study to perform in the future.
-Furthermore, the co-location of AERA with the SD-750 array is optimal for studying a muon observable measurable with the SD-750 array for vertical air showers in combination with the high-quality $X_{\rm max}$ reconstructions of AERA.
-The following chapter will investigate exactly this with data, even given the result that this observable combination with simulations is not as mass sensitive as originally hoped.
+%The mass sensitivity results of combining the $S^{\mu}_{450}$ and $X_{\rm max}$ observables of this chapter are not as promising as previously hoped.
+%$S^{\mu}_{450}$ as extracted from fitting a muon LDF to the true muon signals from Monte Carlo simulations increases the proton-iron mass sensitivity by a small, yet appreciable, amount across the full energy range of $\lg(E_{\rm MC}$ / eV)$\,=\,$\numrange{17.5}{18.5} studied here.
+%However, this mass sensitivity decreases when replacing this event-level muon observable by its equivalent value instead extracted from fitting a muon LDF to the neural network predicted muon signals.
+%The results still show an increase in mass sensitivity over knowledge of $X_{\rm max}$ alone, but this additional mass sensitivity is relatively small for the neural network based event-level muon observable.
 
 %combining a muon observable with a radio antenna reconstructed $X_{\rm max}$ requires 
 
