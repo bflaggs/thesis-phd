@@ -371,7 +371,7 @@ The network underestimates the true muonic signal by only 3.3\%.
 For the example station with little muonic signal the results are not nearly as precise, with an overestimation in the muonic signal by the neural network of 142\%.
 The network picks locations and peaks which are ``fast and spiky'', generally associated with muonic particles.
 Yet, both the total and muonic signals of the PMT trace are low, complicating the network's predictive power.
-Multiple variables such as energy, zenith angle, and distance to the air-shower core, have an effect on the total and muonic signals measured by the detector and therefore an effect on the network's predictions.
+Multiple variables such as energy, zenith angle, and distance to the air-shower axis, have an effect on the total and muonic signals measured by the detector and therefore an effect on the network's predictions.
 This effect must be evaluated; however, traces with less than \qty{1}{VEM} of MC muon signal will be disregarded from the evaluation of the network's performance.
 This removes 1.6\% of traces (3,244 traces in total) from the EPOS LHC-R validation set.
 
@@ -426,7 +426,7 @@ The plots in~\Cref{fig:mc_energy} therefore show stable network predictive power
 \end{figure}
 
 The RNN bias and resolution should also be investigated for air-shower observables which serve as the static input features to the network.
-\Cref{fig:sd_zenith} shows the bias and resolution per primary in bins of the secant of the SD-750 reconstructed zenith angle ($\sec\theta_{\rm SD}$),~\Cref{fig:sd_r} shows these plots for the reconstructed distance of the station to the shower core ($r_{\rm SD}$), and~\Cref{fig:sd_zeta} shows these same plots for the reconstructed azimuthal angle between the station and the air-shower axis in the shower plane ($\zeta_{\rm SD}$).
+\Cref{fig:sd_zenith} shows the bias and resolution per primary in bins of the secant of the SD-750 reconstructed zenith angle ($\sec\theta_{\rm SD}$),~\Cref{fig:sd_r} shows these plots for the reconstructed distance of the station to the shower axis ($r_{\rm SD}$), and~\Cref{fig:sd_zeta} shows these same plots for the reconstructed azimuthal angle between the station and the air-shower axis in the shower plane ($\zeta_{\rm SD}$).
 The same y-axis limits are chosen between all bias plots, and similarly for all resolution plots, allowing for by eye comparisons of the bias and resolutions between observables.
 Similar primary distributions as in~\Cref{fig:mc_energy} (over-predictions for proton and under-predictions for iron, with everything else in between) are seen.
 The most notable bias plot is that of $r_{\rm SD}$, which shows all primaries approaching a bias of zero then deviating from their general trendlines in the bins farthest from the shower axis.
@@ -446,7 +446,7 @@ Further dependencies on the other observables exists within each bias and resolu
   \centering
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/relativedifference_rSD_bias.pdf}
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/relativedifference_rSD_resolution.pdf}
-  \caption[RNN bias and resolution plots of the reconstructed distance to shower axis.]{The same plots as~\Cref{fig:sd_zenith}, but instead binned as a function of the SD-750 reconstructed distance to the air-shower core.}
+  \caption[RNN bias and resolution plots of the reconstructed distance to shower axis.]{The same plots as~\Cref{fig:sd_zenith}, but instead binned as a function of the SD-750 reconstructed distance to the air-shower axis.}
   \label{fig:sd_r}
 \end{figure}
 
@@ -511,18 +511,18 @@ This holds in all but the first and final distance bins with data, which are sta
 \end{figure}
 
 Visible is not only the multivariate dependence on the bias and resolution, but also the network's predictive phase space for this combination of observables.
-For example, within the given ranges for the zenith angle and total signal within a station, and for stations farther than \qty{1100}{\meter} from the reconstructed air-shower core, or for stations closer than approximately \qty{100}{\meter} to the air-shower core, no stations have signal.
+For example, within the given ranges for the zenith angle and total signal within a station, and for stations farther than \qty{1100}{\meter} from the reconstructed air-shower axis, or for stations closer than approximately \qty{100}{\meter} to the air-shower axis, no stations have signal.
 Assuming the validation and training datasets occupy the same data phase space, a fair assumption to make given the results in~\Cref{ssec:pretraining}, then the network has not been trained on any data outside of this phase space.
 Hence, the predictive space of the network is seen from this visualization.
 
-Generally speaking, for less total station signal and the same zenith angle range as the above example, bin statistics increase for stations farther from the shower axis, yet decrease in the opposite direction closer to the shower axis.
+Generally speaking, for less total station signal and the same zenith angle range as the above example, bin statistics increase for stations farther from the air-shower axis, yet decrease in the opposite direction closer to the shower axis.
 The opposite is true when stations record larger total signal, again for the same zenith range.
 In the case of less total signal, network accuracy improves to only a few percent, but the network precision degrades to roughly 25\% or more.
 No major difference is apparent in the network bias or resolution from the example in~\Cref{fig:density} in the case of larger total signal yet with the same zenith range.
 The zenith angle has an impact on the network bias and resolution, yet is highly correlated with the station's distance to the shower axis and, to a smaller extent, the station's total signal, making the exact impact in a multi-variable phase space difficult to distinguish.
 
 
-%those closer than approximately \qty{100}{\meter} to the air-shower core and farther than roughly \qty{1100}{\meter} from the core.
+%those closer than approximately \qty{100}{\meter} to the air-shower axis and farther than roughly \qty{1100}{\meter} from the axis.
 
 %Take, for instance, the lack of data points within roughly \qty{100}{\meter} and further than approximately \qty{1100}{\meter} from the air-shower axis.
 
@@ -586,7 +586,7 @@ The zenith range of this maximum separation is near the peak in the zenith angle
 %aligning serendipitously with the analysis goal of~\Cref{chap:radiomuon} to combine this radio dataset with the RNN muon predictions.
 
 %The RNN results can therefore be used to construct an event-level muon observable directly from the station-level predictions.
-%This event-level observable may struggle to determine an event-level mass, particularly for the intermediate masses of helium and oxygen, yet an average mass determination based on the magnitude of the muonic signal component at a specific reference distance to the air-shower core is feasible.
+%This event-level observable may struggle to determine an event-level mass, particularly for the intermediate masses of helium and oxygen, yet an average mass determination based on the magnitude of the muonic signal component at a specific reference distance to the air-shower axis is feasible.
 
 \begin{figure}
   \centering
@@ -601,7 +601,7 @@ The zenith range of this maximum separation is near the peak in the zenith angle
 
 \section{Fitting a Muon LDF to the Network Predictions}\label{sec:mldf}
 The previous section shows the RNN results can be used to construct an event-level muon observable directly from the station-level predictions.
-This event-level observable may struggle to determine an event-by-event mass, particularly for the intermediate masses of helium and oxygen, yet an average mass determination based on the magnitude of the muonic signal component at a specific reference distance to the air-shower core is feasible.
+This event-level observable may struggle to determine an event-by-event mass, particularly for the intermediate masses of helium and oxygen, yet an average mass determination based on the magnitude of the muonic signal component at a specific reference distance to the air-shower axis is feasible.
 To extract this event-level observable, a modified NKG function, given by
 
 \begin{equation}
@@ -615,14 +615,14 @@ An important distinction between the models is the model used to fit the UMD dat
 The assumption taken within this analysis is the muon signal LDF follows the muon density LDF up to an unaccounted for multiplicative factor.
 
 Mathematically, the LDF shape is determined by three separate terms, $\alpha$, $\beta$, and $\gamma$, which describe how stations at different distances contribute to the overall LDF.
-To a first-order approximation, the $\alpha$ term describes stations close to the air-shower core, the $\beta$ term describes stations at intermediate distances, and the $\gamma$ term describes stations far from the shower core.
-``Far'' and ``close'' are relative distances to the shower core, dependent on the $r_{0}$ and $r_{\rm ref}$ terms.
+To a first-order approximation, the $\alpha$ term describes stations close to the air-shower axis, the $\beta$ term describes stations at intermediate distances, and the $\gamma$ term describes stations far from the shower axis.
+``Far'' and ``close'' are relative distances to the shower axis, dependent on the $r_{0}$ and $r_{\rm ref}$ terms.
 The $\alpha$, $\gamma$, and $r_{0}$ parameters are fixed to $\alpha=0.75$, $\gamma=3.0$, and $r_{0}=$\qty{320}{\meter} for the model and fit process used in this analysis, as these definitions describe well the average UMD-measured muon LDF~\cite{flaviagesualdi_phd2022}.
 
 The reference distance, as described in~\Cref{chap:auger}, depends on the geometry of the detector array at ground.
 The neural network predicts the muon signal at station level for the SD-750 array, therefore \qty{450}{\meter} is chosen for $r_{\rm ref}$.
 This distance minimizes systematic effects within the LDF shape for both the SD as stated in~\Cref{sec:reconstruction}, and also for the UMD~\cite{diego_astropartphys2015_mldf}.
-Left as free parameters of the model are $\beta$, which determines the slope of the muon LDF near the reference distance, and $S^{\mu}_{450}$, a per-event measurement of the muonic signal within a station located at \qty{450}{\meter} from the air-shower core.
+Left as free parameters of the model are $\beta$, which determines the slope of the muon LDF near the reference distance, and $S^{\mu}_{450}$, a per-event measurement of the muonic signal within a station located at \qty{450}{\meter} from the air-shower axis.
 However, the neural network accuracy and precision need to be quantified and a fit likelihood must be defined prior to fitting the network predictions to~\Cref{eq:mldf}.
 
 %using $S^{\mu}_{450}$ as a per-event muon observable reconstructed from fitting the network predictions to the model in
@@ -735,11 +735,11 @@ Statuses include:
 Each station status has different probabilities of occurrence based on detector physics and counting statistics and therefore each status must be described by a separate probability, each contributing to the overall likelihood of the event. 
 The total, or joint, likelihood is defined as
 
-\begin{eqnarray}
-  \mathcal{L}\left(S^{\mu}_{450}, \beta\right) & = & \prod_{i \in \rm sat}^{N_{i}} P_{\rm sat}\left(S_{\text{total}, i} > S_{\rm sat} | S^{\mu}_{450}, \beta\right) \times \nonumber\\
-   & & \prod_{j \in \rm trig}^{N_{j}} P_{\rm trig}\left(\hat{S}^{\mu}_{j} | S^{\mu}_{450}, \beta\right) \times \nonumber\\
-   & & \prod_{k \in \rm sil}^{N_{k}} P_{\rm sil}\left(S_{\text{total}, k} < S_{\rm th}| S^{\mu}_{450}, \beta\right) \label{eq:likelihood}
-\end{eqnarray}
+\begin{align}
+  \mathcal{L}\left(S^{\mu}_{450}, \beta\right) = & \prod_{i \in \rm sat}^{N_{i}} P_{\rm sat}\left(S_{\text{total}, i} > S_{\rm sat} | S^{\mu}_{450}, \beta\right) \times \nonumber\\
+   & \prod_{j \in \rm trig}^{N_{j}} P_{\rm trig}\left(\hat{S}^{\mu}_{j} | S^{\mu}_{450}, \beta\right) \times \nonumber\\
+   & \prod_{k \in \rm sil}^{N_{k}} P_{\rm sil}\left(S_{\text{total}, k} < S_{\rm th}| S^{\mu}_{450}, \beta\right) \label{eq:likelihood}
+\end{align}
 
 \noindent
 where the saturated and silent station probabilities are calculated with respect to the total signal ($S_{\rm total}$) measured by the detector because the thresholds for saturation and triggering are dependent only upon the detector's total measured signal.
@@ -765,7 +765,7 @@ The inclusion of $\epsilon$ is purely theoretical and only used to describe the 
 The laws of total expectation and variance can then be used to derive $E\left[\hat{S}^{\mu}\right]=\mu$ and Var$(\hat{S}^{\mu})=\sigma_{\rm tot}^{2}$.
 The true signal is assumed to be $S^{\mu}_{\rm MC}\,=\,kN$ with $k$ the per-muon signal in VEM measured at the station, and $N$ the number of muons arriving at the tank following a Poisson distribution.
 $k$ is dependent upon how muons deposit energy within the water-Cherenkov detectors; however, for simplicity, the Langau (the Landau convolved with the Gaussian detector response) energy deposit is ignored and instead it is assumed the muons only deposit energy in the detector dependent upon their track length.
-Further, it is assumed there is no spread in this value and that all muons travel perpendicular to the air-shower axis, meaning a simple zenith angle dependence of $k$ is sufficient.
+Further, it is assumed there is no spread in this value and that all muons travel parallel to the air-shower axis, meaning a simple zenith angle dependence of $k$ is sufficient.
 
 With these assumptions, $k$ is given by
 
@@ -774,15 +774,15 @@ With these assumptions, $k$ is given by
 \end{equation}
 
 \noindent
-where the second term is the volume of the water-Cherenkov detector, with radius $R$ and height $h$, divided by its projected into the shower axis, yielding a track length through the detector.
+where the second term is the volume of the water-Cherenkov detector, with radius $R$ and height $h$, divided by its projection into the shower plane, yielding a track length through the detector.
 The first term is ratio of signal to height deposited for a vertical, central, and through-going muon.
 In reality, this ratio is measured to calibrate the water-Cherenkov detectors of Auger and depends on the muon energy deposit and detector response; however, again for simplicity, it is assumed that $k_{\rm VEM}\,=\,$\qty{1}{VEM}.
 Returning to the expectation and variance of $\hat{S}^{\mu}$, the derivations, given all assumptions, result in
 
-\begin{eqnarray}
-  \mu & = & S^{\mu}\left(1 + b_{\rm eff}\right) \label{eq:smu_expectation} \\
-  \sigma_{\rm tot}^{2} & = & k(\theta)S^{\mu}\left[\left(1 + b_{\rm eff}\right)^{2} + \sigma_{\rm eff}^{2}\right] + \left(S^{\mu}\sigma_{\rm eff}\right)^{2} \label{eq:smu_total_variance}
-\end{eqnarray}
+\begin{align}
+  \mu &= S^{\mu}\left(1 + b_{\rm eff}\right) \label{eq:smu_expectation} \\
+  \sigma_{\rm tot}^{2} &= k(\theta)S^{\mu}\left[\left(1 + b_{\rm eff}\right)^{2} + \sigma_{\rm eff}^{2}\right] + \left(S^{\mu}\sigma_{\rm eff}\right)^{2} \label{eq:smu_total_variance}
+\end{align}
 
 \noindent
 where $S^{\mu}$ is the muon signal model,~\Cref{eq:mldf}.
@@ -813,24 +813,24 @@ This approximation is worst in the limit of non-triggered stations, therefore th
 
 \noindent
 where the signals must be converted into single muons.
-Signal conversions are defined as $N_{i}\,=\,S_{\text{total}, i} / k(\theta)$ and $N_{\rm th}\,=\,S_{\rm th} / k(\theta)$, with $k(\theta)$ the zenith-dependent per-muon signal from~\Cref{eq:track_length}.
+Explicitly, this signal conversion is $N_{\rm th}\,=\,S_{\rm th} / k(\theta)$ rounded down to the nearest integer, with $k(\theta)$ the zenith-dependent per-muon signal from~\Cref{eq:track_length}.
 The assumption taken here is the total signal for the low-signal regimes of silent stations is completely muonic.
-This is an incomplete, but fair, assumption to make for silent stations as these will be stations far from the air-shower core where little to no electromagnetic shower component survives.
-Additionally, this sum is only taken to $N_{\rm th}\,=\,1$ in the likelihood because single muons should be enough to trigger a water-Cherenkov detector.
+This is an incomplete, but fair, assumption to make for silent stations as these will be stations far from the air-shower axis where little to no electromagnetic shower component survives.
+The trigger threshold for an Auger water-Cherenkov detector is $S_{\rm th}\,=\,$\qty{3.2}{VEM}, meaning the summation in~\Cref{eq:silent} is only calculated up to a maximum of $N_{\rm th}\,=\,2$ or $N_{\rm th}\,=\,3$, dependent upon the zenith angle of the event. 
 
 In the fitting procedure, a negative log likelihood minimization process will be used to estimate $S^{\mu}_{450}$ and $\beta$.
 The joint likelihood then becomes,
 
-\begin{eqnarray}
-  -\ln\mathcal{L}\left(S^{\mu}_{450}, \beta\right) & = & -\sum_{i = 1}^{N_{\rm sat}} \ln\left[1 - \Phi\left(\frac{S_{\rm sat} - \mu}{\sigma}\right)\right] \times \nonumber\\
-   & & -\sum_{i = 1}^{N_{\rm trig}} \ln\left[\frac{1}{\sqrt{2\pi\sigma_{\rm tot}^{2}}}\exp\left( - \frac{(\hat{S}^{\mu}_{i} - \mu)^{2}}{2\,\sigma_{\rm tot}^{2}}\right)\right] \times \nonumber\\
-   & & -\sum_{i = 1}^{N_{\rm sil}} \ln\left[\sum_{N = 0}^{1} \frac{\lambda_{i}^{N}e^{-\lambda_{i}}}{N!}\right]. \label{eq:joint_nll}
-\end{eqnarray}
+\begin{align}
+  -\ln\mathcal{L}\left(S^{\mu}_{450}, \beta\right) = & -\sum_{i = 1}^{N_{\rm sat}} \ln\left[1 - \Phi\left(\frac{S_{\rm sat} - \mu}{\sigma}\right)\right] \times \nonumber\\
+   & -\sum_{i = 1}^{N_{\rm trig}} \ln\left[\frac{1}{\sqrt{2\pi\sigma_{\rm tot}^{2}}}\exp\left( - \frac{(\hat{S}^{\mu}_{i} - \mu)^{2}}{2\,\sigma_{\rm tot}^{2}}\right)\right] \times \nonumber\\
+   & -\sum_{i = 1}^{N_{\rm sil}} \ln\left[\sum_{N = 0}^{1} \frac{\lambda_{i}^{N}e^{-\lambda_{i}}}{N!}\right]. \label{eq:joint_nll}
+\end{align}
 
 \noindent
 Note the joint likelihood does not apply a penalty for the uncertainty in the Auger SD reconstructed core location.
 Uncertainties in the core position for Auger SD reconstructed air showers are typically between \qtyrange{50}{100}{\meter}, with both an energy and zenith dependence~\cite{auger_jinst2020_sdreconstruction}.
-Shifting the core location within this uncertainty has an impact not only on the total signal measured by each station, but also on the potential status of each station.
+Shifting the core location within this uncertainty has an impact not only on the total signal measured by each station and their locations within the shower plane (i.e. their distance to the air-shower axis), but also on the potential status of each station.
 Accounting for the Auger SD reconstructed core uncertainty should be implemented to the joint likelihood in a future iteration of the analysis.
 
 The validation and test datasets contains no silent or saturated stations because stations with these signals were removed from the dataset prior to applying the splits described in~\Cref{ssec:selection}.
@@ -937,7 +937,7 @@ Notably, this observable exhibits lesser proton-iron separation power than the $
 
 Intermediate mass separation seems challenging with the neural network predicted signals given the absolute proton-iron merit factor values reported here.
 However, this observable still stands to enhance the air-shower mass sensitivity when combined with $X_{\rm max}$.
-The addition of $X_{\rm max}$ information with the $S^{\mu}_{450}$ observable reconstructed from the neural network predictions is represented visually in~\Cref{fig:smu450_xmax_contour}.
+The addition of $X_{\rm max}$ information with the $S^{\mu}_{450}$ observable represented visually in~\Cref{fig:smu450_xmax_contour} for $S^{\mu}_{450}$ reconstructed from the MC muon signals (left) and the neural network predictions (right).
 A separation between the proton and iron distributions is visible, yet large overlap between the 90\% contours exists.
 Important to note is this contour plot shows all data of the EPOS LHC-R validation set, including all energies and zenith angles.
 
@@ -965,7 +965,7 @@ The neural network based observable also adds to the overall mass sensitivity at
   \label{fig:smu450_xmax_fom}
 \end{figure}
 
-\subsection{Investigating a Muon Observable at a Larger Distance From the Air-Shower Core}\label{ssec:smu800}
+\subsection{Investigating a Muon Observable at a Larger Distance From the Air-Shower Axis}\label{ssec:smu800}
 The mass sensitivity results of combining the $S^{\mu}_{450}$ and $X_{\rm max}$ observables are not as promising as previously hoped.
 $S^{\mu}_{450}$ as extracted from fitting a muon LDF to the true muon signals from Monte Carlo simulations increases the proton-iron mass sensitivity by a small, yet appreciable, amount across the full energy range of $\lg(E_{\rm MC}$ / eV)$\,=\,$\numrange{17.5}{18.5} studied here.
 However, the mass sensitivity decreases when replacing this event-level muon observable by its equivalent value extracted from fitting a muon LDF to the neural network predicted muon signals.
@@ -1048,10 +1048,10 @@ The following chapter will investigate exactly this with data.
 
 %This mass sensitivity could be exploited using the SD-1500 array, as the reference distance 
 
-%this mass sensitivity increases at farther distances than \qty{450}{\meter} from the reconstructed air-shower core, such as at the reference distance of \qty{1000}{\meter} used for the SD-1500.
+%this mass sensitivity increases at farther distances than \qty{450}{\meter} from the reconstructed air-shower axis, such as at the reference distance of \qty{1000}{\meter} used for the SD-1500.
 
 %Furthermore, the analysis of~\Cref{chap:nn} shows a reconstruction of the muonic signal at the SD-750 reference distance is feasible in simulations using neural network based predictions of the station-level muonic signal traces.
-%This event-level muon signal the SD-750 is mass sensitive; however, this mass sensitivity could increase at farther distances than \qty{450}{\meter} from the reconstructed air-shower core, such as at the reference distance of \qty{1000}{\meter} used for the SD-1500.
+%This event-level muon signal the SD-750 is mass sensitive; however, this mass sensitivity could increase at farther distances than \qty{450}{\meter} from the reconstructed air-shower axis, such as at the reference distance of \qty{1000}{\meter} used for the SD-1500.
 %The results of this thesis hence motivate the application of the procedure and analysis of~\Cref{chap:nn} to the SD-1500 array.
 
 %However, the SD-1500 array has a reference distance of \qty{1000}{\meter} from the air-shower axis.
@@ -1101,10 +1101,10 @@ The following chapter will investigate exactly this with data.
 %where that event's nominal fit parameters of $S^{\mu}_{450}$ and $\beta$ from the muon LDF fit are assumed.
 %The mass sensitivity of this $S^{\mu}_{800}$ muon observable is studied 
 
-%the muon LDF is evaluated per-event at \qty{800}{\meter} from the air-shower core using the nominal fit parameter values of $S^{\mu}_{450}$ and $\beta$ derived from that event's muon LDF fit to the neural network predicted muon signals.
+%the muon LDF is evaluated per-event at \qty{800}{\meter} from the air-shower axis using the nominal fit parameter values of $S^{\mu}_{450}$ and $\beta$ derived from that event's muon LDF fit to the neural network predicted muon signals.
 %The resulting 
 
-%nominal $S^{\mu}_{450}$ and $\beta$ fit parameters are used to evaluate the muon LDF per-event at \qty{800}{\meter} from the air-shower core, resulting in a measurement of 
+%nominal $S^{\mu}_{450}$ and $\beta$ fit parameters are used to evaluate the muon LDF per-event at \qty{800}{\meter} from the air-shower axis, resulting in a measurement of 
 
 %the per-event nominal fit parameters are used to e
 
@@ -1112,9 +1112,9 @@ The following chapter will investigate exactly this with data.
 
 %a simple test of evaluating the muon LDF per-event using the 
 
-%Using a reference distance from the air-shower core greater than \qty{450}{\meter} could improve the mass sensitivity of the muon observable derived from the muon LDF fit
+%Using a reference distance from the air-shower axis greater than \qty{450}{\meter} could improve the mass sensitivity of the muon observable derived from the muon LDF fit
 
-%Using a reference distance for the muon LDF fit farther than \qty{450}{\meter} from the air-shower core could improve the mass sensitivity of the muon observable and, therefore, improve the mass sensitivity of this observable's combination with $X_{\rm max}$.
+%Using a reference distance for the muon LDF fit farther than \qty{450}{\meter} from the air-shower axis could improve the mass sensitivity of the muon observable and, therefore, improve the mass sensitivity of this observable's combination with $X_{\rm max}$.
 
 % Smu800 vs. mc energy plots
 % smu800 vs. xmax contours
