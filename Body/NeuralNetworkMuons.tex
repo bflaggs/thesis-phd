@@ -611,7 +611,7 @@ To extract this event-level observable, a modified NKG function, given by
 \noindent
 is used as a model to fit the lateral distribution of muon signals.
 Auger UMD analyses show this muon lateral distribution function (LDF) provides an accurate model of the measured UMD data, hence motivating this choice of model to fit the neural network predictions~\cite{joaquindejesus_phd2025}.
-An important distinction between the models is the model used to fit the UMD data predicts the muon density at a reference distance; however, this model predicts the muon signal at a reference distance instead.
+An important distinction between the LDF models is the model used to fit the UMD data predicts the muon density at a reference distance; however, this model predicts the muon signal at a reference distance instead.
 The assumption taken within this analysis is the muon signal LDF follows the muon density LDF up to an unaccounted for multiplicative factor.
 
 Mathematically, the LDF shape is determined by three separate terms, $\alpha$, $\beta$, and $\gamma$, which describe how stations at different distances contribute to the overall LDF.
@@ -621,7 +621,7 @@ The $\alpha$, $\gamma$, and $r_{0}$ parameters are fixed to $\alpha=0.75$, $\gam
 
 The reference distance, as described in~\Cref{chap:auger}, depends on the geometry of the detector array at ground.
 The neural network predicts the muon signal at station level for the SD-750 array, therefore \qty{450}{\meter} is chosen for $r_{\rm ref}$.
-This distance minimizes systematic effects within the LDF shape for both the SD as stated in~\Cref{sec:reconstruction}, and also for the UMD~\cite{diego_astropartphys2015_mldf}.
+This distance minimizes systematic effects within the LDF shape for the SD, as stated in~\Cref{sec:reconstruction}, and also for the UMD~\cite{diego_astropartphys2015_mldf}.
 Left as free parameters of the model are $\beta$, which determines the slope of the muon LDF near the reference distance, and $S^{\mu}_{450}$, a per-event measurement of the muonic signal within a station located at \qty{450}{\meter} from the air-shower axis.
 However, the neural network accuracy and precision need to be quantified and a fit likelihood must be defined prior to fitting the network predictions to~\Cref{eq:mldf}.
 
@@ -644,14 +644,14 @@ As shown in~\Cref{ssec:multi_performance}, both the bias and resolution exhibit 
 The same three observables from~\Cref{ssec:multi_performance}, the total signal measured by the station, the reconstructed station distance to the air-shower axis, and the reconstructed zenith angle of the event, are used to parameterize the neural network accuracy and precision.
 These parameterization observables were chosen for two reasons.
 First, all three observables directly influence the muonic component of the signal, and second, all three observables are available for both simulations and data.
-The network predictive power has an additional dependence on the true primary-particle mass, as seen in the plots and described in the text of~\Cref{sec:performance}, therefore parameterizations must be built per primary.
+The network predictive power has an additional dependence on the true primary-particle mass, as seen in the plots and described in the text of~\Cref{sec:performance}, therefore parameterizations must be built per primary from simulations.
 
 Observable binning is performed on the full EPOS LHC-R validation dataset, where these bins are used to to build the per-primary parameterizations.
 The base-10 logarithm of the total signal is binned in six bins of equal statistics and $r_{\rm SD}$ is binned in eight bins of equal distance.
 Each of these observables have a binning range defined by their minimum and maximum values within the validation set.
 $\theta_{\rm SD}$ is binned within four equally spaced bins of $\sin^{2}(\theta_{\rm SD})$, with a bin range between $\theta_{\rm SD}=$\qtyrange{0}{58}{\degree}.
 The $\theta_{\rm SD}$ approximately contain equal statistics because the distribution of $\theta_{\rm SD}$ is flat under a $\sin^{2}$ transformation.
-To visualize the parameterization space, think of these bins as mapping a three-dimensional box, where the box origin is the starting bin edge of each observable and each observable is a single dimension of the box.
+To visualize the parameterization space, think of these bins as mapping a three-dimensional box, where the box origin is the edge of the starting bin of each observable and each observable is a single dimension of the box.
 In this thought experiment of the bin mapping, valid bins follow the diagonal of the box due to the inverse relationship of $S_{\rm total}$ and $r_{\rm SD}$, meaning bins close to the shower axis have high total signals and bins far from the shower axis have low total signals.
 A bin far from the shower axis with high total signal is unphysical, making this an unfilled bin in the phase space.
 
@@ -664,7 +664,7 @@ Bins must contain at least 20 stations of data for each primary; however, if one
 The count-weighted average is calculated per primary, meaning only neighboring bins of the same primary particle contribute to the weighted average of the low statistics bin. 
 
 Once all valid bins have been defined, an interpolation between the bins is performed to generate two smooth three-dimensional meshes, one of the bias and one of the resolution.
-The interpolations are built per primary; however, the bias and resolution must be each be reported as a single value.
+The interpolations are built per primary; however, the bias and resolution must each be reported as a single value.
 A mass-weighted bias and resolution are therefore calculated from the interpolations to construct an effective bias, $b_{\rm eff}$, and an effective resolution, $\sigma_{\rm eff}$.
 The effective bias and resolution can be derived using the laws of total expectation and variance applied to $\delta$, where $\delta$ is defined as the relative difference from~\Cref{eq:metric}.
 Additional assumptions for the derivation include $P(A)=w_{A}$, with $\sum_{A}w_{A}=1$, and the conditional statements $E\left[\delta|A\right]=b_{A}$ and Var$(\delta|A)=\sigma_{A}^{2}$, where $b_{A}$ and $\sigma_{A}$ are the bias and resolution of mass group $A$. 
@@ -687,8 +687,8 @@ with the square of the effective resolution (the effective variance) given by
 In both equations $w_{A}$ represents the mass weights, with $A\in\left[\rm p, He, O, Fe\right]$.
 The mass weights are defined as the mass fractions of the input dataset to the network, which for the validation set is 0.25 for each of the four primary mass groups.
 With data, a measurement of the mass fractions independent of the neural network, such as the Auger FD measurements, should be used; however, this introduces an energy dependence on the mass fractions and therefore also on the effective bias and resolution.
-Furthermore, the individual mass biases and resolutions are functions of total signal, reconstructed distance to the air-shower axis, and reconstructed zenith angle, i.e. $b_{A}\left(S_{\rm total}, r_{\rm SD}, \theta_{\rm SD}\right)$ and $\sigma_{A}\left(S_{\rm total}, r_{\rm SD}, \theta_{\rm SD}\right)$.
-Hence, an effective bias and resolution can be calculated for any station with values of these three observables within their defined phase spaces.
+The individual mass biases and resolutions are functions of total signal, reconstructed distance to the air-shower axis, and reconstructed zenith angle, i.e. $b_{A}\left(S_{\rm total}, r_{\rm SD}, \theta_{\rm SD}\right)$ and $\sigma_{A}\left(S_{\rm total}, r_{\rm SD}, \theta_{\rm SD}\right)$.
+Hence, an effective bias and resolution can be calculated for any station with values of these three observables within their defined parameterization phase spaces.
 This is necessary for triggered stations to inform the fit likelihood, as discussed in the following section. 
 Equally as important, this allows the same parameterization of the network bias and resolution to be used for both simulations and data, up to the assumed mass fractions.
 
@@ -728,7 +728,7 @@ Statuses include:
 \begin{itemize}
   \item \textit{Saturated stations}: stations measuring a total signal above the saturation threshold, $S_{\rm sat}$, of the PMTs.
   \item \textit{Triggered stations}: stations measuring a total signal above the trigger threshold, $S_{\rm th}$, but below the saturation threshold.
-  \item \textit{Silent stations}: stations that did not trigger and therefore do not have a measured signal, also known as non-triggered stations.
+  \item \textit{Silent stations}: non-triggered stations with a total signal below the trigger threshold,  $S_{\rm th}$.
 \end{itemize}
 
 \noindent
@@ -775,7 +775,7 @@ With these assumptions, $k$ is given by
 
 \noindent
 where the second term is the volume of the water-Cherenkov detector, with radius $R$ and height $h$, divided by its projection into the shower plane, yielding a track length through the detector.
-The first term is ratio of signal to height deposited for a vertical, central, and through-going muon.
+The first term is the ratio of signal to height deposited for a vertical, central, and through-going muon.
 In reality, this ratio is measured to calibrate the water-Cherenkov detectors of Auger and depends on the muon energy deposit and detector response; however, again for simplicity, it is assumed that $k_{\rm VEM}\,=\,$\qty{1}{VEM}.
 Returning to the expectation and variance of $\hat{S}^{\mu}$, the derivations, given all assumptions, result in
 
@@ -802,7 +802,7 @@ This signal phase space requires the saturated station probability to be modeled
 with $\Phi$ the cumulative distribution function of a Gaussian distribution.
 The mean and variance of the saturated station distribution is derived in the same manner as for the triggered station distribution, therefore $\mu$ and $\sigma$ of this equation are given by~\Cref{eq:smu_expectation} and~\Cref{eq:smu_total_variance} respectively.
 Yet, an effective bias and effective resolution can not be calculated directly because the saturated stations measure total signals outside the parameterization region defined in~\Cref{ssec:parameterization}.
-Instead, the effective bias and resolutions for saturated stations are assumed to be the median values of the effective bias and resolution across the entire triggered-station phase space, resulting in $b_{\rm eff}\,=\,0.0129$ and $\sigma_{\rm eff}\,=\,0.2153$ for the saturated stations.
+Instead, the effective bias and resolutions for saturated stations are assumed to be the median values of the effective bias and resolution across the entire triggered-station phase space, resulting in $b_{\rm eff}\,=\,0.0129$ and $\sigma_{\rm eff}\,=\,0.2153$ for the saturated stations when assuming equal mass fractions.
 
 In the low-signal regime, the Gaussian approximation of the likelihood begins to worsen.
 This approximation is worst in the limit of non-triggered stations, therefore the probability of silent stations is modeled using a Poissonian distribution with
@@ -865,7 +865,7 @@ $\beta$, serving as the ``lever arm'' of the fit near the \qty{450}{\meter} refe
 A clear, almost one-to-one, linear relationship is seen between the muon signal at the reference distance of the neural network predictions ($\hat{S}^{\mu}_{450}$) and the same value for the MC truth data ($S^{\mu}_{450}$).
 Small, off-diagonal, islands in the two-dimensional histogram are bins with a single entry showing disagreement between the RNN predicted and MC truth muon LDF fits.
 The Pearson $r$ correlation coefficient is used to quantify the correlation of the two distributions and is calculated to be 0.96, proving a high correlation between the fits.
-The calculated Pearson $r$ near one further validates the network's predictive power; however, is calculated for the full validation dataset over all primaries, energies and zenith angles.
+The calculated Pearson $r$ of nearly 1.0 further validates the network's predictive power, yet is calculated for the full validation dataset over all primaries, energies and zenith angles.
 Further cutting the dataset to contain only near-vertical air showers with $\sec(\theta_{\rm SD}\,=\,$\numrange{1.0}{1.2} results in a Pearson $r$ correlation of 0.93.
 
 \begin{figure}
@@ -877,8 +877,8 @@ Further cutting the dataset to contain only near-vertical air showers with $\sec
 
 Investigating this correlation for individual primaries shows similar results, as seen in~\Cref{fig:nn_mc_comparison_primaries}.
 Again, the bias introduced from the neural network is seen, with the neural network showing an overprediction of $S^{\mu}_{450}$ compared to the MC truth for proton, and an underprediction observed for iron.
-The shower physics can also be seen within the plots by proton having a larger spread than iron in the two-dimensional distribution, highlighting the larger shower-to-shower fluctuations for proton.
-This effect is also visible within the Pearson $r$ correlation coefficient, with iron yielding a coefficient closer to one.
+The shower physics can also be seen within the plots by proton having a slightly larger spread than iron in the two-dimensional distribution, highlighting the larger shower-to-shower fluctuations for proton.
+This effect is also visible within the Pearson $r$ correlation coefficient, with iron yielding a coefficient closer to 1.0.
 
 \begin{figure}
   \centering
@@ -897,7 +897,7 @@ The plots to analyze the network predictive power and extracted observables from
 The final goal is to use this per-event muon observable as a proxy to the total muon content of the air shower and therefore an indirect proxy of the primary cosmic-ray mass.
 The mass sensitivity of this observable as a function of true air-shower energy can already be approximated here using the validation dataset.
 \Cref{fig:smu450_energy} shows the proton and iron distributions of $S^{\mu}_{450}$ as a function of the true MC air-shower energy for both the fits performed to the true MC muon signals and the RNN predicted muon signals.
-The average of the proton and iron distributions are calculated in bins of width $\lg(E_{\rm MC}$ / eV)$\,=\,$0.2 and included on the plots to highlight the average separation between the proton and iron primaries.
+The average of the proton and iron distributions are calculated in bins of width $\lg(E_{\rm MC}$ / eV)$\,=\,$0.2 and are included on the plots to highlight the average separation between the proton and iron primaries.
 Both the true and predicted muon signals show a separation between proton and iron primaries for this per-event muon observable, with the true muon signals showing a higher separation.
 This is expected given the proton-iron separation seen in the average muon LDFs from~\Cref{ssec:feasibility}.
 
@@ -937,14 +937,15 @@ Notably, this observable exhibits lesser proton-iron separation power than the $
 
 Intermediate mass separation seems challenging with the neural network predicted signals given the absolute proton-iron merit factor values reported here.
 However, this observable still stands to enhance the air-shower mass sensitivity when combined with $X_{\rm max}$.
-The addition of $X_{\rm max}$ information with the $S^{\mu}_{450}$ observable represented visually in~\Cref{fig:smu450_xmax_contour} for $S^{\mu}_{450}$ reconstructed from the MC muon signals (left) and the neural network predictions (right).
+The addition of $X_{\rm max}$ information with the $S^{\mu}_{450}$ observable is represented visually in~\Cref{fig:smu450_xmax_contour} for $S^{\mu}_{450}$ reconstructed from the MC muon signals (left) and the neural network predictions (right).
 A separation between the proton and iron distributions is visible, yet large overlap between the 90\% contours exists.
-Important to note is this contour plot shows all data of the EPOS LHC-R validation set, including all energies and zenith angles.
+Important to note is this contour plot shows a subset of events within an energy range of $\lg(E_{\rm MC}$ / eV)$\,=\,$\numrange{18.3}{18.5} and a zenith range of $\theta_{\rm SD}\,=\,$\qtyrange{0}{58}{\degree} for the EPOS LHC-R validation set.
 
 \begin{figure}
   \centering
-  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.7\textwidth]{chapter5/xmax_smu450_nn_prediction_protoniron_lgE17.5_17.7_zen0_58_Contours_smu450_nn_xmax.pdf}
-  \caption[$X_{\rm max}$ and neural network predicted $S^{\mu}_{450}$ contours.]{The proton and iron contours of the EPOS LHC-R validation set mapping the distributions of $S^{\mu}_{450}$ as extracted from the muon LDF fit to the neural network predictions and $X_{\rm max}$ taken from MC. Both the 68\% and 90\% contours are shown, where each contour is mapped over all energies and zenith angles. A hard lower limit of $S^{\mu}_{450}$ is seen, showing the minimum value of the observable.}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.48\textwidth]{chapter5/xmax_smu450_mc_truth_protoniron_lgE18.3_18.5_zen0_58_KDEContours_smu450_mc_xmax.pdf}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.4833\textwidth]{chapter5/xmax_smu450_nn_prediction_protoniron_lgE18.3_18.5_zen0_58_KDEContours_smu450_nn_xmax.pdf}
+  \caption[$X_{\rm max}$ and neural network predicted $S^{\mu}_{450}$ contours.]{The proton and iron contours of the EPOS LHC-R validation set mapping the distributions of $S^{\mu}_{450}$ as extracted from the muon LDF fit and $X_{\rm max}$ taken from MC. The left plot shows $S^{\mu}_{450}$ as extracted from the MC muon signals and the right plot shows $S^{\mu}_{450}$ as extracted from the neural network predictions. Both the 68\% and 90\% contours are shown, where each contour is mapped over $\lg(E_{\rm MC}$ / eV)$\,=\,$\numrange{18.3}{18.5} and $\theta_{\rm SD}\,=\,$\qtyrange{0}{58}{\degree}.}
   \label{fig:smu450_xmax_contour}
 \end{figure}
 
@@ -971,7 +972,7 @@ $S^{\mu}_{450}$ as extracted from fitting a muon LDF to the true muon signals fr
 However, the mass sensitivity decreases when replacing this event-level muon observable by its equivalent value extracted from fitting a muon LDF to the neural network predicted muon signals.
 The results still show an increase in mass sensitivity over knowledge of $X_{\rm max}$ alone, but this additional mass sensitivity is relatively small for the neural network based event-level $S^{\mu}_{450}$ muon observable.
 
-As stated in the previous section, the $S^{\mu}_{450}$ observable exhibits lesser proton-iron separation power than the $\lg(N_{\mu})$\,\qty{800}{\meter} observable used in the mass sensitivity analysis of~\Cref{chap:simulations}.
+As also stated in the previous section, the $S^{\mu}_{450}$ observable exhibits lesser proton-iron separation power than the $\lg(N_{\mu})$\,\qty{800}{\meter} observable used in the mass sensitivity analysis of~\Cref{chap:simulations}.
 The lesser separation power is partly dependent on the choice of reference distance, as the results of~\Cref{app:annulus} show the muon number, as measured within reference annuli at different distances to the air-shower axis, generally increases in proton-iron mass sensitivity as the distance to the air-shower axis also increases.
 In the context of the neural network derived muon observable, a distance from the air-shower axis greater than \qty{450}{\meter} could therefore improve the mass sensitivity of the muon LDF fit-derived observable.
 Yet, changing the reference distance used in the muon LDF fit is not feasible with the SD-750 array, as \qty{450}{\meter} is the optimized reference distance for this array spacing and geometry.
@@ -1002,8 +1003,8 @@ This result is also seen in~\Cref{fig:average_mldf}, where the largest separatio
   \label{fig:smu800_energy}
 \end{figure}
 
-The additional mass sensitivity $S^{\mu}_{800}$ adds when combined with knowledge of $X_{\rm max}$ is studied using the Fisher linear discriminant in tandem with the FOM metric.
-Both the individual and combined proton-iron separation power curves of $S^{\mu}_{800}$ and $X_{\rm max}$ as functions of true air-shower energy are presented in~\Cref{fig:smu800_xmax_fom}.
+The additional mass sensitivity of $S^{\mu}_{800}$ when combined with knowledge of $X_{\rm max}$ is studied using the Fisher linear discriminant in tandem with the FOM metric.
+Both the individual and combined knowledge proton-iron separation power curves of $S^{\mu}_{800}$ and $X_{\rm max}$ as functions of true air-shower energy are presented in~\Cref{fig:smu800_xmax_fom}.
 The top plot shows these results for $S^{\mu}_{800}$ derived from the MC muon signals, while the bottom plot shows results for $S^{\mu}_{800}$ derived from the network predicted signals.
 $S^{\mu}_{800}$ adds to the overall mass sensitivity of $X_{\rm max}$ alone across the full studied energy range, where the mass sensitivity of the combined $S^{\mu}_{800}$ and $X_{\rm max}$ observables is clearly greater than the mass sensitivity of the combined $S^{\mu}_{450}$ and $X_{\rm max}$ observables presented in~\Cref{fig:smu450_xmax_fom}.
 Furthermore, when comparing the mass sensitivity of individual observables, the $S^{\mu}_{800}$ observable is more mass sensitive than the $S^{\mu}_{450}$ for all studied energies and zenith angles.
@@ -1024,7 +1025,7 @@ These results hold for both the muon observables as determined from fits to the 
   \label{fig:smu800_xmax_fom}
 \end{figure}
 
-Overall, this chapter shows a reconstruction of the muonic signal at the SD-750 reference distance is feasible in simulations using neural network based predictions of the station-level muonic signal traces.
+Overall, a reconstruction of the muonic signal at the SD-750 reference distance is feasible using neural network based predictions of the station-level muonic signal traces.
 This event-level muon signal at the SD-750 reference distance is mass sensitive; however, its mass sensitivity increases when measured at a distance farther than \qty{450}{\meter} from the reconstructed air-shower axis.
 The increased mass sensitivity of the muon observable at farther distances to the air-shower axis could be exploited with the SD-1500 array, which has a reference distance of \qty{1000}{\meter} based on its array spacing and geometry.
 An application of this network and muon LDF fitting procedure to vertical air showers measured by the SD-1500 array, combined with $X_{\rm max}$ measurements from the Auger FD, could yield a higher mass separation over FD $X_{\rm max}$ measurements or SD-1500 muon predictions from a neural network alone.
