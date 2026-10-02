@@ -296,11 +296,45 @@ An application to Auger data will come soon, the results of which can be used to
 %Cosmic rays serve as a probe to the deepest depths of the known Universe.
 
 \section{Propagation Effects}\label{sec:propagation}
-Probing cosmic-ray sources and their source evolution becomes complicated due to magnetic deflection from cosmic rays traversing Galactic and extragalactic magnetic fields and, at ultra-high-energies, due to cosmic-ray energy losses from propagation effects.
-%Paragraph here on magnetic deflection
+Probing cosmic-ray sources and their source evolution becomes complicated due to cosmic-ray interactions with Galactic and extragalactic magnetic fields and, at ultra-high-energies, due to cosmic-ray energy losses from propagation effects.
+Cosmic rays, because they are charged particles, are subject to magnetic deflections along their trajectories throughout both the interstellar and intergalactic media.
+The underlying physics of these deflections are simple Lorentz force interactions, yet the deflections themselves are incredibly complex due to the turbulence and stochasticities present in the magnetic fields.
+Limitations of the magnetic field measurement techniques, or lack thereof, complicate the modeling of magnetic field properties, resulting in assumptions about the structure, strength, and distribution of the field both within and outside the Galaxy.
 
+To first order, the Galactic magnetic field is modeled as two complementary components: a coherent large-scale component the size of the Galaxy and a smaller-scale component, varying on distances up to roughly \qty{100}{parsecs}, that encapsulates the randomness of the field.
+Measurements of starlight polarization, synchrotron emission from cosmic-ray electrons, and Faraday rotation probe aspects of the Galactic magnetic field strength and structure, each with their own pros and cons (see~\cite{jaffe_galaxies2019_gmf,haverkorn_arxiv2026_gmf} for an overview). 
+Several global Galactic magnetic field models are informed by these measurements~\cite{jansson_apj2012_gmf,jansson_apjl2012_gmf,unger_apj2023_gmf,unger_arxiv2026_gmf}; however, the exact field structure and strength predicted by each model varies depending on the model's assumptions.
+Global magnetic field modeling enables particle backtracking through the Galaxy if the magnetic rigidity of the cosmic ray is known.
+The magnetic rigidity of a cosmic ray is given by
+
+\begin{equation}
+  R_{\text{B}} = \frac{pc}{Ze} \approx \frac{E}{Ze} \label{eq:rigidity}
+\end{equation}
+
+\noindent
+where $Ze$ is the charge of the cosmic ray, which, for ultra-high-energy cosmic rays that are fully ionized, determines the chemical composition (i.e. the mass) of the cosmic-ray nucleus.
+\Cref{fig:deflections} shows an example of a cosmic ray with magnetic rigidity $R_{\text{B}}=$\qty{20}{\exa\volt} backtracked from Earth to the edge of the Galaxy through several Galactic magnetic field models.
+Using~\Cref{eq:rigidity}, a cosmic ray with $R_{\text{B}}=$\qty{20}{\exa\volt} in the context of~\Cref{fig:deflections} represents a proton (iron) cosmic ray with an energy of \qty[parse-numbers=false]{20$\times$10^{18}}{\electronvolt} (\qty[parse-numbers=false]{0.8$\times$10^{18}}{\electronvolt}).
+Hence, the figure highlights the importance of both magnetic field modeling and cosmic-ray mass measurements for progress towards determining the sources of ultra-high-energy cosmic rays.
+
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.7\textwidth]{chapter1/gmf_model_deflections.pdf}
+  \caption[Cosmic-ray deflections through several Galactic magnetic field models.]{The magnetic deflections from the edge of the Galaxy to Earth calculated with numerous Galactic magnetic field models for a cosmic ray with rigidity $R_{\text{B}}=$\qty{20}{\exa\volt}. Figure taken from~\cite{teresa_icrc2025_plenary}.}
+  \label{fig:deflections}
+\end{figure}
+
+Extragalactic magnetic fields on the other hand are much less constrained than Galactic magnetic fields, partly driven by the limited understanding of how primordial extragalactic magnetic fields formed and how they have since evolved.
+In addition, they span a large range of astrophysical environments, including galaxy clusters, cosmic filaments that follow the large-scale structure of the Universe, and the inter-filament voids that separate filament arms, complicating global extragalactic field models.
+Measurements of the extragalactic field strength can be performed, such as using a radio astronomy method known as Faraday tomography~\cite{akahori_pasj2014_faradaytomography}, while limits on the magnetic field of the early Universe can be calculated using measurements of the Cosmic Microwave Background (CMB)~\cite{jedamzik_prl2018_egmflimits}.
+Yet, modeling the large-scale structure of extragalactic magnetic fields requires intensive N-body magnetohydrodynamic simulations which are sensitive to the seeding of the initial magnetic field within the simulation~\cite{garaldi_mnras2020_egmfseed}.
+Magnetic horizon effects, where cosmic rays never reach Earth and instead continuously deflect from magnetic fields, are also possible for ultra-high-energy cosmic rays propagating within the presence of strong extragalactic magnetic fields.
+Even so, the extragalactic magnetic field strength within inter-filament voids, which constitute most of the known Universe, is of a lower strength than its Galactic counterpart (typically on the order of nanogauss or less compared to order microgauss for Galactic fields) and therefore plays a small role in the magnetic deflections of ultra-high-energy cosmic rays.
+A review of extragalactic magnetic fields and their modeling is given in~\cite{vachaspati_report2020_egmf}.
+
+Cosmic-ray energy loss effects also significantly effect ultra-high-energy cosmic rays propagation.
 Above an energy of approximately \qty[parse-numbers=false]{10^{18}}{\electronvolt}, cosmic-ray interactions with background photon fields become the dominant energy loss mechanism over the adiabatic energy losses from the expansion of the Universe.
-Above this threshold, proton cosmic rays will begin to interact with the Cosmic Microwave Background (CMB) via Bethe-Heitler pair production:
+Above this threshold, proton cosmic rays will begin to interact with the CMB via Bethe-Heitler pair production:
 
 \begin{equation}
   p + \gamma_{\text{CMB}} \rightarrow p + e^{+} + e^{-}, \label{eq:cmb_pairproduction}
