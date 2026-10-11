@@ -2,16 +2,166 @@
 % Cosmic-ray air showers and their physics (chapter 2)
 %
 \chapter{Cosmic-Ray Air Showers}\label{chap:airshowers}
-Intro, Heitler-Matthews Model.
+Cosmic rays above roughly \qty[parse-numbers=false]{10^{14}}{\electronvolt} entering Earth's atmosphere will interact with atmospheric nuclei to initiate extensive air showers, cascades of secondary particles and electromagnetic radiation.
+The primary cosmic ray is no longer directly detectable after initiating this cascade; however, features of the primary cosmic ray, such as its energy, mass, and arrival direction, are imparted on the air shower's constituent particles and radiation.
+The air-shower constituents continue to interact in the atmosphere, which acts as a calorimetric medium during the shower development, until reaching Earth's surface where they are detected using a variety of techniques.
+This chapter will introduce the physics of air showers, including air-shower modeling and the relation of air-shower components to the primary cosmic ray, while~\Cref{chap:auger} will introduce the air-shower detection techniques implemented by the Pierre Auger Observatory.
 
-\section{Hadronic Cascade}\label{sec:hadronic}
-\subsection{Muonic Component}\label{ssec:muonic}
+%Particles surviving the at
+
+%Earth's atmosphere acts as a calorimeter throughout the shower development, where particles 
+
+%The air-shower constituents continue to interact during the shower development 
+
+%cascade equations
+%The primary (i.e.~interacting) cosmic ray is no longer directly detectable once it initiates an air shower; however, characteristics of the primary cosmic ray are imparted to the 
+
+%The secondary particles and radiation continue to interact in the atmosphere generating further secondary particles and radiation until it is no longer energetically favorable for these interactions to occur.
+
+%These ``snowball effects'' compile, resulting in both a large lateral spread in the shower footprint at ground and 
+
+%of up to tens of kilometers in width and 
+
+%This ``snowball effect'' results in a large 
+
+%The first interaction is extremely energetic and generates secondary particles which then continue to interact in the atmosphere
+
+%where primary (i.e.~interacting) cosmic rays of energy  
+%The interactions snowball into generating more secondary particles and radiation until it is no longer energetically favorable for these interactions to occur.
+%The interactions snowball, leading to both a large lateral size and number of particles within the shower.
+
+%Throughout the air-shower's development, Earth's atmosphere acts as a calorimeter where several components of the air shower are used to probe properties of the primary cosmic ray, including it's energy and atomic mass.
+
+%Cosmic rays above roughly \qty[parse-numbers=false]{10^{14}}{\electronvolt} entering Earth's atmosphere will interact with atmospheric nuclei, generating secondary particles and electromagnetic radiation.
+%These secondaries continue to interact in the atmosphere, resulting 
+
+%As mentioned in the previous chapter, cosmic-ray air showers are cascades of secondary particles and electromagnetic radiation initiated by a cosmic ray interacting with an atmospheric n
+
+%Intro, Heitler-Matthews Model.
+
+\section{Air Shower Development}\label{sec:development}
+Air showers develop in the atmosphere along the air-shower axis, the straight line that follows the trajectory of the primary cosmic ray prior to its first atmospheric interaction.
+The first interactions are of the highest energy and generate high-energy particles beamed in the forward direction parallel to the shower axis.
+Subsequent interactions generate a larger number of particles than the previous generation of interactions, resulting in more and more particles of lower energy with each generation.
+Particles resulting from these interactions can receive a significant transverse momentum in relation to the shower axis, depending upon the nature of the generating collision, which propagates throughout the shower development and contributes to a lateral spread of the air shower.
+The absolute particle number of the air shower continues to grow as the shower develops longitudinally until the particle generation processes are no longer energetically favorable.
+After this threshold, the particle number in the air shower decreases due to atmospheric attenuation until the shower front reaches Earth's surface.
+
+%Particles attenuate in the atmo
+%The lower-energy particles have smaller 
+
+%occur on shorter path lengths as the air density increases, with each generation of interaction generating a greater number of particles 
+
+%generate further particles of lower energy which interact more frequen
+%As the air density increases
+
+The development of an air shower depends on the amount of atmospheric material traversed as the shower develops, referred to as the atmospheric slant depth or simply slant depth, given by
+
+\begin{equation}
+    X = \int_{\ell}^{\infty} \rho\left( \ell^{\prime} \right) d\,\ell^{\prime} \label{eq:slant}
+\end{equation}
+
+\noindent
+where $\ell$ is the distance along the air-shower axis and $\rho\left(\ell\right)$ is the density profile of the atmosphere along the shower axis.
+The relation between the vertical altitude $h$ above sea level and $\ell$ is purely geometric and determined by the law of cosines:
+
+\begin{equation}
+    h = \sqrt{R_{\oplus}^{2} + \ell^{2} + 2\,R_{\oplus}\,\ell\,\cos\theta} - R_{\oplus} \approx \ell\,\cos\theta + \frac{1}{2}\frac{\ell^{2}}{R_{\oplus}}\sin^{2}\theta \label{eq:law_of_cosines}
+\end{equation}
+
+\noindent
+where $R_{\oplus}$ is the radius of the Earth and $\theta$ is the zenith angle of the air shower, the angle between the lines of local zenith directly beneath the point of first interaction in the atmosphere and the air-shower axis.
+The approximation in~\Cref{eq:law_of_cosines} is a first-order Taylor expansion (i.e.~truncated after two terms) taken in the limit $\ell << R_{\oplus}$.
+For a completely vertical air shower, with a zenith angle $\theta$\,=\,\qty{0}{degrees}, the traversed distance along the shower axis becomes the vertical altitude $h$ as measured above sea level and the slant depth becomes the atmospheric vertical depth
+
+\begin{equation}
+    X_{v} = \int_{h}^{\infty} \rho\left( h^{\prime} \right) d\,h^{\prime}, \label{eq:vertical_depth}
+\end{equation}
+
+\noindent
+where both the vertical and slant depths are reported in units of $\text{g}/\text{cm}^{2}$.
+For air showers with $\theta$\,=\,\qty{65}{\degree} the zeroth-order approximation from~\Cref{eq:law_of_cosines} cna be used to determine the slant depth, giving
+
+\begin{equation}
+    X = \frac{X_{v}}{\cos\theta} = X_{v}\,\sec\theta. \label{eq:slant_depth}
+\end{equation}
+
+\noindent
+This approximation assumes the atmosphere and Earth are flat, which no longer holds for $\theta>$\,\qty{65}{\degree} and instead requires the full treatment from~\Cref{eq:law_of_cosines}.
+However, the approximation in~\Cref{eq:slant_depth} highlights the direct effect of zenith angle on atmospheric material traversed, which in turn impacts the attenuation of particles during the development of an air shower.
+
+The longitudinal development of an air shower is modeled using a set of differential equations that known as the cascade equations.
+The cascade equations describe $N_{i}$, the number of particles of type $i$, as a function of the particle energies $E_{i}$ at a slant depth $X$ as
+
+\begin{equation}
+    \frac{\text{d}\,N_{i}\left(E_{i}, X\right)}{\text{d}\,X} = -\frac{N_{i}\left(E_{i}, X\right)}{\lambda_{i}} + ... \label{eq:cascade}
+\end{equation}
+
+\noindent
+with $\lambda_{i}$ amd $d_{i}$ the respective interaction and decay lengths of particle type $i$.
+%and describe $N_{i}$, the number of particles of type $i$, with energies $E_{i}$ at a slant depth $X$  
+
+%the number of particles of type $i$, defined as $N_{i}$, with energies $E_{i}$ at a slant depth $X$ as
+
+%are defined as
+
+
+%yields an intriguing result that the 
+
+%a result from~\Cref{eq:slant_depth} 
+
+
+
+%Assuming an isothermal atmosphere that behaves as an ideal gas, the density profile can be approximated as an exponential function that yields an exponential solution to the vertical depth integral
+
+%\begin{equation}
+%    X_{v} = X_{}
+%\end{equation}
+
+%Approximating the atmosphere as an ideal gas and assuming it behaves isothermally, the density 
+
+%Approximating the atmosphere as an ideal gas and he integral is taken to infinity as an approximate ``start'' of Earth's atmosphere.
+
+
+%the vertical line pointing from Earth's surface to the point of first interaction in the atmosphere and the air-shower axis.
+
+%$\ell_{2}$ is the start of the atmosphere 
+%The slant depth increases from the top of the atmosphere downwards with $\ell_{1}$ and $\ell_{2}$ 
+
+%is defined as increasing from the top of the atmosphere downwards  $\ell_{1}$ and $\ell_{2}$
+
+
+The interaction lengths and cross sections of particles traveling within Earth's atmosphere impacts the development of air showers.
+These values are dependent upon the total amount of atmospheric material traversed as the shower develops, referred to as the atmospheric slant depth, given as an integral along the air-shower a by
+
+%Air showers develop in Earth's atmosphere 
+
+
+The development of a particle cascade depends upon the density of the material traversed by the particles, which for air showers is the calorimetric medium of Earth's atmosphere.
+
+
+
+Air showers development depends upon the 
+
+
+in the calorimetric medium of Earth's atmosphere dependent upon the density of the material in which they are traversing 
+
+is dependent upon the material the shower and its constituents traverse, which is the calorimetric medium of Earth's atmosphere 
+
+Air showers traverse through the calorimetric medium of Earth's atmosphere where the shower development is directly related to the 
+Air showers are particle cascade and therefore develop 
+
+
+develop in the calorimetric medium of Earth's atmosphere dependent upon the density of the material in which they are traversing. 
 
 \section{Electromagnetic Cascade}\label{sec:electromagnetic}
 \subsection{Radio Emission from Air Showers}\label{ssec:radio}
 
+\section{Hadronic Cascade}\label{sec:hadronic}
+\subsection{Muonic Component}\label{ssec:muonic}
+
 \section{Air Shower Universality}\label{sec:universality}
-\subsection{Longitudinal Profile}\label{ssec:development}
+\subsection{Longitudinal Profile}\label{ssec:long_profile}
 
 An alternative version of the Gaisser-Hillas function, is given by:
 
@@ -36,7 +186,9 @@ Within this parameterization, $L$ represents a characteristic width of the showe
 \subsection{Shower-to-Shower Fluctuations}\label{ssec:fluctuations}
 Helium outliers from SKA proceeding and my work. Do not know where to organize it yet...
 
-\section{Particle Attenuation in the Atmosphere}\label{sec:attenuation}
-Used as motivation for including sec(zen) and r in NN
+%\section{Particle Attenuation in the Atmosphere}\label{sec:attenuation}
+%Used as motivation for including sec(zen) and r in NN
+%Not sure if a full section is necessary, maybe a subsection or just a paragraph
 
 \section{Uncertainties from Hadronic Interaction Models}\label{sec:models}
+Further complicating air shower understanding is the extrapolation of models of hadronic interactions into an energy phase space where there is yet no measurements from terrestrial particle accelerators.
