@@ -72,15 +72,19 @@ The relation between the vertical altitude $h$ above sea level and $\ell$ is pur
 \noindent
 where $R_{\oplus}$ is the radius of the Earth and $\theta$ is the zenith angle of the air shower, the angle between the lines of local zenith directly beneath the point of first interaction in the atmosphere and the air-shower axis.
 The approximation in~\Cref{eq:law_of_cosines} is a first-order Taylor expansion (i.e.~truncated after two terms) taken in the limit $\ell << R_{\oplus}$.
-For a completely vertical air shower, with a zenith angle $\theta$\,=\,\qty{0}{degrees}, the traversed distance along the shower axis becomes the vertical altitude $h$ as measured above sea level and the slant depth becomes the atmospheric vertical depth
+
+For a completely vertical air shower, with a zenith angle $\theta$\,=\,\qty{0}{\degree}, the traversed distance along the shower axis becomes the vertical altitude $h$ as measured above sea level and the slant depth becomes the vertical atmospheric depth, or simply atmospheric depth,
 
 \begin{equation}
     X_{v} = \int_{h}^{\infty} \rho\left( h^{\prime} \right) d\,h^{\prime}, \label{eq:vertical_depth}
 \end{equation}
 
 \noindent
-where both the vertical and slant depths are reported in units of $\text{g}/\text{cm}^{2}$.
-For air showers with $\theta$\,=\,\qty{65}{\degree} the zeroth-order approximation from~\Cref{eq:law_of_cosines} cna be used to determine the slant depth, giving
+where both the atmospheric and slant depths are reported in units of $\text{g}/\text{cm}^{2}$.
+For reference, assuming an isothermal atmosphere and an average altitude of \qty{1400}{\meter} for the Pierre Auger Observatory in Malarg\"{u}e, Argentina yields an atmospheric depth of approximately \qty{875}{\gram\per\centi\meter\squared}.
+In reality, the atmosphere exhibits seasonal variations and its temperature varies with altitude, both described extensively within atmospheric profile models used in air-shower simulations for theoretical studies and data validation.
+
+For air showers with $\theta<$\,\qty{65}{\degree} the zeroth-order approximation from~\Cref{eq:law_of_cosines} can be used to determine the slant depth, giving
 
 \begin{equation}
     X = \frac{X_{v}}{\cos\theta} = X_{v}\,\sec\theta. \label{eq:slant_depth}
@@ -90,15 +94,63 @@ For air showers with $\theta$\,=\,\qty{65}{\degree} the zeroth-order approximati
 This approximation assumes the atmosphere and Earth are flat, which no longer holds for $\theta>$\,\qty{65}{\degree} and instead requires the full treatment from~\Cref{eq:law_of_cosines}.
 However, the approximation in~\Cref{eq:slant_depth} highlights the direct effect of zenith angle on atmospheric material traversed, which in turn impacts the attenuation of particles during the development of an air shower.
 
-The longitudinal development of an air shower is modeled using a set of differential equations that known as the cascade equations.
-The cascade equations describe $N_{i}$, the number of particles of type $i$, as a function of the particle energies $E_{i}$ at a slant depth $X$ as
+The longitudinal development of an air shower is modeled using a set of differential equations known as the cascade equations.
+The cascade equations describe the differential flux of the the number of particles of type $i$, as a function of the particle energies $E_{i}$ at a slant depth $X$ as
+
+\begin{align}
+    \frac{\text{d}N_{i}\left(E_{i}, X\right)}{\text{d}X} = & -\frac{N_{i}\left(E_{i}, X\right)}{\lambda_{i}} - \frac{N_{i}\left(E_{i}, X\right)}{d_{i}} \nonumber\\
+    & + \sum_{j=1}^{J} \int_{E}^{\infty} \frac{F_{ji}\left(E_{i}, E_{j}\right)}{E_{i}} \, \frac{N_{j}\left(E_{j}, X\right)}{\lambda_{j}} \, \text{d}E_{j} \label{eq:cascade}
+\end{align}
+
+\noindent
+with $\lambda_{i}$ and $d_{i}$ the respective interaction and decay lengths of particle type $i$.
+The sum over $j$ represents a sum over all possible parent particles that interact to generate particles of type $i$ and contribute to the differential flux.
+Related, the function $F_{ji}\left(E_{i}, E_{j}\right)$ is a dimensionless measure of the particle production from a particle of type $j$ and energy $E_{j}$ colliding with a molecule in the atmosphere to produce a particle of type $i$ and energy $E_{i}$.
+This function is explicitly defined as
 
 \begin{equation}
-    \frac{\text{d}\,N_{i}\left(E_{i}, X\right)}{\text{d}\,X} = -\frac{N_{i}\left(E_{i}, X\right)}{\lambda_{i}} + ... \label{eq:cascade}
+    F_{ji}\left(E_{i}, E_{j}\right) = E_{i} \frac{1}{\sigma_{j\,\text{air}}^{\text{had}}} \frac{\text{d}\sigma_{j\,\text{air}\rightarrow i}}{\text{d}E_{i}} \label{eq:particle_yield}
 \end{equation}
 
 \noindent
-with $\lambda_{i}$ amd $d_{i}$ the respective interaction and decay lengths of particle type $i$.
+where $\sigma_{j\,\text{air}}^{\text{had}}$ is the total hadronic cross section for interactions between particle type $j$ and atmospheric molecules and $\sigma_{j\,\text{air}\rightarrow i}$ is the inclusive cross section for interactions of particle type $j$ and atmospheric molecules that produce a particle of type $i$.
+These interactions are limited to $E_{i}<E_{j}$ due to conservation of energy.
+
+The interaction length is dependent upon the total hadronic cross section:
+
+\begin{equation}
+    \lambda_{i} = \frac{A\,m_{p}}{\sigma_{j\,\text{air}}^{\text{had}}} \label{eq:interaction_length}
+\end{equation}
+
+\noindent
+where $A$ is the mean mass of atmospheric nuclei and $m_{p}$ is the proton mass.
+Alternatively, the decay length is proportional to the atmospheric density at altitude $h$:
+
+\begin{equation}
+    d_{i} = \rho(h)\,\gamma\,c\,\tau_{i} \label{eq:decay_length}
+\end{equation}
+
+\noindent
+with $\tau_{i}$ the lifetime at rest of particle type $i$ and $\gamma$ the Lorentz factor of the particle.
+Note that~\Cref{eq:cascade} does not account for particle energy losses in the atmosphere due to ionization, which occur naturally as a high-energy charged particle deposits energy by ionizing the medium it traverses.
+Ionization energy losses are unimportant for hadrons or high-energy electrons in an air shower; however, they become important at the critical energy, the energy where interaction losses, from radiative or hadronic processes, equal energy losses due to ionization. 
+The critical energy will be discussed further in the coming sections.
+An in depth description of the cascade equations, both generally and for specific particle types, is provided in~\cite{tom_book}.
+
+The cascade equations are used to exactly describe the development of an extensive air shower.
+To understand the cascade equations intensive simulations are used to model the development of an air shower.
+MCEq, CONEX, CORSIKA.
+Toy model into Heitler-Matthews model.
+
+
+%Energy losses from ionization become the dominant energy loss process for a specific particle at that particle's critical energy, defined as the moment when 
+
+%In the case of electromagnetic cascades, the cascade equations follow a specific treatment dependent upon the interaction lengths of pair production and bremsstrahlung, as discussed extensively in~\cite{tom_book}.
+
+
+%with $\rho(h)$ the atmospheric density at altitude $h$ and $n_{A}$ the number density of atmospheric nuclei with a mean mass $A$.
+%The decay length is 
+
 %and describe $N_{i}$, the number of particles of type $i$, with energies $E_{i}$ at a slant depth $X$  
 
 %the number of particles of type $i$, defined as $N_{i}$, with energies $E_{i}$ at a slant depth $X$ as
@@ -110,6 +162,15 @@ with $\lambda_{i}$ amd $d_{i}$ the respective interaction and decay lengths of p
 
 %a result from~\Cref{eq:slant_depth} 
 
+
+%Assuming an isothermal atmosphere that behaves as an ideal gas, the atmospheric depth has an exponential form
+
+%\begin{equation}
+%    X_{v} = X_{0}\,e^{-h/h_{0}}. \label{eq:isothermal}
+%\end{equation}
+
+%\noindent
+%Here $X_{0}$ is the atmospheric overburden at sea level, assumed to be $X_{0}$\,=\,\qty{1030}{\gram\per\centi\meter\squared}, and $h_{0}\,=\,R\,T/M\,g$ is the scale height of the atmosphere, with $R$ the ideal gas constant, $T$ the temperature of the atmosphere, $M$ the mean molar mass of air, and $g$ is the acceleration due to Earth's gravity.
 
 
 %Assuming an isothermal atmosphere that behaves as an ideal gas, the density profile can be approximated as an exponential function that yields an exponential solution to the vertical depth integral
