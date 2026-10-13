@@ -39,7 +39,7 @@ This chapter will introduce the physics of air showers, including air-shower mod
 
 %Intro, Heitler-Matthews Model.
 
-\section{Air Shower Development}\label{sec:development}
+\section{Air-Shower Development}\label{sec:development}
 Air showers develop in the atmosphere along the air-shower axis, the straight line that follows the trajectory of the primary cosmic ray prior to its first atmospheric interaction.
 The first interactions are of the highest energy and generate high-energy particles beamed in the forward direction parallel to the shower axis.
 Subsequent interactions generate a larger number of particles than the previous generation of interactions, resulting in more and more particles of lower energy with each generation.
@@ -133,14 +133,45 @@ Alternatively, the decay length is proportional to the atmospheric density at al
 \noindent
 with $\tau_{i}$ the lifetime at rest of particle type $i$ and $\gamma$ the Lorentz factor of the particle.
 Note that~\Cref{eq:cascade} does not account for particle energy losses in the atmosphere due to ionization, which occur naturally as a high-energy charged particle deposits energy by ionizing the medium it traverses.
-Ionization energy losses are unimportant for hadrons or high-energy electrons in an air shower; however, they become important at the critical energy, the energy where interaction losses, from radiative or hadronic processes, equal energy losses due to ionization. 
-The critical energy will be discussed further in the coming sections.
+Ionization energy losses are unimportant for hadrons or high-energy electrons in an air shower; however, they become important for energies at and below the critical energy, the energy where interaction losses, from radiative or hadronic processes, equal energy losses due to ionization. 
+%The critical energy will be discussed further in the coming sections.
 An in depth description of the cascade equations, both generally and for specific particle types, is provided in~\cite{tom_book}.
+Further, the Matrix Cascade Equations (MCEq) code\footnote[1]{\href{https://github.com/mceq-project/MCEq}{https://github.com/mceq-project/MCEq}} provides a way to numerically solve the cascade equations with computationally efficient methods.
 
-The cascade equations are used to exactly describe the development of an extensive air shower.
-To understand the cascade equations intensive simulations are used to model the development of an air shower.
-MCEq, CONEX, CORSIKA.
-Toy model into Heitler-Matthews model.
+The cascade equations provide a complete phenomenological framework to understand the development of air showers, yet certain interaction processes are statistical in nature.
+To model this, detailed air-shower simulation codes that incorporate solving the cascade equations with components of Monte Carlo (MC) simulation are used, the most prominent of which is CORSIKA (COsmic Ray SImulations for KAscade)~\cite{heck_1998_corsika}.
+Air-shower experiments compare CORSIKA simulations with air-shower observations to greater understand the distributions of air-shower observables reconstructed from ground-based measurements. 
+Directly relating properties of the primary cosmic ray to air-shower observables is complicated due to the stochastic and complex nature of air-shower development; however, toy models of the shower development process provide this insight.
+
+\section{The Heitler-Matthews Model}\label{sec:heitler_matthews}
+Cosmic-ray air showers can be described by three separate shower components: the electromagnetic, hadronic, and muonic components.
+%A cosmic-ray air shower is described by three separate components, an electromagnetic, hadronic, and muonic shower component.
+
+
+%Air-shower experiments compare CORSIKA simulations with air-shower observations to more fully understand air-shower development and the reconstructed air-shower observables from measurements.
+
+%it can be hard to comprehend  
+
+%incorporating components of both Monte Carlo (MC) simulation and solving the cascade equations are the standard
+
+%are used to more fully understand air-shower development. 
+
+%Air-shower experiments 
+
+%To greater understand observations
+%To model this, air-shower experiments 
+
+%Air-shower experiments take advantage of this framework by comparing air-shower observations to air-shower simulations to more fully understand air-shower development.
+%Simulation frameworks such as CONEX ()
+
+%, where many of the simulation codes utilize the cascade equations to study the development of air showers.
+
+
+%Air-shower experiments can not 
+%The cascade equations are used to exactly describe the longitudinal development of an extensive air shower.
+%To understand the cascade equations intensive simulations are used to model the development of an air shower.
+%MCEq, CONEX, CORSIKA.
+%Toy model into Heitler-Matthews model.
 
 
 %Energy losses from ionization become the dominant energy loss process for a specific particle at that particle's critical energy, defined as the moment when 
@@ -192,28 +223,28 @@ Toy model into Heitler-Matthews model.
 %is defined as increasing from the top of the atmosphere downwards  $\ell_{1}$ and $\ell_{2}$
 
 
-The interaction lengths and cross sections of particles traveling within Earth's atmosphere impacts the development of air showers.
-These values are dependent upon the total amount of atmospheric material traversed as the shower develops, referred to as the atmospheric slant depth, given as an integral along the air-shower a by
+%The interaction lengths and cross sections of particles traveling within Earth's atmosphere impacts the development of air showers.
+%These values are dependent upon the total amount of atmospheric material traversed as the shower develops, referred to as the atmospheric slant depth, given as an integral along the air-shower a by
 
 %Air showers develop in Earth's atmosphere 
 
 
-The development of a particle cascade depends upon the density of the material traversed by the particles, which for air showers is the calorimetric medium of Earth's atmosphere.
+%The development of a particle cascade depends upon the density of the material traversed by the particles, which for air showers is the calorimetric medium of Earth's atmosphere.
 
 
 
-Air showers development depends upon the 
+%Air showers development depends upon the 
 
 
-in the calorimetric medium of Earth's atmosphere dependent upon the density of the material in which they are traversing 
+%in the calorimetric medium of Earth's atmosphere dependent upon the density of the material in which they are traversing 
 
-is dependent upon the material the shower and its constituents traverse, which is the calorimetric medium of Earth's atmosphere 
+%is dependent upon the material the shower and its constituents traverse, which is the calorimetric medium of Earth's atmosphere 
 
-Air showers traverse through the calorimetric medium of Earth's atmosphere where the shower development is directly related to the 
-Air showers are particle cascade and therefore develop 
+%Air showers traverse through the calorimetric medium of Earth's atmosphere where the shower development is directly related to the 
+%Air showers are particle cascade and therefore develop 
 
 
-develop in the calorimetric medium of Earth's atmosphere dependent upon the density of the material in which they are traversing. 
+%develop in the calorimetric medium of Earth's atmosphere dependent upon the density of the material in which they are traversing. 
 
 \section{Electromagnetic Cascade}\label{sec:electromagnetic}
 \subsection{Radio Emission from Air Showers}\label{ssec:radio}
