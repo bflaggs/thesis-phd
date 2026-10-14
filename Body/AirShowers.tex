@@ -46,6 +46,7 @@ Subsequent interactions generate a larger number of particles than the previous 
 Particles resulting from these interactions can receive a significant transverse momentum in relation to the shower axis, depending upon the nature of the generating collision, which propagates throughout the shower development and contributes to a lateral spread of the air shower.
 The absolute particle number of the air shower continues to grow as the shower develops longitudinally until the particle generation processes are no longer energetically favorable.
 After this threshold, the particle number in the air shower decreases due to atmospheric attenuation until the shower front reaches Earth's surface.
+Knowledge of atmospheric physics and particle physics is necessary to understand the development of an air shower, while simplified models of air showers can provide zeroth-order approximations relating the primary cosmic ray and the air shower it produces.
 
 %Particles attenuate in the atmo
 %The lower-energy particles have smaller 
@@ -55,6 +56,7 @@ After this threshold, the particle number in the air shower decreases due to atm
 %generate further particles of lower energy which interact more frequen
 %As the air density increases
 
+\subsection{The Atmosphere}\label{ssec:atmosphere}
 The development of an air shower depends on the amount of atmospheric material traversed as the shower develops, referred to as the atmospheric slant depth or simply slant depth, given by
 
 \begin{equation}
@@ -94,6 +96,50 @@ For air showers with $\theta<$\,\qty{65}{\degree} the zeroth-order approximation
 This approximation assumes the atmosphere and Earth are flat, which no longer holds for $\theta>$\,\qty{65}{\degree} and instead requires the full treatment from~\Cref{eq:law_of_cosines}.
 However, the approximation in~\Cref{eq:slant_depth} highlights the direct effect of zenith angle on atmospheric material traversed, which in turn impacts the attenuation of particles during the development of an air shower.
 
+
+%Assuming an isothermal atmosphere that behaves as an ideal gas, the atmospheric depth has an exponential form
+
+%\begin{equation}
+%    X_{v} = X_{0}\,e^{-h/h_{0}}. \label{eq:isothermal}
+%\end{equation}
+
+%\noindent
+%Here $X_{0}$ is the atmospheric overburden at sea level, assumed to be $X_{0}$\,=\,\qty{1030}{\gram\per\centi\meter\squared}, and $h_{0}\,=\,R\,T/M\,g$ is the scale height of the atmosphere, with $R$ the ideal gas constant, $T$ the temperature of the atmosphere, $M$ the mean molar mass of air, and $g$ is the acceleration due to Earth's gravity.
+
+
+%Assuming an isothermal atmosphere that behaves as an ideal gas, the density profile can be approximated as an exponential function that yields an exponential solution to the vertical depth integral
+
+%\begin{equation}
+%    X_{v} = X_{}
+%\end{equation}
+
+%Approximating the atmosphere as an ideal gas and assuming it behaves isothermally, the density 
+
+%Approximating the atmosphere as an ideal gas and he integral is taken to infinity as an approximate ``start'' of Earth's atmosphere.
+
+
+%the vertical line pointing from Earth's surface to the point of first interaction in the atmosphere and the air-shower axis.
+
+%$\ell_{2}$ is the start of the atmosphere 
+%The slant depth increases from the top of the atmosphere downwards with $\ell_{1}$ and $\ell_{2}$ 
+
+%is defined as increasing from the top of the atmosphere downwards  $\ell_{1}$ and $\ell_{2}$
+
+
+%The interaction lengths and cross sections of particles traveling within Earth's atmosphere impacts the development of air showers.
+%These values are dependent upon the total amount of atmospheric material traversed as the shower develops, referred to as the atmospheric slant depth, given as an integral along the air-shower a by
+
+%The development of a particle cascade depends upon the density of the material traversed by the particles, which for air showers is the calorimetric medium of Earth's atmosphere.
+
+%in the calorimetric medium of Earth's atmosphere dependent upon the density of the material in which they are traversing 
+
+%is dependent upon the material the shower and its constituents traverse, which is the calorimetric medium of Earth's atmosphere 
+
+%Air showers traverse through the calorimetric medium of Earth's atmosphere where the shower development is directly related to the 
+
+%develop in the calorimetric medium of Earth's atmosphere dependent upon the density of the material in which they are traversing. 
+
+\subsection{The Cascade Equations}\label{ssec:cascade_equations}
 The longitudinal development of an air shower is modeled using a set of differential equations known as the cascade equations.
 The cascade equations describe the differential flux of the the number of particles of type $i$, as a function of the particle energies $E_{i}$ at a slant depth $X$ as
 
@@ -132,19 +178,115 @@ Alternatively, the decay length is proportional to the atmospheric density at al
 
 \noindent
 with $\tau_{i}$ the lifetime at rest of particle type $i$ and $\gamma$ the Lorentz factor of the particle.
-Note that~\Cref{eq:cascade} does not account for particle energy losses in the atmosphere due to ionization, which occur naturally as a high-energy charged particle deposits energy by ionizing the medium it traverses.
-Ionization energy losses are unimportant for hadrons or high-energy electrons in an air shower; however, they become important for energies at and below the critical energy, the energy where interaction losses, from radiative or hadronic processes, equal energy losses due to ionization. 
+Note that~\Cref{eq:cascade} does not account for energy losses in the atmosphere due to ionization, which occur naturally as a high-energy charged particle deposits energy by ionizing the medium it traverses.
+Ionization energy losses are unimportant for hadrons or high-energy electrons in an air shower; however, they become important for energies at and below the critical energy, the energy where interaction losses from radiative or hadronic processes equal energy losses due to ionization. 
 %The critical energy will be discussed further in the coming sections.
 An in depth description of the cascade equations, both generally and for specific particle types, is provided in~\cite{tom_book}.
 Further, the Matrix Cascade Equations (MCEq) code\footnote[1]{\href{https://github.com/mceq-project/MCEq}{https://github.com/mceq-project/MCEq}} provides a way to numerically solve the cascade equations with computationally efficient methods.
 
-The cascade equations provide a complete phenomenological framework to understand the development of air showers, yet certain interaction processes are statistical in nature.
-To model this, detailed air-shower simulation codes that incorporate solving the cascade equations with components of Monte Carlo (MC) simulation are used, the most prominent of which is CORSIKA (COsmic Ray SImulations for KAscade)~\cite{heck_1998_corsika}.
-Air-shower experiments compare CORSIKA simulations with air-shower observations to greater understand the distributions of air-shower observables reconstructed from ground-based measurements. 
-Directly relating properties of the primary cosmic ray to air-shower observables is complicated due to the stochastic and complex nature of air-shower development; however, toy models of the shower development process provide this insight.
+%The cascade equations provide a complete phenomenological framework to understand the development of air showers, yet certain interaction processes are statistical in nature.
+%To model this, detailed air-shower simulation codes that incorporate solving the cascade equations with components of Monte Carlo (MC) simulations are used, the most prominent of which is CORSIKA (COsmic Ray SImulations for KAscade)~\cite{heck_1998_corsika}.
+%Air-shower experiments reconstruct air-shower observables, both per-event and averaged over many events, and compare the reconstructed observables to those predicted by CORSIKA simulations to greater understand air-shower measurements.
+%Directly relating properties of the primary cosmic ray to air-shower observables is complicated due to the stochastic and complex nature of air-shower development; however, toy models of the shower development process can provide this insight.
 
-\section{The Heitler-Matthews Model}\label{sec:heitler_matthews}
-Cosmic-ray air showers can be described by three separate shower components: the electromagnetic, hadronic, and muonic components.
+%compare CORSIKA simulations with air-shower observations to greater understand the distributions of air-shower observables reconstructed from ground-based measurements.
+
+%Energy losses from ionization become the dominant energy loss process for a specific particle at that particle's critical energy, defined as the moment when 
+
+%In the case of electromagnetic cascades, the cascade equations follow a specific treatment dependent upon the interaction lengths of pair production and bremsstrahlung, as discussed extensively in~\cite{tom_book}.
+
+%with $\rho(h)$ the atmospheric density at altitude $h$ and $n_{A}$ the number density of atmospheric nuclei with a mean mass $A$.
+%The decay length is 
+
+%and describe $N_{i}$, the number of particles of type $i$, with energies $E_{i}$ at a slant depth $X$  
+%the number of particles of type $i$, defined as $N_{i}$, with energies $E_{i}$ at a slant depth $X$ as
+%yields an intriguing result that the 
+
+%a result from~\Cref{eq:slant_depth} 
+
+\subsection{The Heitler-Matthews Model}\label{ssec:heitler_matthews}
+Cosmic-ray air showers can be described by two separate shower components, an electromagnetic and a hadronic component\footnote[2]{Some literature describe air showers as having three components: electromagnetic, hadronic, and muonic. Here the hadronic and muonic components are considered one, as the muonic component is generated via the hadronic cascade (see~\Cref{sssec:hadronic}).}.
+A simplified toy model of air showers, known as the Heitler-Matthews model~\cite{matthews_astropartphys2005_heitlermatthews}, treats the cascades of the electromagnetic and hadronic shower components separately, where the hadronic cascade prolongs the electromagnetic cascade.
+This toy model serves to statistically relate attributes of the primary cosmic ray to separate measurable parameters of an air shower, called air-shower observables; however, the exact relationships are complicated and not known precisely for individual air showers. 
+A diagram of the electromagnetic and hadronic cascades of the Heitler-Matthews model are shown in~\Cref{fig:hm_model} and each will be described in the following subsections.
+
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter2/heitler_matthews_model.png}
+  \caption[Heitler-Matthews model of cosmic-ray air showers.]{Diagram of the (a) electromagnetic cascade and (b) hadronic cascade of the Heitler-Matthews toy model of cosmic-ray air showers. See their respective text sections for descriptions. Figure taken from~\cite{matthews_astropartphys2005_heitlermatthews}.}
+  \label{fig:hm_model}
+\end{figure}
+
+%three separate shower components: electromagnetic, hadronic, and muonic components, where the muonic component is .
+%Particle interactions of the hadronic component generate muons to form a muonic shower component. footnote about three shower component.
+
+\subsubsection{Electromagnetic Cascade}\label{sssec:electromagnetic}
+The original toy model of electromagnetic cascades in the atmosphere was developed by Heitler~\cite{heitler_book} as a simple splitting model where single electromagnetic particles ($e^{\pm}$, $\gamma$)\footnote[3]{Throughout this dissertation electromagnetic particles include gamma-ray photons ($\gamma$) unless otherwise stated.} split into two electromagnetic particles at every interaction, each with half of the energy of the original particle.
+Only a single electromagnetic particle of high energy, $\mathcal{O}(100)$\,MeV and above, initiates the cascade.
+Within the cascade, gamma-ray photons in the vicinity of atmospheric nuclei will interact to pair produce an electron-positron pair:
+
+\begin{equation}
+    (Z +) \gamma \rightarrow e^{-} + e^{+} \label{eq:pair_production}
+\end{equation}
+
+\noindent
+where the parenthesis around $Z$ indicate the interaction is not a direct collision.
+
+
+with each new particle having half of the original particle
+
+each new particle with half of the energy of the original particle.
+
+In the Heitler model, 
+
+
+single electromagnetic particle ($e^{\pm}$, $\gamma$) of high energy, $\mathcal{O}(100)$\,MeV and above, initiates the electromagnetic cascade.
+
+
+\subsubsection{Hadronic Cascade}\label{sssec:hadronic}
+
+Atmospheric muons propagate directly to Earth's surface
+Due to their low rate of interactions in the atmosphere and their large relativistic $\gamma$ factors, resulting in a large decay length, muons rarely interact in the atmosphere and instead propagate to Earth's surface with only ionization energy losses.
+Therefore, muons serve as a direct probe to the air-shower hadronic component.
+M
+Muons rarely interact in the atmosphere and lose energy mainly to ionization as they traverse 
+
+\subsection{Longitudinal Profile}\label{ssec:long_profile}
+
+\subsubsection{Shower-to-Shower Fluctuations}\label{sssec:fluctuations}
+Helium outliers from SKA proceeding and my work? Do not know where to organize it yet...
+
+\section{Air-Shower Universality}\label{sec:universality}
+
+An alternative version of the Gaisser-Hillas function, is given by:
+
+%described in terms of shower width $L$, and shower asymmetry $R$ is given by:
+
+\begin{equation}
+    N^{\prime} = \left( 1 + \frac{R X^{\prime}}{L} \right)^{R^{-2}} \exp \left( -\frac{X^{\prime}}{LR} \right). \label{eq:gh_parameterized}
+\end{equation}
+
+\noindent
+$N^{\prime}$ is the normalized number of charged particles in the air shower ($N^{\prime} = N / N_{\rm max}$) and $X\prime$ is the shower maximum shifted slant depth ($X\prime = X - X_{\rm max}$).
+Within this parameterization, $L$ represents a characteristic width of the shower longitudinal profile while $R$ is related to the asymmetry of the profile, defined explicitly with the equations
+
+\begin{equation}
+    L = \sqrt{|X_{0}\prime \lambda|}, \label{eq:L}
+\end{equation}
+
+\begin{equation}
+    R = \sqrt{\frac{\lambda}{|X_{0}\prime|}}. \label{eq:R}
+\end{equation}
+
+
+\section{Radio Emission from Air Showers}\label{sec:radio}
+
+
+\section{Air-Shower Simulations}\label{sec:simulations}
+Simulations, then hadronic models (these should be last).
+
+\subsection{Hadronic Interaction Models}\label{sec:models}
+Further complicating air shower understanding is the extrapolation of models of hadronic interactions into an energy phase space where there is yet no measurements from terrestrial particle accelerators.
 %A cosmic-ray air shower is described by three separate components, an electromagnetic, hadronic, and muonic shower component.
 
 
@@ -171,116 +313,23 @@ Cosmic-ray air showers can be described by three separate shower components: the
 %The cascade equations are used to exactly describe the longitudinal development of an extensive air shower.
 %To understand the cascade equations intensive simulations are used to model the development of an air shower.
 %MCEq, CONEX, CORSIKA.
-%Toy model into Heitler-Matthews model.
 
 
-%Energy losses from ionization become the dominant energy loss process for a specific particle at that particle's critical energy, defined as the moment when 
+%\section{Electromagnetic Cascade}\label{sec:electromagnetic}
+%\subsection{Radio Emission from Air Showers}\label{ssec:radio}
 
-%In the case of electromagnetic cascades, the cascade equations follow a specific treatment dependent upon the interaction lengths of pair production and bremsstrahlung, as discussed extensively in~\cite{tom_book}.
+%\section{Hadronic Cascade}\label{sec:hadronic}
+%\subsection{Muonic Component}\label{ssec:muonic}
 
+%\section{Air Shower Universality}\label{sec:universality}
+%\subsection{Longitudinal Profile}\label{ssec:long_profile}
 
-%with $\rho(h)$ the atmospheric density at altitude $h$ and $n_{A}$ the number density of atmospheric nuclei with a mean mass $A$.
-%The decay length is 
-
-%and describe $N_{i}$, the number of particles of type $i$, with energies $E_{i}$ at a slant depth $X$  
-
-%the number of particles of type $i$, defined as $N_{i}$, with energies $E_{i}$ at a slant depth $X$ as
-
-%are defined as
-
-
-%yields an intriguing result that the 
-
-%a result from~\Cref{eq:slant_depth} 
-
-
-%Assuming an isothermal atmosphere that behaves as an ideal gas, the atmospheric depth has an exponential form
-
-%\begin{equation}
-%    X_{v} = X_{0}\,e^{-h/h_{0}}. \label{eq:isothermal}
-%\end{equation}
-
-%\noindent
-%Here $X_{0}$ is the atmospheric overburden at sea level, assumed to be $X_{0}$\,=\,\qty{1030}{\gram\per\centi\meter\squared}, and $h_{0}\,=\,R\,T/M\,g$ is the scale height of the atmosphere, with $R$ the ideal gas constant, $T$ the temperature of the atmosphere, $M$ the mean molar mass of air, and $g$ is the acceleration due to Earth's gravity.
-
-
-%Assuming an isothermal atmosphere that behaves as an ideal gas, the density profile can be approximated as an exponential function that yields an exponential solution to the vertical depth integral
-
-%\begin{equation}
-%    X_{v} = X_{}
-%\end{equation}
-
-%Approximating the atmosphere as an ideal gas and assuming it behaves isothermally, the density 
-
-%Approximating the atmosphere as an ideal gas and he integral is taken to infinity as an approximate ``start'' of Earth's atmosphere.
-
-
-%the vertical line pointing from Earth's surface to the point of first interaction in the atmosphere and the air-shower axis.
-
-%$\ell_{2}$ is the start of the atmosphere 
-%The slant depth increases from the top of the atmosphere downwards with $\ell_{1}$ and $\ell_{2}$ 
-
-%is defined as increasing from the top of the atmosphere downwards  $\ell_{1}$ and $\ell_{2}$
-
-
-%The interaction lengths and cross sections of particles traveling within Earth's atmosphere impacts the development of air showers.
-%These values are dependent upon the total amount of atmospheric material traversed as the shower develops, referred to as the atmospheric slant depth, given as an integral along the air-shower a by
-
-%Air showers develop in Earth's atmosphere 
-
-
-%The development of a particle cascade depends upon the density of the material traversed by the particles, which for air showers is the calorimetric medium of Earth's atmosphere.
-
-
-
-%Air showers development depends upon the 
-
-
-%in the calorimetric medium of Earth's atmosphere dependent upon the density of the material in which they are traversing 
-
-%is dependent upon the material the shower and its constituents traverse, which is the calorimetric medium of Earth's atmosphere 
-
-%Air showers traverse through the calorimetric medium of Earth's atmosphere where the shower development is directly related to the 
-%Air showers are particle cascade and therefore develop 
-
-
-%develop in the calorimetric medium of Earth's atmosphere dependent upon the density of the material in which they are traversing. 
-
-\section{Electromagnetic Cascade}\label{sec:electromagnetic}
-\subsection{Radio Emission from Air Showers}\label{ssec:radio}
-
-\section{Hadronic Cascade}\label{sec:hadronic}
-\subsection{Muonic Component}\label{ssec:muonic}
-
-\section{Air Shower Universality}\label{sec:universality}
-\subsection{Longitudinal Profile}\label{ssec:long_profile}
-
-An alternative version of the Gaisser-Hillas function, is given by:
-
-%described in terms of shower width $L$, and shower asymmetry $R$ is given by:
-
-\begin{equation}
-    N^{\prime} = \left( 1 + \frac{R X^{\prime}}{L} \right)^{R^{-2}} \exp \left( -\frac{X^{\prime}}{LR} \right). \label{eq:gh_parameterized}
-\end{equation}
-
-\noindent
-$N^{\prime}$ is the normalized number of charged particles in the air shower ($N^{\prime} = N / N_{\rm max}$) and $X\prime$ is the shower maximum shifted slant depth ($X\prime = X - X_{\rm max}$).
-Within this parameterization, $L$ represents a characteristic width of the shower longitudinal profile while $R$ is related to the asymmetry of the profile, defined explicitly with the equations
-
-\begin{equation}
-    L = \sqrt{|X_{0}\prime \lambda|}, \label{eq:L}
-\end{equation}
-
-\begin{equation}
-    R = \sqrt{\frac{\lambda}{|X_{0}\prime|}}. \label{eq:R}
-\end{equation}
-
-\subsection{Shower-to-Shower Fluctuations}\label{ssec:fluctuations}
-Helium outliers from SKA proceeding and my work. Do not know where to organize it yet...
+%\subsection{Shower-to-Shower Fluctuations}\label{ssec:fluctuations}
+%Helium outliers from SKA proceeding and my work. Do not know where to organize it yet...
 
 %\section{Particle Attenuation in the Atmosphere}\label{sec:attenuation}
 %Used as motivation for including sec(zen) and r in NN
 %Not sure if a full section is necessary, maybe a subsection or just a paragraph
 
-\section{Uncertainties from Hadronic Interaction Models}\label{sec:models}
-Further complicating air shower understanding is the extrapolation of models of hadronic interactions into an energy phase space where there is yet no measurements from terrestrial particle accelerators.
+%\section{Uncertainties from Hadronic Interaction Models}\label{sec:models}
+%Further complicating air shower understanding is the extrapolation of models of hadronic interactions into an energy phase space where there is yet no measurements from terrestrial particle accelerators.
