@@ -221,27 +221,78 @@ A diagram of the electromagnetic and hadronic cascades of the Heitler-Matthews m
 %Particle interactions of the hadronic component generate muons to form a muonic shower component. footnote about three shower component.
 
 \subsubsection{Electromagnetic Cascade}\label{sssec:electromagnetic}
-The original toy model of electromagnetic cascades in the atmosphere was developed by Heitler~\cite{heitler_book} as a simple splitting model where single electromagnetic particles ($e^{\pm}$, $\gamma$)\footnote[3]{Throughout this dissertation electromagnetic particles include gamma-ray photons ($\gamma$) unless otherwise stated.} split into two electromagnetic particles at every interaction, each with half of the energy of the original particle.
-Only a single electromagnetic particle of high energy, $\mathcal{O}(100)$\,MeV and above, initiates the cascade.
-Within the cascade, gamma-ray photons in the vicinity of atmospheric nuclei will interact to pair produce an electron-positron pair:
+The toy model of electromagnetic cascades in the atmosphere was developed by Heitler~\cite{heitler_book} as a simple splitting model, needing only a single electromagnetic particle ($e^{\pm}$, $\gamma$)\footnote[3]{Throughout this dissertation electromagnetic particles include gamma-ray photons ($\gamma$) unless otherwise stated.} of high energy, $\mathcal{O}(100)$\,MeV and above, to initiate the cascade.
+Electron energy losses in the atmosphere, for an electron\footnote[4]{Mentions of electrons throughout the dissertation will refer to both electrons and positrons, the electron antiparticle, unless otherwise stated.} of initial energy $E_{0}$, are modeled as an exponential 
 
 \begin{equation}
-    (Z +) \gamma \rightarrow e^{-} + e^{+} \label{eq:pair_production}
+    E\left(X\right) = E_{0}\,e^{-X / X_{0}} \label{eq:electron_energy_loss}
 \end{equation}
 
 \noindent
-where the parenthesis around $Z$ indicate the interaction is not a direct collision.
+where $X_{0}$ is the radiation length of an electron, defined as the average column density of matter traversed by an electron before it loses a factor $1/e$ of its initial energy to radiative loss processes.
+In air, the radiation length of an electron is $X_{0}$\,=\,\qty{37}{\gram\per\centi\meter\squared}~\cite{tom_book}.
+The column density an electron travels within a medium before losing half of its initial energy is given by
 
+\begin{equation}
+    \lambda_{\text{EM}} = X_{0}\,\ln\left(2\right) \label{eq:splitting_length}
+\end{equation}
 
-with each new particle having half of the original particle
+\noindent
+which is defined as the characteristic splitting length of the Heitler model.
+The toy model assumes electromagnetic particles interact in the atmosphere after traveling this characteristic splitting length, after which they ``split'' into two electromagnetic particles, each with half of the energy of the original particle.
+The Heitler model further assumes that gamma-ray photons ($\gamma$'s) interact in the atmosphere with the same splitting length as electrons\footnote[1]{In reality, the mean free path of photon pair production is approximately $\frac{9}{7}X_{0}$.}.
 
-each new particle with half of the energy of the original particle.
+Within the toy model, after traveling a distance $\lambda_{\text{EM}}$, a $\gamma$ in the vicinity of an atmospheric nucleus will interact to pair produce an electron-positron pair:
 
-In the Heitler model, 
+\begin{equation}
+    \gamma \rightarrow e^{-} + e^{+}. \label{eq:pair_production}
+\end{equation}
 
+\noindent
+The cascade electrons, also after traveling a distance $\lambda_{\text{EM}}$, decelerate within the electric field of atmospheric nuclei to produce further electrons and gamma-ray photons, following
 
-single electromagnetic particle ($e^{\pm}$, $\gamma$) of high energy, $\mathcal{O}(100)$\,MeV and above, initiates the electromagnetic cascade.
+\begin{equation}
+    e^{\pm} \rightarrow e^{\pm} + \gamma. \label{eq:bremsstrahlung}
+\end{equation}
 
+\noindent
+This deceleration process is known as bremsstrahlung and is the leading radiative loss process for electrons in the atmosphere.
+In the Heitler model, these interactions occur every splitting length of atmospheric matter traversed, generating two new electromagnetic particles for every one parent particle.
+After $n\,=\,X / \lambda_{\text{EM}}$ splitting lengths, the number of particles in the electromagnetic cascade is
+
+\begin{equation}
+    N_{\text{EM}}\left(X\right) = 2^{n} = 2^{X / \lambda_{\text{EM}}} \label{eq:em_particle_number}
+\end{equation}
+
+\noindent
+and the energy of each particle is
+
+\begin{equation}
+    E\left(X\right) = \frac{E_{0}}{N_{\text{EM}}\left(X\right)}. \label{eq:em_particle_energy}
+\end{equation}
+
+The interactions~\Cref{eq:pair_production,eq:bremsstrahlung} will continue at every splitting length traveled until the energy of the individual electromagnetic particles within the cascade reaches the critical energy of $E_{c} \approx$\qty{87}{\mega\electronvolt}~\cite{tom_book}.
+Below this energy, electromagnetic particles will only lose energy due to ionization or absorb in the atmosphere, as bremsstrahlung is no longer energetically favorable over energy losses from ionization.
+The moment a shower develops to the critical energy is known as shower maximum, after which the number of electromagnetic particles in the cascade only decreases.
+The number of particles in the cascade at shower maximum is then defined as
+
+\begin{equation}
+    N_{\text{max}}^{\text{EM}} = \frac{E_{0}}{E_{c}} \label{eq:em_particle_maximum}
+\end{equation}
+
+\noindent
+and the atmospheric depth of shower maximum is
+
+\begin{equation}
+    X_{\text{max}}^{\text{EM}} = X_{0} \ln\left( \frac{E_{0}}{E_{c}} \right). \label{eq:em_xmax}
+\end{equation}
+
+\noindent
+The Heitler toy model makes several assumptions about the propagation and interaction of electromagnetic particles and their atmospheric cascades; however, the toy model is a useful tool to determine proportionalities that hold beyond this generalization, namely
+
+\begin{equation}
+    N_{\text{max}}^{\text{EM}} \propto E_{0} \qquad \text{and} \qquad X_{\text{max}}^{\text{EM}} \propto \ln\left(E_{0}\right). \label{eq:em_proportionalities}
+\end{equation}
 
 \subsubsection{Hadronic Cascade}\label{sssec:hadronic}
 
