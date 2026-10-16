@@ -295,6 +295,58 @@ The Heitler toy model makes several assumptions about the propagation and intera
 \end{equation}
 
 \subsubsection{Hadronic Cascade}\label{sssec:hadronic}
+The Heitler-Matthews model~\cite{matthews_astropartphys2005_heitlermatthews} is an extension of the original Heitler model to hadronic cascades.
+The hadronic extension uses the same concept of parent particles interacting after a splitting length to generate multiple particles that receive equal energy fractions of the parent particle.
+This toy model assumes all hadrons produced in the cascade are pions, with each interaction producing $n_{\text{tot}}$ pions with an energy of $E / n_{\text{tot}}$ per pion.
+$E$ is either the energy of the parent hadron or the primary cosmic ray, depending on the interaction generation.
+One-third of the pions are neutral ($\pi^{0}$) that decay almost immediately\footnote[1]{$\pi^{0}$ have an average lifetime of \qty[parse-numbers=false]{(8.43\,$\pm$\,0.13)$\times$10^{-17}}{\second}~\cite{pdg_2026_review}.}, following
+
+\begin{equation}
+    \pi^{0} \rightarrow \gamma + \gamma. \label{eq:pion_pairproduction}
+\end{equation}
+
+\noindent
+The resulting gamma-ray photons each initiate an electromagnetic cascade following the Heitler model discussed in the previous section.
+
+Two-thirds of the pions are charged ($\pi^{\pm}$), with $n_{\text{ch}}$ representing their total number.
+The charged pions travel a distance $\lambda_{\text{had}}$ before either interacting or decaying.
+If the energy of the pion is less than the pion critical energy, $E_{c}^{\pi}$, defined here as the energy where the decay length of the pion equals the interaction length $\lambda_{\text{had}}$, then the pion will decay into a muon or neutrino via
+
+\begin{equation}
+    \pi^{+} \rightarrow \mu^{+} + \nu_{\mu} \qquad \text{or} \qquad \pi^{-} \rightarrow \mu^{-} + \bar{\nu_{\mu}} \label{eq:pion_decay}
+\end{equation}
+
+\noindent
+depending on the charge of the pion.
+Otherwise the charged pions will interact hadronically with atmospheric nuclei, splitting again with one-third of the initial pion energy transferred to neutral pions that feed the electromagnetic cascade and two-thirds of the initial pion energy transferred to charged pions.
+The energies of the hadronic and electromagnetic air-shower components is then given by
+
+\begin{equation}
+    E_{\text{had}} = \left( \frac{2}{3} \right)^{n} E_{0} \qquad \text{and} \qquad E_{\text{EM}} = \left[ 1 - \left( \frac{2}{3} \right)^{n} \right] E_{0} \label{eq:shower_energies}
+\end{equation}
+
+\noindent
+after $n\,=\,X / \lambda_{\text{had}}$ generations of the cascade, where $E_{0}$ is the energy of the primary cosmic ray that initiated the air shower.
+After several generations, both the air shower energy and particle number are dominated by electromagnetic particles, hence $X_\text{max}$ is mostly electromagnetic in nature.
+For completeness, values of $\lambda_{\text{had}}$\,=\,\qty{120}{\gram\per\centi\meter\squared} and $E_{c}^{\pi}\,\simeq$\,\qty{20}{\giga\electronvolt} can be assumed for the Heitler-Matthews model~\cite{matthews_astropartphys2005_heitlermatthews}.
+
+Assuming the primary cosmic ray is a proton with energy $E_{0}$, the atmospheric depth of shower maximum can be approximated as
+
+\begin{equation}
+    X_{\text{max}}^{p} \approx \lambda_{\text{had}} + X_{\text{max}}^{\text{EM}}\left( E_{0} / \left(2\,n_{\text{tot}}\right) \right) = \lambda_{\text{had}} + X_{0} \ln\left( \frac{E_{0}}{2\,n_{\text{tot}}\,E_{c}} \right). \label{eq:proton_xmax}
+\end{equation}
+
+\noindent
+The approximation considers only electromagnetic particles generated from the first interaction within the Heitler-Matthews model, of which there are $2\,n_{\text{tot}}$ generated from the decay of neutral pions.
+These will be the electromagnetic particles of the highest energy, therefore contributing the most towards shower maximum and justifying this approximation.
+
+
+Each interaction produces 
+
+
+The same concept of parent particles interacting after a splitting length and the
+The same idea of splitting lengths and resultant particles receiving equal energies 
+
 
 Atmospheric muons propagate directly to Earth's surface
 Due to their low rate of interactions in the atmosphere and their large relativistic $\gamma$ factors, resulting in a large decay length, muons rarely interact in the atmosphere and instead propagate to Earth's surface with only ionization energy losses.
