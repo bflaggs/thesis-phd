@@ -271,7 +271,7 @@ and the energy of each particle is
     E\left(X\right) = \frac{E_{0}}{N_{\text{EM}}\left(X\right)}. \label{eq:em_particle_energy}
 \end{equation}
 
-The interactions~\Cref{eq:pair_production,eq:bremsstrahlung} will continue at every splitting length traveled until the energy of the individual electromagnetic particles within the cascade reaches the critical energy of $E_{c} \approx$\qty{87}{\mega\electronvolt}~\cite{tom_book}.
+The interactions~\Cref{eq:pair_production,eq:bremsstrahlung} will continue at every splitting length traveled until the energy of the individual electromagnetic particles within the cascade reaches the critical energy of $E_{c}\approx$\,\qty{87}{\mega\electronvolt}~\cite{tom_book}.
 Below this energy, electromagnetic particles will only lose energy due to ionization or absorb in the atmosphere, as bremsstrahlung is no longer energetically favorable over energy losses from ionization.
 The moment a shower develops to the critical energy is known as shower maximum, after which the number of electromagnetic particles in the cascade only decreases.
 The number of particles in the cascade at shower maximum is then defined as
@@ -310,7 +310,7 @@ The resulting gamma-ray photons each initiate an electromagnetic cascade followi
 
 Two-thirds of the pions are charged ($\pi^{\pm}$), with $n_{\text{ch}}$ representing their total number.
 The charged pions travel a distance $\lambda_{\text{had}}$ before either interacting or decaying.
-If the energy of the pion is less than the pion critical energy, $E_{c}^{\pi}$, defined here as the energy where the decay length of the pion equals the interaction length $\lambda_{\text{had}}$, then the pion will decay into a muon or neutrino via
+If the energy of the pion is less than the pion critical energy, $E_{c}^{\pi}$, defined here as the energy where the decay length of the pion equals the interaction length $\lambda_{\text{had}}$, then the pion will decay into a muon and a neutrino via
 
 \begin{equation}
     \pi^{+} \rightarrow \mu^{+} + \nu_{\mu} \qquad \text{or} \qquad \pi^{-} \rightarrow \mu^{-} + \bar{\nu_{\mu}} \label{eq:pion_decay}
@@ -319,16 +319,16 @@ If the energy of the pion is less than the pion critical energy, $E_{c}^{\pi}$, 
 \noindent
 depending on the charge of the pion.
 Otherwise the charged pions will interact hadronically with atmospheric nuclei, splitting again with one-third of the initial pion energy transferred to neutral pions that feed the electromagnetic cascade and two-thirds of the initial pion energy transferred to charged pions.
-The energies of the hadronic and electromagnetic air-shower components is then given by
+The energies of the hadronic and electromagnetic air-shower components after $n\,=\,X / \lambda_{\text{had}}$ generations of the cascade is given by
 
 \begin{equation}
     E_{\text{had}} = \left( \frac{2}{3} \right)^{n} E_{0} \qquad \text{and} \qquad E_{\text{EM}} = \left[ 1 - \left( \frac{2}{3} \right)^{n} \right] E_{0} \label{eq:shower_energies}
 \end{equation}
 
 \noindent
-after $n\,=\,X / \lambda_{\text{had}}$ generations of the cascade, where $E_{0}$ is the energy of the primary cosmic ray that initiated the air shower.
+where $E_{0}$ is the energy of the primary cosmic ray that initiated the air shower.
 After several generations, both the air shower energy and particle number are dominated by electromagnetic particles, hence $X_\text{max}$ is mostly electromagnetic in nature.
-For completeness, values of $\lambda_{\text{had}}$\,=\,\qty{120}{\gram\per\centi\meter\squared} and $E_{c}^{\pi}\,\simeq$\,\qty{20}{\giga\electronvolt} can be assumed for the Heitler-Matthews model~\cite{matthews_astropartphys2005_heitlermatthews}.
+For completeness, values of $\lambda_{\text{had}}$\,=\,\qty{120}{\gram\per\centi\meter\squared} and $E_{c}^{\pi}\simeq$\,\qty{20}{\giga\electronvolt} can be assumed for the Heitler-Matthews model~\cite{matthews_astropartphys2005_heitlermatthews}.
 
 Assuming the primary cosmic ray is a proton with energy $E_{0}$, the atmospheric depth of shower maximum can be approximated as
 
@@ -338,21 +338,60 @@ Assuming the primary cosmic ray is a proton with energy $E_{0}$, the atmospheric
 
 \noindent
 The approximation considers only electromagnetic particles generated from the first interaction within the Heitler-Matthews model, of which there are $2\,n_{\text{tot}}$ generated from the decay of neutral pions.
-These will be the electromagnetic particles of the highest energy, therefore contributing the most towards shower maximum and justifying this approximation.
+These are the electromagnetic particles of the highest energy within the air shower, therefore contributing the most towards shower maximum and justifying this approximation.
+$X_{\text{max}}$ hence serves as a probe of the electromagnetic component of the air shower.
 
+Charged pion decay generates the muonic\footnote[1]{As with other particle types, muons will refer to both $\mu^{+}$ and $\mu^{-}$ throughout this dissertation.} component of the air shower.
+In this toy model, all charged pions will have their energy fall below $E_{c}^{\pi}$ after several interaction generations and then will decay into muons following~\Cref{eq:pion_decay}.
+Therefore, the total number of muons in the air shower is given by
 
-Each interaction produces 
+\begin{equation}
+    N_{\mu} = n_{\text{ch}}^{n} = \left( \frac{2}{3} n_{\text{tot}} \right)^{n} \label{eq:muon_pion_relation}
+\end{equation}
 
+\noindent
+with $n$ the number of cascade generations and the energy per pion at decay equal to the pion critical energy, $E_{c}^{\pi}$.
+Again assuming the primary cosmic ray is a proton with energy $E_{0}$, the energy per pion at decay is
 
-The same concept of parent particles interacting after a splitting length and the
-The same idea of splitting lengths and resultant particles receiving equal energies 
+\begin{equation}
+    E_{\pi} = E_{c}^{\pi} = \frac{E_{0}}{n_{\text{tot}}^{n}}. \label{eq:energy_per_pion}
+\end{equation}
 
+\noindent
+Combining~\Cref{eq:muon_pion_relation,eq:energy_per_pion} removes the dependence on cascade generation, yielding a muon number for a proton cosmic ray dependent upon the cosmic-ray energy
 
-Atmospheric muons propagate directly to Earth's surface
-Due to their low rate of interactions in the atmosphere and their large relativistic $\gamma$ factors, resulting in a large decay length, muons rarely interact in the atmosphere and instead propagate to Earth's surface with only ionization energy losses.
-Therefore, muons serve as a direct probe to the air-shower hadronic component.
-M
-Muons rarely interact in the atmosphere and lose energy mainly to ionization as they traverse 
+\begin{equation}
+    N_{\mu}^{p} = \left( \frac{E_{0}}{E_{c}^{\pi}} \right)^{\beta}, \qquad \text{with} \qquad \beta = \frac{\ln\left( n_{\text{ch}} \right)}{\ln\left( n_{\text{tot}} \right)} = \frac{\ln\left( \frac{2}{3} n_{\text{tot}} \right)}{\ln\left( n_{\text{tot}} \right)}. \label{eq:proton_nmu}
+\end{equation}
+
+\noindent
+The value of $\beta$ depends on the particle multiplicity of hadronic interactions and is determined from in-depth simulations of air showers.
+\Cref{chap:simulations} determines the energy evolution of $\beta$ averaged over many air-shower simulations for three separate model treatments of the particle multiplicities.
+
+Unlike electrons, muons rarely interact in the atmosphere through radiative processes because of their larger mass ($m_{\mu}\approx200\,m_{e}$).
+Muons also have large decay lengths (see~\Cref{eq:decay_length}) due to their long rest lifetime and relativistic $\gamma$ factors.
+Hence, muons with enough energy rarely interact or decay in the atmosphere and instead propagate to Earth's surface with only ionization energy losses of $\sim$\,\qty{2}{\mega\electronvolt}$/\left(\text{g}\,\text{cm}^{-2}\right)$.
+To traverse the full atmosphere (i.e.~$X\approx$\,\qty{1030}{\gram\per\centi\meter\squared}) would require a muon energy of roughly \qty{2}{\giga\electronvolt}, where muons above this threshold will reach Earth's surface.
+Muons therefore serve as a probe of the hadronic component of air showers, able to be observed with ground-based air-shower detection techniques, due to their direct relation to hadronic particles and their low rates of atmospheric interaction and decay.
+
+%above this threshold reach Earth's surface and, due to the direct relation of muons to hadronic particles, serve as a probe of the hadronic component of air showers.
+
+%, and therefore can traverse the atmosphere 
+%The long muon rest lifetime, combined with a relativistic $\gamma$ factor, results in a large 
+
+%both due to their low rate of interactions in the atmosphere and their large 
+
+%The same concept of parent particles interacting after a splitting length and the
+%The same idea of splitting lengths and resultant particles receiving equal energies 
+
+%Atmospheric muons propagate directly to Earth's surface
+%Due to their low rate of interactions in the atmosphere and their large relativistic $\gamma$ factors, resulting in a large decay length, muons rarely interact in the atmosphere and instead propagate to Earth's surface with only ionization energy losses.
+%Therefore, muons serve as a direct probe to the air-shower hadronic component.
+%Muons rarely interact in the atmosphere and lose energy mainly to ionization as they traverse 
+
+\subsubsection{The Superposition Model}\label{sssec:superposition}
+The previous two sections describe the relation of $X_{\text{max}}$ and $N_{\mu}$ to the primary cosmic ray assuming it has a proton composition.
+
 
 \subsection{Longitudinal Profile}\label{ssec:long_profile}
 
