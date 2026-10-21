@@ -390,14 +390,37 @@ Muons therefore serve as a probe of the hadronic component of air showers, able 
 %Muons rarely interact in the atmosphere and lose energy mainly to ionization as they traverse 
 
 \subsubsection{The Superposition Model}\label{sssec:superposition}
-The previous two sections describe the relation of $X_{\text{max}}$ and $N_{\mu}$ to the primary cosmic ray assuming it has a proton composition.
-The Heitler-Matthews model can be extended to nuclear primaries using the superposition model.
+The previous two sections describe the relation of $X_{\text{max}}$ and $N_{\mu}$ to the primary cosmic ray in the Heitler-Matthews model assuming the primary has the mass of a proton.
+Extending these relationships to nuclear primaries is performed using the superposition model. 
 The superposition model posits a primary cosmic-ray nucleus with a mass $A$ and an energy $E_{0}$ can be modeled as $A$ separate cosmic-ray protons, each with an energy $E_{0} / A$.
 The energies of particle interactions within the air shower are significantly larger than the nuclear binding energy of roughly \qty{5}{\mega\electronvolt} per nucleon, rationalizing the use of the superposition model.
+Using the superposition model, the $X_{\text{max}}$ relationship for a primary cosmic ray of mass $A$ is
 
-Linear relationship between lnNmu and lnA, anti-linear relationship with Xmax and lnA (-lnA).
+\begin{equation}
+    X_{\text{max}}^{A}\left( E_{0} \right) \approx \lambda_{\text{had}} + X_{0} \ln\left( \frac{E_{0}}{2\,n_{\text{tot}}\,A\,E_{c}} \right) = X_{\text{max}}^{p} - X_{0}\ln\left(A\right), \label{eq:nucleon_xmax}
+\end{equation}
 
-In reality, the direct mass relationship for an individual air shower is more complicated, to be discussed in~\Cref{sssec:fluctuations}; however, this simplified model provides a general relation between mass and air-shower observables that holds when averaged over many air-shower events.
+\noindent
+where the approximation considers only electromagnetic particles generated from the first interaction, assumed also for~\Cref{eq:proton_xmax}.
+The relationship for $N_{\mu}$ within the superposition model becomes
+
+\begin{equation}
+    N_{\mu}^{A}\left( E_{0} \right) = A\,\left( \frac{E_{0}}{A\,E_{c}^{\pi}} \right)^{\beta} = A^{1-\beta}\,N_{\mu}^{p}. \label{eq:nucleon_nmu}
+\end{equation}
+
+\Cref{eq:nucleon_xmax,eq:nucleon_nmu} highlight the mass dependence of $X_{\text{max}}$ and $N_{\mu}$, namely proton air showers develop further into the atmosphere and contain less muons than iron particles, where a more massive primary results in more shower muons and an air shower that develops earlier (higher) in the atmosphere.
+This is nicely summarized with the proportionalities
+
+\begin{equation}
+    X_{\text{max}} \propto -\ln\left( A \right) \qquad \text{and} \qquad N_{\mu} \propto A^{1-\beta}, \label{eq:observables_mass}
+\end{equation}
+
+\noindent
+showing a direct relationship to the primary mass for separate probes of the electromagnetic and hadronic air-shower components, regardless of the composition of the primary cosmic ray.
+Taking the natural logarithm of $N_{\mu}$ yields a linear relationship between $\ln(A)$ and $\ln(N_{\mu})$, hence there exists a linear relationship between $\ln(A)$ and these separate probes of the electromagnetic and hadronic shower components.
+Combining these observables therefore provides complementary information in determining the cosmic-ray mass from air-shower measurements.
+In reality, the relationship between cosmic-ray mass and these air-shower observables is more complicated and depends on the first interactions during air-shower development; however, this simplified model provides a general relation between mass and air-shower observables that holds when averaged over many air-shower events.
+The impact from the first shower interactions will be discussed in~\Cref{sssec:fluctuations}.
 
 \subsection{Longitudinal Profile}\label{ssec:long_profile}
 
