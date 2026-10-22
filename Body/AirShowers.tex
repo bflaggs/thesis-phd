@@ -431,13 +431,17 @@ A phenomenological function, known as the Gaisser-Hillas function~\cite{gaisser_
 \end{equation}
 
 \noindent
-This function is used to fit both simulations and data of individual air showers to directly determine $X_{\text{max}}$.
-Fitting the Gaisser-Hillas function to air-shower data is further described in~\Cref{chap:auger}.
-In the original implementation, $N(X)$ is the total number of electrons within the air shower at slant depth $X$, which, due to the dominant number of shower electromagnetic particles, can be approximated as the total number of charged particles within the air shower at $X$.
+$N(X)$ is the total number of electrons within the air shower at slant depth $X$, which, due to the dominant number of shower electromagnetic particles, can be approximated as the total number of charged particles within the air shower at $X$.
 $N_{\text{max}}$ is the number of electrons at shower maximum (i.e.~at $X_{\text{max}}$) and can be used to approximate the air-shower energy by $E\approx$\,\qty{1.5}{\giga\electronvolt}\,$\times\,N_{\text{max}}$.
 If $N(X)$ is approximated as the total number of charged particles within the air shower at atmospheric slant depth $X$, then $N_{\text{max}}$ is the number of charged particles at shower maximum.
 $X_{0}$ and $\lambda$ are shape parameters of the longitudinal profile, each with units of $\text{g}/\text{cm}^{2}$.
-Both $X_{0}$ and $\lambda$ are left as free parameters of the fit and are respectively related to the slant depth of first interaction and the effective interaction length of the air shower.
+\Cref{eq:gh} is used to fit both simulations and data of individual air showers to directly determine $X_{\text{max}}$.
+The application to air-shower data does not fit the particle numbers in the air shower, as this is not directly measurable, but rather fits to the cascade energy deposit in the atmosphere, as described in~\Cref{chap:auger}. 
+In either simulations or data, both $X_{0}$ and $\lambda$ are left as free parameters of the fit and are respectively related to the slant depth of first interaction and the effective interaction length of the air shower.
+
+ADD PLOT HERE OF LONGITUDINAL PROFILE AND LATERAL PROFILE
+
+%State lateral profile will be discussed further in chapter 3 and chapter 5.
 
 An alternative version of the Gaisser-Hillas function, is given by:
 
@@ -460,7 +464,7 @@ Within this parameterization, $L$ represents a characteristic width of the showe
 \noindent
 \Cref{eq:gh_parameterized} is sometimes referred to as the ``universal shower profile'' as $L$ and $R$ are less correlated and more stable fit parameters than $X_{0}$ and $\lambda$~\cite{andringa_astropartphys2011_longitudinalprofiles}.
 $L$ and $R$ are both mass-sensitive observables, yet each is also sensitive to the choice of hadronic interaction model, especially the combined knowledge of $L$ and $X_{\text{max}}$~\cite{andringa_astropartphys2011_longitudinalprofiles,icrc2021_buitink_ska,arena2022_buitink_showerlength}.
-Hadronic interaction models are discussed in more detail in~\Cref{ssec:models}.
+Hadronic interaction models are discussed in more detail in~\Cref{sec:models}.
 
 %A deterministic description of the longitudinal development of separate particle types within an air shower is given by the cascade equations of~\Cref{ssec:cascade_equations}.
 
@@ -488,11 +492,11 @@ Assuming this same treatment for an ensemble of iron cosmic rays yields a smalle
 Overall, the means of the $X_{\text{max}}$ distributions for separate mass groups follows the proportionality of~\Cref{eq:observables_mass}, where proton cosmic rays have a larger spread in the $X_{\text{max}}$ distribution compared to iron cosmic rays.
 
 The $N_{\mu}$ observable also has greater shower-to-shower fluctuations for proton air showers compared to heavier primaries; however, this is due to stochasticities in the nature of the high-energy hadronic interactions within the air showers.
-After several interactions, the stochasticities average out and air showers develop following the same universal rules; however, the effect on the shower observables is still propagated throughout the full shower development. 
+After several interactions, the stochasticities average out and air showers develop following the same universal rules; however, the effect of stochastic processes on the shower observables is still propagated throughout the full shower development. 
 Shower-to-shower fluctuations then limit the potential per-event separation of individual air-shower observables.
 The fluctuations instead produce a second moment, the spread, for each observable distribution which is also mass sensitive and can be studied using distributions of single observables.
 Simultaneously combining knowledge of multiple mass-sensitive observables is a potential method to relax the limitations of per-event separation resulting from shower fluctuations.
-This method of combining multiple observables to study per-event mass separation is the topic of~\Cref{chap:simulations.}
+This method of combining multiple observables to study per-event mass separation is the topic of~\Cref{chap:simulations}.
 
 
 %Shower-to-shower fluctuations smear the distributions of individual observables, yielding a second moment for each observable which is also mass sensitive.
@@ -535,12 +539,51 @@ This method of combining multiple observables to study per-event mass separation
 
 
 \section{Radio Emission from Air Showers}\label{sec:radio}
+Radio emission, generated from charged secondary particles of the cascade, is another component of cosmic-ray air showers.
+The radio emission is broadband emission generated in MHz to GHz frequencies, meaning the radio signal has a continuous frequency spectrum over this range of frequencies, and coherent, meaning the radio waves generated throughout the shower development are in phase with one another.
+Measuring the radio emission from an air shower is made possible due to the broadband and coherence properties of the emission.
+The radio detection technique for observing cosmic-ray air showers has matured in recent years, with several observatories using radio observations of air showers to report cosmic-ray energy and depth of shower maximum measurements.
+
+The radio emission within air showers is generated from two main emission mechanisms.
+The first is geomagnetic emission, a deflection of charged secondary particles in the shower from the geomagnetic field.
+The deflection is a Lorentz force interaction that deflects shower electrons and positrons within the shower front, the thin disk of shower particles generated as the shower propagates throughout the atmosphere.
+Deflections of the electrons and positrons induce a transverse current that generates coherent radio emission.
+Muons also deflect in Earth's magnetic field due to their positive and negative charges; however, the magnitude of these deflections is lesser for muons compared to electrons due to muons having a larger mass.
+Hence, any radio emission generated from muons deflecting in the geomagnetic field is negligible compared to radio emission generated by electron deflections.
+
+The second emission mechanism is Askaryan emission, produced by a time-varying net-negative charge within the shower front~\cite{askaryan_jetp1962_radioemission,askaryan_jetp1965_densemedia}.
+The net-negative charge is generated at the shower front by photons ionizing atmospheric molecules to ``knock-out'' valence shell electrons\footnote[1]{Some literature simply refers to these electrons as ``knock-out'' or ``kick-out'' electrons.} and by air-shower positrons annihilating with valence shell electrons, hence Askaryan emission is sometimes referred to as charge excess emission.
+These effects induce a roughly 20\% excess of shower electrons compared to shower positrons, where this excess changes as the air-shower develops~\cite{krijn_astropartphys2010_lateraldistribution}.
 
 
-\section{Air-Shower Simulations}\label{sec:simulations}
-Simulations, then hadronic models (these should be last).
+%sometimes called charge excess 
 
-\subsection{Hadronic Interaction Models}\label{ssec:models}
+The amplitude of the geomagnetic emission depends on the angle $\alpha$ between the magnetic field direction and the air-shower axis, where a shower axis perpendicular to the geomagnetic field will produce the maximum particle deflection and therefore the maximum radio signal amplitude from the geomagnetic emission mechanism.
+%Additionally, their distribution within the air shower is less uniform making any generated radio signal with lower amplitude from a loss of coherence in the emission.
+
+
+\begin{figure}
+    \centering
+    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.7\textwidth]{chapter2/radioemission.eps}
+    \caption[Radio emission mechanisms within an air shower.]{Radio emission mechanisms of a cosmic-ray air shower. Geomagnetic emission is shown on the left and Askaryan emission is shown on the right. The top panels provide a depiction of how the charged particle interactions generate the radio emission while the bottom panels show the polarization of the electric field at the position of a radio antenna in the shower plane (for radio emission, the shower plane is the $\vec{v}\,\times\,\vec{v}\,\times\,\vec{B}$ and $\vec{v}\,\times\,\vec{B}$ plane). Figure taken from~\cite{schroeder_ppnp2017_radio}.}
+    \label{fig:radio_emission}
+\end{figure}
+
+
+
+%The broadband and coherence properties of radio emission in air showers makes measuring them possible.
+
+%Cosmic-ray air showers 
+
+%In addition to particles, 
+
+%Cosmic-ray air showers generate broadband, coherent electromagnetic radiation in the form of radio waves.
+ 
+
+%\section{Air-Shower Simulations}\label{sec:simulations}
+%Simulations, then hadronic models (these should be last).
+
+\section{Hadronic Interaction Models}\label{sec:models}
 Further complicating air shower understanding is the extrapolation of models of hadronic interactions into an energy phase space where there is yet no measurements from terrestrial particle accelerators.
 %A cosmic-ray air shower is described by three separate components, an electromagnetic, hadronic, and muonic shower component.
 
