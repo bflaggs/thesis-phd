@@ -281,7 +281,7 @@ The number of particles in the cascade at shower maximum is then defined as
 \end{equation}
 
 \noindent
-and the atmospheric depth of shower maximum is
+and the atmospheric slant depth of shower maximum is
 
 \begin{equation}
     X_{\text{max}}^{\text{EM}} = X_{0} \ln\left( \frac{E_{0}}{E_{c}} \right). \label{eq:em_xmax}
@@ -330,7 +330,7 @@ where $E_{0}$ is the energy of the primary cosmic ray that initiated the air sho
 After several generations, both the air shower energy and particle number are dominated by electromagnetic particles, hence $X_\text{max}$ is mostly electromagnetic in nature.
 For completeness, values of $\lambda_{\text{had}}$\,=\,\qty{120}{\gram\per\centi\meter\squared} and $E_{c}^{\pi}\simeq$\,\qty{20}{\giga\electronvolt} can be assumed for the Heitler-Matthews model~\cite{matthews_astropartphys2005_heitlermatthews}.
 
-Assuming the primary cosmic ray is a proton with energy $E_{0}$, the atmospheric depth of shower maximum can be approximated as
+Assuming the primary cosmic ray is a proton with energy $E_{0}$, the atmospheric slant depth of shower maximum can be approximated as
 
 \begin{equation}
     X_{\text{max}}^{p} \approx \lambda_{\text{had}} + X_{\text{max}}^{\text{EM}}\left( E_{0} / \left(2\,n_{\text{tot}}\right) \right) = \lambda_{\text{had}} + X_{0} \ln\left( \frac{E_{0}}{2\,n_{\text{tot}}\,E_{c}} \right). \label{eq:proton_xmax}
@@ -423,31 +423,115 @@ In reality, the relationship between cosmic-ray mass and these air-shower observ
 The impact from the first shower interactions will be discussed in~\Cref{sssec:fluctuations}.
 
 \subsection{Longitudinal Profile}\label{ssec:long_profile}
+The longitudinal development of the air shower, from first interaction to full absorption of all particles, is known as the longitudinal profile, a description of the number of particles within the air shower at a given atmospheric slant depth during the shower development.
+A phenomenological function, known as the Gaisser-Hillas function~\cite{gaisser_icrc1977_gh}, relates the air-shower longitudinal profile to the mass-sensitive observable $X_\text{max}$ and is given by
 
-\subsubsection{Shower-to-Shower Fluctuations}\label{sssec:fluctuations}
-Helium outliers from SKA proceeding and my work? Do not know where to organize it yet...
+\begin{equation}
+    N\left( X \right) = N_{\text{max}} \left( \frac{X - X_{0}}{X_{\text{max}} - X_{0}} \right)^{\frac{X_{\text{max}} - X_{0}}{\lambda}} \exp\left( \frac{X_{\text{max}} - X}{\lambda} \right). \label{eq:gh}
+\end{equation}
 
-\section{Air-Shower Universality}\label{sec:universality}
+\noindent
+This function is used to fit both simulations and data of individual air showers to directly determine $X_{\text{max}}$.
+Fitting the Gaisser-Hillas function to air-shower data is further described in~\Cref{chap:auger}.
+In the original implementation, $N(X)$ is the total number of electrons within the air shower at slant depth $X$, which, due to the dominant number of shower electromagnetic particles, can be approximated as the total number of charged particles within the air shower at $X$.
+$N_{\text{max}}$ is the number of electrons at shower maximum (i.e.~at $X_{\text{max}}$) and can be used to approximate the air-shower energy by $E\approx$\,\qty{1.5}{\giga\electronvolt}\,$\times\,N_{\text{max}}$.
+If $N(X)$ is approximated as the total number of charged particles within the air shower at atmospheric slant depth $X$, then $N_{\text{max}}$ is the number of charged particles at shower maximum.
+$X_{0}$ and $\lambda$ are shape parameters of the longitudinal profile, each with units of $\text{g}/\text{cm}^{2}$.
+Both $X_{0}$ and $\lambda$ are left as free parameters of the fit and are respectively related to the slant depth of first interaction and the effective interaction length of the air shower.
 
 An alternative version of the Gaisser-Hillas function, is given by:
-
-%described in terms of shower width $L$, and shower asymmetry $R$ is given by:
 
 \begin{equation}
     N^{\prime} = \left( 1 + \frac{R X^{\prime}}{L} \right)^{R^{-2}} \exp \left( -\frac{X^{\prime}}{LR} \right). \label{eq:gh_parameterized}
 \end{equation}
 
 \noindent
-$N^{\prime}$ is the normalized number of charged particles in the air shower ($N^{\prime} = N / N_{\rm max}$) and $X\prime$ is the shower maximum shifted slant depth ($X\prime = X - X_{\rm max}$).
+$N^{\prime}$ is the normalized number of electrons\footnote[1]{Or the normalized number of charged particles, depending on assumptions.} in the air shower ($N^{\prime} = N / N_{\text{max}}$) and $X^{\prime}$ is the shower maximum shifted slant depth ($X^{\prime} = X - X_{\text{max}}$).
 Within this parameterization, $L$ represents a characteristic width of the shower longitudinal profile while $R$ is related to the asymmetry of the profile, defined explicitly with the equations
 
 \begin{equation}
-    L = \sqrt{|X_{0}\prime \lambda|}, \label{eq:L}
+    L = \sqrt{|X_{0}^{\prime} \lambda|} \qquad \text{and} \label{eq:L}
 \end{equation}
 
 \begin{equation}
-    R = \sqrt{\frac{\lambda}{|X_{0}\prime|}}. \label{eq:R}
+    R = \sqrt{\frac{\lambda}{|X_{0}^{\prime|}}}. \label{eq:R}
 \end{equation}
+
+\noindent
+\Cref{eq:gh_parameterized} is sometimes referred to as the ``universal shower profile'' as $L$ and $R$ are less correlated and more stable fit parameters than $X_{0}$ and $\lambda$~\cite{andringa_astropartphys2011_longitudinalprofiles}.
+$L$ and $R$ are both mass-sensitive observables, yet each is also sensitive to the choice of hadronic interaction model, especially the combined knowledge of $L$ and $X_{\text{max}}$~\cite{andringa_astropartphys2011_longitudinalprofiles,icrc2021_buitink_ska,arena2022_buitink_showerlength}.
+Hadronic interaction models are discussed in more detail in~\Cref{ssec:models}.
+
+%A deterministic description of the longitudinal development of separate particle types within an air shower is given by the cascade equations of~\Cref{ssec:cascade_equations}.
+
+%The total particle number is dominated by electromagnetic particles and therefore, a 
+
+%As the shower develops, the charged particles will   
+%The longitudinal development of an air shower is modeled using the cascade equations of~\Cref{ssec:cascade_equations}. 
+%As the shower develops, the
+
+%Relating the air-shower longitudinal profile to $X_{\text{max}}$, shown to be a mass-sensitive observable in the previous sections, is done through a phenomenological model of 
+
+\subsubsection{Shower-to-Shower Fluctuations}\label{sssec:fluctuations}
+The nature of the first few interactions during air-shower development are inherently random processes.
+These stochasticities propagate throughout the development of an air shower, resulting in shower-to-shower fluctuations among air showers with the same mass, energy, and arrival direction of the primary cosmic-ray.
+The impact of the stochastic interactions throughout the shower development become imprinted upon air-shower observables, making the relationships between shower observables and cosmic-ray mass a statistical, rather than a deterministic, model.
+
+This is most easily visualized through a simple addition to the Heitler-Matthews model that assumes the first interaction point in the atmosphere is random, where the probability of the primary cosmic-ray surviving decreases exponentially as it penetrates further into the atmosphere.
+In this thought experiment, a proton cosmic ray with a first interaction point higher in the atmosphere will reach shower maximum development faster than a proton cosmic ray with a first interaction point lower in the atmosphere.
+Assuming a stochastic first interaction point for an ensemble of proton cosmic rays, each with the same energy, yields a range of $X_{\text{max}}$ values, where the spread in these values is a direct result of shower-to-shower fluctuations. 
+
+Thinking in terms of the superposition model, an iron cosmic ray is modeled as a collection of lower energy proton cosmic rays, each with a distinct first interaction depth.
+The individual ``proton'' sub-showers superimpose, one on top of the other, where each sub-shower is treated to have a randomized first-interaction depth.
+Averaging over the ``proton'' sub-shower first-interaction depths determines the value of $X_{\text{max}}$ for a single iron cosmic ray.
+Assuming this same treatment for an ensemble of iron cosmic rays yields a smaller range of $X_{\text{max}}$ values compared to the $X_{\text{max}}$ range of the proton cosmic ray ensemble.
+Overall, the means of the $X_{\text{max}}$ distributions for separate mass groups follows the proportionality of~\Cref{eq:observables_mass}, where proton cosmic rays have a larger spread in the $X_{\text{max}}$ distribution compared to iron cosmic rays.
+
+The $N_{\mu}$ observable also has greater shower-to-shower fluctuations for proton air showers compared to heavier primaries; however, this is due to stochasticities in the nature of the high-energy hadronic interactions within the air showers.
+After several interactions, the stochasticities average out and air showers develop following the same universal rules; however, the effect on the shower observables is still propagated throughout the full shower development. 
+Shower-to-shower fluctuations then limit the potential per-event separation of individual air-shower observables.
+The fluctuations instead produce a second moment, the spread, for each observable distribution which is also mass sensitive and can be studied using distributions of single observables.
+Simultaneously combining knowledge of multiple mass-sensitive observables is a potential method to relax the limitations of per-event separation resulting from shower fluctuations.
+This method of combining multiple observables to study per-event mass separation is the topic of~\Cref{chap:simulations.}
+
+
+%Shower-to-shower fluctuations smear the distributions of individual observables, yielding a second moment for each observable which is also mass sensitive.
+%These fluctuations then limit the potential per-event separation of individual air-shower observables
+
+%This simple explanation assumed only the first interaction is determined stochastically; however, the first few interactions are stochastic in nature.
+%results in smaller shower-to-shower fluctuations 
+
+%that form the sample $X_{\text{max}}$ distribution for protons. 
+%The mean of the distribution follows the $X_{\text{max}}$ proportionality of~\Cref{eq:observables_mass} while   
+
+%Yet, it has a significant impact on the development of an air shower, as cosmic rays with their first interaction higher in the atmosphere will reach their shower maximum faster than cosmic rays that interact lower in the atmosphere.
+%An ensemble of individual proton cosmic rays will 
+%There is also a dependence between the primary particle mass and the first interaction depth within the atmosphere.
+%A single proton will interact in the atmosphere where the first interaction can occur within a large range of slant depths.
+%This range of first interaction depths propagates throughout the shower development resulting in a large range of 
+
+%Thinking again in terms of the superposition model, an iron cosmic ray is a collection of lower energy proton cosmic rays each with a distinct first interaction depth.
+%Averaged over these ``proton'' first-interaction depths for a single iron cosmic ray superimpose upon each other, resulting in a 
+
+%\section{Air-Shower Universality}\label{sec:universality}
+
+%An alternative version of the Gaisser-Hillas function, is given by:
+
+%\begin{equation}
+%    N^{\prime} = \left( 1 + \frac{R X^{\prime}}{L} \right)^{R^{-2}} \exp \left( -\frac{X^{\prime}}{LR} \right). \label{eq:gh_parameterized}
+%\end{equation}
+
+%\noindent
+%$N^{\prime}$ is the normalized number of charged particles in the air shower ($N^{\prime} = N / N_{\rm max}$) and $X\prime$ is the shower maximum shifted slant depth ($X\prime = X - X_{\rm max}$).
+%Within this parameterization, $L$ represents a characteristic width of the shower longitudinal profile while $R$ is related to the asymmetry of the profile, defined explicitly with the equations
+
+%\begin{equation}
+%    L = \sqrt{|X_{0}\prime \lambda|}, \label{eq:L}
+%\end{equation}
+
+%\begin{equation}
+%    R = \sqrt{\frac{\lambda}{|X_{0}\prime|}}. \label{eq:R}
+%\end{equation}
 
 
 \section{Radio Emission from Air Showers}\label{sec:radio}
@@ -456,7 +540,7 @@ Within this parameterization, $L$ represents a characteristic width of the showe
 \section{Air-Shower Simulations}\label{sec:simulations}
 Simulations, then hadronic models (these should be last).
 
-\subsection{Hadronic Interaction Models}\label{sec:models}
+\subsection{Hadronic Interaction Models}\label{ssec:models}
 Further complicating air shower understanding is the extrapolation of models of hadronic interactions into an energy phase space where there is yet no measurements from terrestrial particle accelerators.
 %A cosmic-ray air shower is described by three separate components, an electromagnetic, hadronic, and muonic shower component.
 
