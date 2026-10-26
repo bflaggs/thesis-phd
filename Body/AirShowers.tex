@@ -541,10 +541,11 @@ This method of combining multiple observables to study per-event mass separation
 \section{Radio Emission from Air Showers}\label{sec:radio}
 Radio emission, generated from charged secondary particles of the cascade, is another component of cosmic-ray air showers.
 The radio emission is broadband, coherent, emission generated in MHz to GHz frequencies, meaning the radio signal has a continuous frequency spectrum over this range of frequencies (broadband) and the radio waves generated throughout the shower development are in phase with one another (coherence).
-The radio detection technique for observing cosmic-ray air showers has matured in recent years, with several observatories using radio observations of air showers to report measurements of air-shower observables, including cosmic-ray energy and depth of shower maximum measurements.
+The radio detection technique for observing cosmic-ray air showers has matured in recent years, with several observatories using radio observations of air showers to report measurements of air-shower observables, including the cosmic-ray energy and the slant depth of shower maximum.
 
+\subsection{Radio Emission Mechanisms}\label{ssec:mechanisms}
 Radio emission within air showers is generated from two main emission mechanisms.
-The first is geomagnetic emission, a deflection of charged secondary particles in the shower induced by the geomagnetic field.
+The first is geomagnetic emission, a deflection of charged secondary particles in the shower caused by interactions with the geomagnetic field.
 The deflection is a Lorentz force interaction that deflects shower electrons and positrons within the shower front, the thin disk of shower particles that forms as the shower propagates throughout the atmosphere.
 Deflections of the electrons and positrons induce a transverse current that generates radio emission polarized in the $-\vec{v}\,\times\,\vec{B}$ direction, where $\vec{v}$ is the particle velocity and $\vec{B}$ is Earth's magnetic field.
 Muons also deflect in Earth's magnetic field due to their positive and negative charges; however, the magnitude of these deflections is lesser for muons compared to electrons due to muons having a larger mass.
@@ -552,9 +553,9 @@ Hence, any radio emission generated from muons deflecting in the geomagnetic fie
 Radio emission from deflections of other particle species within the shower is also negligible.
 
 The second emission mechanism is Askaryan emission, produced by a time-varying net-negative charge within the shower front~\cite{askaryan_jetp1962_radioemission,askaryan_jetp1965_densemedia}.
-The net-negative charge is generated at the shower front by photons ionizing atmospheric molecules to ``knock-out'' valence shell electrons\footnote[1]{Some literature simply refers to these electrons as ``knock-out'' or ``kick-out'' electrons.} and by air-shower positrons annihilating with valence shell electrons, hence Askaryan emission is sometimes referred to as charge excess emission.
-These effects induce a roughly 20\% excess of shower electrons compared to shower positrons, where this excess changes as the air-shower develops~\cite{krijn_astropartphys2010_lateraldistribution}.
-Askaryan emission is radially polarized in the $\vec{v}\,\times\,\vec{B}$ plane and also occurs for particle showers within dense media, such as water-ice.
+The net-negative charge is generated at the shower front by photons ionizing atmospheric molecules to ``knock-out'' valence shell electrons\footnote[1]{Some literature simply refers to these electrons as ``knock-out'' or ``kick-out'' electrons.} and by air-shower positrons annihilating with valence shell electrons, therefore Askaryan emission is sometimes referred to as charge excess emission.
+These effects induce a roughly 20\% excess of shower electrons compared to shower positrons, where this excess changes as the air shower develops~\cite{krijn_astropartphys2010_lateraldistribution}.
+Askaryan emission is radially polarized in the shower plane and also occurs for particle showers within dense media, such as water-ice.
 \Cref{fig:radio_emission} depicts both the geomagnetic and Askaryan emission mechanisms and their respective polarizations.
 
 \begin{figure}
@@ -567,17 +568,56 @@ Askaryan emission is radially polarized in the $\vec{v}\,\times\,\vec{B}$ plane 
 In general, emission mechanisms generate coherent emission if the wavelength of the radiation is larger than the emission region.
 For geomagnetic and Askaryan emission, the shower front, with a thickness of roughly one meter for an air shower, is the emission region.
 Using the relationship $c = \lambda\,f$, coherent radio emission in air showers occurs for frequencies of a few \qty{100}{\mega\hertz} and below, where higher frequencies have a lower ambient radio background from sources such as the Galactic center or thermal noise from radiating blackbodies~\cite{schroeder_ppnp2017_radio}.
-Coherence makes the strength of the radio emission (i.e.~the electric field strength measured by the radio antennas) linearly proportional to the number of electrons within the air shower $N_{e}$.
-The square of the radiation energy (i.e.~the radiated power of the radio emission) therefore linearly scales with the primary cosmic-ray energy, $E_{0}$, from~\Cref{eq:em_proportionalities}.
+Coherence makes the strength of the radio emission (i.e.~the electric field amplitude measured by the radio antennas) linearly proportional to the number of electrons within the air shower, $N_{e}$.
+The air-shower radiation energy (i.e.~the total radiated power of the radio emission) therefore scales quadratically with the electromagnetic energy of the air shower from~\Cref{eq:em_proportionalities}, explicitly $E_{\text{rad}} \propto E_{\text{EM}}^{2}$.
 
 The amplitude of the geomagnetic emission depends on $\sin\left(\alpha\right)$, with $\alpha$ the angle between the magnetic field direction and the air-shower axis.
 The incoming direction of the air shower therefore determines the ratio of the Askaryan emission strength to the geomagnetic emission strength.
 The total radio emission also depends on the longitudinal development of the shower itself.
 Inclined showers that develop in the atmosphere over a longer distance than vertical air showers will have a longer duration of their geomagnetic emission, leading to an increase in the amount of radio emission.
 For showers in dense media the opposite is true, and the geomagnetic radio emission is negligible because the shower develops over a shorter length scale. 
-Generally, both the geomagnetic and Askaryan radio emission contribute to the total radio emission for a cosmic-ray air shower; however, the two effects interfere with one another leading to an observed asymmetry in the footprint of the radiation energy at ground, known as the radio footprint.
+
+\subsection{Relationship of the Radio Emission to Air-Shower Observables}\label{ssec:radio_observables}
+Generally, both the geomagnetic and Askaryan radio emission contribute to the total radio emission for a cosmic-ray air shower; however, the two effects interfere with one another leading to an observed asymmetry in the footprint of the radiation energy fluence at ground, known as the radio footprint.
 The size of the asymmetry within the radio footprint depends on the ratio of the Askaryan to geomagnetic emission strengths.
-XXX shows an example of a radio footprint at ground as measured by radio antennas at the Pierre Auger Observatory, where an interpolation of the radio signal between antennas has been made.
+XXX shows an example of a simulated radio footprint at ground that has been projected into the shower plane, the plane perpendicular to the air-shower axis.
+Spatially integrating the radio footprint at ground in two dimensions yields the radiation energy, $E_{\text{rad}}$.
+
+BJARNI FIGURE 1 HERE
+% From Radio measurements of the depth of air-shower maximum at the Pierre Auger Observatory
+
+As stated in the previous section, the strength of the radio emission is dependent on both the shower geometry and its development within the atmosphere.
+The total radiation energy must be corrected for these effects following the corrections discussed within~\cite{christian_jcap2016_radiationenergy}.
+The corrected radiation energy can then be used to determine the air-shower electromagnetic energy from a fit to data, following:
+
+\begin{equation}
+    E_\text{rad} = A \times 10^{7}\,\text{eV} \left( \frac{E_{\text{EM}}}{10^{18}\,\text{eV}} \right)^{B} \label{eq:radio_energy}
+\end{equation}
+
+\noindent
+where $A$ and $B$ are free parameters of the fit.
+The total air-shower energy can not be used in place of the electromagnetic energy in~\Cref{eq:radio_energy} because neutrinos and high-energy muons carry a fraction of the primary cosmic-ray energy, roughly 10\%, which is never transferred to the electromagnetic component of the air shower.
+This is known as the invisible energy which can be corrected for using particle-detector measurements of inclined air showers where the majority of the electromagnetic particles have been absorbed in the atmosphere~\cite{auger_prd2019_invisibleenergy}.
+Note that the fluorescence and air-Cherenkov detection techniques of air showers also measure the electromagnetic component of air showers and therefore must be corrected for the energy carried by the ``invisible'' portion of the air shower as well.
+However, these detection techniques can serve as a direct calibration measurement to the radio detection technique.
+Fluorescence detection is discussed further in~\Cref{sec:fd}.
+
+The shape of the radio signal footprint is also dependent on the geometric distance to the maximum development of the air shower, as seen in XXX.
+Continue into describing how to determine shower maximum from radio emission.
+
+BJARNI FIGURE 2 HERE
+% also from Radio measurements of the depth of air-shower maximum at the Pierre Auger Observatory, but take instead from 
+% Christian's paper, An analytic description of the radio emission of air showers based on its emission mechanisms (original)
+
+%must also be corrected for the invisible energy 
+
+
+%This fraction is roughly 10\% of the primary cosmic-ray energy and is known as the invisible energy.
+%A correction for the invisible energy must be applied in order to estimate the primary cosmic-ray energy, 
+
+
+
+%The total radiation energy is dependent upon the geometry of the air shower and 
 
 
 %shower axis perpendicular to the geomagnetic field will produce the maximum particle deflection and therefore the maximum radio signal amplitude from the geomagnetic emission mechanism.
