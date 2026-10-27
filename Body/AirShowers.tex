@@ -567,7 +567,7 @@ Askaryan emission is radially polarized in the shower plane and also occurs for 
 
 In general, emission mechanisms generate coherent emission if the wavelength of the radiation is larger than the emission region.
 For geomagnetic and Askaryan emission, the shower front, with a thickness of roughly one meter for an air shower, is the emission region.
-Using the relationship $c = \lambda\,f$, coherent radio emission in air showers occurs for frequencies of a few \qty{100}{\mega\hertz} and below, where higher frequencies have a lower ambient radio background from sources such as the Galactic center or thermal noise from radiating blackbodies~\cite{schroeder_ppnp2017_radio}.
+Using the relationship $c = \lambda\,f$, coherent radio emission in air showers occurs for frequencies of a few \qty{100}{\mega\hertz} and below, where higher frequencies have a lower ambient radio background from sources such as the Galactic center or thermal noise from radiating blackbodies~\cite{schroeder_ppnp2017_radio, tim_physrep2016_radio}.
 Coherence makes the strength of the radio emission (i.e.~the electric field amplitude measured by the radio antennas) linearly proportional to the number of electrons within the air shower, $N_{e}$.
 The air-shower radiation energy (i.e.~the total radiated power of the radio emission) therefore scales quadratically with the electromagnetic energy of the air shower from~\Cref{eq:em_proportionalities}, explicitly $E_{\text{rad}} \propto E_{\text{EM}}^{2}$.
 
@@ -578,17 +578,21 @@ Inclined showers that develop in the atmosphere over a longer distance than vert
 For showers in dense media the opposite is true, and the geomagnetic radio emission is negligible because the shower develops over a shorter length scale. 
 
 \subsection{Relationship of the Radio Emission to Air-Shower Observables}\label{ssec:radio_observables}
-Generally, both the geomagnetic and Askaryan radio emission contribute to the total radio emission for a cosmic-ray air shower; however, the two effects interfere with one another leading to an observed asymmetry in the footprint of the radiation energy fluence at ground, known as the radio footprint.
+Both the geomagnetic and Askaryan radio emission contribute to the total radio emission for a cosmic-ray air shower; however, the two effects interfere with one another leading to an observed asymmetry in the footprint of the radiation energy fluence at ground, known as the radio footprint.
 The size of the asymmetry within the radio footprint depends on the ratio of the Askaryan to geomagnetic emission strengths.
-XXX shows an example of a simulated radio footprint at ground that has been projected into the shower plane, the plane perpendicular to the air-shower axis.
+\Cref{fig:radio_footprint} shows an example of a simulated radio footprint at ground that has been projected into the shower plane, the plane perpendicular to the air-shower axis.
 Spatially integrating the radio footprint at ground in two dimensions yields the radiation energy, $E_{\text{rad}}$.
 
-BJARNI FIGURE 1 HERE
-% From Radio measurements of the depth of air-shower maximum at the Pierre Auger Observatory
+\begin{figure}
+    \centering
+    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.7\textwidth]{chapter2/radio_footprint_example.pdf}
+    \caption[Example of a simulated radio footprint.]{A simulated footprint of the radio emission within a cosmic-ray air shower. The footprint is simulated at ground and projected into the shower plane. Each unfilled circle represents the simulated location of a radio antenna. Darker colors represent a larger amplitude of the radio fluence. Figure taken from~\cite{auger_prd2024_aeraxmax}.}
+    \label{fig:radio_footprint}
+\end{figure}
 
 As stated in the previous section, the strength of the radio emission is dependent on both the shower geometry and its development within the atmosphere.
 The total radiation energy must be corrected for these effects following the corrections discussed within~\cite{christian_jcap2016_radiationenergy}.
-The corrected radiation energy can then be used to determine the air-shower electromagnetic energy from a fit to data, following:
+Using air-shower simulations, the corrected radiation energy can be fit to the air-shower electromagnetic energy following: 
 
 \begin{equation}
     E_\text{rad} = A \times 10^{7}\,\text{eV} \left( \frac{E_{\text{EM}}}{10^{18}\,\text{eV}} \right)^{B} \label{eq:radio_energy}
@@ -596,29 +600,42 @@ The corrected radiation energy can then be used to determine the air-shower elec
 
 \noindent
 where $A$ and $B$ are free parameters of the fit.
+In data, \Cref{eq:radio_energy} can be inverted using the $A$ and $B$ fit parameters to determine a per-event electromagnetic energy for a measured corrected radiation energy.
 The total air-shower energy can not be used in place of the electromagnetic energy in~\Cref{eq:radio_energy} because neutrinos and high-energy muons carry a fraction of the primary cosmic-ray energy, roughly 10\%, which is never transferred to the electromagnetic component of the air shower.
 This is known as the invisible energy which can be corrected for using particle-detector measurements of inclined air showers where the majority of the electromagnetic particles have been absorbed in the atmosphere~\cite{auger_prd2019_invisibleenergy}.
 Note that the fluorescence and air-Cherenkov detection techniques of air showers also measure the electromagnetic component of air showers and therefore must be corrected for the energy carried by the ``invisible'' portion of the air shower as well.
-However, these detection techniques can serve as a direct calibration measurement to the radio detection technique.
+These additional detection techniques can serve as a direct calibration measurement to the radio detection technique~\cite{maxbuesken_phdthesis}.
 Fluorescence detection is discussed further in~\Cref{sec:fd}.
 
-The shape of the radio signal footprint is also dependent on the geometric distance to the maximum development of the air shower, as seen in XXX.
-Continue into describing how to determine shower maximum from radio emission.
+The shape of the radio signal footprint is also dependent on the geometric distance to the maximum development of the air shower, as seen in~\Cref{fig:footprint_xmax}.
+Hence, an $X_{\text{max}}$ dependence on the radio footprint shape is expected.
+Simulation template matching of the two-dimensional lateral distributions of measured radio signals to simulated radio signals is used to determine $X_{\text{max}}$ with radio measurements of air showers~\cite{buitink_prd2014_radioxmax}.
+Several air showers with the same initial parameters, other than primary cosmic-ray mass, are simulated to reproduce the shower-to-shower fluctuations seen in real data.
+The simulated radio footprints are compared to the measured radio footprint using a $\chi^{2}$ calculated from the individual radio antenna fluence values to quantify a match of the data with simulation.
+A parabolic fit to the $\chi^{2}$ values as a function of simulated $X_{\text{max}}$ then determines the nominal event $X_{\text{max}}$.
+This method has been used to determine $X_{\text{max}}$ both within a frequency range of \qtyrange{30}{80}{\mega\hertz}~\cite{auger_prd2024_aeraxmax, auger_prl2024_aeraxmax} and tested at higher frequencies of \qtyrange{30}{80}{\mega\hertz}~\cite{icrc2023_turcotte}, yet these analyses were performed at separate observatory locations.
+Dense arrays of radio antennas have been shown to be sensitive to reconstructions of the air-shower longitudinal profile width and asymmetry, respectively $L$ and $R$ from~\Cref{ssec:long_profile}~\cite{arena2022_corstanje_longitudinaldistribution}, while methods using information field theory can reconstruct the full longitudinal profile from simulated radio signals~\cite{arena2026_watanabe_ift}.
 
-BJARNI FIGURE 2 HERE
-% also from Radio measurements of the depth of air-shower maximum at the Pierre Auger Observatory, but take instead from 
-% Christian's paper, An analytic description of the radio emission of air showers based on its emission mechanisms (original)
+\begin{figure}
+    \centering
+    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.7\textwidth]{chapter2/radio_footprint_shower_maximum_distance.pdf}
+    \caption[Radio footprints for various distances to shower maximum.]{The radio footprint and how it evolves with the distance to the atmospheric slant depth of shower maximum. Shower A has a shower maximum closer to the observation level and therefore a smaller radio footprint, while shower C has a shower maximum farther from the observation level and as a result a larger radio footprint. Figure taken from~\cite{glaser_astropartphys2018_radiomodel}.}
+    \label{fig:footprint_xmax}
+\end{figure}
+
+%This method to determine $X_{\text{max}}$ has been used at the Pierre Auger Observatory within the frequency range of \qtyrange{30}{80}{\mega\hertz}~\cite{auger_prd2024_aeraxmax, auger_prl2024_aeraxmax} and 
+
+%Several simulations for various masses of the primary cosmic ray are necessary to reproduce the shower-to-shower fluctuations seen in real data.
+%For a single air shower, several air-shower simulations are pr
+%Using the two-dimensional lateral distribution of radio signals 
+%$X_\text{max}$ can be determined 
 
 %must also be corrected for the invisible energy 
-
 
 %This fraction is roughly 10\% of the primary cosmic-ray energy and is known as the invisible energy.
 %A correction for the invisible energy must be applied in order to estimate the primary cosmic-ray energy, 
 
-
-
 %The total radiation energy is dependent upon the geometry of the air shower and 
-
 
 %shower axis perpendicular to the geomagnetic field will produce the maximum particle deflection and therefore the maximum radio signal amplitude from the geomagnetic emission mechanism.
 
@@ -634,7 +651,6 @@ BJARNI FIGURE 2 HERE
 
 %Askaryan emission also occurs within dense media, such as water-ice, 
 
-
 %sometimes called charge excess 
 
 %The amplitude of the geomagnetic emission depends on the angle $\alpha$ between the magnetic field direction and the air-shower axis, where a shower axis perpendicular to the geomagnetic field will produce the maximum particle deflection and therefore the maximum radio signal amplitude from the geomagnetic emission mechanism.
@@ -647,7 +663,6 @@ BJARNI FIGURE 2 HERE
 
 %Additionally, their distribution within the air shower is less uniform making any generated radio signal with lower amplitude from a loss of coherence in the emission.
 
-
 %The broadband and coherence properties of radio emission in air showers makes measuring them possible.
 
 %Cosmic-ray air showers 
@@ -655,7 +670,6 @@ BJARNI FIGURE 2 HERE
 %In addition to particles, 
 
 %Cosmic-ray air showers generate broadband, coherent electromagnetic radiation in the form of radio waves.
- 
 
 %\section{Air-Shower Simulations}\label{sec:simulations}
 %Simulations, then hadronic models (these should be last).
