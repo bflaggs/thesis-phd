@@ -439,9 +439,20 @@ $X_{0}$ and $\lambda$ are shape parameters of the longitudinal profile, each wit
 The application to air-shower data does not fit the particle numbers in the air shower, as this is not directly measurable, but rather fits to the cascade energy deposit in the atmosphere, as described in~\Cref{chap:auger}. 
 In either simulations or data, both $X_{0}$ and $\lambda$ are left as free parameters of the fit and are respectively related to the slant depth of first interaction and the effective interaction length of the air shower.
 
-ADD PLOT HERE OF LONGITUDINAL PROFILE AND LATERAL PROFILE
+\begin{figure}
+    \centering
+    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.7\textwidth]{chapter2/longitudinal_and_lateral_distributions.png}
+    \caption[Longitudinal and lateral distributions of air-shower particles.]{Left: The lateral distribution of air-shower particles for a completely vertical ($\theta_{\text{zen}}$=\,\qty{0}{\degree}) simulated air shower initiated by a \qty{10}{\exa\electronvolt} proton cosmic ray. Right: The longitudinal distribution for various particle types within the same air shower. Some particle types are scaled by a constant factor to improve visibility of the longitudinal profile. Figure taken from~\cite{engel_annrev2011_hadronicinteractions}.}
+    \label{fig:simulated_distributions}
+\end{figure}
 
-%State lateral profile will be discussed further in chapter 3 and chapter 5.
+\Cref{fig:simulated_distributions} shows the individual longitudinal profiles for gamma-ray photons, electrons, muons, and hadrons within a simulated air shower.
+The electron longitudinal profile is clearly has the dominant contribution to the total charged particle longitudinal distribution.
+The particle density as a function of distance to the air-shower core, known as the lateral profile, is also shown in~\Cref{fig:simulated_distributions}.
+Converting this distance to a distance to the air-shower axis (i.e.~a distance in the plane perpendicular to the shower axis) yields the lateral distribution of the air shower.
+In this example, the distance to the air-shower axis and the distance to the air-shower core are the same because the air shower has a zenith angle of \qty{0}{\degree}.
+Fitting the measured lateral distribution to a model function can provide a measure of the air-shower energy or the particle content of the shower depending on the specifics of the fit.
+These fit types will be discussed in more detail in~\Cref{chap:auger} and~\Cref{chap:nn} respectively.  
 
 An alternative version of the Gaisser-Hillas function, is given by:
 
@@ -675,7 +686,98 @@ Dense arrays of radio antennas have been shown to be sensitive to reconstruction
 %Simulations, then hadronic models (these should be last).
 
 \section{Hadronic Interaction Models}\label{sec:models}
-Further complicating air shower understanding is the extrapolation of models of hadronic interactions into an energy phase space where there is yet no measurements from terrestrial particle accelerators.
+Further complicating the understanding of air showers are hadronic interaction models, frameworks that describe how hadrons interact during the development of the cascade.
+The models are based on quantum chromodynamics (QCD) which describes how quarks are ``glued''\footnote[1]{The force mediator for the strong nuclear force is the gluon. Yes this pun was intentional.} together via the strong nuclear force to form hadrons and the interactions of hadrons.
+Interactions of hadrons within air showers is typically in the soft QCD regime, where interactions occur with low-momentum transfer between quarks and the resultant particles have a small transverse momentum ($p_{\text{T}}\leq$\numrange{1}{2}$\,\text{GeV}/c$)~\cite{christiansen_annurev2025_softqcd}.
+Calculations in the soft QCD regime are incredibly complex because soft QCD is non-perturbative, meaning perturbation theory is no longer a viable option to solve the equations of QCD.
+Instead, hadronic interaction models are used as phenomenological models of these soft QCD interactions, with model parameters ``tuned'' to particle collision data from terrestrial particle accelerators~\cite{albrecht_revphys2025_tuning}.
+
+The hadronic development of an air shower is governed by these hadronic interaction models.
+The first interaction of the primary cosmic ray and an atmospheric molecule that initiates the air shower is hadronic in nature, where the subsequent interactions occur in the forward development region of the air shower.
+Depending on the energy of the primary cosmic ray, the first interaction, and the first few subsequent hadronic interactions, can occur at center-of-mass energies greater than the maximum LHC center-of-mass energy of \qty{14}{\tera\electronvolt}.
+Hadronic interactions at energies above this threshold occur in a phase space with no experimental constrains from current particle accelerators and instead interaction parameters are extrapolated from the ``tuned'' energy regime.
+Uncertainties in the hadronic interactions at these energies and the lack of direct air-shower observations of these first interactions produce large systematic uncertainties of ground-based air-shower measurements.
+These systematic uncertainties impact the measured distributions of air-shower observables.
+
+\subsection{Relation of Air-Shower Observables to Hadronic Interaction Models}\label{ssec:model_dependence}
+The total muon content of an air shower, $N_{\mu}$, is generated through the hadronic shower development and therefore will heavily depend on the hadronic interaction model.
+Additionally, the hadronic nature of the first air-shower interaction creates a dependence of $X_{\text{max}}$ on the assumed hadronic interaction model due to the coupling of $X_{\text{max}}$ with the atmospheric slant depth of first interaction.
+Both $X_{\text{max}}$ and $N_{\mu}$ are air-shower observables highly correlated with the primary cosmic-ray mass highlighting a relationship between cosmic-ray mass composition measurements and hadronic interaction models.
+Therefore, the interpretation of air-shower data is highly dependent on the hadronic interaction model.
+
+Interpretation of air-shower data is performed by comparing air-shower simulations to observed air-shower data, where the hadronic interactions of the simulation are modeled with individual hadronic interaction models.
+These comparisons, in addition to guiding the interpretation of air-shower data, can be used to constrain hadronic interaction models based on their separate predictions.
+One systematic result across all hadronic interaction models is the muon deficit, sometimes called the muon puzzle, a deficit in the number of air-shower muons predicted from hadronic interaction models and the number of air-shower muons measured in data.
+Hadronic interaction models correctly predict the number of high-energy muons (at roughly TeV muon energies and above)~\cite{icecube_prd2025_tevmuons}, yet the number of low-energy muons reaching the observation level is predicted to be lower than what is measured by various air-shower experiments around the world~\cite{icrc2023_arteaga_muonpuzzle}.
+Recent studies suggest this deficit could be an accumulated deficit that grows as the shower develops~\cite{auger_prl2021_muonfluctuations}; however, it is clear that hadronic interaction models still have yet to fully describe the hadronic shower development.
+Hence, studies to test hadronic interaction models are of the utmost importance as these models impact all aspects of understanding air-shower measurements.
+EPOS LHC-R~\cite{icrc2025_pierog}, Sibyll 2.3e~\cite{riehn_prd2019_sibyll23d}, and QGSJETIII-01~\cite{ostapchenko_prd2024_qgsjet3_formalism,ostapchenko_prd2024_qgsjet3_production} are the most recent hadronic interaction models used by the astroparticle research community to describe the hadronic interactions within air showers.
+The impact of hadronic model choice on observable mass sensitivity is studied using air-shower simulations in~\Cref{chap:simulations}.
+
+\section{Chapter Summary}\label{sec:ch2_summary}
+This chapter introduces the physics of cosmic-ray air showers and draws the connection between these air showers and the unknown astrophysical properties of cosmic rays introduced in the previous chapter.
+Several air-shower observables were presented within this chapter and their connection to the primary cosmic-ray mass within various phenomenological models is discussed.
+Specifically, the atmospheric slant depth of shower maximum, $X_{\text{max}}$, and the total air-shower muon content, $N_{\mu}$, are introduced as two observables that are both correlated with the primary cosmic-ray mass, yet each observable is probed through a separate component of the air shower.
+$X_{\text{max}}$ is a measure of the electromagnetic shower component and can be reconstructed with measurements of the radio emission generated within an air shower.
+$N_{\mu}$ is direct probe of the hadronic shower component, which, when combined with $X_{\text{max}}$ measurements, provide two independent and almost fully decoupled methods to measure the cosmic-ray mass.
+Simultaneously measuring both observables could therefore improve the per-event mass sensitivity of air showers, as will be studied with simulations in~\Cref{chap:simulations} and with data in~\Cref{chap:radiomuon}.
+
+Hadronic interaction models, a major source of systematic uncertainty in air-shower measurements and their interpretations, are also introduced.
+These models govern the development of the hadronic air-shower component, yet they are known to be incomplete descriptions of the hadronic interactions.
+This is discussed with the examples of model extrapolation to an energy regime no longer constrained by measurements from terrestrial particle accelerator and from the observed discrepancy in the total muon content of simulated and measured air showers.
+Hadronic interaction models directly impact the understanding of air-shower observables and their distributions and is another point of investigation within this dissertation.
+The following chapter will introduce how these air-shower observables are measured at the Pierre Auger Observatory, the location of the world's largest cosmic-ray observatory and where several analyses presented in this dissertation were performed.
+
+%Various phenomenological models were presented that 
+
+%Observables measured within cosmic-ray air showers and their relationship to understanding the astrophysics 
+%The relationship between observables measured in air
+
+%The deficit is 
+
+%As the models predict 
+%These comparisons are a cyclic process which can be used to constrain both hadronic interaction models and 
+
+%using an assumed hadronic interaction model to 
+
+%resulting in cosmic-ray mass composition measurements dependent 
+
+%an indirect cosmic-ray mass dependence of the hadroni
+
+%the primary cosmic-ray mass
+%Both $X_{\text{max}}$ and $N_{\mu}$ are air-shower observables highly correlated with the primary cosmic-ray mass
+
+%Air-shower simulations use hadronic interaction models to test the 
+%Hadronic interaction models are used in tandem with air-shower simulations to 
+
+%due to the dependence of $X_{\text{max}}$ with the atmospheric slant depth of first interaction, there is 
+
+%XX XX and XX are three major hadronic interaction models used by the astroparticle research community to describe the hadronic interactions within air showers; however, treatment of the hadronic interactions is slightly different for each model yielding differences in the air-shower observable distributions between models.
+%The impact of hadronic model on observable mass sensitivity is studied using air-shower simulations in~\Cref{chap:simulations}.
+
+%therefore certain interaction parameters are extrapolated to these  
+%Hence, the hadronic models 
+
+%Subsequent interactions 
+
+%Hadronic interaction models govern the hadronic development of an air shower.
+
+%Air showers develop in the forward region along the direction of travel of the cascade-initiating primary cosmic ray
+
+%and govern the hadronic development of an air shower.
+
+
+
+
+%In the soft QCD regime, perturbation theory is no longer a viable option to solve the equations of QCD
+%The soft QCD regime is a non-perturbative QCD regime, meaning perturbation theory can not be used to solve equations of QCD, which in turn 
+
+%Yet, solving QCD equations in the non-perturbative regime, such as on distance scales smaller than the 
+
+%is incredibly complex and requires phenomenological models, such as the hadronic interaction models, to describe hadron interactions 
+
+%in the non-perturbative
+%air shower understanding is the extrapolation of models of hadronic interactions into an energy phase space where there is yet no measurements from terrestrial particle accelerators.
 %A cosmic-ray air shower is described by three separate components, an electromagnetic, hadronic, and muonic shower component.
 
 
