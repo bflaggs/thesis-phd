@@ -3,26 +3,28 @@
 %
 \chapter{The Pierre Auger Observatory}\label{chap:auger}
 
-The Pierre Auger Observatory is located near the town of Malarg\"ue in the Mendoza province of Argentina between the Andes mountain range and la Pampa Amarilla.
+The Pierre Auger Observatory is located near the town of Malarg\"ue in the Mendoza province of Argentina next to the Andes mountain range in the Pampa Amarilla.
 Auger, as the observatory is commonly referred to, is the world's largest cosmic-ray observatory, covering a total area of \qty{3000}{\kilo\meter^{2}}.
-In context, this is about the size of the state of Rhode Island, or for those with a more worldly perspective, slightly larger than the size of Luxembourg.
-The observatory's size allows the detection of ultra-high-energy cosmic rays, starting at energies of $\approx$\qty[parse-numbers=false]{10^{17}}{\electronvolt}, with high statistics.
+In context, this is about the size of the state of Rhode Island, or for those with a more worldly perspective, slightly larger than the size of the country of Luxembourg.
+The observatory's size enables the detection of ultra-high-energy cosmic rays, starting at energies of $\sim$\qty[parse-numbers=false]{10^{17}}{\electronvolt}, with high statistics.
 However, the observatory is ground based and therefore indirectly detects the highest energy particles in the known Universe from the air showers they initiate after colliding with atmospheric nuclei.
 
 Not only is Auger the world's largest cosmic-ray observatory, but adding to the novelty is the hybrid detection mode employed by the observatory.
-The hybrid design allows simultaneous air-shower observations with two separate, yet complimentary techniques.
+The hybrid design enables simultaneous air-shower observations with separate, yet complementary techniques.
 The observatory consists of two primary detectors, the surface detector (SD), an array of over 1600 water-Cherenkov detectors (WCDs) spread across the full \qty{3000}{\kilo\meter^{2}} footprint of the observatory, and a fluorescence detector (FD), 27 fluorescence telescopes overlooking the SD array at four locations around the edges of the array.
 Auger has been recording data in hybrid mode for over 20 years, officially starting in 2004 and with full completion of the SD in 2008.
-In March 2026, Auger finished deploying detectors for the next-generation upgrade of the observatory, AugerPrime.
-An international funding agreement will keep the observatory in operation until at least 2035, allowing for high-quality air-shower measurements with AugerPrime, and the potential for prototyping detectors for future experiments in the Argentinian Pampa.
+Since 2008, additional detector systems of radio antennas and scintillator panels have been added to the observatory.
+In 2016, the first surface scintillator panel was deployed for an upgrade of the observatory, AugerPrime, also referred to as Auger Phase II, consisting of electronics upgrades, and new arrays of radio antennas and both surface and buried scintillator panels.
+Deployment of the of the final buried scintillator panel finished in March 2026; however, deployment of the surface scintillators and radio antennas finished in November 2021 and November 2024 respectively.
+An international funding agreement will keep the observatory in operation until at least 2035, allowing for high-quality air-shower measurements with AugerPrime, and the potential for prototyping detectors of future experiments in the Argentinian Pampa.
 This chapter will describe the Pierre Auger Observatory and its detectors systems in detail.
 
 
 \section{Surface Detector}\label{sec:sd}
 
 The Pierre Auger Observatory SD consists of 1660 WCDs deployed on a triangular grid to cover the full surface area of the array.
-The spacing of the grid is \qty{1500}{\meter}, designed such that all cosmic rays landing within the array grid and above an energy of \qty[parse-numbers=false]{10^{18.5}}{\electronvolt} are detected.
-Within the SD-1500 are two nested triangular sub-arrays of WCDs with denser spacing to lower the energy threshold of cosmic-ray detection.
+The spacing of the grid is \qty{1500}{\meter}, designed such that all air showers landing within the array grid and above an energy of \qty[parse-numbers=false]{10^{18.5}}{\electronvolt} are detected.
+Within the SD-1500 are two nested triangular sub-arrays of WCDs with denser spacing to lower the energy threshold of cosmic-ray air-shower detection.
 They are the SD-750, with \qty{750}{\meter} spacing between each detector, and the SD-433, nested within the SD-750 and with a detector spacing of \qty{433}{\meter}.
 The SD-750 consists of 61 WCDs covering an area of \qty{23.5}{\kilo\meter^{2}}, lowering the energy detection threshold to \qty[parse-numbers=false]{10^{17.5}}{\electronvolt}, while the SD-433 consists of 19 WCDs over an area of \qty{1.95}{\kilo\meter^{2}} and can detect air showers as low as \qty[parse-numbers=false]{10^{16.5}}{\electronvolt} in energy.
 A map of the Pierre Auger Observatory, including all three SD arrays, is shown in~\Cref{fig:auger_map}.
@@ -30,24 +32,26 @@ A map of the Pierre Auger Observatory, including all three SD arrays, is shown i
 \begin{figure}
     \centering
     \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter3/auger_array.pdf}
-    \caption[Map of the Pierre Auger Observatory.]{A map of the Pierre Auger Observatory, showing both the SD stations as black filled circles and the field-of-view for each fluorescence telescope. The circled region represents the approximate location of the Auger Engineering Radio Array (AERA). Figure taken from~\cite{augerprime_pdr}.}
+    \caption[Map of the Pierre Auger Observatory.]{A map of the Pierre Auger Observatory, showing both the SD stations as black filled circles and the field-of-view for each fluorescence telescope. The circled regions represent the approximate locations of the Auger Engineering Radio Array (AERA) and the Underground Muon Detector (UMD). Figure updated from~\cite{augerprime_pdr}.}
     \label{fig:auger_map}
 \end{figure}
 
-Each WCD is a cylinder of \qty{1.2}{\meter} height and \qty{3.6}{\meter} diameter filled with \qty{11000}{\liter} of ultra-pure water.
-The water inside the WCD is contained in a bladder composed of Tyvek\textregistered with a fully reflective inner surface.
+Each WCD is a cylinder of \qty{1.2}{\meter} height and \qty{3.6}{\meter} diameter filled with 11000 litres of ultra-pure water.
+The water inside the WCD is contained in a bladder composed of Tyvek\textsuperscript{\textregistered}~with a fully reflective inner surface.
 At the top of each WCD are three, equally spaced, 9-inch phototmultiplier tubes (PMTs) to detect the Cherenkov radiation generated from ultra-relativistic air-shower secondary particles traversing the ultra-pure water.
-The PMT signals are digitized by a \qty{40}{\mega\hertz} flash analog-to-digital converter (FADC), corresponding to a bin width of \qty{25}{\nano\second} for the FADC conversion.
-Two signals are digitized per PMT, the low-gain channel, taken directly from the PMT anode, and the high-gain channel, taken from the last PMT dynode with a nominal amplification of 32 times the anode channel, corresponding to a total dynamic range of approximately 17 bits.
-All processes are handled by the Auger Unified Board (UB), the main electronics board of each SD station.
-The full electronics system of the SD is described in more detail at~\cite{auger_nima2015_paper}.
+The PMT signals are digitized by a \qty{40}{\mega\hertz} flash analog-to-digital converter (FADC) with a 10-bit dynamic range for Auger Phase I electronics and by a \qty{120}{\mega\hertz} FADC with a 12-bit dynamic range for Auger Phase II electronics.
+These correspond to a bin width of \qty{25}{\nano\second} for the FADC conversion of Phase I and a bin width of \qty{8.3}{\nano\second} for the FADC conversion of Phase II.
+Two signals are digitized per PMT, the low-gain channel, taken directly from the PMT anode, and the high-gain channel, taken from the last PMT dynode with a nominal amplification of 32 times the anode channel, yielding a total dynamic range of 15 bits for Auger Phase I measurements and 17 bits for Auger Phase II measurements.
+All processes are handled by the main electronics board of each SD station.
+For Auger Phase I this electronics board is the Auger Unified Board (UB), which was upgraded to the Auger Upgraded Unified Board (UUB) for Auger Phase II.
+The full electronics system of the SD is described in more detail at~\cite{auger_nima2015_paper} for Phase I and at~\cite{auger_jinst2023_sdeu} for Phase II.
 Other components of the individual WCDs include a standalone communications system, for communications and data transfer to the Central Data Acquisition System (CDAS) of the observatory, and a solar power system for powering the station.
-The solar power system allows an approximate 100\% uptime of the SD.
+The solar power system facilitates an approximate 100\% uptime of the SD.
 
-Signals from the PMTs are digitized in electronics units, integrated ADC units where the integration is performed over the bin width of the FADC.
-The digitized signals are converted to units of Vertical Equivalent Muons (VEM) to provide a common reference unit across the array, where one VEM is defined as the total signal deposited in the WCD by a single muon traversing the WCD vertically and centrally.
+Signals from the PMTs are digitized by the FADCs into units of ADC counts and then integrated over the FADC signal bins.
+The bin-integrated FADC signals are converted to units of Vertical Equivalent Muons (VEM) to provide a common reference unit across the array, where one VEM is defined as the total signal deposited in the WCD by a single muon traversing the WCD vertically and centrally.
 The conversion to VEM is performed ``online'' (within the electronics of the station) at each WCD using the calibration histograms of the individual PMTs.
-A WCD equipped with an RDC hodoscope was used to experimentally confirm the conversion~\cite{auger_jinst2020_hodoscope}.
+A WCD equipped with a resistive plate chamber (RPC) hodoscope was used to experimentally confirm the conversion~\cite{auger_jinst2020_hodoscope}.
 The calibration histograms are generated from \qty{60}{\second} of atmospheric muon data recorded with the \texttt{muon\_buffer} of the local station.
 See~\Cref{app:layered_wcd} for further discussion of the \texttt{muon\_buffer}.
 
@@ -56,20 +60,22 @@ See~\Cref{app:layered_wcd} for further discussion of the \texttt{muon\_buffer}.
 The atmospheric muons recorded for local station calibration arrive at an approximate rate of \qty{3}{\kilo\hertz}.
 A tiered SD trigger system reduces this to a feasible rate for physics analyses.
 To understand the threshold levels defined for the first two tiers of the trigger system an understanding of the peak and charge calibration histograms is needed.
-The charge histogram is generated by integrating the total signals of individual atmospheric muons triggering the \texttt{muon\_buffer}, with charges ($Q$) measured in units of time-integrated FADC bins, or simply FADC bins.
-The second maximum in the charge histogram is known as the ``muon peak'', where the charge value of this maximum, represented as $Q_{\rm VEM}^{\rm peak}$, defines the conversion constant from electronics units to VEM units.
-Related to the charge histogram is the peak histogram, generated from the maximum amplitudes of the signal recorded by the \texttt{muon\_buffer}.
-The peak histogram has units of FADC bins per \qty{25}{\nano\second} and is sometimes referred to as the current ($I$) histogram because the second maximum of this histogram, represented as $I_{\rm VEM}^{\rm peak}$, defines the end-to-end gain of the PMTs.
+The charge histogram is generated by integrating the total signals of individual atmospheric muons triggering the \texttt{muon\_buffer}, with charges ($Q$) measured in units of bin-integrated ADC counts.
+The second maximum in the charge histogram is known as the ``muon peak'', where the charge value of this maximum, represented as $Q_{\rm VEM}^{\rm peak}$, defines the conversion constant from integrated ADC counts to VEM.
+Related to the charge histogram is the peak histogram, generated from the maximum amplitudes of the signals recorded by the \texttt{muon\_buffer}.
+The peak histogram has units of FADC bins per bin width (\qty{25}{\nano\second} for Phase I and \qty{8.3}{\nano\second} for Phase II) and is sometimes referred to as the current ($I$) histogram because it is directly proportional to the raw voltage signal recorded by the PMTs (i.e.~pre-FADC conversion)\footnote[1]{The signal recorded by the low-gain PMTs follows Ohm's Law, $V=I\,R$, with $R$ the constant, load resistance of the system. The high-gain PMTs follow the generalized Ohm's law, $V=I\,Z_{\text{eff}}$, with $Z_{\text{eff}}$ the effective impedance of the system which is also constant. The difference between the treatment of low-gain and high-gain signals is due to the signal amplification at the dynode.}.
+The second maximum of the peak histogram, represented as $I_{\rm VEM}^{\rm peak}$, defines the end-to-end gain of the PMTs.
 The end-to-end PMT gains are set individually and a local station-level calibration is done to continually adjust this value (see~\cite{auger_nima2006_sdcalibration} for more information).
 
 The first-level (T1) and second-level (T2) triggers are generated locally by the station electronics and depend directly on $I_{\rm VEM}^{\rm peak}$.
 Two types of T1 trigger are possible, each designed for sensitivity to different particle types.
 The first is a simple threshold trigger, Th-T1, requiring a coincidence of all three PMTs to measure a signal above 1.75$\,I_{\rm VEM}^{\rm peak}$.
-This reduces the trigger rate of the SD from $\approx$\qty{3}{\kilo\hertz} to $\approx$\qty{100}{\hertz} and is more sensitive to muons, as these particles generate large amplitude and temporally quick signals in the PMTs.
+This reduces the trigger rate of the SD from $\approx$\qty{3}{\kilo\hertz} to $\approx$\qty{100}{\hertz} and is more sensitive to muons, as these particles generate large amplitude and quick signals in the PMTs.
 The second T1 trigger is a time-over-threshold trigger, ToT-T1, requiring two PMTs to coincidentally measure above 0.2$\,I_{\rm VEM}^{\rm peak}$ in at least 13 FADC bins (\qty{325}{\nano\second}) over a 120 FADC bin (\qty{3}{\micro\second}) sliding window.
-The ToT-T1 trigger reduces the trigger rate to $\approx$\qty{2}{\hertz} and is more sensitive to electromagnetic particles, as the Cherenkov light generated by these particles in the WCD is spread in time.
-ToT triggers are automatically promoted to T2 triggers, whereas the Th-T1 trigger is only promoted to a Th-T2 if all three PMTs measure in coincidence a signal above 3.2$\,I_{\rm VEM}^{\rm peak}$.
-The Th-T2 further reduces the trigger rate from \qty{100}{\hertz} to \qty{20}{hertz}.
+The signals measured by the UUB are downsampled to match the UB, enabling the trigger implementation between Phase I and Phase II electronics to remain consistent~\cite{auger_jinst2023_sdeu}. 
+The ToT-T1 trigger has a rate of $\approx$\qty{2}{\hertz} and is more sensitive to electromagnetic particles, as the Cherenkov light generated by these particles in the WCD is spread in time.
+ToT triggers are automatically promoted to T2 triggers, whereas the Th-T1 trigger is only promoted to a Th-T2 if all three PMTs measure a signal above 3.2$\,I_{\rm VEM}^{\rm peak}$ in coincidence.
+The Th-T2 further reduces the trigger rate from \qty{100}{\hertz} to \qty{20}{\hertz}.
 Over the 20 years of Auger data taking, PMT failures have occurred in individual WCDs, with these PMTs referred to as ``masked'' PMTs.
 In these conditions, the thresholds for Th and ToT triggers change to the values described in~\cite{auger_nima2010_sdtrigger}, as a three PMT coincidence is no longer viable.
 
@@ -80,7 +86,7 @@ The T4 trigger, the first physics trigger of the SD, requires stricter time and 
 Stricter coincidence conditions ensure the events passing the T4 trigger are true physics events rather than random coincident triggering of nearby stations.
 Criterion for T3 and T4 triggers are described in~\cite{auger_nima2010_sdtrigger}.
 The T5 trigger, the final SD trigger, applies a fiducial quality cut to the true air-shower events.
-A common fiducial cut to use is a 6T5 cut, also known as a 6T5 trigger, which requires the station with the highest signal in an event to be fully surrounded by six working stations at the time of the event.
+A common fiducial cut to use is a 6T5 cut, also known as a 6T5 trigger, which requires the station with the highest signal in an event to be surrounded by a hexagon of six working stations at the time of the event.
 This cut selects events fully contained within the SD array to ensure they have a reliable SD reconstruction and is a common cut to use for high-level SD analyses.
 
 
@@ -139,14 +145,14 @@ This cut selects events fully contained within the SD array to ensure they have 
 The Fluorescence Detector (FD) of the Pierre Auger Observatory consists of 27 fluorescence telescopes to observe the longitudinal development of cosmic-ray air showers above approximately \qty[parse-numbers=false]{10^{18}}{\electronvolt} in energy~\cite{auger_nima2010_fd}.
 As an air shower develops, the ultra-relativistic charged secondary particles will excite nitrogen molecules in Earth's atmosphere, which, upon de-excitation, generate fluorescence light measurable by the fluorescence telescopes.
 The telescopes are split between four locations surrounding the SD array: Los Leones, Los Morados, Loma Amarilla, and Coihueco.
-Each location hosts six fluorescence telescopes, with the exception of Coihueco which hosts three additional fluorescence telescopes for observing air-showers at lower energies.
+Each location hosts six fluorescence telescopes, with the exception of Coihueco which hosts three additional high elevation fluorescence telescopes (HEAT) for observing air-showers at lower energies.
 These three telescopes will be described later in the text.
 The six telescopes at each location cover a combined \qty{180}{\degree} azimuthal field of view overlooking the SD array, with individual telescopes providing an azimuthal and elevation field of view of \qty{30}{\degree}$\,\times\,$\qty{30}{\degree}.
 Operation of the telescopes is possible only on clear, moonless nights, without rain or strong winds, limiting the uptime of the FD to approximately 15\%.
 
 The fluorescence telescopes follow a Schmidt optics design to minimize coma aberrations, arising from incoming light rays not being parallel to the axis of the mirror.
 The basics of the telescope system consist of a spherical aperture with a UV filter and Schmidt corrector ring, a segmented mirror, and a camera of PMTs.
-Fluorescence light enters the aperture with \qty{2.2}{\meter} diameter where it is filtered to UV wavelengths to reduce the amount of background light reaching the camera.
+Fluorescence light enters the aperture of \qty{2.2}{\meter} diameter where it is filtered to UV wavelengths to reduce the amount of background light reaching the camera.
 The filtered light is collected by a segmented mirror of nearly \qty{13}{\meter^{2}} in size and focused to the telescope's camera, composed of 440 total PMTs arranged in a 22$\,\times\,$20 grid.
 The camera PMTs of each telescope connect to front-end electronics boards that handle the digitization of the PMT signals and the first and second level hardware triggers of the FD telescope. 
 A schematic of a single fluorescence telescope is shown in~\Cref{fig:auger_fd}.
@@ -154,7 +160,7 @@ A schematic of a single fluorescence telescope is shown in~\Cref{fig:auger_fd}.
 \begin{figure}
     \centering
     \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.5\textwidth]{chapter3/fd_telescope_schematic.eps}
-    \caption[Schematic of an FD telescope.]{A diagram showing a single fluorescence telescope of the FD. An average sized adult is included for size reference. Figure taken from~\cite{auger_nima2010_fd}.}
+    \caption[Schematic of an FD telescope.]{A diagram showing a single fluorescence telescope of the FD. An average-sized adult is included for size reference. Figure taken from~\cite{auger_nima2010_fd}.}
     \label{fig:auger_fd}
 \end{figure}
 
@@ -162,9 +168,9 @@ Three additional fluorescence telescopes, known as the High Elevation Auger Tele
 HEAT is similar to the other fluorescence telescopes, but the main difference is each telescope of HEAT can observe in either an upwards or downwards configuration.
 In the upwards configuration, the telescopes of HEAT are pointed upwards by \qty{29}{\degree} in elevation, providing an elevation field of view of approximately \qtyrange{30}{58}{\degree}.
 The downwards configuration has the same field of view in elevation as the other 24 fluorescence telescopes.
-Elevating the telescope field of view allows measurements of the longitudinal development of lower energy air showers that reach their maximum development at higher altitudes, with HEAT lowering the fluorescence detection threshold to approximately \qty[parse-numbers=false]{10^{17}}{\electronvolt} in energy.
+Elevating the telescope field of view enables measurements of the longitudinal development of lower energy air showers that reach their maximum development at higher altitudes, with HEAT lowering the fluorescence detection threshold to approximately \qty[parse-numbers=false]{10^{17}}{\electronvolt} in energy.
 The HEAT field of view overlooks the SD-750 and SD-433 arrays, delivering high-quality hybrid detections of air showers at energies near and between the second knee and ankle of the cosmic ray energy spectrum.
-
+The SD-433 array primarily detects air-showers below the energy threshold of HEAT, therefore not many coincident SD-433 and HEAT measurements of air showers are expected.
 
 %to provide an elevation field of view of approximately 
 
@@ -211,31 +217,40 @@ The HEAT field of view overlooks the SD-750 and SD-433 arrays, delivering high-q
 
 \section{Event Reconstruction}\label{sec:reconstruction}
 
-The event reconstruction for the Pierre Auger Observatory occurs separately for the SD and FD, and is later combined for hybrid air-shower analyses.
-All reconstruction occurs within Offline, the observatory's software package for analyzing air-shower data.
-For the SD reconstruction, two main measurements are needed for each station that recorded event data: the start time of the signal in the station, to determine the geometry of the arriving cosmic-ray air shower, and the total signal in the station's PMTs, to determine an event-level observable related to the air-shower energy.
-Determination of the time range of the event in the station and the conversion of the PMT signals from FADC units to VEM must be done before analyzing the station data for event-level analyses.
-The time range is determined using the procedure described in~\cite{auger_jinst2020_sdreconstruction}, and the conversion of FADC to VEM is performed using the SD calibration histograms described in~\Cref{ssec:sd_triggers}, with further information on the conversion provided in~\cite{auger_nima2006_sdcalibration}.
+The event reconstruction for the Pierre Auger Observatory occurs separately for the SD and FD, and are later combined for hybrid air-shower analyses.
+Other detector systems added later to the observatory, such as the surface and buried scintillator panels and the arrays of radio antennas, also have separate event reconstructions, which are then combined with the SD and FD reconstructions to produce multi-hybrid air-shower datasets.
+All reconstructions occurs within Offline, the observatory's software package for analyzing air-shower data.
+The newer detector systems will be introduced later in this chapter.
+This section will discuss the SD, FD, and hybrid SD-FD reconstruction of air-shower events.
+
+%The newer detector systems will be introduced later in this chapter, though describing their individual reconstructions is reserved for the references within each of the detector systems respective section.
+
+%The newer detector systems will be introduced later in this chapter; however, describing the reconstruction of air-shower observables using these detectors is reserved for the references mentioning these analyses.
+
+\subsection{SD Reconstruction}\label{ssec:sd_reconstruction}
+For the SD reconstruction, two main measurements are needed for each station participating in the event: the start time of the signal in the station, to determine the geometry of the arriving cosmic-ray air shower, and the total signal in the station's PMTs, to determine an event-level observable related to the air-shower energy.
+Determination of the time range of the event in the station and the conversion of the PMT signals from integrated FADC counts to VEM is done before any event-level analyses.
+The time range is determined using the procedure described in~\cite{auger_jinst2020_sdreconstruction}, and the conversion of FADC counts to VEM is performed using the SD calibration histograms described in~\Cref{ssec:sd_triggers}, with further information on the conversion provided in~\cite{auger_nima2006_sdcalibration}.
 
 %Within a station, the signal baseline of all PMTs (both high and low-gain channels) must first be subtracted.
 %A total baseline is determined by linearly interpolating between constant baseline segments to account for the affect of the signal on the baseline.
 %Baseline segments are defined as at least \qty{1}{\micro\second} of consecutive FADC bins (40 bins) within a signal range of $\bar{b}\pm\sigma_{b}$, with $\bar{b}$ the average baseline in the segment and $\sigma_{b}$ nominally set to 2 FADC counts (see REF2020JINST for further details).
 %After baseline subtraction, the PMT signals are converted from FADC units to VEM.   
 
-Signal time windows are determined on a PMT-to-PMT basis.
-Therefore, the nominal start and stop times for the station are taken from the station PMT with the longest signal time window.
-The station's PMTs are averaged bin-by-bin, where the averaged PMT signal will be integrated over the nominal time window of the signal to determine the total signal measured in VEM within the SD station.
+Time windows of signal fragments are determined and merged on a PMT-to-PMT basis following the steps in~\cite{auger_jinst2020_sdreconstruction} to form PMT signal segments.
+The signal segments of the station's active PMTs are averaged bin-by-bin to obtain a station signal, where the signal segment with the largest signal determines the nominal start and stop times for the station signal.
+The averaged PMT signal will be integrated over the nominal time window to determine the total signal measured in VEM within the SD station.
 When the station is close to the air-shower axis, large signals are measured in the tank which can saturate either the high-gain, low-gain, or both channels of the PMT.
 The saturation is dependent on both the distance to the air-shower axis and the energy of the arriving shower~\cite{auger_jinst2020_sdreconstruction}.
 In the case of no PMT saturation, the high-gain PMT channels are used to determine the total measured PMT signal, whereas in the case of high-gain saturation, the low-gain PMT channels are used instead.
 In the case of both high-gain and low-gain saturation, the station is labeled as a saturated station.
 Software within the Offline framework is used to recover the signals of such saturated stations for analysis~\cite{auger_gap2008_saturation, auger_icrc2013_saturation}.
-However, identifying the signal window of the individual PMTs is always done with the high-gain PMT channel.
+However, identifying the signal window of the station is always done with the high-gain PMT channels.
 
-The air-shower geometry (point of impact on the ground and arrival direction) are reconstructed from an iterative procedure involving both the signal start times and total signals of the SD stations participating in the event.
-A signal-weighted barycenter, determined from the center-of-mass of stations in the event, is used as the first estimate of the impact point on ground.
+The air-shower geometry (the point of impact on the ground and the arrival direction) are reconstructed from an iterative procedure involving both the signal start times and total signals of the SD stations participating in the event.
+A signal-weighted barycenter, determined from the center-of-mass of stations in the event, is used as the first estimate of the impact point on ground, known as the air-shower core.
 Assuming speed of light propagation of the particles, a plane wave fit to the start times of the three stations with the largest signal closest to the barycenter determines the first estimate of the arrival direction.
-All stations with start times outside of the range \qtyrange{-2}{+1}{\micro\second} from the arrival time determined by the fit are labeled as accidental stations, i.e. stations that do not participate in the event yet were triggered, likely triggered from accidental muons.
+All stations with start times \qty{1}{\micro\second} earlier or \qty{2}{\micro\second} later than the station's expected arrival time of the plane wave fit are labeled as accidental stations, i.e. stations that do not participate in the event yet were triggered, likely from accidental muons.
 Stations participating in the event are fit using a chi-squared minimization process to a timing model of the wavefront arrival that accounts for wavefront curvature.
 Four values are fit: the directional cosines, $u$ and $v$, of the unit vector describing the shower arrival direction (i.e. $\hat{a} = u\,\hat{x} + v\,\hat{y} + \sqrt{1 - u^{2} - v^{2}}\,\hat{z}$), the time the air-shower core intersects with the ground ($t_{c}$), and the radius of curvature of the shower front, where the radius of curvature is only used as a free parameter if at least 5 stations are participating in the event.
 Otherwise, it is parameterized from events where the radius of curvature could be determined from the fit~\cite{auger_jinst2020_sdreconstruction}.
@@ -250,16 +265,18 @@ The SD reconstruction of the Auger Observatory uses a modified Nishimura-Kamata-
 
 \noindent
 with $r_{\rm s}$ a scale distance fixed to \qty{700}{\meter}.
+$\beta$ describe the steepness of the LDF for distances close to the air-shower axis (relative to the scale distance $r_{\rm s}$, i.e.~for $r<r_{\rm s}$), while $\gamma$ describes the steepness of the LDF at distances far from the air-shower axis ($r>r_{\rm s}$).
+The LDF steepness in each regime is related to the air-shower age, a quantity describing the development stage of the air shower when it reaches the observation level, which is dependent on both the air-shower energy and zenith angle.
 $\beta$ and $\gamma$ are handled with data-driven parameterizations, dependent upon energy and zenith angle, unless their respective ``lever-arm'' criteria described in~\cite{auger_jinst2020_sdreconstruction} are met.
-If this criteria is met for $\beta$, it is treated as a free parameter in the LDF fit, and similarly for $\gamma$.
+If this criteria is met, $\beta$ is treated as a free parameter in the LDF fit, and likewise for $\gamma$.
 
-$S(r_{\rm opt})$ is the shower size estimated for the fit at the reference distance $r_{\rm opt}$.
+$S(r_{\rm opt})$ is the shower size determined by the fit at the reference distance $r_{\rm opt}$.
 Note that given the same energy, mass, and arrival direction of a primary particle, shower-to-shower fluctuations in the air-shower development lead to the air shower being measured at ground in different stages of the shower development.
 The impact is an intrinsic variation in $S(r_{\rm opt})$.
-Therefore, the reference distance was determined to minimize the variations in the shower-size estimator arising from shower-to-shower fluctuations and depends on the spacing of the SD array~\cite{newton_2007_ropt}\footnotemark[1].
+Therefore, the reference distance was determined to minimize the variations in the shower-size estimator arising from shower-to-shower fluctuations and depends on the spacing of the SD array\footnote[2]{For a general particle detector array, the reference distance also depends on the array structure, which for the Auger SD is an isometric triangular grid.}~\cite{newton_2007_ropt}.
 The optimal reference distances for the SD-1500, SD-750, and SD-433 arrays are \qtylist{1000;450;300}{\meter} respectively.
 In each case, $S(r_{\rm opt})$ is a free parameter in the LDF fit.
-The fit itself determines $S(r_{\rm opt})$ and the position of the air-shower core intersection with ground ($\vec{x}_{\rm c}$) by minimizing a log-likelihood function of the form:
+The fit itself determines $S(r_{\rm opt})$ and the position of the air-shower core ($\vec{x}_{\rm c}$) by minimizing a log-likelihood function of the form:
 
 \begin{equation}
     \ln\mathcal{L} = \sum_{i}\,\ln P\left( S(r_{\rm opt}),\vec{x}_{\rm c} | S_{i},\vec{x}_{i} \right), \label{eq:sd_ll}
@@ -267,31 +284,40 @@ The fit itself determines $S(r_{\rm opt})$ and the position of the air-shower co
 
 \noindent
 with $S_{i}$ and $\vec{x}_{i}$ the measured signal and positions of the $i$-th station.
-The probability model, $P$, depends on the signal measured by the station, with each model described in~\cite{auger_jinst2020_sdreconstruction}.
-\footnotetext[1]{For a general particle detector array, the reference distance also depends on the array structure, which for the Auger SD is an isometric triangular grid}.
+The total probability, $P$, is the product of several probability models dependent on the trigger status and measured signal size of the station, with each model described in~\cite{auger_jinst2020_sdreconstruction}.
+\Cref{fig:example_sd} shows an example Auger event reconstructed with the SD-1500 array, including the plot of the shower footprint, a plot of the LDF fit, and a plot of the wavefront fit.
+This event was observed on March 30, 2026 at 02:15 UTC with an SD reconstructed energy of \qty[parse-numbers=false]{(3.78\,$\pm$\,0.20\,$\pm$\,0.25)$\times$10^{19}}{\electronvolt} and a reconstructed shower size \qty{1000}{\meter} from the shower axis, $S_{1000}$, of \qty[parse-numbers=false]{46.9\,$\pm$\,2.4\,$\pm$\,3.0}{VEM}.
 
-For a given air-shower energy, less particles will reach the ground for inclined air showers than for vertical air showers due to attenuation effects as the air shower develops.
+\begin{figure}
+    \centering
+    \includegraphics[trim={3.3cm 4.0cm 4.7cm 4.5cm},clip,width=0.8\textwidth]{chapter3/AugerEvent_250885131100_SD_view.pdf}
+    \caption[Example event SD reconstruction.]{The SD-1500 reconstruction for Auger event ID 250885131100. The top left plot shows the air-shower footprint, the bottom left plot shows the LDF fit to reconstruct $S_{1000}$, and the bottom right plot shows the wavefront fit. The top right shows specific parameters of the SD reconstruction.}
+    \label{fig:example_sd}
+\end{figure}
+
+For a given air-shower energy, less particles will reach the ground for inclined air showers than for vertical air showers due to attenuation as the air shower develops.
 This directly affects the signal measured by the WCDs of Auger, introducing a zenith angle dependence on the reference distance signal, $S(r_{\rm opt})$.
-To correct for this dependence, the constant intensity cut (CIC) method is used to derive an attenuation correction as a function of zenith angle, i.e. $f_{\rm att}(\theta)$\cite{auger_gap2015_cic}.
-The correction is applied following equation
+To correct for this dependence, the constant intensity cut (CIC) method is used to derive an attenuation correction as a function of zenith angle, i.e.~$f_{\rm att}(\theta)$~\cite{auger_gap2015_cic}.
+The correction is applied following the equation
 
 \begin{equation}
     S_{\theta_{\rm ref}} = \frac{S(r_{\rm opt})}{f_{\rm att}(\theta)}, \label{eq:Sref_correction}
 \end{equation}
 
 \noindent
-with $f_{\rm att}(\theta)$ a third-degree polynomial in $x = \cos^{2}(\theta) - \cos^{2}(\theta_{\rm ref})$.
-The applied correction represents the average signal at reference distance $r_{\rm opt}$ measured if the incoming cosmic ray arrived at a zenith angle of $\theta_{\rm ref}$.
-The reference angle changes depending upon the spacing of the SD array, with reference angles of \qtylist{38;35}{\degree} respectively used for the SD-1500 and SD-750 arrays~\cite{auger_prd2020_spectrum, auger_epjc2021_infillspectrum}.
-The attenuation corrected signals are referred to as $S_{38}$ and $S_{35}$, and can be used in conjunction with hybrid FD measurements to derive an energy estimate from the SD.
+with $f_{\rm att}(\theta)$ a third-degree polynomial in $x = \cos^{2}(\theta)\,-\,\cos^{2}(\theta_{\rm ref})$.
+The applied correction represents the average signal at reference distance $r_{\rm opt}$ measured if the incoming cosmic ray arrived at a zenith angle $\theta_{\rm ref}$.
+The reference angle changes depending upon the spacing of the SD array, with reference angles of \qtylist{38;35;30}{\degree} respectively used for the SD-1500, SD-750, and SD-433 arrays~\cite{auger_prd2020_spectrum, auger_epjc2021_infillspectrum, icrc2023_gaby_spectrum}.
+The attenuation corrected signals are referred to as $S_{38}$, $S_{35}$, and $S_{30}$, and can be used in conjunction with hybrid FD measurements to derive an energy estimate from the SD.
 
-For the FD reconstruction, the shower-detector plane, the plane connecting the triggered pixels of the telescope and the air-shower axis, is first determined using the timing information of the triggered fluorescence telescope pixels.
-Uncertainties in the shower-detector plane reconstruction are validated with laser measurements from the Central Laser Facility (CLF) located within the SD-1500 array, as the distance and direction of the CLF laser is known with an accuracy better than the FD reconstruction resolution.
-In the case of hybrid events where SD stations also participate in the event the shower-detector plane geometry is more precisely constrained than when no SD reconstruction is available.
-For a majority of FD events, an SD reconstruction is available due to the approximate 100\% duty cycle of the SD.
-For these hybrid events, resolutions of \qty{50}{\meter} for the air-shower core and \qty{0.6}{\degree} for the air-shower arrival direction are possible~\cite{auger_nima2010_fd}.
+\subsection{FD Reconstruction}\label{ssec:fd_reconstruction}
+For the FD reconstruction, the shower-detector plane, the plane connecting the shower axis and the fluorescence detector, is first determined using the trajectory of triggered pixels across the field of view of the telescope.
+The timing information of the triggered fluorescence telescope pixels is then used to reconstruct the location of the shower axis within the shower-detector plane.
+The FD shower geometry reconstruction is validated with laser measurements from the Central Laser Facility (CLF) and the eXtreme Laser Facility (XLF), both located within the SD-1500 array, as the position and direction of the CLF and XLF lasers are known with an accuracy better than the angular resolution of the FD~\cite{auger_nima2010_fd}.
+In addition, both the CLF and XLF measure the time-varying aerosol attenuation, which is used to correct the FD measurements for atmospheric effects~\cite{auger_jinst2013_clf}.
 
-The longitudinal development of the air shower, including the location of the depth of shower maximum ($X_{\rm max}$), can be reconstructed with the FD.
+The longitudinal development of the air shower, in particular, its electromagnetic component, can be reconstructed with the FD.
+This includes the location of the depth of shower maximum ($X_{\rm max}$).
 The time-dependent fluorescence light signals collected by the telescope pixels are converted to energy deposited by the shower in a portion of atmosphere, $\rm{d}E / \rm{d}X$, as a function of atmospheric slant depth, $X$, and fit to a Gaisser-Hillas function~\cite{gaisser_icrc1977_gh}
 
 \begin{equation}
@@ -302,12 +328,23 @@ The time-dependent fluorescence light signals collected by the telescope pixels 
 $\left(\frac{\rm{d}E}{\rm{d}X}\right)_{\rm max}$ is the energy deposit in the atmosphere at shower maximum, i.e. $X_{\rm max}$. 
 $X_{0}$ and $\lambda$ are shape parameters of the longitudinal profile, with $X_{0}$ related to the point of first interaction in the atmosphere and $\lambda$ representing an effective interaction length.
 The shape parameters, along with $X_{\rm max}$ are parameters of the fit determined by the FD reconstruction.
-An alternative Gaisser-Hillas function as a function of a translated slant depth, $X\prime = X - X_{\rm max}$, can be used in the reconstruction which removes the correlation between the shape parameters, instead relating them to physical properties in the shower profile as the shower width ($L$) and asymmetry ($R$)~\cite{andringa_astropartphys2011_longitudinalprofiles, auger_jcap2019_longitudinalprofiles}.
-Integrating~\Cref{eq:gh_energy_deposit} yields an estimate of the calorimetric energy of the air-shower representing roughly 85\% of the total air-shower energy.
+An alternative version of the Gaisser-Hillas function as a function of a translated slant depth, $X^{\prime} = X - X_{\rm max}$, can be used in the reconstruction which removes the correlation between the shape parameters, instead relating them to physical properties in the shower profile as the shower width ($L$) and asymmetry ($R$)~\cite{andringa_astropartphys2011_longitudinalprofiles, auger_jcap2019_longitudinalprofiles} (see~\Cref{ssec:long_profile} for further discussion).
+
+Integrating~\Cref{eq:gh_energy_deposit} yields an estimate of the calorimetric energy of the air-shower, representing roughly 85\% of the total air-shower energy.
 The remaining 15\% of the total energy is referred to as the ``invisible'' energy, representing the energy in the shower carried by high-energy muons and neutrinos, and is not measurable with the fluorescence technique.
 A data-driven analysis determines the invisible energy and is used to correct the measured calorimetric energy of the FD to obtain an estimate for the air-shower energy~\cite{auger_prd2019_invisibleenergy}.
+\Cref{fig:example_fd} shows an example FD reconstruction of an Auger event for a single fluorescence telescope of the Los Morados FD site.
+The FD reconstructed air-shower energy, after correcting for the invisible energy, is \qty[parse-numbers=false]{(2.03\,$\pm$\,0.09)$\times$10^{19}}{\electronvolt} and the FD reconstructed $X_{\text{max}}$ is \qty[parse-numbers=false]{712\,$\pm$\,16}{\gram\per\centi\meter\squared}.
 
-For hybrid events, the attenuation corrected SD signals from~\Cref{eq:Sref_correction} ($S_{38}$ for the SD-1500 and $S_{35}$ for the SD-750) can be related to the FD reconstructed energy following
+\begin{figure}
+    \centering
+    \includegraphics[trim={2cm 7cm 2cm 4.3cm},clip,width=1.0\textwidth]{chapter3/AugerEvent_250885131100_LM_view.pdf}
+    \caption[Example event FD reconstruction.]{The FD reconstruction from mirror (telescope) 3 of the Los Morados FD site for Auger event ID 250885131100. The top left plot shows the trajectory of triggered fluorescence telescope pixels with timing information (blue is early and red is late). The top right plot shows the pixel timing information used to determine the shower geometry, and the bottom left plot shows the measured longitudinal profile and its Gaisser-Hillas fit. The bottom right shows parameters of the FD reconstruction.}
+    \label{fig:example_fd}
+\end{figure}
+
+\subsection{Hybrid SD-FD Reconstruction}\label{ssec:hybrid_reconstruction}
+For hybrid events, the attenuation corrected SD signals from~\Cref{eq:Sref_correction} ($S_{38}$ for the SD-1500, $S_{35}$ for the SD-750, and $S_{30}$ for the SD-433) can be related to the FD reconstructed energy following
 
 \begin{equation}
     E_{\rm FD} = A\,\left( \frac{S_{\theta_{\rm ref}}}{\rm VEM} \right)^{B}. \label{eq:energy_scale}
@@ -315,8 +352,23 @@ For hybrid events, the attenuation corrected SD signals from~\Cref{eq:Sref_corre
 
 \noindent
 A log-likelihood fit is performed to determine the $A$ and $B$ fit parameters~\cite{dembinski_astropartphys2016_llfit} using a selection of high-quality hybrid events.
-The resulting $A$ and $B$ fit parameters for the SD-1500 are presented in~\cite{auger_icrc2019_fdspectrum}, and for the SD-750 are presented in~\cite{auger_epjc2021_infillspectrum}.
+The resulting $A$ and $B$ fit parameters for the SD-1500 are presented in~\cite{auger_prd2020_spectrum}, for the SD-750 in~\cite{auger_epjc2021_infillspectrum}, and for the SD-433 in~\cite{icrc2023_gaby_spectrum}.
 The data-derived relationship between the FD energy scale and the SD reference signal is used to set the SD energy scale, even when FD data are not available.
+
+In the case of hybrid SD-FD events with only one SD station participating in the event, the air-shower geometry is more precisely constrained than when no SD measurements are available.
+In this instance, no SD reconstruction is available; however, a more precise estimate of the air-shower core is possible.
+For a majority of FD events, an SD reconstruction is available due to the approximate 100\% duty cycle of the SD.
+For these SD-FD hybrid events, resolutions of \qty{50}{\meter} for the air-shower core and \qty{0.6}{\degree} for the air-shower arrival direction are possible~\cite{auger_nima2010_fd}.
+\Cref{fig:example_hybrid} shows the hybrid SD-FD reconstruction of Auger event ID 250885131100, combining the SD reconstruction shown in~\Cref{fig:example_sd} with the FD reconstruction shown in~\Cref{fig:example_fd}.
+This hybrid event was measured by three FD sites and triggered several SD stations.
+
+\begin{figure}
+    \centering
+    \includegraphics[trim={1cm 5cm 12cm 9cm},clip,width=0.8\textwidth]{chapter3/AugerEvent_250885131100_3d_view.pdf}
+    \caption[Example event hybrid reconstruction.]{A visual showing the hybrid SD-FD reconstruction of Auger event ID 250885131100. The shower-detector plane of the FD sites, Los Morados (purple), Loma Amarilla (red), and Coihueco (green), are visible, along with the footprint of triggered SD stations.}
+    \label{fig:example_hybrid}
+\end{figure}
+
 
 %The calorimetric energy is then corrected for the ``invisible'' energy of the shower in a data-driven
 
@@ -350,15 +402,24 @@ The data-derived relationship between the FD energy scale and the SD reference s
 
 \section{Auger Engineering Radio Array}\label{sec:aera}
 
-The Auger Engineering Radio Array (AERA) consists of 153 radio antennas deployed over a \qty{17}{\kilo\meter^{2}} area to observe the radio emission of air showers within a frequency band of \qtyrange{30}{80}{\mega\hertz}\cite{auger_jinst2012_aera}.
-AERA is designed to measure the radio emission of air showers above approximately \qty[parse-numbers=false]{10^{17}}{\electronvolt} in energy and is co-located with the SD-750 and the field of view of the Coihueco FD site, providing coincident radio detections of air showers with the SD and FD.
-AERA stations are autonomously powered with solar panels, providing an approximate 100\% duty cycle of the antennas.
-Further, each station is equipped with a GPS system for timing information, a wireless radio system for data transfer and communications, and fencing to prevent interference from wildlife.
+The Auger Engineering Radio Array (AERA) consists of 153 radio antennas deployed over a \qty{17}{\kilo\meter^{2}} area to observe the radio emission of air showers within a frequency band of \qtyrange{30}{80}{\mega\hertz}~\cite{auger_jinst2012_aera}.
+AERA is designed to measure the radio emission of air showers above approximately \qty[parse-numbers=false]{10^{17}}{\electronvolt} in energy and is co-located with the SD-750 in the field of view of the Coihueco FD site, providing coincident radio detections of air showers with the SD and FD.
+A map of the AERA footprint, along with the local SD footprint and the Coihueco FD site, is shown in~\Cref{fig:aera_map}.
+
+\begin{figure}
+    \centering
+    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.5\textwidth]{chapter3/AERA_Infill_FD_map.pdf}
+    \caption[Map of the Auger Engineering Radio Array.]{Map of all AERA radio antennas. AERA antennas can be externally triggered or self triggered (see text), where this differentiation is made within the map. Both the local SD footprint, containing the entire SD-750 array, and the Coihueco FD site are included. Figure taken from~\cite{auger_prd2024_aeraxmax}.}
+    \label{fig:aera_map}
+\end{figure}
+
+AERA stations are autonomously powered with solar panels and batteries, providing an approximate 100\% duty cycle of the antennas.
+Further, each station is equipped with a GPS system for timing information, a wireless radio system for data transfer and communications, and fencing to prevent interference from cattle.
 Two types of antenna were used for AERA, the log-periodic dipole antenna (LPDA) and the butterfly antenna.
 Both have two orthogonal polarizations, one aligned in the North-South direction (aligned with the local magnetic field) and the other in the East-West direction.
 The signal processing chain for the LPDA and butterfly antennas is similar (described in~\cite{auger_jinst2012_aera}), yet differences arise for the response of the antennas to air-shower radio emission.
-LPDA antennas are more sensitive than the butterfly antennas, and therefore have a lower signal threshold, while the butterfly antennas have a signal dependence on local ground conditions, as this antenna's total measured signal is a combination of signals reflected from the ground that interfere constructively with the direct shower radio emission.
-Both antennas are more sensitive to ``vertical'' air showers, i.e. air showers with arrival directions of \qtyrange{0}{55}{\degree} in zenith angle.
+Butterfly antennas are more sensitive than the LPDA antennas, and therefore have a lower signal threshold, because the butterfly antennas have a signal dependence on local ground conditions, as this antenna's total measured signal is a combination of signals reflected from the ground that for most zenith angles interfere constructively with the direct shower radio emission.
+Both antennas are most sensitive to ``vertical'' air showers, i.e.~air showers with arrival directions of \qtyrange{0}{55}{\degree} in zenith angle.
 
 %The response of the LPDA and butterfly antennas to air-shower radio emission is mostly similar, with the exception that LPDA antennas are more sensitive to the butterfly antennas and therefore 
 %The two antenna types both measure the radio emission from air showers within a frequency band of \qtyrange{30}{80}{\mega\hertz}.
@@ -366,23 +427,24 @@ Both antennas are more sensitive to ``vertical'' air showers, i.e. air showers w
 AERA deployment started in 2011 and was performed over three phases.
 AERA phase I consists of 24 LPDA antennas on a triangular grid with inter-antenna spacing of \qty{144}{\meter}.
 Phase II deployment started in 2013, adding an additional 100 butterfly antennas: 60 deployed on a \qty{250}{\meter} grid and the remaining 40 deployed on a \qty{375}{\meter} grid.
-In 2015, AERA phase III, consisting of 29 butterfly antennas, was deployed on a \qty{750}{\meter} grid resulting in the completion of AERA.
+In 2015, AERA phase III added 29 further butterfly antennas deployed on a \qty{750}{\meter} grid, resulting in the completion of AERA.
 
 Two trigger types exist for the AERA stations: an external trigger, supplied by local detector triggers from CDAS (mostly triggers from the SD), and a radio self trigger, that triggers directly on the radio signal itself.
 The station electronics differ depending on the type of trigger algorithm used by the antenna.
 Externally-triggered stations continually measure and digitize radio signals with a 12-bit digitizer at a \qty{180}{\mega\hertz} sampling rate.
 The signals are then stored on a ring buffer of \qty{7.4}{\second} where they wait for the arrival of an external trigger from CDAS, which takes about \qty{6}{\second} from the time of trigger generation to arrive at the array~\cite{sato_privcomm_2025}.
-The GPS timestamp of the trigger is used to readout the ring buffer data where it is transferred to the AERA data acquisition system at the Coihueco FD site, either directly from the antenna itself or from a Ubiquiti Bullet link at the CRS.
+The GPS timestamp of the trigger is used to readout the ring buffer data which is then transferred to the AERA data acquisition system at the Coihueco FD site, either directly from the antenna station itself or via a Ubiquiti Bullet link at the CRS.
 The self-triggered stations measure and digitize radio signals with a 14-bit digitizer at a \qty{200}{\mega\hertz} sampling rate.
 Digitized signals are passed to an electronics board for threshold and signal determinations over the omnipresent radio background, where radio signals are sent to the CRS if the self-trigger signal conditions are met.
-All self-triggered AERA stations have been decommissioned since January 2023.
-10 AERA antennas have been repurposed for GRAND@Auger~\cite{deerrico_icrc2025_grandatauger}.
+All self-triggered AERA stations have been decommissioned since January 2023, with 10 of these antennas repurposed for GRAND@Auger~\cite{deerrico_icrc2025_grandatauger}.
 
-A major science goal of AERA was to serve as a testbed for deploying a radio array in the \qtyrange{30}{80}{\mega\hertz} band over the full surface array of the Auger observatory as part of it's next generation upgrade.
+A major science goal of AERA was to serve as a testbed for deploying a radio array in the \qtyrange{30}{80}{\mega\hertz} band over the full surface array of the Auger observatory as part of its next generation upgrade.
 However, high-quality radio data and important analyses with AERA strengthened the cosmic-ray science potential of the future radio array.
-Science highlights include an $X_{\rm max}$ reconstruction with AERA~\cite{auger_prd2024_aeraxmax, auger_prl2024_aeraxmax}, deriving an absolute energy scale from radio measurements~\cite{auger_icrc2025_aeraenergyscale}, and a Galactic calibration of the AERA antennas proving their long-term stability~\cite{auger_jinst2025_aeracalibration}.
-A recent analysis combines AERA radio measurements, which probe the electromagnetic air-shower component, with SD reconstructions of inclined ($\theta_{\rm zen}\,>\,$\qty{60}{\degree}) to provide a simultaneous muon and radio measurement on a per-shower basis~\cite{auger_prd2025_aeramuoninclined} and serves as a proof of principle for the radio component of the Auger observatory's next generation upgrade (see~\Cref{ssec:rd} for further details).
-The aim of this thesis is to study simultaneous muon and radio measurements in the context of vertical ($\theta_{\rm zen}\,<\,$\qty{55}{\degree}) air showers measured by the Pierre Auger Observatory.
+Science highlights include an $X_{\rm max}$ reconstruction with AERA~\cite{auger_prd2024_aeraxmax, auger_prl2024_aeraxmax}, deriving an absolute energy scale from radio measurements~\cite{auger_icrc2025_aeraenergyscale}, and a calibration of the AERA antennas with Galactic radio noise proving their long-term stability~\cite{auger_jinst2025_aeracalibration}.
+A recent analysis combines AERA radio measurements, which probe the electromagnetic air-shower component, with SD reconstructions of inclined air showers ($\theta_{\rm zen}>\,$\qty{60}{\degree}) to provide a simultaneous muon and radio measurement on a per-shower basis~\cite{auger_prd2025_aeramuoninclined}.
+This served as a proof of principle for the radio component of the Auger observatory's next generation upgrade (see~\Cref{ssec:rd} for further details).
+However, this also served as motivation for the Auger ARISE upgrade which focuses on hybrid radio-muon measurements of more vertical air showers (see~\Cref{sec:arise}).
+One motivation for this thesis is to study simultaneous muon and radio measurements in the context of vertical ($\theta_{\rm zen}<\,$\qty{55}{\degree}) air showers measured by the Pierre Auger Observatory.
 
 %The signals are then stored on a ring buffer of \qty{7.4}{\second} where they wait for the arrival of an external trigger from CDAS, taking about \qty{6}{\second} to arrive at the AERA stations in the case of SD generated triggers~\cite{sato_privcomm_2025}. % Include??
 
@@ -393,32 +455,32 @@ The aim of this thesis is to study simultaneous muon and radio measurements in t
 %prepare for the next generation upgrade of the Pierre Auger Observatory, AugerPrime, 
 
 \section{AugerPrime: The Upgrade of the Pierre Auger Observatory}\label{sec:augerprime}
-
-AugerPrime is the next generation upgrade to the Pierre Auger Observatory in the quest to determine the astrophysical origin of ultra-high-energy cosmic rays~\cite{augerprime_pdr}.
+AugerPrime is an upgrade to the Pierre Auger Observatory in the quest to determine the astrophysical origin of ultra-high-energy cosmic rays~\cite{augerprime_pdr}.
 The main science objective of AugerPrime is to improve the observatory's composition sensitivity, to be achieved with more stringent separation of the electromagnetic and muonic air-shower components.
-Independent measurements of the muonic component are crucial, as the muon puzzle highlights the incompleteness of our interaction models in extrapolated energy ranges (see~\Cref{sec:models}), and directly serve another science goal of AugerPrime: studying and constraining hadronic interaction models. 
+Independent measurements of the muonic component are crucial, as the muon puzzle highlights the incompleteness of hadronic interaction models in extrapolated energy ranges (see~\Cref{sec:models}), and directly serve another science goal of AugerPrime: studying and constraining hadronic interaction models. 
 To this end, the observatory has upgraded its current detectors, in addition to adding new detector systems over the full array.
-Deployment of all AugerPrime components finished in March 2026.
+Officially, the deployment of all AugerPrime components finished in November 2024 with the deployment of the final AugerPrime radio antenna; however, the final Underground Muon Detector station was deployed in March 2026.
 
 \begin{figure}
     \centering
     \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.7\textwidth]{chapter3/augerprime_wcd_labeled.png}
-    \caption[Schematic of an AugerPrime water-Cherenkov detector.]{A diagram showing an AugerPrime WCD, outfitted with a surface scintillator detector and a radio detector. The electronics dome houses the UUB, protecting it from dust and other environmental conditions. Figure taken from~\cite{bjarnipont_phd2021}.}
+    \caption[Schematic of an AugerPrime water-Cherenkov detector.]{A diagram showing an AugerPrime WCD, outfitted with a Surface Scintillator Detector and a Radio Detector. The electronics dome houses the UUB, protecting it from dust and other environmental conditions. Figure taken from~\cite{bjarnipont_phd2021}.}
     \label{fig:augerprime_wcd}
 \end{figure}
 
-Each WCD of the SD was outfitted with a surface scintillator detector (see~\Cref{ssec:ssd}) and a radio antenna (see~\Cref{ssec:rd}), both deployed on top of the WCDs and directly integrated into the SD detector system and electronics.
+Each WCD of the SD was outfitted with a surface scintillator panel (see~\Cref{ssec:ssd}) and a radio antenna (see~\Cref{ssec:rd}), both deployed on top of the WCDs and directly integrated into the SD detector system and electronics.
 See~\Cref{fig:augerprime_wcd} for a picture of an AugerPrime WCD.
-A small PMT (SPMT), a Hamamatsu R8619 PMT of 1-inch diameter, was installed inside each WCD to increase the dynamic range of the SD, allowing SD measurements without PMT saturation to within \qty{250}{\meter} of the reconstructed air-shower core~\cite{auger_icrc2023_dynamicrange}.
+A small PMT (SPMT), a Hamamatsu R8619 PMT of 1-inch diameter, was installed inside each WCD to increase the dynamic range of the SD, allowing for SD measurements without PMT saturation to within \qty{250}{\meter} of the reconstructed air-shower core~\cite{auger_icrc2023_dynamicrange}.
 In addition, the electronics of the SD were updated with an Upgraded Unified Board (UUB).
 Compared to the UB, the UUB increases the dynamic range from 10 to 12 bits and increases the sampling rate from \qty{40}{\hertz} to \qty{120}{\hertz}, respectively resulting in improved signal amplitude and timing accuracy of the PMT signals~\cite{augerprime_pdr}.
-Other electronics updates include improvements to the processing power, local stations monitoring system, and the local trigger and calibration capabilities.
+Other electronics updates include improvements to the processing power, the local station monitoring system, and the local trigger and calibration capabilities.
 Deployment of the UUB electronics was completed in June 2023.
 See~\cite{auger_jinst2023_sdeu} for further information on the SD electronics of AugerPrime.
 
 AugerPrime has also improved the duty cycle of the FD up to 29\% by lowering the PMT gain given certain observing conditions.
-Lowering the gain allows observation nights with moonlight, i.e. nights with a higher night sky background, without risk of deteriorating the FD PMTs from high anode currents.
+Lowering the gain enables observation nights with moonlight, i.e.~nights with a higher night sky background, without risk of deteriorating the FD PMTs from high anode currents.
 The new detector systems added as part of the AugerPrime upgrade will be discussed in the following subsections.
+The first detector system to be described will be final detector system to be fully deployed, the Underground Muon Detector, as this detector system started as an enhancement to the Pierre Auger Observatory prior to AugerPrime.
 
 %closer to the shower core without PMT saturation REFICRC2023343.
 %The electronics used for the SD array will also be up
@@ -428,12 +490,12 @@ The new detector systems added as part of the AugerPrime upgrade will be discuss
 %The science objective of AugerPrime is to determine with precision the mass composition of ultra-high-energy cosmic rays, with focus on improving the observatory's composition sensitivity   
 
 
-\subsection{Underground Muon Detector}\label{ssec:umd}
+\subsection{The Underground Muon Detector}\label{ssec:umd}
 
-The Underground Muon Detector (UMD) is part of both the AugerPrime upgrade and the Auger Muons and Infill for the Ground Array (AMIGA) enhancement of the observatory~\cite{auger_icrc2007_amiga}.
+The Underground Muon Detector (UMD) is part of both the AugerPrime upgrade and the Auger Muons and Infill for the Ground Array (AMIGA) enhancement of the observatory~\cite{auger_icrc2007_amiga, auger_jinst2016_amiga}.
 The UMD consists of an array of scintillator panels buried \qty{2.3}{\meter} underground at the locations of the SD-750 and SD-433 stations.
-The \qty{2.3}{\meter} vertical soil overburden, corresponding to \qty{540}{\gram\per\centi\meter^{2}}, will attenuate to an immeasurable level all electromagnetic particles in the air shower, providing a direct measurement of the muonic air-shower component.
-However, the muonic signal measured at the UMD is not the same as the muonic signal at ground, with the UMD only measuring muons above approximately \qty{1}{\giga\electronvolt} in energy due to the traversal of \qty{540}{\gram\per\centi\meter^{2}} soil equivalent.
+The \qty{2.3}{\meter} vertical soil overburden, corresponding to \qty{540}{\gram\per\centi\meter^{2}}, absorbs all electromagnetic particles in the air shower, providing a direct measurement of the muonic air-shower component.
+However, the muonic signal measured at the UMD is not the same as the muonic signal at ground, with the UMD only measuring muons above approximately \qty{1}{\giga\electronvolt} in energy due to the traversal of \qty{540}{\gram\per\centi\meter^{2}} soil equivalent for vertical muons.
 Therefore, the direct muon measurements with the UMD can be used to study the muon puzzle and hadronic model interpretations in detail given this constraint.
 The UMD inherits the energy range of the co-located SD-433 and SD-750 arrays, with the UMD measuring the air-shower muonic component between primary energies of approximately \qtyrange[parse-numbers=false]{10^{16.5}}{10^{19}}{\electronvolt}.
 
@@ -447,7 +509,8 @@ The UMD inherits the energy range of the co-located SD-433 and SD-750 arrays, wi
 \end{figure}
 
 Each UMD station consists of three \qty{10}{\meter^{2}} scintillators, totaling a \qty{30}{\meter^{2}} collecting area for each station.
-As with all flat detectors, the UMD scintillators are more sensitive to vertical air showers ($\theta_{\rm zen}\,<\,$\qty{55}{\degree}) from the $\cos\theta$ dependence on the projected detector surface area in the shower plane.
+As with all flat detectors, the UMD scintillators are more sensitive to vertical air showers ($\theta_{\rm zen}<\,$\qty{55}{\degree}) from the $\cos\theta$ dependence on the projected detector surface area in the shower plane.
+Particle absorption in the soil adds to the UMD's sensitivity to vertical air showers.
 The individual scintillators consist of 64 scintillation bars of \qty{400}{\centi\meter} length, \qty{4}{\centi\meter} width, and \qty{1}{\centi\meter} thickness, separated into two identical strips of 32 bars.
 A 64 channel Hamamatsu silicon phototmultiplier (SiPM) of type S13361-2050NE-08, along with the UMD electronics, is placed at the center separation of the two strips of 32 bars (see~\Cref{fig:auger_umd}).
 Minimum ionizing particles, in this case muons above $\approx\,$\qty{1}{\giga\electronvolt} in energy, entering the scintillator bar will ionize the doped material of the bar producing scintillation light.
@@ -458,7 +521,7 @@ UMD data are saved as \qty{6.4}{\micro\second} traces, with the trigger for data
 %Readout of the UMD data is triggered directly by the SD T1 trigger, where UMD data are saved as \qty{6.4}{\micro\second} traces covering the time range of \qty{-1.6}{\micro\second} before and \qty{4.8}{\micro\second} after the SD trigger time.
 
 The SiPM signal traces are digitized in one of two acquisition modes of the UMD, designed for different phase spaces of muon density.
-Designed for low muon densities is the binary mode, a counting mode recording data if the SiPM signal is above a set discriminator threshold, which generates 64 independent binary traces that are subsequently analyzed, resulting in a muon count.
+Designed for low muon densities is the binary mode, a counting mode recording data if the SiPM signal is above a set discriminator threshold, which generates 64 independent binary traces that are subsequently analyzed, resulting in a measurement of the muon number.
 The calorimetric mode (sometimes referred to as the ADC mode) sums and integrates the SiPM measured signals from all scintillator bars, similar to the WCD charge integration method, and was designed for high muon densities.
 Both acquisition modes of the UMD electronics operate simultaneously, with further description of the electronics and acquisition modes provided in~\cite{auger_jinst2021_amigasipm}.
 Deployment of the UMD was completed in March 2026, finalizing the deployment of AugerPrime.
@@ -470,31 +533,31 @@ The most recent analyses of the UMD include a muon LDF fit from measured UMD dat
 %It connects to a 64 channel Hamamatsu silicon phototmultiplier (SiPM).
 
 
-\subsection{Surface Scintillator Detector}\label{ssec:ssd}
-
-With AugerPrime, a Surface Scintillator Detector (SSD) was deployed on top of each WCD of the Pierre Auger Observatory.
+\subsection{The Surface Scintillator Detector}\label{ssec:ssd}
+With AugerPrime, a Surface Scintillator Detector (SSD) was deployed on top of all WCDs of the Pierre Auger Observatory, except for the WCDs at the edges of the array (i.e.~the outermost WCDs).
 The SSDs are flat scintillator panels covering a surface area of \qty{3.8}{\meter^{2}} above the WCD and have been fully integrated into the UUB electronics, providing the same duty cycle for both the WCD and SSD.
-The scintillators of the SSD are similar in function and design to the scintillators of the UMD, with a more detailed description of the SSD provided in~\cite{auger_jinst2025_ssd}.
-The SSD measures minimum ionizing air-shower particles with no distinction between electromagnetic and muonic particles triggering the scintillator.
-Combined with the more muon sensitive WCD measurements, the muonic and electromagnetic contributions to the total signal measured in each detector can be estimated.
-Yet, the SSD is mostly sensitive to air showers with $\theta_{\rm zen}\,<\,$\qty{55}{\degree} due to the same geometrical constraints for flat detectors described in the previous section.
+The scintillators of the SSD are similar in function and design to the scintillators of the UMD, where the SSD also triggers in a slave mode from the SD T1 trigger.
+A more detailed description of the SSD is provided in~\cite{auger_jinst2025_ssd}.
+The SSD measures minimum ionizing air-shower particles with no distinction between electromagnetic and muonic particles detected by the scintillator.
+Combined with the more muon sensitive WCD measurements, the muonic and electromagnetic contributions to the total signal measured by each SD can be estimated.
+Yet, the SSD is mostly sensitive to air showers with $\theta_{\rm zen}<\,$\qty{55}{\degree} due to the same geometrical constraints for flat detectors described in the previous section and from the attenuation of the electromagnetic shower component for more inclined air showers.
 
-\subsection{Radio Detector}\label{ssec:rd}
-
+\subsection{The Radio Detector}\label{ssec:rd}
 In addition to the SSD, a short aperiodic loaded loop antenna (SALLA) was deployed on top of each WCD.
-The SALLA radio antennas measure the radio emission of cosmic-ray air showers in the \qtyrange{30}{80}{\mega\hertz} band, forming the radio detector (RD) of AugerPrime.
+The SALLA radio antennas, a robust antenna design validated in Tunka-Rex~\cite{tunkarex_jcap2015_radiomeasurements}, measure the radio emission of cosmic-ray air showers in the \qtyrange{30}{80}{\mega\hertz} band, forming the radio detector (RD) of AugerPrime.
 The RD electronics has been fully integrated into the UUB, with RD power coming from the SD solar power system.
 Hence, RD is a subsystem of the SD, with the same duty cycle of nearly 100\% and the RD readout triggered directly from the SD.
 Similar to AERA, the SALLA antennas of RD consist of two polarizations, one aligned with the local magnetic field (North-South) and an orthogonal polarization aligned in the East-West direction.
 A description of the RD event reconstruction is presented in~\cite{auger_icrc2025_rdreconstruction}.
 
-Inclined air showers ($\theta_{\rm zen}\,>\,$\qty{65}{\degree}) with energies above \qty[parse-numbers=false]{10^{18.5}}{\electronvolt} generate radio footprints at ground spanning several kilometers in distance.
+Inclined air showers ($\theta_{\rm zen}>\,$\qty{65}{\degree}) with energies above \qty[parse-numbers=false]{10^{18.5}}{\electronvolt} generate radio footprints at ground spanning several kilometers in distance~\cite{auger_jcap2018_aerainclinedshowers}.
 The RD, due to its spacing of \qty{1500}{\meter} between antennas, is suited to measure the radio emission of these air showers with high precision.
 For these inclined showers, the electromagnetic particles will suffer greater attenuation in the atmosphere than for vertical showers, resulting in the WCDs measuring a mostly muonic signal at the ground.
 However, the radio emission generated from the electromagnetic particles does not attenuate in the atmosphere, traveling through the air unaffected where it is measured at ground by the RD.
-The addition of RD results in separate and distinct measurements of the electromagnetic and muonic air-shower components for air showers with $\theta_{\rm zen}\,>\,$\qty{65}{\degree}, further complimenting the SSD deployment which is more suited for electromagnetic-muonic separation of vertical air showers.
+The addition of RD results in separate and distinct measurements of the electromagnetic and muonic air-shower components for air showers with $\theta_{\rm zen}>\,$\qty{65}{\degree}, further complementing the SSD deployment which is more suited for electromagnetic-muonic separation of vertical air showers.
 The pipeline for simultaneously reconstructing the electromagnetic air-shower component with radio antennas and the muonic component with the SD has been established for AERA~\cite{auger_prd2025_aeramuoninclined}, and can be applied with minimal changes to the RD dataset yielding high-quality, high-statistics results.
-Further, the RD can be used to extend the AERA energy scale and $X_{\rm max}$ results beyond the AERA energy range with high statistics for the phase space of inclined air showers.
+Further, the RD can be used to extend the AERA energy scale results beyond the AERA energy range with high statistics for the phase space of inclined air showers.
+The capability to reconstruct $X_{\rm max}$ from radio measurements is still to be determined for the large spacing between RD stations; however, if proven, the AERA $X_{\rm max}$ results could also be extended.
 The RD deployment was completed in November 2024, with the first physics data presented in~\cite{auger_icrc2025_rdfirstdata}.
 High-level physics analyses with the RD are expected soon due to the extensive commissioning of RD, aided by the lessons learned from more than 10 years of data taking with AERA.
 
