@@ -2,7 +2,7 @@
 % Cosmic-ray air showers and their physics (chapter 2)
 %
 \chapter{Cosmic-Ray Air Showers}\label{chap:airshowers}
-Cosmic rays above roughly \qty[parse-numbers=false]{10^{14}}{\electronvolt} entering Earth's atmosphere will interact with atmospheric nuclei to initiate extensive air showers, cascades of secondary particles and electromagnetic radiation.
+Cosmic rays above roughly \qty[parse-numbers=false]{10^{14}}{\electronvolt} entering Earth's atmosphere will interact with atmospheric nuclei and initiate extensive air showers, cascades of secondary particles and electromagnetic radiation.
 The primary cosmic ray is no longer directly detectable after initiating this cascade; however, features of the primary cosmic ray, such as its energy, mass, and arrival direction, are imparted on the air shower's constituent particles and radiation.
 The air-shower constituents continue to interact in the atmosphere, which acts as a calorimetric medium during the shower development, until reaching Earth's surface where they are detected using a variety of techniques.
 This chapter will introduce the physics of air showers, including air-shower modeling and the relation of air-shower components to the primary cosmic ray, while~\Cref{chap:auger} will introduce the air-shower detection techniques implemented by the Pierre Auger Observatory.
@@ -42,11 +42,11 @@ This chapter will introduce the physics of air showers, including air-shower mod
 \section{Air-Shower Development}\label{sec:development}
 Air showers develop in the atmosphere along the air-shower axis, the straight line that follows the trajectory of the primary cosmic ray prior to its first atmospheric interaction.
 The first interactions are of the highest energy and generate high-energy particles beamed in the forward direction parallel to the shower axis.
-Subsequent interactions generate a larger number of particles than the previous generation of interactions, resulting in more and more particles of lower energy with each generation.
+Subsequent interactions generate additional particles, resulting in more and more particles of lower energy with each generation.
 Particles resulting from these interactions can receive a significant transverse momentum in relation to the shower axis, depending upon the nature of the generating collision, which propagates throughout the shower development and contributes to a lateral spread of the air shower.
 The absolute particle number of the air shower continues to grow as the shower develops longitudinally until the particle generation processes are no longer energetically favorable.
-After this threshold, the particle number in the air shower decreases due to atmospheric attenuation until the shower front reaches Earth's surface.
-Knowledge of atmospheric physics and particle physics is necessary to understand the development of an air shower, while simplified models of air showers can provide zeroth-order approximations relating the primary cosmic ray and the air shower it produces.
+After this threshold, the particle number in the air shower decreases due to decay and atmospheric attenuation until the shower front reaches Earth's surface.
+Knowledge of atmospheric physics and particle physics is necessary to understand the development of an air shower, while simplified models of air showers can provide approximations relating the primary cosmic ray and the air shower it produces.
 
 %Particles attenuate in the atmo
 %The lower-energy particles have smaller 
@@ -65,14 +65,14 @@ The development of an air shower depends on the amount of atmospheric material t
 
 \noindent
 where $\ell$ is the distance along the air-shower axis and $\rho\left(\ell\right)$ is the density profile of the atmosphere along the shower axis.
-The relation between the vertical altitude $h$ above sea level and $\ell$ is purely geometric and determined by the law of cosines:
+The relation between the vertical altitude $h$ above sea level and $\ell$ is purely geometric:
 
 \begin{equation}
     h = \sqrt{R_{\oplus}^{2} + \ell^{2} + 2\,R_{\oplus}\,\ell\,\cos\theta} - R_{\oplus} \approx \ell\,\cos\theta + \frac{1}{2}\frac{\ell^{2}}{R_{\oplus}}\sin^{2}\theta \label{eq:law_of_cosines}
 \end{equation}
 
 \noindent
-where $R_{\oplus}$ is the radius of the Earth and $\theta$ is the zenith angle of the air shower, the angle between the lines of local zenith directly beneath the point of first interaction in the atmosphere and the air-shower axis.
+where $R_{\oplus}$ is the radius of the Earth and $\theta$ is the zenith angle of the air shower, the angle between the normal vector of the ground plane and the air-shower axis.
 The approximation in~\Cref{eq:law_of_cosines} is a first-order Taylor expansion (i.e.~truncated after two terms) taken in the limit $\ell << R_{\oplus}$.
 
 For a completely vertical air shower, with a zenith angle $\theta$\,=\,\qty{0}{\degree}, the traversed distance along the shower axis becomes the vertical altitude $h$ as measured above sea level and the slant depth becomes the vertical atmospheric depth, or simply atmospheric depth,
@@ -83,7 +83,7 @@ For a completely vertical air shower, with a zenith angle $\theta$\,=\,\qty{0}{\
 
 \noindent
 where both the atmospheric and slant depths are reported in units of $\text{g}/\text{cm}^{2}$.
-For reference, assuming an isothermal atmosphere and an average altitude of \qty{1400}{\meter} for the Pierre Auger Observatory in Malarg\"{u}e, Argentina yields an atmospheric depth of approximately \qty{875}{\gram\per\centi\meter\squared}.
+For reference, assuming an isothermal atmosphere and an average altitude of \qty{1400}{\meter} for the Pierre Auger Observatory in Malarg\"{u}e, Argentina, yields an atmospheric depth of approximately \qty{875}{\gram\per\centi\meter\squared}.
 In reality, the atmosphere exhibits seasonal variations and its temperature varies with altitude, both described extensively within atmospheric profile models used in air-shower simulations for theoretical studies and data validation.
 
 For air showers with $\theta<$\,\qty{65}{\degree} the zeroth-order approximation from~\Cref{eq:law_of_cosines} can be used to determine the slant depth, giving
@@ -159,10 +159,10 @@ This function is explicitly defined as
 \end{equation}
 
 \noindent
-where $\sigma_{j\,\text{air}}^{\text{had}}$ is the total hadronic cross section for interactions between particle type $j$ and atmospheric molecules and $\sigma_{j\,\text{air}\rightarrow i}$ is the inclusive cross section for interactions of particle type $j$ and atmospheric molecules that produce a particle of type $i$.
+where $\sigma_{j\,\text{air}}^{\text{had}}$ is the total hadronic cross section for interactions between particle type $j$ and atmospheric molecules, and $\sigma_{j\,\text{air}\rightarrow i}$ is the inclusive cross section for interactions of particle type $j$ and atmospheric molecules that produce a particle of type $i$.
 These interactions are limited to $E_{i}<E_{j}$ due to conservation of energy.
 
-The interaction length is dependent upon the total hadronic cross section:
+The interaction length in units of $\text{g}/\text{cm}^{2}$ is dependent upon the total hadronic cross section:
 
 \begin{equation}
     \lambda_{i} = \frac{A\,m_{p}}{\sigma_{j\,\text{air}}^{\text{had}}} \label{eq:interaction_length}
@@ -170,7 +170,7 @@ The interaction length is dependent upon the total hadronic cross section:
 
 \noindent
 where $A$ is the mean mass of atmospheric nuclei and $m_{p}$ is the proton mass.
-Alternatively, the decay length is proportional to the atmospheric density at altitude $h$:
+The decay length in units of $\text{g}/\text{cm}^{2}$ is proportional to the atmospheric density at altitude $h$:
 
 \begin{equation}
     d_{i} = \rho(h)\,\gamma\,c\,\tau_{i} \label{eq:decay_length}
@@ -181,7 +181,7 @@ with $\tau_{i}$ the lifetime at rest of particle type $i$ and $\gamma$ the Loren
 Note that~\Cref{eq:cascade} does not account for energy losses in the atmosphere due to ionization, which occur naturally as a high-energy charged particle deposits energy by ionizing the medium it traverses.
 Ionization energy losses are unimportant for hadrons or high-energy electrons in an air shower; however, they become important for energies at and below the critical energy, the energy where interaction losses from radiative or hadronic processes equal energy losses due to ionization. 
 %The critical energy will be discussed further in the coming sections.
-An in depth description of the cascade equations, both generally and for specific particle types, is provided in~\cite{tom_book}.
+An in-depth description of the cascade equations, both generally and for specific particle types, is provided in~\cite{tom_book}.
 Further, the Matrix Cascade Equations (MCEq) code\footnote[1]{\href{https://github.com/mceq-project/MCEq}{https://github.com/mceq-project/MCEq}} provides a way to numerically solve the cascade equations with computationally efficient methods.
 
 %The cascade equations provide a complete phenomenological framework to understand the development of air showers, yet certain interaction processes are statistical in nature.
@@ -205,7 +205,8 @@ Further, the Matrix Cascade Equations (MCEq) code\footnote[1]{\href{https://gith
 %a result from~\Cref{eq:slant_depth} 
 
 \subsection{The Heitler-Matthews Model}\label{ssec:heitler_matthews}
-Cosmic-ray air showers can be described by two separate shower components, an electromagnetic and a hadronic component\footnote[2]{Some literature describe air showers as having three components: electromagnetic, hadronic, and muonic. Here the hadronic and muonic components are considered one, as the muonic component is generated via the hadronic cascade (see~\Cref{sssec:hadronic}).}.
+Cosmic-ray air showers can be described by three separate shower components, an electromagnetic, a muonic, and a hadronic component.
+The muonic component is generated primarily via the hadronic cascade, and therefore is used to probe the hadronic shower component\footnote[2]{Because of this, some literature describe air showers as having only two components: electromagnetic and hadronic, where muons are a subset of the hadronic component.} (see~\Cref{sssec:hadronic} for further information).
 A simplified toy model of air showers, known as the Heitler-Matthews model~\cite{matthews_astropartphys2005_heitlermatthews}, treats the cascades of the electromagnetic and hadronic shower components separately, where the hadronic cascade prolongs the electromagnetic cascade.
 This toy model serves to statistically relate attributes of the primary cosmic ray to separate measurable parameters of an air shower, called air-shower observables; however, the exact relationships are complicated and not known precisely for individual air showers. 
 A diagram of the electromagnetic and hadronic cascades of the Heitler-Matthews model are shown in~\Cref{fig:hm_model} and each will be described in the following subsections.
@@ -218,11 +219,10 @@ A diagram of the electromagnetic and hadronic cascades of the Heitler-Matthews m
 \end{figure}
 
 %three separate shower components: electromagnetic, hadronic, and muonic components, where the muonic component is .
-%Particle interactions of the hadronic component generate muons to form a muonic shower component. footnote about three shower component.
 
 \subsubsection{Electromagnetic Cascade}\label{sssec:electromagnetic}
-The toy model of electromagnetic cascades in the atmosphere was developed by Heitler~\cite{heitler_book} as a simple splitting model, needing only a single electromagnetic particle ($e^{\pm}$, $\gamma$)\footnote[3]{Throughout this dissertation electromagnetic particles include gamma-ray photons ($\gamma$) unless otherwise stated.} of high energy, $\mathcal{O}(100)$\,MeV and above, to initiate the cascade.
-Electron energy losses in the atmosphere, for an electron\footnote[4]{Mentions of electrons throughout the dissertation will refer to both electrons and positrons, the electron antiparticle, unless otherwise stated.} of initial energy $E_{0}$, are modeled as an exponential 
+The toy model of electromagnetic cascades in the atmosphere was developed by Heitler~\cite{heitler_book} as a simple splitting model, needing only a single electromagnetic particle ($e^{\pm}$, $\gamma$)\footnote[3]{Throughout this dissertation electromagnetic particles will include electrons, positrons, and gamma-ray photons ($\gamma$) unless otherwise stated. Mentions of electrons will refer to both electrons and positrons unless otherwise stated} of high energy, $\mathcal{O}(100)$\,MeV and above, to initiate the cascade.
+Electron energy losses in the atmosphere, for an electron of initial energy $E_{0}$, are modeled as an exponential 
 
 \begin{equation}
     E\left(X\right) = E_{0}\,e^{-X / X_{0}} \label{eq:electron_energy_loss}
@@ -240,7 +240,7 @@ The column density an electron travels within a medium before losing half of its
 \noindent
 which is defined as the characteristic splitting length of the Heitler model.
 The toy model assumes electromagnetic particles interact in the atmosphere after traveling this characteristic splitting length, after which they ``split'' into two electromagnetic particles, each with half of the energy of the original particle.
-The Heitler model further assumes that gamma-ray photons ($\gamma$'s) interact in the atmosphere with the same splitting length as electrons\footnote[1]{In reality, the mean free path of photon pair production is approximately $\frac{9}{7}X_{0}$.}.
+The Heitler model further assumes that gamma-ray photons ($\gamma$'s) interact in the atmosphere with the same splitting length as electrons\footnote[4]{In reality, the mean free path of photon pair production is approximately $\frac{9}{7}X_{0}$.}.
 
 Within the toy model, after traveling a distance $\lambda_{\text{EM}}$, a $\gamma$ in the vicinity of an atmospheric nucleus will interact to pair produce an electron-positron pair:
 
@@ -272,16 +272,17 @@ and the energy of each particle is
 \end{equation}
 
 The interactions~\Cref{eq:pair_production,eq:bremsstrahlung} will continue at every splitting length traveled until the energy of the individual electromagnetic particles within the cascade reaches the critical energy of $E_{c}\approx$\,\qty{87}{\mega\electronvolt}~\cite{tom_book}.
-Below this energy, electromagnetic particles will only lose energy due to ionization or absorb in the atmosphere, as bremsstrahlung is no longer energetically favorable over energy losses from ionization.
-The moment a shower develops to the critical energy is known as shower maximum, after which the number of electromagnetic particles in the cascade only decreases.
-The number of particles in the cascade at shower maximum is then defined as
+Below this energy, electromagnetic particles will only lose energy due to ionization, or will be absorbed in the atmosphere, as bremsstrahlung is no longer energetically favorable over energy losses from ionization.
+Hence, the number of electromagnetic particles in the cascade only decreases after the critical energy is reached.
+The maximum number of particles in the electromagnetic cascade is then defined as
 
 \begin{equation}
-    N_{\text{max}}^{\text{EM}} = \frac{E_{0}}{E_{c}} \label{eq:em_particle_maximum}
+    N_{\text{max}}^{\text{EM}} = \frac{E_{0}}{E_{c}}. \label{eq:em_particle_maximum}
 \end{equation}
 
 \noindent
-and the atmospheric slant depth of shower maximum is
+The atmospheric slant depth at which the number of shower particles is maximum is known as shower maximum.
+For a purely electromagnetic shower of energy $E_{0}$, shower maximum is defined by
 
 \begin{equation}
     X_{\text{max}}^{\text{EM}} = X_{0} \ln\left( \frac{E_{0}}{E_{c}} \right). \label{eq:em_xmax}
@@ -299,7 +300,7 @@ The Heitler-Matthews model~\cite{matthews_astropartphys2005_heitlermatthews} is 
 The hadronic extension uses the same concept of parent particles interacting after a splitting length to generate multiple particles that receive equal energy fractions of the parent particle.
 This toy model assumes all hadrons produced in the cascade are pions, with each interaction producing $n_{\text{tot}}$ pions with an energy of $E / n_{\text{tot}}$ per pion.
 $E$ is either the energy of the parent hadron or the primary cosmic ray, depending on the interaction generation.
-One-third of the pions are neutral ($\pi^{0}$) that decay almost immediately\footnote[1]{$\pi^{0}$ have an average lifetime of \qty[parse-numbers=false]{(8.43\,$\pm$\,0.13)$\times$10^{-17}}{\second}~\cite{pdg_2026_review}.}, following
+One-third of the pions are neutral ($\pi^{0}$) that decay almost immediately\footnote[5]{$\pi^{0}$ have an average lifetime of \qty[parse-numbers=false]{(8.43\,$\pm$\,0.13)$\times$10^{-17}}{\second}~\cite{pdg_2026_review}.}, following
 
 \begin{equation}
     \pi^{0} \rightarrow \gamma + \gamma. \label{eq:pion_pairproduction}
@@ -309,8 +310,8 @@ One-third of the pions are neutral ($\pi^{0}$) that decay almost immediately\foo
 The resulting gamma-ray photons each initiate an electromagnetic cascade following the Heitler model discussed in the previous section.
 
 Two-thirds of the pions are charged ($\pi^{\pm}$), with $n_{\text{ch}}$ representing their total number.
-The charged pions travel a distance $\lambda_{\text{had}}$ before either interacting or decaying.
-If the energy of the pion is less than the pion critical energy, $E_{c}^{\pi}$, defined here as the energy where the decay length of the pion equals the interaction length $\lambda_{\text{had}}$, then the pion will decay into a muon and a neutrino via
+The charged pions travel a distance $\lambda_{\pi}$ before either interacting or decaying.
+If the energy of the pion is less than the pion critical energy, $E_{c}^{\pi}$, defined here as the energy where the decay length of the pion equals the interaction length $\lambda_{\pi}$, then the pion will decay into a muon and a neutrino via
 
 \begin{equation}
     \pi^{+} \rightarrow \mu^{+} + \nu_{\mu} \qquad \text{or} \qquad \pi^{-} \rightarrow \mu^{-} + \bar{\nu_{\mu}} \label{eq:pion_decay}
@@ -319,7 +320,7 @@ If the energy of the pion is less than the pion critical energy, $E_{c}^{\pi}$, 
 \noindent
 depending on the charge of the pion.
 Otherwise the charged pions will interact hadronically with atmospheric nuclei, splitting again with one-third of the initial pion energy transferred to neutral pions that feed the electromagnetic cascade and two-thirds of the initial pion energy transferred to charged pions.
-The energies of the hadronic and electromagnetic air-shower components after $n\,=\,X / \lambda_{\text{had}}$ generations of the cascade is given by
+The energies of the hadronic and electromagnetic air-shower components after $n\,=\,X / \lambda_{\pi}$ generations of the cascade is given by
 
 \begin{equation}
     E_{\text{had}} = \left( \frac{2}{3} \right)^{n} E_{0} \qquad \text{and} \qquad E_{\text{EM}} = \left[ 1 - \left( \frac{2}{3} \right)^{n} \right] E_{0} \label{eq:shower_energies}
@@ -328,20 +329,22 @@ The energies of the hadronic and electromagnetic air-shower components after $n\
 \noindent
 where $E_{0}$ is the energy of the primary cosmic ray that initiated the air shower.
 After several generations, both the air shower energy and particle number are dominated by electromagnetic particles, hence $X_\text{max}$ is mostly electromagnetic in nature.
-For completeness, values of $\lambda_{\text{had}}$\,=\,\qty{120}{\gram\per\centi\meter\squared} and $E_{c}^{\pi}\simeq$\,\qty{20}{\giga\electronvolt} can be assumed for the Heitler-Matthews model~\cite{matthews_astropartphys2005_heitlermatthews}.
+For completeness, values of $\lambda_{\pi}$\,=\,\qty{120}{\gram\per\centi\meter\squared} and $E_{c}^{\pi}\simeq$\,\qty{20}{\giga\electronvolt} can be assumed for the Heitler-Matthews model~\cite{matthews_astropartphys2005_heitlermatthews}.
 
 Assuming the primary cosmic ray is a proton with energy $E_{0}$, the atmospheric slant depth of shower maximum can be approximated as
 
 \begin{equation}
-    X_{\text{max}}^{p} \approx \lambda_{\text{had}} + X_{\text{max}}^{\text{EM}}\left( E_{0} / \left(2\,n_{\text{tot}}\right) \right) = \lambda_{\text{had}} + X_{0} \ln\left( \frac{E_{0}}{2\,n_{\text{tot}}\,E_{c}} \right). \label{eq:proton_xmax}
+    X_{\text{max}}^{p} \approx \lambda_{\text{int}} + X_{\text{max}}^{\text{EM}}\left( E_{0} / \left(2\,n_{\text{tot}}\right) \right) = \lambda_{\text{int}} + X_{0} \ln\left( \frac{E_{0}}{2\,n_{\text{tot}}\,E_{c}} \right) \label{eq:proton_xmax}
 \end{equation}
 
 \noindent
+where $\lambda_{\text{int}}$ is an interaction length related to the interaction cross section of the primary particle with air and therefore has a dependence on the primary cosmic-ray mass.
+Additionally, $X_{0}$ is slightly smaller for hadronic showers than for electromagnetic showers to account for the particle multiplicity per interaction.
 The approximation considers only electromagnetic particles generated from the first interaction within the Heitler-Matthews model, of which there are $2\,n_{\text{tot}}$ generated from the decay of neutral pions.
 These are the electromagnetic particles of the highest energy within the air shower, therefore contributing the most towards shower maximum and justifying this approximation.
 $X_{\text{max}}$ hence serves as a probe of the electromagnetic component of the air shower.
 
-Charged pion decay generates the muonic\footnote[1]{As with other particle types, muons will refer to both $\mu^{+}$ and $\mu^{-}$ throughout this dissertation.} component of the air shower.
+Charged pion decay generates the muonic\footnote[6]{As with other particle types, muons will refer to both $\mu^{+}$ and $\mu^{-}$ throughout this dissertation.} component of the air shower.
 In this toy model, all charged pions will have their energy fall below $E_{c}^{\pi}$ after several interaction generations and then will decay into muons following~\Cref{eq:pion_decay}.
 Therefore, the total number of muons in the air shower is given by
 
@@ -350,7 +353,7 @@ Therefore, the total number of muons in the air shower is given by
 \end{equation}
 
 \noindent
-with $n$ the number of cascade generations and the energy per pion at decay equal to the pion critical energy, $E_{c}^{\pi}$.
+with $n$ the number of cascade generations and the energy of decaying pions equal to the pion critical energy, $E_{c}^{\pi}$.
 Again assuming the primary cosmic ray is a proton with energy $E_{0}$, the energy per pion at decay is
 
 \begin{equation}
@@ -358,21 +361,21 @@ Again assuming the primary cosmic ray is a proton with energy $E_{0}$, the energ
 \end{equation}
 
 \noindent
-Combining~\Cref{eq:muon_pion_relation,eq:energy_per_pion} removes the dependence on cascade generation, yielding a muon number for a proton cosmic ray dependent upon the cosmic-ray energy
+Combining~\Cref{eq:muon_pion_relation,eq:energy_per_pion} removes the dependence on cascade generation, yielding that the muon number of an air shower from a proton cosmic ray depends upon the proton energy $E_{0}$:
 
 \begin{equation}
     N_{\mu}^{p} = \left( \frac{E_{0}}{E_{c}^{\pi}} \right)^{\beta}, \qquad \text{with} \qquad \beta = \frac{\ln\left( n_{\text{ch}} \right)}{\ln\left( n_{\text{tot}} \right)} = \frac{\ln\left( \frac{2}{3} n_{\text{tot}} \right)}{\ln\left( n_{\text{tot}} \right)}. \label{eq:proton_nmu}
 \end{equation}
 
 \noindent
-The value of $\beta$ depends on the particle multiplicity of hadronic interactions and is determined from in-depth simulations of air showers.
+The value of $\beta$ depends on the particle multiplicity of hadronic interactions, with a range of roughly $\beta$\,=\,\numrange{0.80}{0.95} and is determined from in-depth simulations of air showers.
 \Cref{chap:simulations} determines the energy evolution of $\beta$ averaged over many air-shower simulations for three separate model treatments of the particle multiplicities.
 
 Unlike electrons, muons rarely interact in the atmosphere through radiative processes because of their larger mass ($m_{\mu}\approx200\,m_{e}$).
 Muons also have large decay lengths (see~\Cref{eq:decay_length}) due to their long rest lifetime and relativistic $\gamma$ factors.
 Hence, muons with enough energy rarely interact or decay in the atmosphere and instead propagate to Earth's surface with only ionization energy losses of $\sim$\,\qty{2}{\mega\electronvolt}$/\left(\text{g}\,\text{cm}^{-2}\right)$.
-To traverse the full atmosphere (i.e.~$X\approx$\,\qty{1030}{\gram\per\centi\meter\squared}) would require a muon energy of roughly \qty{2}{\giga\electronvolt}.
-Muons therefore serve as a probe of the hadronic component of air showers, able to be observed with ground-based air-shower detection techniques, due to their direct relation to hadronic particles and their low rates of atmospheric interaction and decay.
+To traverse the full atmosphere (i.e.~$X\approx$\,\qty{1030}{\gram\per\centi\meter\squared}) requires a muon energy of roughly \qty{2}{\giga\electronvolt}.
+Muons therefore serve as a probe of the hadronic component of air showers, able to be observed with ground-based air-shower detectors.
 
 %above this threshold reach Earth's surface and, due to the direct relation of muons to hadronic particles, serve as a probe of the hadronic component of air showers.
 
@@ -397,11 +400,12 @@ The energies of particle interactions within the air shower are significantly la
 Using the superposition model, the $X_{\text{max}}$ relationship for a primary cosmic ray of mass $A$ is
 
 \begin{equation}
-    X_{\text{max}}^{A}\left( E_{0} \right) \approx \lambda_{\text{had}} + X_{0} \ln\left( \frac{E_{0}}{2\,n_{\text{tot}}\,A\,E_{c}} \right) = X_{\text{max}}^{p} - X_{0}\ln\left(A\right), \label{eq:nucleon_xmax}
+    X_{\text{max}}^{A}\left( E_{0} \right) \approx \lambda_{\text{int}} + X_{0} \ln\left( \frac{E_{0}}{2\,n_{\text{tot}}\,A\,E_{c}} \right) \approx X_{\text{max}}^{p} - X_{0}\ln\left(A\right), \label{eq:nucleon_xmax}
 \end{equation}
 
 \noindent
 where the approximation considers only electromagnetic particles generated from the first interaction, assumed also for~\Cref{eq:proton_xmax}.
+$\lambda_{\text{int}}$ is smaller for a cosmic ray of mass $A$ than a proton cosmic ray because of their respective cross sections with air.
 The relationship for $N_{\mu}$ within the superposition model becomes
 
 \begin{equation}
@@ -417,13 +421,13 @@ This is nicely summarized with the proportionalities
 
 \noindent
 showing a direct relationship to the primary mass for separate probes of the electromagnetic and hadronic air-shower components, regardless of the composition of the primary cosmic ray.
-Taking the natural logarithm of $N_{\mu}$ yields a linear relationship between $\ln(A)$ and $\ln(N_{\mu})$, hence there exists a linear relationship between $\ln(A)$ and these separate probes of the electromagnetic and hadronic shower components.
-Combining these observables therefore provides complementary information in determining the cosmic-ray mass from air-shower measurements.
-In reality, the relationship between cosmic-ray mass and these air-shower observables is more complicated and depends on the first interactions during air-shower development; however, this simplified model provides a general relation between mass and air-shower observables that holds when averaged over many air-shower events.
-The impact from the first shower interactions will be discussed in~\Cref{sssec:fluctuations}.
+Taking the natural logarithm of $N_{\mu}$ yields a linear relationship between $\ln(A)$ and $\ln(N_{\mu})$, hence there exists a linear relationship between $\ln(A)$ and these separate probes of the electromagnetic and hadronic shower components, i.e.~$X_{\text{max}}$ and $\ln\left(N_{\mu}\right)$.
+Combining $X_{\text{max}}$ and $N_{\mu}$ therefore provides complementary information in determining the cosmic-ray mass from air-shower measurements.
+In reality, the relationship between cosmic-ray mass and these air-shower observables is more complicated and depends also on the first interactions during air-shower development; however, this simplified model provides a general relation between mass and air-shower observables that holds when averaged over many air-shower events.
+%The impact from the first shower interactions will be discussed in~\Cref{sssec:fluctuations}.
 
 \subsection{Longitudinal Profile}\label{ssec:long_profile}
-The longitudinal development of the air shower, from first interaction to full absorption of all particles, is known as the longitudinal profile, a description of the number of particles within the air shower at a given atmospheric slant depth during the shower development.
+The longitudinal development of the air shower, from first interaction to full absorption of all particles, is described by its longitudinal profile, the number of particles at a given atmospheric slant depth during the shower development.
 A phenomenological function, known as the Gaisser-Hillas function~\cite{gaisser_icrc1977_gh}, relates the air-shower longitudinal profile to the mass-sensitive observable $X_\text{max}$ and is given by
 
 \begin{equation}
@@ -431,26 +435,24 @@ A phenomenological function, known as the Gaisser-Hillas function~\cite{gaisser_
 \end{equation}
 
 \noindent
-$N(X)$ is the total number of electrons within the air shower at slant depth $X$, which, due to the dominant number of shower electromagnetic particles, can be approximated as the total number of charged particles within the air shower at $X$.
-$N_{\text{max}}$ is the number of electrons at shower maximum (i.e.~at $X_{\text{max}}$) and can be used to approximate the air-shower energy by $E\approx$\,\qty{1.5}{\giga\electronvolt}\,$\times\,N_{\text{max}}$.
-If $N(X)$ is approximated as the total number of charged particles within the air shower at atmospheric slant depth $X$, then $N_{\text{max}}$ is the number of charged particles at shower maximum.
+$N(X)$ is the total number of particles within the air shower at slant depth $X$.
+$N_{\text{max}}$ is the number of particles at shower maximum (i.e.~at $X_{\text{max}}$) and can be used to approximate the air-shower energy by $E\approx$\,\qty{1.5}{\giga\electronvolt}\,$\times\,N_{\text{max}}$.
 $X_{0}$ and $\lambda$ are shape parameters of the longitudinal profile, each with units of $\text{g}/\text{cm}^{2}$.
 \Cref{eq:gh} is used to fit both simulations and data of individual air showers to directly determine $X_{\text{max}}$.
-The application to air-shower data does not fit the particle numbers in the air shower, as this is not directly measurable, but rather fits to the cascade energy deposit in the atmosphere, as described in~\Cref{chap:auger}. 
+The application to air-shower data does not fit the particle numbers in the air shower, as this is not directly measurable, but rather fits to the cascade energy deposit in the atmosphere, as described in~\Cref{chap:auger}.
 In either simulations or data, both $X_{0}$ and $\lambda$ are left as free parameters of the fit and are respectively related to the slant depth of first interaction and the effective interaction length of the air shower.
+Photons and electrons are the dominant particle types within the shower and their longitudinal profiles follow the same shape, as seen in~\Cref{fig:simulated_distributions}, hence the same form of~\Cref{eq:gh} can also be used for the total number of electrons within the air shower (i.e.~excluding photons).
 
 \begin{figure}
     \centering
     \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.7\textwidth]{chapter2/longitudinal_and_lateral_distributions.png}
-    \caption[Longitudinal and lateral distributions of air-shower particles.]{Left: The lateral distribution of air-shower particles for a completely vertical ($\theta_{\text{zen}}$=\,\qty{0}{\degree}) simulated air shower initiated by a \qty{10}{\exa\electronvolt} proton cosmic ray. Right: The longitudinal distribution for various particle types within the same air shower. Some particle types are scaled by a constant factor to improve visibility of the longitudinal profile. Figure taken from~\cite{engel_annrev2011_hadronicinteractions}.}
+    \caption[Longitudinal and lateral distributions of air-shower particles.]{Left: The lateral distribution of air-shower particles for a vertical ($\theta_{\text{zen}}$=\,\qty{0}{\degree}) simulated air shower initiated by a \qty{10}{\exa\electronvolt} proton cosmic ray. Right: The longitudinal distribution for various particle types within the same air shower. Some particle types are scaled by a constant factor to improve visibility of the longitudinal profile. Figure taken from~\cite{engel_annrev2011_hadronicinteractions}.}
     \label{fig:simulated_distributions}
 \end{figure}
 
 \Cref{fig:simulated_distributions} shows the individual longitudinal profiles for gamma-ray photons, electrons, muons, and hadrons within a simulated air shower.
-The electron longitudinal profile is clearly has the dominant contribution to the total charged particle longitudinal distribution.
-The particle density as a function of distance to the air-shower core, known as the lateral profile, is also shown in~\Cref{fig:simulated_distributions}.
-Converting this distance to a distance to the air-shower axis (i.e.~a distance in the plane perpendicular to the shower axis) yields the lateral distribution of the air shower.
-In this example, the distance to the air-shower axis and the distance to the air-shower core are the same because the air shower has a zenith angle of \qty{0}{\degree}.
+The particle density as a function of distance to the air-shower axis (i.e.~a distance in the plane perpendicular to the shower axis), known as the lateral distribution, is also shown in~\Cref{fig:simulated_distributions}.
+In this example, the distance to the air-shower axis and the distance to the air-shower core, the distance to the shower axis in the observation plane, are the same because the air shower has a zenith angle of \qty{0}{\degree}.
 Fitting the measured lateral distribution to a model function can provide a measure of the air-shower energy or the particle content of the shower depending on the specifics of the fit.
 These fit types will be discussed in more detail in~\Cref{chap:auger} and~\Cref{chap:nn} respectively.  
 
@@ -461,7 +463,7 @@ An alternative version of the Gaisser-Hillas function, is given by:
 \end{equation}
 
 \noindent
-$N^{\prime}$ is the normalized number of electrons\footnote[1]{Or the normalized number of charged particles, depending on assumptions.} in the air shower ($N^{\prime} = N / N_{\text{max}}$) and $X^{\prime}$ is the shower maximum shifted slant depth ($X^{\prime} = X - X_{\text{max}}$).
+$N^{\prime}$ is the normalized number of particles\footnote[7]{Or the normalized number of electrons.} in the air shower ($N^{\prime} = N / N_{\text{max}}$) and $X^{\prime}$ is the shower maximum shifted slant depth ($X^{\prime} = X - X_{\text{max}}$).
 Within this parameterization, $L$ represents a characteristic width of the shower longitudinal profile while $R$ is related to the asymmetry of the profile, defined explicitly with the equations
 
 \begin{equation}
@@ -488,9 +490,9 @@ Hadronic interaction models are discussed in more detail in~\Cref{sec:models}.
 %Relating the air-shower longitudinal profile to $X_{\text{max}}$, shown to be a mass-sensitive observable in the previous sections, is done through a phenomenological model of 
 
 \subsubsection{Shower-to-Shower Fluctuations}\label{sssec:fluctuations}
-The nature of the first few interactions during air-shower development are inherently random processes.
-These stochasticities propagate throughout the development of an air shower, resulting in shower-to-shower fluctuations among air showers with the same mass, energy, and arrival direction of the primary cosmic-ray.
-The impact of the stochastic interactions throughout the shower development become imprinted upon air-shower observables, making the relationships between shower observables and cosmic-ray mass a statistical, rather than a deterministic, model.
+The interactions during air-shower development are inherently random processes.
+Stochasticities during the first interactions propagate throughout the development of an air shower, resulting in shower-to-shower fluctuations among air showers with the same mass, energy, and arrival direction of the primary cosmic-ray.
+The impact of the stochastic interactions throughout the shower development becomes imprinted upon air-shower observables, making the relationships between shower observables and cosmic-ray mass statistical rather than deterministic.
 
 This is most easily visualized through a simple addition to the Heitler-Matthews model that assumes the first interaction point in the atmosphere is random, where the probability of the primary cosmic-ray surviving decreases exponentially as it penetrates further into the atmosphere.
 In this thought experiment, a proton cosmic ray with a first interaction point higher in the atmosphere will reach shower maximum development faster than a proton cosmic ray with a first interaction point lower in the atmosphere.
@@ -498,15 +500,15 @@ Assuming a stochastic first interaction point for an ensemble of proton cosmic r
 
 Thinking in terms of the superposition model, an iron cosmic ray is modeled as a collection of lower energy proton cosmic rays, each with a distinct first interaction depth.
 The individual ``proton'' sub-showers superimpose, one on top of the other, where each sub-shower is treated to have a randomized first-interaction depth.
-Averaging over the ``proton'' sub-shower first-interaction depths determines the value of $X_{\text{max}}$ for a single iron cosmic ray.
+Averaging over the ``proton'' sub-shower first-interaction depths determines the first-interaction depth for a single iron cosmic ray, which impacts the value of $X_{\text{max}}$.
 Assuming this same treatment for an ensemble of iron cosmic rays yields a smaller range of $X_{\text{max}}$ values compared to the $X_{\text{max}}$ range of the proton cosmic ray ensemble.
-Overall, the means of the $X_{\text{max}}$ distributions for separate mass groups follows the proportionality of~\Cref{eq:observables_mass}, where proton cosmic rays have a larger spread in the $X_{\text{max}}$ distribution compared to iron cosmic rays.
+Overall, the mean $X_{\text{max}}$ for separate mass groups follows the proportionality of~\Cref{eq:observables_mass}, where proton cosmic rays have a larger spread in the $X_{\text{max}}$ distribution compared to iron cosmic rays.
 
 The $N_{\mu}$ observable also has greater shower-to-shower fluctuations for proton air showers compared to heavier primaries; however, this is due to stochasticities in the nature of the high-energy hadronic interactions within the air showers.
-After several interactions, the stochasticities average out and air showers develop following the same universal rules; however, the effect of stochastic processes on the shower observables is still propagated throughout the full shower development. 
-Shower-to-shower fluctuations then limit the potential per-event separation of individual air-shower observables.
+After several interactions, the stochasticities average out and air showers develop following the same universal rules; however, the effect of stochastic processes in the first interactions is still propagated throughout the full shower development. 
+Shower-to-shower fluctuations then limit the potential of per-event mass separation of individual air-shower observables.
 The fluctuations instead produce a second moment, the spread, for each observable distribution which is also mass sensitive and can be studied using distributions of single observables.
-Simultaneously combining knowledge of multiple mass-sensitive observables is a potential method to relax the limitations of per-event separation resulting from shower fluctuations.
+Simultaneously combining knowledge of multiple mass-sensitive observables may reduce the limitations of per-event mass separation imposed by shower-to-shower fluctuations.
 This method of combining multiple observables to study per-event mass separation is the topic of~\Cref{chap:simulations}.
 
 
@@ -550,21 +552,20 @@ This method of combining multiple observables to study per-event mass separation
 
 
 \section{Radio Emission from Air Showers}\label{sec:radio}
-Radio emission, generated from charged secondary particles of the cascade, is another component of cosmic-ray air showers.
-The radio emission is broadband, coherent, emission generated in MHz to GHz frequencies, meaning the radio signal has a continuous frequency spectrum over this range of frequencies (broadband) and the radio waves generated throughout the shower development are in phase with one another (coherence).
-The radio detection technique for observing cosmic-ray air showers has matured in recent years, with several observatories using radio observations of air showers to report measurements of air-shower observables, including the cosmic-ray energy and the slant depth of shower maximum.
+Radio emission, generated from charged secondary particles of the cascade, primarily electrons and positrons, is another component of cosmic-ray air showers.
+The radio emission is broadband, coherent, emission generated in MHz to GHz frequencies, meaning the radio signal has a continuous frequency spectrum over this range and the radio waves generated throughout the shower development are in phase with one another.
+The radio detection technique for observing cosmic-ray air showers has matured in recent years~\cite{schroeder_ppnp2017_radio,tim_physrep2016_radio}, with several observatories using radio observations of air showers to report measurements of air-shower observables, including the cosmic-ray energy and the slant depth of shower maximum~\cite{tunkarex_jcap2015_radiomeasurements,maxbuesken_phdthesis,auger_prd2024_aeraxmax,auger_prl2024_aeraxmax}.
 
 \subsection{Radio Emission Mechanisms}\label{ssec:mechanisms}
 Radio emission within air showers is generated from two main emission mechanisms.
-The first is geomagnetic emission, a deflection of charged secondary particles in the shower caused by interactions with the geomagnetic field.
-The deflection is a Lorentz force interaction that deflects shower electrons and positrons within the shower front, the thin disk of shower particles that forms as the shower propagates throughout the atmosphere.
+The first is geomagnetic emission, caused by the deflection of charged secondary particles in the shower by the Lorentz force of the geomagnetic field.
 Deflections of the electrons and positrons induce a transverse current that generates radio emission polarized in the $-\vec{v}\,\times\,\vec{B}$ direction, where $\vec{v}$ is the particle velocity and $\vec{B}$ is Earth's magnetic field.
-Muons also deflect in Earth's magnetic field due to their positive and negative charges; however, the magnitude of these deflections is lesser for muons compared to electrons due to muons having a larger mass.
+Other charged particles, such as muons, also deflect in Earth's magnetic field due to their positive and negative charges; however, the magnitude of these deflections is lesser for muons compared to electrons due to muons having a larger mass.
 Hence, any radio emission generated from muons deflecting in the geomagnetic field is negligible compared to radio emission generated by electron deflections.
 Radio emission from deflections of other particle species within the shower is also negligible.
 
 The second emission mechanism is Askaryan emission, produced by a time-varying net-negative charge within the shower front~\cite{askaryan_jetp1962_radioemission,askaryan_jetp1965_densemedia}.
-The net-negative charge is generated at the shower front by photons ionizing atmospheric molecules to ``knock-out'' valence shell electrons\footnote[1]{Some literature simply refers to these electrons as ``knock-out'' or ``kick-out'' electrons.} and by air-shower positrons annihilating with valence shell electrons, therefore Askaryan emission is sometimes referred to as charge excess emission.
+The net-negative charge is generated at the shower front by photons ionizing atmospheric molecules to ``knock-out'' electrons\footnote[8]{Some literature refers to these electrons as ``kick-out'' electrons.} and by air-shower positrons annihilating with electrons; therefore, Askaryan emission is sometimes referred to as charge excess emission.
 These effects induce a roughly 20\% excess of shower electrons compared to shower positrons, where this excess changes as the air shower develops~\cite{krijn_astropartphys2010_lateraldistribution}.
 Askaryan emission is radially polarized in the shower plane and also occurs for particle showers within dense media, such as water-ice.
 \Cref{fig:radio_emission} depicts both the geomagnetic and Askaryan emission mechanisms and their respective polarizations.
@@ -578,18 +579,19 @@ Askaryan emission is radially polarized in the shower plane and also occurs for 
 
 In general, emission mechanisms generate coherent emission if the wavelength of the radiation is larger than the emission region.
 For geomagnetic and Askaryan emission, the shower front, with a thickness of roughly one meter for an air shower, is the emission region.
-Using the relationship $c = \lambda\,f$, coherent radio emission in air showers occurs for frequencies of a few \qty{100}{\mega\hertz} and below, where higher frequencies have a lower ambient radio background from sources such as the Galactic center or thermal noise from radiating blackbodies~\cite{schroeder_ppnp2017_radio, tim_physrep2016_radio}.
+Using the relationship $c = \lambda\,f$, coherent radio emission in air showers occurs for frequencies of a few \qty{100}{\mega\hertz} and below and at higher frequencies, up to several GHz, at the Cherenkov angle.
+Higher frequencies have a lower ambient radio background from sources such as the Galactic center or thermal noise from radiating blackbodies~\cite{schroeder_ppnp2017_radio, tim_physrep2016_radio}.
 Coherence makes the strength of the radio emission (i.e.~the electric field amplitude measured by the radio antennas) linearly proportional to the number of electrons within the air shower, $N_{e}$.
 The air-shower radiation energy (i.e.~the total radiated power of the radio emission) therefore scales quadratically with the electromagnetic energy of the air shower from~\Cref{eq:em_proportionalities}, explicitly $E_{\text{rad}} \propto E_{\text{EM}}^{2}$.
 
 The amplitude of the geomagnetic emission depends on $\sin\left(\alpha\right)$, with $\alpha$ the angle between the magnetic field direction and the air-shower axis.
-The incoming direction of the air shower therefore determines the ratio of the Askaryan emission strength to the geomagnetic emission strength.
+The incoming direction of the air shower therefore determines the ratio of the strength of the Askaryan emission to the geomagnetic emission.
 The total radio emission also depends on the longitudinal development of the shower itself.
 Inclined showers that develop in the atmosphere over a longer distance than vertical air showers will have a longer duration of their geomagnetic emission, leading to an increase in the amount of radio emission.
 For showers in dense media the opposite is true, and the geomagnetic radio emission is negligible because the shower develops over a shorter length scale. 
 
 \subsection{Relationship of the Radio Emission to Air-Shower Observables}\label{ssec:radio_observables}
-Both the geomagnetic and Askaryan radio emission contribute to the total radio emission for a cosmic-ray air shower; however, the two effects interfere with one another leading to an observed asymmetry in the footprint of the radiation energy fluence at ground, known as the radio footprint.
+Both the geomagnetic and Askaryan radio emission contribute to the total radio emission for a cosmic-ray air shower; however, the two effects interfere with one another leading to an observed asymmetry in the radiation energy fluence at ground, known as the radio footprint.
 The size of the asymmetry within the radio footprint depends on the ratio of the Askaryan to geomagnetic emission strengths.
 \Cref{fig:radio_footprint} shows an example of a simulated radio footprint at ground that has been projected into the shower plane, the plane perpendicular to the air-shower axis.
 Spatially integrating the radio footprint at ground in two dimensions yields the radiation energy, $E_{\text{rad}}$.
@@ -597,7 +599,7 @@ Spatially integrating the radio footprint at ground in two dimensions yields the
 \begin{figure}
     \centering
     \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.7\textwidth]{chapter2/radio_footprint_example.pdf}
-    \caption[Example of a simulated radio footprint.]{A simulated footprint of the radio emission within a cosmic-ray air shower. The footprint is simulated at ground and projected into the shower plane. Each unfilled circle represents the simulated location of a radio antenna. Darker colors represent a larger amplitude of the radio fluence. Figure taken from~\cite{auger_prd2024_aeraxmax}.}
+    \caption[Example of a simulated radio footprint.]{A simulated footprint of the radio emission within a cosmic-ray air shower. The footprint is simulated at ground and projected into the shower plane. Each unfilled circle represents the simulated location of a radio antenna. Darker colors represent a larger amplitude of the radio energy fluence. Figure taken from~\cite{auger_prd2024_aeraxmax}.}
     \label{fig:radio_footprint}
 \end{figure}
 
@@ -611,20 +613,21 @@ Using air-shower simulations, the corrected radiation energy can be fit to the a
 
 \noindent
 where $A$ and $B$ are free parameters of the fit.
-In data, \Cref{eq:radio_energy} can be inverted using the $A$ and $B$ fit parameters to determine a per-event electromagnetic energy for a measured corrected radiation energy.
+$B\approx2$ for coherent emission, where a simulation study reports $B=1.980\pm0.001$~\cite{christian_jcap2016_radiationenergy} and results from the Pierre Auger Observatory report $B=1.98\pm0.04$~\cite{auger_prd2016_aeraenergyscale,auger_prl2016_aeraenergyscale}.
+In data, \Cref{eq:radio_energy} can be inverted using the $A$ and $B$ fit parameters to determine a per-event electromagnetic energy for a measured, and corrected, radiation energy.
 The total air-shower energy can not be used in place of the electromagnetic energy in~\Cref{eq:radio_energy} because neutrinos and high-energy muons carry a fraction of the primary cosmic-ray energy, roughly 10\%, which is never transferred to the electromagnetic component of the air shower.
 This is known as the invisible energy which can be corrected for using particle-detector measurements of inclined air showers where the majority of the electromagnetic particles have been absorbed in the atmosphere~\cite{auger_prd2019_invisibleenergy}.
 Note that the fluorescence and air-Cherenkov detection techniques of air showers also measure the electromagnetic component of air showers and therefore must be corrected for the energy carried by the ``invisible'' portion of the air shower as well.
 These additional detection techniques can serve as a direct calibration measurement to the radio detection technique~\cite{maxbuesken_phdthesis}.
 Fluorescence detection is discussed further in~\Cref{sec:fd}.
 
-The shape of the radio signal footprint is also dependent on the geometric distance to the maximum development of the air shower, as seen in~\Cref{fig:footprint_xmax}.
+The shape of the radio signal footprint is also dependent on the geometric distance to the shower maximum, as seen in~\Cref{fig:footprint_xmax}.
 Hence, an $X_{\text{max}}$ dependence on the radio footprint shape is expected.
 Simulation template matching of the two-dimensional lateral distributions of measured radio signals to simulated radio signals is used to determine $X_{\text{max}}$ with radio measurements of air showers~\cite{buitink_prd2014_radioxmax}.
-Several air showers with the same initial parameters, other than primary cosmic-ray mass, are simulated to reproduce the shower-to-shower fluctuations seen in real data.
-The simulated radio footprints are compared to the measured radio footprint using a $\chi^{2}$ calculated from the individual radio antenna fluence values to quantify a match of the data with simulation.
-A parabolic fit to the $\chi^{2}$ values as a function of simulated $X_{\text{max}}$ then determines the nominal event $X_{\text{max}}$.
-This method has been used to determine $X_{\text{max}}$ both within a frequency range of \qtyrange{30}{80}{\mega\hertz}~\cite{auger_prd2024_aeraxmax, auger_prl2024_aeraxmax} and tested at higher frequencies of \qtyrange{30}{80}{\mega\hertz}~\cite{icrc2023_turcotte}, yet these analyses were performed at separate observatory locations.
+Several air showers with the same energy and arrival direction parameters, bu various primary cosmic-ray masses, are simulated to reproduce the shower-to-shower fluctuations seen in real data.
+The simulated radio footprints are compared to the measured radio footprint using a $\chi^{2}$ calculated from the individual radio antenna measurements to quantify a match of the data with simulation.
+The minimum of a parabolic fit to the $\chi^{2}$ values as a function of simulated $X_{\text{max}}$ then determines the measured $X_{\text{max}}$.
+This method has been used to determine $X_{\text{max}}$ both within a frequency range of \qtyrange{30}{80}{\mega\hertz}~\cite{auger_prd2024_aeraxmax, auger_prl2024_aeraxmax} and tested at higher frequencies of \qtyrange{80}{300}{\mega\hertz}~\cite{icrc2023_turcotte}, yet these analyses were performed at separate observatory locations.
 Dense arrays of radio antennas have been shown to be sensitive to reconstructions of the air-shower longitudinal profile width and asymmetry, respectively $L$ and $R$ from~\Cref{ssec:long_profile}~\cite{arena2022_corstanje_longitudinaldistribution}, while methods using information field theory can reconstruct the full longitudinal profile from simulated radio signals~\cite{arena2026_watanabe_ift}.
 
 \begin{figure}
@@ -686,47 +689,48 @@ Dense arrays of radio antennas have been shown to be sensitive to reconstruction
 %Simulations, then hadronic models (these should be last).
 
 \section{Hadronic Interaction Models}\label{sec:models}
-Further complicating the understanding of air showers are hadronic interaction models, frameworks that describe how hadrons interact during the development of the cascade.
-The models are based on quantum chromodynamics (QCD) which describes how quarks are ``glued''\footnote[1]{The force mediator for the strong nuclear force is the gluon. Yes this pun was intentional.} together via the strong nuclear force to form hadrons and the interactions of hadrons.
-Interactions of hadrons within air showers is typically in the soft QCD regime, where interactions occur with low-momentum transfer between quarks and the resultant particles have a small transverse momentum ($p_{\text{T}}\leq$\numrange{1}{2}$\,\text{GeV}/c$)~\cite{christiansen_annurev2025_softqcd}.
+Required, yet further complicating the understanding of air showers are hadronic interaction models, frameworks that describe how hadrons interact during the development of the cascade.
+The models are based on quantum chromodynamics (QCD) which describes how quarks are ``glued''\footnote[9]{The force mediator for the strong nuclear force is the gluon.} together via the strong nuclear force to form hadrons and the interactions of hadrons.
+Interactions of hadrons within air showers typically occur in the soft QCD regime, where interactions occur with low-momentum transfer between quarks and the resulting particles have a small transverse momentum ($p_{\text{T}}\leq$\numrange{1}{2}$\,\text{GeV}/c$)~\cite{christiansen_annurev2025_softqcd}.
 Calculations in the soft QCD regime are incredibly complex because soft QCD is non-perturbative, meaning perturbation theory is no longer a viable option to solve the equations of QCD.
 Instead, hadronic interaction models are used as phenomenological models of these soft QCD interactions, with model parameters ``tuned'' to particle collision data from terrestrial particle accelerators~\cite{albrecht_revphys2025_tuning}.
 
 The hadronic development of an air shower is governed by these hadronic interaction models.
 The first interaction of the primary cosmic ray and an atmospheric molecule that initiates the air shower is hadronic in nature, where the subsequent interactions occur in the forward development region of the air shower.
-Depending on the energy of the primary cosmic ray, the first interaction, and the first few subsequent hadronic interactions, can occur at center-of-mass energies greater than the maximum LHC center-of-mass energy of \qty{14}{\tera\electronvolt}.
-Hadronic interactions at energies above this threshold occur in a phase space with no experimental constrains from current particle accelerators and instead interaction parameters are extrapolated from the ``tuned'' energy regime.
-Uncertainties in the hadronic interactions at these energies and the lack of direct air-shower observations of these first interactions produce large systematic uncertainties of ground-based air-shower measurements.
+Depending on the energy of the primary cosmic ray, the first interaction and a few subsequent hadronic interactions can occur at center-of-mass energies greater than the maximum LHC center-of-mass energy of \qty{14}{\tera\electronvolt}.
+Hadronic interactions at energies above this threshold occur in a phase space with no experimental constraints from current particle accelerators and instead interaction parameters are extrapolated from the ``tuned'' energy regime.
+Uncertainties in the hadronic interactions at these energies and the lack of direct air-shower observations of these first interactions produce large systematic uncertainties for the interpretation of air-shower measurements.
 These systematic uncertainties impact the measured distributions of air-shower observables.
 
 \subsection{Relation of Air-Shower Observables to Hadronic Interaction Models}\label{ssec:model_dependence}
-The total muon content of an air shower, $N_{\mu}$, is generated through the hadronic shower development and therefore will heavily depend on the hadronic interaction model.
+The total muon content of an air shower, $N_{\mu}$, is generated through the hadronic shower component and therefore depends on the hadronic interaction model.
 Additionally, the hadronic nature of the first air-shower interaction creates a dependence of $X_{\text{max}}$ on the assumed hadronic interaction model due to the coupling of $X_{\text{max}}$ with the atmospheric slant depth of first interaction.
-Both $X_{\text{max}}$ and $N_{\mu}$ are air-shower observables highly correlated with the primary cosmic-ray mass highlighting a relationship between cosmic-ray mass composition measurements and hadronic interaction models.
+Both $X_{\text{max}}$ and $N_{\mu}$ are air-shower observables correlated with the primary cosmic-ray mass highlighting a relationship between cosmic-ray mass composition measurements and hadronic interaction models.
 Therefore, the interpretation of air-shower data is highly dependent on the hadronic interaction model.
 
-Interpretation of air-shower data is performed by comparing air-shower simulations to observed air-shower data, where the hadronic interactions of the simulation are modeled with individual hadronic interaction models.
-These comparisons, in addition to guiding the interpretation of air-shower data, can be used to constrain hadronic interaction models based on their separate predictions.
-One systematic result across all hadronic interaction models is the muon deficit, sometimes called the muon puzzle, a deficit in the number of air-shower muons predicted from hadronic interaction models and the number of air-shower muons measured in data.
-Hadronic interaction models correctly predict the number of high-energy muons (at roughly TeV muon energies and above)~\cite{icecube_prd2025_tevmuons}, yet the number of low-energy muons reaching the observation level is predicted to be lower than what is measured by various air-shower experiments around the world~\cite{icrc2023_arteaga_muonpuzzle}.
+Interpretation of air-shower data is performed by comparing air-shower simulations to observed air showers, where the hadronic interactions of the simulation are modeled with individual hadronic interaction models.
+These comparisons, in addition to guiding the interpretation of air-shower data, can be used to constrain hadronic interaction models based on their predictions.
+One systematic result across all hadronic interaction models is called the muon puzzle, a deficit in the number of air-shower muons predicted from hadronic interaction models compared to measured air showers at ultra-high energies.
+Hadronic interaction models correctly predict the number of high-energy muons (at roughly TeV muon energies and above)~\cite{icecube_prd2025_tevmuons} up to primary energies of at least a few \qty[parse-numbers=false]{10^{17}}{\electronvolt}.
+Yet, starting at cosmic-ray energies near \qty[parse-numbers=false]{10^{17}}{\electronvolt}, the number of low-energy muons reaching the observation level is predicted to be lower than what is measured by various air-shower experiments around the world~\cite{icrc2023_arteaga_muonpuzzle}.
 Recent studies suggest this deficit could be an accumulated deficit that grows as the shower develops~\cite{auger_prl2021_muonfluctuations}; however, it is clear that hadronic interaction models still have yet to fully describe the hadronic shower development.
-Hence, studies to test hadronic interaction models are of the utmost importance as these models impact all aspects of understanding air-shower measurements.
+Hence, studies to test hadronic interaction models are of utmost importance as these models impact all aspects of understanding air-shower measurements.
 EPOS LHC-R~\cite{icrc2025_pierog}, Sibyll 2.3e~\cite{riehn_prd2019_sibyll23d}, and QGSJETIII-01~\cite{ostapchenko_prd2024_qgsjet3_formalism,ostapchenko_prd2024_qgsjet3_production} are the most recent hadronic interaction models used by the astroparticle research community to describe the hadronic interactions within air showers.
-The impact of hadronic model choice on observable mass sensitivity is studied using air-shower simulations in~\Cref{chap:simulations}.
+\Cref{chap:simulations} studies how the choice of hadronic interaction model impacts the mass sensitivity of air-shower observables.
 
 \section{Chapter Summary}\label{sec:ch2_summary}
-This chapter introduces the physics of cosmic-ray air showers and draws the connection between these air showers and the unknown astrophysical properties of cosmic rays introduced in the previous chapter.
+This chapter introduces the physics of cosmic-ray air showers and draws the connection between these air showers and the properties of cosmic rays introduced in the previous chapter.
 Several air-shower observables were presented within this chapter and their connection to the primary cosmic-ray mass within various phenomenological models is discussed.
 Specifically, the atmospheric slant depth of shower maximum, $X_{\text{max}}$, and the total air-shower muon content, $N_{\mu}$, are introduced as two observables that are both correlated with the primary cosmic-ray mass, yet each observable is probed through a separate component of the air shower.
 $X_{\text{max}}$ is a measure of the electromagnetic shower component and can be reconstructed with measurements of the radio emission generated within an air shower.
-$N_{\mu}$ is direct probe of the hadronic shower component, which, when combined with $X_{\text{max}}$ measurements, provide two independent and almost fully decoupled methods to measure the cosmic-ray mass.
+$N_{\mu}$ is a direct probe of the hadronic shower component, which, when combined with $X_{\text{max}}$ measurements, provides an independent method to measure the cosmic-ray mass.
 Simultaneously measuring both observables could therefore improve the per-event mass sensitivity of air showers, as will be studied with simulations in~\Cref{chap:simulations} and with data in~\Cref{chap:radiomuon}.
 
 Hadronic interaction models, a major source of systematic uncertainty in air-shower measurements and their interpretations, are also introduced.
-These models govern the development of the hadronic air-shower component, yet they are known to be incomplete descriptions of the hadronic interactions.
-This is discussed with the examples of model extrapolation to an energy regime no longer constrained by measurements from terrestrial particle accelerator and from the observed discrepancy in the total muon content of simulated and measured air showers.
+These models govern the development of the hadronic air-shower component, yet they are known to be incomplete descriptions of the hadronic interactions in air showers of ultra-high energies.
+This is reflected by the observed discrepancy in the total muon content of simulated and measured air showers.
 Hadronic interaction models directly impact the understanding of air-shower observables and their distributions and is another point of investigation within this dissertation.
-The following chapter will introduce how these air-shower observables are measured at the Pierre Auger Observatory, the location of the world's largest cosmic-ray observatory and where several analyses presented in this dissertation were performed.
+The following chapter will introduce how these air-shower observables are measured at the Pierre Auger Observatory, the world's largest cosmic-ray observatory, which was used for several analyses presented in this dissertation.
 
 %Various phenomenological models were presented that 
 
