@@ -221,7 +221,7 @@ A diagram of the electromagnetic and hadronic cascades of the Heitler-Matthews m
 %three separate shower components: electromagnetic, hadronic, and muonic components, where the muonic component is .
 
 \subsubsection{Electromagnetic Cascade}\label{sssec:electromagnetic}
-The toy model of electromagnetic cascades in the atmosphere was developed by Heitler~\cite{heitler_book} as a simple splitting model, needing only a single electromagnetic particle ($e^{\pm}$, $\gamma$)\footnote[3]{Throughout this dissertation electromagnetic particles will include electrons, positrons, and gamma-ray photons ($\gamma$) unless otherwise stated. Mentions of electrons will refer to both electrons and positrons unless otherwise stated} of high energy, $\mathcal{O}(100)$\,MeV and above, to initiate the cascade.
+The toy model of electromagnetic cascades in the atmosphere was developed by Heitler~\cite{heitler_book} as a simple splitting model, needing only a single electromagnetic particle ($\text{e}^{\pm}$, $\gamma$)\footnote[3]{Throughout this dissertation electromagnetic particles will include electrons, positrons, and gamma-ray photons ($\gamma$) unless otherwise stated. Mentions of electrons will refer to both electrons and positrons unless otherwise stated.} of high energy, $\mathcal{O}(100)$\,MeV and above, to initiate the cascade.
 Electron energy losses in the atmosphere, for an electron of initial energy $E_{0}$, are modeled as an exponential 
 
 \begin{equation}
@@ -245,14 +245,14 @@ The Heitler model further assumes that gamma-ray photons ($\gamma$'s) interact i
 Within the toy model, after traveling a distance $\lambda_{\text{EM}}$, a $\gamma$ in the vicinity of an atmospheric nucleus will interact to pair produce an electron-positron pair:
 
 \begin{equation}
-    \gamma \rightarrow e^{-} + e^{+}. \label{eq:pair_production}
+    \gamma \rightarrow \text{e}^{-} + \text{e}^{+}. \label{eq:pair_production}
 \end{equation}
 
 \noindent
 The cascade electrons, also after traveling a distance $\lambda_{\text{EM}}$, decelerate within the electric field of atmospheric nuclei to produce further electrons and gamma-ray photons, following
 
 \begin{equation}
-    e^{\pm} \rightarrow e^{\pm} + \gamma. \label{eq:bremsstrahlung}
+    \text{e}^{\pm} \rightarrow \text{e}^{\pm} + \gamma. \label{eq:bremsstrahlung}
 \end{equation}
 
 \noindent
@@ -328,7 +328,7 @@ The energies of the hadronic and electromagnetic air-shower components after $n\
 
 \noindent
 where $E_{0}$ is the energy of the primary cosmic ray that initiated the air shower.
-After several generations, both the air shower energy and particle number are dominated by electromagnetic particles, hence $X_\text{max}$ is mostly electromagnetic in nature.
+After several generations, both the air-shower energy and particle number are dominated by electromagnetic particles, hence $X_\text{max}$ is mostly electromagnetic in nature.
 For completeness, values of $\lambda_{\pi}$\,=\,\qty{120}{\gram\per\centi\meter\squared} and $E_{c}^{\pi}\simeq$\,\qty{20}{\giga\electronvolt} can be assumed for the Heitler-Matthews model~\cite{matthews_astropartphys2005_heitlermatthews}.
 
 Assuming the primary cosmic ray is a proton with energy $E_{0}$, the atmospheric slant depth of shower maximum can be approximated as
@@ -371,7 +371,7 @@ Combining~\Cref{eq:muon_pion_relation,eq:energy_per_pion} removes the dependence
 The value of $\beta$ depends on the particle multiplicity of hadronic interactions, with a range of roughly $\beta$\,=\,\numrange{0.80}{0.95} and is determined from in-depth simulations of air showers.
 \Cref{chap:simulations} determines the energy evolution of $\beta$ averaged over many air-shower simulations for three separate model treatments of the particle multiplicities.
 
-Unlike electrons, muons rarely interact in the atmosphere through radiative processes because of their larger mass ($m_{\mu}\approx200\,m_{e}$).
+Unlike electrons, muons rarely interact in the atmosphere through radiative processes because of their larger mass ($m_{\mu}\approx200\,m_{\text{e}}$).
 Muons also have large decay lengths (see~\Cref{eq:decay_length}) due to their long rest lifetime and relativistic $\gamma$ factors.
 Hence, muons with enough energy rarely interact or decay in the atmosphere and instead propagate to Earth's surface with only ionization energy losses of $\sim$\,\qty{2}{\mega\electronvolt}$/\left(\text{g}\,\text{cm}^{-2}\right)$.
 To traverse the full atmosphere (i.e.~$X\approx$\,\qty{1030}{\gram\per\centi\meter\squared}) requires a muon energy of roughly \qty{2}{\giga\electronvolt}.
@@ -471,7 +471,7 @@ Within this parameterization, $L$ represents a characteristic width of the showe
 \end{equation}
 
 \begin{equation}
-    R = \sqrt{\frac{\lambda}{|X_{0}^{\prime|}}}. \label{eq:R}
+    R = \sqrt{\frac{\lambda}{|X_{0}^{\prime}|}}. \label{eq:R}
 \end{equation}
 
 \noindent
@@ -581,7 +581,7 @@ In general, emission mechanisms generate coherent emission if the wavelength of 
 For geomagnetic and Askaryan emission, the shower front, with a thickness of roughly one meter for an air shower, is the emission region.
 Using the relationship $c = \lambda\,f$, coherent radio emission in air showers occurs for frequencies of a few \qty{100}{\mega\hertz} and below and at higher frequencies, up to several GHz, at the Cherenkov angle.
 Higher frequencies have a lower ambient radio background from sources such as the Galactic center or thermal noise from radiating blackbodies~\cite{schroeder_ppnp2017_radio, tim_physrep2016_radio}.
-Coherence makes the strength of the radio emission (i.e.~the electric field amplitude measured by the radio antennas) linearly proportional to the number of electrons within the air shower, $N_{e}$.
+Coherence makes the strength of the radio emission (i.e.~the electric field amplitude measured by the radio antennas) linearly proportional to the number of electrons within the air shower, $N_{\text{e}}$.
 The air-shower radiation energy (i.e.~the total radiated power of the radio emission) therefore scales quadratically with the electromagnetic energy of the air shower from~\Cref{eq:em_proportionalities}, explicitly $E_{\text{rad}} \propto E_{\text{EM}}^{2}$.
 
 The amplitude of the geomagnetic emission depends on $\sin\left(\alpha\right)$, with $\alpha$ the angle between the magnetic field direction and the air-shower axis.
@@ -624,7 +624,7 @@ Fluorescence detection is discussed further in~\Cref{sec:fd}.
 The shape of the radio signal footprint is also dependent on the geometric distance to the shower maximum, as seen in~\Cref{fig:footprint_xmax}.
 Hence, an $X_{\text{max}}$ dependence on the radio footprint shape is expected.
 Simulation template matching of the two-dimensional lateral distributions of measured radio signals to simulated radio signals is used to determine $X_{\text{max}}$ with radio measurements of air showers~\cite{buitink_prd2014_radioxmax}.
-Several air showers with the same energy and arrival direction parameters, bu various primary cosmic-ray masses, are simulated to reproduce the shower-to-shower fluctuations seen in real data.
+Several air showers with the same energy and arrival direction parameters, but various primary cosmic-ray masses, are simulated to reproduce the shower-to-shower fluctuations seen in real data.
 The simulated radio footprints are compared to the measured radio footprint using a $\chi^{2}$ calculated from the individual radio antenna measurements to quantify a match of the data with simulation.
 The minimum of a parabolic fit to the $\chi^{2}$ values as a function of simulated $X_{\text{max}}$ then determines the measured $X_{\text{max}}$.
 This method has been used to determine $X_{\text{max}}$ both within a frequency range of \qtyrange{30}{80}{\mega\hertz}~\cite{auger_prd2024_aeraxmax, auger_prl2024_aeraxmax} and tested at higher frequencies of \qtyrange{80}{300}{\mega\hertz}~\cite{icrc2023_turcotte}, yet these analyses were performed at separate observatory locations.
