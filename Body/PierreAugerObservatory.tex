@@ -14,10 +14,12 @@ The hybrid design enables simultaneous air-shower observations with separate, ye
 The observatory consists of two primary detectors, the surface detector (SD), an array of over 1600 water-Cherenkov detectors (WCDs) spread across the full \qty{3000}{\kilo\meter^{2}} footprint of the observatory, and a fluorescence detector (FD), 27 fluorescence telescopes overlooking the SD array at four locations around the edges of the array.
 Auger has been recording data in hybrid mode for over 20 years, officially starting in 2004 and with full completion of the SD in 2008.
 Since 2008, additional detector systems of radio antennas and scintillator panels have been added to the observatory.
-In 2016, the first surface scintillator panel was deployed for an upgrade of the observatory, AugerPrime, also referred to as Auger Phase II, consisting of electronics upgrades, and new arrays of radio antennas and both surface and buried scintillator panels.
+In 2016, the first surface scintillator panel was deployed for an upgrade of the observatory, AugerPrime, also referred to as Auger Phase II.
+With AugerPrime, improvements to the FD increased the detector uptime and the SD received an upgrade consisting of electronics upgrades, a new array of radio antennas, and surface scintillator panels.
+Buried scintillator panels were also deployed as a part of AugerPrime over a small area within the full footprint of the observatory.
 Deployment of the of the final buried scintillator panel finished in March 2026; however, deployment of the surface scintillators and radio antennas finished in November 2021 and November 2024 respectively.
 An international funding agreement will keep the observatory in operation until at least 2035, allowing for high-quality air-shower measurements with AugerPrime, and the potential for prototyping detectors of future experiments in the Argentinian Pampa.
-This chapter will describe the Pierre Auger Observatory and its detectors systems in detail.
+This chapter will describe the Pierre Auger Observatory and its detector systems in detail.
 
 
 \section{Surface Detector}\label{sec:sd}
@@ -170,7 +172,7 @@ In the upwards configuration, the telescopes of HEAT are pointed upwards by \qty
 The downwards configuration has the same field of view in elevation as the other 24 fluorescence telescopes.
 Elevating the telescope field of view enables measurements of the longitudinal development of lower energy air showers that reach their maximum development at higher altitudes, with HEAT lowering the fluorescence detection threshold to approximately \qty[parse-numbers=false]{10^{17}}{\electronvolt} in energy.
 The HEAT field of view overlooks the SD-750 and SD-433 arrays, delivering high-quality hybrid detections of air showers at energies near and between the second knee and ankle of the cosmic ray energy spectrum.
-The SD-433 array primarily detects air-showers below the energy threshold of HEAT, therefore not many coincident SD-433 and HEAT measurements of air showers are expected.
+Not many coincident SD-433 and HEAT measurements of air showers are expected due to the small size of the SD-433 array (roughly \qty{2}{\kilo\meter^{2}}) and because the SD-433 array primarily detects air-showers near or below the fluorescence threshold of HEAT.
 
 %to provide an elevation field of view of approximately 
 
@@ -189,7 +191,6 @@ The SD-433 array primarily detects air-showers below the energy threshold of HEA
 %The fluorescence telescopes follow a Schmidt optics design, used to observe wide field of view's while limiting aberrations. 
 
 
-%The fluorescence light passes through a UV filter on the at each telescope location before reachn 
 
 
 %Close to 90\% of the air-shower energy is 
@@ -212,7 +213,6 @@ The SD-433 array primarily detects air-showers below the energy threshold of HEA
 %pointed inwards from the array edges to overlook the SD array.
 %The telescopes monitor the atmosphere directly above the SD array 
 
-%from the SD array edges to observ.
 %to observe the atmosphere 
 
 \section{Event Reconstruction}\label{sec:reconstruction}
@@ -234,8 +234,8 @@ The time range is determined using the procedure described in~\cite{auger_jinst2
 
 %Within a station, the signal baseline of all PMTs (both high and low-gain channels) must first be subtracted.
 %A total baseline is determined by linearly interpolating between constant baseline segments to account for the affect of the signal on the baseline.
-%Baseline segments are defined as at least \qty{1}{\micro\second} of consecutive FADC bins (40 bins) within a signal range of $\bar{b}\pm\sigma_{b}$, with $\bar{b}$ the average baseline in the segment and $\sigma_{b}$ nominally set to 2 FADC counts (see REF2020JINST for further details).
-%After baseline subtraction, the PMT signals are converted from FADC units to VEM.   
+%Baseline segments are defined as at least \qty{1}{\micro\second} of consecutive FADC bins (40 bins) within a signal range of $\bar{b}\pm\sigma_{b}$, with $\bar{b}$ the average baseline in the segment and $\sigma_{b}$ nominally set to 2 FADC counts (see~\cite{auger_jinst2020_sdreconstruction} for further details).
+%After baseline subtraction, the PMT signals are converted from FADC units to VEM.
 
 Time windows of signal fragments are determined and merged on a PMT-to-PMT basis following the steps in~\cite{auger_jinst2020_sdreconstruction} to form PMT signal segments.
 The signal segments of the station's active PMTs are averaged bin-by-bin to obtain a station signal, where the signal segment with the largest signal determines the nominal start and stop times for the station signal.
@@ -265,7 +265,7 @@ The SD reconstruction of the Auger Observatory uses a modified Nishimura-Kamata-
 
 \noindent
 with $r_{\rm s}$ a scale distance fixed to \qty{700}{\meter}.
-$\beta$ describe the steepness of the LDF for distances close to the air-shower axis (relative to the scale distance $r_{\rm s}$, i.e.~for $r<r_{\rm s}$), while $\gamma$ describes the steepness of the LDF at distances far from the air-shower axis ($r>r_{\rm s}$).
+$\beta$ describes the steepness of the LDF for distances close to the air-shower axis (relative to the scale distance $r_{\rm s}$, i.e.~for $r<r_{\rm s}$), while $\gamma$ describes the steepness of the LDF at distances far from the air-shower axis ($r>r_{\rm s}$).
 The LDF steepness in each regime is related to the air-shower age, a quantity describing the development stage of the air shower when it reaches the observation level, which is dependent on both the air-shower energy and zenith angle.
 $\beta$ and $\gamma$ are handled with data-driven parameterizations, dependent upon energy and zenith angle, unless their respective ``lever-arm'' criteria described in~\cite{auger_jinst2020_sdreconstruction} are met.
 If this criteria is met, $\beta$ is treated as a free parameter in the LDF fit, and likewise for $\gamma$.
@@ -291,7 +291,7 @@ This event was observed on March 30, 2026 at 02:15 UTC with an SD reconstructed 
 \begin{figure}
     \centering
     \includegraphics[trim={3.3cm 4.0cm 4.7cm 4.5cm},clip,width=0.8\textwidth]{chapter3/AugerEvent_250885131100_SD_view.pdf}
-    \caption[Example event SD reconstruction.]{The SD-1500 reconstruction for Auger event ID 250885131100. The top left plot shows the air-shower footprint, the bottom left plot shows the LDF fit to reconstruct $S_{1000}$, and the bottom right plot shows the wavefront fit. The top right shows specific parameters of the SD reconstruction.}
+    \caption[Example event SD reconstruction.]{The SD-1500 reconstruction for Auger event ID 250885131100. The top left plot shows the air-shower footprint as measured by the SD, where the lines draw the air-shower axis in the shower-detector plane of the FD reconstruction (see~\Cref{ssec:fd_reconstruction}). The bottom left plot shows the LDF fit to reconstruct $S_{1000}$, and the bottom right plot shows the wavefront fit, where $r$ in each plot is the distance to the air-shower axis. The top right shows specific parameters of the SD reconstruction.}
     \label{fig:example_sd}
 \end{figure}
 
@@ -355,8 +355,7 @@ A log-likelihood fit is performed to determine the $A$ and $B$ fit parameters~\c
 The resulting $A$ and $B$ fit parameters for the SD-1500 are presented in~\cite{auger_prd2020_spectrum}, for the SD-750 in~\cite{auger_epjc2021_infillspectrum}, and for the SD-433 in~\cite{icrc2023_gaby_spectrum}.
 The data-derived relationship between the FD energy scale and the SD reference signal is used to set the SD energy scale, even when FD data are not available.
 
-In the case of hybrid SD-FD events with only one SD station participating in the event, the air-shower geometry is more precisely constrained than when no SD measurements are available.
-In this instance, no SD reconstruction is available; however, a more precise estimate of the air-shower core is possible.
+In the case of hybrid SD-FD events with only one SD station participating in the event, no SD reconstruction is available; however, a more precise estimate of the air-shower core than with the FD alone is still possible.
 For a majority of FD events, an SD reconstruction is available due to the approximate 100\% duty cycle of the SD.
 For these SD-FD hybrid events, resolutions of \qty{50}{\meter} for the air-shower core and \qty{0.6}{\degree} for the air-shower arrival direction are possible~\cite{auger_nima2010_fd}.
 \Cref{fig:example_hybrid} shows the hybrid SD-FD reconstruction of Auger event ID 250885131100, combining the SD reconstruction shown in~\Cref{fig:example_sd} with the FD reconstruction shown in~\Cref{fig:example_fd}.
@@ -479,10 +478,8 @@ See~\cite{auger_jinst2023_sdeu} for further information on the SD electronics of
 
 AugerPrime has also improved the duty cycle of the FD up to 29\% by lowering the PMT gain given certain observing conditions.
 Lowering the gain enables observation nights with moonlight, i.e.~nights with a higher night sky background, without risk of deteriorating the FD PMTs from high anode currents.
-The new detector systems added as part of the AugerPrime upgrade will be discussed in the following subsections.
-The first detector system to be described will be final detector system to be fully deployed, the Underground Muon Detector, as this detector system started as an enhancement to the Pierre Auger Observatory prior to AugerPrime.
+The new detector systems added as part of the AugerPrime upgrade are discussed in the following subsections.
 
-%closer to the shower core without PMT saturation REFICRC2023343.
 %The electronics used for the SD array will also be up
 
 %However, solely increasing statistics of air-shower observations 
@@ -510,7 +507,7 @@ The UMD inherits the energy range of the co-located SD-433 and SD-750 arrays, wi
 
 Each UMD station consists of three \qty{10}{\meter^{2}} scintillators, totaling a \qty{30}{\meter^{2}} collecting area for each station.
 As with all flat detectors, the UMD scintillators are more sensitive to vertical air showers ($\theta_{\rm zen}<\,$\qty{55}{\degree}) from the $\cos\theta$ dependence on the projected detector surface area in the shower plane.
-Particle absorption in the soil adds to the UMD's sensitivity to vertical air showers.
+Particle absorption in the soil adds to the UMD being more sensitive to vertical air showers.
 The individual scintillators consist of 64 scintillation bars of \qty{400}{\centi\meter} length, \qty{4}{\centi\meter} width, and \qty{1}{\centi\meter} thickness, separated into two identical strips of 32 bars.
 A 64 channel Hamamatsu silicon phototmultiplier (SiPM) of type S13361-2050NE-08, along with the UMD electronics, is placed at the center separation of the two strips of 32 bars (see~\Cref{fig:auger_umd}).
 Minimum ionizing particles, in this case muons above $\approx\,$\qty{1}{\giga\electronvolt} in energy, entering the scintillator bar will ionize the doped material of the bar producing scintillation light.
@@ -570,14 +567,15 @@ High-level physics analyses with the RD are expected soon due to the extensive c
 \section{Chapter Summary}\label{sec:ch3_summary}
 This chapter introduces the Pierre Auger Observatory, the world's largest cosmic-ray observatory, and its various techniques for detecting air showers initiated by ultra-high-energy cosmic rays.
 The observatory's hybrid particle-fluorescence technique of detecting air showers is described, introducing both the SD, a \qty{3000}{\kilo\meter\squared} array of water-Cherenkov detectors, and the FD, 27 fluorescence telescopes overlooking the footprint of the SD.
-Several further air-shower detection methods, added as enhancements or upgrades to the observatory, are discussed, paving the way for multi-hybrid air-shower measurements.
-These include a \qty{17}{\kilo\meter\squared} engineering array of radio antennas (AERA), arrays of buried and surface scintillator panels (the UMD and SSD respectively), and an array of radio antennas covering the \qty{3000}{\kilo\meter\squared} SD footprint (RD).
+Several further air-shower detectors, added as enhancements or upgrades to the observatory, are discussed, paving the way for multi-hybrid air-shower measurements.
+These include a \qty{17}{\kilo\meter\squared} engineering array of radio antennas (known as AERA), an array of buried scintillator panels in the densely spaced region of the SD that forms the underground muon detector (UMD), and further upgrades to the SD across the footprint of the observatory.
+These further SD upgrades include an array of surface scintillator panels that forms the surface scintillator detector (SSD) and an array of radio antennas that forms the radio detector (RD).
 
 %The SD footprint has three distinct inter-detector spacings of \qtylist{1500;750;433}{\meter} that form the main array of WCDs with a \qty{1500}{\meter} detector spacing, the SD-1500, and two sub-arrays, the SD-750 and SD-433.
 %The inter-detector spacing determines the energy threshold of high-quality air-shower detections, with approximate thresholds of \qty[parse-numbers=false]{10^{18.5}}{\electronvolt} for the SD-1500, \qty[parse-numbers=false]{10^{17.5}}{\electronvolt} for the SD-750, and \qty[parse-numbers=false]{10^{16.5}}{\electronvolt} for the SD-433.
 
-The goal of this thesis is to combine air-shower measurements from particle detectors sensitive to the air-shower muonic component with radio measurements of air showers, which are more sensitive to the air-shower electromagnetic component, in order to improve the sensitivity to the cosmic-ray mass.
+The goal of this thesis is to investigate the combination of air-shower measurements from particle detectors sensitive to the air-shower muonic component with radio measurements of air showers, which are more sensitive to the air-shower electromagnetic component, in order to improve the sensitivity to the cosmic-ray mass.
 A detailed description of the SD is presented in this chapter, as this detection method will be used to reconstruct the air-shower muonic component in~\Cref{chap:nn}.
-The radio detection method is also presented and will be used in tandem with the SD measurements in~\Cref{chap:radiomuon}, with the goal of increasing the cosmic-ray mass sensitivity using a hybrid radio-muon detection method.
+The radio detection method is also presented and will be used in tandem with the SD measurements in~\Cref{chap:radiomuon}, with the goal of studying the cosmic-ray mass sensitivity for a hybrid radio-muon detection method.
 In principle, this is possible given the proportionalities of $X_{\text{max}}$ and $N_{\mu}$ to the primary cosmic-ray mass $A$ introduced in~\Cref{chap:airshowers}, namely $X_{\text{max}} \propto -\ln\left(A\right)$ and $\ln\left(N_{\mu}\right) \propto \ln\left(A\right)$.
 The following chapter investigates the mass sensitivity of this observable combination, in addition to the mass sensitivity of several additional observables and their combination, with a study using simulated cosmic-ray air showers.
