@@ -9,17 +9,42 @@ Yet, the validation set was not fully blind to the network, as several trainings
 Instead a truly blind dataset to the network is better suited to analyze it's predictive power.
 The test set is used for this purpose, as this dataset was fully blind to the network at all steps of the training and analysis.
 
+The test set histograms of the relative difference metric from~\Cref{eq:metric} are shown for the full dataset distributions for each of the four primaries in~\Cref{fig:testset_relative_difference}.
+Traces with less than \qty{1}{VEM} of MC muon signal are removed from the dataset, making these histograms the test set analog to~\Cref{fig:relative_difference}.
+This cut removes 1.6\% of traces (4,085 traces in total) from the EPOS LHC-R test set, the same percentage as removed from the validation set in~\Cref{chap:nn}.
+The average value and spread in the relative difference metric, $\mu$ and $\sigma$ respectively, are almost exactly the same between the validation and test sets for each of the four primaries. 
+
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{appendix/C/testset_metric_histogram_relative_delta_muon_signal_2x2primaries_fulldataset.pdf}
+  \caption[Relative difference histograms for the test dataset.]{Relative difference of the muon signal metric for the EPOS LHC-R test set. Each histogram is for all stations for a single primary particle (i.e. over all energies, zenith angles, etc.), with $\mu$ the mean relative difference for that primary and $\sigma$ its standard deviation. A dashed vertical line is plotted at a relative difference of 0.0 to represent a network prediction with no bias.}
+  \label{fig:testset_relative_difference}
+\end{figure}
+
 The same two dimensional histograms of the muon fractions presented in~\Cref{fig:muon_fraction} are shown in~\Cref{fig:muon_fraction_testset} for the test set.
-Similar results to the validation dataset are shown, where the Pearson $r$ correlation coefficient for the test set is slightly higher than the validation set for proton and is the same value between the datasets for iron.
+Similar results to the validation dataset are shown, where the Pearson correlation coefficient $r$ for the test set is slightly higher than the validation set for proton and is the same value between the datasets for iron.
 The general agreement between the predicted and true muon fractions, shown visually by the data distribution in the density histogram and mathematically with the Pearson correlation coefficient, highlight the network performs well on the test set.
 
 \begin{figure}
   \centering
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{appendix/C/testset_pearsonr_Proton_2d_muon_fraction_mc_histogram.pdf}
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{appendix/C/testset_pearsonr_Iron_2d_muon_fraction_mc_histogram.pdf}
-  \caption[The RNN and MC truth muon fractions for the test set.]{A density plot showing the correlation of the RNN predicted muon fraction with the MC truth muon fraction for proton (left) and iron (right) data in the EPOS LHC-R test set. The Pearson $r$ correlation coefficient for each plot is included to mathematically describe the linearity.}
+  \caption[The RNN and MC truth muon fractions for the test set.]{A density plot showing the correlation of the RNN predicted muon fraction with the MC truth muon fraction for proton (left) and iron (right) data in the EPOS LHC-R test set. The Pearson correlation coefficient $r$ for each plot is included to mathematically describe the linearity.}
   \label{fig:muon_fraction_testset}
 \end{figure}
 
 The muon signal predictions for the test data are then fit to the muon LDF per-event to extract the event-level muon observable $S^{\mu}_{450}$.
+Same as for the validation set, valid fits for the test set events require network predictions for at least four stations, removing 4.6\% (1,577 / 34,515) events from the test set.
+Surprisingly, this is the same fraction of events removed from the validation set.
 This fitting procedure uses the likelihood described in~\Cref{ssec:likelihood}.
+The same two dimensional histograms of the muon fractions presented in~\Cref{fig:nn_mc_comparison_primaries} are shown in~\Cref{fig:nn_mc_comparison_primaries_testset} for the test set.
+The Pearson correlation coefficient $r$ is the same in the test set and validation set for proton primaries, yet is slightly lower in the test set for iron primaries.
+Generally, there is agreement between the neural-network predicted $\hat{S}^{\mu}_{450}$ and the MC truth $S^{\mu}_{450}$ observables for the test set, again highlighting the performance of the network on an unseen dataset.
+
+\begin{figure}
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{appendix/C/testset_triggered_highgain_pearsonr_Proton_2d_mc_S_mu_ref_histogram.pdf}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{appendix/C/testset_triggered_highgain_pearsonr_Iron_2d_mc_S_mu_ref_histogram.pdf}
+  \caption[Comparison of the NN-MC reference distance muon signals for the test set.]{Comparisons of the muon signal at a reference distance of \qty{450}{\meter} extracted from fits to the neural-network predictions and the true MC muon signals for proton (left) and iron (right) primaries. The Pearson correlation coefficient $r$ is included for each plot.}
+  \label{fig:nn_mc_comparison_primaries_testset}
+\end{figure}
