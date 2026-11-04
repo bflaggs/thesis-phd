@@ -3,29 +3,14 @@
 %
 \chapter{Neural Network Based Reconstructions of a Muon Observable}\label{chap:nn}
 The previous chapter highlights the importance of combining radio $X_{\rm max}$ and muon measurements for the prospect of increasing the event-by-event mass separation between primary cosmic-ray mass groups.
-At the Pierre Auger Observatory, an event-level $X_{\rm max}$ reconstruction using the radio technique is well established, with results from AERA already published~\cite{auger_prd2024_aeraxmax,auger_prl2024_aeraxmax}.
-The UMD provides direct muon measurements of air showers on a per-event basis, which in principle can be combined with per-event radio $X_\text{max}$ reconstructions to increase the overall mass sensitivity of Auger, both per-event and for the average mass composition.
-The AERA and UMD footprints are co-located making simultaneous measurements feasible; however, implementation is difficult due to both geometrical and timeline restrictions for each detector system.
-The geometry of UMD scintillator panels is optimal for vertical air-shower reconstructions while the spacing of the AERA radio antennas makes the AERA $X_{\rm max}$ reconstruction more efficient for air showers with $\theta_{\rm zen}\,>\,$\qty{40}{\degree} (see~\Cref{fig:aera_umd_histograms}).
-Regarding timeline constraints, AERA, recording air showers since 2011, has fulfilled its primary science goal of proving the usefulness of air-shower reconstructions in the \qtyrange{30}{80}{\mega\hertz} band near Malarg\"{u}e and will soon enter the decomissioning phase.
-The UMD did not obtain a stable reconstruction until January 2018, with deployment only finishing in March 2026, severely limiting the data overlap between the two reconstruction methods.
-The radio $X_{\rm max}$ reconstruction will eventually be ported to the RD antennas, deployed at each Auger SD, yet the spacing of RD will incur the same reconstruction efficiency constraint as AERA.
-
-\begin{figure}
-  \centering
-  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/AERA_BiasFreeXmax_ZenithHistogram.pdf}
-  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/MDSD750_ICRC2025_test7_reconstructions_ZenithHistogram.pdf}
-  \caption[Reconstructed zenith angle histograms for AERA and UMD.]{Reconstructed zenith angle histograms from the bias free sample of the AERA $X_\text{max}$ reconstructions (left) and the standard UMD + SD-750 reconstruction of the Pierre Auger Observatory (right). The label ``icrc2025-test7'' refers to the version tag for the Auger observatory's reconstruction software. Both reconstructions shown here are for Auger Phase I data only.}
-  \label{fig:aera_umd_histograms}
-\end{figure}
-
-Instead a neural network based method to reconstruct a per-event muon observable, to be later combined with previously recorded AERA measurements, is investigated over the following two chapters.
+At the Pierre Auger Observatory, an event-level $X_{\rm max}$ reconstruction using the radio technique is available, with results from AERA already published~\cite{auger_prd2024_aeraxmax,auger_prl2024_aeraxmax}.
+This chapter studies a neural network based method to reconstruct a per-event muon observable from the SD signal, to be later combined with previously recorded AERA measurements.
 A previous Auger analysis has used deep learning methods to reconstruct the station-level muonic component of the PMT traces bin-by-bin for the SD-1500~\cite{auger_jinst2021_dnnmuons,juanmiguel_phd2020}.
-The general concept is driven from the knowledge that muons in air showers arrive at ground faster and, on average, with larger energies than their electromagnetic counterparts.
-Muonic particles reaching the Auger water-Cherenkov detectors generate Cherenkov light within the water tank that produces sharp peaks over short time windows within the measured PMT traces.
+The general concept is driven from the knowledge that muonic particles reaching the Auger water-Cherenkov detectors generate Cherenkov light within the water tank that produces sharp peaks over short time windows within the measured PMT traces.
 The characteristics of this ``fast and spiky'' muonic component of the PMT traces are difficult to disentangle from their electromagnetic counterpart, yet can be distinguished using deep learning methods. 
 This chapter updates the previous deep learning analysis to predict the station-level muon traces of the SD-750 array, essentially lowering the energy threshold of the prediction by one decade in energy.
-Another analysis had updated the SD-1500 muon trace predictions including station ageing effects, yet this is not investigated here for the SD-750 as it requires a large library of highly detailed detector simulations~\cite{orazio_phd2023}.
+Another analysis had updated the SD-1500 muon trace predictions including station ageing effects~\cite{orazio_phd2023}, yet this is not investigated here for the SD-750 as it requires a large library of highly detailed detector simulations.
+Additionally, the SD-750 is a younger array than the SD-1500, so accumulated aging effects are assumed to be smaller.
 
 %This has already been implemented a the Pierre Auger Observatory for the SD-1500, proving 
 
@@ -52,7 +37,7 @@ A bidirectional LSTM architecture would induce a similar effect.
 %that allows mixing between subsequent bins, 
 
 The input to the network is a vector of length 203.
-Three of the inputs are static features and the remaining 200 constitute a single time series vector spanning 200 time bins.
+Three of the inputs are static features and the remaining 200 constitute a single time series vector spanning 200 time bins of \qty{25}{\nano\second} each (representing Auger Phase I data).
 The goal of the conditional RNN is to predict the muonic component of the Auger water-Cherenkov detector PMT traces at the station level, therefore static variables with a high dependence on the air-shower muon number are chosen.
 The static variables are the station distance to the air-shower axis ($r$), the azimuthal angle in the shower plane between the station and the incoming air-shower direction ($\zeta$), and the secant of the air-shower zenith angle ($\sec\theta$).
 The end goal is a station-level result, therefore the inputs should also be station level to prevent any unexpected event-level dependencies from leaking into the analysis.
@@ -70,7 +55,7 @@ Note that all dense layers in the architecture have a rectified linear unit (ReL
 \begin{figure}
   \centering
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter5/RNNArchitecture.pdf}
-  \caption[Architecture of the conditional RNN.]{A diagram showing the architecture of the conditional RNN described in the text. The static features are input to two dense (fully connected) network layers to form the cell and hidden states of the inputs given to the first LSTM layer. The given dimensions of the dense layers are \texttt{input\_features}$\times$\texttt{output\_features} while the dimensions of the LSTM layers are \texttt{input\_features}$\times$\texttt{hidden\_features}. The final LSTM layer output is sliced to one feature, transposed to form one output of 200 features, and used as input to the final dense layer. The network inputs and outputs are clearly labeled in the left and right vertical rectangles. Diagram influenced by~\cite{juanmiguel_phd2020,orazio_phd2023}.}
+  \caption[Architecture of the conditional RNN.]{Diagram showing the architecture of the conditional RNN described in the text. The static features are input to two dense (fully connected) network layers to form the cell and hidden states of the inputs given to the first LSTM layer. The given dimensions of the dense layers are \texttt{input\_features}$\times$\texttt{output\_features} while the dimensions of the LSTM layers are \texttt{input\_features}$\times$\texttt{hidden\_features}. The final LSTM layer output is sliced to one feature, transposed to form one output of 200 features, and used as input to the final dense layer. The network inputs and outputs are clearly labeled in the left and right vertical rectangles. Diagram influenced by~\cite{juanmiguel_phd2020,orazio_phd2023}.}
   \label{fig:architecture}
 \end{figure}
 
@@ -109,7 +94,7 @@ ADSTs from \Offline mimic the data storage of the fully processed data of the Au
 \subsection{Summary of the Dataset}\label{ssec:data_summary}
 The software version used for this analysis is the \Offline icrc2025-test7 version configured for a UMD and SD-750 production of Auger Phase I data.
 The simulations and \Offline productions available for this analysis were generated by the Auger collaboration's Monte Carlo task group and are freely available for use for any member of the collaboration\footnote[1]{The description and \Offline configuration of this production are available for members of the Pierre Auger Observatory at the link: \href{https://www.auger.unam.mx/AugerWiki/NapoliLibrary\#head-f39e6bd21998ef5a242dd9f7b33fbc10abc1642f}{https://www.auger.unam.mx/AugerWiki/NapoliLibrary}.}.
-The production is based on CORSIKA v7.8010 air showers simulated with hadronic models EPOS LHC-R, Sibyll 2.3e, and QGSJETIII-01, where all low-energy hadronic interactions were simulated with FLUKA.
+The production is based on CORSIKA v7.8010 air showers simulated with hadronic interaction model EPOS LHC-R, where all low-energy hadronic interactions were simulated with FLUKA\footnote[2]{The same production simulated with the Sibyll 2.3e and QGSJETIII-01 hadronic models is also available, yet is unused for training and validating the network.}.
 For each hadronic model, simulations are available for proton, helium, oxygen, and iron.
 For each primary, 5000 showers were simulated for each of two energy bins, \qtyrange[parse-numbers=false]{10^{17.5}}{10^{18}}{\electronvolt} and \qtyrange[parse-numbers=false]{10^{18}}{10^{18.5}}{\electronvolt}, where zenith angles range between \qtyrange{0}{65}{\degree} within each bin.
 The energy spectra and zenith angles within each bin are distributed with $dN/dE \propto E^{-1}$ and $dN/d\theta \propto \sin\theta\cos\theta$ respectively, resulting in a flat distribution in $\lg(E / \rm eV)$ for the energies and a flat distribution in $\sin^{2}(\theta)$ for the zenith angles, similar to the simulation library used in~\Cref{chap:simulations}.
@@ -117,15 +102,18 @@ Within each energy bin, the 5000 simulated showers are split evenly between diff
 
 Atmospheric changes in temperature and pressure directly impact the attenuation of particles and muon production within the atmosphere, inducing a seasonal effect on the absolute number of high-energy muons in air showers~\cite{stef_astropartphys2024_muons}. 
 Furthermore, changes in temperature also affect the VEM calibration of water-Cherenkov detectors (see~\Cref{app:layered_wcd}) and hence have a direct impact on the muonic signal measured by ground-based detectors.
-In this analysis, the impact on the network predictions from differences in the atmospheric models is not studied, yet will be crucial to study in the future to fully capture minute details in the muon signal measured by the SD.
+In this analysis, the impact on the network predictions from differences in the atmospheric models is not studied.
+Differences from atmospheric models could capture minute details in the muon signal measured by the SD and therefore should be studied in a future analysis.
 Further updates to the network could include expanding the architecture to train on and provide predictions for Auger Phase II data productions. 
 The upgraded SD electronics used for Phase II data increased the data sampling rate (see~\Cref{sec:augerprime}), therefore to encapsulate the same physics in the network using Phase II data/simulations would require an increase in the length of the input time series.
-Currently, there is not an available simulation production of both the UMD and SD-750 for Auger Phase II data using the most current hadronic interaction models.
+At the moment of writing, a simulation production of both the UMD and SD-750 for Auger Phase II data using the most current hadronic interaction models was not yet available.
 
 \Offline places the simulated core of each air shower in the library at random within the footprint of the SD-750 array and then runs the SD-750 and UMD reconstructions, both following the icrc2025-test7 standard module sequences for the respective detector system.
+For the SD-750 reconstruction, this standard module sequence includes preprocessing the SD-750 signals, reconstructing the air-shower geometry using signal timing information, and determining the shower size from a fit to the lateral distribution function (LDF) of the station signals, as discussed in~\Cref{ssec:sd_reconstruction}.
+The LDF fit of the SD-750 reconstruction is used later to select high-quality data to train the neural network. 
+The UMD reconstruction is not used in this analysis; however, it could serve as a check between the surface muon signal predictions of the network and the underground muon counts measured by the UMD.
 The event information for each reconstruction is stored in an ADST, along with the individual station-level information, as the network architecture trains and predicts at the station level.
-For each station, the first 200 time bins (\qty{5}{\micro\second}) of the total signal measured by the PMTs is averaged over all active PMTs and saved in the ADST.
-Nominally, the number of active PMTs is three.
+For each station, the first 200 time bins (\qty{5}{\micro\second}) of the total signal measured by the PMTs is averaged over all active PMTs (nominally all three large PMTs for the Auger SD) and saved in the ADST.
 These averaged traces will be used as the time-series input of the neural network.
 
 %throws each shower samples each shower takes this library as input and for each shower 
@@ -134,33 +122,32 @@ These averaged traces will be used as the time-series input of the neural networ
 %The network training is performed per station, 
 
 \subsection{Data Selection}\label{ssec:selection}
-An adage in machine learning, and one of my favorite sayings about these analyses: ``if you put crap in, you get crap out.''
+An adage in machine learning, and one of my favorite sayings about these analyses is: ``if you put crap in, you get crap out.''
 Following this dogma, a high-quality subset of the station-level simulated traces must be selected to train the RNN.
 This subset should mimic measured data traces of high quality, as eventually the network will be applied to real measured traces from SD-750 reconstructed air showers.
-For training and validating the network, only the \Offline production for EPOS LHC-R simulations will be used.
-Therefore this section, and the sections following it, only contain results for simulations using this hadronic model unless otherwise stated. 
+For training and validating the network, only the \Offline production for EPOS LHC-R simulations has been used.
 
-The selection cuts applied to the dataset are the same as in~\cite{orazio_phd2023} and will be described briefly here.
-Some of the selection cuts are applied at the event level to ensure high-quality data for the full event, while others are applied at the station (i.e. trace) level to ensure the signal in the station is of acceptable quality.
+The selection cuts applied to the dataset are the same as in~\cite{orazio_phd2023} and are described briefly here.
+Some of the selection cuts are applied at the event level to ensure high-quality data for the full event, while others are applied at the station (i.e.~trace) level to ensure the signal in the station is of acceptable quality.
 The event-level selections require a converged LDF fit and a 6T5 trigger for the event.
-An additional event-level selection requires the reconstructed zenith angle to be $\theta_{\rm SD}<$\qty{58}{\degree}.
-This cut was not used in~\cite{orazio_phd2023}, yet must be applied here due to the poor quality of SD-750 reconstructions for inclined air showers.
+An additional event-level selection requires the reconstructed zenith angle to be $\theta_{\rm SD}<$\,\qty{58}{\degree}.
+This cut was not used in~\cite{orazio_phd2023}, yet must be applied here due to the poor quality of the SD-750 reconstruction for inclined air showers.
 \Cref{fig:zenith_outliers} highlights this for the SD-750, showing a histogram of the reconstructed zenith angle for all simulations with a difference in the reconstructed and Monte Carlo truth (MC) energies greater than half a decade in energy.
 Furthermore, the end goal is to predict the muonic signal for air showers between \qtyrange{0}{55}{\degree}.
 Therefore training on a larger zenith range will eliminate possible edge effects in the network's predictive power.
-The \qty{55}{degree} limit is set from the ``bias-free'' AERA $X_{\rm max}$ data selection, which applies a zenith angle selection of $\theta_{\rm SD}<$\qty{55}{\degree} on both the SD and AERA directional reconstructions.
+The \qty{55}{\degree} limit is set from the ``bias-free'' AERA $X_{\rm max}$ data selection, which applies a zenith angle selection of $\theta_{\rm SD}<$\,\qty{55}{\degree} on both the SD and AERA directional reconstructions.
 
 \begin{figure}
   \centering
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter5/outliers_zen_degrees_histogram.pdf}
-  \caption[Histogram of zenith angles for poor energy reconstructions.]{A histogram of the reconstructed zenith angle of simulated air showers reconstructed with the SD-750 of the Pierre Auger Observatory. Only air showers with an absolute difference between the true MC energy and the SD reconstructed energy of greater than 0.5 are included. Histograms for each simulated primary are shown, where most poorly reconstructed air-shower energies correspond to air showers with $\theta_{\rm zen}>$\qty{55}{\degree}. A histogram of the true MC zenith angles exhibits the same behavior.}
+  \caption[Histogram of zenith angles for poor energy reconstructions.]{A histogram of the reconstructed zenith angle of simulated air showers reconstructed with the SD-750 of the Pierre Auger Observatory. Only air showers with an absolute difference between the true MC energy and the SD reconstructed energy of greater than 0.5 are included. Histograms for each simulated primary are shown, where most poorly reconstructed air-shower energies correspond to air showers with $\theta_{\rm SD}>$\,\qty{55}{\degree}. A histogram of the true MC zenith angles exhibits the same behavior.}
   \label{fig:zenith_outliers}
 \end{figure}
 
 %the end goal is to combine the predictions of this network with the ``bias-free'' AERA $X_{\rm max}$ data selection 
 
 %, and the reconstructed zenith angle to be $<$\qty{58}{\degree}.
-The station-level selections require the LDF fit evaluated at the station distance from the reconstructed shower axis to contain at least \qty{5}{VEM} of signal(i.e. LDF($r_{\rm station}$)$>$\qty{5}{VEM}), and that there is at least no low-gain saturation of the PMTs within the station.
+The station-level selections require the LDF fit function of the SD-750 reconstruction, when evaluated at the station distance from the reconstructed shower axis, to contain at least \qty{5}{VEM} of signal(i.e. LDF($r_{\rm station}$)$>$\qty{5}{VEM}), and that there is no low-gain saturation of any PMT within the station.
 Data with high-gain PMT saturation is included as these signals can be recovered by analyzing the low-gain PMTs, allowing the network to include a phase space closer to the air-shower axis within its training dataset.
 \Cref{tab:cuts} shows a summary of the selection cuts and the resulting statistics for each primary of the EPOS LHC-R simulation set.
 After cuts, there are a total of 1,280,885 traces for use in training, validating, and testing the RNN, split approximately equally across all four primaries. 
@@ -216,7 +203,7 @@ After splitting the subsets event wise, the training set contains 822,099 traces
 Before training the network, the training and validation sets are investigated to determine and correct any potential biases induced from the splitting process, and to determine if additional selection cuts are necessary.
 \Cref{fig:training} shows two-dimensional histograms comparing the SD-750 reconstructed (SD) and the Monte Carlo truth (MC) values of both event-level and station-level observables for the training set of 822,099 traces.
 Included are the observables used as the static feature inputs to the neural network ($r$, $\zeta$, and $\sec\theta$) and the air-shower energy.
-A linear function of slope one is included on each plot to provide an example of exact agreement between the reconstruction and MC truth.
+The diagonal is included in each plot to provide a reference of exact agreement between the reconstruction and MC truth.
 
 \begin{figure}
   \centering
@@ -228,19 +215,19 @@ A linear function of slope one is included on each plot to provide an example of
   \label{fig:training}
 \end{figure}
 
-The distributions for the $r$, $\zeta$, and $\sec\theta$ observables show agreement with the linear function of slope one for the SD-MC observable relationships, highlighting no biases in the dataset are induced from the SD reconstruction or from the selection cuts.
+The distributions for the $r$, $\zeta$, and $\sec\theta$ observables show agreement between the SD reconstruction and MC truth, highlighting no biases in the dataset are induced from the SD reconstruction or from the selection cuts.
 Yet, the SD-750 reconstructed energy underestimates the MC energy by $\sim$20\% across the full energy range of the training dataset.
-The reconstruction-MC mismatch does not represent an unknown bias from the selection cuts; however, is an expected bias due to the muon deficit~\cite{schmidt_privcomm_2026}.
+The reconstruction-MC mismatch is an expected bias due to the muon deficit in hadronic interaction models~\cite{schmidt_privcomm_2026}.
 MC simulations generate lower muon content than what is measured in data for the same air-shower energy, thereby generating less signal at ground measurable by the SD array.
-Applying the SD energy reconstruction to simulations then results in an energy estimate systematically lower than the true MC energy because the SD energy reconstruction uses a measurement-derived calibration, as described in~\Cref{sec:reconstruction}.
+Applying the SD energy reconstruction to simulations then results in an energy estimate systematically lower than the true MC energy because the SD energy reconstruction uses measured FD-SD hybrid events for calibration, as described in~\Cref{sec:reconstruction}.
 This underestimation compared to MC is also seen in the SD-1500 reconstructed energies~\cite{auger_gap2025_muondeficit}.
 The energy reconstruction itself will not introduce any biases in the network predictions because the energy is not an input to the network, although the muon deficit will.
-Bias from the muon deficit can not be corrected for because of the use of simulations in the network training, and instead induces a systematic uncertainty on the result.
+Bias from the muon deficit cannot be corrected for because of the use of simulations in the network training, and instead induces a systematic uncertainty on the result.
 
 \Cref{fig:validation} shows the same two-dimensional histograms as~\Cref{fig:training}, yet instead using data from the 203,297 traces of the validation set for EPOS LHC-R simulations.
 The validation set exhibits the same SD-MC observable relationships as the training set, highlighting that the data splitting process does not introduce any unforeseen biases that will propagate forward in the analysis into either the training or validation data.
-The testing set was not studied to maintain the integrity of having a dataset available for network predictions unseen by both the researcher and the network before application to real data.
-However, no biases (other than the muon deficit) are assumed in the training set because the same selection cuts and data splitting used for the training and validation sets were also applied to the testing set.
+The testing set was not studied until after final training of the network to maintain the integrity of having a dataset available for network predictions unseen by both the researcher and the network before application to real data.
+However, no biases (other than the muon deficit) were observed in the training set.
 
 \begin{figure}
   \centering
@@ -272,13 +259,13 @@ However, no biases (other than the muon deficit) are assumed in the training set
 \section{Network Training}\label{sec:training}
 % Preprocessing here or in a subsection of the previous section names Final Preprocessing
 The final data preprocessing step before training the network is to scale the network inputs to similar levels.
-This allows the network to assign weighting factors to features based on percentage differences rather than absolute differences, essentially assigning an equal weighting factor to the same percentage difference regardless of the studied input feature.
-Other purposes serve to increase the speed at which the network converges and to provide a numerical range favorable for the chosen activation function of the network.
-All inputs to the network are min-max scaled $\in$[0,1] with the exception of $r$.
-$r$ is instead divided by \qty{1500}{\meter} to approximately scale the $r$ values within this same range.
+This allows the network to assign weighting factors to features based on relative percentage differences rather than absolute differences, essentially assigning an equal weighting factor to the same percentage difference regardless of the studied input feature.
+Scaling the input features also serves the purpose to increase the speed at which the network converges and to provide a numerical range favorable for the chosen activation function of the network.
+All inputs to the network are min-max scaled $\in$\,[0,1] with the exception of $r$.
+$r$ is instead divided by \qty{1500}{\meter} to approximately scale the $r$ values within this same range\footnote[3]{The NN trained on the SD-1500 simulations used \qty{4000}{\meter} to scale the distances from the air-shower axis.}.
 
-The origin for $\zeta$ occurs in the azimuthal direction of the incoming air shower, constraining the $\zeta$ phase space to [$-\pi$,$\pi$].
-The $\zeta$ values are therefore shifting by $\pi$ to occupy a fully positive phase space before scaling.
+The origin for $\zeta$ is the azimuthal direction of the incoming air shower, constraining the $\zeta$ phase space to [$-\pi$,$\pi$].
+The $\zeta$ values are therefore shifted by $\pi$ to occupy a fully positive phase space before scaling.
 More importantly, the averaged PMT traces used as the time series input to the network can contain negative signals due to baseline fluctuations or incorrectly subtracted baselines from errors in the generalized subtraction procedure.
 The trace bins with negative signal are explicitly set to zero pre-training to mitigate this issue.
 Each trace is scaled individually by its maximum value, fixing the trace input also within the range of [0,1].
@@ -286,7 +273,7 @@ The trace maximum values are saved to rescale the network outputs.
 
 An optimization process of selecting network hyperparameters and re-training the network was implemented until a final selection of hyperparameters resulted in a final network training.
 The network implementation was built using \texttt{PyTorch} version 1.13.1~\cite{pytorch_neurips2019} and was trained on an NVIDIA A100 GPU.
-Training for the network takes between \qtyrange{1}{2}{\hour} depending on the chosen hyperparameters, with the final training taking \qty{1.06}{\hour} in total.
+Training for the network takes between \qtyrange{1}{2}{\hour} depending on the chosen hyperparameters, where the final training took \qty{1.06}{\hour} in total.
 The loss function used in training is a root mean square error (MSE) function of the form
 
 \begin{equation}
@@ -297,13 +284,13 @@ The loss function used in training is a root mean square error (MSE) function of
 where $\hat{S}_{t}^{\mu}$ is the neural network predicted muonic signal of the trace in time bin $t$, and $S_{t}^{\mu}$ is the true muonic signal of the trace in time bin $t$.
 The training dataset is split into batches where the loss is calculated per batch of data and then summed over the full training dataset.
 A batch size of 512 was used in the final network training. 
-Also tested to train the network was a batch size of 1024, yet this was not used in the final training as it provided no improvement on network performance.
+A batch size of 1024 was also tested, but not used in the final training as it provided no improvement on network performance.
 
 During the training, an adaptive movement estimation (Adam) optimizer was used.
 The optimizer actively adjusts the individual learning rates of network input features based on the moving average of the loss function gradients and their squares.
 A gradient clipping with a normalization of 1.0 was added to the optimizer to stabilize the network training by preventing extreme loss function gradients.
 The addition of gradient clipping added little to no improvement on network training, yet was maintained to prevent unstable or divergent loss functions in future network implementations.
-A baseline learning rate of 0.001 was used and set with a learning rate scheduler which decreases this learning rate by 0.5 if there is no loss improvement after 10 epochs of training.
+A baseline learning rate of 0.001 was used and set with a learning rate scheduler which decreases this learning rate by a factor of 0.5 if there is no loss improvement after 10 epochs of training.
 
 \Cref{fig:loss_curves} shows the evolution of the training and validation loss functions with training epoch.
 The sharp visible drops in loss are epochs where the learning rate scheduler reduced the learning rate.
@@ -344,8 +331,8 @@ Final training is reached after 150 epochs of training and is stopped here to pr
 The general network performance on the validation set is studied after final training of the network.
 This performance can also be studied as a function of epoch during the training of the network.
 \Cref{fig:metric_training} shows the average difference between the total predicted muon signal ($\hat{S}^{\mu}$) and true muon signal ($S^{\mu}$) in the PMTs, and the spread in this difference, as a function of training epoch for the validation data.
-As the final epoch is approached the average difference approaches roughly \qty{0}{VEM}, indicating little bias in the network's predicted muon signals when averaged over all traces; however, the standard deviation of the difference distribution approaches roughly \qty{5}{VEM} indicating a large spread in differences over the full range of values.
-This standard deviation is calculated for all primaries, zenith angles, distances to the air-shower axis, etc. in the validation set and therefore a large spread is expected.
+As the final epoch is approached the average difference stays close to roughly \qty{0}{VEM}, indicating little bias in the network's predicted muon signals when averaged over all traces; however, the standard deviation of the difference distribution is roughly \qty{5}{VEM} indicating a large spread in differences over the full range of values.
+This standard deviation is calculated for all primaries, zenith angles, distances to the air-shower axis, etc. in the validation set and therefore a large spread is expected because this spread cannot be lower than the intrinsic spread in the signals.
 
 \begin{figure}
   \centering
@@ -354,9 +341,9 @@ This standard deviation is calculated for all primaries, zenith angles, distance
   \label{fig:metric_training}
 \end{figure}
 
-As the network predicts the muonic component of the signal at the station level, verifying the bin-by-bin network predictive power for individual stations is paramount.
+As the network predicts the muonic component of the signal at the station level, verifying the network predictive power for the traces of individual stations is paramount.
 \Cref{fig:nn_traces} shows the PMT traces in VEM units for the total PMT signal, the total muonic component of the signal from simulations, and the total muonic component of the signal as predicted from the neural network.
-Examples for two different stations are shown, one station with a small total signal and therefore a small muonic component of the signal ($<$\qty{1}{VEM}), and one station with a larger total and muonic signal.
+Examples for two different stations are shown, one station with a small total signal and therefore a small muonic component of the signal ($<$\,\qty{1}{VEM}), and one station with a larger total and muonic signal.
 For the example with a larger true muonic component of the signal, the neural network accurately predicts the amplitude and location of the muonic contributions to the signal.
 The network underestimates the true muonic signal by only 3.3\%.
 
@@ -364,7 +351,7 @@ The network underestimates the true muonic signal by only 3.3\%.
   \centering
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/TracePrediction_118_proton_lowSmu_.pdf}
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/TracePrediction_48959_helium_mediumSmu_.pdf}
-  \caption[Bin-by-bin muon trace predictions of the RNN.]{The RNN predicted bin-by-bin muon traces for two stations, one with a small total and muonic component of the signal (left) and one with a larger total and muonic signal component (right). Small here refers to a total muonic contribution to the signal in the tank of $<$\qty{1}{VEM}. The true muon trace and total signal traces are included for each plot. The RNN poorly predicts the trace with little muon signal with an overestimation in the muon signal of over 100\%. However, the muon signal, and therefore the RNN prediction, also depends on the event and station observables included as text on each plot.}
+  \caption[Muon trace predictions of the RNN.]{The RNN predicted muon traces for two SD stations from different simulated events. One trace has a small total and muonic component of the signal (left) and the other has a larger total and muonic signal component (right). The true muon trace and total signal traces are included for each plot. The RNN poorly predicts the trace with little muon signal with an overestimation in the muon signal of over 100\%, but the trace with larger muon signal is correctly predicted.}
   \label{fig:nn_traces}
 \end{figure}
 
@@ -374,6 +361,7 @@ Yet, both the total and muonic signals of the PMT trace are low, complicating th
 Multiple variables such as energy, zenith angle, and distance to the air-shower axis, have an effect on the total and muonic signals measured by the detector and therefore an effect on the network's predictions.
 This effect must be evaluated; however, traces with less than \qty{1}{VEM} of MC muon signal will be disregarded from the evaluation of the network's performance.
 This removes 1.6\% of traces (3,244 traces in total) from the EPOS LHC-R validation set.
+These traces remain in the training dataset for the network.
 
 %studying the effect for detectors with low total signal will 
 %When analyzing the performance of the network
@@ -389,7 +377,8 @@ The network performance is evaluated using the relative difference metric, defin
 \end{equation}
 
 \noindent
-$\hat{S}^{\mu}$ is the total, bin-by-bin summed, muon signal in the trace predicted by the neural network and $S^{\mu}$ is the MC truth of this value.
+$\hat{S}^{\mu}$ is the total muon signal in the trace of an SD station as predicted by the neural network and $S^{\mu}$ is the MC truth of this value.
+These values are calculated as sums over the time bins of the SD station.
 The relative difference is histogrammed individually for each primary (p, He, O, Fe) of the EPOS LHC-R validation set, shown in~\Cref{fig:relative_difference}.
 The bias ($\mu$) and resolution ($\sigma$) are included for each histogram, along with a dashed line at a relative difference of 0.0 to represent no bias.
 Proton has the largest positive bias which decreases with the mass ordering to iron with the largest negative bias.
@@ -401,7 +390,7 @@ Investigating the evolution of this metric with each variable is a necessary ste
 \begin{figure}
   \centering
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter5/metric_histogram_relative_delta_muon_signal_2x2primaries_fulldataset.pdf}
-  \caption[Histograms of the muon signal relative difference.]{Histograms of the relative difference metric presented in~\Cref{eq:metric}. Each histogram is for all stations for a single primary particle (i.e. over all energies, zenith angles, etc.). $\mu$ is the mean relative difference for that primary and $\sigma$ is the standard deviation. These are respectively known as the bias and resolution of the network within the given phase space they are calculated over. A dashed vertical line at a relative difference of 0.0 represents no bias, meaning the network exactly predicts the total muonic signal in the station as compared to simulations.}
+  \caption[Histograms of the muon signal relative difference.]{Relative difference metric of the muon signal in an SD station as presented in~\Cref{eq:metric}. Each histogram is for all stations for a single primary particle (i.e. over all energies, zenith angles, etc.). $\mu$ is the mean relative difference for that primary and $\sigma$ is the standard deviation. These are respectively known as the bias and resolution of the network within the given phase space they are calculated over. A dashed vertical line at a relative difference of 0.0 represents no bias, meaning the network exactly predicts the total muonic signal in the station as compared to simulations.}
   \label{fig:relative_difference}
 \end{figure}
 
@@ -412,10 +401,10 @@ The bias shows a spread in the individual mass groups centered around zero bias.
 Proton simulations have the largest bias and over-predict the muon signals on average, while iron simulations have the most negative bias and under-predict the muon signals on average.
 This behavior is expected, as iron initiated air showers have on average more muons than the other studied primaries, with proton initiated showers having the least amount of muons on average.
 As the network was trained on nearly average mass fractions, the expectation would be for the network bias averaged over all primaries to sit between the two extremes of proton and iron, as seen in the figure.
-The resolution plot shows proton has the largest resolution, with decreasing resolution as mass increases to iron, which has the smallest resolution.
-This behavior is foreseen due to protons having larger shower-to-shower fluctuations compared to iron air showers.
+Proton shows the largest resolution, with resolution decreasing as mass increases to iron, which has the smallest resolution.
+This behavior is foreseen due to protons featuring larger shower-to-shower fluctuations compared to iron air showers.
 Important to note is the network resolution decreases with increasing air-shower energy.
-The plots in~\Cref{fig:mc_energy} therefore show stable network predictive power as a function of air-shower energy, with less stability for lower energy air showers. 
+The plots in~\Cref{fig:mc_energy} therefore show less precision in predictions for lower energy air showers. 
 
 \begin{figure}
   \centering
@@ -428,9 +417,9 @@ The plots in~\Cref{fig:mc_energy} therefore show stable network predictive power
 The RNN bias and resolution should also be investigated for air-shower observables which serve as the static input features to the network.
 \Cref{fig:sd_zenith} shows the bias and resolution per primary in bins of the secant of the SD-750 reconstructed zenith angle ($\sec\theta_{\rm SD}$),~\Cref{fig:sd_r} shows these plots for the reconstructed distance of the station to the shower axis ($r_{\rm SD}$), and~\Cref{fig:sd_zeta} shows these same plots for the reconstructed azimuthal angle between the station and the air-shower axis in the shower plane ($\zeta_{\rm SD}$).
 The same y-axis limits are chosen between all bias plots, and similarly for all resolution plots, allowing for by eye comparisons of the bias and resolutions between observables.
-Similar primary distributions as in~\Cref{fig:mc_energy} (over-predictions for proton and under-predictions for iron, with everything else in between) are seen.
+Similar primary distributions as in~\Cref{fig:mc_energy} (over-predictions for proton and under-predictions for iron, with other masses in between) are seen.
 The most notable bias plot is that of $r_{\rm SD}$, which shows all primaries approaching a bias of zero then deviating from their general trendlines in the bins farthest from the shower axis.
-This is at least expected in the final distance bin due to lesser statistics compared to other bins.
+This could be caused by lesser statistics compared to other bins.
 The resolution plot of $r_{\rm SD}$ is also notable, as the RNN resolution for all primaries other than proton increases with increasing distance from the air-shower axis.
 Further dependencies on the other observables exists within each bias and resolution plot and need to be accounted for to more completely describe the predictive accuracy and precision of the RNN (see both~\Cref{ssec:multi_performance} and~\Cref{ssec:parameterization} for more complete descriptions.)
 
@@ -495,7 +484,7 @@ In particular, the bias and resolution dependencies of three observables are stu
 Binning for the three observables is as follows: eight bins of $\lg(S_{\rm total}$ / VEM), ten bins of $r_{\rm SD}$, and six bins of $\sec\theta_{\rm SD}$.
 The binning for total signal and zenith angle is quantile based to ensure equal statistics within each bin; however, the ten bins chosen for $r_{\rm SD}$ are equidistant, with a total range between \qtyrange{0}{1500}{\meter}.
 
-\Cref{fig:density} shows a $2\times2$ collection of density histograms of the relative difference metric (\Cref{eq:metric}) for individual mass groups as a function of binned distance to the shower axis.
+\Cref{fig:density} shows a $2\times2$ collection of density histograms of the relative difference metric of $S^{\mu}$ (\Cref{eq:metric}) for individual mass groups as a function of binned distance to the shower axis.
 Data is further binned in zenith angle and total station signal, where a zenith angle bin of $\sec\theta_{\rm SD}$=\numrange{1.41}{1.60} ($\theta_{\rm SD}$=\qtyrange{44.9}{51.2}{\degree}) and a total signal bin of $\lg(S_{\rm total}$ / VEM)=\numrange{1.37}{1.61} (\qtyrange{23.4}{40.7}{VEM}) were chosen for this example.
 The black data points and their uncertainties represent the average difference metric $\mu$ (the network bias) and its standard deviation $\sigma$ (the network resolution), allowing a visualization of the network accuracy and precision as functions of the multiple variables.
 Within this zenith and total signal phase space, the network predicts a station's muonic signal with less precision for stations closer to the shower axis.
@@ -506,18 +495,18 @@ This holds in all but the first and final distance bins with data, which are sta
 \begin{figure}
   \centering
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter5/reldiff_vs_r_log10Stotal_1.4_1.6_sectheta_1.4_1.6.pdf}
-  \caption[Multi-variable density histograms of the relative difference metric.]{The relative difference metric for individual mass groups plotted as density histograms binned in zenith angle, total station signal in VEM, and distance to the shower axis. The black data points show the bias (mean) and resolution (standard deviation) within each distance bin. The bin statistics are shown at the top of each plot and the bins of zenith angle and total signal are listed at the bottom of the proton density histogram (upper left).}
+  \caption[Multi-variable density histograms of the relative difference metric.]{Relative difference of $\hat{S}^{\mu}$ to $S^{\mu}$ signals in an SD station for individual mass groups plotted as density histograms binned in zenith angle, total station signal in VEM, and distance to the shower axis. The black data points show the bias (mean) and resolution (standard deviation) within each distance bin. The bin statistics are shown at the top of each plot and the bins of zenith angle and total signal are listed at the bottom of the proton density histogram (upper left).}
   \label{fig:density}
 \end{figure}
 
 Visible is not only the multivariate dependence on the bias and resolution, but also the network's predictive phase space for this combination of observables.
-For example, within the given ranges for the zenith angle and total signal within a station, and for stations farther than \qty{1100}{\meter} from the reconstructed air-shower axis, or for stations closer than approximately \qty{100}{\meter} to the air-shower axis, no stations have signal.
+For example, within the given ranges for the zenith angle and total signal within a station listed in~\Cref{fig:density}, and for stations farther than \qty{1100}{\meter} from the reconstructed air-shower axis, or for stations closer than approximately \qty{100}{\meter} to the air-shower axis, no stations have signal.
 Assuming the validation and training datasets occupy the same data phase space, a fair assumption to make given the results in~\Cref{ssec:pretraining}, then the network has not been trained on any data outside of this phase space.
-Hence, the predictive space of the network is seen from this visualization.
+Hence, the predictive phase space of the network for this zenith range and total signal strength is seen from this visualization.
 
 Generally speaking, for less total station signal and the same zenith angle range as the above example, bin statistics increase for stations farther from the air-shower axis, yet decrease in the opposite direction closer to the shower axis.
 The opposite is true when stations record larger total signal, again for the same zenith range.
-In the case of less total signal, network accuracy improves to only a few percent, but the network precision degrades to roughly 25\% or more.
+In the case of less total signal for this same zenith range, the network accuracy improves to only a few percent, but the network precision degrades to roughly 25\% or more.
 No major difference is apparent in the network bias or resolution from the example in~\Cref{fig:density} in the case of larger total signal yet with the same zenith range.
 The zenith angle has an impact on the network bias and resolution, yet is highly correlated with the station's distance to the shower axis and, to a smaller extent, the station's total signal, making the exact impact in a multi-variable phase space difficult to distinguish.
 
@@ -556,7 +545,7 @@ The zenith angle has an impact on the network bias and resolution, yet is highly
 
 \subsection{Feasibility of Using RNN Predictions for an Event-Level Muon Observable}\label{ssec:feasibility}
 One of the final goals of this analysis is to combine the station-level RNN predictions to extract an event-level muon observable.
-To this end, the feasibility of performing such an analysis is investigated by studying the MC truth and RNN predicted muon-signal lateral distribution functions (LDFs).
+To this end, the feasibility of performing such an analysis is investigated by studying the lateral distribution functions (LDFs) of the MC truth muon signals and the muon signals predicted by the RNN.
 \Cref{fig:mldf} shows the station-level muon signals as a function of the reconstructed distance to the air-shower axis for all four primary mass groups of the validation dataset.
 The data are further binned in energy and zenith angle to minimize contributions from event-level dependencies to the muon-signal LDF, where the example plot shown here is for an energy range of $\lg(E_{\rm MC}$ / eV)=\numrange{18.3}{18.5} and a zenith range of $\sec\theta_{\rm SD}$=\numrange{1.0}{1.2} ($\theta_{\rm SD}$=\qtyrange{0}{34}{\degree}).
 The RNN predicted signals exhibit a narrower distribution of the muon LDF compared to the MC truth signals.
@@ -577,9 +566,10 @@ Specifically, the muon signals are separated into \qty{100}{\meter} width bins o
 Within each bin, the average proton and iron muon signals are calculated and used to construct an average muon-signal LDF for each of the two mass groups.
 These average LDFs are shown in~\Cref{fig:average_mldf} for the same energy and zenith ranges as in~\Cref{fig:mldf}.
 A clear separation is visible between the average proton-iron LDFs, both for the MC truth muon signals and for the RNN predicted muon signals.
-This separation is larger for the MC truth muon signals, as expected from the results presented in~\Cref{fig:mldf}; however, the visible separation in the RNN predicted muon-signal LDFs still shows promise.
-This result holds across all zenith angles and energies, where the RNN predictions show the greatest separation between the average proton-iron LDFs for the highest energy, most inclined, air showers in the validation dataset, corresponding to an energy range of $\lg(E_{\rm MC}$ / eV) = \numrange{18.3}{18.5} and a zenith range of $\sec\theta_{\rm SD}$ = \numrange{1.6}{1.8} ($\theta_{\rm SD}$ = \qtyrange{51}{56}{\degree}).
-The zenith range of this maximum separation is near the peak in the zenith angle histogram of AERA bias-free $X_{\rm max}$ reconstructions (the left plot in~\Cref{fig:aera_umd_histograms}), motivating the analysis idea of~\Cref{chap:radiomuon} to combine an event-level muon prediction based on this neural network with the high-quality radio $X_{\rm max}$ reconstructions from AERA.
+This separation is larger for the MC truth muon signals, as expected from the results presented in~\Cref{fig:mldf}; however, the visible separation in the RNN predicted muon-signal LDFs is still seen.
+This result holds across all zenith angles and energies, where the RNN predictions show the greatest separation between the average proton-iron LDFs for the most inclined air showers in the highest energy bin of the validation dataset, corresponding to an energy range of $\lg(E_{\rm MC}$ / eV) = \numrange{18.3}{18.5} and a zenith range of $\sec\theta_{\rm SD}$ = \numrange{1.6}{1.8} ($\theta_{\rm SD}$ = \qtyrange{51}{56}{\degree}).
+The zenith range of this maximum separation is near the peak in the zenith angle histogram of AERA bias-free $X_{\rm max}$ reconstructions (see the next chapter), motivating the analysis idea to combine an event-level muon prediction based on this neural network with the high-quality radio $X_{\rm max}$ reconstructions from AERA.
+This analysis idea will be presented in~\Cref{chap:radiomuon}.
 
 %this radio dataset with the RNN muon predictions.
 
@@ -600,18 +590,19 @@ The zenith range of this maximum separation is near the peak in the zenith angle
 
 
 \section{Fitting a Muon LDF to the Network Predictions}\label{sec:mldf}
-The previous section shows the RNN results can be used to construct an event-level muon observable directly from the station-level predictions.
-This event-level observable may struggle to determine an event-by-event mass, particularly for the intermediate masses of helium and oxygen, yet an average mass determination based on the magnitude of the muonic signal component at a specific reference distance to the air-shower axis is feasible.
+The previous section shows the RNN predicted station-level muon observables for each event can be combined to construct a average muon observable with mass sensitivity.
+This section aims to construct an event-level muon observable based on the magnitude of the muonic signal component at a specific reference distance to the air-shower axis directly from the station-level predictions for that event.
+This event-level observable may be insufficient to determine an event-by-event mass, particularly for the intermediate masses of helium and oxygen, yet a mass determination averaged over many events is feasible.
 To extract this event-level observable, a modified NKG function, given by
 
 \begin{equation}
-  S^{\mu}(r) = S^{\mu}_{\rm ref} \left(\frac{r}{r_{\rm ref}}\right)^{-\alpha} \left(\frac{1 + r / r_{0}}{1 + r_{\rm ref} / r_{0}}\right)^{-\beta} \left(\frac{1 + (r / 10\,r_{0})^{2}}{1 + (r_{\rm ref} / 10\,r_{0})^{2}}\right)^{-\gamma}, \label{eq:mldf}
+  S^{\mu}(r) = S^{\mu}_{\rm ref} \left(\frac{r}{r_{\rm ref}}\right)^{-\alpha} \left(\frac{1 + r / r_{0}}{1 + r_{\rm ref} / r_{0}}\right)^{-\beta} \left(\frac{1 + \left(\frac{r}{10\,r_{0}}\right)^{2}}{1 + \left(\frac{r_{\rm ref}}{10\,r_{0}}\right)^{2}}\right)^{-\gamma}, \label{eq:mldf}
 \end{equation}
 
 \noindent
 is used as a model to fit the lateral distribution of muon signals.
 Auger UMD analyses show this muon lateral distribution function (LDF) provides an accurate model of the measured UMD data, hence motivating this choice of model to fit the neural network predictions~\cite{joaquindejesus_phd2025}.
-An important distinction between the LDF models is the model used to fit the UMD data predicts the muon density at a reference distance; however, this model predicts the muon signal at a reference distance instead.
+An important distinction between the LDF model used to fit the UMD data and the one used here is that the UMD LDF model predicts the muon density at a reference distance; however, this model predicts the muon signal at a reference distance instead.
 The assumption taken within this analysis is the muon signal LDF follows the muon density LDF up to an unaccounted for multiplicative factor.
 
 Mathematically, the LDF shape is determined by three separate terms, $\alpha$, $\beta$, and $\gamma$, which describe how stations at different distances contribute to the overall LDF.
@@ -622,7 +613,7 @@ The $\alpha$, $\gamma$, and $r_{0}$ parameters are fixed to $\alpha=0.75$, $\gam
 The reference distance, as described in~\Cref{chap:auger}, depends on the geometry of the detector array at ground.
 The neural network predicts the muon signal at station level for the SD-750 array, therefore \qty{450}{\meter} is chosen for $r_{\rm ref}$.
 This distance minimizes systematic effects within the LDF shape for the SD, as stated in~\Cref{sec:reconstruction}, and also for the UMD~\cite{diego_astropartphys2015_mldf}.
-Left as free parameters of the model are $\beta$, which determines the slope of the muon LDF near the reference distance, and $S^{\mu}_{450}$, a per-event measurement of the muonic signal within a station located at \qty{450}{\meter} from the air-shower axis.
+Left as free parameters of the model are $\beta$, which determines the slope of the muon LDF near the reference distance, and $S^{\mu}_{450}$, a per-event measurement of the muonic signal at \qty{450}{\meter} from the air-shower axis.
 However, the neural network accuracy and precision need to be quantified and a fit likelihood must be defined prior to fitting the network predictions to~\Cref{eq:mldf}.
 
 %using $S^{\mu}_{450}$ as a per-event muon observable reconstructed from fitting the network predictions to the model in
@@ -639,29 +630,29 @@ However, the neural network accuracy and precision need to be quantified and a f
 %is used to fit the neural network predicted muon signals.  
 
 \subsection{Parameterization of the Bias and Uncertainty in the Network Predictions}\label{ssec:parameterization}
-The accuracy and precision of the neural network predictions will be quantified by the network bias and resolution, as measured using the relative difference metric from~\Cref{eq:metric}.
+The accuracy and precision of the neural network predictions are quantified by the network bias and resolution, as measured using the relative difference metric from~\Cref{eq:metric}.
 As shown in~\Cref{ssec:multi_performance}, both the bias and resolution exhibit dependencies on multiple air-shower observables.
 The same three observables from~\Cref{ssec:multi_performance}, the total signal measured by the station, the reconstructed station distance to the air-shower axis, and the reconstructed zenith angle of the event, are used to parameterize the neural network accuracy and precision.
 These parameterization observables were chosen for two reasons.
 First, all three observables directly influence the muonic component of the signal, and second, all three observables are available for both simulations and data.
 The network predictive power has an additional dependence on the true primary-particle mass, as seen in the plots and described in the text of~\Cref{sec:performance}, therefore parameterizations must be built per primary from simulations.
 
-Observable binning is performed on the full EPOS LHC-R validation dataset, where these bins are used to to build the per-primary parameterizations.
+The parameterization observables are taken from the full EPOS LHC-R validation dataset, where they are binned and used to to build the per-primary parameterizations.
 The base-10 logarithm of the total signal is binned in six bins of equal statistics and $r_{\rm SD}$ is binned in eight bins of equal distance.
 Each of these observables have a binning range defined by their minimum and maximum values within the validation set.
 $\theta_{\rm SD}$ is binned within four equally spaced bins of $\sin^{2}(\theta_{\rm SD})$, with a bin range between $\theta_{\rm SD}=$\qtyrange{0}{58}{\degree}.
 The $\theta_{\rm SD}$ approximately contain equal statistics because the distribution of $\theta_{\rm SD}$ is flat under a $\sin^{2}$ transformation.
 To visualize the parameterization space, think of these bins as mapping a three-dimensional box, where the box origin is the edge of the starting bin of each observable and each observable is a single dimension of the box.
-In this thought experiment of the bin mapping, valid bins follow the diagonal of the box due to the inverse relationship of $S_{\rm total}$ and $r_{\rm SD}$, meaning bins close to the shower axis have high total signals and bins far from the shower axis have low total signals.
+Bins along the diagonal of the box are more populated due to the inverse relationship of $S_{\rm total}$ and $r_{\rm SD}$, meaning bins close to the shower axis have high total signals and bins far from the shower axis have low total signals.
 A bin far from the shower axis with high total signal is unphysical, making this an unfilled bin in the phase space.
 
-Per-primary, the average and standard deviation of the relative difference metric distribution are calculated within each bin of the three-dimensional phase space.
+Per primary, the average and standard deviation of the relative difference metric distribution are calculated within each bin of the three-dimensional phase space.
 A count-weighted average of the nearest-neighbor metric values are used to fill bins with less than 20 stations to prevent low statistics holes in the parameterized space.
-This same nearest-neighbor calculation is used to extend the three-dimensional parameterized space one bin along its diagonal to mitigate edge cases from falling outside the parameterization region.
-Only the diagonal is extended because these are soft limits, whereas the edges of the three-dimensional parameterization box form hard limits on the network predictive power.
+This same nearest-neighbor calculation is used to extend the three-dimensional parameterized space perpendicular to the diagonal by one bin.
+The calculation is performed at every step along the diagonal to mitigate edge cases from falling outside the parameterization region.
+Only perpendicular to the diagonal is extended because these are soft limits, whereas the edges of the three-dimensional parameterization box form hard limits on the network predictive power.
 Additionally, the parameterization region for each primary can differ slightly.
-Bins must contain at least 20 stations of data for each primary; however, if one or more primaries do not meet the minimum statistics threshold then a count-weighted average of nearest-neighbor bins is used to fill the bin.
-The count-weighted average is calculated per primary, meaning only neighboring bins of the same primary particle contribute to the weighted average of the low statistics bin. 
+Bins must contain at least 20 data points for each primary; however, if one or more primaries do not meet the minimum statistics threshold then a count-weighted average of nearest-neighbor bins for that primary is used to fill the bin.
 
 Once all valid bins have been defined, an interpolation between the bins is performed to generate two smooth three-dimensional meshes, one of the bias and one of the resolution.
 The interpolations are built per primary; however, the bias and resolution must each be reported as a single value.
@@ -670,7 +661,7 @@ The effective bias and resolution can be derived using the laws of total expecta
 Additional assumptions for the derivation include $P(A)=w_{A}$, with $\sum_{A}w_{A}=1$, and the conditional statements $E\left[\delta|A\right]=b_{A}$ and Var$(\delta|A)=\sigma_{A}^{2}$, where $b_{A}$ and $\sigma_{A}$ are the bias and resolution of mass group $A$. 
 The derivation is left as an exercise for the reader.
 
-Following the derivation, the effective bias is just the mass-weighted average of the individual mass biases,
+Consequently, the effective bias is just the mass-weighted average of the individual mass biases,
 
 \begin{equation}
   b_{\rm eff} = \sum_{A} w_{A} b_{A}, \label{eq:effective_bias}
@@ -686,11 +677,11 @@ with the square of the effective resolution (the effective variance) given by
 \noindent
 In both equations $w_{A}$ represents the mass weights, with $A\in\left[\rm p, He, O, Fe\right]$.
 The mass weights are defined as the mass fractions of the input dataset to the network, which for the validation set is 0.25 for each of the four primary mass groups.
-With data, a measurement of the mass fractions independent of the neural network, such as the Auger FD measurements, should be used; however, this introduces an energy dependence on the mass fractions and therefore also on the effective bias and resolution.
+For the application to real measurements, a measurement of the mass fractions independent of the neural network, such as the Auger FD measurements, should be used; however, this introduces an energy dependence on the mass fractions and therefore also on the effective bias and resolution.
 The individual mass biases and resolutions are functions of total signal, reconstructed distance to the air-shower axis, and reconstructed zenith angle, i.e. $b_{A}\left(S_{\rm total}, r_{\rm SD}, \theta_{\rm SD}\right)$ and $\sigma_{A}\left(S_{\rm total}, r_{\rm SD}, \theta_{\rm SD}\right)$.
-Hence, an effective bias and resolution can be calculated for any station with values of these three observables within their defined parameterization phase spaces.
+Hence, an effective bias and resolution can be calculated for any station using these three observables within their defined parameterization phase spaces.
 This is necessary for triggered stations to inform the fit likelihood, as discussed in the following section. 
-Equally as important, this allows the same parameterization of the network bias and resolution to be used for both simulations and data, up to the assumed mass fractions.
+Equally as important, this allows the same parameterization of the network bias and resolution to be used for both simulations and real measurements, where the only difference between the two is the assumed mass fractions.
 
 %allowing a parameterization of the network bias and resolution usable for both simulations and data and which only depends on 
 
@@ -717,7 +708,7 @@ Equally as important, this allows the same parameterization of the network bias 
 \subsection{Construction of a Per-Event Fit Likelihood}\label{ssec:likelihood}
 A well constructed likelihood is physics informed, meaning the physics of the situation influences the choice of likelihood used in the analysis.
 In this analysis, particles arrive at water-Cherenkov detectors following Poissonian statistics and deposit energy within the detector in the form of Cherenkov radiation.
-The particle energy deposit follows a Landau distribution, which becomes convolved with the Gaussian detector response once the PMTs of the detector measure the Cherenkov radiation.
+The particle energy deposit follows a Landau distribution, which becomes convolved with the Gaussian detector response when the PMTs of the detector measure the Cherenkov radiation.
 The total signal measured by the detector is then fed to the neural network previously described, resulting in a station-level prediction of the total muonic signal for the detector.
 The station-level predictions for single events are combined and fit to a lateral distribution function of the form given by~\Cref{eq:mldf}.
 The likelihood used in the fitting procedure is then defined by $\mathcal{L}\left(S^{\mu}_{450}, \beta|\hat{S}^{\mu}\right)$, meaning ``how likely is it the model values $S^{\mu}_{450}$ and $\beta$ describe the $\hat{S}^{\mu}$ station data for this event,'' where this likelihood is the product of all probabilities for each station.
@@ -745,7 +736,7 @@ The total, or joint, likelihood is defined as
 where the saturated and silent station probabilities are calculated with respect to the total signal ($S_{\rm total}$) measured by the detector because the thresholds for saturation and triggering are dependent only upon the detector's total measured signal.
 In addition, the total signal traces for saturated and silent stations can not be used as inputs to the neural network, and therefore these stations have no prediction of the station muonic component.
 
-The probability of triggered stations will be modeled using a Gaussian:
+The signal probability of triggered stations will be modeled using a Gaussian:
 
 \begin{equation}
   P_{\rm trig}\left(\hat{S}^{\mu}_{j} | S^{\mu}_{450}, \beta\right) = \frac{1}{\sqrt{2\pi\sigma_{\rm tot}^{2}}}\exp\left( - \frac{(\hat{S}^{\mu}_{j} - \mu)^{2}}{2\,\sigma_{\rm tot}^{2}}\right) \label{eg:triggered}
@@ -761,10 +752,10 @@ The predicted muon signal can be defined mathematically by
 
 \noindent
 where $\epsilon$ is a normal distribution with mean 0 and width 1.
-The inclusion of $\epsilon$ is purely theoretical and only used to describe the mathematics that the network predictions result in a Gaussian smearing of $S^{\mu}_{\rm MC}$ by $S^{\mu}_{\rm MC}\sigma_{\rm eff}$, and a shift in the mean of $S^{\mu}_{\rm MC}$ by $S^{\mu}_{\rm MC}b_{\rm eff}$.
+The inclusion of $\epsilon$ is used to describe the mathematics that the network predictions result in a Gaussian smearing of $S^{\mu}_{\rm MC}$ by $S^{\mu}_{\rm MC}\sigma_{\rm eff}$, and a shift in the mean of $S^{\mu}_{\rm MC}$ by $S^{\mu}_{\rm MC}b_{\rm eff}$.
 The laws of total expectation and variance can then be used to derive $E\left[\hat{S}^{\mu}\right]=\mu$ and Var$(\hat{S}^{\mu})=\sigma_{\rm tot}^{2}$.
 The true signal is assumed to be $S^{\mu}_{\rm MC}\,=\,kN$ with $k$ the per-muon signal in VEM measured at the station, and $N$ the number of muons arriving at the tank following a Poisson distribution.
-$k$ is dependent upon how muons deposit energy within the water-Cherenkov detectors; however, for simplicity, the Langau (the Landau convolved with the Gaussian detector response) energy deposit is ignored and instead it is assumed the muons only deposit energy in the detector dependent upon their track length.
+$k$ depends on how muons deposit energy within the water-Cherenkov detectors; however, for simplicity, the Langau (the Landau convolved with the Gaussian detector response) energy deposit is ignored and instead it is assumed the muons only deposit energy in the detector dependent upon their track length.
 Further, it is assumed there is no spread in this value and that all muons travel parallel to the air-shower axis, meaning a simple zenith angle dependence of $k$ is sufficient.
 
 With these assumptions, $k$ is given by
@@ -774,9 +765,9 @@ With these assumptions, $k$ is given by
 \end{equation}
 
 \noindent
-where the second term is the volume of the water-Cherenkov detector, with radius $R$ and height $h$, divided by its projection into the shower plane, yielding a track length through the detector.
+where the second term is the volume of the water-Cherenkov detector, with radius $R$ and height $h$, divided by its projection into the shower plane, yielding a track length of particles arriving with zenith angle $\theta$ through the detector.
 The first term is the ratio of signal to height deposited for a vertical, central, and through-going muon.
-In reality, this ratio is measured to calibrate the water-Cherenkov detectors of Auger and depends on the muon energy deposit and detector response; however, again for simplicity, it is assumed that $k_{\rm VEM}\,=\,$\qty{1}{VEM}.
+In practice, this ratio is measured to calibrate the water-Cherenkov detectors of Auger and depends on the muon energy deposit and detector response; however, again for simplicity, it is assumed that $k_{\rm VEM}\,=\,$\qty{1}{VEM}.
 Returning to the expectation and variance of $\hat{S}^{\mu}$, the derivations, given all assumptions, result in
 
 \begin{align}
@@ -786,12 +777,11 @@ Returning to the expectation and variance of $\hat{S}^{\mu}$, the derivations, g
 
 \noindent
 where $S^{\mu}$ is the muon signal model,~\Cref{eq:mldf}.
-The derivations again are left as exercises for the reader.
 The total variance of the Gaussian likelihood is driven by two major components, the uncertainty from the neural network predictions, and a component from the physics of detecting muons, the latter of which is only introduced in the derivation of~\Cref{eq:smu_total_variance}.
 However, there is a third component from shower-to-shower fluctuations which should be quantified and added in quadrature with the total variance. 
 This additional uncertainty is not yet considered here; however, it should be added in a future implementation of this fit to more fully describe the physics.
 
-The probability of saturated stations will also be modeled using a Gaussian; however, the saturated station signal is not known exactly and only known to be within the range $S_{\rm total}\in\left[S_{\rm sat}, \infty\right]$.
+The saturated station signal is not known exactly and only known to be within the range $S_{\rm total}\in\left[S_{\rm sat}, \infty\right]$.
 This signal phase space requires the saturated station probability to be modeled as the complementary cumulative distribution function of a Gaussian, defined by
 
 \begin{equation}
@@ -800,9 +790,10 @@ This signal phase space requires the saturated station probability to be modeled
 
 \noindent
 with $\Phi$ the cumulative distribution function of a Gaussian distribution.
-The mean and variance of the saturated station distribution is derived in the same manner as for the triggered station distribution, therefore $\mu$ and $\sigma$ of this equation are given by~\Cref{eq:smu_expectation} and~\Cref{eq:smu_total_variance} respectively.
-Yet, an effective bias and effective resolution can not be calculated directly because the saturated stations measure total signals outside the parameterization region defined in~\Cref{ssec:parameterization}.
-Instead, the effective bias and resolutions for saturated stations are assumed to be the median values of the effective bias and resolution across the entire triggered-station phase space, resulting in $b_{\rm eff}\,=\,0.0129$ and $\sigma_{\rm eff}\,=\,0.2153$ for the saturated stations when assuming equal mass fractions.
+The total signal is a combination of the total electromagnetic and muonic signal components, i.e.~$S_{\rm total} = S^{\mu} + S^{\text{EM}}$, and the saturation threshold, $S_{\text{sat}}$, is indiscriminate against the type of particle that generates the signal within the station.
+Put in the context of the LDF, the saturation threshold sets a lower limit on the LDF signal, which, in the case of a purely muonic LDF, will overestimate the muon signal due to electromagnetic signal contamination (except in the case where $S^{\mu}>S_{\text{sat}}$).
+Saturated stations currently have no method to distinguish between the electromagnetic and muonic signal components and the neural network trained here is not optimized for doing so.
+Therefore, saturated stations will not be included in the muon LDF fitting for their risk of overestimating the muon signal.
 
 In the low-signal regime, the Gaussian approximation of the likelihood begins to worsen.
 This approximation is worst in the limit of non-triggered stations, therefore the probability of silent stations is modeled using a Poissonian distribution with
@@ -815,25 +806,27 @@ This approximation is worst in the limit of non-triggered stations, therefore th
 where the signals must be converted into single muons.
 Explicitly, this signal conversion is $N_{\rm th}\,=\,S_{\rm th} / k(\theta)$ rounded down to the nearest integer, with $k(\theta)$ the zenith-dependent per-muon signal from~\Cref{eq:track_length}.
 The assumption taken here is the total signal for the low-signal regimes of silent stations is completely muonic.
-This is an incomplete, but fair, assumption to make for silent stations as these will be stations far from the air-shower axis where little to no electromagnetic shower component survives.
-The trigger threshold for an Auger water-Cherenkov detector is $S_{\rm th}\,=\,$\qty{3.2}{VEM}, meaning the summation in~\Cref{eq:silent} is only calculated up to a maximum of $N_{\rm th}\,=\,2$ or $N_{\rm th}\,=\,3$, dependent upon the zenith angle of the event. 
+This is an incomplete, but fair, assumption to make for silent stations as these will be stations far from the air-shower axis where little electromagnetic shower component survives.
+The trigger threshold for an Auger water-Cherenkov detector is $S_{\rm th}\,=\,$\qty{3.2}{VEM} (see~\Cref{ssec:sd_triggers}).
+A muon at $\theta=$\,\qty{58}{\degree} can deposit a maximum of \qty{1.12}{VEM} given the assumption that $k_{\text{VEM}}=$\,\qty{1}{VEM}.
+Hence, the summation in~\Cref{eq:silent} is only calculated up to a maximum of $N_{\rm th}\,=\,2$ or $N_{\rm th}\,=\,3$, dependent upon the zenith angle of the event.
 
 In the fitting procedure, a negative log likelihood minimization process will be used to estimate $S^{\mu}_{450}$ and $\beta$.
 The joint likelihood then becomes,
 
 \begin{align}
-  -\ln\mathcal{L}\left(S^{\mu}_{450}, \beta\right) = & -\sum_{i = 1}^{N_{\rm sat}} \ln\left[1 - \Phi\left(\frac{S_{\rm sat} - \mu}{\sigma}\right)\right] \times \nonumber\\
-   & -\sum_{i = 1}^{N_{\rm trig}} \ln\left[\frac{1}{\sqrt{2\pi\sigma_{\rm tot}^{2}}}\exp\left( - \frac{(\hat{S}^{\mu}_{i} - \mu)^{2}}{2\,\sigma_{\rm tot}^{2}}\right)\right] \times \nonumber\\
-   & -\sum_{i = 1}^{N_{\rm sil}} \ln\left[\sum_{N = 0}^{1} \frac{\lambda_{i}^{N}e^{-\lambda_{i}}}{N!}\right]. \label{eq:joint_nll}
+  -\ln\mathcal{L}\left(S^{\mu}_{450}, \beta\right) = & -\sum_{i = 1}^{N_{\rm trig}} \ln\left[\frac{1}{\sqrt{2\pi\sigma_{\rm tot}^{2}}}\exp\left( - \frac{(\hat{S}^{\mu}_{i} - \mu)^{2}}{2\,\sigma_{\rm tot}^{2}}\right)\right] \times \nonumber\\
+   & -\sum_{i = 1}^{N_{\rm sil}} \ln\left[\sum_{N = 0}^{N_{\rm th}} \frac{\lambda_{i}^{N}e^{-\lambda_{i}}}{N!}\right]. \label{eq:joint_nll}
 \end{align}
 
 \noindent
+The contribution from saturated stations has been dropped, as these stations will not be used at any further point in the fitting procedure.
 Note the joint likelihood does not apply a penalty for the uncertainty in the Auger SD reconstructed core location.
 Uncertainties in the core position for Auger SD reconstructed air showers are typically between \qtyrange{50}{100}{\meter}, with both an energy and zenith dependence~\cite{auger_jinst2020_sdreconstruction}.
-Shifting the core location within this uncertainty has an impact not only on the total signal measured by each station and their locations within the shower plane (i.e. their distance to the air-shower axis), but also on the potential status of each station.
+Shifting the core location within this uncertainty has an impact on both the total signal measured by each station and the station distances to the air-shower axis.
 Accounting for the Auger SD reconstructed core uncertainty should be implemented to the joint likelihood in a future iteration of the analysis.
 
-The validation and test datasets contains no silent or saturated stations because stations with these signals were removed from the dataset prior to applying the splits described in~\Cref{ssec:selection}.
+The validation and test datasets contains no silent stations because stations with these signals were removed from the dataset prior to applying the splits described in~\Cref{ssec:selection}.
 Hence, for the remainder of the chapter, only triggered stations are included.
 The fit likelihood simplifies to only the triggered station component:
 
@@ -864,20 +857,21 @@ $\beta$, serving as the ``lever arm'' of the fit near the \qty{450}{\meter} refe
 \Cref{fig:nn_mc_comparison} plots a two-dimensional histogram of the per-event fit results of $S^{\mu}_{450}$ for fits to the neural network predictions and to the MC truth muon signals of the validation dataset.
 A clear, almost one-to-one, linear relationship is seen between the muon signal at the reference distance of the neural network predictions ($\hat{S}^{\mu}_{450}$) and the same value for the MC truth data ($S^{\mu}_{450}$).
 Small, off-diagonal, islands in the two-dimensional histogram are bins with a single entry showing disagreement between the RNN predicted and MC truth muon LDF fits.
-The Pearson $r$ correlation coefficient is used to quantify the correlation of the two distributions and is calculated to be 0.96, proving a high correlation between the fits.
+The Pearson correlation coefficient $r$ is used to quantify the correlation of the two distributions and is calculated to be 0.96, proving a high correlation between the fits.
 The calculated Pearson $r$ of nearly 1.0 further validates the network's predictive power, yet is calculated for the full validation dataset over all primaries, energies and zenith angles.
-Further cutting the dataset to contain only near-vertical air showers with $\sec(\theta_{\rm SD}\,=\,$\numrange{1.0}{1.2} results in a Pearson $r$ correlation of 0.93.
+Further cutting the dataset to contain only near-vertical air showers with $\sec(\theta_{\rm SD})=\,$\numrange{1.0}{1.2} results in a Pearson $r$ correlation of 0.93.
+The decrease in correlation for a smaller range in zenith angles is unclear.
 
 \begin{figure}
   \centering
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.7\textwidth]{chapter5/triggered_highgain_pearsonr_2d_mc_S_mu_ref_histogram.pdf}
-  \caption[Comparison of the RNN predicted and MC true reference distance muon signals.]{A two-dimensional histogram comparing the muon signals at the nominal reference distance of \qty{450}{\meter} extracted from the fits to the RNN predicted muon signals and the MC truth muon signals. A dashed black diagonal line is included to highlight a slope of one showing exact agreement between the two fits. The data follow this diagonal line closely, with some spread.}
+  \caption[Comparison of the RNN predicted and MC true reference distance muon signals.]{A two-dimensional histogram comparing the muon signals at the nominal reference distance of \qty{450}{\meter} extracted from the fits to the RNN predicted muon signals and the MC truth muon signals. A dashed black diagonal line is included to highlight a slope of one showing exact agreement between the two fits. The data follow this diagonal line closely, with some spread. A bias at high $S^{\mu}_{450}$ is seen because only iron is present there (see~\Cref{fig:nn_mc_comparison_primaries}).}
   \label{fig:nn_mc_comparison}
 \end{figure}
 
 Investigating this correlation for individual primaries shows similar results, as seen in~\Cref{fig:nn_mc_comparison_primaries}.
-Again, the bias introduced from the neural network is seen, with the neural network showing an overprediction of $S^{\mu}_{450}$ compared to the MC truth for proton, and an underprediction observed for iron.
-The shower physics can also be seen within the plots by proton having a slightly larger spread than iron in the two-dimensional distribution, highlighting the larger shower-to-shower fluctuations for proton.
+However, the bias introduced from the neural network is seen, with the neural network showing an overprediction of $S^{\mu}_{450}$ compared to the MC truth for proton, and an underprediction observed for iron.
+Proton shows a slightly larger spread than iron in the two-dimensional distribution due to the larger shower-to-shower fluctuations for proton.
 This effect is also visible within the Pearson $r$ correlation coefficient, with iron yielding a coefficient closer to 1.0.
 
 \begin{figure}
@@ -889,9 +883,8 @@ This effect is also visible within the Pearson $r$ correlation coefficient, with
 \end{figure}
 
 As a natural next step, the network was used to predict the muonic signal component of all stations in the EPOS LHC-R test set, which were then further used to extract the $S^{\mu}_{450}$ event-level observable as described in this chapter.
-The network's application to the test set shows nearly the same results as the application to the validation set.
+The network's application to the test set shows nearly the same results as the application to the validation set (see~\Cref{app:test}).
 This performance on a before unseen dataset highlights the network learns the general features needed to predict the station-level muonic signal.
-The plots to analyze the network predictive power and extracted observables from the muon LDF fit for the test set are similar to the plots in this chapter and therefore are included separately in~\Cref{app:test} for clarity.
 
 \subsection{Analyzing the Mass Sensitivity of the Neural Network Based Muon Observable}\label{ssec:nn_sensitivity}
 The final goal is to use this per-event muon observable as a proxy to the total muon content of the air shower and therefore an indirect proxy of the primary cosmic-ray mass.
@@ -905,12 +898,12 @@ This is expected given the proton-iron separation seen in the average muon LDFs 
   \centering
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.9\textwidth]{chapter5/smu450_energy_mctruth.pdf} \\
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.9\textwidth]{chapter5/smu450_energy_nnpredictions.pdf}
-  \caption[MC energy evolution of the muon signal reference distance.]{$S^{\mu}_{450}$ extracted from the muon LDF fit plotted as a function of the true air-shower energy for both the true muon signals (top) and predicted muon signals (bottom). Only proton and iron signals are included to exhibit the separation between the two most extreme mass groups for this event-level observable.}
+  \caption[MC energy evolution of the muon signal reference distance.]{$S^{\mu}_{450}$ extracted from the muon LDF fit plotted as a function of the true air-shower energy for both the true muon signals ($S^{\mu}_{450}$, top) and predicted muon signals ($\hat{S}^{\mu}_{450}$, bottom). Only proton and iron showers are included to exhibit the separation between the two most extreme mass groups for this event-level observable.}
   \label{fig:smu450_energy}
 \end{figure}
 
-The figure of merit, given in~\Cref{eq:fom}, is calculated for both the MC and neural network extracted $S^{\mu}_{450}$ observables in bins of true air-shower energy, allowing a direct comparison to the results in~\Cref{chap:simulations}.
-\Cref{tab:smu450_foms} shows the FOMs calculated without bootstrapping in bins of the true air-shower energy, each with a width of $\lg(E_{\rm MC}$ / eV)$\,=\,$0.2.
+The figure of merit, given in~\Cref{eq:fom}, is calculated for both the true MC, $S^{\mu}_{450}$, and neural network extracted, $\hat{S}^{\mu}_{450}$, observables in bins of true air-shower energy, allowing for a direct comparison to the results in~\Cref{chap:simulations}.
+\Cref{tab:smu450_foms} shows the FOMs calculated in bins of the true air-shower energy, each with a width of $\lg(E_{\rm MC}$ / eV)$\,=\,$0.2.
 The true muon signal as measured at \qty{450}{\meter} from the air-shower axis exhibits a higher proton-iron mass separation than the same observable extracted from the network predicted muon signals.
 Notably, this observable exhibits lesser proton-iron separation power than the $\lg(N_{\mu})$\,\qty{800}{\meter} observable used in the mass sensitivity analysis of~\Cref{chap:simulations}, even when both observables are known exactly from MC simulations.
 
@@ -935,25 +928,26 @@ Notably, this observable exhibits lesser proton-iron separation power than the $
     \end{tabular}
 \end{table}
 
-Intermediate mass separation seems challenging with the neural network predicted signals given the absolute proton-iron merit factor values reported here.
+Intermediate mass separation seems challenging with the neural network predicted signals given the proton-iron merit factors reported here.
 However, this observable still stands to enhance the air-shower mass sensitivity when combined with $X_{\rm max}$.
-The addition of $X_{\rm max}$ information with the $S^{\mu}_{450}$ observable is represented visually in~\Cref{fig:smu450_xmax_contour} for $S^{\mu}_{450}$ reconstructed from the MC muon signals (left) and the neural network predictions (right).
+The addition of $X_{\rm max}$ information with the $S^{\mu}_{450}$ observable is represented visually in~\Cref{fig:smu450_xmax_contour} for $S^{\mu}_{450}$ reconstructed from the MC muon signals (left) and for $\hat{S}^{\mu}_{450}$ from the neural network predictions (right).
 A separation between the proton and iron distributions is visible, yet large overlap between the 90\% contours exists.
-Important to note is this contour plot shows a subset of events within an energy range of $\lg(E_{\rm MC}$ / eV)$\,=\,$\numrange{18.3}{18.5} and a zenith range of $\theta_{\rm SD}\,=\,$\qtyrange{0}{58}{\degree} for the EPOS LHC-R validation set.
+This contour plot shows a subset of events within an energy range of $\lg(E_{\rm MC}$ / eV)$\,=\,$\numrange{18.3}{18.5} and a zenith range of $\theta_{\rm SD}\,=\,$\qtyrange{0}{58}{\degree} for the EPOS LHC-R validation set.
+Important to note is this energy range, and therefore this contour plot, shows the largest separation between proton and iron showers.
 
 \begin{figure}
   \centering
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.48\textwidth]{chapter5/xmax_smu450_mc_truth_protoniron_lgE18.3_18.5_zen0_58_KDEContours_smu450_mc_xmax.pdf}
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.4833\textwidth]{chapter5/xmax_smu450_nn_prediction_protoniron_lgE18.3_18.5_zen0_58_KDEContours_smu450_nn_xmax.pdf}
-  \caption[$X_{\rm max}$ and neural network predicted $S^{\mu}_{450}$ contours.]{The proton and iron contours of the EPOS LHC-R validation set mapping the distributions of $S^{\mu}_{450}$ as extracted from the muon LDF fit and $X_{\rm max}$ taken from MC. The left plot shows $S^{\mu}_{450}$ as extracted from the MC muon signals and the right plot shows $S^{\mu}_{450}$ as extracted from the neural network predictions. Both the 68\% and 90\% contours are shown, where each contour is mapped over $\lg(E_{\rm MC}$ / eV)$\,=\,$\numrange{18.3}{18.5} and $\theta_{\rm SD}\,=\,$\qtyrange{0}{58}{\degree}.}
+  \caption[$X_{\rm max}$ and neural network predicted $S^{\mu}_{450}$ contours.]{The proton and iron contours of the EPOS LHC-R validation set mapping the distributions of $S^{\mu}_{450}$ as extracted from the muon LDF fit and the true $X_{\rm max}$ taken from MC. The left plot shows $S^{\mu}_{450}$ as extracted from the MC muon signals and the right plot shows $\hat{S}^{\mu}_{450}$ as extracted from the neural network predictions. Both the 68\% and 90\% contours are shown, where each contour is mapped over $\lg(E_{\rm MC}$ / eV)$\,=\,$\numrange{18.3}{18.5} and $\theta_{\rm SD}\,=\,$\qtyrange{0}{58}{\degree}.}
   \label{fig:smu450_xmax_contour}
 \end{figure}
 
 The Fisher linear discriminant in combination with the FOM is used to quantify the proton-iron separation power through the addition of $X_{\rm max}$.
 \Cref{fig:smu450_xmax_fom} shows the proton-iron FOM plotted as a function of true air-shower energy for the $S^{\mu}_{450}$ observable, the $X_{\rm max}$ observable, and their combination for the EPOS LHC-R validation set.
-Two plots are included, one showing the separation power curves for the $S^{\mu}_{450}$ observable as extracted from fits to the true MC muon signals (top), and another showing the separation power curves for the $S^{\mu}_{450}$ observable as extracted from the neural network predicted muon signals (bottom).
+Two plots are included, one showing the separation power curves for the $S^{\mu}_{450}$ observable as extracted from fits to the true MC muon signals (top), and another showing the separation power curves for the $\hat{S}^{\mu}_{450}$ observable as extracted from the neural network predicted muon signals (bottom).
 Each merit factor and its uncertainty band are calculated with the same bootstrapping method used in~\Cref{chap:simulations}.
-The addition of the $S^{\mu}_{450}$ observable with $X_{\rm max}$ adds mass sensitivity over $X_{\rm max}$ alone for all energies; however, for the neural network predicted signals, the additional mass sensitivity gained from $S^{\mu}_{450}$ is minimal.
+The addition of the $S^{\mu}_{450}$ observable with $X_{\rm max}$ adds mass sensitivity over $X_{\rm max}$ alone for all energies; however, for the neural network predicted signals, the additional mass sensitivity gained from $\hat{S}^{\mu}_{450}$ is minimal.
 For the true MC muon signals, the $S^{\mu}_{450}$ observable exhibits a small, yet promising, increase in mass sensitivity in combination with $X_{\rm max}$.
 This is especially true at the highest studied energies for this analysis.
 The neural network based observable also adds to the overall mass sensitivity at the highest energies, but to a lesser degree.
@@ -962,7 +956,7 @@ The neural network based observable also adds to the overall mass sensitivity at
   \centering
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.75\textwidth]{chapter5/fom_xmax_smu450_mc_zen0_58.pdf} \\
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.75\textwidth]{chapter5/fom_xmax_smu450_nn_zen0_58.pdf}
-  \caption[Proton-iron FOM for $S^{\mu}_{450}$ combined with $X_{\rm max}$.]{The proton-iron FOM curves of true $X_{\rm max}$ in combination with $S^{\mu}_{450}$ derived from fits to the true muon signals from simulations (top) and fits to the neural network predicted muon signals (bottom). The neural network based observable is differentiated with a hat. These FOM curves are calculated using all data in the EPOS LHC-R validation set, spanning a zenith angle range of $\theta_{\rm SD}\,=\,$\qtyrange{0}{58}{\degree}.}
+  \caption[Proton-iron FOM for $S^{\mu}_{450}$ combined with $X_{\rm max}$.]{The proton-iron FOM curves of true $X_{\rm max}$ in combination with $S^{\mu}_{450}$ derived from fits to the true muon signals from simulations (top) and $\hat{S}^{\mu}_{450}$ from the fits to the neural network predicted muon signals (bottom). These FOM curves are calculated using all data in the EPOS LHC-R validation set, spanning a zenith angle range of $\theta_{\rm SD}\,=\,$\qtyrange{0}{58}{\degree}.}
   \label{fig:smu450_xmax_fom}
 \end{figure}
 
@@ -970,10 +964,10 @@ The neural network based observable also adds to the overall mass sensitivity at
 The mass sensitivity results of combining the $S^{\mu}_{450}$ and $X_{\rm max}$ observables are not as promising as previously hoped.
 $S^{\mu}_{450}$ as extracted from fitting a muon LDF to the true muon signals from Monte Carlo simulations increases the proton-iron mass sensitivity by a small, yet appreciable, amount across the full energy range of $\lg(E_{\rm MC}$ / eV)$\,=\,$\numrange{17.5}{18.5} studied here.
 However, the mass sensitivity decreases when replacing this event-level muon observable by its equivalent value extracted from fitting a muon LDF to the neural network predicted muon signals.
-The results still show an increase in mass sensitivity over knowledge of $X_{\rm max}$ alone, but this additional mass sensitivity is relatively small for the neural network based event-level $S^{\mu}_{450}$ muon observable.
+The results then show only a small increase in mass sensitivity over knowledge of $X_{\rm max}$ alone.
 
 As also stated in the previous section, the $S^{\mu}_{450}$ observable exhibits lesser proton-iron separation power than the $\lg(N_{\mu})$\,\qty{800}{\meter} observable used in the mass sensitivity analysis of~\Cref{chap:simulations}.
-The lesser separation power is partly dependent on the choice of reference distance, as the results of~\Cref{app:annulus} show the muon number, as measured within reference annuli at different distances to the air-shower axis, generally increases in proton-iron mass sensitivity as the distance to the air-shower axis also increases.
+The lesser separation power is partly dependent on the choice of reference distance:~\Cref{app:annulus} shows that the proton-iron mass sensitivity of the muon number, as measured within reference annuli at different distances to the air-shower axis, generally increases as the distance to the air-shower axis also increases.
 In the context of the neural network derived muon observable, a distance from the air-shower axis greater than \qty{450}{\meter} could therefore improve the mass sensitivity of the muon LDF fit-derived observable.
 Yet, changing the reference distance used in the muon LDF fit is not feasible with the SD-750 array, as \qty{450}{\meter} is the optimized reference distance for this array spacing and geometry.
 
@@ -987,11 +981,11 @@ Yet, changing the reference distance used in the muon LDF fit is not feasible wi
 %the same functional form of the muon LDF is kept, where the resulting muon LDF fit is evaluated at a farther distance to the air-shower axis than 
 %yet to evaluate this muon LDF at a farther distance to the air-shower axis and use this LDF evaluated signal in a mass sensitivity study.
 
-Instead, a per-event muon observable is calculated from evaluating the muon LDF at \qty{800}{\meter} from the air-shower axis, where the muon LDF values of $S^{\mu}_{450}$ and $\beta$ are assumed to be the resulting fit parameters as determined from the minimized NLL fit to that event's muon LDF.
-The mass sensitivity of this new muon observable, $S^{\mu}_{800}$, is studied in the same way as the previous subsection.
-\Cref{fig:smu800_energy} shows the energy evolution of the average $S^{\mu}_{800}$ values of proton and iron simulations using $S^{\mu}_{800}$ as derived from the muon LDF fits to the MC muon signals (top) and the fits to the network predicted signals (bottom).
+Instead, a per-event muon observable is calculated from evaluating the muon LDF at \qty{800}{\meter} from the air-shower axis, using the muon LDF values of $S^{\mu}_{450}$ and $\beta$ as determined from the fit to that event.
+The mass sensitivity of this new muon observable, $S^{\mu}_{800}$, is studied in the same way as described in the previous subsection.
+\Cref{fig:smu800_energy} shows the energy evolution of the average $S^{\mu}_{800}$ values of proton and iron simulations using $S^{\mu}_{800}$ as derived from the muon LDF fits to the true MC muon signals (top) and the fits to the network predicted signals (bottom).
 Little difference between the absolute proton-iron separation is perceivable between the MC and NN derived $S^{\mu}_{800}$ values.
-Furthermore, a visual improvement of the proton-iron mass separation is seen for the $S^{\mu}_{800}$ observable when comparing the network predicted $S^{\mu}_{800}$ observable to its $S^{\mu}_{450}$ counterpart.
+Furthermore, a visual improvement of the proton-iron mass separation is seen for the $S^{\mu}_{800}$ observable when comparing the network predicted $\hat{S}^{\mu}_{800}$ observable to its $\hat{S}^{\mu}_{450}$ counterpart.
 This result is also seen in~\Cref{fig:average_mldf}, where the largest separation between the average proton and iron muon-signal LDFs occurs within a distance range of roughly \qtyrange{800}{1100}{\meter} from the shower axis, both for the MC and NN predicted muon signals. 
 
 % Smu800 vs. mc energy plots
@@ -999,16 +993,16 @@ This result is also seen in~\Cref{fig:average_mldf}, where the largest separatio
   \centering
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.9\textwidth]{chapter5/smu800_energy_mctruth.pdf} \\
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.9\textwidth]{chapter5/smu800_energy_nnpredictions.pdf}
-  \caption[MC energy evolution of the muon LDF signal evaluated at \qty{800}{\meter}.]{The muon LDF signal \qty{800}{\meter} from the air-shower axis plotted as a function of the true air-shower energy for both the true muon signals (top) and predicted muon signals (bottom). Only proton and iron signals are included.}
+  \caption[MC energy evolution of the muon LDF signal evaluated at \qty{800}{\meter}.]{The muon LDF signal \qty{800}{\meter} from the air-shower axis plotted as a function of the true air-shower energy for both the true muon signals, $S^{\mu}_{800}$, (top) and neural-network predicted muon signals, $\hat{S}^{\mu}_{800}$ (bottom). Only proton and iron signals are included.}
   \label{fig:smu800_energy}
 \end{figure}
 
 The additional mass sensitivity of $S^{\mu}_{800}$ when combined with knowledge of $X_{\rm max}$ is studied using the Fisher linear discriminant in tandem with the FOM metric.
 Both the individual and combined knowledge proton-iron separation power curves of $S^{\mu}_{800}$ and $X_{\rm max}$ as functions of true air-shower energy are presented in~\Cref{fig:smu800_xmax_fom}.
-The top plot shows these results for $S^{\mu}_{800}$ derived from the MC muon signals, while the bottom plot shows results for $S^{\mu}_{800}$ derived from the network predicted signals.
-$S^{\mu}_{800}$ adds to the overall mass sensitivity of $X_{\rm max}$ alone across the full studied energy range, where the mass sensitivity of the combined $S^{\mu}_{800}$ and $X_{\rm max}$ observables is clearly greater than the mass sensitivity of the combined $S^{\mu}_{450}$ and $X_{\rm max}$ observables presented in~\Cref{fig:smu450_xmax_fom}.
+The top plot shows these results for $S^{\mu}_{800}$ derived from the MC muon signals, while the bottom plot shows results for $\hat{S}^{\mu}_{800}$ derived from the network predicted signals.
+$S^{\mu}_{800}$ adds to the mass sensitivity of $X_{\rm max}$ across the full studied energy range, where the mass sensitivity of the combined $S^{\mu}_{800}$ and $X_{\rm max}$ observables is clearly greater than the mass sensitivity of the combined $S^{\mu}_{450}$ and $X_{\rm max}$ observables presented in~\Cref{fig:smu450_xmax_fom}.
 Furthermore, when comparing the mass sensitivity of individual observables, the $S^{\mu}_{800}$ observable is more mass sensitive than the $S^{\mu}_{450}$ for all studied energies and zenith angles.
-These results hold for both the muon observables as determined from fits to the true muon signals from MC or from fits to the neural network predicted muon signals.
+These results hold for both the muon observables as determined from fits to the true muon signals from MC and the neural-network predicted muon signals.
 
 %regardless of the data used to in the fit procedure to determine the muon observables, whether taken directly from the MC or 
 
@@ -1021,21 +1015,15 @@ These results hold for both the muon observables as determined from fits to the 
   \centering
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.75\textwidth]{chapter5/fom_xmax_smu800_mc_zen0_58.pdf} \\
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.75\textwidth]{chapter5/fom_xmax_smu800_nn_zen0_58.pdf}
-  \caption[Proton-iron FOM for $S^{\mu}_{800}$ combined with $X_{\rm max}$.]{The proton-iron FOM curves of true $X_{\rm max}$ in combination with $S^{\mu}_{800}$ derived from fits to the true muon signals from simulations (top) and fits to the neural network predicted muon signals (bottom). The neural network based observable is differentiated with a hat. These FOM curves are calculated using all data in the EPOS LHC-R validation set, spanning a zenith angle range of $\theta_{\rm SD}\,=\,$\qtyrange{0}{58}{\degree}.}
+  \caption[Proton-iron FOM for $S^{\mu}_{800}$ combined with $X_{\rm max}$.]{The proton-iron FOM curves of true $X_{\rm max}$ in combination with $S^{\mu}_{800}$ derived from fits to the true muon signals from simulations (top) and $\hat{S}^{\mu}_{800}$ derived from fits to the neural-network predicted muon signals (bottom). These FOM curves are calculated using all data in the EPOS LHC-R validation set, spanning a zenith angle range of $\theta_{\rm SD}\,=\,$\qtyrange{0}{58}{\degree}.}
   \label{fig:smu800_xmax_fom}
 \end{figure}
 
-Overall, a reconstruction of the muonic signal at the SD-750 reference distance is feasible using neural network based predictions of the station-level muonic signal traces.
-This event-level muon signal at the SD-750 reference distance is mass sensitive; however, its mass sensitivity increases when measured at a distance farther than \qty{450}{\meter} from the reconstructed air-shower axis.
 The increased mass sensitivity of the muon observable at farther distances to the air-shower axis could be exploited with the SD-1500 array, which has a reference distance of \qty{1000}{\meter} based on its array spacing and geometry.
 An application of this network and muon LDF fitting procedure to vertical air showers measured by the SD-1500 array, combined with $X_{\rm max}$ measurements from the Auger FD, could yield a higher mass separation over FD $X_{\rm max}$ measurements or SD-1500 muon predictions from a neural network alone.
-
 This exact study was performed in~\cite{orazio_phd2023} and applied to data within a limited energy range, assuming a simple power-law for the muon signal LDF.
-The study uses the NN predicted muon and $X_{\rm max}$ observables taken from simulations weighted with the Auger mass fractions and compares them to the data-derived observable values, confirming the muon deficit between data and simulation.
+The study uses the NN predicted muon and FD measured $X_{\rm max}$ observables taken from simulations weighted with the Auger mass fractions and compares them to the data-derived observable values, confirming the muon deficit in simulations.
 A future study can build upon the combined work of the previous analysis and the analysis presented in this dissertation by applying a more rigorous muon LDF fit to the SD-1500 network predictions, with the potential for using the combined observable information for mass composition results.
-In the context of this dissertation, the co-location of AERA radio antennas with the SD-750 array is optimal for studying a muon observable measurable with the SD-750 array for vertical air showers in combination with the high-quality $X_{\rm max}$ reconstructions of AERA.
-The following chapter will investigate exactly this with data.
-
 
 %A comparison of the Auger, resulting in a preliminary result for this observable combination.
 %A future study 
@@ -1135,19 +1123,14 @@ The following chapter will investigate exactly this with data.
 
 
 \section{Chapter Summary}\label{sec:ch5_summary}
-This chapter introduces a neural network based method to determine a per-event muon observable for use in mass sensitivity studies.
-The network itself predicts a station-level estimate of the muonic signal component measured by the water-Cherenkov detectors of the Pierre Auger Observatory.
-The neural network builds upon a previous implementation of this network architecture by retraining the network on air-shower simulations one decade in energy lower than the previous analyses.
-A network hyperparameter optimization phase was used to improve the network predictions of the station-level muonic signal within the lower-energy phase space.
-The station-level predictions from the network were then recombined at the event-level and fit to a muon LDF to extract an event-level muon observable based upon station-level neural network predictions.
-
-A negative log likelihood minimization procedure was used to determine the nominal muon observable per event, where the likelihood was constructed based on the physics of the problem at hand.
-An in depth parameterization of the network accuracy and precision was performed to characterize the major uncertainties in the fit.
-The mass sensitivity of the neural network based event-level muon observable was studied using the same Fisher linear discriminant and figure of merit analysis described in~\Cref{chap:simulations}, providing a direct link between the results of the two chapters.
-The event-level muon observable derived within this chapter was then combined with $X_{\rm max}$ to study the proton-iron mass sensitivity of the combined observable information.
-This both provides a test of and builds upon a major result from~\Cref{chap:simulations}, showing the combination of muon and $X_{\rm max}$ observables is a promising way to separate cosmic rays by their mass on an event-by-event basis.
-The neural network derived muon observable evaluated at \qty{800}{\meter} from the shower axis, $S^{\mu}_{800}$, was proven to be more mass sensitive than a muon observable evaluated at the SD-750 reference distance, $S^{\mu}_{450}$, both as an individual observable and when combined with $X_{\rm max}$.
-The neural network derived $S^{\mu}_{800}$ observable will therefore be used in the next chapter in the application to real air-shower data.
+This chapter builds upon a previous iteration of a neural network that predicts the station-level muon traces within air-shower events measured by the SD of the Pierre Auger Observatory.
+Extensive studies were performed to apply the previous network architecture to the SD-750 array, essentially lowering the energy threshold of the network's predictive range by one decade in energy to near the second knee of the cosmic-ray energy spectrum.
+In addition, this greatly increases the number of air-shower events that can be used as inputs to the network, yet this was not exploited here.
+Overall, this chapter shows a reconstruction of the muonic signal at the SD-750 reference distance of \qty{450}{\meter} is feasible using neural-network based predictions of the station-level muonic signal traces.
+This event-level muon signal at the SD-750 reference distance is mass sensitive; however, its mass sensitivity increases when measured at a distance farther than \qty{450}{\meter} from the reconstructed air-shower axis.
+Instead, a neural-network derived muon observable evaluated at \qty{800}{\meter} from the shower axis, $S^{\mu}_{800}$, was proven to be more mass sensitive than a muon observable evaluated at the SD-750 reference distance, $S^{\mu}_{450}$, both as an individual observable and when combined with true $X_{\rm max}$ values from simulations.
+In the context of this dissertation, the co-location of AERA radio antennas with the SD-750 array is optimal for studying a muon observable measurable with the SD-750 array for vertical air showers in combination with the high-quality $X_{\rm max}$ reconstructions of AERA.
+The following chapter will apply the neural network trained and validated within this chapter to the SD-750 measurements of the AERA $X_{\rm max}$ dataset.
 
 %The mass sensitivity results of combining the $S^{\mu}_{450}$ and $X_{\rm max}$ observables of this chapter are not as promising as previously hoped.
 %$S^{\mu}_{450}$ as extracted from fitting a muon LDF to the true muon signals from Monte Carlo simulations increases the proton-iron mass sensitivity by a small, yet appreciable, amount across the full energy range of $\lg(E_{\rm MC}$ / eV)$\,=\,$\numrange{17.5}{18.5} studied here.
