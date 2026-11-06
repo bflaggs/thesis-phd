@@ -102,7 +102,7 @@ with $\gamma$ an energy-dependent spectral index, constrained to $\gamma>0$.
 Shown in~\Cref{fig:spectrum_measurements} is the differential flux of cosmic rays, i.e. the cosmic-ray energy spectrum, above \qty[parse-numbers=false]{10^{15}}{\electronvolt} in energy as measured by various cosmic-ray experiments.
 At these ultra-high energies, cosmic rays are extremely rare, with a flux of \qty{1}{\per\meter\squared\per\year} at roughly \qty[parse-numbers=false]{10^{16}}{\electronvolt} and \qty{1}{\per\kilo\meter\squared\per\year} at nearly \qty[parse-numbers=false]{10^{19}}{\electronvolt}.
 Measuring ultra-high-energy cosmic rays with meaningful statistics therefore requires large observatories covering detection areas of several hundreds to thousands of square kilometers.
-The low flux impacts cosmic-ray measurements, yielding large statistical uncertainties and only few experiments, the Pierre Auger Observatory (Auger)~\cite{auger_nima2015_paper} and the Telescope Array experiment (TA)~\cite{ta_nima2012_sd,ta_nima2012_fd}, provide measurements at the highest energies of the energy spectrum.
+The low flux impacts cosmic-ray measurements, yielding large statistical uncertainties and only few experiments, the Pierre Auger Observatory (Auger)~\cite{auger_nima2015_paper} and the Telescope Array experiment (TA)~\cite{ta_nima2012_sd,ta_nima2012_fd}, provide precise measurements at the highest energies of the energy spectrum.
 In~\Cref{fig:spectrum_measurements}, the differential flux is scaled by $E^{3}$ to highlight features in the cosmic-ray energy spectrum.
 %Hence, the lack of measurements and large measurement uncertainties at the highest energies of the cosmic-ray energy spectrum.
 % Add the above three sentences at the end of the section leading into mass composition?
@@ -204,14 +204,14 @@ Changes in the $X_{\rm max}$ distributions seen in~\Cref{fig:mean_and_sigma_xmax
 Assuming a hadronic interaction model and using Monte Carlo simulations as truth, the mass fractions as a function of energy can be predicted for air-shower measurements, providing a handle on how the cosmic-ray mass composition evolves with energy.
 Correlations of energy dependent changes in mass composition with spectral features of the cosmic-ray energy spectrum informs of potential rigidity dependencies on cosmic-ray acceleration and propagation processes.
 The inferred mass composition therefore constrains astrophysical theories for features in the cosmic-ray energy spectrum and models of cosmic-ray sources.
-The mass and spectrum results from various experiments, both using direct and indirect cosmic-ray measurements, have also been combined to perform a ``global fit'' to the individual mass spectra~\cite{icrc2017_gsf2017, icrc2025_gsf2025}.
+The mass and spectrum results from various experiments, both using direct and indirect cosmic-ray measurements, have also been combined to perform a ``global fit'' to the individual mass spectra~\cite{icrc2017_gsf2017, icrc2025_gsf2025, fedynitch_2026_gsf}.
 This ``Global Spline Fit'' (GSF) model, shown in~\Cref{fig:gsf}, simultaneously describes the mass composition and energy spectra of cosmic rays.
 %for both interpreting cosmic-ray data and influencing astrophysical source models within the context of a singular, coherent model.
 
 \begin{figure}[!b]
   \centering
-  \includegraphics[trim={3.9cm 18.4cm 3.9cm 3.4cm},clip,width=0.9\textwidth]{chapter1/gsf2025_page.pdf}
-  \caption[Global spline fit of cosmic-ray data.]{The most recent Global Spline Fit (GSF) of both cosmic-ray mass and energy spectrum measurements. Both direct and indirect cosmic-ray measurements are included in the fit. This GSF model is an update of the original GSF model from 2017~\cite{icrc2017_gsf2017} and uses updated data from the references within~\cite{icrc2025_gsf2025}. Figure taken from~\cite{icrc2025_gsf2025}.}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.9\textwidth]{chapter1/gsf_cr_flux_traditional.pdf}
+  \caption[Global spline fit of cosmic-ray data.]{The most recent Global Spline Fit (GSF) of both cosmic-ray mass and energy spectrum measurements. Both direct and indirect cosmic-ray measurements are included in the fit. This GSF model is an update of the original GSF model from 2017~\cite{icrc2017_gsf2017} and uses updated data from the references within~\cite{fedynitch_2026_gsf}. Figure taken from~\cite{fedynitch_2026_gsf}.}
   \label{fig:gsf}
 \end{figure}
 
@@ -303,7 +303,7 @@ The underlying physics of these deflections are simple Lorentz force interaction
 Limitations of the magnetic field measurement techniques, or lack thereof, complicate the modeling of magnetic field properties, resulting in assumptions about the structure, strength, and distribution of the field both within and outside the Galaxy.
 
 To first order, the Galactic magnetic field is modeled as two complementary components: a coherent large-scale component the size of the Galaxy and a smaller-scale component, varying on distances up to roughly \qty{100}{parsecs}, that encapsulates the randomness of the field.
-Measurements of starlight polarization, synchrotron emission from cosmic-ray electrons, and Faraday rotation probe aspects of the Galactic magnetic field strength and structure, each with their own pros and cons (see~\cite{jaffe_galaxies2019_gmf,haverkorn_arxiv2026_gmf} for an overview). 
+Measurements of starlight polarization, synchrotron emission from cosmic-ray electrons, and Faraday rotation probe aspects of the Galactic magnetic field strength and structure (see~\cite{jaffe_galaxies2019_gmf,haverkorn_arxiv2026_gmf} for an overview). 
 Several global Galactic magnetic field models are informed by these measurements~\cite{jansson_apj2012_gmf,jansson_apjl2012_gmf,unger_apj2023_gmf,unger_arxiv2026_gmf}; however, the exact field structure and strength predicted by each model varies depending on the model's assumptions.
 Global magnetic field modeling enables particle backtracking through the Galaxy if the magnetic rigidity of the cosmic ray is known.
 The magnetic rigidity of a cosmic ray is given by
@@ -313,21 +313,22 @@ The magnetic rigidity of a cosmic ray is given by
 \end{equation}
 
 \noindent
-where $Ze$ is the charge of the cosmic ray, which, for ultra-high-energy cosmic rays that are fully ionized, determines the chemical composition (i.e.~the mass) of the cosmic-ray nucleus.
+where $Ze$ is the charge of the cosmic ray.
+As cosmic rays are fully ionized, $Z$ is determined by the charge number of the cosmic-ray nucleus.
 \Cref{fig:deflections} shows an example of a cosmic ray with magnetic rigidity $R_{\text{B}}$\,=\,\qty{20}{\exa\volt} backtracked from Earth to the edge of the Galaxy through several Galactic magnetic field models.
-Using~\Cref{eq:rigidity}, a cosmic ray with $R_{\text{B}}$\,=\,\qty{20}{\exa\volt} in the context of~\Cref{fig:deflections} represents a proton (iron) cosmic ray with an energy of \qty[parse-numbers=false]{20$\times$10^{18}}{\electronvolt} (\qty[parse-numbers=false]{0.8$\times$10^{18}}{\electronvolt}).
+Using~\Cref{eq:rigidity}, a cosmic ray with $R_{\text{B}}$\,=\,\qty{20}{\exa\volt} in the context of~\Cref{fig:deflections} represents a proton (iron) cosmic ray with an energy of \qty[parse-numbers=false]{2$\times$10^{19}}{\electronvolt} (\qty[parse-numbers=false]{5$\times$10^{20}}{\electronvolt}).
 Hence, the figure highlights the importance of both magnetic field modeling and cosmic-ray mass measurements for progress towards determining the sources of ultra-high-energy cosmic rays.
 
 \begin{figure}
   \centering
-  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.7\textwidth]{chapter1/gmf_model_deflections.pdf}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter1/gmf_model_deflections.pdf}
   \caption[Cosmic-ray deflections through several Galactic magnetic field models.]{The magnetic deflections from the edge of the Galaxy to Earth calculated with numerous Galactic magnetic field models for a cosmic ray with rigidity $R_{\text{B}}$\,=\,\qty{20}{\exa\volt}. Figure taken from~\cite{teresa_icrc2025_plenary}.}
   \label{fig:deflections}
 \end{figure}
 
 Extragalactic magnetic fields on the other hand are much less constrained than Galactic magnetic fields, partly driven by the limited understanding of how primordial extragalactic magnetic fields formed and how they have since evolved.
 In addition, they span a large range of astrophysical environments, including galaxy clusters, cosmic filaments that follow the large-scale structure of the Universe, and the inter-filament voids that separate filament arms, complicating global extragalactic field models.
-Measurements of the extragalactic field strength can be performed, such as using a radio astronomy method known as Faraday tomography~\cite{akahori_pasj2014_faradaytomography}, while limits on the magnetic field of the early Universe can be calculated using measurements of the Cosmic Microwave Background (CMB)~\cite{jedamzik_prl2018_egmflimits}.
+Measurements of the extragalactic field strength can be performed, for example, using a radio astronomy method known as Faraday tomography~\cite{akahori_pasj2014_faradaytomography}, while limits on the magnetic field of the early Universe can be calculated using measurements of the Cosmic Microwave Background (CMB)~\cite{jedamzik_prl2018_egmflimits}.
 Yet, modeling the large-scale structure of extragalactic magnetic fields requires intensive N-body magnetohydrodynamic simulations which are sensitive to the seeding of the initial magnetic field within the simulation~\cite{garaldi_mnras2020_egmfseed}.
 Magnetic horizon effects, where cosmic rays never reach Earth and instead continuously deflect from magnetic fields, are also possible for ultra-high-energy cosmic rays propagating within the presence of strong extragalactic magnetic fields.
 Even so, the extragalactic magnetic field strength within inter-filament voids, which constitute most of the known Universe, is of a lower strength than its Galactic counterpart (typically on the order of nanogauss or less compared to order microgauss for Galactic fields).
@@ -367,7 +368,7 @@ Photodisintegration processes are those where a background photon is Lorentz boo
 \noindent
 where the subscript BGL represents a photon from any background light field.
 Both the CMB and infrared background radiation are important photon fields for this interaction~\cite{puget_apj1976_photodisintegration, stecker_apj1999_photodisintegration}.
-The energy thresholds for these photodisintegration processes are complicated, depending on both the interaction geometry and constituents, yet they have a dependence on the mass number $A$ of the interacting cosmic-ray nucleus.
+The energy thresholds for these photodisintegration processes are complicated, depending on the interaction geometry and on the specific nuclei involved.
 Therefore this extragalactic propagation process could impose a mass dependent ordering on the composition of ultra-high-energy cosmic rays observed at Earth~\cite{tom_book}.
 A more complete theoretical description of photonuclear interactions for understanding cosmic-ray propagation is given in~\cite{rachen_phdthesis}.
 A full description of all understood cosmic-ray propagation processes is included in CRPropa~\cite{rafa_crpropa}, a state-of-the-art Monte Carlo code for simulating cosmic-ray extragalactic and Galactic propagation.
@@ -416,7 +417,8 @@ The exact transition of the Galactic to extragalactic origin of cosmic rays is s
 %The aim of this thesis will be to further constrain 
 
 LHAASO has precisely measured both the proton and helium spectra in the energy region surrounding the cosmic-ray knee, reporting first a spectral hardening before a spectral softening for both nuclei~\cite{lhaaso_scib2025_protonknee, lhaaso_prl2025_heliumknee}.
-This challenges the assumption of a single Peters cycle source evolution near the knee and already provides evidence of a second Galactic source population at lower, knee-like, energies.
+This challenges the assumption of a single Peters cycle source evolution near the knee.
+There already is evidence of a second Galactic source population below the energy of the knee~\cite{aharonian_apj2026_galacticcr}.
 With the precise LHAASO results, recent theories suggest that direct spectral signatures of PeVatons, sources accelerating cosmic rays up to PeV energies, could be visible at the cosmic-ray knee~\cite{fang_apjl2026_pevatrons}.
 Data-driven tests of these theories are underway, with potential associations of source classes, for example pulsar wind nebula, with Galactic PeVatrons~\cite{dikerby_apj2025_pwn}.
 Associating astrophysical objects as Galactic PeVatrons is one step closer towards determining cosmic-ray origins across the entire cosmic-ray energy spectrum.
@@ -518,8 +520,8 @@ Future focused efforts studying these missing pieces of information could improv
 
 Within this chapter, the depth of shower maximum $X_{\text{max}}$, an air-shower property extensively used for mass composition and hadronic interaction model studies, was introduced.
 A second observable sensitive to both the primary cosmic-ray mass and hadronic interaction model is the total muon content of the air shower, which when combined with $X_{\rm max}$ is known to more accurately determine the mass of individual cosmic rays compared to $X_{\rm max}$ alone~\cite{holt_epjc2019_radiomuon}.
-The scope of this dissertation will focus on improving mass composition measurements near the Galactic-to-extragalactic transition region of the cosmic-ray energy spectrum using these observables.
-The increased accuracy of mass measurements near the transition region has the potential to further constrain the exact energy of the Galactic-to-extragalactic transition of cosmic-ray origin, provide more precise measurements of the fluxes of individual cosmic-ray nuclei at the second knee and ankle, and test current source models near these energies.
+The scope of this dissertation will focus on studying a method for improving mass composition measurements near the Galactic-to-extragalactic transition region of the cosmic-ray energy spectrum using these observables.
+The increased accuracy of mass measurements near the transition region has the potential to further constrain the exact energy of the Galactic-to-extragalactic transition of cosmic-ray origin, to provide more precise measurements of the fluxes of individual cosmic-ray nuclei at the second knee and ankle, and to test current source models near these energies.
 The following chapter provides an overview of air-shower physics, necessary to understand the relationship between the discussed air-shower observables and primary cosmic-ray mass.
 
 
