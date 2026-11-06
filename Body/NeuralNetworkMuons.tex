@@ -106,7 +106,7 @@ In this analysis, the impact on the network predictions from differences in the 
 Differences from atmospheric models could capture minute details in the muon signal measured by the SD and therefore should be studied in a future analysis.
 Further updates to the network could include expanding the architecture to train on and provide predictions for Auger Phase II data productions. 
 The upgraded SD electronics used for Phase II data increased the data sampling rate (see~\Cref{sec:augerprime}), therefore to encapsulate the same physics in the network using Phase II data/simulations would require an increase in the length of the input time series.
-At the moment of writing, a simulation production of both the UMD and SD-750 for Auger Phase II data using the most current hadronic interaction models was not yet available.
+At the moment of writing, a simulation production of both the UMD and SD-750 for Auger Phase II data using the most recent hadronic interaction models was not yet available.
 
 \Offline places the simulated core of each air shower in the library at random within the footprint of the SD-750 array and then runs the SD-750 and UMD reconstructions, both following the icrc2025-test7 standard module sequences for the respective detector system.
 For the SD-750 reconstruction, this standard module sequence includes preprocessing the SD-750 signals, reconstructing the air-shower geometry using signal timing information, and determining the shower size from a fit to the lateral distribution function (LDF) of the station signals, as discussed in~\Cref{ssec:sd_reconstruction}.
@@ -125,7 +125,7 @@ These averaged traces will be used as the time-series input of the neural networ
 An adage in machine learning, and one of my favorite sayings about these analyses is: ``if you put crap in, you get crap out.''
 Following this dogma, a high-quality subset of the station-level simulated traces must be selected to train the RNN.
 This subset should mimic measured data traces of high quality, as eventually the network will be applied to real measured traces from SD-750 reconstructed air showers.
-For training and validating the network, only the \Offline production for EPOS LHC-R simulations has been used.
+For training and validating the network, the \Offline production for EPOS LHC-R simulations has been used.
 
 The selection cuts applied to the dataset are the same as in~\cite{orazio_phd2023} and are described briefly here.
 Some of the selection cuts are applied at the event level to ensure high-quality data for the full event, while others are applied at the station (i.e.~trace) level to ensure the signal in the station is of acceptable quality.
@@ -147,7 +147,7 @@ The \qty{55}{\degree} limit is set from the ``bias-free'' AERA $X_{\rm max}$ dat
 %the end goal is to combine the predictions of this network with the ``bias-free'' AERA $X_{\rm max}$ data selection 
 
 %, and the reconstructed zenith angle to be $<$\qty{58}{\degree}.
-The station-level selections require the LDF fit function of the SD-750 reconstruction, when evaluated at the station distance from the reconstructed shower axis, to contain at least \qty{5}{VEM} of signal(i.e. LDF($r_{\rm station}$)$>$\qty{5}{VEM}), and that there is no low-gain saturation of any PMT within the station.
+The station-level selections require the LDF fit function of the SD-750 reconstruction, when evaluated at the station distance from the reconstructed shower axis, to contain more than \qty{5}{VEM} of signal (i.e. LDF($r_{\rm station}$)$>$\qty{5}{VEM}), and that there is no low-gain saturation of any PMT within the station.
 Data with high-gain PMT saturation is included as these signals can be recovered by analyzing the low-gain PMTs, allowing the network to include a phase space closer to the air-shower axis within its training dataset.
 \Cref{tab:cuts} shows a summary of the selection cuts and the resulting statistics for each primary of the EPOS LHC-R simulation set.
 After cuts, there are a total of 1,280,885 traces for use in training, validating, and testing the RNN, split approximately equally across all four primaries. 
@@ -227,7 +227,7 @@ Bias from the muon deficit cannot be corrected for because of the use of simulat
 \Cref{fig:validation} shows the same two-dimensional histograms as~\Cref{fig:training}, yet instead using data from the 203,297 traces of the validation set for EPOS LHC-R simulations.
 The validation set exhibits the same SD-MC observable relationships as the training set, highlighting that the data splitting process does not introduce any unforeseen biases that will propagate forward in the analysis into either the training or validation data.
 The testing set was not studied until after final training of the network to maintain the integrity of having a dataset available for network predictions unseen by both the researcher and the network before application to real data.
-However, no biases (other than the muon deficit) were observed in the training set.
+%However, no biases (other than the muon deficit) were observed in the training set.
 
 \begin{figure}
   \centering
@@ -590,7 +590,7 @@ This analysis idea will be presented in~\Cref{chap:radiomuon}.
 
 
 \section{Fitting a Muon LDF to the Network Predictions}\label{sec:mldf}
-The previous section shows the RNN predicted station-level muon observables for each event can be combined to construct a average muon observable with mass sensitivity.
+The previous section shows the RNN predicted station-level muon observables for each event can be combined to construct an average muon observable with mass sensitivity.
 This section aims to construct an event-level muon observable based on the magnitude of the muonic signal component at a specific reference distance to the air-shower axis directly from the station-level predictions for that event.
 This event-level observable may be insufficient to determine an event-by-event mass, particularly for the intermediate masses of helium and oxygen, yet a mass determination averaged over many events is feasible.
 To extract this event-level observable, a modified NKG function, given by
@@ -646,13 +646,13 @@ To visualize the parameterization space, think of these bins as mapping a three-
 Bins along the diagonal of the box are more populated due to the inverse relationship of $S_{\rm total}$ and $r_{\rm SD}$, meaning bins close to the shower axis have high total signals and bins far from the shower axis have low total signals.
 A bin far from the shower axis with high total signal is unphysical, making this an unfilled bin in the phase space.
 
-Per primary, the average and standard deviation of the relative difference metric distribution are calculated within each bin of the three-dimensional phase space.
-A count-weighted average of the nearest-neighbor metric values are used to fill bins with less than 20 stations to prevent low statistics holes in the parameterized space.
-This same nearest-neighbor calculation is used to extend the three-dimensional parameterized space perpendicular to the diagonal by one bin.
-The calculation is performed at every step along the diagonal to mitigate edge cases from falling outside the parameterization region.
-Only perpendicular to the diagonal is extended because these are soft limits, whereas the edges of the three-dimensional parameterization box form hard limits on the network predictive power.
-Additionally, the parameterization region for each primary can differ slightly.
-Bins must contain at least 20 data points for each primary; however, if one or more primaries do not meet the minimum statistics threshold then a count-weighted average of nearest-neighbor bins for that primary is used to fill the bin.
+Per primary, the average and standard deviation of the relative difference metric are calculated within each bin of the three-dimensional phase space.
+Bins must contain at least 20 data points for each primary; however, if one or more primaries do not meet the minimum statistics threshold then a count-weighted average of that primary's nearest-neighbor bins is used to fill the bin.
+This prevents low-statistics holes in the parameterization.
+Bin statistics can differ between primaries, therefore the bins that require filling can differ as well.
+This same nearest-neighbor calculation is used to extend the three-dimensional parameterized space by one bin perpendicular to the diagonal.
+The calculation is performed at every step along the diagonal to prevent edge cases from falling outside the parameterization region.
+The phase space is only extended perpendicular to the diagonal because the limits of the phase space in this direction are determined by low statistics, whereas the edges of the three-dimensional parameterization box form hard limits set by the range of valid network inputs.
 
 Once all valid bins have been defined, an interpolation between the bins is performed to generate two smooth three-dimensional meshes, one of the bias and one of the resolution.
 The interpolations are built per primary; however, the bias and resolution must each be reported as a single value.
@@ -860,7 +860,7 @@ Small, off-diagonal, islands in the two-dimensional histogram are bins with a si
 The Pearson correlation coefficient $r$ is used to quantify the correlation of the two distributions and is calculated to be 0.96, proving a high correlation between the fits.
 The calculated Pearson $r$ of nearly 1.0 further validates the network's predictive power, yet is calculated for the full validation dataset over all primaries, energies and zenith angles.
 Further cutting the dataset to contain only near-vertical air showers with $\sec(\theta_{\rm SD})=\,$\numrange{1.0}{1.2} results in a Pearson $r$ correlation of 0.93.
-The decrease in correlation for a smaller range in zenith angles is unclear.
+The reason for the decrease in correlation for a smaller range in zenith angles is unclear.
 
 \begin{figure}
   \centering
