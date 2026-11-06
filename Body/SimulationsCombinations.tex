@@ -2,7 +2,14 @@
 % Simulations of air showers and studying observable combinations (chapter 4)
 %
 \chapter{Combinations of Simulated Air-Shower Observables for Improved Primary Mass Sensitivity}\label{chap:simulations}
-%Simulation Dataset Overview. Focus on Auger (simulations with updated hadronic interaction models)
+
+\begin{publishedin}
+\pubentry{\textbf{B.~Flaggs}, A.~Coleman, and F.~G.~Schr\"{o}der}{Simulation Study about Event-by-Event Mass Separation of Cosmic Rays using Several Mass Sensitive Air-Shower Observables}{\href{https://doi.org/10.22323/1.444.0289}{PoS ICRC2023 (2024) 289}}
+\pubsep
+\pubentry{\textbf{B.~Flaggs}, A.~Coleman, and F.~G.~Schr\"{o}der}{Studying the mass sensitivity of air-shower observables using simulated cosmic rays}{\href{https://doi.org/10.1103/PhysRevD.109.042002}{Phys. Rev. D 109 (2024) 042002} [\href{https://arxiv.org/abs/2306.13246}{arXiv:2306.13246}]}
+\pubsep
+\pubentry{\textbf{B.~Flaggs}, F.~G.~Schr\"{o}der, and A.~Coleman}{Investigating Event-by-Event Mass Separation of Air Showers Simulated with Recent Hadronic Interaction Models}{PoS ISVHECRI2026 050 (forthcoming)}
+\end{publishedin}
 
 The Heitler-Matthews model, described in~\Cref{chap:airshowers}, presents an overview of how air showers develop in the atmosphere, including the relation of specific air-shower observables with the primary cosmic-ray mass.
 Studying these mass-sensitive observables in detail is important for mass determination of the primary cosmic ray.
@@ -16,7 +23,8 @@ This chapter presents the results of a mass-sensitivity study of individual air-
 All analysis is performed using a general purpose software framework for studying the cosmic-ray mass separation of observables~\cite{flaggs_masters2022,flaggs_prd2024_mso,isvhecri2026_flaggs_hadronicmodels}.
 The mantra of this framework is to study the intrinsic potential of air-shower observables for event-by-event cosmic-ray mass separation, although CORSIKA simulations need to be computed for location specific conditions such as the elevation above sea level of the observation plane, local geomagnetic field, and atmospheric properties.
 With the recently deployed detectors of AugerPrime, the Pierre Auger Observatory simultaneously measures several, complementary, air-shower observables for primary cosmic-ray mass determination and therefore serves as the location choice for this study.
-This chapter presents an update to~\cite{flaggs_masters2022} and~\cite{flaggs_prd2024_mso}, confirming the previous results that the observable combination of $X_{\text{max}}$ and $N_{\mu}$ is highly mass sensitive and that there is qualitative agreement of the mass-sensitivity results between the hadronic interaction models.
+This chapter presents an update to~\cite{flaggs_masters2022} and~\cite{flaggs_prd2024_mso} by studying air-showers simulated with the most recent hadronic interaction modes.
+The previous results are generally confirmed, that the observable combination of $X_{\text{max}}$ and $N_{\mu}$ is highly mass sensitive and that there is qualitative agreement of the mass-sensitivity results between all studied hadronic interaction models, both between the most recent models and their previous iterations.
 
 
 %Originally, this analysis framework was applied to both the locations of the IceCube Neutrino Observatory and the Pierre Auger Observatory 
@@ -298,7 +306,7 @@ From the Fisher analysis, a figure of merit (FOM) value, defined as
 \noindent
 is calculated from multivariate projections onto the Fisher axis.
 The $\mu$ and $\sigma$ values respectively represent the mean and standard deviation of the primary particle distributions, after being projected onto the one-dimensional Fisher axis.
-The subscript x and y represent the type of primary particle, i.e. $\rm{x}\,\epsilon\left[\rm{p, He, O, Fe}\right]$ and $\rm{y}\,\epsilon\left[\rm{p, He, O, Fe}\right]$, with the condition that the FOM for x = y is zero and the degeneracy that the FOM of xy is the same as the FOM of yx.
+The subscripts x and y represent the type of primary particle, i.e. $\rm{x}\,\epsilon\left[\rm{p, He, O, Fe}\right]$ and $\rm{y}\,\epsilon\left[\rm{p, He, O, Fe}\right]$, with the condition that the FOM for x = y is zero and the degeneracy that the FOM of xy is the same as the FOM of yx.
 The FOM is calculated statistically from knowledge of the mean and standard deviation of the observable distributions, but serves as a measure of the mass-separation power on an event-by-event basis.
 The FOM is a measure of how many combined standard deviations the distribution means are separated by, therefore a larger FOM indicates a greater separation.
 It is typically held that FOM values larger than 1.5 correspond to distributions which can be reasonably separated.
@@ -328,7 +336,7 @@ This is in agreement with the lesser overlap of the proton-iron distributions fo
   \label{fig:proton_iron_projections}
 \end{figure}
 
-\subsection{The Effect of Observable Reconstruction Resolution on Mass Sensitivity}\label{ssec:resolution}
+\subsection{The Effect of Reconstruction Resolution on Mass Sensitivity}\label{ssec:resolution}
 Important for any air-shower analysis is the resolution at which air-shower observables can be reconstructed from measurements.
 Both the type of ground-based detection technique and detector specific systematics play a role in an observable's reconstruction resolution (i.e.~the uncertainty within which the observable is known).
 In this analysis, a range of uncertainties for each observable can be investigated, where the baseline uncertainties are motivated by current detectors and their reconstruction techniques.
@@ -391,7 +399,7 @@ All FOM values, along with their uncertainty bands, were calculated from a boots
 The proton-iron separation power curves for each hadronic interaction model were calculated in two zenith angle ranges: \qtyrange{0}{30}{\degree}, shown in the top panels of~\Cref{fig:fisher_protoniron_recentmodels}, and \qtyrange{40}{60}{\degree}, shown in the bottom panels.
 These plots use a larger zenith angle range than the \qtyrange{40}{50}{\degree} range used in the previous sections to increase the statistics within each energy bin.
 
-\begin{figure}
+\begin{figure}[!t]
   \centering
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter4/Fisher_FOM_pFe_allzeniths_allrecentmodels.pdf}
   \caption[FOM curves of proton-iron mass separation for recent hadronic models.]{Proton-iron separation power curves for the three most recent hadronic interaction models. FOM curves are provided for all studied observables in this analysis, both for near-vertical air showers (\qtyrange{0}{30}{\degree}, top) and for inclined air showers (\qtyrange{40}{60}{\degree}, bottom). Included on each plot are the separation power curves showing what is possible when combined knowledge of all observables is known, either exactly (dark blue) or within assumed reconstruction uncertainties (magenta). The individual observable curves represent having knowledge of only that observable, and the energy proxy observable, within the uncertainty stated in the legend.}
@@ -415,6 +423,13 @@ The mass sensitivity of the $\rm R_{\rm e/\mu}$\,\qty{800}{\meter} observable de
 %This zenith range used for scaling has little difference for the longitudinal profile observables ($X_{\rm max}$, $R$, and $L$) because the longitudinal profile is sampled in terms of slant depth rather than atmospheric depth.
 %This is confirmed as the $X_{\rm max}$, $R$ and $L$ observables show similar energy evolutions in their mass sensitivities regardless of the investigated zenith range (i.e. stable $X_{\rm max}$, decreasing $R$, and increasing $L$ above approximately \qty[parse-numbers=false]{10^{18.5}}{\electronvolt} in true cosmic-ray energy).
 
+\begin{figure}[!t]
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter4/Fisher_FOM_pFe_allzeniths_allpreviousmodels.pdf}
+  \caption[FOM curves of proton-iron mass separation for previous hadronic models.]{The same plots as~\Cref{fig:fisher_protoniron_recentmodels} made using the previous hadronic interaction model versions. No qualitative differences are seen between model generations.}
+  \label{fig:fisher_protoniron_previousmodels}
+\end{figure}
+
 For inclined showers with energies above approximately \qty[parse-numbers=false]{10^{18.5}}{\electronvolt}, all three hadronic interaction models exhibit a decrease in the proton-iron mass separation of both the $\lg\left(N_{\mu}\right)$\,\qty{800}{\meter} and $R$ observables, while the mass separation of the $L$ observable increases.
 The increase in the proton-iron mass separation of $L$ is also observed for vertical showers.
 The physical cause of the increase in mass sensitivity of the $L$ observable is unknown; however, a possible explanation is the Landau-Pomeranchuk-Migdal (LPM) effect which causes an elongation of the electromagnetic shower development at ultra-high energies~\cite{landau_sssr1953_lpm, migdal_pr1956_lpm}.
@@ -422,13 +437,6 @@ This mechanism affects the overall shower development and therefore, in turn, co
 Above approximately \qty[parse-numbers=false]{10^{20.0}}{\electronvolt} for inclined showers, the proton-iron mass sensitivity of the $L$ observable becomes higher than the muon observable when reconstruction uncertainties are included.
 Yet, when studied in combination with both $X_{\rm max}$ and $\lg\left(N_{\mu}\right)$\,\qty{800}{\meter}, the $L$ observable adds little to no extra mass sensitivity (see~\Cref{ssec:combinations}).
 Hence, while increasingly mass sensitive at the highest energies, $L$ adds little to no information about per-event mass separation if knowledge of both $X_{\rm max}$ and surface muons is already known.
-
-\begin{figure}
-  \centering
-  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter4/Fisher_FOM_pFe_allzeniths_allpreviousmodels.pdf}
-  \caption[FOM curves of proton-iron mass separation for previous hadronic models.]{The same plots as~\Cref{fig:fisher_protoniron_recentmodels} made using the previous hadronic interaction model versions. No qualitative differences are seen between model generations.}
-  \label{fig:fisher_protoniron_previousmodels}
-\end{figure}
 
 \Cref{fig:fisher_protoniron_previousmodels} shows the proton-iron separation power curves for the three previous iterations of the hadronic interaction models: EPOS LHC, Sibyll 2.3d, and QGSJETII-04.
 Plots are presented in the same manner as~\Cref{fig:fisher_protoniron_recentmodels}, allowing a direct comparison between the two.
@@ -493,7 +501,7 @@ Hence, although muon observables will provide a higher event-by-event mass separ
 \subsection{Event-by-Event Mass Separation of Helium from Proton and Oxygen Primaries}\label{ssec:intermediate}
 A multitude of cosmic-ray studies would benefit from the ability to discriminate between helium and the CNO group (carbon, nitrogen, oxygen), as well as proton and helium cosmic rays.
 Measurements of the proton-to-helium ratio in the energy range of the Galactic to extragalactic transition, as well as the fraction of CNO, can help to distinguish certain scenarios for the origin of the highest energy Galactic cosmic rays~\cite{thoudam_aa2016_spectrum}.
-Moreover, it is possible that these highest energy Galactic cosmic rays are rich in CNO while the extragalactic cosmic rays in the transition region may be rich in protons and possibly helium~\cite{auger_jcap2023_sources, auger_submittedprd2026_xmax}.
+Moreover, it is possible that these highest energy Galactic cosmic rays are rich in CNO while the extragalactic cosmic rays in the transition region may be rich in protons and possibly helium~\cite{auger_jcap2023_sources, auger_prd2026_xmax}.
 In such scenarios, discrimination between cosmic rays of these mass groups (p, He, CNO) on an event-by-event basis may effectively enable to separate Galactic from extragalactic cosmic rays, allow for mass-group specific anisotropy measurements, and potentially enable rigidity-based particle astronomy of the most energetic Galactic sources.
 
 The FOM metric was applied to measure the helium-oxygen and helium-proton separation power when using knowledge of all observables investigated within this study.
@@ -503,14 +511,14 @@ Results are reported within two zenith angle ranges of \qtyrange{0}{30}{\degree}
 The helium-oxygen separation power is approximately half of the proton-iron separation power for all FOM curves, with all curves showing similar relationships as a function of energy.
 Reasonable event-by-event helium-oxygen separation is not feasible with the Fisher discriminant for any recent hadronic interaction model version when knowledge of all observables is known within their baseline uncertainties.
 
-\begin{figure}
+\begin{figure}[!t]
   \centering
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter4/Fisher_FOM_HeO_allzeniths_allrecentmodels.pdf}
   \caption[FOM curves of helium-oxygen mass separation for recent hadronic models.]{Helium-oxygen separation power curves for all studied observables in this analysis for the three most recent hadronic interaction models. Two zenith ranges are shown, \qtyrange{0}{30}{\degree} (top) and \qtyrange{40}{60}{\degree} (bottom). For each model, the helium-oxygen separation power curves are approximately two times lower than the curves for proton-iron separation power.}
   \label{fig:fisher_heliumoxygen_recentmodels}
 \end{figure}
 
-A difference between the zenith ranges is the steeply declining FOM curve of vertical showers when exact knowledge of all observables is known.
+A difference between the zenith ranges is the FOM curve of vertical showers steeply declining with energy when exact knowledge of all observables is known.
 This is caused from the decreasing mass sensitivity of the $\lg\left(N_{\mu}\right)$\,\qty{800}{\meter} observable with energy when this observable is known with exact precision.
 Notably, the same FOM curve for proton-iron separation does not exhibit this energy dependence, therefore the muon observables could have a greater influence on the overall mass separation between intermediate masses than between light and heavy masses.
 \Cref{fig:fisher_heliumoxygen_previousmodels} shows this same helium-oxygen separation power now calculated using the previous versions of the hadronic interaction models.
@@ -518,7 +526,7 @@ The previous hadronic model versions exhibit larger fluctuations than the most r
 These fluctuations are influenced by low bin statistics from more broken/missing simulations files for the previous hadronic model versions than for the most recent versions.
 Otherwise, no major qualitative differences are apparent between the most recent and previous versions of the hadronic interaction models.
 
-\begin{figure}
+\begin{figure}[!t]
   \centering
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter4/Fisher_FOM_HeO_allzeniths_allpreviousmodels.pdf}
   \caption[FOM curves of helium-oxygen mass separation for previous hadronic models.]{The same plot as~\Cref{fig:fisher_heliumoxygen_recentmodels}, but now showing helium-oxygen separation power curves for the three previous versions of the hadronic interaction models. No qualitative differences between the model versions are seen.}
@@ -534,14 +542,14 @@ The difference between $\ln(A)$ for helium and oxygen primaries is similar to th
 However, oxygen has smaller shower-to-shower fluctuations, leading to narrower distributions for all observables than for proton.
 This smaller spread increases the separation between the helium and oxygen distributions, resulting in larger FOM values for the helium-oxygen separation power than those of helium-proton separation.
 
-\begin{figure}
+\begin{figure}[!t]
   \centering
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter4/Fisher_FOM_pHe_allzeniths_allrecentmodels.pdf}
   \caption[FOM curves of helium-proton mass separation for recent hadronic models.]{Helium-proton separation power curves of the three most recent hadronic interaction models. Two zenith ranges are included, \qtyrange{0}{30}{\degree} (top) and \qtyrange{40}{60}{\degree} (bottom). Fisher results for all studied observables in this analysis are shown. For each model, the helium-proton separation power curves are approximately three times lower than the curves for proton-iron separation power.}
   \label{fig:fisher_heliumproton_recentmodels}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!t]
   \centering
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter4/Fisher_FOM_pHe_allzeniths_allpreviousmodels.pdf}
   \caption[FOM curves of helium-proton mass separation for previous hadronic models.]{The same plot as~\Cref{fig:fisher_heliumproton_recentmodels}, but now showing helium-proton separation power curves of the previous iterations of the hadronic interaction models. Results are similar to the helium-proton separation power curves calculated for the most recent hadronic interaction models.}
@@ -677,8 +685,8 @@ $N_{\mu}$ is most important for the helium-oxygen and helium-proton separations 
 This chapter presents the results of a CORSIKA simulation study to investigate the event-by-event mass sensitivity of individual air-shower observables and their combinations.
 The observable mass sensitivity is studied for proton, helium, oxygen, and iron primary cosmic rays using both a Fisher linear discriminant and a gradient boosted decision tree analysis.
 The dependence on several features is investigated, including hadronic interaction model, cosmic-ray energy, and zenith angle.
-The results find that proton-iron separation is feasilble using combined detections of $X_{\text{max}}$ and $N_{\mu}$; however, intermediate mass seaprataion, such as helium-oxygen or helium-proton, is more difficult, even when combining knowledge of all studied observables.
-Intermediate mass separation, though shown here to be difficult, is still most impacted by the combination of the $X_{\text{max}}$ and $N_{\mu}$ observables.
+The results find that proton-iron separation is feasible using combined detections of $X_{\text{max}}$ and $N_{\mu}$; however, intermediate mass seaprataion, such as helium-oxygen or helium-proton, is more difficult, even when combining knowledge of all studied observables.
+Intermediate mass separation, though shown here to be difficult, still benefits from the combination of the $X_{\text{max}}$ and $N_{\mu}$ observables.
 These results were shown to be independent of the choice of hadronic interaction model, proving the potential for combining $X_{\text{max}}$ and $N_{\mu}$ measurements regardless of the data interpretation from hadronic models.
 This motivates combining muon and $X_{\text{max}}$ detectors for the prospects of improving the sensitivity of air-shower measurements to the mass of the primary cosmic ray.
 
