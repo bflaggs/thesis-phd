@@ -2,6 +2,15 @@
 % ARISE my SKALA antennas (will be chapter 7 in final product...)
 %
 \chapter{Future Prospects: SKALA Radio Antennas at Auger}\label{chap:skala}
+
+\begin{publishedin}
+\pubentry{S.~Verpoest, F.~G.~Schr\"{o}der, A.~Novikov, A.~Coleman, \textbf{B.~Flaggs}, A.~Weindl, M.~Venugopal, C.~Merx, and A.~Haungs}{Plans for a new array of radio antennas for the detection of air showers at the 433m surface-detector array of the Pierre Auger Observatory}{\href{https://doi.org/10.22323/1.484.0122}{PoS UHECR2024 (2025) 122} [\href{https://arxiv.org/abs/2503.01638}{arXiv:2503.01638}]}
+\pubsep
+\pubentry{S.~Verpoest, C.~Merx, and \textbf{B.~Flaggs} for the IceCube-Gen2 and Pierre Auger Collaborations}{A prototype station of the IceCube-Gen2 Surface Array at the Pierre Auger Observatory}{\href{https://doi.org/10.22323/1.501.0428}{PoS ICRC2025 (2025) 428} [\href{https://arxiv.org/abs/2507.08991}{arXiv:2507.08991}]}
+\pubsep
+\pubentry{\textbf{B.~Flaggs} for the Pierre Auger Collaboration}{ARISE: the Auger Radio Infill SKALA Extension}{PoS ISVHECRI2026 039 (forthcoming)}
+\end{publishedin}
+
 The Pierre Auger Observatory hosts several prototype detectors and pathfinder air-shower arrays in addition to its main detectors discussed in~\Cref{chap:auger}.
 This includes prototype layered water Cherenkov detectors for the Global Cosmic Ray Observatory (GCOS), a GRAND@Auger prototype array~\cite{deerrico_icrc2025_grandatauger}, a prototype surface station for IceCube-Gen2, and the Auger Radio Infill SKALA Extension (ARISE)~\cite{isvhecri2026_flaggs_arise}, of which the latter two will be the focus of this chapter.
 The location of Malarg\"ue and the surrounding area greatly benefits prototyping new detectors because of the existing infrastructure of the Auger observatory, allowing ease of access for detector maintenance, assistance from the local observatory staff when feasible, and potential cross calibration of prototype detectors with the well understood Auger detectors.
@@ -332,7 +341,7 @@ A naked metal wire connects the metal TAXI housing to a buried copper rod and is
 The dirt surrounding the buried rod was salted to increase soil conductivity and provide a better grounding.
 A buried OS2 9/125 military grade optical fiber of \qty{100}{\meter} length provides the connection between the WR switch inside the CRS and the WR-LEN board inside the TAXI housing for the station.
 This fiber connection handles all data transfer, communications, and timing for the prototype station.
-In March 2026, this TAXI was placed on a solar power system of the same type as used for ARISE, along with a Control and Housekeeping Box for remote power cycling (see~\Cref{ssec:arise_station_centers}).
+In March 2026, this TAXI was placed on a solar power system of the same type as used for ARISE, along with a Control and Housekeeping (CHK) box for remote power cycling (see~\Cref{ssec:arise_station_centers}).
 Previously, the open \qty{24}{\volt} DC power line from the custom DC-DC converter in the CRS was used to power the IceCube-Gen2 prototype station from a buried \qty{100}{\meter} length 5-pin power cable with shielding for lightning protection.
 \Cref{fig:gen2_deployed_hardware} shows a picture of the aluminum box containing TAXI, the central scintillator pair, and one of the SKALA antennas of the IceCube-Gen2 prototype station.
 
@@ -351,11 +360,13 @@ Previously, the open \qty{24}{\volt} DC power line from the custom DC-DC convert
 %The Central Radio Station (CRS) provides 24V power to the DAQ from a buried power cable.
 
 
-\subsection{Observations with the IceCube-Gen2 Prototype Station}\label{ssec:gen2_observations}\footnote[3]{The analyses presented in this section were performed by a visiting Bachelor student whom I advised and another collaborator with whom I worked closely.}
+\subsection[Observations with the IceCube-Gen2 Prototype Station]{Observations with the IceCube-Gen2 Prototype Station\footnotemark[3]}\label{ssec:gen2_observations}
+
+\footnotetext[3]{The analyses presented in this section were performed by a visiting Bachelor student whom I advised (Sara Reina) and another collaborator with whom I worked closely (Stef Verpoest).}
 
 The feasibility of air-shower measurements in the \qtyrange{70}{350}{\mega\hertz} frequency band had not been proven experimentally with the anthropogenic and environmental RFI at Auger prior to the deployment of the IceCube-Gen2 prototype station.
 To this end, a study was performed to measure the modulation of the radio noise background in this frequency band correlated in time with the movement of the Galactic center across the Celestial sphere at the location of the prototype station.
-The hypothesis: if a modulation of the radio noise background with sidereal time is visible, then the radio data is not flooded by the internal system noise and external environmental noise and therefore can be used to observe air showers.
+The hypothesis: if a modulation of the radio noise background with sidereal time is visible (i.e.~confirming the Galactic radio noise is visible), then the radio data is not flooded by the internal system noise and external environmental noise and therefore can be used to observe air showers.
 All analysis for this station was performed using the surface radio modules in IceTray, the IceCube software framework, and follows the pipeline described in~\cite{jinst2022_radcube} to prepare the measured electric fields at the antenna to an analysis ready stage.
 
 Radio data, collected every \qty{10}{\second} from a fixed-rate software trigger, is corrected for artifacts and used to investigate the frequency spectrum of the radio background for the prototype station.
@@ -407,8 +418,8 @@ The periodicity in the noise level is attributed to the radio emission of the Ga
 
 \begin{figure}
     \centering
-    \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.8\textwidth]{chapter7/AugerStation_galactic.png}
-    \caption[RMS time dependence of background radio signals.]{The RMS of background radio waveforms measured with antenna 1 of the IceCube-Gen2 prototype station for a 10 day period. A moving average is calculated from the RMS values and fit to~\Cref{eq:galactic_fit}, with fit results reported in~\Cref{tab:gen2_galactic_results}. Plot by Sara Reina and published in~\cite{arena2024_verpoest}.}
+    \includegraphics[trim={0cm 9.7cm 0cm 11.6cm},clip,width=1.0\textwidth]{chapter7/AugerStation_galactic_edited.pdf}
+    \caption[RMS time dependence of background radio signals.]{The RMS of background radio waveforms measured with antenna 1 of the IceCube-Gen2 prototype station for a 10 day period. A moving average is calculated from the RMS values and fit to~\Cref{eq:galactic_fit}, with fit results reported in~\Cref{tab:gen2_galactic_results}. Plot by Sara Reina and edited from~\cite{arena2024_verpoest}.}
     \label{fig:gen2_galactic}
 \end{figure}
 
@@ -490,7 +501,7 @@ The station centers are located approximately \qty{80}{\meter} from Lety Jr.,~ea
 One arm of each station is aligned such that an antenna is approximately halfway between Lety Jr.~and the station center.
 The final positions of the 18 SKALA-v2 antennas were optimized through a simulation study to maximize the number of vertical air showers above the threshold for full reconstruction efficiency.
 For this array of 18 SKALA antennas, a larger overall footprint would provide for the observation of more air showers, but would increase the energy threshold for full efficiency due to the increased spacing between antennas.
-With the described antenna positions, full reconstruction efficiency is predicted at \qty{300}{\peta\electronvolt} for near-vertical air showers ($\theta <$\,\qty{30}{\degree}) using a traditional method requiring an SNR threshold to be exceeded in at least five antennas and a successful directional reconstruction. 
+With the described antenna positions, full reconstruction efficiency is predicted at \qty{200}{\peta\electronvolt} for vertical air showers using a traditional method requiring an SNR threshold to be exceeded in at least five antennas and a successful directional reconstruction. 
 Full reconstruction efficiency is defined as having at least 97\% of air showers with a core landing within the ARISE footprint that pass these reconstruction requirements, resulting in the expected observation of $\simeq$\,45 such air showers per year~\cite{uhecr2024_verpoest}.
 Many more air showers at lower energies, or with a shower core outside of the ARISE footprint, are also expected to be measured.
 Current machine-learning based radio denoising and reconstruction algorithms may lower this energy threshold by a factor of two once implemented in the data pipeline, increasing the statistics of reconstructed air showers~\cite{abdulrehman_phd2024}.
@@ -554,7 +565,7 @@ Examples of the prepared sites for a station center and a SKALA antenna of ARISE
 \begin{figure}
     \centering
     \includegraphics[trim={18cm 6cm 18cm 1cm},clip,width=1.0\textwidth]{chapter7/ARISE_StationCenter_CrossSection.jpg}
-    \caption[Cross-section of an ARISE station centers.]{A diagram showing the cross-section of an ARISE station center. Six \qty{12}{\volt} batteries are housed in the bottom layer of the station and used to power TAXI stored in the top layer. The batteries are charged with the LX-440M108GG WM1 solar panel.}
+    \caption[Cross-section of an ARISE station centers.]{A diagram showing the cross-section of an ARISE station center. Six \qty{12}{\volt} batteries are housed in the bottom layer of the station and used to power TAXI stored in the top layer. The batteries are charged with the LX-440M108GG WM1 solar panel. Drawing by G\"{u}nter W\"{o}rner, Karlsruhe Institute of Technology.}
     \label{fig:arise_cross_section}
 \end{figure}
 
@@ -569,7 +580,7 @@ The holes drilled for all entering cables and fibers are of exact cable/fiber wi
 Solar panels face approximately North to maximize the amount of sunlight impacting the solar cells of the panels during winter and additionally provides shade to the wooden box.
 \Cref{fig:arise_cross_section} shows a cross-section of an ARISE station center.
 
-Connected in series between the charge controller and TAXI inside the station center is the ARISE Control and Housekeeping (CHK) box.
+Connected in series between the charge controller and TAXI inside the station center is the Control and Housekeeping (CHK) box.
 The CHK box serves two purposes: first, to allow remote power cycling of the TAXI via a Wi-Fi channel separate from the data-transfer Wi-Fi channel, and second, to monitor the voltage and current supplied to TAXI and other environmental factors (temperature, pressure, dust, etc.).
 The heart of the CHK box is a BeagleBone Black (BBB) single-board debian computer which handles all operations using python and bash scripts to remotely turn on/off TAXI and control the power logging service.
 Connection to the BBB is set from a Ubiquiti LiteBeam antenna that connects to a Ubiquiti Rocket housed at the CRS.
@@ -631,7 +642,7 @@ This custom designed aluminum box splits the electrical signal from the \texttt{
 Six \qty{100}{\meter} OM2 50/125 multimode military grade optical fibers are trenched from Lety Jr.~to each of the six ARISE station centers, connecting the optical Tx boards to an optical receiver (Rx) board inside the TAXI enclosure.
 The optical Rx board reconverts the signal from optical back to electrical for TAXI to initiate the readout of the radio signal of the station's three SKALA antennas.
 The conversion and reconversion of the signal introduce approximately a \qty{1}{\micro\second} delay each between the time the Auger T1 trigger is sent and the time it is received by TAXI.
-In principle, the trigger signals should arrive at each TAXI simultaneously; however, the widths of the timing distributions for the conversion and reconversion processes of the signal have not yet been studied in detail and timing differences between stations of $\mathcal{O}$(10)\,ns are observed.
+In principle, the trigger signals should arrive at each TAXI simultaneously; however, the widths of the timing distributions for the conversion and reconversion processes of the signal have not yet been studied in detail and timing differences between stations of approximately \qty{50}{\nano\second} are observed.
 A simple diagram showing the connections for the ARISE trigger system is given in~\Cref{fig:arise_trigger_system}.
 
 \begin{figure}
@@ -702,7 +713,7 @@ A full overview of the ARISE systems, including the triggering, local and centra
 
 The fully deployed ARISE array is shown in~\Cref{fig:arise_drone_photo}.
 Recently, a full analysis pipeline for reconstructing air showers with ARISE was implemented into Auger \Offline by collaborators, leading to the first cosmic-ray air shower detections with ARISE~\cite{arena2026_merx,arena2026_schroder}.
-Reconstructed ARISE air-shower directions are compared to air-shower reconstructions from Auger's SD-433 array and the measured radio emission is currently being compared to CORSIKA with CoREAS air-shower simulations by collaborators, similar to the air-shower reconstructions for the IceCube-Gen2 prototype station.
+Reconstructed ARISE air-shower directions are compared to air-shower reconstructions from Auger's SD-433 array and the measured radio emission is currently being compared to CORSIKA with CoREAS air-shower simulations, similar to the air-shower reconstructions for the IceCube-Gen2 prototype station.
 In the near future, reconstructions of the air-shower energy and $X_{\rm max}$ are planned with ARISE.
 Reconstructing the air-shower energy with ARISE provides a pathway for a cross-calibration between the SKALA antennas deployed at Auger and those at the South Pole, deployed within the surface array of the IceCube Neutrino Observatory, serving as an indirect comparison of the Auger and IceTop energy scales.
 Further, the energy reconstruction has potential for an energy scale comparison between the \qtyrange{70}{350}{\mega\hertz} band of ARISE and the \qtyrange{30}{80}{\mega\hertz} band of AERA.
@@ -719,13 +730,13 @@ The location of ARISE in the decommissioned part of the AERA footprint, and its 
 Synergies between ARISE and the Auger UMD can be exploited to simultaneously reconstruct observables related to the muonic and electromagnetic component of air showers.
 The UMD directly measures the muonic component of air showers for cosmic-ray energies between \qtyrange[parse-numbers=false]{10^{16.8}}{10^{19}}{\electronvolt} while ARISE is expected to be fully efficient for near-vertical ($\theta<$\,\qty{30}{\degree}) air showers for cosmic-ray energies above \qty[parse-numbers=false]{10^{17.5}}{\electronvolt} (or even lower with a neural-network analysis).
 A geometric effect that the projected surface area of the UMD scintillators in the shower plane is proportional to $\cos(\theta)$, convolved with muons from inclined showers having larger path lengths to the UMD in Earth's crust, result in an optimal triggering of the UMD for near-vertical air showers.
-Once ARISE $X_{\rm max}$ and energy reconstructions are reached, near-vertical showers above approximately \qty[parse-numbers=false]{10^{17.5}}{\electronvolt} within the footprint of ARISE would have simultaneous $X_{\rm max}$ and muon measurements on a muon-independent energy scale, allowing ARISE to test hadronic interaction models and potentially measure the composition of cosmic rays in the energy range of the Galactic-to-extragalactic transition region.
+Once ARISE $X_{\rm max}$ and energy reconstructions are reached, near-vertical showers $\gtrsim$\,\qty[parse-numbers=false]{10^{17.5}}{\electronvolt} within the footprint of ARISE would have simultaneous $X_{\rm max}$ and muon measurements on a muon-independent energy scale, allowing ARISE to test hadronic interaction models and potentially measure the composition of cosmic rays in the energy range of the Galactic-to-extragalactic transition region.
 
 Additional future studies could include a test of the radio interferometric technique to reconstruct air-shower observables.
 This technique requires sub-nanosecond-level timing accuracy for interferometric reconstruction to compete with typical reconstruction techniques~\cite{schoorlemmer_interferometry_epjc}, yet this may be feasible with the WR timing synchronization of ARISE.
 Also, the TAXI in each ARISE station may be replaced with a new DAQ currently in development at the Karlsruhe Institute for Technology~\cite{arena2026_schmitt}.
 Another future possibility is to expand the ARISE array to include more stations, providing a larger dataset for tandem $X_{\rm max}$ and muon reconstructions over those measured with the current ARISE footprint.
-If achieved, the additional ARISE stations would use the latest version of SKALA antennas used at SKA-Low, opposed to the SKALA-v2 antennas used for the current ARISE stations.
+If achieved, the additional ARISE stations could use the latest version of SKALA antennas used at SKA-Low, opposed to the SKALA-v2 antennas used for the current ARISE stations.
 This can enable a cross-calibration with air showers measured by the antennas of SKA-Low~\cite{ska_sciencebook2026_cr_intro}.
 
 \section{Chapter Summary}\label{sec:ch7_summary}
@@ -734,8 +745,8 @@ A prototype surface station for IceCube-Gen2, deployed during this PhD work in A
 This prototype station served as a testbed for a new array of radio antennas at the Pierre Auger Observatory, the Auger Radio Infill SKALA Extension (ARISE).
 ARISE, also deployed during this PhD work in March 2025, aims to achieve two primary science goals: 1.~to reconstruct vertical air showers ($\theta_{\rm zen}<$\,\qty{30}{\degree}) with full efficiency using SKALA-v2 radio antennas, and 2.~to provide hybrid radio-muon detections of these vertical air showers from coincidence measurements with Auger's Underground Muon Detector (UMD).
 The focus of this PhD work regards the deployment, detector operations, and assisting in the data commissioning of both ARISE and the IceCube-Gen2 prototype station.
-Several collaborators will continue to work with ARISE to develop depth of shower maximum and electromagnetic energy reconstructions of air showers in coincidence with UMD measurements.
-These reconstructions, combined with the UMD, would allow ARISE to serve as a pathfinder array for this hybrid radio-muon detection method, making progress towards constraining high-energy hadronic interaction models, improved mass-composition measurements near the Galactic-to-extragalactic transition region, and potentially solving the muon puzzle.
+Several collaborators will continue to work with ARISE to develop methods for the reconstruction of the depth of shower maximum and electromagnetic energy of air showers in coincidence with UMD measurements.
+These reconstructions, combined with the UMD, would allow ARISE to serve as a pathfinder array for this hybrid radio-muon detection method, making progress towards constraining high-energy hadronic interaction models, improved mass-composition measurements near the Galactic-to-extragalactic transition region, and contributing to the solution of the muon puzzle.
 
 
 %These hybrid radio-muon measurements wou
