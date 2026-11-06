@@ -1012,6 +1012,7 @@ FUNCTION {mastersthesis}
     { format.doi "{" * doi * "}" * "DOI" output.check }
   if$
   format.eprint.paren output
+  note output
   fin.entry
 }
 
@@ -1050,8 +1051,8 @@ FUNCTION {phdthesis}
   new.block
   format.eprint output
   new.block
-  % note output
   doi output
+  note output
   fin.entry
 }
 
