@@ -695,7 +695,7 @@ mu.\mkern
 			  \hangindent\wd 1
 	          #2\par} 
 \newcommand{\provost}{\renewcommand{\baselinestretch}{1}\large\normalsize
-	\approval{Louis F. Rossi, Ph.D.}
+	\approval{Kami Silk, Ph.D.}
     \hangindent\wd 1 Vice Provost for Graduate and Professional Education and\newline Dean of the Graduate College\par}
 \newcommand{\maketitlebox}{\vbox{\begin{center}\baselineskip\titlebaselineskip
 				  {\bfseries\uppercase\expandafter{\@title}}\end{center}}}
