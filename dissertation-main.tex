@@ -2,6 +2,21 @@
 \documentclass {udthesis}
 % preamble
 
+% "published in" environment for adding papers/proceedings under a chapter heading
+% Follows Abdul and Narayan's exmaples
+\newenvironment{publishedin}[1][Parts of this chapter have been or will be published in]
+  {\par\noindent\rule{\textwidth}{0.4pt}\par
+   \noindent #1\par}
+  {\par\noindent\rule{\textwidth}{0.4pt}\par
+   \medskip\global\everypar{{\setbox0\lastbox}\global\everypar{}}}% next paragraph not indented
+
+% Example usage: \pubentry{authors}{title}{reference line}
+\newcommand{\pubentry}[3]{%
+  \noindent #1\par
+  \noindent ``#2''\par
+  \noindent #3\par}
+\newcommand{\pubsep}{\vspace{\baselineskip}}
+
 % Include graphicx package for the example image used
 % Use LaTeX->PDF if including graphics such as .jpg, .png or .pdf.
 % Use LaTeX->PS->PDF if including graphics such as .ps or .eps
@@ -18,6 +33,9 @@
 % Package for better math typesetting
 \usepackage{amsmath}
 
+% Package for further math symbols
+\usepackage{amssymb}
+
 % Package for referencing labeled positions in thesis
 % Must include hyperref before cleveref so links can work correctly
 \usepackage{hyperref}
@@ -26,6 +44,11 @@
 % Package for spacing
 \usepackage{xspace}
 
+% Package for including URLs in text, needed for references
+\usepackage{url}
+
+% Package to define words that should not be hyphenated at any point in the text
+\usepackage{hyphenat}
 
 % Setup unicode encoding for hyperlinks from the hyperref package
 \hypersetup{pdfencoding=unicode}
@@ -38,25 +61,29 @@
       {Off}}$\hspace{.05em}\protect\raisebox{.4ex} % .
     {$\protect\underline{\text{line}}$}}\xspace}
 
+\hyphenation{radioTad}
+\hyphenation{analysis,analyses}
+
+% Enhancing cosmic-ray mass sensitivity through hybrid radio-muon measurements of air showers
 
 \begin{document}
 \include{dissertation-tap}
                    % This file (dissertation-tap.tex) contains the Title
                    % and Approval Page information for a dissertation.
 
-%\include{Body/CosmicRayAstrophysics}    % Chapter 1 text 
+\include{Body/CosmicRayAstrophysics}    % Chapter 1 text 
                    
 \include{Body/AirShowers}    % Chapter 2 text 
 
-%\include{Body/PierreAugerObservatory}    % Chapter 3 text 
+\include{Body/PierreAugerObservatory}    % Chapter 3 text 
 
-%\include{Body/SimulationsCombinations}    % Chapter 4 text 
+\include{Body/SimulationsCombinations}    % Chapter 4 text 
 
 \include{Body/NeuralNetworkMuons}    % Chapter 5 text 
 
 \include{Body/CombinedRadioMuon}    % Chapter 6 text 
 
-%\include{Body/SKALAatAuger}    % Chapter 7 text 
+\include{Body/SKALAatAuger}    % Chapter 7 text 
 
 % CURRENTLY UNNEEDED (keep just in case)
 %\include{ref}      % This file (ref.tex) contains the text
@@ -77,6 +104,10 @@
                                 % for Appendix A. 
                    
 \include{BackMaterial/appB}     % This file (appB.tex) contains the text
-                                % for Appendix B.   
+                                % for Appendix B.
+                                
+\include{BackMaterial/appC}     % This file (appC.tex) contains the text
+                                % for Appendix C.
+              
        
 \end{document}
