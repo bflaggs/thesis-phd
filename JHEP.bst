@@ -51,6 +51,8 @@ ENTRY
     year
     archive
     eprint
+    archivePrefix
+    primaryClass
     report
     collaboration
     url
@@ -337,6 +339,30 @@ FUNCTION {format.eprint}
        if$
      }
      if$
+}
+
+%% Stand-alone e-print (no journal): "arXiv:2609.32649 [astro-ph.HE]"
+%% Falls back to format.eprint for old-style ids that use the archive field.
+FUNCTION {format.eprint.full}
+{ eprint empty$
+    { "" }                                    % no eprint -> print nothing
+    { archive empty$
+        { "\href{https://arxiv.org/abs/" eprint * "}{{\ttfamily " *
+          archiveprefix empty$
+            'skip$
+            { archiveprefix * ":" * }         % add "arXiv:"
+          if$
+          eprint *                            % add "2609.32649"
+          primaryclass empty$
+            'skip$
+            { " [" * primaryclass * "]" * }   % add " [astro-ph.HE]"
+          if$
+          "}}" *
+        }
+        { format.eprint }                     % old-style id: use original function
+      if$
+    }
+  if$
 }
 
 FUNCTION {format.eprint.paren}
@@ -770,9 +796,15 @@ FUNCTION {article}
   crossref missing$
     {
       journal missing$
-        { format.eprint output }
+        { format.eprint.full output
+          blank.sep
+          format.date.paren.nomonth output
+        }
         { journal empty$
-            { format.eprint output }
+            { format.eprint.full output
+              blank.sep
+              format.date.paren.nomonth output
+            }
             { format.doi * "{" * journal emphasize before.all 'output.state := "journal" output.check
               blank.sep
               format.volume output
