@@ -457,8 +457,8 @@ In general, both the proton and iron muon fractions follow a clear linear distri
 
 \begin{figure}
   \centering
-  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/pearsonr_Proton_2d_muon_fraction_mc_histogram.pdf}
-  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/pearsonr_Iron_2d_muon_fraction_mc_histogram.pdf}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/pearsonr_Proton_2d_muon_fraction_mc_histogram_fixedcbar.pdf}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/pearsonr_Iron_2d_muon_fraction_mc_histogram_fixedcbar.pdf}
   \caption[Correlation of the RNN and MC truth muon fractions.]{A density plot showing the RNN predicted muon fraction correlation with the MC truth muon fraction for proton (left) and iron (right) data in the validation set. The lower left of each plot represents a fully electromagnetic trace (muon fraction = 0.0) while the upper right represents a fully muonic trace (muon fraction = 1.0). The Pearson r value for each plot is included to mathematically describe the correlation.}
   \label{fig:muon_fraction}
 \end{figure}
@@ -470,8 +470,8 @@ Within this distance bin, the Pearson r correlation factor for proton increased 
 
 \begin{figure}
   \centering
-  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/pearsonr_subslice_Proton_2d_muon_fraction_mc_histogram.pdf}
-  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/pearsonr_subslice_Iron_2d_muon_fraction_mc_histogram.pdf}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/pearsonr_subslice_Proton_2d_muon_fraction_mc_histogram_fixedcbar.pdf}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/pearsonr_subslice_Iron_2d_muon_fraction_mc_histogram_fixedcbar.pdf}
   \caption[RNN vs. MC truth muon fractions in a distance bin.]{The same plot as~\Cref{fig:muon_fraction} including only stations with a reconstructed distance to the air-shower axis between \qtyrange{400}{500}{\meter}.}
   \label{fig:muon_fraction_distance_bin}
 \end{figure}
@@ -494,7 +494,7 @@ This holds in all but the first and final distance bins with data, which are sta
 
 \begin{figure}
   \centering
-  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter5/reldiff_vs_r_log10Stotal_1.4_1.6_sectheta_1.4_1.6.pdf}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter5/relDiff_vs_r_log10Stotal_1.4_1.6_sectheta_1.4_1.6_fixedcbar.pdf}
   \caption[Multi-variable density histograms of the relative difference metric.]{Relative difference of $\hat{S}^{\mu}$ to $S^{\mu}$ signals in an SD station for individual mass groups plotted as density histograms binned in zenith angle, total station signal in VEM, and distance to the shower axis. The black data points show the bias (mean) and resolution (standard deviation) within each distance bin. The bin statistics are shown at the top of each plot and the bins of zenith angle and total signal are listed at the bottom of the proton density histogram (upper left).}
   \label{fig:density}
 \end{figure}
@@ -876,8 +876,8 @@ This effect is also visible within the Pearson $r$ correlation coefficient, with
 
 \begin{figure}
   \centering
-  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/triggered_highgain_pearsonr_Proton_2d_mc_S_mu_ref_histogram.pdf}
-  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/triggered_highgain_pearsonr_Iron_2d_mc_S_mu_ref_histogram.pdf}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/triggered_highgain_pearsonr_Proton_2d_mc_S_mu_ref_histogram_fixedcbar.pdf}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter5/triggered_highgain_pearsonr_Iron_2d_mc_S_mu_ref_histogram_fixedcbar.pdf}
   \caption[Comparison of the NN-MC reference distance muon signals for proton and iron.]{Comparisons of the muon signal at a reference distance of \qty{450}{\meter} extracted from fits to the neural network predictions and the true MC muon signals for proton (left) and iron (right) primaries. The Pearson $r$ correlation coefficient is included for each plot.}
   \label{fig:nn_mc_comparison_primaries}
 \end{figure}
