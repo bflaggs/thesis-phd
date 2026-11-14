@@ -59,20 +59,9 @@ Describe the zenith weighting scheme to weight zenith angles of the simulations 
 \end{figure}
 
 
-\begin{figure}[h]
-  \centering
-  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter6/smu800_xmax_individual_zenw_en17.7_17.9_zen0_55_nn_prediction.pdf}
-  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter6/smu800_xmax_individual_zenw_en18.3_18.5_zen0_55_nn_prediction.pdf}
-  \caption[Unscaled $\hat{S}^{\mu}_{800}$ vs. $X_{\text{max}}$ distributions.]{The $\hat{S}^{\mu}_{800}$ vs. $X_{\text{max}}$ distributions for proton, iron, and the AERA bias-free $X_{\text{max}}$ data within an energy bin of $\lg\left(E_{\text{SD}} / \text{eV}\right)$=\numrange{17.7}{17.9} (left) and \numrange{18.3}{18.5} (right). No energy scaling is applied to the data or simulations; however, the simulations have an applied zenith angle weighting to match the data distribution (see text). Simulations are the EPOS LHC-R test set, plotted with their true $X_{\text{max}}$ values from the Monte Carlo.}
-  \label{fig:unscaled_smu800_xmax}
-\end{figure}
-
-
 \subsection{Scaling the Observables with SD Reconstructed Energy}\label{ssec:flattening}
 
 Describe fits over full energy range of simulations (using SD-750 reconstructed energies).
-Explain smearing and how resolutions are calculated.
-Introduce Pearson $r$ to test for linearity.
 
 \begin{figure}[h]
   \centering
@@ -84,22 +73,34 @@ Introduce Pearson $r$ to test for linearity.
 
 \begin{figure}[h]
   \centering
-  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter6/smu800_xmax_smeared_scaledrange_zenw_pearson_en17.7_17.9_zen0_55_nn_prediction.pdf} \\
-  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter6/smu800_xmax_smeared_scaledrange_zenw_pearson_en18.3_18.5_zen0_55_nn_prediction.pdf}
-  \caption[Energy scaled $\hat{S}^{\mu}_{800}$ vs. $X_{\text{max}}$ distributions.]{The energy scaled $\hat{S}^{\mu}_{800}$ vs. $X_{\text{max}}$ distributions for proton, iron, and the AERA bias-free $X_{\text{max}}$ data within two separate energy bins: $\lg\left(E_{\text{SD}} / \text{eV}\right)$=\numrange{17.7}{17.9} (top) and \numrange{18.3}{18.5} (bottom). Energy scaling is performed over the full energy range of the simulations. Simulations are smeared by the values listed on the plots to mimic detector resolutions and a test of linearity following the Pearson correlation coefficient $r$ is performed on both data and simulations.}
-  \label{fig:scaled_smu800_xmax}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter6/smu800_xmax_individual_zenw_en17.7_17.9_zen0_55_nn_prediction.pdf}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter6/smu800_xmax_individual_zenw_en18.3_18.5_zen0_55_nn_prediction.pdf} \\
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter6/smu800_xmax_individual_scaled_zenw_en17.7_17.9_zen0_55_nn_prediction.pdf}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter6/smu800_xmax_individual_scaled_zenw_en18.3_18.5_zen0_55_nn_prediction.pdf} \\
+  \caption[Raw and energy scaled $\hat{S}^{\mu}_{800}$ vs. $X_{\text{max}}$ distributions.]{The $\hat{S}^{\mu}_{800}$ vs. $X_{\text{max}}$ distributions for proton, iron, and the AERA bias-free $X_{\text{max}}$ data within an energy bin of $\lg\left(E_{\text{SD}} / \text{eV}\right)$=\numrange{17.7}{17.9} (left) and \numrange{18.3}{18.5} (right). The plots on top show raw data and simulation values (no energy scaling applied), while the bottom plots apply an energy scaling to both data and simulations with respect to the central energy of the energy bin. The energy scaling constants are determined by the average fit lines in~\Cref{fig:nn_energy_scaling}. In all plots, simulations have an applied zenith angle weighting to match the data distribution (see text). Simulations are from the EPOS LHC-R test set, plotted with their true $X_{\text{max}}$ values from the Monte Carlo.}
+  \label{fig:scaling_smu800_xmax}
 \end{figure}
 
 
 \section{Testing the Linearity of the \texorpdfstring{$\hat{S}^{\mu}_{800}-X_{\text{max}}$}{hatS\textmu800--Xmax} Correlation}\label{sec:pearson}
 
+Explain smearing and how resolutions are calculated.
+Introduce Pearson $r$ to test for linearity.
 Further describe linearity tests and comparisons between data and simulations.
 Describe bootstrap.
 
 \begin{figure}[h]
   \centering
-  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter6/correlation_vs_energy_nn_prediction_signalsmeared_nsimboot50_uncertinavg.pdf}
-  \caption[Energy evolution of Pearson $r$ for data and simulations.]{The Pearson correlation coefficient $r$ calculated within each energy bin, for both data and simulations, and plotted as a function of SD-750 reconstructed energy. The uncertainties for simulations and data are each calculated by bootstrapping with $N=50$. The data are sensitive to outliers and small statistics, yet approximately follow the trend of the joint proton-iron simulations within the $\hat{S}^{\mu}_{800}-X_{\text{max}}$ plane.}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter6/smu800_xmax_smeared_zenw_pearson_en17.7_17.9_zen0_55_nn_prediction.pdf} \\
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter6/smu800_xmax_smeared_zenw_pearson_en18.3_18.5_zen0_55_nn_prediction.pdf}
+  \caption[Smeared $\hat{S}^{\mu}_{800}$ vs. $X_{\text{max}}$ distributions.]{The energy scaled and smeared $\hat{S}^{\mu}_{800}$ vs. $X_{\text{max}}$ distributions for proton, iron, and the AERA bias-free $X_{\text{max}}$ data within two separate energy bins: $\lg\left(E_{\text{SD}} / \text{eV}\right)$=\numrange{17.7}{17.9} (top) and \numrange{18.3}{18.5} (bottom). Data and simulations are energy scaled to the bin center, where the scaling constants were determined from the fits in~\Cref{fig:nn_energy_scaling}. Simulations are smeared by the values listed on the plots to mimic detector resolutions and a test of linearity following the Pearson correlation coefficient $r$ is performed on both data and simulations.}
+  \label{fig:smeared_smu800_xmax}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter6/correlation_vs_energy_nn_prediction_signalsmeared_nsimboot50_purePpureFEincluded.pdf}
+  \caption[Energy evolution of Pearson $r$ for data and simulations.]{The Pearson correlation coefficient $r$ calculated within each energy bin, for both data and simulations, and plotted as a function of SD-750 reconstructed energy. The Pearson $r$ values for the pure proton and pure iron distributions are included as references. The uncertainties for simulations and data are each calculated as the standard deviation of  $N=50$ bootstraps. The data approximately follow the trend of the joint proton-iron simulations within the $\hat{S}^{\mu}_{800}-X_{\text{max}}$ plane, within uncertainties.}
   \label{fig:correlation}
 \end{figure}
 
@@ -122,7 +123,7 @@ Check difference between average depth of shower maximum between QGSJetII-04 and
 \begin{figure}[h]
   \centering
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter6/energy_evolution_nn_prediction.pdf}
-  \caption[Energy evolution of mean $\hat{S}^{\mu}_{800}$ vs. mean $X_{\text{max}}$.]{The energy evolution of the mean $\hat{S}^{\mu}_{800}$ vs. mean $X_{\text{max}}$ distributions. The mean $\hat{S}^{\mu}_{800}$ values are plotted on a logarithmic scale so all energy bins are visible; however, this makes the statistical uncertainty of the mean $\hat{S}^{\mu}_{800}$ values not visible. The systematic uncertainty of $X_{\text{max}}$ is not plotted here. Energy bins are labeled and colored for distinction. Both the data and simulations evolve up and to the right for increasing energy.}
+  \caption[Energy evolution of mean $\hat{S}^{\mu}_{800}$ vs. mean $X_{\text{max}}$.]{The energy evolution of the mean $\hat{S}^{\mu}_{800}$ vs. mean $X_{\text{max}}$ distributions. The mean $\hat{S}^{\mu}_{800}$ values are plotted on a logarithmic scale so all energy bins are visible; however, this makes the statistical uncertainty of the mean $\hat{S}^{\mu}_{800}$ values not visible. The systematic uncertainty of $X_{\text{max}}$ is not plotted here. Energy bins are labeled by their range for distinction. Both the data and simulations evolve up and to the right for increasing energy.}
   \label{fig:energy_evolution}
 \end{figure}
 
