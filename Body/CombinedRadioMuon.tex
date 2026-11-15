@@ -1,15 +1,36 @@
 %
 % Combining high-quality radio Xmax reconstructions and muon reconstructions for mass composition (chapter 6)
 %
-\chapter{Combined Analysis of Muon and Electromagnetic Reconstructions}\label{chap:radiomuon}
+\chapter{Combined Analysis of Radio and Muon Reconstructions}\label{chap:radiomuon}
 
-Coming soon
+% For final summary chapter???
+%Throughout this dissertation, sensitivity to the primary cosmic-ray mass is shown to improve when combining radio $X_{\text{max}}$ and muon reconstructions.
+%\Cref{chap:airshowers} describes this idea using theoretical models of air showers,~\Cref{chap:simulations} proves this result in simulations 
+
+The previous chapter builds upon a previous neural-network based analysis that predicts the muonic signal component measured by the SD of the Pierre Auger Observatory.
+The energy threshold of the neural network is lowered by one decade in cosmic-ray energy, enabling the network to predict the muonic signal component for the SD-750, a densely spaced array of the Auger SD with a lower energy threshold of fully efficient air-shower detections than the SD-1500.
+Co-located with the SD-750 is AERA, an engineering array of radio antennas with a proven event-level $X_{\text{max}}$ reconstruction~\cite{auger_prd2024_aeraxmax,auger_prl2024_aeraxmax}.
+The AERA $X_{\text{max}}$ reconstructions use a trigger from the SD to readout the radio data, therefore a subset of the AERA $X_{\text{max}}$ reconstructions have a complementary SD-750 reconstruction which facilitates the application of the neural network from the previous chapter to a subset of the AERA $X_{\text{max}}$ data.
+This chapter applies the neural network trained in the previous chapter to the SD-750 reconstructions of the AERA $X_{\text{max}}$ dataset to predict the muonic signal component measured by the SD at \qty{800}{\meter} from the air-shower axis, $\hat{S}^{\mu}_{800}$.
+The predicted muon observable and the radio $X_{\text{max}}$ measurements are combined to study the feasibility of hybrid radio-muon measurements with a neural-network based muon observable and to study the mismatch between muon predictions from simulations and muon measurements from data, known as the muon puzzle.  
+
+%to study their joint effect 
+
+%which have reconstruction biases either removed or well constrained to obtain a measure of the muonic signal.
+%will apply the neural network trained in the previous chapter to a subset of the AERA $X_{\text{max}}$ reconstructions which have reconstruction biases 
+
+%with reconstruction biases either removed or well constrained~\cite{auger_prd2024_aeraxmax,auger_prl2024_aeraxmax}.
+
+%where biases of this reconstruction are well studied
+%lowers the energy threshold of a previous neural-network based analysis by one decade in cosmic-ray energy, enabling the application of the energy 
 
 %Description AERA Shower maximum reconstructions on the SD energy scale (Bjarni work) and the reconstruction of the absolute EM energy from AERA
 
-\section{Why Use the Neural-Network Reconstructed Muon Observable?}\label{sec:motivation}
+\section{Why Use the Neural-Network Predicted Muon Observable?}\label{sec:motivation}
 
-The UMD provides direct muon measurements of air showers on a per-event basis, which in principle can be combined with per-event radio $X_\text{max}$ reconstructions to increase the overall mass sensitivity of Auger, both per-event and for the average mass composition.
+Co-located with the SD-750 and AERA is also the UMD, an array of buried scintillators to directly measure the muon content of air showers.
+With this knowledge, the reader may ask: ``why not use the UMD to measure a muon observable instead of using the neural network to predict one?''
+The UMD provides direct muon measurements of air showers on a per-event basis, which in principle can be combined with per-event radio $X_\text{max}$ reconstructions to increase the overall mass sensitivity of Auger, both at the event level and for the average mass composition.
 The AERA and UMD footprints are co-located making simultaneous measurements feasible; however, implementation is difficult due to both geometrical and timeline restrictions for each detector system.
 The geometry of UMD scintillator panels is optimal for vertical air-shower reconstructions while the spacing of the AERA radio antennas makes the AERA $X_{\rm max}$ reconstruction more efficient for air showers with $\theta>\,$\qty{40}{\degree} (see~\Cref{fig:aera_umd_histograms}).
 Regarding timeline constraints, AERA, recording air showers since 2011, has fulfilled its primary science goal of proving the usefulness of air-shower reconstructions in the \qtyrange{30}{80}{\mega\hertz} band near Malarg\"{u}e and may eventually be decomissioned.
@@ -20,13 +41,13 @@ The radio $X_{\rm max}$ reconstruction will eventually be ported to the RD anten
   \centering
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.459\textwidth]{chapter6/AERA_BiasFreeXmax_ZenithHistogram.pdf}
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter6/MDSD750_ICRC2025_test7_reconstructions_ZenithHistogram.pdf}
-  \caption[Reconstructed zenith angle histograms for AERA and UMD.]{Reconstructed zenith angle histograms from the bias-free sample of the AERA $X_\text{max}$ reconstructions (left) and the standard UMD + SD-750 reconstruction of the Pierre Auger Observatory (right). The label ``icrc2025-test7'' refers to the version tag for the Auger observatory's reconstruction software. Both reconstructions shown here are for Auger Phase I data only.}
+  \caption[Reconstructed zenith angle histograms for AERA and UMD.]{Reconstructed zenith angle histograms from the bias-free sample of the AERA $X_\text{max}$ reconstructions (left) and the standard UMD + SD-750 reconstruction of the Pierre Auger Observatory (right). The definition of bias-free is discussed in the text (see~\Cref{sec:application}). The label ``icrc2025-test7'' refers to the version tag for the Auger observatory's reconstruction software. Both reconstructions shown here are for Auger Phase I data only.}
   \label{fig:aera_umd_histograms}
 \end{figure}
 
 Alternatively, the neural-network based muon predictions presented in~\Cref{chap:nn} are not affected by these same constraints that limit the overlap between the UMD and AERA $X_{\text{max}}$ reconstructions.
 With the foresight of a potential combination with the AERA results, the neural network was trained and validated beyond the upper limit of the zenith distribution for the AERA reconstructions.
-This enables each AERA reconstructed $X_{\rm max}$, post quality cuts, to have a complementary neural-network predicted muon observable.
+This enables the possibility for each AERA event with a reconstructed $X_{\rm max}$ and an SD-750 reconstruction to have a complementary neural-network predicted muon observable.
 The neural network is subject to other constraints, including the quality of the muon observable it predicts and the mismatch of hadronic interaction model predictions to observed data, each of which will be discussed within the following sections.
 Future work, beyond the scope of this dissertation, could compare the above-ground neural-network predicted muon signals with the below-ground measured muon signals of the UMD.
 
@@ -42,21 +63,105 @@ Future work, beyond the scope of this dissertation, could compare the above-grou
 
 \section{Application of the Neural Network to the AERA Bias-Free Data}\label{sec:application}
 
-Description of the AERA bias-free dataset, including why it is considered ``bias-free''.
+%Description of the AERA bias-free dataset, including why it is considered ``bias-free''.
+
+The triggering of the SD-750 array is used to initiate the readout of the AERA radio antennas used to reconstruct a per-event radio $X_{\text{max}}$.
+Therefore, a subset of the events with an AERA $X_{\text{max}}$ reconstruction will also have an SD-750 reconstruction.
+In the AERA analysis, an energy cut requiring $E_{\text{SD}}>$\,\qty[parse-numbers=false]{10^{17.5}}{\electronvolt} for the SD-750 reconstructed energy is applied to select air-shower events with energies above the threshold for full detection efficiency of the SD-750; however, the detection efficiency of AERA is separate from the detection efficiency of the SD-750.
+To account for this, a radio acceptance cut is used in the previous AERA $X_{\text{max}}$ analysis, resulting in a final selection of 594 ``bias-free'' AERA events with an $X_{\text{max}}$ reconstruction and a complementary SD-750 reconstruction.
+Other biases in the $X_{\text{max}}$ reconstruction were studied and quantified in~\cite{auger_prd2024_aeraxmax,auger_prl2024_aeraxmax} prior to the acceptance cut, including atmospheric effects, hadronic interaction model interpretations, the SD energy reconstruction, and the method of reconstructing $\langle X_{\text{max}}\rangle$.
+The previous analysis determined a total systematic uncertainty on $\langle X_{\text{max}}\rangle$ of $\pm$\qty{10}{\gram\per\centi\meter\squared} which is approximately constant across the previously studied energy range (\qty[parse-numbers=false]{10^{17.5}}{\electronvolt} up to energies of roughly \qty[parse-numbers=false]{10^{18.8}}{\electronvolt}).
+Hence, for this analysis, a set of 594 events with both a radio $X_{\text{max}}$ and an SD-750 reconstruction is available.
+These events are considered ``bias-free'' as all potential reconstruction biases have been either removed or quantified within the quoted systematic uncertainty. 
+
+%Biases in the $X_{\text{max}}$ reconstruction itself were quantified prior to the SD-750 efficiency cuts, yielding a final dataset of 594 ``bias-free'' AERA events with an $X_{\text{max}}$ reconstruction and a complementary SD-750 reconstruction.
+%Biases studied in~\cite{auger_prd2024_aeraxmax} include atmospheric effects, hadronic interaction model interpretations, the SD energy reconstruction, the reconstruction of $\langle X_{\text{max}}\rangle$, and the SD 
+
+%The AERA dataset used to reconstruct a radio $X_{\text{max}}$ is first triggered 
 
 \subsection{Quality Cuts}\label{ssec:cuts}
 
-Include a table of AERA bias-free dataset SD reconstruction with same cuts as Bjarni used but ported to ``icrc2025-test7'' reconstruction.
-Also include a table of the cuts used to select high-quality MLDF fits.
-Describe the zenith weighting scheme to weight zenith angles of the simulations to match the zenith distribution of the data. 
+%Include a table of AERA bias-free dataset SD reconstruction with same cuts as Bjarni used but ported to ``icrc2025-test7'' reconstruction.
+%Also include a table of the cuts used to select high-quality MLDF fits.
+%Describe the zenith weighting scheme to weight zenith angles of the simulations to match the zenith distribution of the data. 
+
+The neural network in~\Cref{chap:nn} was trained on simulations that were reconstructed using the icrc2025-test7 version of \Offline; however, this is not the same \Offline version used for the SD-750 reconstruction within the AERA $X_{\text{max}}$ analysis.
+To account for this, the all Phase I SD-750 reconstructions using \Offline version icrc2025-test7 were matched via their distinct Auger event IDs to the 594 AERA bias-free events.
+After matching, the standard set of SD-750 reconstruction quality cuts used by the Pierre Auger Observatory was applied\footnote[1]{The standard SD-750 cuts are available on the GitLab for the Pierre Auger Observatory on the main branch of \Offline at: \href{https://gitlab.iap.kit.edu/auger-observatory/offline/offline/-/blob/main/ADST/Analysis/cuts/ICRC2025/sd750_vertical.cuts?ref_type=heads}{https://gitlab.iap.kit.edu/auger-observatory/offline/offline/-/blob/main/ADST/Analysis/cuts/ICRC2025/sd750_vertical}.}.
+These cuts are the same as used in the pre-selection of the SD-750 data within the AERA $X_{\text{max}}$ analysis, yet must be applied here as small changes in the reconstruction are possible from improvements in the reconstruction modules and changes in data-driven constants used in the reconstruction.
+\Cref{tab:sd_cuts} lists all applied selection cuts to the SD-750 dataset, including their total selection efficiency.
+An SD energy cut lower than the threshold for full efficiency is applied to maximize statistics of the selection, as changes in the SD-750 energy reconstruction between \Offline versions can shift events below this threshold, especially for events with reconstructed energies close to \qty[parse-numbers=false]{10^{17.5}}{\electronvolt}.
+These events will be cut later from the analysis as to not introduce any additional bias.
+Furthermore, the radio reconstruction was not performed again, and instead the nominal radio $X_{\text{max}}$ values and their uncertainties from the previous analysis are used for the remainder of this chapter.
+
+\begin{table}
+    \caption[Summary of the SD-750 selection cuts for the bias-free dataset.]{The SD-750 selection cuts and resulting statistics of each cut for the bias-free AERA $X_{\text{max}}$ dataset. These are the standard SD-750 quality cuts used for the icrc2025-test7 \Offline version, with the exception of the cut on the energy threshold. The resulting 589 events that pass the selection cuts will be given as input to the neural network to predict station-level muon signals which are then combined per-event to determine an event-level muon observable from a muon LDF fit.}
+    \label{tab:sd_cuts}
+    \vspace*{.5\baselineskip}
+    \centering
+    \begin{tabular}{| c || c | c |}
+        \hline
+        Selection Cut                        & Selection Cut (Auger Lingo) & Total Events  & $\varepsilon$ (\%)\\
+        \hline
+        \hline
+        Bias-Free Dataset                       & ``  ''                                          & 594  & 100.0\\
+        Remove lightning                        & \texttt{!lightning}                             & 594  & 100.0\\
+        Converged LDF fit                       & \texttt{minRecLevel 3}                          & 594  & 100.0\\
+        $\theta_{\rm SD}<$\qty{55}{\degree}     & \texttt{maxZenithSD 55}                         & 592  &  99.7\\
+        SD T4 trigger                           & \texttt{T4Trigger 2}                            & 592  &  99.7\\
+        6T5 trigger                             & \texttt{T5Trigger 2}                            & 590  &  99.3\\
+        $\lg\left(E / \text{eV}\right)>$\,17.4  & \texttt{minLgEnergySD 17.4}                     & 590  &  99.3\\
+        Bad SD-750 periods rejection            & \texttt{badPeriodsRejectionFromFile}            & 589  &  99.2\\
+        Phase I event                           & \texttt{timeInterval { params: 080731 211201 }} & 589  &  99.2\\
+        \hline
+    \end{tabular}
+\end{table}
+
+After running the SD-750 selection cuts, the remaining 589 bias-free events were given as input to the trained neural network to predict the station-level muonic signal measured by the individual SD-750 stations for each event.
+Only stations with a non-saturated, measured signal are given as input to the neural network.
+The station-level predictions are grouped by their Auger event IDs and then fit to the muon LDF given by~\Cref{eq:mldf}.
+The same fit procedure and fit likelihood (\Cref{eq:joint_nll}) as in~\Cref{chap:nn} are used, meaning only triggered and silent stations are included in the fit.
+Different from~\Cref{chap:nn} are the parameterizations of the effective bias and effective resolution (respectively~\Cref{eq:effective_bias} and~\Cref{eq:effective_resolution}) of the network, which for the application to the AERA $X_{\text{max}}$ dataset are calculated using the mass fractions as predicted from Auger FD measurements assuming an EPOS LHC-R interpretation of the data~\cite{auger_prd2026_xmax}.
+The mass fractions from~\cite{auger_prd2026_xmax} are available at energies of \qty[parse-numbers=false]{10^{17.7}}{\electronvolt} and above, therefore the network parameterizations assume the mass fractions of the \qtyrange[parse-numbers=false]{10^{17.7}}{10^{17.8}}{\electronvolt} energy bin for energies below \qtyrange[parse-numbers=false]{10^{17.7}}.
 
 \begin{figure}[h]
   \centering
-  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.47\textwidth]{chapter6/aerabiasfree_datafits_betaerr_histogram.pdf}
-  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter6/simulationfits_betaerr_histogram.pdf}
-  \caption[Quality cut of the muon LDF slope.]{Histograms of the uncertainty in $\beta$, the muon LDF slope, from fitting the neural-network predictions to the muon LDF given by~\Cref{eq:mldf}. Histograms are shown for the muon LDF fits to the bias-free sample of the AERA $X_\text{max}$ reconstructions (left) and the EPOS LHC-R test set of simulations (right). The dashed red vertical line shows the location of the $\sigma_{\beta}$ quality cut applied to both data and simulations ($\sigma_{\beta}<1$).}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.47\textwidth]{chapter6/aerabiasfree_datafits_betaerr_histogram_postcuts.pdf}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter6/simulationfits_betaerr_histogram_postcuts.pdf}
+  \caption[Quality cut of the muon LDF slope.]{Histograms of the uncertainty in $\beta$, the muon LDF slope, from fitting the neural-network predictions to the muon LDF given by~\Cref{eq:mldf}. Histograms are shown for the muon LDF fits to the bias-free sample of the AERA $X_\text{max}$ reconstructions (left) and the EPOS LHC-R test set of simulations (right). The dashed red vertical line shows the location of the $\sigma_{\beta}$ quality cut applied to both data and simulations ($\sigma_{\beta}<1$) after all other quality cuts are applied.}
   \label{fig:sigma_beta_histograms}
 \end{figure}
+
+The fit validity requirement of at least four stations with a neural-network prediction is enforced to maintain the number of degrees of freedom for the fit is at least equal to the number of free fit parameters.
+Other quality cuts to ensure accurate fit results include cutting events where one fit parameter (either $\hat{S}^{\mu}_{450}$ or $\beta$) are at their limit, removing events with an SD-750 reconstructed energy outside of the network trained range of \qtyrange[parse-numbers=false]{10^{17.5}}{10^{18.5}}{\electronvolt}, and removing events with an SD-750 reconstructed zenith angle outside of the range \qtyrange{0}{55}{\degree}.
+The limits for the fit parameters of $\hat{S}^{\mu}_{450}$ and $\beta$ are \qtyrange{0.1}{10000}{VEM} and \numrange{0.1}{10} respectively.
+A final quality cut on the uncertainty in the muon LDF slope, $\beta$, is applied to the dataset as the distribution of $\sigma_{\beta}$ has a tail with unconstrained fits (see~\Cref{fig:sigma_beta_histograms}).
+Unconstrained values of $\beta$ contribute to unconstrained values of $\hat{S}^{\mu}_{800}$ and therefore are removed to yield a high-quality subset of the neural-network predicted muon observables which in addition have a bias-free radio $X_{\text{max}}$ reconstruction.
+\Cref{tab:final_quality_cuts} lists the quality cuts applied to the bias-free AERA $X_{\text{max}}$ dataset and to the EPOS LHC-R test set of simulations.
+The EPOS LHC-R test set will be used in comparison against the bias-free $X_{\text{max}}$ dataset for the remainder of this chapter and therefore the same quality cuts must be applied to these simulations to prevent any unwanted selection biases.
+
+\begin{table}
+    \caption[Summary of the data and simulation quality cuts prior to analysis.]{The SD-750 selection cuts and resulting statistics of each cut for the bias-free AERA $X_{\text{max}}$ dataset. These are the standard SD-750 quality cuts used for the icrc2025-test7 \Offline version, with the exception of the cut on the energy threshold. The resulting 589 events that pass the selection cuts will be given as input to the neural network to predict station-level muon signals which are then combined per-event to determine an event-level muon observable from a muon LDF fit.}
+    \label{tab:final_quality_cuts}
+    \vspace*{.5\baselineskip}
+    \centering
+    \begin{tabular}{| c || c | c || c | c |}
+        \hline
+        Selection Cut                        & Bias-Free $X_{\text{max}}$ Dataset & $\varepsilon$ (\%) & EPOS LHC-R Test Set & $\varepsilon$ (\%)\\
+        \hline
+        \hline
+        Bias-Free Dataset                       & ``  ''                                          & 594  & 100.0\\
+        Remove lightning                        & \texttt{!lightning}                             & 594  & 100.0\\
+        Converged LDF fit                       & \texttt{minRecLevel 3}                          & 594  & 100.0\\
+        $\theta_{\rm SD}<$\qty{55}{\degree}     & \texttt{maxZenithSD 55}                         & 592  &  99.7\\
+        SD T4 trigger                           & \texttt{T4Trigger 2}                            & 592  &  99.7\\
+        6T5 trigger                             & \texttt{T5Trigger 2}                            & 590  &  99.3\\
+        $\lg\left(E / \text{eV}\right)>$\,17.4  & \texttt{minLgEnergySD 17.4}                     & 590  &  99.3\\
+        Bad SD-750 periods rejection            & \texttt{badPeriodsRejectionFromFile}            & 589  &  99.2\\
+        Phase I event                           & \texttt{timeInterval { params: 080731 211201 }} & 589  &  99.2\\
+        \hline
+    \end{tabular}
+\end{table}
 
 
 \subsection{Scaling the Observables with SD Reconstructed Energy}\label{ssec:flattening}
