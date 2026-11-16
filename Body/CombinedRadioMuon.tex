@@ -180,8 +180,8 @@ Mostly the proton and iron simulations are used for the simulation-data comparis
 %Describe fits over full energy range of simulations (using SD-750 reconstructed energies).
 
 The analyses for this chapter are energy-binned analyses.
-Therefore, the observable values of $\hat{S}^{\mu}_{800}$ and $X_{\text{max}}$ are scaled with respect to the SD-750 reconstructed energy of the event to remove the energy dependence of observables within energy bins.
-In essence, this removes the smearing of observable distributions caused by energy while maintaining the intrinsic shower-to-shower fluctuations for a fixed air-shower energy.
+Therefore, the observable values of $\hat{S}^{\mu}_{800}$ and $X_{\text{max}}$ within an energy bin are scaled with respect to the SD-750 reconstructed energy of the event to remove their energy dependence.
+In essence, this fixes the air-shower energy within the bin, which removes the smearing of observable distributions caused by energy while preserves the intrinsic shower-to-shower fluctuations.
 From the Heitler-Matthews model (see~\Cref{chap:airshowers}), the relationships of $X_{\text{max}}$ and $\lg\left(N_{\mu}\right)$ are linear in $\lg\left(E / \text{eV}\right)$.
 The base-10 logarithm of the muonic signal at \qty{800}{\meter} from the air-shower axis is also taken to be linear in $\lg\left(E / \text{eV}\right)$ by assuming $\hat{S}^{\mu}_{800}$ is proportional to $N_{\mu}$, up to a multiplicative factor.
 
@@ -202,7 +202,7 @@ The average of the proton and iron fits is shown as the solid grey line.
 
 %within an energy bin cause by  
 
-\begin{figure}[h]
+\begin{figure}
   \centering
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.782\textwidth]{chapter6/energy_scaling_fits_smu800_xmax_nn_prediction_signal.pdf} \\
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.8\textwidth]{chapter6/energy_scaling_fits_smu800_xmax_nn_prediction_xmax.pdf}
@@ -220,9 +220,9 @@ Both simulations and data within each energy bin are scaled with respect to the 
 \noindent
 $E_{\text{c}}$ is the energy of the bin center and $E_{\text{SD}}$ is the SD-750 reconstructed energy of the event being scaled.
 The effect of energy scaling the $X_{\text{max}}$ and $\hat{S}^{\mu}_{800}$ observables is seen for two separate energy bins in~\Cref{fig:scaling_smu800_xmax}, where the top plots show proton, iron, and data distributions of $\hat{S}^{\mu}_{800}$ vs. $X_{\text{max}}$ with no energy scaling applied and the bottom plots show these same plots with observables scaled to the center energy of the bin.
-Energy scaling greater aligns both the proton-iron distributions and the data points along a linear curve in the $\hat{S}^{\mu}_{800}-X_{\text{max}}$ plane, exemplified by a slight narrowing of the 68\% Gaussian KDE contours and a tightening of the data distributions. 
+Energy scaling greater aligns both the proton-iron distributions and the data points following a linear relationship in the $\hat{S}^{\mu}_{800}-X_{\text{max}}$ plane, exemplified by a slight narrowing of the 68\% Gaussian KDE contours of proton and iron and a tightening of the data distributions. 
 
-\begin{figure}[h]
+\begin{figure}
   \centering
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter6/smu800_xmax_individual_zenw_en17.7_17.9_zen0_55_nn_prediction.pdf}
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter6/smu800_xmax_individual_zenw_en18.3_18.5_zen0_55_nn_prediction.pdf} \\
@@ -232,34 +232,83 @@ Energy scaling greater aligns both the proton-iron distributions and the data po
   \label{fig:scaling_smu800_xmax}
 \end{figure}
 
-In~\Cref{fig:scaling_smu800_xmax}, the simulations (both scaled and unscaled values) are weighted with respect to the data distribution of zenith angles.
+In~\Cref{fig:scaling_smu800_xmax}, a zenith-weighting scheme of the simulations (both scaled and unscaled values) is applied, where weights are calculated with respect to the data distribution of zenith angles.
 This is necessary to ensure the simulations and data probe the same phase space when comparing the neural-network predicted $\hat{S}^{\mu}_{800}$ observable, as this observable is expected to be dependent on the zenith angle of the air shower.
 The simulations were generated with a $dN/d\theta \propto \sin\theta\cos\theta$ zenith distribution; however, the bias-free AERA dataset does not follow this distribution due to the reconstruction efficiency of AERA radio antennas and selection effects (see the left plot of~\Cref{fig:aera_umd_histograms}).
-Instead the data determine four quantile bins of $\sec\left(\theta_{\text{SD}}\right)$ and the simulation fraction within each data quantile bin is computed.
-The zenith weighting of the simulations is determined by the relative fraction of data within the quantile bin (approximately fixed for each bin) to the fraction of simulations within the bin.
+Instead, the data determine four quantile bins of $\sec\left(\theta_{\text{SD}}\right)$ and the simulation fraction within each quantile bin is computed.
+The zenith weighting of the simulations is determined by the fraction of data within the quantile bin (approximately fixed for each bin) to the fraction of simulations within the bin.
 The zenith weights are calculated separately for each primary and normalized to fix the total per-primary zenith weight to 1.0 across the four zenith bins.
-This zenith weighting and energy scaling are performed to remove potential biases from the simulation-data comparisons and each are applied to the analysis and plots for the remainder of this chapter.
+This zenith weighting and energy scaling are performed to remove potential biases from the simulation-data comparisons.
+Both zenith weighting of the simulations and energy scaling of the data and simulations are applied to the analysis and plots presented in the remainder of this chapter.
 
 
 \section{Testing the Linearity of the \texorpdfstring{$\hat{S}^{\mu}_{800}-X_{\text{max}}$}{hatS\textmu800--Xmax} Correlation}\label{sec:pearson}
 
-Explain smearing and how resolutions are calculated.
-Introduce Pearson $r$ to test for linearity.
-Further describe linearity tests and comparisons between data and simulations.
-Describe bootstrap.
+%Explain smearing and how resolutions are calculated.
+%Introduce Pearson $r$ to test for linearity.
+%Further describe linearity tests and comparisons between data and simulations.
+%Describe bootstrap.
 
-\begin{figure}[h]
+To first test the simulation-data relationship, the linearity of each is computed in the $\hat{S}^{\mu}_{800}-X_{\text{max}}$ plane and then compared.
+As in the previous section, simulations and data are binned in five equally spaced energy bins of width $\lg\left(E_{\text{SD}} / \text{eV}\right)=$\,0.2 and both are energy scaled with respect to the center of the bin.
+The zenith-weighting scheme for the simulations is also applied.
+Prior to the linearity test, each simulated observable is smeared by a Gaussian in order to mimic the effects of detector resolution on the observable's reconstruction.
+The width of the Gaussian smearing applied to each observable is determined by the average reconstruction resolution of that observable calculated from the data within the energy bin.
+
+Post smearing of the simulations, the linearity of the $\hat{S}^{\mu}_{800}-X_{\text{max}}$ correlation for data and simulations can be tested and then compared.
+The Pearson correlation coefficient $r$ is used to quantify the $\hat{S}^{\mu}_{800}-X_{\text{max}}$ correlation for both data and simulations.
+The 68\% uncertainty on each Pearson $r$ value is estimated by a bootstrapped random sampling with replacement method.
+A bootstrapped $r$ is calculated a total of $N=50$ times, where the standard deviation of the bootstrapped values determines this $1\sigma$ uncertainty band. 
+\Cref{fig:smeared_smu800_xmax} shows the smeared proton and iron distributions of $\hat{S}^{\mu}_{800}$ vs. $X_{\text{max}}$ with the data points overlaid for two separate energy bins: $\lg\left(E_{\text{SD}} / \text{eV}\right)=$\,\numrange{17.7}{17.9} and \numrange{18.3}{18.5}.
+The Pearson $r$ values, calculated for both the data and the proton-iron simulated distributions, are listed for each energy bin, including their bootstrapped $1\sigma$ uncertainties.
+The anti-correlation of $\hat{S}^{\mu}_{800}$ and $X_{\text{max}}$ results in negative Pearson $r$ values.
+
+\begin{figure}
   \centering
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter6/smu800_xmax_smeared_zenw_pearson_en17.7_17.9_zen0_55_nn_prediction.pdf} \\
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter6/smu800_xmax_smeared_zenw_pearson_en18.3_18.5_zen0_55_nn_prediction.pdf}
-  \caption[Smeared $\hat{S}^{\mu}_{800}$ vs. $X_{\text{max}}$ distributions.]{The energy scaled and smeared $\hat{S}^{\mu}_{800}$ vs. $X_{\text{max}}$ distributions for proton, iron, and the AERA bias-free $X_{\text{max}}$ data within two separate energy bins: $\lg\left(E_{\text{SD}} / \text{eV}\right)$=\numrange{17.7}{17.9} (top) and \numrange{18.3}{18.5} (bottom). Data and simulations are energy scaled to the bin center, where the scaling constants were determined from the fits in~\Cref{fig:nn_energy_scaling}. Simulations are smeared by the values listed on the plots to mimic detector resolutions and a test of linearity following the Pearson correlation coefficient $r$ is performed on both data and simulations.}
+  \caption[Smeared $\hat{S}^{\mu}_{800}$ vs. $X_{\text{max}}$ distributions.]{The energy scaled and smeared $\hat{S}^{\mu}_{800}$ vs. $X_{\text{max}}$ distributions for proton, iron, and the AERA bias-free $X_{\text{max}}$ dataset within two separate energy bins: $\lg\left(E_{\text{SD}} / \text{eV}\right)$=\numrange{17.7}{17.9} (top) and \numrange{18.3}{18.5} (bottom). Data and simulations are energy scaled to the bin center, where the scaling constants were determined from the fits in~\Cref{fig:nn_energy_scaling}. Simulations are zenith weighted to the data and smeared by the values listed on the plots to mimic detector resolutions. A test of linearity following the Pearson correlation coefficient $r$ is performed on both data and simulations.}
   \label{fig:smeared_smu800_xmax}
 \end{figure}
+
+%The Pearson $r$ values 
+
+%A bootstrapping random sampling with replacement method is used to calculate the $r$ a total of $N=50$ times for both data and simulations.
+%The 68\% uncertainty on the Pearson $r$ value for both data and simulations is estimated as the standard deviation of the bootstrapped values.
+
+%To calculate an error estimate on the Pearson $r$, a bootstrapping method with $N=50$ is used 
+
+%between data and simulations can be compared
+
+%Smearing the simulations lessens the $\hat{S}^{\mu}_{800}-X_{\text{max}}$ correlation by folding the data's reconstruction resolution onto the true observable values from simulations.
+%Agreement in the $\hat{S}^{\mu}_{800}-X_{\text{max}}$ correlation between smeared simulations and data then 
+
+%Post smearing of the simulations, both simulations and data contain the reconstruction resolution folded onto their nominal observable values and therefore the linearity of the $\hat{S}^{\mu}_{800}-X_{\text{max}}$ distributions for simulations and data can be compared without the need of a systematic scaling effect.
+
+%allowing a more accurate representation of what the 
+
+%with a width of that observable's average reconstruction resolution within the energy bin.
+
+%In order to mimic the effects of reconstruction resolution  in the 
+
+The Pearson correlation coefficient $r$ is calculated in the $\hat{S}^{\mu}_{800}-X_{\text{max}}$ plane for proton and iron simulations and data within each of the five equally spaced energy bins used in this analysis.
+\Cref{fig:correlation} shows the energy evolution of the Pearson $r$ values for both data and simulations.
+The $\hat{S}^{\mu}_{800}-X_{\text{max}}$ correlation is calculated using only proton simulations, only iron simulations, and using the joint proton-iron distribution of simulations.
+Each of the simulated distributions is smeared and an uncertainty band is estimated from bootstrapping.
+The Pearson $r$ of data is included on the same plot for comparison, where the uncertainty on each data point is determined from the bootstrapping method previously described.
+The linear $\hat{S}^{\mu}_{800}-X_{\text{max}}$ correlation of the data approximately follows the same correlation determined by the joint proton-iron simulations, providing a sanity check that the correlation structure of this radio-muon observable pair is similar between data and simulations.
+The slope of this $\hat{S}^{\mu}_{800}-X_{\text{max}}$ correlation provides the additional mass information that is not accessible for studies of the $\hat{S}^{\mu}_{800}$ or $X_{\text{max}}$ observables alone.
+The similar energy evolution of the Pearson $r$ for data as in simulations then highlights that this hybrid radio-muon method adds mass sensitivity beyond individual radio or muon reconstructions, yet this result does not draw any conclusion for potential systematic offsets between the two reconstruction methods.
+
+%a sole radio or muon observable
+
+%The similar correlation slope  data and simulations therefore highlight that this hybrid radio-muon method 
+%Hence, the similar correlation slopes between 
 
 \begin{figure}[h]
   \centering
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter6/correlation_vs_energy_nn_prediction_signalsmeared_nsimboot50_purePpureFEincluded.pdf}
-  \caption[Energy evolution of Pearson $r$ for data and simulations.]{The Pearson correlation coefficient $r$ calculated within each energy bin, for both data and simulations, and plotted as a function of SD-750 reconstructed energy. The Pearson $r$ values for the pure proton and pure iron distributions are included as references. The uncertainties for simulations and data are each calculated as the standard deviation of  $N=50$ bootstraps. The data approximately follow the trend of the joint proton-iron simulations within the $\hat{S}^{\mu}_{800}-X_{\text{max}}$ plane, within uncertainties.}
+  \caption[Energy evolution of Pearson $r$ for data and simulations.]{The Pearson correlation coefficient $r$ calculated within each energy bin, for both data and simulations, and plotted as a function of SD-750 reconstructed energy. The Pearson $r$ values for the pure proton and pure iron distributions are included as references. The uncertainties for simulations and data are each calculated as the standard deviation of $N=50$ bootstraps. The data approximately follow the trend of the joint proton-iron simulations within the $\hat{S}^{\mu}_{800}-X_{\text{max}}$ plane, within uncertainties.}
   \label{fig:correlation}
 \end{figure}
 
@@ -270,6 +319,8 @@ As AERA dataset is ``bias-free'', average values can be used.
 Mismatch between the data and simulations for the muon observable.
 Describe how uncertainties are calculated and where systematic uncertainty comes from.
 Check difference between average depth of shower maximum between QGSJetII-04 and EPOS LHC-R, see if they are within $\pm$\qty{10}{\gram\per\centi\meter\squared} (the systematic uncertainty).
+
+The potential systematic offsets between the radio and muon observables is studied 
 
 \begin{figure}[h]
   \centering
