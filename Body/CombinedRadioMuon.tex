@@ -249,13 +249,13 @@ Both zenith weighting of the simulations and energy scaling of the data and simu
 %Further describe linearity tests and comparisons between data and simulations.
 %Describe bootstrap.
 
-To first test the simulation-data relationship, the linearity of each is computed in the $\hat{S}^{\mu}_{800}-X_{\text{max}}$ plane and then compared.
+The linearity of both data and simulations is each computed in the $\hat{S}^{\mu}_{800}-X_{\text{max}}$ plane and then compared to test the simulation-data relationship.
 As in the previous section, simulations and data are binned in five equally spaced energy bins of width $\lg\left(E_{\text{SD}} / \text{eV}\right)=$\,0.2 and both are energy scaled with respect to the center of the bin.
 The zenith-weighting scheme for the simulations is also applied.
 Prior to the linearity test, each simulated observable is smeared by a Gaussian in order to mimic the effects of detector resolution on the observable's reconstruction.
 The width of the Gaussian smearing applied to each observable is determined by the average reconstruction resolution of that observable calculated from the data within the energy bin.
 
-Post smearing of the simulations, the linearity of the $\hat{S}^{\mu}_{800}-X_{\text{max}}$ correlation for data and simulations can be tested and then compared.
+Post smearing of the simulations, the linearity of the $\hat{S}^{\mu}_{800}-X_{\text{max}}$ correlation for data and simulations can be quantified and then compared.
 The Pearson correlation coefficient $r$ is used to quantify the $\hat{S}^{\mu}_{800}-X_{\text{max}}$ correlation for both data and simulations.
 The 68\% uncertainty on each Pearson $r$ value is estimated by a bootstrapped random sampling with replacement method.
 A bootstrapped $r$ is calculated a total of $N=50$ times, where the standard deviation of the bootstrapped values determines this $1\sigma$ uncertainty band. 
@@ -296,10 +296,11 @@ The Pearson correlation coefficient $r$ is calculated in the $\hat{S}^{\mu}_{800
 The $\hat{S}^{\mu}_{800}-X_{\text{max}}$ correlation is calculated using only proton simulations, only iron simulations, and using the joint proton-iron distribution of simulations.
 Each of the simulated distributions is smeared and an uncertainty band is estimated from bootstrapping.
 The Pearson $r$ of data is included on the same plot for comparison, where the uncertainty on each data point is determined from the bootstrapping method previously described.
-The linear $\hat{S}^{\mu}_{800}-X_{\text{max}}$ correlation of the data approximately follows the same correlation determined by the joint proton-iron simulations, providing a sanity check that the correlation structure of this radio-muon observable pair is similar between data and simulations.
-The slope of this $\hat{S}^{\mu}_{800}-X_{\text{max}}$ correlation provides the additional mass information that is not accessible for studies of the $\hat{S}^{\mu}_{800}$ or $X_{\text{max}}$ observables alone.
-The similar energy evolution of the Pearson $r$ for data as in simulations then highlights that this hybrid radio-muon method adds mass sensitivity beyond individual radio or muon reconstructions.
-Yet, this result does not draw any conclusions about potential systematic offsets between the two reconstruction methods.
+The linear $\hat{S}^{\mu}_{800}-X_{\text{max}}$ correlation of the data approximately follows the same correlation as the joint proton-iron simulations, providing a sanity check that the correlation structure of this radio-muon observable pair is similar between data and simulations.
+The non-zero slope of this $\hat{S}^{\mu}_{800}-X_{\text{max}}$ correlation highlights additional mass information is accessible when studying the mass sensitivity of this observable combination in comparison to studies of the $\hat{S}^{\mu}_{800}$ or $X_{\text{max}}$ observables alone.
+Hence, this hybrid radio-muon method adds mass sensitivity beyond individual radio or muon reconstructions.
+The similar energy evolution of the Pearson $r$ for data as in simulations shows that this conclusion is also true for data.
+Yet, this result does not draw any conclusions about potential systematic offsets between the separate radio-muon reconstruction methods or between the data and simulations.
 
 %a sole radio or muon observable
 
@@ -321,11 +322,11 @@ Yet, this result does not draw any conclusions about potential systematic offset
 %Describe how uncertainties are calculated and where systematic uncertainty comes from.
 %Check difference between average depth of shower maximum between QGSJetII-04 and EPOS LHC-R, see if they are within $\pm$\qty{10}{\gram\per\centi\meter\squared} (the systematic uncertainty).
 
-The $\langle \hat{S}^{\mu}_{800}\rangle$ vs. $\langle X_{\text{max}}\rangle$ values binned in SD-750 reconstructed energy are studied to determine any potential systematic offsets between the radio and muon observables.
+The $\langle \hat{S}^{\mu}_{800}\rangle$ vs. $\langle X_{\text{max}}\rangle$ values binned in SD-750 reconstructed energy are studied to determine any potential systematic offsets between data and simulations for the radio and muon observables.
 \Cref{fig:mean_smu800_xmax} shows the $\langle \hat{S}^{\mu}_{800}\rangle$ vs. $\langle X_{\text{max}}\rangle$ values within two of the five studied energy bins.
-The average values are shown for the simulations of all primaries within the EPOS LHC-R test set and for the bias-free AERA dataset.
+The average values are shown for the simulations of all primaries within the EPOS LHC-R test set and for the measured air showers of the bias-free AERA dataset.
 The simulations are zenith weighted to the data and both simulations and data are energy scaled with respect to the center of the energy bin prior to calculating the average observable values within the bin.
-The statistical uncertainties are calculated as the uncertainty in the average value, while the systematic uncertainty of $\langle X_{\text{max}}\rangle$ is determined from~\cite{auger_prd2024_aeraxmax,auger_prl2024_aeraxmax} to be $\pm$\qty{10}{\gram\per\centi\meter\squared} across the full energy range of $\lg\left(E_{\text{SD}} / \text{eV}\right)=$\,\numrange{17.5}{18.5}.
+The statistical uncertainties are calculated as the uncertainties in their respective average values, while the systematic uncertainty of $\langle X_{\text{max}}\rangle$ is determined from~\cite{auger_prd2024_aeraxmax,auger_prl2024_aeraxmax} to be $\pm$\qty{10}{\gram\per\centi\meter\squared} across the full energy range of $\lg\left(E_{\text{SD}} / \text{eV}\right)=$\,\numrange{17.5}{18.5}.
 The systematic uncertainty in the neural-network predicted $\langle \hat{S}^{\mu}_{800}\rangle$ value has not been quantified.
 A dotted line connecting the proton and iron average values is drawn on the plots as a reference.
 
@@ -345,10 +346,14 @@ A dotted line connecting the proton and iron average values is drawn on the plot
 
 A mismatch of the average neural-network predicted muon signal at \qty{800}{\meter} from the air-shower axis between data and simulations is visible.
 The mismatch is present in all energy bins except for the bin $\lg\left(E_{\text{SD}} / \text{eV}\right)=$\,\numrange{18.3}{18.5}, which contains the highest energy air showers of the analysis.
-This is visible in the energy evolution of the $\langle \hat{S}^{\mu}_{800}\rangle$ vs. $\langle X_{\text{max}}\rangle$ data in comparison to simulations, presented in~\Cref{fig:energy_evolution}.
-$\langle \hat{S}^{\mu}_{800}\rangle$ values are plotted on a logarithmic scale such that all energy bins can be included on a single plot.
+This is visible in the energy evolution plot of the $\langle \hat{S}^{\mu}_{800}\rangle$ vs. $\langle X_{\text{max}}\rangle$ for all five energy bins, presented in~\Cref{fig:energy_evolution}.
+In this figure, $\langle \hat{S}^{\mu}_{800}\rangle$ values are plotted on a logarithmic scale so that all energy bins are included on a single plot.
 Note the uncertainties in the $\langle X_{\text{max}}\rangle$ values generally become larger with increasing air-shower energy, partially due to bin statistics.
-The mismatch prevents the combination of the average muon and average radio observables for mass composition analyses without a systematic scaling factor applied to the simulations.
+
+The bias-free AERA dataset has a per-event $X_{\text{max}}$ determined by a parabola fit to 27 air showers simulated with the QGSJETII-04 hadronic interaction model; however, this dataset is compared to air-shower simulations performed with the EPOS LHC-R hadronic interaction model.
+The difference in $\langle X_{\text{max}}\rangle$ between these two hadronic models is roughly \qty{30}{\gram\per\centi\meter\squared} within the $\lg\left(E_{\text{SD}} / \text{eV}\right)=$\,\numrange{17.5}{18.5} energy range studied here, with EPOS LHC-R predicting deeper showers than QGSJETII-04.
+A back-of-the-envelope calculation of shifting the $\langle X_{\text{max}}\rangle$ values of the EPOS LHC-R simulations by -\qty{30}{\gram\per\centi\meter\squared} still yields a mismatch between the data and simulations.
+The mismatch of data and simulations prevents the combination of the average muon and average radio observables for mass composition analyses using measured air-shower data without a systematic scaling factor applied to the simulations.
 This scaling factor embodies the muon puzzle, as this is a discrepancy of the muonic air-shower content between simulations and data.
 
 %Hence, this mismatch embodies the muon puzzle as this is a discrepancy of muon observables between simulations and data
@@ -369,7 +374,43 @@ This scaling factor embodies the muon puzzle, as this is a discrepancy of the mu
 
 \subsection{Quantifying the Simulation-Data Muon Discrepancy}\label{ssec:puzzle}
 
-Explain $F_{\mu}$ and the integration of the muon LDF.
+%The observed muon discrepancy between simulations and data for this analysis is investigated as a study of the muon puzzle.
+
+The analysis in this section is performed without applying the back-of-the-envelope -\qty{30}{\gram\per\centi\meter\squared} shift in the $\langle X_{\text{max}}\rangle$ values of the EPOS LHC-R simulations.
+Instead, it is assumed that the $X_{\text{max}}$ scale of the simulations and data are correct.
+Quantifying the simulation-data discrepancy in the predicted muon observable is performed assuming the $\langle X_{\text{max}}\rangle$ determined by the radio $X_{\text{max}}$ reconstruction is the true cosmic-ray composition within each energy bin.
+The vertical shift of the EPOS LHC-R simulated $\langle \hat{S}^{\mu}_{800}\rangle$ required to match the data in each energy bin is calculated as a measure of the discrepancy between the muon observable as determined from simulations and from data.
+
+The discrepancy is calculated using two metrics: first, as a percentage necessary to scale the simulations to match the data and second, as a muon fraction of the measured data with respect to the simulation predictions.
+There is a one-to-one correlation between the two values.
+The mass composition as determined by $X_{\text{max}}$ data fixes the location within the $\hat{S}^{\mu}_{800}-X_{\text{max}}$ plane at which to calculate the muon discrepancy and is reported as a dimensionless fraction along the proton-iron line of this plane:
+
+\begin{eqnarray}
+  Z_{X} = \frac{\langle X_{\text{max}}\rangle_{\text{data}} - \langle X_{\text{max}}\rangle_{\text{p}}}{\langle X_{\text{max}}\rangle_{\text{Fe}} - \langle X_{\text{max}}\rangle_{\text{p}}}. \label{eq:zscale_xmax}
+\end{eqnarray}
+
+\noindent
+$\langle X_{\text{max}}\rangle_{\text{p}}$ and $\langle X_{\text{max}}\rangle_{\text{Fe}}$ are the average $X_{\text{max}}$ values of proton and iron respectively within a given energy bin.
+The muon fraction, $F_{\mu}$, depends on the mass composition as determined by $X_{\text{max}}$ data, and is defined as
+
+\begin{equation}
+  F_{\mu} = \frac{\langle \hat{S}^{\mu}\rangle_{\text{data}}}{\langle \hat{S}^{\mu}\rangle_{\text{p}} + Z_{X} \left(\langle \hat{S}^{\mu}\rangle_{\text{Fe}} - \langle \hat{S}^{\mu}\rangle_{\text{p}}\right)}. \label{eq:f_mu}
+\end{equation}
+
+\noindent
+$\langle \hat{S}^{\mu}\rangle_{\text{p}}$ and $\langle \hat{S}^{\mu}\rangle_{\text{Fe}}$ are the average $\hat{S}^{\mu}$ values of proton and iron respectively within a given energy bin.
+A value of $F_{\mu}>$\,1 represents the data has more muonic signal (i.e.~a larger $\hat{S}^{\mu}$) than expected from the mass composition determined by the energy scaled radio $X_{\text{max}}$ data, while $F_{\mu}<$\,1 means the opposite is true.
+$F_{\mu}=$\,1 signifies the the neural-network predicted muon signal in data is equivalent with the expectation from simulations for the fixed mass composition by radio measurements, meaning there is no muon discrepancy between simulations and data. 
+
+Nominally, the muon observable is the neural-network predicted muon signal at \qty{800}{\meter} from the air-shower axis, $\hat{S}^{\mu}_{800}$.
+As exhibited in~\Cref{fig:mean_smu800_xmax}, $\hat{S}^{\mu}_{800}$ predicted from simulations over-estimates the $\hat{S}^{\mu}_{800}$ results from data within most of the studied energy bins in this analysis.
+The muon puzzle reported by several air-shower experiments expects the opposite is true, that simulations under-predict the measured results from data, for measurements of the muon content in air showers with energies above roughly \qty[parse-numbers=false]{10^{17}}{\electronvolt}.
+Yet, this discrepancy also depends on the distance from the air-shower axis at which the muon content is measured~\cite{icrc2023_arteaga_muonpuzzle}.
+To study this simulation-data muon discrepancy more generally, the $F_{\mu}$ value is calculated for the neural-network predicted muon observable at \qty{450}{\meter} from the air-shower axis ($\hat{S}^{\mu}_{450}$), at \qty{800}{\meter} from the air-shower axis ($\hat{S}^{\mu}_{800}$), and for the total neural-network predicted muon signal ($\hat{S}^{\mu}_{\text{total}}$).
+
+$\hat{S}^{\mu}_{450}$ is determined directly from the muon LDF fit as described in~\Cref{chap:nn}, $\hat{S}^{\mu}_{800}$ is determined by evaluating the muon LDF at \qty{800}{\meter}, and $\hat{S}^{\mu}_{\text{total}}$ is determined by integrating the muon LDF given by~\Cref{eq:mldf} using the nominal values of that event's $\hat{S}^{\mu}_{450}$ and $\beta$.
+The integration is performed numerically over the limits of $r$\,=\,\qtyrange[parse-numbers=false]{10^{-3}}{10^{6}}{\meter} to calculate the total muonic signal predicted by the neural network, which is accurate to within roughly $\left(10^{-3}\right)^{-\alpha+2}$ (approximately $10^{-4}$ with the muon LDF assumption $\alpha$\,=\,0.75).
+The $\hat{S}^{\mu}_{\text{total}}$ values have units of $\text{VEM}\,\text{m}^{2}$, yet the calculation of $F_{\mu}$ is a dimensionless fraction and enables a direct comparison of the fractions for the total muonic signal and the muonic signal at the references distances of \qty{450}{\meter} and \qty{800}{\meter} from the air-shower axis.
 
 \begin{figure}[h]
   \centering
@@ -378,15 +419,58 @@ Explain $F_{\mu}$ and the integration of the muon LDF.
   \label{fig:muon_rescaling}
 \end{figure}
 
+\Cref{fig:muon_rescaling} shows the percentage necessary to scale the simulated $\langle \hat{S}^{\mu}\rangle$ values to match the data for both reference distances and for the total neural-network predicted muon signal as a function of binned SD-750 reconstructed energy.
+The corresponding $F_{\mu}$ values are shown on the right-hand y-axis.
+The simulations in each energy bin are zenith weighted to the data and both data and simulations are energy scaled to the bin center prior to calculating any average observable values.
+Results show the $\langle \hat{S}^{\mu}_{800}\rangle$ value in data has less muonic signal than what is predicted in simulations assuming the mass composition from radio $X_{\text{max}}$ at most studied energies except for the highest energy bin of \qtyrange[parse-numbers=false]{10^{18.3}}{10^{18.5}}{\electronvolt}.
+The $\langle \hat{S}^{\mu}_{450}\rangle$ and $\langle \hat{S}^{\mu}_{\text{total}}\rangle$ value derived from data have more muonic signal than predicted in simulations for the given radio $X_{\text{max}}$ results for all studied energies.
+Overall, the total muon signal in data exhibits a roughly 10\% excess in comparison to simulations for the full energy range of \qtyrange[parse-numbers=false]{10^{17.5}}{10^{18.5}}{\electronvolt}.
+
+For comparison, an analysis of the UMD and FD measurements at the Pierre Auger Observatory sees an approximately 38\% excess ($F_{\mu}=$\,1.38) in the measured muon number compared to simulations using the EPOS LHC hadronic interaction model at energies of \qty[parse-numbers=false]{10^{17.5}}{\electronvolt} and \qty[parse-numbers=false]{10^{18}}{\electronvolt}~\cite{auger_epjc2020_muoncontent_umd}.
+These measurements are based on muon density measurements at \qty{450}{\meter} from the air-shower axis, corrected for zenith angle effects using the constant intensity cut method (see~\Cref{ssec:sd_reconstruction}).
+The results of $\langle \hat{S}^{\mu}_{450}\rangle$ reported here only exhibit an approximately 5\% excess ($F_{\mu}=$\,1.05) in the measured muon number compared to simulations; however, the excess is expected to be lower in magnitude for the EPOS LHC-R hadronic interaction model compared to its previous iteration~\cite{icrc2025_pierog}.
+The results of this hybrid radio-muon analysis emphasize that discrepancies in the simulated and measured muon content in air showers from a neural-network prediction are prevalent, where the magnitude and direction of the discrepancy depends on the measurement distance from the air-shower axis of the muon observable.
+Additional studies of hadronic interaction models and the muon content of air showers are necessary to further understand this discrepancy. 
+
+
+%The Pierre Auger Observatory with the 
+
+%Prior to calculating any averages the s
+
+%Notably, the IceCube Neutrino Observatory predicts the muon density measured at \qty{800}{\meter} from the air-shower axis 
+
+%This enables a measure of the vertical shift in the simulated 
+
+%Quantifying this discrepancy is done
+
+%Explain $F_{\mu}$ and the integration of the muon LDF.
+
 
 \section{Chapter Summary}\label{sec:ch6_summary}
 
-Combined radio-muon measurements do enhance the mass sensitivity through adding additional mass information; however, systematics need to be heavily scrutinized and understood before muon and radio measurements can be combined for mass composition analyses.
-Constraining hadronic interaction models is therefore of the utmost importance for hybrid radio-muon measurements.
-Direct muon measurements, such as with the Underground Muon Detector (UMD) of the Pierre Auger Observatory could improve prospects.
-Hybrid radio-muon measurements of air showers reconstructed with AERA and the UMD is shown in this chapter to be impractical; however, the following chapter introduces a new array of radio antennas at the Pierre Auger Observatory, the Auger Radio Infill SKALA Extension (ARISE), which aims at hybrid radio-muon detections of air showers in coincidence with the UMD.
+This chapter presents the application to data of the neural network trained in~\Cref{chap:nn} for the goal of obtaining hybrid radio-muon measurements of air showers.
+A bias-free dataset of radio $X_{\text{max}}$ measurements for 594 air showers is studied, each with a counterpart measurement by the SD-750 array of the Pierre Auger Observatory. 
+The neural network is applied to SD-750 measurements of this dataset to predict the station-level muonic signals, which are then combined at the event level and fit to a muon LDF to determine the muonic signal in the SD at \qty{800}{\meter} from the air-shower axis ($\hat{S}^{\mu}_{800}$).
+The muon observable is combined with the knowledge of radio $X_{\text{max}}$ measurements to study the joint effect on mass sensitivity of hybrid radio-muon measurements and to investigate the discrepancy in the muon observable as predicted in simulations and measured in data.
 
-; however, hybrid radio-muon measurements with the UMD will require a new array of radio antennas
+The hybrid radio-muon combination was shown to add mass sensitivity beyond either observable alone using simulations in~\Cref{chap:simulations}; however, this chapter shows this result is also true in data using a radio $X_{\text{max}}$ reconstruction and a neural-network prediction of the muonic signal measured by an array of water-Cherenkov detectors.
+Combined radio-muon measurements do enhance the mass sensitivity through adding additional mass information, as exemplified from the significant non-zero slope of the $\hat{S}^{\mu}_{800}-X_{\text{max}}$ correlation in data.
+Yet, this chapter shows a systematic mismatch between the predictions from simulations and the results from data for the hybrid-radio muon method.
+Systematics need to be heavily scrutinized and understood before muon and radio measurements can be combined for mass composition analyses.
+
+The simulation-data mismatch is quantified between the simulated and measured muon observables studied within this chapter; however, future radio-muon analyses that plan to determine an event-by-event or an average mass composition will require this mismatch to be rectified.
+Incomplete descriptions of the hadronic interactions in air showers are known to contribute significantly to this muon discrepancy between data and simulations.
+Constraining hadronic interaction models is therefore of the utmost importance for hybrid radio-muon measurements.
+Direct muon measurements, such as with the Underground Muon Detector (UMD) of the Pierre Auger Observatory could improve prospects over the neural-network based muon observable as these direct measurements are less subject to the limitations of hadronic interaction models.
+Hybrid radio-muon measurements of air showers reconstructed with the radio antennas of AERA and the UMD is shown in this chapter to be impractical; however, the following chapter introduces a new array of radio antennas at the Pierre Auger Observatory, the Auger Radio Infill SKALA Extension (ARISE), which aims at hybrid radio-muon detections of air showers through coincidence measurements with the UMD.
+
+%A major contribution to this mismatch are the predictions 
+
+%The discrepancy between simulated and measured muon observables contributes significantly to this systematic and is subject to the choice of hadronic interaction model used to interpret the data.
+
+%This discrepancy is studied for three muon observables derived from the neural network predictions: the SD muonic signal at \qty{450}{\meter} from the air-shower axis, at \qty{800}{\meter} from the air-shower axis, and the total SD muonic signal of the reconstruction.
+
+%; however, hybrid radio-muon measurements with the UMD will require a new array of radio antennas
 
 %\section{Muon and Shower Maximum Reconstructions with an Electromagnetic Energy}\label{sec:radioenergyscale}
 %Comparison of ln(A) Plots (avg. and sigma)
