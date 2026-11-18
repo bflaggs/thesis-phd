@@ -352,7 +352,7 @@ Note the uncertainties in the $\langle X_{\text{max}}\rangle$ values generally b
 
 The bias-free AERA dataset has a per-event $X_{\text{max}}$ determined by a parabola fit to 27 air showers simulated with the QGSJETII-04 hadronic interaction model; however, this dataset is compared to air-shower simulations performed with the EPOS LHC-R hadronic interaction model.
 The difference in $\langle X_{\text{max}}\rangle$ between these two hadronic models is roughly \qty{30}{\gram\per\centi\meter\squared} within the $\lg\left(E_{\text{SD}} / \text{eV}\right)=$\,\numrange{17.5}{18.5} energy range studied here, with EPOS LHC-R predicting deeper showers than QGSJETII-04.
-A back-of-the-envelope calculation of shifting the $\langle X_{\text{max}}\rangle$ values of the EPOS LHC-R simulations by -\qty{30}{\gram\per\centi\meter\squared} still yields a mismatch between the data and simulations.
+A back-of-the-envelope calculation of shifting the $\langle X_{\text{max}}\rangle$ values of the EPOS LHC-R simulations by $-$\qty{30}{\gram\per\centi\meter\squared} still yields a mismatch between the data and simulations.
 The mismatch of data and simulations prevents the combination of the average muon and average radio observables for mass composition analyses using measured air-shower data without a systematic scaling factor applied to the simulations.
 This scaling factor embodies the muon puzzle, as this is a discrepancy of the muonic air-shower content between simulations and data.
 
@@ -376,21 +376,21 @@ This scaling factor embodies the muon puzzle, as this is a discrepancy of the mu
 
 %The observed muon discrepancy between simulations and data for this analysis is investigated as a study of the muon puzzle.
 
-The analysis in this section is performed without applying the back-of-the-envelope -\qty{30}{\gram\per\centi\meter\squared} shift in the $\langle X_{\text{max}}\rangle$ values of the EPOS LHC-R simulations.
-Instead, it is assumed that the $X_{\text{max}}$ scale of the simulations and data are correct.
+The analysis in this section is performed without applying the back-of-the-envelope $-$\qty{30}{\gram\per\centi\meter\squared} shift in the $\langle X_{\text{max}}\rangle$ values of the EPOS LHC-R simulations.
+Instead, it is assumed that the $X_{\text{max}}$ scale of the simulations and data are in agreement with one another.
 Quantifying the simulation-data discrepancy in the predicted muon observable is performed assuming the $\langle X_{\text{max}}\rangle$ determined by the radio $X_{\text{max}}$ reconstruction is the true cosmic-ray composition within each energy bin.
 The vertical shift of the EPOS LHC-R simulated $\langle \hat{S}^{\mu}_{800}\rangle$ required to match the data in each energy bin is calculated as a measure of the discrepancy between the muon observable as determined from simulations and from data.
 
-The discrepancy is calculated using two metrics: first, as a percentage necessary to scale the simulations to match the data and second, as a muon fraction of the measured data with respect to the simulation predictions.
+The discrepancy is calculated using two metrics: first, as a percentage necessary to scale the simulations to match the data, and second, as a muon fraction of the measured data with respect to the predictions from simulations.
 There is a one-to-one correlation between the two values.
-The mass composition as determined by $X_{\text{max}}$ data fixes the location within the $\hat{S}^{\mu}_{800}-X_{\text{max}}$ plane at which to calculate the muon discrepancy and is reported as a dimensionless fraction along the proton-iron line of this plane:
+The mass composition as determined by $X_{\text{max}}$ data fixes the location within the $\hat{S}^{\mu}_{800}-X_{\text{max}}$ plane for the calculation of the muon discrepancy and is reported as a dimensionless fraction along the proton-iron line of this plane:
 
 \begin{eqnarray}
   Z_{X} = \frac{\langle X_{\text{max}}\rangle_{\text{data}} - \langle X_{\text{max}}\rangle_{\text{p}}}{\langle X_{\text{max}}\rangle_{\text{Fe}} - \langle X_{\text{max}}\rangle_{\text{p}}}. \label{eq:zscale_xmax}
 \end{eqnarray}
 
 \noindent
-$\langle X_{\text{max}}\rangle_{\text{p}}$ and $\langle X_{\text{max}}\rangle_{\text{Fe}}$ are the average $X_{\text{max}}$ values of proton and iron respectively within a given energy bin.
+$\langle X_{\text{max}}\rangle_{\text{p}}$ and $\langle X_{\text{max}}\rangle_{\text{Fe}}$ are the average $X_{\text{max}}$ values of proton and iron respectively, within a given energy bin.
 The muon fraction, $F_{\mu}$, depends on the mass composition as determined by $X_{\text{max}}$ data, and is defined as
 
 \begin{equation}
@@ -398,8 +398,8 @@ The muon fraction, $F_{\mu}$, depends on the mass composition as determined by $
 \end{equation}
 
 \noindent
-$\langle \hat{S}^{\mu}\rangle_{\text{p}}$ and $\langle \hat{S}^{\mu}\rangle_{\text{Fe}}$ are the average $\hat{S}^{\mu}$ values of proton and iron respectively within a given energy bin.
-A value of $F_{\mu}>$\,1 represents the data has more muonic signal (i.e.~a larger $\hat{S}^{\mu}$) than expected from the mass composition determined by the energy scaled radio $X_{\text{max}}$ data, while $F_{\mu}<$\,1 means the opposite is true.
+$\langle \hat{S}^{\mu}\rangle_{\text{p}}$ and $\langle \hat{S}^{\mu}\rangle_{\text{Fe}}$ are the average $\hat{S}^{\mu}$ values of proton and iron respectively, again within a given energy bin.
+A value of $F_{\mu}>$\,1 represents the data have a larger muonic signal (i.e.~a greater $\hat{S}^{\mu}$) than expected from the mass composition determined by the energy scaled radio $X_{\text{max}}$ data, while $F_{\mu}<$\,1 means the opposite is true.
 $F_{\mu}=$\,1 signifies the the neural-network predicted muon signal in data is equivalent with the expectation from simulations for the fixed mass composition by radio measurements, meaning there is no muon discrepancy between simulations and data. 
 
 Nominally, the muon observable is the neural-network predicted muon signal at \qty{800}{\meter} from the air-shower axis, $\hat{S}^{\mu}_{800}$.
@@ -415,22 +415,24 @@ The $\hat{S}^{\mu}_{\text{total}}$ values have units of $\text{VEM}\,\text{m}^{2
 \begin{figure}[h]
   \centering
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter6/muon_shift_nn_prediction.pdf}
-  \caption[Scaling factor of simulated $\hat{S}^{\mu}$ to match the data.]{The rescaling of the neural-network predicted muon signal for simulations to match the data. The scaling factor is calculated assuming the composition from the AERA $X_{\text{max}}$ results is the true composition. In addition to $\hat{S}^{\mu}_{800}$, the scaling factors of $\hat{S}^{\mu}_{450}$ and $\hat{S}^{\mu}_{\text{total}}$ from integrating the muon LDF are presented. $F_{\mu}>1$ implies the data has more muonic signal than seen in simulations, and simulations must be scaled up to match the data, whereas $F_{\mu}<1$ implies the opposite. The systematic uncertainty is solely that of the $X_{\text{max}}$ systematic uncertainty from~\cite{auger_prd2024_aeraxmax}. The data predicts roughly 10\% more total muonic signal than simulations for a given $X_{\text{max}}$. This scaling is shown to depend on the distance to the air-shower axis at which the muon signal is sampled.}
+  \caption[Scaling factor of simulated $\hat{S}^{\mu}$ to match the data.]{The rescaling of the neural-network predicted muon signal for simulations to match the data. The scaling factor is calculated assuming the composition from the AERA $X_{\text{max}}$ results is the true composition. In addition to $\hat{S}^{\mu}_{800}$, the scaling factors of $\hat{S}^{\mu}_{450}$ and $\hat{S}^{\mu}_{\text{total}}$ from integrating the muon LDF are presented. $F_{\mu}>1$ implies the data has more muonic signal than seen in simulations, and simulations must be scaled up to match the data, whereas $F_{\mu}<1$ implies the opposite. The systematic uncertainty is solely that of the $X_{\text{max}}$ systematic uncertainty from~\cite{auger_prd2024_aeraxmax,auger_prl2024_aeraxmax}. The data predicts roughly 10\% more total muonic signal than simulations for a given $X_{\text{max}}$. This scaling is shown to depend on the distance to the air-shower axis at which the muon signal is sampled.}
   \label{fig:muon_rescaling}
 \end{figure}
 
-\Cref{fig:muon_rescaling} shows the percentage necessary to scale the simulated $\langle \hat{S}^{\mu}\rangle$ values to match the data for both reference distances and for the total neural-network predicted muon signal as a function of binned SD-750 reconstructed energy.
+\Cref{fig:muon_rescaling} shows the percentage necessary to scale the simulated $\langle \hat{S}^{\mu}\rangle$ values to match the data for both reference distances, and for the total neural-network predicted muon signal from integrating the muon LDF, as a function of binned SD-750 reconstructed energy.
 The corresponding $F_{\mu}$ values are shown on the right-hand y-axis.
 The simulations in each energy bin are zenith weighted to the data and both data and simulations are energy scaled to the bin center prior to calculating any average observable values.
-Results show the $\langle \hat{S}^{\mu}_{800}\rangle$ value in data has less muonic signal than what is predicted in simulations assuming the mass composition from radio $X_{\text{max}}$ at most studied energies except for the highest energy bin of \qtyrange[parse-numbers=false]{10^{18.3}}{10^{18.5}}{\electronvolt}.
-The $\langle \hat{S}^{\mu}_{450}\rangle$ and $\langle \hat{S}^{\mu}_{\text{total}}\rangle$ value derived from data have more muonic signal than predicted in simulations for the given radio $X_{\text{max}}$ results for all studied energies.
+Results show the $\langle \hat{S}^{\mu}_{800}\rangle$ value in data has less muonic signal than what is predicted in simulations assuming the mass composition from radio $X_{\text{max}}$.
+This is true at most studied energies, except for the highest energy bin of \qtyrange[parse-numbers=false]{10^{18.3}}{10^{18.5}}{\electronvolt}.
+The $\langle \hat{S}^{\mu}_{450}\rangle$ and $\langle \hat{S}^{\mu}_{\text{total}}\rangle$ values derived from data have more muonic signal than predicted in simulations for the given radio $X_{\text{max}}$ results for all studied energies.
 Overall, the total muon signal in data exhibits a roughly 10\% excess in comparison to simulations for the full energy range of \qtyrange[parse-numbers=false]{10^{17.5}}{10^{18.5}}{\electronvolt}.
 
 For comparison, an analysis of the UMD and FD measurements at the Pierre Auger Observatory sees an approximately 38\% excess ($F_{\mu}=$\,1.38) in the measured muon number compared to simulations using the EPOS LHC hadronic interaction model at energies of \qty[parse-numbers=false]{10^{17.5}}{\electronvolt} and \qty[parse-numbers=false]{10^{18}}{\electronvolt}~\cite{auger_epjc2020_muoncontent_umd}.
-These measurements are based on muon density measurements at \qty{450}{\meter} from the air-shower axis, corrected for zenith angle effects using the constant intensity cut method (see~\Cref{ssec:sd_reconstruction}).
+These measurements are based on muon density measurements at \qty{450}{\meter} from the air-shower axis corrected for zenith angle effects using the constant intensity cut method (see~\Cref{ssec:sd_reconstruction}).
 The results of $\langle \hat{S}^{\mu}_{450}\rangle$ reported here only exhibit an approximately 5\% excess ($F_{\mu}=$\,1.05) in the measured muon number compared to simulations; however, the excess is expected to be lower in magnitude for the EPOS LHC-R hadronic interaction model compared to its previous iteration~\cite{icrc2025_pierog}.
 The results of this hybrid radio-muon analysis emphasize that discrepancies in the simulated and measured muon content in air showers from a neural-network prediction are prevalent, where the magnitude and direction of the discrepancy depends on the measurement distance from the air-shower axis of the muon observable.
-Additional studies of hadronic interaction models and the muon content of air showers are necessary to further understand this discrepancy. 
+This is expected to mimic the muon puzzle, as seen within this chapter, because the neural network is trained on hadronic interaction models that have incomplete descriptions of the hadronic interactions within air showers.
+Additional studies of hadronic interaction models and the muon content of air showers are therefore necessary to further understand this discrepancy. 
 
 
 %The Pierre Auger Observatory with the 
@@ -461,8 +463,8 @@ Systematics need to be heavily scrutinized and understood before muon and radio 
 The simulation-data mismatch is quantified between the simulated and measured muon observables studied within this chapter; however, future radio-muon analyses that plan to determine an event-by-event or an average mass composition will require this mismatch to be rectified.
 Incomplete descriptions of the hadronic interactions in air showers are known to contribute significantly to this muon discrepancy between data and simulations.
 Constraining hadronic interaction models is therefore of the utmost importance for hybrid radio-muon measurements.
-Direct muon measurements, such as with the Underground Muon Detector (UMD) of the Pierre Auger Observatory could improve prospects over the neural-network based muon observable as these direct measurements are less subject to the limitations of hadronic interaction models.
-Hybrid radio-muon measurements of air showers reconstructed with the radio antennas of AERA and the UMD is shown in this chapter to be impractical; however, the following chapter introduces a new array of radio antennas at the Pierre Auger Observatory, the Auger Radio Infill SKALA Extension (ARISE), which aims at hybrid radio-muon detections of air showers through coincidence measurements with the UMD.
+Direct muon measurements, such as with the Underground Muon Detector (UMD) of the Pierre Auger Observatory, could improve prospects over the neural-network based muon observable as direct measurements are less subject to the limitations of hadronic interaction models.
+Hybrid radio-muon measurements of air showers reconstructed with the UMD and the radio antennas of AERA is shown to be impractical within this chapter; however, the following chapter introduces a new array of radio antennas at the Pierre Auger Observatory, the Auger Radio Infill SKALA Extension (ARISE), which aims at hybrid radio-muon detections of air showers through coincidence measurements with the UMD.
 
 %A major contribution to this mismatch are the predictions 
 
