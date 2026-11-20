@@ -1,0 +1,160 @@
+%
+% Final summary of dissertation (chapter 8)
+%
+\chapter{Executive Summary}\label{chap:summary}
+
+A longstanding question in cosmic-ray physics is: what are the sources and mechanisms responsible for accelerating cosmic rays to the highest particle energies in the known Universe?
+Progress towards answering this question requires knowledge of the cosmic-ray mass, energy, and its arrival direction at Earth.
+At the highest cosmic-ray energies, these properties are reconstructed from observations of air showers, cascades of particles and radiation initiated by the primary cosmic ray interacting with Earth's atmosphere.
+In particular, both the air-shower electromagnetic and muonic components are correlated with the mass of the cosmic-ray nucleus, where simultaneous measurements of these shower components provides complementary mass information.
+A key observable of the electromagnetic shower component is the atmospheric depth of shower maximum development $X_{\text{max}}$, which can be reconstructed from measurements by radio antennas or fluorescence telescopes, while a key observable of the muonic component is the total muon number within the air shower, $N_{\mu}$, which can be probed with particle detectors sensitive to the muon content of air showers.
+Measurements from fluorescence telescopes are limited to clear, moonless nights, restricting their duty cycle to between approximately 15$-$30\%, while radio antennas offer a cost-efficient alternative with a roughly 100\% duty cycle, matching the duty cycle of particle detectors. 
+This dissertation investigates the mass sensitivity of hybrid radio-muon observations of air showers at the location of the Pierre Auger Observatory near Malarg\"{u}e, Argentina, highlighting that these coincident measurements can be used to further understand major systematic uncertainties of air-shower observations, such as the muon puzzle, and potentially for mass composition analyses once these systematics are more properly constrained.
+
+Throughout this dissertation, sensitivity to the primary cosmic-ray mass is shown to improve when combining radio $X_{\text{max}}$ and muon reconstructions.
+This work proves through a simulation study that proton-iron separation on a per-event basis is feasible using combined detections of $X_{\text{max}}$ and $N_{\mu}$ assuming state-of-the-art radio $X_{\text{max}}$ and particle detector $N_{\mu}$ reconstruction uncertainties.
+Event-by-event mass separation for intermediate masses is more difficult, yet still improves from the combination of the $X_{\text{max}}$ and $N_{\mu}$ observables.
+Results are shown to be independent of air-shower energy, zenith angle, and the choice of hadronic interaction model, concluding that the $X_{\text{max}}$-muon combination improves the sensitivity to the cosmic-ray mass regardless of the interpretation of the data from hadronic interaction models.
+The framework used to perform this study is of general purpose and can be used to study the mass sensitivity of air-shower observables as a function of several variables at locations other than the Pierre Auger Observatory, given that a simulation library exists.
+
+A neural-network based on a previous analysis at the Pierre Auger Observatory is retrained for the SD-750, a more densely spaced array of water-Cherenkov detectors compared to the previous study, to predict the muonic component of signals measured by these detectors of the observatory.
+This analysis lowers the energy threshold by one decade in cosmic-ray energy, enabling the application of the neural network to a larger number of events measured by the observatory, including a dataset with complementary radio $X_{\text{max}}$ reconstructions from the Auger Engineering Radio Array (AERA).
+The station-level predictions are validated using one of the most recent hadronic interaction models and then fit on a per-event basis to a muon lateral distribution function to extract an event-level muon observable from the neural-network predictions at \qty{800}{\meter} from the air-shower axis, namely $\hat{S}^{\mu}_{800}$.
+The per-event $\hat{S}^{\mu}_{800}$ is combined with true $X_{\text{max}}$ values from simulations and provides a proof-of-concept that the joint information from combining a neural-network muon observable with $X_{\text{max}}$ adds to the cosmic-ray mass sensitivity compared to either observable individually.
+
+The neural-network is applied to a dataset of nearly 600 bias-free radio $X_{\text{max}}$ reconstructions from AERA, resulting in a per-event radio-muon reconstruction to study the joint effect of muon and radio measurements on mass sensitivity.
+The non-zero slope of the linear correlation between the radio-muon measurements is shown to add additional mass information not accessible through either measurement alone, proving coincident radio-muon measurements enhance the sensitivity to the cosmic-ray mass within data.
+The total muon signal predicted by the neural network overestimates the muon signal in simulations by roughly 10\% compared to data when assuming the mass composition predicted by radio $X_{\text{max}}$ is the true composition.
+This overestimation holds for the entire studied energy range of \qtyrange[parse-numbers=false]{10^{17.5}}{10^{18.5}}{\electronvolt}.
+Additionally, the muon signals predicted by the neural network at distances of \qty{450}{\meter} and \qty{800}{\meter} from the air-shower axis show discrepancies between data and simulations, highlighting that the descriptions of hadronic interactions in air showers remain incomplete.
+The results of this dissertation show that systematic differences between the radio and muon reconstructions must be heavily scrutinized before hybrid radio-muon measurements can be combined for mass-composition studies.
+
+Finally, two detector systems of SKALA-v2 radio antennas, both deployed at the Pierre Auger Observatory as parts of this PhD work, are introduced.
+An IceCube-Gen2 prototype station, deployed in August 2022, proved that radio measurements of air showers within the \qtyrange{70}{350}{\mega\hertz} band at the Pierre Auger Observatory are possible.
+This proof-of-principle result motivated the deployment of the Auger Radio Infill SKALA Extension (ARISE) in March 2025.
+The science goals of ARISE include a fully efficient radio reconstruction of vertical air showers ($\theta_{\text{zen}}<$\,\qty{30}{\degree}), a feature not yet proven by the other arrays of radio antennas at the Pierre Auger Observatory, and coincident radio-muon measurements of air showers with ARISE and the observatory's array of Underground Muon Detectors (UMD).
+The hybrid radio-muon measurements with ARISE have the possibility to test hadronic interaction models from the direct muon measurements and potentially further understand the systematic differences between the radio and neural-network muon reconstructions shown in this dissertation.
+The work of this dissertation encompasses the deployment, detector operations, and preliminary data commissioning of both detector systems, where collaborators will continue work with ARISE to achieve its science goals.
+
+Overall, this dissertation proves the radio-muon detection method is a viable method of studying hadronic interaction models while simultaneously enhancing the sensitivity to the primary cosmic-ray mass beyond what is achievable with single observables.
+A general software framework was developed to study these observables, in addition to others, using simulations, and can be of general use to the greater field of cosmic-ray physics beyond the scope of this dissertation.
+A previous neural-network based analysis was extended by one decade lower in energy, near the energy of the Galactic-to-extragalactic transition of the cosmic-ray energy spectrum, and combined with radio $X_{\text{max}}$ measurements to prove the capabilities of hybrid radio-muon measurements.
+In addition, the future prospects of the hybrid radio-muon detection technique at the Pierre Auger Observatory with ARISE are presented.
+Collaborators will build upon the foundation of this dissertation by developing radio $X_{\text{max}}$ and energy reconstructions with ARISE to be combined with muon measurements from the UMD.
+Hybrid radio-muon measurements with ARISE will aim to study the muon puzzle in greater detail, to test hadronic interaction models, and to provide mass-composition results near the energy of the Galactic-to-extragalactic transition.
+
+
+%to test hadronic interaction models, to study the muon 
+
+%using ARISE reconstructions to 
+
+%In particular, ARISE, deployed during this PhD, plans to use 
+
+%to studying the enhancements to cosmic-ray mass sensitivity with simultaneous neural-network derived muon and a radio $X_{\text{max}}$ reconstructions, the future of hybrid radio-muon 
+%Combining a neural-network derived muon observable with a radio $X_{\text{max}}$ observable proves to enhance the mass sensitivity to the primary cosmic ray using data recorded by the detectors of the Pierre Auger Observatory. 
+
+%The radio-muon method was proven to be viable using 
+
+%and aids the future prospects of the hybrid radio-muon detection method 
+
+%This would enable future hybrid radio-muon measurements to be 
+
+%currently unavailable for other arrays of radio antennas at the Pierre Auger Observatory,
+%currently unproven for arrays of radio antennas at the Pierre Auger Observatory, and coincident radio-muon measuremnts of air showers with ARISE and the observatory's array of Underground Muon Detectors (UMD).
+
+%reconstructing vertical air showers ($\theta_{\text{zen}}<$\,\qty{30}{\degree}) with full efficicency
+
+%air-shower measurements at the Pierre Auger Observatory using radio antennas measurements in the \qtyrange{70}{350}{\mega\hertz} frequency band 
+
+%The work of this dissertation encompasses the deployment, detector operations, and assisting in the data comissioning of both detector systems.
+
+%an IceCube-Gen2 prototype station and the Auger Radio Infill SKALA Enhancement (ARISE), deployed at the Pierre Auger Observatory as part of this PhD work, are introduced.
+%Both detector systems consist of SKALA radio antennas, where the prototype station serve
+
+%two SKALA radio antenna detector systems, deployed at the Pierre Auger Observatory as part of this PhD work, are introduced.
+
+%the deployment of two SKALA radio antenna detector systems, performed as part of this PhD work, is   
+
+
+%Hybrid radio-muon measurements must first account for
+%Mass-composition studies using hybrid radio-muon measurements 
+
+%A mismatch between the neural-network predicted muon observable from data and simulations is observed and quantified as a measure of the muon puzzle.
+
+%overpredicted by roughly 10\% in simulations between energies of \qtyrange[parse-numbers=false]{10^{17.5}}{10^{18.5}}{\electronvolt}
+
+%the muon signal measured at \qty{800}{\meter} from the air-shower axis is shown to be underpredicted in simulations, while the total muon signal and the muon %signal at \qty{450}{\meter} from the air-shower axis is shown to be overpredicted in simulations
+
+%with heavily scrutinized systematic uncertainties to result in a bias-free set of events
+
+%data with complementary radio $X_{\text{max}}$ reconstructed value, with heavily scrutinized systematic uncertainties to result in a bias-free set of events.
+
+%Application to data with complementary radio $X_{\text{max}}$ reconstructed value, with heavily scrutinized systematic uncertainties to result in a bias-free set of events
+
+%The simulation study motivates hybrid radio-muon measurements of air showers for the prospects of greater sensitivity of air-shower measurements to the primary cosmic-ray mass.
+
+%\Cref{chap:airshowers} describes this idea using theoretical models of air showers,~\Cref{chap:simulations} proves this result in simulations 
+
+%This method if first studied using a simultaiont study of several air-shwoer observabels.
+%The observables were studied in a very particular manner, care was used to clean them prior to use in the analysis.
+
+%First with simulation study.
+
+%Then with neural network and application to data.
+%Neural network was retrained using the most recent hadronic interaction model and for one decade lower in energy than the previous analysis.
+%Application to data with complementary radio $X_{\text{max}}$ reconstructed value, with heavily scrutinized systematic uncertainties to result in a bias-free set of events.
+
+%Next generation of radio-muon detections with ARISE.
+%Mention IceCube-Gen2 prototype station and ARISE, both of whihc I deployted during my PhD.
+
+
+
+%Two longstanding questions within cosmic-ray physics are: 1.~what are the sources and mechanisms responsible for accelerating cosmic rays to the highest particle energies in the known Universe? And 2.~what is the nature of the hadronic interactions within the air showers these cosmic rays initiate upon entering Earth's atmosphere?
+%Progress towards answering these questions requires reconstructing air-shower observables which probe separate components of the air shower to infer properties of the initial cosmic ray.
+%In particular, the air-shower electromagnetic and muonic components are each correlated with the mass of the cosmic-ray nucleus, a key property useful for progress towards determining the origins of ultra-high-energy cosmic rays.
+%The muonic component also serves to investigate the muon puzzle, a systematic mismatch between the air-shower muon content of data and simulations, and is a direct probe of the hadronic interactions within the shower.
+%The electromagnetic component can be measured with an array of radio antennas while the muonic component can be measured with particle detectors sensitive to the muon content of air showers, each with a duty cycle of roughly 100\%.
+%This dissertation investigates hybrid radio-muon observations of air showers with the aim of studying the combined mass sensitivity of these coincident measurements.
+
+
+%reconstructing properties of the primary cosmic ray through the observations of air showers, cascades of particles and radiation initiated from the primary interacting with Earth's atmosphere.
+
+%air-shower observables which probe separate components of the air shower to infer properties of the initial cosmic ray.
+%In particular, the air-shower electromagnetic and muonic components are each correlated with the mass of the cosmic-ray nucleus, a key property useful for progress towards determining the origins of ultra-high-energy cosmic rays.
+%The muonic component also serves to investigate the muon puzzle, a systematic mismatch between the air-shower muon content of data and simulations, and is a direct probe of the hadronic interactions within the shower.
+%The electromagnetic component can be measured with an array of radio antennas while the muonic component can be measured with particle detectors sensitive to the muon content of air showers, each with a duty cycle of roughly 100\%.
+%This dissertation investigates hybrid radio-muon observations of air showers with the aim of studying the combined mass sensitivity of these coincident measurements.
+
+
+%A longstanding question in cosmic-ray physics is: what are the sources and mechanisms responsible for accelerating cosmic rays to the highest particle energies in the known Universe?
+%Cosmic rays at these energies will initiate cascades of particles and radiation, called air showers, upon entering Earth's atmosphere, where measurements of air showers are used to reconstruct properties of the primary cosmic ray.
+%The cosmic-ray mass in particular is a key property, useful for progress towards determining the origins of ultra-high-energy cosmic rays; however, interpretations of air-shower observables, used to determine the cosmic-ray mass composition, are subject to large systematic uncertainties from incomplete descriptions of the hadronic interactions within air showers.
+%Phenomenological models of air showers show that the atmospheric depth of shower maximum ($X_{\text{max}}$), a probe of the shower electromagnetic component, and the total muon content of the shower ($N_{\mu}$), a probe of the muonic component, are each correlated with the primary cosmic-ray mass.
+
+%Studying the separate components of air showers, such as the electromagnetic and muonic components, enables properties of the primary cosmic ray to be reconstructed 
+
+%At these energies, cosmic rays entering Earth's atmosphere will initiate cascades of particles and radiation, called air showers, that are described by three separate components, the electromagnetic, the muonic, and the hadronic components.
+%Studying the various air-shower components enables properties of the primary cosmic ray to be reconstructed  
+
+
+%Two longstanding questions within cosmic-ray physics are: 1.~what are the sources and mechanisms responsible for accelerating cosmic rays to the highest particle energies in the known Universe? And 2.~what is the nature of the hadronic interactions within the air showers these cosmic ray initiate upon entering Earth's atmosphere?
+%Progress towards answering these questions requires reconstructing air-shower observables which probe separate components of the air shower to infer properties of the initial cosmic ray.
+%In particular, the air-shower electromagnetic and muonic components are each correlated with the mass of the cosmic-ray nucleus, where the latter also serves as a direct probe of the hadronic shower interactions.
+%The electromagnetic component can be measured with an array of radio antennas while the muonic component can be measured with particle detectors sensitive to the muon content of air showers, each with a duty cycle of roughly 100\%.
+%This dissertation investigates hybrid observations of cosmic-ray air showers using simultaneous measurements from radio antennas and from particle detectors that probe the muon content of air showers.
+
+
+
+%are the exact descriptions of the initial and subsequent hadronic interactions of these cosmic rays within the atmosphere?
+
+%Longstanding questions within cosmic-ray physics include: what are the sources and mechanisms responsible for accelerating cosmic rays to the highest particle energies in the known Universe?, and what are the exact descriptions of the initial and subsequent hadronic interactions of these cosmic rays within the atmosphere?.
+%Progress towards answering these questions requires studying the air showers, cascades of secondary particles and radiation, these cosmic rays initiate upon entering Earth's atmosphere.
+%Specifically, 
+%Phenomenological models of air showers, such as the Heitler-Matthews model, show 
+
+
+
+%Studying components of the air showers these cosmic rays initiate when entering Earth's atmosphere 
+%Progress towards answering these questions requires studying 
+%This dissertation investigates hybrid observations of cosmic-ray air showers using simultaneous measurements from radio antennas and particle detectors the probe the muon content of air showers.
+%Simple phenomenological models of air showers, such as the Heitler-Matthews model, predict that 
