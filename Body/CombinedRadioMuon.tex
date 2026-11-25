@@ -7,12 +7,13 @@
 %Throughout this dissertation, sensitivity to the primary cosmic-ray mass is shown to improve when combining radio $X_{\text{max}}$ and muon reconstructions.
 %\Cref{chap:airshowers} describes this idea using theoretical models of air showers,~\Cref{chap:simulations} proves this result in simulations 
 
+This chapter combines radio and muon reconstructions of air showers measured by the Pierre Auger Observatory to study their joint effect on mass sensitivity and to investigate the mismatch of the air-shower muon content between simulation predictions and data measurements.
 The previous chapter builds upon a previous neural-network based analysis that predicts the muonic signal component measured by the SD of the Pierre Auger Observatory.
-The energy threshold of the neural network is lowered by one decade in cosmic-ray energy compared to the previous analysis, enabling the network to predict the muonic signal component for air showers detected above full efficiency with the SD-750.
+The energy threshold of the neural network is lowered by one decade in cosmic-ray energy compared to the previous analysis, enabling the network to predict the muonic signal component for air showers detected above full efficiency with the SD-750 (i.e.~$E_{\text{SD}}>$\,\qty[parse-numbers=false]{10^{17.5}}{\electronvolt}).
 Co-located with the SD-750 is AERA, an engineering array of radio antennas with a proven event-level $X_{\text{max}}$ reconstruction~\cite{auger_prd2024_aeraxmax,auger_prl2024_aeraxmax}.
-The AERA $X_{\text{max}}$ reconstructions use a trigger from the SD to readout the radio data, therefore a subset of the AERA $X_{\text{max}}$ reconstructions have a complementary SD-750 reconstruction.
-This chapter applies the neural network trained in the previous chapter to the SD-750 reconstructions of the AERA $X_{\text{max}}$ dataset to predict the muonic signal component measured by the SD at \qty{800}{\meter} from the air-shower axis, $\hat{S}^{\mu}_{800}$.
-The predicted muon observable and the radio $X_{\text{max}}$ measurements are combined to study the feasibility of hybrid radio-muon measurements with a neural-network based muon observable and to study the mismatch between muon predictions from simulations and muon measurements from data, known as the muon puzzle.  
+AERA is triggered from the SD, therefore a large subset of the AERA events with $X_{\text{max}}$ reconstructions have a complementary SD-750 reconstruction.
+This chapter applies the neural network trained in the previous chapter to the SD-750 measurements of the AERA $X_{\text{max}}$ dataset to predict the muonic signal component measured by the SD.
+The predicted muon observables and the radio $X_{\text{max}}$ measurements are combined to study the feasibility of hybrid radio-muon measurements and the mismatch between muon predictions from simulations and muon measurements from data, known as the muon puzzle.  
 
 %to study their joint effect 
 
@@ -29,14 +30,14 @@ The predicted muon observable and the radio $X_{\text{max}}$ measurements are co
 \section{Why Use the Neural-Network Predicted Muon Observable?}\label{sec:motivation}
 
 Co-located with the SD-750 and AERA is also the UMD, an array of buried scintillators to directly measure the muon content of air showers.
-With this knowledge, the reader may ask: ``why not use the UMD to measure a muon observable instead of using the neural network to predict one?''
+Hence, why not use the UMD to measure a muon observable instead of using the neural network to predict one?
 The UMD provides direct muon measurements of air showers on a per-event basis, which in principle can be combined with per-event radio $X_\text{max}$ reconstructions to increase the overall mass sensitivity of Auger, both at the event level and for the average mass composition.
 The AERA and UMD footprints are co-located making simultaneous measurements feasible; however, implementation is difficult due to both geometrical and timeline restrictions for each detector system.
 The geometry of UMD scintillator panels is optimal for vertical air-shower reconstructions while the spacing of the AERA radio antennas makes the AERA $X_{\rm max}$ reconstruction more efficient for air showers with $\theta>\,$\qty{40}{\degree} (see~\Cref{fig:aera_umd_histograms}).
-Regarding timeline constraints, AERA, recording air showers since 2011, has fulfilled its primary science goal of proving the usefulness of air-shower reconstructions in the \qtyrange{30}{80}{\mega\hertz} band near Malarg\"{u}e and may eventually be decomissioned.
+Regarding timeline constraints, AERA, recording air showers since 2011, has fulfilled its primary science goal of proving the usefulness of air-shower reconstructions in the \qtyrange{30}{80}{\mega\hertz} band near Malarg\"{u}e and is planned to be decommissioned in 2027.
 At the moment of writing, the AERA $X_{\rm max}$ reconstruction is only available within the time frame of May 2013 until November 2019.
-The UMD did not obtain a stable reconstruction until January 2018, with deployment only finished in March 2026, severely limiting the data overlap between the two detectors.
-The radio $X_{\rm max}$ reconstruction will eventually be ported to the RD antennas, deployed at each Auger SD, yet the spacing of RD will aim to reconstruct even more highly-inclined air showers ($\theta>$\,\qty{65}{\degree}).
+The UMD did not obtain a stable reconstruction until January 2018, aned deployment only finished in March 2026, severely limiting the data overlap between the two detectors.
+The radio $X_{\rm max}$ reconstruction may eventually be ported to the RD antennas, deployed at each Auger SD, yet the spacing of RD will aim to reconstruct even more highly-inclined air showers ($\theta>$\,\qty{65}{\degree}).
 
 \begin{figure}
   \centering
@@ -46,8 +47,8 @@ The radio $X_{\rm max}$ reconstruction will eventually be ported to the RD anten
   \label{fig:aera_umd_histograms}
 \end{figure}
 
-Alternatively, the neural-network based muon predictions presented in~\Cref{chap:nn} are not affected by these same constraints that limit the overlap between the UMD and AERA $X_{\text{max}}$ reconstructions.
-With the foresight of a potential combination with the AERA results, the neural network was trained and validated beyond the upper limit of the zenith distribution for the AERA reconstructions.
+The neural-network based muon predictions presented in~\Cref{chap:nn} are not affected by these same constraints that limit the overlap between the UMD and AERA $X_{\text{max}}$ reconstructions.
+With the foresight of a potential combination with the AERA results, the neural network was trained and validated over the complete range of the zenith distribution for the AERA reconstructions and slightly beyond (up to \qty{58}{\degree}).
 This enables the possibility for each AERA event with a reconstructed $X_{\rm max}$ and an SD-750 reconstruction to have a complementary neural-network predicted muon observable.
 The neural network is subject to other constraints, including the quality of the muon observable it predicts and the mismatch of hadronic interaction model predictions to observed data, each of which will be discussed within the following sections.
 Future work, beyond the scope of this dissertation, could compare the above-ground neural-network predicted muon signals with the below-ground measured muon signals of the UMD.
@@ -67,12 +68,12 @@ Future work, beyond the scope of this dissertation, could compare the above-grou
 %Description of the AERA bias-free dataset, including why it is considered ``bias-free''.
 
 The triggering of the SD-750 array initiates the readout of the AERA radio antennas used to reconstruct a per-event radio $X_{\text{max}}$.
-Therefore, a subset of the events with an AERA $X_{\text{max}}$ reconstruction will also have an SD-750 reconstruction.
-In the AERA analysis, an energy cut requiring $E_{\text{SD}}>$\,\qty[parse-numbers=false]{10^{17.5}}{\electronvolt} is applied to select air-shower events with energies above the threshold for full detection efficiency of the SD-750; however, the detection efficiency of AERA is separate from the detection efficiency of the SD-750.
-To account for this, a radio acceptance cut is used in the AERA $X_{\text{max}}$ analysis resulting in a final selection of 594 ``bias-free'' AERA events, each with an $X_{\text{max}}$ reconstruction and a complementary SD-750 reconstruction.
+Therefore, a subset of the events with an AERA $X_{\text{max}}$ reconstruction also have an SD-750 reconstruction.
+In the AERA analysis, an energy cut requiring $E_{\text{SD}}>$\,\qty[parse-numbers=false]{10^{17.5}}{\electronvolt} is applied to select air-shower events with energies above the threshold for full detection efficiency of the SD-750; however, AERA itself is not fully efficient at this energy.
+To account for this, a radio acceptance cut is used in the AERA $X_{\text{max}}$ analysis resulting in a final selection of 594 ``bias-free'' air-shower events in the original analysis, each with an $X_{\text{max}}$ reconstruction and a complementary SD-750 reconstruction.
 Other biases in the $X_{\text{max}}$ reconstruction were studied and quantified in~\cite{auger_prd2024_aeraxmax,auger_prl2024_aeraxmax} prior to the acceptance cut, including atmospheric effects, hadronic interaction model interpretations, the SD energy reconstruction, and the method of reconstructing $\langle X_{\text{max}}\rangle$.
 The previous analysis determined a total systematic uncertainty on $\langle X_{\text{max}}\rangle$ of $\pm$\qty{10}{\gram\per\centi\meter\squared} which is approximately constant across the studied energy range (\qty[parse-numbers=false]{10^{17.5}}{\electronvolt} up to roughly \qty[parse-numbers=false]{10^{18.8}}{\electronvolt}).
-Hence, for the analysis presented in this chapter, a set of 594 events with both a radio $X_{\text{max}}$ and an SD-750 reconstruction is available.
+Hence, a set of 594 air showers with both a radio $X_{\text{max}}$ and an SD-750 reconstruction is available for the analysis presented in this chapter, prior to any additional quality cuts.
 These events are considered ``bias-free'' as all potential reconstruction biases have either been removed or quantified within the quoted systematic uncertainty. 
 
 %Biases in the $X_{\text{max}}$ reconstruction itself were quantified prior to the SD-750 efficiency cuts, yielding a final dataset of 594 ``bias-free'' AERA events with an $X_{\text{max}}$ reconstruction and a complementary SD-750 reconstruction.
@@ -91,15 +92,14 @@ To account for this, the Phase I SD-750 reconstructions using \Offline version i
 After matching, the standard set of SD-750 reconstruction quality cuts used by the Pierre Auger Observatory was applied\footnote[1]{The standard SD-750 cuts are available on the GitLab for the Pierre Auger Observatory on the main branch of \Offline at: \href{https://gitlab.iap.kit.edu/auger-observatory/offline/offline/-/blob/main/ADST/Analysis/cuts/ICRC2025/sd750_vertical.cuts?ref_type=heads}{https://gitlab.iap.kit.edu/auger-observatory/offline/offline/-/blob/main/ADST/Analysis/cuts/ICRC2025/sd750\_vertical}.}.
 These cuts are generally the same as the cuts used in the pre-selection of the SD-750 data within the AERA $X_{\text{max}}$ analysis, yet must be applied here as small changes in the reconstruction are possible from improvements in the reconstruction modules and changes in data-driven constants used in the reconstruction.
 \Cref{tab:sd_cuts} lists all applied selection cuts to the SD-750 dataset, including their selection efficiency with respect to the total event number.
-An SD energy cut lower than the threshold for full efficiency is applied to maximize statistics of the selection as changes in the SD-750 energy reconstruction between \Offline versions can shift events below this threshold, especially for events with reconstructed energies close to \qty[parse-numbers=false]{10^{17.5}}{\electronvolt}.
-These events will be cut later from the analysis as to not introduce any additional bias.
-Furthermore, the radio reconstruction was not performed again, and instead the nominal radio $X_{\text{max}}$ values and their uncertainties from the previous analysis are used for the remainder of this chapter.
+An SD energy cut of \qty[parse-numbers=false]{10^{17.4}}{\electronvolt} is applied, lower than the \qty[parse-numbers=false]{10^{17.5}}{\electronvolt} threshold for full efficiency, to maximize statistics of the selection as changes in the SD-750 energy reconstruction between \Offline versions can shift events below the original \qty[parse-numbers=false]{10^{17.5}}{\electronvolt} threshold.
+Furthermore, the radio reconstruction was not performed again, and instead the radio $X_{\text{max}}$ values and their uncertainties from the previous analysis are used.
 
 \begin{table}
     \hbox to \textwidth{\hfill
     \rotatebox{90}{
     \begin{minipage}{\textheight}
-    \caption[Summary of the SD-750 selection cuts for the bias-free dataset.]{The SD-750 selection cuts and resulting statistics of each cut for the bias-free AERA $X_{\text{max}}$ dataset. These are the standard SD-750 quality cuts used for the icrc2025-test7 \Offline version, with the exception of the cut on the energy threshold. The resulting 589 events that pass the selection cuts will be given as input to the neural network to predict station-level muon signals which are then combined per-event to determine an event-level muon observable from a muon LDF fit.}
+    \caption[Summary of the SD-750 selection cuts for the bias-free dataset.]{SD-750 selection cuts and resulting statistics of each cut for the bias-free AERA $X_{\text{max}}$ dataset. These are the standard SD-750 quality cuts used for the icrc2025-test7 \Offline version, with the exception of the cut on the energy threshold. The resulting 589 events that pass the selection cuts will be given as input to the neural network to predict station-level muon signals which are then combined per-event to determine an event-level muon observable from a muon LDF fit.}
     \label{tab:sd_cuts}
     \vspace*{.5\baselineskip}
     \centering
@@ -128,7 +128,7 @@ The station-level predictions are grouped by their Auger event IDs and then fit 
 The same fit procedure and fit likelihood (\Cref{eq:joint_nll}) as in~\Cref{chap:nn} are used, meaning only triggered and silent stations are included in the fit.
 The parameterizations of the effective bias and effective resolution (respectively~\Cref{eq:effective_bias} and~\Cref{eq:effective_resolution}) of the network use different mass fractions for this chapter than were used in~\Cref{chap:nn}.
 Specifically, for the application to the AERA $X_{\text{max}}$ dataset in this chapter, the mass fractions as predicted from Auger FD measurements assuming an EPOS LHC-R interpretation of the data are used~\cite{auger_prd2026_xmax}.
-These mass fractions from~\cite{auger_prd2026_xmax} are available at energies of \qty[parse-numbers=false]{10^{17.7}}{\electronvolt} and above, therefore the network parameterizations assume the mass fractions of the \qtyrange[parse-numbers=false]{10^{17.7}}{10^{17.8}}{\electronvolt} energy bin for energies below \qty[parse-numbers=false]{10^{17.7}}{\electronvolt}.
+These mass fractions from~\cite{auger_prd2026_xmax} are available at energies of \qty[parse-numbers=false]{10^{17.7}}{\electronvolt} and above, therefore the network parameterizations assume the mass fractions of the \qtyrange[parse-numbers=false]{10^{17.7}}{10^{17.8}}{\electronvolt} energy bin also for energies below \qty[parse-numbers=false]{10^{17.7}}{\electronvolt}.
 
 \begin{figure}[h]
   \centering
@@ -139,7 +139,7 @@ These mass fractions from~\cite{auger_prd2026_xmax} are available at energies of
 \end{figure}
 
 The requirement of at least four triggered stations with a neural-network prediction is enforced to maintain the number of degrees of freedom for the fit is at least equal to the number of free fit parameters.
-Other quality cuts include cutting events where at least one fit parameter (either $\hat{S}^{\mu}_{450}$ or $\beta$) is at the defined limit for that parameter, removing events with an SD-750 reconstructed energy outside of the network trained range of \qtyrange[parse-numbers=false]{10^{17.5}}{10^{18.5}}{\electronvolt}, and removing events with an SD-750 reconstructed zenith angle outside of the range \qtyrange{0}{55}{\degree}.
+Other quality cuts include cutting events where at least one fit parameter (either $\hat{S}^{\mu}_{450}$ or $\beta$) is at the defined limit for that parameter, removing events with an SD-750 reconstructed energy outside of the range \qtyrange[parse-numbers=false]{10^{17.5}}{10^{18.5}}{\electronvolt}, and removing events with an SD-750 reconstructed zenith angle outside of the range \qtyrange{0}{55}{\degree}.
 The limits for the fit parameters of $\hat{S}^{\mu}_{450}$ and $\beta$ are \qtyrange{0.1}{10000}{VEM} and \numrange{0.1}{10} respectively.
 A final quality cut on the uncertainty in the muon LDF slope, $\sigma_{\beta}$, is applied to the dataset as the distribution of $\sigma_{\beta}$ has an extended tail that constitutes unconstrained fits (see~\Cref{fig:sigma_beta_histograms}).
 Unconstrained values of $\beta$ contribute to unconstrained values of $\hat{S}^{\mu}_{800}$ and therefore are removed to yield a high-quality subset of events with both a neural-network predicted muon observable and a bias-free radio $X_{\text{max}}$ reconstruction.
@@ -147,13 +147,13 @@ Unconstrained values of $\beta$ contribute to unconstrained values of $\hat{S}^{
 The EPOS LHC-R test set will be used in comparison against the bias-free $X_{\text{max}}$ dataset for the remainder of this chapter.
 Hence, the same quality cuts are applied to the simulations to prevent any unwanted selection biases.
 Mostly the proton and iron simulations are used for the simulation-data comparisons for the analyses within this dissertation.
-11,552 of the 23,250 simulations passing the quality cuts in~\Cref{tab:final_quality_cuts} are proton and iron, with roughly equal fractions of each primary.
+11,552 of the 23,250 simulations passing the quality cuts in~\Cref{tab:final_quality_cuts} are proton and iron, with 5,445 proton simulations and 6,107 iron simulations.
 
 \begin{table}
     \hbox to \textwidth{\hfill
     \rotatebox{90}{
     \begin{minipage}{\textheight}
-    \caption[Summary of the data and simulation quality cuts prior to analysis.]{The quality cuts applied to both the bias-free AERA $X_{\text{max}}$ dataset and the EPOS LHC-R test set after neural-network predictions are grouped per event and fit to a muon LDF. The bias-free events are those that pass the selection cuts described in~\Cref{tab:sd_cuts}. The EPOS LHC-R simulation totals include the sum of proton, helium, oxygen, and iron primaries, where proton and iron will mainly be used in the analysis. The data and simulations passing these cuts are the final datasets used for the analysis of this chapter.}
+    \caption[Summary of the data and simulation quality cuts prior to analysis.]{Quality cuts applied to both the bias-free AERA $X_{\text{max}}$ dataset and the EPOS LHC-R test set after neural-network predictions are grouped per event and fit to a muon LDF. The bias-free events are those that pass the selection cuts described in~\Cref{tab:sd_cuts}. The EPOS LHC-R simulation totals include the sum of proton, helium, oxygen, and iron primaries, where proton and iron will mainly be used in the analysis. The data and simulations passing these cuts are the final datasets used for the analysis of this chapter.}
     \label{tab:final_quality_cuts}
     \vspace*{.5\baselineskip}
     \centering
@@ -163,7 +163,7 @@ Mostly the proton and iron simulations are used for the simulation-data comparis
         \hline
         \hline
         Total                                           & 589                               & 100.0              & 34 515                    & 100.0\\
-        Triggered $N_{\text{stations}}\geq$\,4          & 561                               &  95.2              & 32 938                    &  95.4\\
+        Triggered SD-750 $N_{\text{stations}}\geq$\,4   & 561                               &  95.2              & 32 938                    &  95.4\\
         $\hat{S}^{\mu}_{450}$ and $\beta$ within limits & 557                               &  94.6              & 32 856                    &  95.2\\
         $\lg\left(E / \text{eV}\right)\geq$\,17.5       & 544                               &  92.4              & 30 912                    &  89.6\\
         $\lg\left(E / \text{eV}\right)<$\,18.5          & 535                               &  90.8              & 30 780                    &  89.2\\
@@ -181,14 +181,14 @@ Mostly the proton and iron simulations are used for the simulation-data comparis
 
 The analyses for this chapter are energy-binned analyses.
 Therefore, the observable values of $\hat{S}^{\mu}_{800}$ and $X_{\text{max}}$ within an energy bin are scaled with respect to the SD-750 reconstructed energy of the event to remove their energy dependence.
-In essence, this fixes the air-shower energy within the bin, which removes the smearing of observable distributions caused by energy while preserves the intrinsic shower-to-shower fluctuations.
+In essence, this fixes the air-shower energy within the bin to the bin center energy, which removes the smearing of observable distributions caused by energy while it preserves the intrinsic shower-to-shower fluctuations.
 From the Heitler-Matthews model (see~\Cref{chap:airshowers}), the relationships of $X_{\text{max}}$ and $\lg\left(N_{\mu}\right)$ are linear in $\lg\left(E / \text{eV}\right)$.
 The base-10 logarithm of the muonic signal at \qty{800}{\meter} from the air-shower axis is also taken to be linear in $\lg\left(E / \text{eV}\right)$ by assuming $\hat{S}^{\mu}_{800}$ is proportional to $N_{\mu}$, up to a multiplicative factor.
 
 The $X_{\text{max}}$ and $\lg\left(\hat{S}^{\mu}_{800} / \text{VEM}\right)$ distributions for proton and iron simulations are individually fit to straight lines following:
 
 \begin{equation}
-  X_{\text{max}} = D_{10} \times \lg\left(\frac{E}{\text{eV}}\right) + a_{1} \qquad \text{and} \qquad \lg\left(\frac{\hat{S}^{\mu}_{800}}{\text{VEM}}\right) = b \times \lg\left(\frac{E}{\text{eV}}\right) + a_{2}. \label{eq:linear_fits}
+  X_{\text{max}} = D_{10} \cdot \lg\left(\frac{E}{\text{eV}}\right) + a_{1} \qquad \text{and} \qquad \lg\left(\frac{\hat{S}^{\mu}_{800}}{\text{VEM}}\right) = b \cdot \lg\left(\frac{E}{\text{eV}}\right) + a_{2}. \label{eq:linear_fits}
 \end{equation}
 
 \noindent
@@ -206,12 +206,12 @@ The average of the proton and iron fits is shown as the solid grey line.
   \centering
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.782\textwidth]{chapter6/energy_scaling_fits_smu800_xmax_nn_prediction_signal.pdf} \\
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.8\textwidth]{chapter6/energy_scaling_fits_smu800_xmax_nn_prediction_xmax.pdf}
-  \caption[Energy scaling of $\hat{S}^{\mu}_{800}$ and $X_{\text{max}}$.]{The energy scaling of the base-10 logarithm of $\hat{S}^{\mu}_{800}$ (top) and true $X_{\text{max}}$ (bottom) with respect to SD-750 reconstructed energy. Only proton and iron simulations of the EPOS LHC-R test set are shown. The distributions for proton and iron are fit to a straight line and then averaged to determine the scaling for each observable. The fit lines and their average are included in the plots.}
+  \caption[Energy scaling of $\hat{S}^{\mu}_{800}$ and $X_{\text{max}}$.]{The energy scaling of the base-10 logarithm of $\hat{S}^{\mu}_{800}$ (top) and true $X_{\text{max}}$ (bottom) with respect to SD-750 reconstructed energy. Only proton and iron simulations of the EPOS LHC-R test set are shown. The distributions for proton and iron are fit with a straight line and then averaged to determine the scaling for each observable. The fit lines and their average are included in the plots.}
   \label{fig:nn_energy_scaling}
 \end{figure}
 
 The simulations and data are split into five equally spaced energy bins of width $\lg\left(E_{\text{SD}} / \text{eV}\right)=$\,0.2 spanning the energy range of $\lg\left(E_{\text{SD}} / \text{eV}\right)=$\,\numrange{17.5}{18.5}.
-Both simulations and data within each energy bin are scaled with respect to the bin center using the averaged $D_{10}$ and $b$ values, given by the grey lines in~\Cref{fig:nn_energy_scaling}, like so:
+Both simulations and data within each energy bin are scaled with respect to the bin center using the averaged $D_{10}$ and $b$ values, given by the grey lines in~\Cref{fig:nn_energy_scaling}, like:
 
 \begin{equation}
   X_{\text{max}} = X_{\text{max, true}} + D_{10}\,\lg\left(\frac{E_{\text{c}}}{E_{\text{SD}}}\right) \qquad \text{and} \qquad \hat{S}^{\mu}_{800} = \hat{S}^{\mu}_{800\text{, true}}\,\left(\frac{E_{\text{c}}}{E_{\text{SD}}}\right)^{b}. \label{eq:energy_scaling}
@@ -220,7 +220,8 @@ Both simulations and data within each energy bin are scaled with respect to the 
 \noindent
 $E_{\text{c}}$ is the energy of the bin center and $E_{\text{SD}}$ is the SD-750 reconstructed energy of the event being scaled.
 The effect of energy scaling the $X_{\text{max}}$ and $\hat{S}^{\mu}_{800}$ observables is seen for two separate energy bins in~\Cref{fig:scaling_smu800_xmax}, where the top plots show proton, iron, and data distributions of $\hat{S}^{\mu}_{800}$ vs. $X_{\text{max}}$ with no energy scaling applied and the bottom plots show these same plots with observables scaled to the center energy of the bin.
-Energy scaling greater aligns both the proton-iron distributions and the data points following a linear relationship in the $\hat{S}^{\mu}_{800}-X_{\text{max}}$ plane, exemplified by a slight narrowing of the 68\% Gaussian KDE contours of proton and iron and a tightening of the data distributions. 
+Energy scaling greater aligns both the proton-iron distributions and the data points following a linear relationship in the $\hat{S}^{\mu}_{800}-X_{\text{max}}$ plane, exemplified by a slight narrowing of the 68\% Gaussian KDE contours of proton and iron and a tightening of the data distributions.
+The energy scaling has a small effect on the physics results as the results within an energy bin are essentially calculated at a fixed SD-750 reconstructed energy rather than for the full energy bin width.
 
 \begin{figure}
   \centering
@@ -228,46 +229,47 @@ Energy scaling greater aligns both the proton-iron distributions and the data po
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter6/smu800_xmax_individual_zenw_en18.3_18.5_zen0_55_nn_prediction.pdf} \\
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter6/smu800_xmax_individual_scaled_zenw_en17.7_17.9_zen0_55_nn_prediction.pdf}
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter6/smu800_xmax_individual_scaled_zenw_en18.3_18.5_zen0_55_nn_prediction.pdf} \\
-  \caption[Raw and energy scaled $\hat{S}^{\mu}_{800}$ vs. $X_{\text{max}}$ distributions.]{The $\hat{S}^{\mu}_{800}$ vs. $X_{\text{max}}$ distributions for proton, iron, and the AERA bias-free $X_{\text{max}}$ data within an energy bin of $\lg\left(E_{\text{SD}} / \text{eV}\right)=$\,\numrange{17.7}{17.9} (left) and \numrange{18.3}{18.5} (right). The plots on top show raw data and simulation values (no energy scaling applied), while the bottom plots apply an energy scaling to both data and simulations with respect to the central energy of the energy bin. The energy scaling constants are determined by the average fit lines in~\Cref{fig:nn_energy_scaling}. In all plots, simulations have an applied zenith angle weighting to match the data distribution (see text). Simulations are from the EPOS LHC-R test set, plotted with their true $X_{\text{max}}$ values from the Monte Carlo.}
+  \caption[Raw and energy scaled $\hat{S}^{\mu}_{800}$ vs. $X_{\text{max}}$ distributions.]{The $\hat{S}^{\mu}_{800}$ vs. $X_{\text{max}}$ distributions for proton and iron simulations, and the AERA bias-free $X_{\text{max}}$ data within an energy bin of $\lg\left(E_{\text{SD}} / \text{eV}\right)=$\,\numrange{17.7}{17.9} (left) and \numrange{18.3}{18.5} (right). The plots on top show raw data and simulation values (no energy scaling applied), while the bottom plots apply an energy scaling to both data and simulations with respect to the central energy of the energy bin. The energy scaling constants are determined by the average fit lines in~\Cref{fig:nn_energy_scaling}. In all plots, simulations have an applied zenith angle weighting to match the data distribution (see text). Simulations are from the EPOS LHC-R test set, plotted with their true $X_{\text{max}}$ values from the Monte Carlo.}
   \label{fig:scaling_smu800_xmax}
 \end{figure}
 
 In~\Cref{fig:scaling_smu800_xmax}, a zenith-weighting scheme of the simulations (both scaled and unscaled values) is applied, where weights are calculated with respect to the data distribution of zenith angles.
 This is necessary to ensure the simulations and data probe the same phase space when comparing the neural-network predicted $\hat{S}^{\mu}_{800}$ observable, as this observable is expected to be dependent on the zenith angle of the air shower.
 The simulations were generated with a $dN/d\theta \propto \sin\theta\cos\theta$ zenith distribution; however, the bias-free AERA dataset does not follow this distribution due to the reconstruction efficiency of AERA radio antennas and selection effects (see the left plot of~\Cref{fig:aera_umd_histograms}).
-Instead, the data determine four quantile bins of $\sec\left(\theta_{\text{SD}}\right)$ and the simulation fraction within each quantile bin is computed.
-The zenith weighting of the simulations is determined by the fraction of data within the quantile bin (approximately fixed for each bin) to the fraction of simulations within the bin.
+Instead, the data is divided into four bins of $\sec\left(\theta_{\text{SD}}\right)$ with equal per-bin statistics.
+The zenith weighting of the simulations is determined by the fraction of data within the $\sec\left(\theta_{\text{SD}}\right)$ bin (the same across all bins) to the fraction of simulations within the bin.
 The zenith weights are calculated separately for each primary and normalized to fix the total per-primary zenith weight to 1.0 across the four zenith bins.
+Calculation of the zenith weights is performed per-primary as a safety measure to mitigate potential biases resulting from the quality cuts, as the impact of quality cuts on the zenith distributions of each simulated primary was not studied.
 This zenith weighting and energy scaling are performed to remove potential biases from the simulation-data comparisons.
 Both zenith weighting of the simulations and energy scaling of the data and simulations are applied to the analysis and plots presented in the remainder of this chapter.
 
 
-\section{Testing the Linearity of the \texorpdfstring{$\hat{S}^{\mu}_{800}-X_{\text{max}}$}{hatS\textmu800--Xmax} Correlation}\label{sec:pearson}
+\section{Testing the \texorpdfstring{$\hat{S}^{\mu}_{800}-X_{\text{max}}$}{hatS\textmu800--Xmax} Correlation}\label{sec:pearson}
 
 %Explain smearing and how resolutions are calculated.
 %Introduce Pearson $r$ to test for linearity.
 %Further describe linearity tests and comparisons between data and simulations.
 %Describe bootstrap.
 
-The linearity of both data and simulations is each computed in the $\hat{S}^{\mu}_{800}-X_{\text{max}}$ plane and then compared to test the simulation-data relationship.
-As in the previous section, simulations and data are binned in five equally spaced energy bins of width $\lg\left(E_{\text{SD}} / \text{eV}\right)=$\,0.2 and both are energy scaled with respect to the center of the bin.
+The $\hat{S}^{\mu}_{800}-X_{\text{max}}$ correlation is studied for both data and simulations.
+For simplicity, the Pearson correlation coefficient $r$ is used as a measure of the linear correlation between the $\hat{S}^{\mu}_{800}$ and $X_{\text{max}}$ observables, although the true correlation may not be linear.
+As in the previous section, data and simulations are binned in five equally spaced energy bins of width $\lg\left(E_{\text{SD}} / \text{eV}\right)=$\,0.2 and both are energy scaled with respect to the center of the bin.
 The zenith-weighting scheme for the simulations is also applied.
-Prior to the linearity test, each simulated observable is smeared by a Gaussian in order to mimic the effects of detector resolution on the observable's reconstruction.
-The width of the Gaussian smearing applied to each observable is determined by the average reconstruction resolution of that observable calculated from the data within the energy bin.
+Prior to the correlation test, each simulated observable is smeared by a Gaussian in order to mimic the effects of detector resolution on the observable's reconstruction.
+For this, the width of the Gaussian smearing applied to each observable is determined by the average reconstruction resolution of that observable calculated from the data within the energy bin.
 
-Post smearing of the simulations, the linearity of the $\hat{S}^{\mu}_{800}-X_{\text{max}}$ correlation for data and simulations can be quantified and then compared.
 The Pearson correlation coefficient $r$ is used to quantify the $\hat{S}^{\mu}_{800}-X_{\text{max}}$ correlation for both data and simulations.
 The 68\% uncertainty on each Pearson $r$ value is estimated by a bootstrapped random sampling with replacement method.
-A bootstrapped $r$ is calculated a total of $N=50$ times, where the standard deviation of the bootstrapped values determines this $1\sigma$ uncertainty band. 
+A bootstrapped $r$ is calculated a total of $N=50$ times, where the standard deviation of the bootstrapped values determines the $1\sigma$ uncertainty band. 
 \Cref{fig:smeared_smu800_xmax} shows the smeared proton and iron distributions of $\hat{S}^{\mu}_{800}$ vs. $X_{\text{max}}$ with the data points overlaid for two separate energy bins: $\lg\left(E_{\text{SD}} / \text{eV}\right)=$\,\numrange{17.7}{17.9} and \numrange{18.3}{18.5}.
 The Pearson $r$ values, calculated for both the data and the proton-iron simulated distributions, are listed for each energy bin, including their bootstrapped $1\sigma$ uncertainties.
 The anti-correlation of $\hat{S}^{\mu}_{800}$ and $X_{\text{max}}$ results in negative Pearson $r$ values.
 
 \begin{figure}
   \centering
-  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter6/smu800_xmax_smeared_zenw_pearson_en17.7_17.9_zen0_55_nn_prediction.pdf} \\
-  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter6/smu800_xmax_smeared_zenw_pearson_en18.3_18.5_zen0_55_nn_prediction.pdf}
-  \caption[Smeared $\hat{S}^{\mu}_{800}$ vs. $X_{\text{max}}$ distributions.]{The energy scaled and smeared $\hat{S}^{\mu}_{800}$ vs. $X_{\text{max}}$ distributions for proton, iron, and the AERA bias-free $X_{\text{max}}$ dataset within two separate energy bins: $\lg\left(E_{\text{SD}} / \text{eV}\right)=$\,\numrange{17.7}{17.9} (top) and \numrange{18.3}{18.5} (bottom). Data and simulations are energy scaled to the bin center, where the scaling constants were determined from the fits in~\Cref{fig:nn_energy_scaling}. Simulations are zenith weighted to the data and smeared by the values listed on the plots to mimic detector resolutions. A test of linearity following the Pearson correlation coefficient $r$ is performed on both data and simulations.}
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter6/legendinside_smu800_xmax_smeared_zenw_pearson_en17.7_17.9_zen0_55_nn_prediction.pdf} \\
+  \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter6/legendinside_smu800_xmax_smeared_zenw_pearson_en18.3_18.5_zen0_55_nn_prediction.pdf}
+  \caption[Smeared $\hat{S}^{\mu}_{800}$ vs. $X_{\text{max}}$ distributions.]{The energy scaled and smeared $\hat{S}^{\mu}_{800}$ vs. $X_{\text{max}}$ distributions for proton, iron, and the AERA bias-free $X_{\text{max}}$ dataset within two separate energy bins: $\lg\left(E_{\text{SD}} / \text{eV}\right)=$\,\numrange{17.7}{17.9} (top) and \numrange{18.3}{18.5} (bottom). Data and simulations are energy scaled to the bin center, where the scaling constants were determined from the fits in~\Cref{fig:nn_energy_scaling}. Simulations are zenith weighted to the data and smeared by the values listed on the plots to mimic detector resolutions. The Pearson correlation coefficient $r$ is calculated for both data and simulations.}
   \label{fig:smeared_smu800_xmax}
 \end{figure}
 
@@ -291,16 +293,23 @@ The anti-correlation of $\hat{S}^{\mu}_{800}$ and $X_{\text{max}}$ results in ne
 
 %In order to mimic the effects of reconstruction resolution  in the 
 
-The Pearson correlation coefficient $r$ is calculated in the $\hat{S}^{\mu}_{800}-X_{\text{max}}$ plane for proton and iron simulations and data within each of the five equally spaced energy bins used in this analysis.
+The Pearson correlation coefficient $r$ is calculated in the $\hat{S}^{\mu}_{800}-X_{\text{max}}$ plane for proton and iron simulations and data for each of the five equally spaced energy bins used in this analysis.
 \Cref{fig:correlation} shows the energy evolution of the Pearson $r$ values for both data and simulations.
 The $\hat{S}^{\mu}_{800}-X_{\text{max}}$ correlation is calculated using only proton simulations, only iron simulations, and using the joint proton-iron distribution of simulations.
 Each of the simulated distributions is smeared and an uncertainty band is estimated from bootstrapping.
 The Pearson $r$ of data is included on the same plot for comparison, where the uncertainty on each data point is determined from the bootstrapping method previously described.
-The linear $\hat{S}^{\mu}_{800}-X_{\text{max}}$ correlation of the data approximately follows the same correlation as the joint proton-iron simulations, providing a sanity check that the correlation structure of this radio-muon observable pair is similar between data and simulations.
-The non-zero slope of this $\hat{S}^{\mu}_{800}-X_{\text{max}}$ correlation highlights additional mass information is accessible when studying the mass sensitivity of this observable combination in comparison to studies of the $\hat{S}^{\mu}_{800}$ or $X_{\text{max}}$ observables alone.
-Hence, this hybrid radio-muon method adds mass sensitivity beyond individual radio or muon reconstructions.
-The similar energy evolution of the Pearson $r$ for data as in simulations shows that this conclusion is also true for data.
-Yet, this result does not draw any conclusions about potential systematic offsets between the separate radio-muon reconstruction methods or between the data and simulations.
+The $\hat{S}^{\mu}_{800}-X_{\text{max}}$ correlation of the data approximately follows the same correlation as the joint proton-iron simulations, providing a sanity check that the correlation structure of this radio-muon observable pair is similar between data and simulations.
+The Pearson $r$, including uncertainties, calculated for each data point is within the limits of $0<|r|\leq1$, indicating a correlation between the $\hat{S}^{\mu}_{800}$ and $X_{\text{max}}$ observables; however, this could be a non-linear correlation.
+Cosmic-ray mass information is encoded in this correlation, yet is not accessible when studying the mass sensitivity of the $\hat{S}^{\mu}_{800}$ or $X_{\text{max}}$ observables alone.
+Hence, hybrid radio-muon data provide additional mass information beyond what is obtained from individual radio or muon reconstructions.
+
+%This correlation is the information not accessible when studying the mass sensitivity of the $\hat{S}^{\mu}_{800}$ or $X_{\text{max}}$ observables alone
+
+%The non-zero slope of this $\hat{S}^{\mu}_{800}-X_{\text{max}}$ correlation highlights additional mass information is accessible when studying the mass sensitivity of this observable combination in comparison to studies of the $\hat{S}^{\mu}_{800}$ or $X_{\text{max}}$ observables alone.
+
+%Hence, this hybrid radio-muon method adds mass sensitivity beyond individual radio or muon reconstructions.
+
+%Yet, this result does not draw any conclusions about potential systematic offsets between the separate radio-muon reconstruction methods or between the data and simulations.
 
 %a sole radio or muon observable
 
@@ -310,7 +319,7 @@ Yet, this result does not draw any conclusions about potential systematic offset
 \begin{figure}[h]
   \centering
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter6/correlation_vs_energy_nn_prediction_signalsmeared_nsimboot50_purePpureFEincluded.pdf}
-  \caption[Energy evolution of Pearson $r$ for data and simulations.]{The Pearson correlation coefficient $r$ calculated within each energy bin, for both data and simulations, and plotted as a function of SD-750 reconstructed energy. The Pearson $r$ values for the pure proton and pure iron distributions are included as references. The uncertainties for simulations and data are each calculated as the standard deviation of $N=50$ bootstraps. The data approximately follow the trend of the joint proton-iron simulations within the $\hat{S}^{\mu}_{800}-X_{\text{max}}$ plane, within uncertainties.}
+  \caption[Energy evolution of Pearson $r$ for data and simulations.]{The Pearson correlation coefficient $r$ calculated within each energy bin, for both data and simulations, and plotted as a function of SD-750 reconstructed energy. The uncertainties for simulations and data are each calculated as the standard deviation of $N=50$ bootstraps. The data in the $\hat{S}^{\mu}_{800}-X_{\text{max}}$ plane, within uncertainties, indicate an anti-correlation compatible to the simulations.}
   \label{fig:correlation}
 \end{figure}
 
@@ -325,8 +334,9 @@ Yet, this result does not draw any conclusions about potential systematic offset
 The $\langle \hat{S}^{\mu}_{800}\rangle$ vs. $\langle X_{\text{max}}\rangle$ values binned in SD-750 reconstructed energy are studied to determine any potential systematic offsets between data and simulations for the radio and muon observables.
 \Cref{fig:mean_smu800_xmax} shows the $\langle \hat{S}^{\mu}_{800}\rangle$ vs. $\langle X_{\text{max}}\rangle$ values within two of the five studied energy bins.
 The average values are shown for the simulations of all primaries within the EPOS LHC-R test set and for the measured air showers of the bias-free AERA dataset.
-The simulations are zenith weighted to the data and both simulations and data are energy scaled with respect to the center of the energy bin prior to calculating the average observable values within the bin.
-The statistical uncertainties are calculated as the uncertainties in their respective average values, while the systematic uncertainty of $\langle X_{\text{max}}\rangle$ is determined from~\cite{auger_prd2024_aeraxmax,auger_prl2024_aeraxmax} to be $\pm$\qty{10}{\gram\per\centi\meter\squared} across the full energy range of $\lg\left(E_{\text{SD}} / \text{eV}\right)=$\,\numrange{17.5}{18.5}.
+The simulations are zenith weighted to the data, and both simulations and data are energy scaled with respect to the center of the energy bin prior to calculating the average observable values within the bin.
+The statistical uncertainty for each average observable is calculated as the uncertainty in the average, and therefore the per-event uncertainties are not used.
+The systematic uncertainty of $\langle X_{\text{max}}\rangle$ is taken from~\cite{auger_prd2024_aeraxmax,auger_prl2024_aeraxmax} to be $\pm$\qty{10}{\gram\per\centi\meter\squared} across the full energy range of $\lg\left(E_{\text{SD}} / \text{eV}\right)=$\,\numrange{17.5}{18.5}.
 The systematic uncertainty in the neural-network predicted $\langle \hat{S}^{\mu}_{800}\rangle$ value has not been quantified.
 A dotted line connecting the proton and iron average values is drawn on the plots as a reference.
 
@@ -334,7 +344,7 @@ A dotted line connecting the proton and iron average values is drawn on the plot
   \centering
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.497\textwidth]{chapter6/mean_plane_en17.7_17.9_nn_prediction.pdf}
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=0.49\textwidth]{chapter6/mean_plane_en18.3_18.5_nn_prediction.pdf}
-  \caption[Mean $\hat{S}^{\mu}_{800}$ vs. mean $X_{\text{max}}$ distributions.]{The mean $\hat{S}^{\mu}_{800}$ vs. mean $X_{\text{max}}$ distributions for simulations and the AERA bias-free $X_{\text{max}}$ data within two separate energy bins of $\lg\left(E_{\text{SD}} / \text{eV}\right)=$\,\numrange{17.7}{17.9} (left) and \numrange{18.3}{18.5} (right). The systematic uncertainty of $\langle X_{\text{max}}\rangle$ is assumed to be $\pm$\qty{10}{\gram\per\centi\meter\squared}, taken from~\cite{auger_prd2024_aeraxmax,auger_prl2024_aeraxmax}. A mismatch of the reconstructed muon signal \qty{800}{\meter} from the air-shower axis between simulations and data is visible.}
+  \caption[Mean $\hat{S}^{\mu}_{800}$ vs. mean radio $X_{\text{max}}$ distributions.]{The mean $\hat{S}^{\mu}_{800}$ vs. mean radio $X_{\text{max}}$ distributions for simulations and the AERA bias-free $X_{\text{max}}$ data within two separate energy bins of $\lg\left(E_{\text{SD}} / \text{eV}\right)=$\,\numrange{17.7}{17.9} (left) and \numrange{18.3}{18.5} (right). The systematic uncertainty of $\langle X_{\text{max}}\rangle$ is assumed to be $\pm$\qty{10}{\gram\per\centi\meter\squared}~\cite{auger_prd2024_aeraxmax,auger_prl2024_aeraxmax}. For the lower energy bin, a mismatch of the muon signal reconstructed at \qty{800}{\meter} from the air-shower axis between simulations and data is visible.}
   \label{fig:mean_smu800_xmax}
 \end{figure}
 
@@ -344,17 +354,26 @@ A dotted line connecting the proton and iron average values is drawn on the plot
 
 %The potential systematic offsets between the radio and muon observables is studied 
 
-A mismatch of the average neural-network predicted muon signal at \qty{800}{\meter} from the air-shower axis between data and simulations is visible.
-The mismatch is present in all energy bins except for the bin $\lg\left(E_{\text{SD}} / \text{eV}\right)=$\,\numrange{18.3}{18.5}, which contains the highest energy air showers of the analysis.
-This is visible in the energy evolution plot of the $\langle \hat{S}^{\mu}_{800}\rangle$ vs. $\langle X_{\text{max}}\rangle$ for all five energy bins, presented in~\Cref{fig:energy_evolution}.
+A mismatch of the average neural-network predicted muon signal at \qty{800}{\meter} from the air-shower axis between data and simulations is visible in all energy bins except for the highest energy bin at $\lg\left(E_{\text{SD}} / \text{eV}\right)=$\,\numrange{18.3}{18.5}, as presented in~\Cref{fig:energy_evolution}.
 In this figure, $\langle \hat{S}^{\mu}_{800}\rangle$ values are plotted on a logarithmic scale so that all energy bins are included on a single plot.
-Note the uncertainties in the $\langle X_{\text{max}}\rangle$ values generally become larger with increasing air-shower energy, partially due to bin statistics.
+Note the uncertainties in the $\langle X_{\text{max}}\rangle$ values generally become larger with increasing air-shower energy, mostly due to bin statistics.
 
 The bias-free AERA dataset has a per-event $X_{\text{max}}$ determined by a parabola fit to 27 air showers simulated with the QGSJETII-04 hadronic interaction model; however, this dataset is compared to air-shower simulations performed with the EPOS LHC-R hadronic interaction model.
 The difference in $\langle X_{\text{max}}\rangle$ between these two hadronic models is roughly \qty{30}{\gram\per\centi\meter\squared} within the $\lg\left(E_{\text{SD}} / \text{eV}\right)=$\,\numrange{17.5}{18.5} energy range studied here, with EPOS LHC-R predicting deeper showers than QGSJETII-04.
-A back-of-the-envelope calculation of shifting the $\langle X_{\text{max}}\rangle$ values of the EPOS LHC-R simulations by $-$\qty{30}{\gram\per\centi\meter\squared} still yields a mismatch between the data and simulations.
-The mismatch of data and simulations prevents the combination of the average muon and average radio observables for mass composition analyses using measured air-shower data without a systematic scaling factor applied to the simulations.
-This scaling factor embodies the muon puzzle, as this is a discrepancy of the muonic air-shower content between simulations and data.
+The template fitting method to reconstruct a radio $X_{\text{max}}$ has a systematic uncertainty of roughly \qty{5}{\gram\per\centi\meter\squared} from the choice of hadronic interaction model~\cite{lofar_prd2014_xmax,auger_prd2024_aeraxmax,auger_prl2024_aeraxmax}, smaller than the difference in $\langle X_{\text{max}}\rangle$ between EPOS LHC-R and QGSJETII-04.
+Even if the systematic uncertainty of $X_{\text{max}}$ would be as large as the \qty{30}{\gram\per\centi\meter\squared} shift there would still be a mismatch between the data and simulations.
+The mismatch of data and simulations prevents the combination of the average muon and average radio observables for mass-composition analyses using measured air-shower data without a systematic scaling factor applied to the simulations.
+
+
+%Instead, the choice of hadronic interaction model affects interpreting the data to determine a mass composition.
+
+%The choice of hadronic interaction model has an effect on the template fitting method to reconstruct a radio $X_{\text{max}}$, yet this systematic effect is much smaller than the \qty{30}{\gram\per\centi\meter\squared} difference in the average $X_{\text{max}}$ between EPOS LHC-R adn QGSJETII-04 as the latter only impacts the .
+
+%The template fitting method to reconstruct a radio $X_{\text{max}}$ has a systematic uncertainty from the choice of hadronic interaction model much smaller than this \qty{30}{\gram\per\centi\meter\squared} difference. 
+%A back-of-the-envelope calculation of shifting the $\langle X_{\text{max}}\rangle$ values of the EPOS LHC-R simulations by $-$\qty{30}{\gram\per\centi\meter\squared} still yields a mismatch between the data and simulations.
+
+%The mismatch of data and simulations prevents the combination of the average muon and average radio observables for mass composition analyses using measured air-shower data without a systematic scaling factor applied to the simulations.
+%This scaling factor embodies the muon puzzle, as this is a discrepancy of the muonic air-shower content between simulations and data.
 
 %Hence, this mismatch embodies the muon puzzle as this is a discrepancy of muon observables between simulations and data
 
@@ -367,7 +386,7 @@ This scaling factor embodies the muon puzzle, as this is a discrepancy of the mu
 \begin{figure}[h]
   \centering
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter6/energy_evolution_nn_prediction.pdf}
-  \caption[Energy evolution of mean $\hat{S}^{\mu}_{800}$ vs. mean $X_{\text{max}}$.]{The energy evolution of the mean $\hat{S}^{\mu}_{800}$ vs. mean $X_{\text{max}}$ distributions. The mean $\hat{S}^{\mu}_{800}$ values are plotted on a logarithmic scale so all energy bins are visible; however, this makes the statistical uncertainty of the mean $\hat{S}^{\mu}_{800}$ values not visible. The systematic uncertainty of $X_{\text{max}}$ is not plotted here. Energy bins are labeled by their range for distinction. Both the data and simulations evolve up and to the right for increasing energy.}
+  \caption[Energy evolution of mean $\hat{S}^{\mu}_{800}$ vs. mean radio $X_{\text{max}}$.]{Energy evolution of the mean $\hat{S}^{\mu}_{800}$ vs. mean radio $X_{\text{max}}$ distributions. The mean $\hat{S}^{\mu}_{800}$ values are plotted on a logarithmic scale so all energy bins are visible; however, this makes the statistical uncertainty of the mean $\hat{S}^{\mu}_{800}$ values not visible because the statistical uncertainties are smaller than the marker size. The systematic uncertainty of $X_{\text{max}}$ is not plotted here. Energy bins are labeled by their range for distinction; both the data and simulations evolve up and to the right for increasing energy.}
   \label{fig:energy_evolution}
 \end{figure}
 
@@ -376,31 +395,30 @@ This scaling factor embodies the muon puzzle, as this is a discrepancy of the mu
 
 %The observed muon discrepancy between simulations and data for this analysis is investigated as a study of the muon puzzle.
 
-The analysis in this section is performed without applying the back-of-the-envelope $-$\qty{30}{\gram\per\centi\meter\squared} shift in the $\langle X_{\text{max}}\rangle$ values of the EPOS LHC-R simulations.
-Instead, it is assumed that the $X_{\text{max}}$ scale of the simulations and data are in agreement with one another.
-Quantifying the simulation-data discrepancy in the predicted muon observable is performed assuming the $\langle X_{\text{max}}\rangle$ determined by the radio $X_{\text{max}}$ reconstruction is the true cosmic-ray composition within each energy bin.
-The vertical shift of the EPOS LHC-R simulated $\langle \hat{S}^{\mu}_{800}\rangle$ required to match the data in each energy bin is calculated as a measure of the discrepancy between the muon observable as determined from simulations and from data.
+The analysis in this section assumes that the $X_{\text{max}}$ scale of the simulations and data are in agreement with one another because they are compatible within uncertainties~\cite{auger_prd2024_aeraxmax,auger_prl2024_aeraxmax}.
+Quantifying the simulation-data discrepancy in the predicted muon observable is thus performed by assuming that the $\langle X_{\text{max}}\rangle$ determined by the radio $X_{\text{max}}$ reconstruction is the true value within each energy bin.
+The vertical shift of the EPOS LHC-R simulated $\langle \hat{S}^{\mu}_{800}\rangle$ required to match the data in each energy bin is calculated as a measure of the discrepancy between the simulated muon observable and data.
 
-The discrepancy is calculated using two metrics: first, as a percentage necessary to scale the simulations to match the data, and second, as a muon fraction of the measured data with respect to the predictions from simulations.
+The discrepancy is calculated using two metrics: first, as a percentage necessary to scale the simulations to match the data, and second, as a fraction of the measured muon signal in data with respect to the predictions from simulations.
 There is a one-to-one correlation between the two values.
-The mass composition as determined by $X_{\text{max}}$ data fixes the location within the $\hat{S}^{\mu}_{800}-X_{\text{max}}$ plane for the calculation of the muon discrepancy and is reported as a dimensionless fraction along the proton-iron line of this plane:
+The mean $X_{\text{max}}$ in data fixes the location within the $\hat{S}^{\mu}_{800}-X_{\text{max}}$ plane for the calculation of the muon discrepancy and is reported as a dimensionless fraction along the proton-iron line of this plane:
 
 \begin{eqnarray}
-  Z_{X} = \frac{\langle X_{\text{max}}\rangle_{\text{data}} - \langle X_{\text{max}}\rangle_{\text{p}}}{\langle X_{\text{max}}\rangle_{\text{Fe}} - \langle X_{\text{max}}\rangle_{\text{p}}}. \label{eq:zscale_xmax}
+  z_{X} = \frac{\langle X_{\text{max}}\rangle_{\text{data}} - \langle X_{\text{max}}\rangle_{\text{p}}}{\langle X_{\text{max}}\rangle_{\text{Fe}} - \langle X_{\text{max}}\rangle_{\text{p}}}. \label{eq:zscale_xmax}
 \end{eqnarray}
 
 \noindent
-$\langle X_{\text{max}}\rangle_{\text{p}}$ and $\langle X_{\text{max}}\rangle_{\text{Fe}}$ are the average $X_{\text{max}}$ values of proton and iron respectively, within a given energy bin.
-The muon fraction, $F_{\mu}$, depends on the mass composition as determined by $X_{\text{max}}$ data, and is defined as
+$\langle X_{\text{max}}\rangle_{\text{p}}$ and $\langle X_{\text{max}}\rangle_{\text{Fe}}$ are the average $X_{\text{max}}$ values of proton and iron simulations respectively, within a given energy bin.
+The muon fraction, $F_{\mu}$, depends on this $z_{X}$ and is defined as
 
 \begin{equation}
-  F_{\mu} = \frac{\langle \hat{S}^{\mu}\rangle_{\text{data}}}{\langle \hat{S}^{\mu}\rangle_{\text{p}} + Z_{X} \left(\langle \hat{S}^{\mu}\rangle_{\text{Fe}} - \langle \hat{S}^{\mu}\rangle_{\text{p}}\right)}. \label{eq:f_mu}
+  F_{\mu} = \frac{\langle \hat{S}^{\mu}\rangle_{\text{data}}}{\langle \hat{S}^{\mu}\rangle_{\text{p}} + z_{X} \left(\langle \hat{S}^{\mu}\rangle_{\text{Fe}} - \langle \hat{S}^{\mu}\rangle_{\text{p}}\right)}. \label{eq:f_mu}
 \end{equation}
 
 \noindent
-$\langle \hat{S}^{\mu}\rangle_{\text{p}}$ and $\langle \hat{S}^{\mu}\rangle_{\text{Fe}}$ are the average $\hat{S}^{\mu}$ values of proton and iron respectively, again within a given energy bin.
-A value of $F_{\mu}>$\,1 represents the data have a larger muonic signal (i.e.~a greater $\hat{S}^{\mu}$) than expected from the mass composition determined by the energy scaled radio $X_{\text{max}}$ data, while $F_{\mu}<$\,1 means the opposite is true.
-$F_{\mu}=$\,1 signifies the the neural-network predicted muon signal in data is equivalent with the expectation from simulations for the fixed mass composition by radio measurements, meaning there is no muon discrepancy between simulations and data. 
+$\langle \hat{S}^{\mu}\rangle_{\text{p}}$ and $\langle \hat{S}^{\mu}\rangle_{\text{Fe}}$ are the average $\hat{S}^{\mu}$ values of proton and iron simulations respectively, again within a given energy bin.
+A value of $F_{\mu}>$\,1 represents the data have a larger muonic signal (i.e.~a greater $\hat{S}^{\mu}$) than expected from the energy scaled, mean radio $X_{\text{max}}$ data, while $F_{\mu}<$\,1 means the opposite is true.
+$F_{\mu}=$\,1 signifies there is no discrepancy of the neural-network predicted muon signal between simulations and data. 
 
 Nominally, the muon observable is the neural-network predicted muon signal at \qty{800}{\meter} from the air-shower axis, $\hat{S}^{\mu}_{800}$.
 As exhibited in~\Cref{fig:mean_smu800_xmax}, $\hat{S}^{\mu}_{800}$ predicted from simulations over-estimates the $\hat{S}^{\mu}_{800}$ results from data within most of the studied energy bins in this analysis.
@@ -408,31 +426,37 @@ The muon puzzle reported by several air-shower experiments expects the opposite 
 Yet, this discrepancy also depends on the distance from the air-shower axis at which the muon content is measured~\cite{icrc2023_arteaga_muonpuzzle}.
 To study this simulation-data muon discrepancy more generally, the $F_{\mu}$ value is calculated for the neural-network predicted muon observable at \qty{450}{\meter} from the air-shower axis ($\hat{S}^{\mu}_{450}$), at \qty{800}{\meter} from the air-shower axis ($\hat{S}^{\mu}_{800}$), and for the total neural-network predicted muon signal ($\hat{S}^{\mu}_{\text{total}}$).
 
-$\hat{S}^{\mu}_{450}$ is determined directly from the muon LDF fit as described in~\Cref{chap:nn}, $\hat{S}^{\mu}_{800}$ is determined by evaluating the muon LDF at \qty{800}{\meter}, and $\hat{S}^{\mu}_{\text{total}}$ is determined by integrating the muon LDF given by~\Cref{eq:mldf} using the nominal values of that event's $\hat{S}^{\mu}_{450}$ and $\beta$.
-The integration is performed numerically over the limits of $r$\,=\,\qtyrange[parse-numbers=false]{10^{-3}}{10^{6}}{\meter} to calculate the total muonic signal predicted by the neural network, which is accurate to within roughly $\left(10^{-3}\right)^{-\alpha+2}$ (approximately $10^{-4}$ with the muon LDF assumption $\alpha$\,=\,0.75).
+$\hat{S}^{\mu}_{450}$ is determined directly from the muon LDF fit as described in~\Cref{chap:nn}, $\hat{S}^{\mu}_{800}$ is determined by evaluating the muon LDF at \qty{800}{\meter}, and $\hat{S}^{\mu}_{\text{total}}$ is determined by integrating the muon LDF given by~\Cref{eq:mldf} using the nominal values of each event's $\hat{S}^{\mu}_{450}$ and $\beta$.
+The integration is performed numerically over the limits of $r$\,=\,\qtyrange[parse-numbers=false]{10^{-3}}{10^{6}}{\meter} to calculate the total muonic signal predicted by the neural network.
+These limits were chosen such that contributions to the numerical integration outside of this range are negligible\footnote[3]{In~\Cref{eq:mldf}, the LDF structure close to the air-shower axis is dominated by the $\alpha$ term of the muon LDF. $\alpha$ is fixed to $\alpha$\,=\,0.75 in the muon LDF, which, for a lower integration limit of \qty[parse-numbers=false]{10^{-3}}{\meter}, results in a numerical integration accurate to roughly \qty[parse-numbers=false]{10^{-4}}{VEM}.}.
 The $\hat{S}^{\mu}_{\text{total}}$ values have units of $\text{VEM}\,\text{m}^{2}$, yet the calculation of $F_{\mu}$ is a dimensionless fraction and enables a direct comparison of the fractions for the total muonic signal and the muonic signal at the references distances of \qty{450}{\meter} and \qty{800}{\meter} from the air-shower axis.
 
 \begin{figure}[h]
   \centering
   \includegraphics[trim={0cm 0cm 0cm 0cm},clip,width=1.0\textwidth]{chapter6/muon_shift_nn_prediction.pdf}
-  \caption[Scaling factor of simulated $\hat{S}^{\mu}$ to match the data.]{The rescaling of the neural-network predicted muon signal for simulations to match the data. The scaling factor is calculated assuming the composition from the AERA $X_{\text{max}}$ results is the true composition. In addition to $\hat{S}^{\mu}_{800}$, the scaling factors of $\hat{S}^{\mu}_{450}$ and $\hat{S}^{\mu}_{\text{total}}$ from integrating the muon LDF are presented. $F_{\mu}>1$ implies the data has more muonic signal than seen in simulations, and simulations must be scaled up to match the data, whereas $F_{\mu}<1$ implies the opposite. The systematic uncertainty is solely that of the $X_{\text{max}}$ systematic uncertainty from~\cite{auger_prd2024_aeraxmax,auger_prl2024_aeraxmax}. The data predicts roughly 10\% more total muonic signal than simulations for a given $X_{\text{max}}$. This scaling is shown to depend on the distance to the air-shower axis at which the muon signal is sampled.}
+  \caption[Rescaling factor of simulated $\hat{S}^{\mu}$ to match the data.]{Rescaling factor of the neural-network predicted muon signal needed for simulations to match the data. The scaling factor is calculated assuming the mean radio $X_{\text{max}}$ as the true value. In addition to $\hat{S}^{\mu}_{800}$, the scaling factors of $\hat{S}^{\mu}_{450}$ and $\hat{S}^{\mu}_{\text{total}}$ from integrating the muon LDF are presented. $F_{\mu}>1$ implies the data have more muonic signal than seen in simulations, and simulations must be scaled up to match the data, whereas $F_{\mu}<1$ implies the opposite. The systematic uncertainty is solely that of the $X_{\text{max}}$ systematic uncertainty from~\cite{auger_prd2024_aeraxmax,auger_prl2024_aeraxmax}. The data predicts roughly 10\% more total muonic signal than simulations for a given $X_{\text{max}}$, but less muonic signal at a larger distance from the shower axis.}
   \label{fig:muon_rescaling}
 \end{figure}
 
 \Cref{fig:muon_rescaling} shows the percentage necessary to scale the simulated $\langle \hat{S}^{\mu}\rangle$ values to match the data for both reference distances, and for the total neural-network predicted muon signal from integrating the muon LDF, as a function of binned SD-750 reconstructed energy.
 The corresponding $F_{\mu}$ values are shown on the right-hand y-axis.
 The simulations in each energy bin are zenith weighted to the data and both data and simulations are energy scaled to the bin center prior to calculating any average observable values.
-Results show the $\langle \hat{S}^{\mu}_{800}\rangle$ value in data has less muonic signal than what is predicted in simulations assuming the mass composition from radio $X_{\text{max}}$.
+Results for $\langle \hat{S}^{\mu}_{800}\rangle$ show that data have less muonic signal at \qty{800}{\meter} than what is predicted in simulations assuming the mean radio $X_{\text{max}}$ as truth.
 This is true at most studied energies, except for the highest energy bin of \qtyrange[parse-numbers=false]{10^{18.3}}{10^{18.5}}{\electronvolt}.
 The $\langle \hat{S}^{\mu}_{450}\rangle$ and $\langle \hat{S}^{\mu}_{\text{total}}\rangle$ values derived from data have more muonic signal than predicted in simulations for the given radio $X_{\text{max}}$ results for all studied energies.
-Overall, the total muon signal in data exhibits a roughly 10\% excess in comparison to simulations for the full energy range of \qtyrange[parse-numbers=false]{10^{17.5}}{10^{18.5}}{\electronvolt}.
+Overall, the total muon signal in simulations exhibits a deficit in comparison to data for the full energy range of \qtyrange[parse-numbers=false]{10^{17.5}}{10^{18.5}}{\electronvolt}, and must be rescaled by a factor of roughly $F_{\mu}=$\,1.10 (i.e.~10\%) to match the data at all energies.
 
-For comparison, an analysis of the UMD and FD measurements at the Pierre Auger Observatory sees an approximately 38\% excess ($F_{\mu}=$\,1.38) in the measured muon number compared to simulations using the EPOS LHC hadronic interaction model at energies of \qty[parse-numbers=false]{10^{17.5}}{\electronvolt} and \qty[parse-numbers=false]{10^{18}}{\electronvolt}~\cite{auger_epjc2020_muoncontent_umd}.
+For comparison, an analysis of the UMD and FD measurements at the Pierre Auger Observatory finds simulations using the EPOS LHC hadronic interaction model need to be rescaled by a factor of $F_{\mu}=$\,1.38 to match the measured muon number at energies of \qty[parse-numbers=false]{10^{17.5}}{\electronvolt} and \qty[parse-numbers=false]{10^{18}}{\electronvolt}~\cite{auger_epjc2020_muoncontent_umd}.
 These measurements are based on muon density measurements at \qty{450}{\meter} from the air-shower axis corrected for zenith angle effects using the constant intensity cut method (see~\Cref{ssec:sd_reconstruction}).
-The results of $\langle \hat{S}^{\mu}_{450}\rangle$ reported here only exhibit an approximately 5\% excess ($F_{\mu}=$\,1.05) in the measured muon number compared to simulations; however, the excess is expected to be lower in magnitude for the EPOS LHC-R hadronic interaction model compared to its previous iteration~\cite{icrc2025_pierog}.
+The results of $\langle \hat{S}^{\mu}_{450}\rangle$ reported here only require a 5\% rescaling ($F_{\mu}=$\,1.05) of the simulations to match the measured muon number; however, the simulation-data mismatch is expected to be lower in magnitude for the EPOS LHC-R hadronic interaction model compared to its previous iteration~\cite{icrc2025_pierog}.
+Specifically, EPOS LHC-R predicts roughly 10\% more muons than EPOS LHC at \qty[parse-numbers=false]{10^{18}}{\electronvolt}.
+Accounting for this difference between hadronic model generation, the simulation rescaling factor from the UMD analysis and the rescaling factor presented here are in agreement within uncertainties, with a z-score of approximately 1.2 between the two rescaling factors.
+
 The results of this hybrid radio-muon analysis emphasize that discrepancies in the simulated and measured muon content in air showers from a neural-network prediction are prevalent, where the magnitude and direction of the discrepancy depends on the measurement distance from the air-shower axis of the muon observable.
-This is expected to mimic the muon puzzle, as seen within this chapter, because the neural network is trained on hadronic interaction models that have incomplete descriptions of the hadronic interactions within air showers.
-Additional studies of hadronic interaction models and the muon content of air showers are therefore necessary to further understand this discrepancy. 
+Hence, the muon puzzle is more complex than a simple mismatch in the total muon content of measured and simulated air showers, as the lateral distribution of muons is also incorrectly predicted in simulations.
+The neural network used in this analysis is trained using only a single hadronic interaction model, EPOS LHC-R, that has an incomplete description of the hadronic interactions within air showers.
+This analysis then confirms that EPOS LHC-R is inconsistent with data, yet no concrete conclusion can be made for the other hadronic interaction models.
+Additional studies of hadronic interaction models and the muon content of air showers are therefore necessary to further understand the discrepancies reported in this dissertation. 
 
 
 %The Pierre Auger Observatory with the 
@@ -450,21 +474,27 @@ Additional studies of hadronic interaction models and the muon content of air sh
 
 \section{Chapter Summary}\label{sec:ch6_summary}
 
-This chapter presents the application to data of the neural network trained in~\Cref{chap:nn} for the goal of obtaining hybrid radio-muon measurements of air showers.
-A bias-free dataset of radio $X_{\text{max}}$ measurements for 594 air showers is studied, each with a counterpart measurement by the SD-750 array of the Pierre Auger Observatory. 
-The neural network is applied to SD-750 measurements of this dataset to predict the station-level muonic signals, which are then combined at the event level and fit to a muon LDF to determine the muonic signal in the SD at \qty{800}{\meter} from the air-shower axis ($\hat{S}^{\mu}_{800}$).
-The muon observable is combined with the knowledge of radio $X_{\text{max}}$ measurements to study the joint effect on mass sensitivity of hybrid radio-muon measurements and to investigate the discrepancy in the muon observable as predicted in simulations and measured in data.
+This chapter presents the application of the neural network trained in~\Cref{chap:nn} to data for the goal of obtaining hybrid radio-muon measurements of air showers.
+A large subset of 439 air-shower events from a bias-free dataset of radio $X_{\text{max}}$ measurements is studied, each of which also have a high-quality muon reconstruction after applying the neural network to the SD-750 measurements of this dataset.
+The neural network predictions of the station-level muonic signals are combined at the event level to determine the muonic signal in the SD at \qty{800}{\meter} from the air-shower axis ($\hat{S}^{\mu}_{800}$).
+The muon observable is combined with the knowledge of radio $X_{\text{max}}$ measurements to study the joint effect on mass sensitivity of hybrid radio-muon measurements and to investigate the discrepancy in the muon observable between simulations and measured data.
 
-The hybrid radio-muon combination was shown to add mass sensitivity beyond either observable alone using simulations in~\Cref{chap:simulations}; however, this chapter shows this result is also true in data using a radio $X_{\text{max}}$ reconstruction and a neural-network prediction of the muonic signal measured by an array of water-Cherenkov detectors.
-Combined radio-muon measurements do enhance the mass sensitivity through adding additional mass information, as exemplified from the significant non-zero slope of the $\hat{S}^{\mu}_{800}-X_{\text{max}}$ correlation in data.
+The hybrid radio-muon combination was shown to add mass sensitivity beyond either observable alone using simulations in~\Cref{chap:simulations}.
+This chapter shows a correlation of the $\hat{S}^{\mu}_{800}$ and radio $X_{\text{max}}$ observables in data.
+Cosmic-ray mass information is encoded within this correlation and therefore this observable combination in data can potentially enhance the cosmic-ray mass sensitivity, as this additional mass information from the observable correlation is not attainable through studies of the $\hat{S}^{\mu}_{800}$ or radio $X_{\text{max}}$ observables alone.
 Yet, this chapter shows a systematic mismatch between the predictions from simulations and the results from data for the hybrid-radio muon method.
-Systematics need to be heavily scrutinized and understood before muon and radio measurements can be combined for mass composition analyses.
+Systematics need to be heavily scrutinized and understood before muon and radio measurements can be combined for mass-composition analyses.
 
-The simulation-data mismatch is quantified between the simulated and measured muon observables studied within this chapter; however, future radio-muon analyses that plan to determine an event-by-event or an average mass composition will require this mismatch to be rectified.
+The mismatch between simulated and measured muon observables is studied within this chapter.
+Compared to EPOS LHC-R simulations, the neural-network predictions for data show an excess of the total muonic signal in the SD, a excess of the muonic signal in the SD at \qty{450}{\meter} from the air-shower axis (yet smaller than the excess of the total muonic signal), and a deficit of the muonic signal at \qty{800}{\meter} from the shower axis.
+The simulation-data inconsistencies for each of the stated muon observables are quantified within this chapter and studied as a function of cosmic-ray energy in the range of \qtyrange[parse-numbers=false]{10^{17.5}}{10^{18.5}}{\electronvolt}.
+These mismatches are generally consistent across the full energy range and point to an incorrect modeling of the lateral distribution of muons for the EPOS LHC-R hadronic interaction model.
+
+Future radio-muon analyses that plan to determine an event-by-event or an average mass composition will require this simulation-data mismatch to be rectified.
 Incomplete descriptions of the hadronic interactions in air showers are known to contribute significantly to this muon discrepancy between data and simulations.
 Constraining hadronic interaction models is therefore of the utmost importance for hybrid radio-muon measurements.
 Direct muon measurements, such as with the Underground Muon Detector (UMD) of the Pierre Auger Observatory, could improve prospects over the neural-network based muon observable as direct measurements are less subject to the limitations of hadronic interaction models.
-Hybrid radio-muon measurements of air showers reconstructed with the UMD and the radio antennas of AERA is shown to be impractical within this chapter; however, the following chapter introduces a new array of radio antennas at the Pierre Auger Observatory, the Auger Radio Infill SKALA Extension (ARISE), which aims at hybrid radio-muon detections of air showers through coincidence measurements with the UMD.
+Hybrid radio-muon measurements of air showers reconstructed with the UMD and the radio antennas of AERA are shown to be impractical due to limited overlap in zenith angle; however, the following chapter introduces a new array of radio antennas at the Pierre Auger Observatory, the Auger Radio Infill SKALA Extension (ARISE), which aims at hybrid radio-muon detections of near-vertical air showers through coincidence measurements with the UMD.
 
 %A major contribution to this mismatch are the predictions 
 
