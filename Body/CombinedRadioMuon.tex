@@ -36,7 +36,7 @@ The AERA and UMD footprints are co-located making simultaneous measurements feas
 The geometry of UMD scintillator panels is optimal for vertical air-shower reconstructions while the spacing of the AERA radio antennas makes the AERA $X_{\rm max}$ reconstruction more efficient for air showers with $\theta>\,$\qty{40}{\degree} (see~\Cref{fig:aera_umd_histograms}).
 Regarding timeline constraints, AERA, recording air showers since 2011, has fulfilled its primary science goal of proving the usefulness of air-shower reconstructions in the \qtyrange{30}{80}{\mega\hertz} band near Malarg\"{u}e and is planned to be decommissioned in 2027.
 At the moment of writing, the AERA $X_{\rm max}$ reconstruction is only available within the time frame of May 2013 until November 2019.
-The UMD did not obtain a stable reconstruction until January 2018, aned deployment only finished in March 2026, severely limiting the data overlap between the two detectors.
+The UMD did not obtain a stable reconstruction until January 2018, and deployment only finished in March 2026, severely limiting the data overlap between the two detectors.
 The radio $X_{\rm max}$ reconstruction may eventually be ported to the RD antennas, deployed at each Auger SD, yet the spacing of RD will aim to reconstruct even more highly-inclined air showers ($\theta>$\,\qty{65}{\degree}).
 
 \begin{figure}
@@ -239,7 +239,7 @@ The simulations were generated with a $dN/d\theta \propto \sin\theta\cos\theta$ 
 Instead, the data is divided into four bins of $\sec\left(\theta_{\text{SD}}\right)$ with equal per-bin statistics.
 The zenith weighting of the simulations is determined by the fraction of data within the $\sec\left(\theta_{\text{SD}}\right)$ bin (the same across all bins) to the fraction of simulations within the bin.
 The zenith weights are calculated separately for each primary and normalized to fix the total per-primary zenith weight to 1.0 across the four zenith bins.
-Calculation of the zenith weights is performed per-primary as a safety measure to mitigate potential biases resulting from the quality cuts, as the impact of quality cuts on the zenith distributions of each simulated primary was not studied.
+Calculation of the zenith weights is performed per-primary as a safety measure to mitigate potential biases resulting from the quality cuts, as the impact of quality cuts on the distributions of each simulated primary was not studied.
 This zenith weighting and energy scaling are performed to remove potential biases from the simulation-data comparisons.
 Both zenith weighting of the simulations and energy scaling of the data and simulations are applied to the analysis and plots presented in the remainder of this chapter.
 
@@ -293,7 +293,6 @@ The anti-correlation of $\hat{S}^{\mu}_{800}$ and $X_{\text{max}}$ results in ne
 
 %In order to mimic the effects of reconstruction resolution  in the 
 
-The Pearson correlation coefficient $r$ is calculated in the $\hat{S}^{\mu}_{800}-X_{\text{max}}$ plane for proton and iron simulations and data for each of the five equally spaced energy bins used in this analysis.
 \Cref{fig:correlation} shows the energy evolution of the Pearson $r$ values for both data and simulations.
 The $\hat{S}^{\mu}_{800}-X_{\text{max}}$ correlation is calculated using only proton simulations, only iron simulations, and using the joint proton-iron distribution of simulations.
 Each of the simulated distributions is smeared and an uncertainty band is estimated from bootstrapping.
@@ -301,7 +300,7 @@ The Pearson $r$ of data is included on the same plot for comparison, where the u
 The $\hat{S}^{\mu}_{800}-X_{\text{max}}$ correlation of the data approximately follows the same correlation as the joint proton-iron simulations, providing a sanity check that the correlation structure of this radio-muon observable pair is similar between data and simulations.
 The Pearson $r$, including uncertainties, calculated for each data point is within the limits of $0<|r|\leq1$, indicating a correlation between the $\hat{S}^{\mu}_{800}$ and $X_{\text{max}}$ observables; however, this could be a non-linear correlation.
 Cosmic-ray mass information is encoded in this correlation, yet is not accessible when studying the mass sensitivity of the $\hat{S}^{\mu}_{800}$ or $X_{\text{max}}$ observables alone.
-Hence, hybrid radio-muon data provide additional mass information beyond what is obtained from individual radio or muon reconstructions.
+Hybrid radio-muon data then have the potential to provide additional mass information beyond what is obtained from individual radio or muon reconstructions in data.
 
 %This correlation is the information not accessible when studying the mass sensitivity of the $\hat{S}^{\mu}_{800}$ or $X_{\text{max}}$ observables alone
 
@@ -428,7 +427,7 @@ To study this simulation-data muon discrepancy more generally, the $F_{\mu}$ val
 
 $\hat{S}^{\mu}_{450}$ is determined directly from the muon LDF fit as described in~\Cref{chap:nn}, $\hat{S}^{\mu}_{800}$ is determined by evaluating the muon LDF at \qty{800}{\meter}, and $\hat{S}^{\mu}_{\text{total}}$ is determined by integrating the muon LDF given by~\Cref{eq:mldf} using the nominal values of each event's $\hat{S}^{\mu}_{450}$ and $\beta$.
 The integration is performed numerically over the limits of $r$\,=\,\qtyrange[parse-numbers=false]{10^{-3}}{10^{6}}{\meter} to calculate the total muonic signal predicted by the neural network.
-These limits were chosen such that contributions to the numerical integration outside of this range are negligible\footnote[3]{In~\Cref{eq:mldf}, the LDF structure close to the air-shower axis is dominated by the $\alpha$ term of the muon LDF. $\alpha$ is fixed to $\alpha$\,=\,0.75 in the muon LDF, which, for a lower integration limit of \qty[parse-numbers=false]{10^{-3}}{\meter}, results in a numerical integration accurate to roughly \qty[parse-numbers=false]{10^{-4}}{VEM}.}.
+These limits were chosen such that contributions to the numerical integration outside of this range are negligible\footnote[3]{In~\Cref{eq:mldf}, the LDF structure close to the air-shower axis is dominated by the $\alpha$ term of the muon LDF. $\alpha$ is fixed to $\alpha$\,=\,0.75 in the muon LDF, which, for a lower integration limit of \qty[parse-numbers=false]{10^{-3}}{\meter}, results in a numerical integration accurate to roughly $10^{-4}\,\text{VEM}\,\text{m}^{2}$.}.
 The $\hat{S}^{\mu}_{\text{total}}$ values have units of $\text{VEM}\,\text{m}^{2}$, yet the calculation of $F_{\mu}$ is a dimensionless fraction and enables a direct comparison of the fractions for the total muonic signal and the muonic signal at the references distances of \qty{450}{\meter} and \qty{800}{\meter} from the air-shower axis.
 
 \begin{figure}[h]
@@ -455,7 +454,7 @@ Accounting for this difference between hadronic model generation, the simulation
 The results of this hybrid radio-muon analysis emphasize that discrepancies in the simulated and measured muon content in air showers from a neural-network prediction are prevalent, where the magnitude and direction of the discrepancy depends on the measurement distance from the air-shower axis of the muon observable.
 Hence, the muon puzzle is more complex than a simple mismatch in the total muon content of measured and simulated air showers, as the lateral distribution of muons is also incorrectly predicted in simulations.
 The neural network used in this analysis is trained using only a single hadronic interaction model, EPOS LHC-R, that has an incomplete description of the hadronic interactions within air showers.
-This analysis then confirms that EPOS LHC-R is inconsistent with data, yet no concrete conclusion can be made for the other hadronic interaction models.
+This analysis then confirms that EPOS LHC-R is inconsistent with muon data, yet no concrete conclusion can be made for the other hadronic interaction models.
 Additional studies of hadronic interaction models and the muon content of air showers are therefore necessary to further understand the discrepancies reported in this dissertation. 
 
 
@@ -476,7 +475,7 @@ Additional studies of hadronic interaction models and the muon content of air sh
 
 This chapter presents the application of the neural network trained in~\Cref{chap:nn} to data for the goal of obtaining hybrid radio-muon measurements of air showers.
 A large subset of 439 air-shower events from a bias-free dataset of radio $X_{\text{max}}$ measurements is studied, each of which also have a high-quality muon reconstruction after applying the neural network to the SD-750 measurements of this dataset.
-The neural network predictions of the station-level muonic signals are combined at the event level to determine the muonic signal in the SD at \qty{800}{\meter} from the air-shower axis ($\hat{S}^{\mu}_{800}$).
+The neural-network predictions of the station-level muonic signals are combined at the event level to determine the muonic signal in the SD at \qty{800}{\meter} from the air-shower axis ($\hat{S}^{\mu}_{800}$).
 The muon observable is combined with the knowledge of radio $X_{\text{max}}$ measurements to study the joint effect on mass sensitivity of hybrid radio-muon measurements and to investigate the discrepancy in the muon observable between simulations and measured data.
 
 The hybrid radio-muon combination was shown to add mass sensitivity beyond either observable alone using simulations in~\Cref{chap:simulations}.
@@ -486,7 +485,7 @@ Yet, this chapter shows a systematic mismatch between the predictions from simul
 Systematics need to be heavily scrutinized and understood before muon and radio measurements can be combined for mass-composition analyses.
 
 The mismatch between simulated and measured muon observables is studied within this chapter.
-Compared to EPOS LHC-R simulations, the neural-network predictions for data show an excess of the total muonic signal in the SD, a excess of the muonic signal in the SD at \qty{450}{\meter} from the air-shower axis (yet smaller than the excess of the total muonic signal), and a deficit of the muonic signal at \qty{800}{\meter} from the shower axis.
+Compared to EPOS LHC-R simulations, the neural-network predictions for data show an excess of the total muonic signal in the SD, an excess of the muonic signal in the SD at \qty{450}{\meter} from the air-shower axis (yet smaller than the excess of the total muonic signal), and a deficit of the muonic signal at \qty{800}{\meter} from the shower axis.
 The simulation-data inconsistencies for each of the stated muon observables are quantified within this chapter and studied as a function of cosmic-ray energy in the range of \qtyrange[parse-numbers=false]{10^{17.5}}{10^{18.5}}{\electronvolt}.
 These mismatches are generally consistent across the full energy range and point to an incorrect modeling of the lateral distribution of muons for the EPOS LHC-R hadronic interaction model.
 
